@@ -1,0 +1,25 @@
+{
+  "nav.home":    "Home",
+  "nav.search":  "Search",
+  "nav.cases":   "Court Cases",
+  "nav.judges":  "Judges",
+  "nav.courts":  "Courts",
+  "nav.map":     "Court Map",
+  "nav.about":   "About Us",
+  "nav.contact": "Contact",
+
+  "header.skipToContent": "Skip to main content",
+
+  "footer.copyright": "Sudačka Mreža",
+  "footer.legal":     "Privacy Policy",
+  "footer.contact":   "Contact",
+
+  "a11y.openMenu":  "Open menu",
+  "a11y.closeMenu": "Close menu",
+
+  "theme.light": "Light mode",
+  "theme.dark":  "Dark mode",
+
+  "lang.hr": "Hrvatski",
+  "lang.en": "English"
+}

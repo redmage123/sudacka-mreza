@@ -1,0 +1,25 @@
+{
+  "nav.home":    "Početna",
+  "nav.search":  "Pretraži",
+  "nav.cases":   "Sudski predmeti",
+  "nav.judges":  "Suci",
+  "nav.courts":  "Sudovi",
+  "nav.map":     "Karta sudova",
+  "nav.about":   "O nama",
+  "nav.contact": "Kontakt",
+
+  "header.skipToContent": "Skoči na sadržaj",
+
+  "footer.copyright": "Sudačka Mreža",
+  "footer.legal":     "Pravila privatnosti",
+  "footer.contact":   "Kontakt",
+
+  "a11y.openMenu":  "Otvori izbornik",
+  "a11y.closeMenu": "Zatvori izbornik",
+
+  "theme.light": "Svijetli način",
+  "theme.dark":  "Tamni način",
+
+  "lang.hr": "Hrvatski",
+  "lang.en": "English"
+}

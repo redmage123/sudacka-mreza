@@ -43,6 +43,15 @@
   --color-warning-bg:      #FEF3C7;
   --color-info:            #2563EB;
 
+  /* ── Named aliases (brief AC-9 required tokens) ────── */
+  --color-brand-cream:          #F5D98A;  /* warm cream accent (≈ gold-light) */
+  --color-brand-charcoal:       #1A202C;  /* near-black charcoal (≈ text) */
+  --color-brand-white:          #FFFFFF;
+  --color-surface-light:        #FFFFFF;  /* card/panel surface in light mode */
+  --color-surface-dark:         #1E293B;  /* card/panel surface in dark mode */
+  --color-text-primary-light:   #1A202C;  /* body text in light mode */
+  --color-text-primary-dark:    #F1F5F9;  /* body text in dark mode */
+
   /* ── Typography ─────────────────────────────────────── */
   --font-sans:  'Inter', system-ui, sans-serif;
   --font-serif: 'Source Serif 4', Georgia, serif;
