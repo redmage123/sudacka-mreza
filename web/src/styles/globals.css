@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Self-hosted fonts — GDPR-safe, no external requests */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/source-serif-4/400.css";
+@import "@fontsource/source-serif-4/400-italic.css";
+@import "@fontsource/source-serif-4/600.css";
+
+@theme {
+  /* ── Brand anchors ──────────────────────────────────── */
+  --color-brand-navy:       #0D2B55;
+  --color-brand-navy-dark:  #091E3D;
+  --color-brand-navy-light: #1A3F72;
+  --color-brand-gold:       #C8941A;
+  --color-brand-gold-light: #F5D98A;
+  --color-brand-gold-dark:  #9A6F0F;
+
+  /* ── Surface (light mode defaults) ─────────────────── */
+  --color-bg:              #F8F9FA;
+  --color-surface:         #FFFFFF;
+  --color-surface-raised:  #FFFFFF;
+  --color-surface-subtle:  #F1F5F9;
+  --color-border:          #CBD5E1;
+  --color-border-focus:    #C8941A;
+
+  /* ── Text (light mode defaults) ────────────────────── */
+  --color-text:            #1A202C;
+  --color-text-muted:      #64748B;
+  --color-text-inverse:    #FFFFFF;
+  --color-text-link:       #0D2B55;
+  --color-text-link-hover: #C8941A;
+
+  /* ── Semantic ───────────────────────────────────────── */
+  --color-success:         #16A34A;
+  --color-success-bg:      #DCFCE7;
+  --color-error:           #DC2626;
+  --color-error-bg:        #FEE2E2;
+  --color-warning:         #D97706;
+  --color-warning-bg:      #FEF3C7;
+  --color-info:            #2563EB;
+
+  /* ── Typography ─────────────────────────────────────── */
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Dark mode token overrides ─────────────────────────── */
+.dark {
+  --color-brand-navy:       #1A3F72;
+  --color-brand-navy-dark:  #0D2B55;
+  --color-brand-navy-light: #2B5499;
+  --color-brand-gold:       #E0B040;
+  --color-brand-gold-light: #C8941A;
+  --color-brand-gold-dark:  #C8941A;
+
+  --color-bg:              #0F172A;
+  --color-surface:         #1E293B;
+  --color-surface-raised:  #243347;
+  --color-surface-subtle:  #162032;
+  --color-border:          #334155;
+  --color-border-focus:    #E0B040;
+
+  --color-text:            #F1F5F9;
+  --color-text-muted:      #94A3B8;
+  --color-text-inverse:    #F1F5F9;
+  --color-text-link:       #60A5FA;
+  --color-text-link-hover: #E0B040;
+
+  --color-success:         #4ADE80;
+  --color-success-bg:      #14532D;
+  --color-error:           #F87171;
+  --color-error-bg:        #7F1D1D;
+  --color-warning:         #FBBF24;
+  --color-warning-bg:      #78350F;
+  --color-info:            #60A5FA;
+}
+
+/* ── Base reset ────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Focus ring ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Skip link ──────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: var(--color-brand-navy);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Legal prose overrides ──────────────────────────────── */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-brand-navy);
+  --tw-prose-links: var(--color-text-link);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-code: var(--color-brand-navy);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 72ch;
+}
+
+/* ── Print styles ───────────────────────────────────────── */
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  a { text-decoration: underline; color: #000; }
+}
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
