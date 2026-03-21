@@ -53,7 +53,7 @@ export function createDecisionsSearchRouter(payload: any) {
       // Full-text search condition: query the precomputed search_vector text column
       // via to_tsvector so we benefit from the GIN index on that column (see db init SQL).
       conditions.push(
-        `to_tsvector('simple', coalesce(cd.search_vector, '') || ' ' || coalesce(cd.title_hr, '') || ' ' || coalesce(cd.case_number, '')) @@ plainto_tsquery('simple', $1)`,
+        `to_tsvector('simple', coalesce(cd.search_vector, '') || ' ' || coalesce(cd.title, '') || ' ' || coalesce(cd.case_number, '')) @@ plainto_tsquery('simple', $1)`,
       )
 
       if (courtId) {
@@ -82,7 +82,7 @@ export function createDecisionsSearchRouter(payload: any) {
       }
 
       if (courtType) {
-        conditions.push(`c.court_type = $${pIdx++}`)
+        conditions.push(`c.type = $${pIdx++}`)
         params.push(courtType)
       }
 
@@ -106,25 +106,25 @@ export function createDecisionsSearchRouter(payload: any) {
       const dataResult = await pool.query(
         `SELECT
            cd.id,
-           cd.title_hr,
+           cd.title,
            cd.case_number,
            cd.date,
            cd.decision_type,
            cd.category,
            cd.slug,
-           c.id     AS court_id,
-           c.name_hr AS court_name,
+           c.id   AS court_id,
+           c.name AS court_name,
            ts_rank(
              to_tsvector('simple',
                coalesce(cd.search_vector, '') || ' ' ||
-               coalesce(cd.title_hr, '') || ' ' ||
+               coalesce(cd.title, '') || ' ' ||
                coalesce(cd.case_number, '')
              ),
              plainto_tsquery('simple', $1)
            ) AS rank,
            ts_headline(
              'simple',
-             coalesce(cd.search_vector, cd.title_hr, ''),
+             coalesce(cd.search_vector, cd.title, ''),
              plainto_tsquery('simple', $1),
              'MaxFragments=1, MaxWords=30, MinWords=5, StartSel=<mark>, StopSel=</mark>'
            ) AS excerpt
@@ -141,7 +141,7 @@ export function createDecisionsSearchRouter(payload: any) {
       return res.json({
         docs: dataResult.rows.map((row) => ({
           id: row.id,
-          title: row.title_hr,
+          title: row.title,
           caseNumber: row.case_number,
           date: row.date,
           decisionType: row.decision_type,

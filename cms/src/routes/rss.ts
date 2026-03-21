@@ -7,7 +7,7 @@
  * public cache header so CDN/proxy layers can cache it briefly.
  *
  * Feed structure (spec FR-043):
- *   - <title>  : caseNumber + " — " + title_hr
+ *   - <title>  : caseNumber + " — " + title
  *   - <link>   : canonical URL to decision detail page
  *   - <guid>   : same as <link>, isPermaLink="true"
  *   - <pubDate>: decision date in RFC 2822 format
@@ -52,7 +52,7 @@ export function createRssRouter(payload: any) {
       const items: string[] = (result.docs as any[]).map((doc) => {
         const id = String(doc.id)
         const slug = String(doc.slug ?? '')
-        const titleText = [doc.caseNumber, doc.title_hr].filter(Boolean).join(' — ')
+        const titleText = [doc.caseNumber, doc.title].filter(Boolean).join(' — ')
         const link = `${baseUrl}/hr/sudska-praksa/${id}-${slug}`
 
         // pubDate: prefer doc.date (decision date), fall back to createdAt
@@ -61,7 +61,7 @@ export function createRssRouter(payload: any) {
         const descriptionText =
           doc.summary
             ? plainText(doc.summary)
-            : plainText(doc.searchVector ?? doc.title_hr ?? '')
+            : plainText(doc.searchVector ?? doc.title ?? '')
 
         return [
           '    <item>',

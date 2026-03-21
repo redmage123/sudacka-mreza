@@ -178,7 +178,7 @@ export function createJurisdictionRouter(payload: any) {
       court: court
         ? {
             id: court.id,
-            name: court.name_hr,
+            name: court.name,
             slug: court.slug,
             address: court.address ?? null,
             phone: court.phone ?? null,

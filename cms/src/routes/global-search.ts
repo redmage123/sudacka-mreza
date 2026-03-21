@@ -61,7 +61,7 @@ export function createGlobalSearchRouter(payload: any) {
         ? payload.find({
             collection: 'court-decisions',
             where: {
-              or: [{ title_hr: { like: q } }, { caseNumber: { like: q } }],
+              or: [{ title: { like: q } }, { caseNumber: { like: q } }],
             },
             limit: typeFilter === 'decisions' ? 20 : 3,
           })
@@ -80,9 +80,7 @@ export function createGlobalSearchRouter(payload: any) {
       shouldSearch('courts')
         ? payload.find({
             collection: 'courts',
-            where: {
-              or: [{ name_hr: { like: q } }, { name_en: { like: q } }],
-            },
+            where: { name: { like: q } },
             limit: typeFilter === 'courts' ? 20 : 3,
           })
         : Promise.resolve(null),
@@ -90,7 +88,7 @@ export function createGlobalSearchRouter(payload: any) {
       shouldSearch('news')
         ? payload.find({
             collection: 'news-posts',
-            where: { title_hr: { like: q } },
+            where: { title: { like: q } },
             limit: typeFilter === 'news' ? 20 : 3,
           })
         : Promise.resolve(null),
