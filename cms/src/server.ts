@@ -1,5 +1,6 @@
 import express from 'express'
-import payload from 'payload'
+import { getPayload, handleEndpoints } from 'payload'
+import config from './payload.config.js'
 
 // Custom route modules
 import contactRouter from './routes/contact.js'
@@ -8,6 +9,9 @@ import { createDecisionsSearchRouter } from './routes/decisions-search.js'
 import { createGlobalSearchRouter } from './routes/global-search.js'
 import { createJurisdictionRouter } from './routes/jurisdiction.js'
 import { createRssRouter } from './routes/rss.js'
+import { createPdfExportRouter } from './routes/pdfExport.js'
+import { createSubscribeRouter } from './routes/subscribe.js'
+import { startNotificationDigest } from './jobs/notificationDigest.js'
 
 const app = express()
 
@@ -28,13 +32,13 @@ const start = async () => {
   }
 
   // ---------------------------------------------------------------------------
-  // Payload CMS init
+  // Payload CMS init (Payload 3 — getPayload API)
+  // secret and express are configured in buildConfig (payload.config.ts)
   // ---------------------------------------------------------------------------
-  await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
-    express: app,
-    onInit: () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+  const payload = await getPayload({
+    config,
+    onInit: (p) => {
+      p.logger.info(`Payload Admin URL: ${p.getAdminURL()}`)
     },
   })
 
@@ -50,6 +54,10 @@ const start = async () => {
   //   GET  /api/court-fee/types             Proceeding type list for UI dropdowns
   //   GET  /api/jurisdiction                Point-in-polygon jurisdiction lookup
   //   GET  /api/rss/court-decisions.xml     RSS 2.0 feed (latest 50 decisions)
+  //   GET  /api/rss/decisions               Filtered RSS feed for court decisions
+  //   GET  /api/rss/news                    RSS feed for published news posts
+  //   POST /api/subscribe                   Email subscription creation
+  //   GET  /api/unsubscribe                 Email unsubscription
   // ---------------------------------------------------------------------------
   app.use('/api', contactRouter)
   app.use('/api', courtFeeRouter)
@@ -57,6 +65,33 @@ const start = async () => {
   app.use('/api', createGlobalSearchRouter(payload))
   app.use('/api', createJurisdictionRouter(payload))
   app.use('/api', createRssRouter(payload))
+  app.use('/api', createPdfExportRouter(payload))
+  app.use('/api', createSubscribeRouter(payload))
+
+  startNotificationDigest(payload)
+
+  // ---------------------------------------------------------------------------
+  // Payload REST API + Admin catch-all — Payload 3 uses the Web Fetch API.
+  // We bridge Express req/res to Fetch Request/Response so that Payload's own
+  // REST endpoints (/api/<collection>) and the Admin UI (/admin) are served.
+  // ---------------------------------------------------------------------------
+  app.use(async (req, res) => {
+    const url = new URL(req.url, `http://localhost:${process.env.PORT || '4094'}`)
+    const headers = new Headers()
+    for (const [key, value] of Object.entries(req.headers)) {
+      if (value != null) headers.set(key, Array.isArray(value) ? value.join(', ') : value)
+    }
+    let body: BodyInit | undefined
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      body = JSON.stringify(req.body)
+    }
+    const fetchReq = new Request(url.toString(), { method: req.method, headers, body })
+    const response = await handleEndpoints({ config, request: fetchReq })
+    res.status(response.status)
+    response.headers.forEach((value, key) => res.setHeader(key, value))
+    const buf = Buffer.from(await response.arrayBuffer())
+    res.send(buf)
+  })
 
   const port = parseInt(process.env.PORT || '4094', 10)
 
