@@ -45,19 +45,26 @@ const ContactPage = lazy(() => import('@/pages/ContactPage'))
 const GalleriesPage = lazy(() => import('@/pages/GalleriesPage'))
 const GalleryDetailPage = lazy(() => import('@/pages/GalleryDetailPage'))
 
+// Map
+const MapPage = lazy(() => import('@/pages/MapPage'))
+
 // News
 const NewsPage = lazy(() => import('@/pages/NewsPage'))
 const NewsDetailPage = lazy(() => import('@/pages/NewsDetailPage'))
+
+// Statistics
+const StatisticsPage = lazy(() => import('@/pages/StatisticsPage'))
 
 // Members / auth
 const MembersPage = lazy(() => import('@/pages/MembersPage'))
 const LoginPage = lazy(() => import('@/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'))
+const MyLibraryPage = lazy(() => import('@/pages/MyLibraryPage'))
 
 // Helper to wrap in Suspense
 function S(Page: React.LazyExoticComponent<React.ComponentType>) {
   return (
-    <Suspense fallback={<div className="flex h-64 items-center justify-center text-[color:var(--color-text-muted)]">Učitavanje…</div>}>
+    <Suspense fallback={<div className="flex h-64 items-center justify-center text-[color:var(--color-text-muted)]" aria-busy="true" />}>
       <Page />
     </Suspense>
   )
@@ -107,11 +114,17 @@ export const router = createBrowserRouter([
       { path: 'stecaj/zakoni', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/odluke', element: S(BankruptcyDecisionsPage) },
 
+      // Statistics
+      { path: 'statistika', element: S(StatisticsPage) },
+
       // Calculator & static
       { path: 'pristojbe', element: S(CalculatorPage) },
       { path: 'pravna-pomoc', element: S(LegalAidPage) },
       { path: 'o-nama', element: S(AboutPage) },
       { path: 'kontakt', element: S(ContactPage) },
+
+      // Map (AC-2 required route)
+      { path: 'mapa', element: S(MapPage) },
 
       // Gallery
       { path: 'galerije', element: S(GalleriesPage) },
@@ -125,6 +138,7 @@ export const router = createBrowserRouter([
       { path: 'clanovi', element: S(MembersPage) },
       { path: 'login', element: S(LoginPage) },
       { path: 'register', element: S(RegisterPage) },
+      { path: 'moja-knjiznica', element: S(MyLibraryPage) },
 
       // 404 within lang prefix
       { path: '*', element: S(NotFoundPage) },

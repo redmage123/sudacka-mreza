@@ -19,10 +19,15 @@ import { Galleries } from './collections/Galleries.js'
 import { Documents } from './collections/Documents.js'
 import { LegalCategories } from './collections/LegalCategories.js'
 import { Subscriptions } from './collections/Subscriptions.js'
+import { Annotations } from './collections/Annotations.js'
+import { Bookmarks } from './collections/Bookmarks.js'
 
 // Globals
 import { Settings } from './globals/Settings.js'
 import { Navigation } from './globals/Navigation.js'
+
+// Endpoints
+import { flagHandler, verifyHandler } from './endpoints/expertFlag.js'
 
 export default buildConfig({
   serverURL: process.env.SERVER_URL || 'http://localhost:4094',
@@ -75,11 +80,36 @@ export default buildConfig({
     Galleries,
     Documents,
     Subscriptions,
+    Annotations,
+    Bookmarks,
   ],
 
   globals: [
     Settings,
     Navigation,
+  ],
+
+  endpoints: [
+    {
+      path: '/experts/:id/flag',
+      method: 'post',
+      handler: flagHandler('expert-witnesses'),
+    },
+    {
+      path: '/experts/:id/verify',
+      method: 'post',
+      handler: verifyHandler('expert-witnesses'),
+    },
+    {
+      path: '/interpreters/:id/flag',
+      method: 'post',
+      handler: flagHandler('interpreters'),
+    },
+    {
+      path: '/interpreters/:id/verify',
+      method: 'post',
+      handler: verifyHandler('interpreters'),
+    },
   ],
 
   cors: [
