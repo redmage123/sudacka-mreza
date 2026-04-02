@@ -50,10 +50,16 @@ export function createDecisionsSearchRouter(payload: any) {
       const params: (string | number)[] = [q]
       let pIdx = 2 // next parameter index
 
-      // Full-text search condition: query the precomputed search_vector text column
-      // via to_tsvector so we benefit from the GIN index on that column (see db init SQL).
+      // Full-text search over full_text_plain (body), search_vector (metadata), title and
+      // case_number.  The GIN index on to_tsvector('simple', full_text_plain) created in
+      // migration 20260321_enable_pg_trgm is used for the full-text body search.
       conditions.push(
-        `to_tsvector('simple', coalesce(cd.search_vector, '') || ' ' || coalesce(cd.title, '') || ' ' || coalesce(cd.case_number, '')) @@ plainto_tsquery('simple', $1)`,
+        `to_tsvector('simple',
+           coalesce(cd.full_text_plain, '') || ' ' ||
+           coalesce(cd.search_vector, '') || ' ' ||
+           coalesce(cd.title, '') || ' ' ||
+           coalesce(cd.case_number, '')
+         ) @@ plainto_tsquery('simple', $1)`,
       )
 
       if (courtId) {
@@ -116,6 +122,7 @@ export function createDecisionsSearchRouter(payload: any) {
            c.name AS court_name,
            ts_rank(
              to_tsvector('simple',
+               coalesce(cd.full_text_plain, '') || ' ' ||
                coalesce(cd.search_vector, '') || ' ' ||
                coalesce(cd.title, '') || ' ' ||
                coalesce(cd.case_number, '')
@@ -124,7 +131,7 @@ export function createDecisionsSearchRouter(payload: any) {
            ) AS rank,
            ts_headline(
              'simple',
-             coalesce(cd.search_vector, cd.title, ''),
+             coalesce(cd.full_text_plain, cd.search_vector, cd.title, ''),
              plainto_tsquery('simple', $1),
              'MaxFragments=1, MaxWords=30, MinWords=5, StartSel=<mark>, StopSel=</mark>'
            ) AS excerpt
