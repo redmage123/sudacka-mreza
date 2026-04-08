@@ -139,6 +139,8 @@ export function createHybridSearchRouter(payload: any) {
           totalPages,
           hasNextPage: page < totalPages,
           hasPrevPage: page > 1,
+          nextPage: page < totalPages ? page + 1 : null,
+          prevPage: page > 1 ? page - 1 : null,
           searchMode: 'browse',
         })
       }
@@ -319,6 +321,8 @@ export function createHybridSearchRouter(payload: any) {
         totalPages,
         hasNextPage: page < totalPages,
         hasPrevPage: page > 1,
+        nextPage: page < totalPages ? page + 1 : null,
+        prevPage: page > 1 ? page - 1 : null,
         searchMode: ragList.length > 0 ? 'hybrid' : 'keyword',
       })
     } catch (err) {
