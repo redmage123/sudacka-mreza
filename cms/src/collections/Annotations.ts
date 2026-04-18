@@ -1,7 +1,7 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
 /** Access constraint: only the record owner can read/write */
-const ownerOnly = ({ req }: Parameters<NonNullable<CollectionConfig['access']>['read']>[0]) => {
+const ownerOnly: Access = ({ req }) => {
   if (!req.user) return false
   return { user: { equals: req.user.id } }
 }

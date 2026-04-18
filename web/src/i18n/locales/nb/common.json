@@ -1,0 +1,815 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "Søk",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "High Commercial",
+      "vrhovni": "Supreme",
+      "upravni": "Administrative",
+      "ustavni": "Constitutional",
+      "echr": "Den europeiske menneskerettsdomstolen"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "Address",
+      "phone": "Phone",
+      "president": "President"
+    },
+    "officialNameNote": "Official Croatian court name"
+  },
+  "nav": {
+    "home": "Hjem",
+    "decisionsSearch": "Søk avgjørelser"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "Domstolskart",
+    "courtType": {
+      "municipal": "Tingrett",
+      "county": "Lagmannsrett",
+      "commercial": "Handelsrett",
+      "misdemeanour": "Forseelsesrett",
+      "administrative": "Forvaltningsrett"
+    },
+    "legend": "Tegnforklaring",
+    "loading": "Laster domstoler...",
+    "filterAll": "Alle domstoler",
+    "filterMunicipal": "Tingrett",
+    "filterCounty": "Lagmannsrett",
+    "filterCommercial": "Handelsrett",
+    "filterMisdemeanour": "Forseelsesrett",
+    "filterAdministrative": "Forvaltningsrett",
+    "viewDetails": "Vis detaljer",
+    "courts": "domstoler",
+    "error": "Kunne ikke laste domstolsdata. Vennligst prøv igjen."
+  },
+  "jurisdiction": {
+    "title": "Vernetingssøk",
+    "subtitle": "Finn riktig domstol for din sak basert på sted og sakstype.",
+    "cityLabel": "By eller kommune",
+    "cityPlaceholder": "f.eks. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Sakstype",
+    "caseType": {
+      "civilMinor": "Sivil (mindre) — Tingrett",
+      "criminalMinor": "Straff (under 5 år) — Tingrett",
+      "criminalSerious": "Straff (5+ år) — Lagmannsrett",
+      "commercial": "Handels — Handelsrett",
+      "misdemeanour": "Forseelse — Forseelsesrett",
+      "administrative": "Forvaltning — Forvaltningsrett"
+    },
+    "results": "Resultater",
+    "noResults": "Ingen kompetent domstol funnet for dette stedet og denne sakstypen.",
+    "noResultsHint": "Prøv et annet bynavn eller se den fullstendige domstolskatalogen.",
+    "viewCourtsDirectory": "Se domstolskatalogen"
+  },
+  "calculator": {
+    "title": "Rettsgebyrer",
+    "selectCaseType": "Sakstype",
+    "caseType": {
+      "civil": "Sivil tvist",
+      "criminal": "Straffesak",
+      "commercial": "Handelstvist",
+      "administrative": "Forvaltningstvst",
+      "nonContentious": "Frivillig rettspleie"
+    },
+    "claimValue": "Tvistesum (EUR)",
+    "calculate": "Beregn gebyr",
+    "filingFee": "Innleveringsgebyr",
+    "appealFee": "Ankegebyr",
+    "enforcementFee": "Fullbyrdelsesgebyr",
+    "fixedFee": "Faste gebyrer",
+    "exemptionsTitle": "Gebyrfritak",
+    "exemption1": "Mottakere av sosialhjelp er fritatt fra alle rettsgebyrer.",
+    "exemption2": "Mindreårige er fritatt fra rettsgebyrer i saker som gjelder deres rettigheter.",
+    "exemption3": "Arbeidstakere i arbeidstvister med tvistesum opptil 2 650 € er fritatt.",
+    "paymentTitle": "Betalingsmetoder",
+    "payment1": "Bankoverføring til rettens offisielle konto",
+    "payment2": "e-Pristojbe-portalen (elektronisk betaling)",
+    "payment3": "Rettens kasse (personlig oppmøte ved retten)",
+    "legalBasis": "Rettslig grunnlag",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, med endringer). Alle beløp omregnet til EUR siden 01.01.2023.",
+    "minorOffenses": "Mindre forseelser",
+    "seriousOffenses": "Alvorlige forbrytelser"
+  },
+  "jurisdictionFinder": {
+    "title": "Finn din domstol",
+    "description": "Oppgi din by og sakstype for å finne hvilken domstol som er kompetent.",
+    "cityLabel": "Din by eller kommune",
+    "cityPlaceholder": "f.eks. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Sakstype",
+    "caseType": {
+      "civilMinor": "Sivil tvist (opptil 2 654 €)",
+      "civilMajor": "Sivil tvist (over 2 654 €)",
+      "criminalMinor": "Straffesak (mindre forseelse)",
+      "criminalSerious": "Straffesak (alvorlig forbrytelse)",
+      "commercial": "Handelstvist",
+      "misdemeanour": "Forseelse / trafikkforseelse",
+      "administrative": "Tvist med offentlig myndighet"
+    },
+    "find": "Finn domstol",
+    "result": "Kompetent domstol",
+    "noResult": "Ingen domstol funnet for denne byen. Prøv domstolskatalogen.",
+    "browseAll": "Bla gjennom alle domstoler",
+    "viewProfile": "Vis domstolsprofil"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "Bankruptcy Portal",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "Bankruptcy Administrators",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "No bankruptcy administrators are currently registered in the system.",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "Bankruptcy Legislation",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "Free Legal Aid",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "Photo Galleries",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "No galleries have been published yet. Check back soon.",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Your message has been sent. We'll get back to you within 2 business days.",
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "No news articles have been published yet. Check back soon.",
+    "readMore": "Read more",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "Create account",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "intro1": "Sudačka mreža (Judicial Network) is a non-profit association that for over twenty years has been collecting, processing, and publishing publicly relevant data from the judicial system of the Republic of Croatia. Our goal is judicial transparency and the accessibility of legal information to all citizens.",
+    "intro2": "The platform offers searchable databases of case law (Supreme Court, High Commercial Court, European Court of Human Rights), a court directory with an interactive jurisdiction map, a directory of court experts and interpreters, bankruptcy estate sale listings, and an overview of relevant legislation.",
+    "intro3": "All services are available free of charge. Registration is only required to access contact details of court professionals.",
+    "donors": {
+      "title": "Donors and Partners",
+      "subtitle": "We thank the organisations that over the years have supported the development and maintenance of Sudačka mreža."
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "Generator for juridiske dokumenter",
+    "subtitle": "Fyll ut skjemaet og last ned et kroatisk juridisk dokument som PDF",
+    "selectType": "Velg dokumenttype",
+    "type": {
+      "tuzba": {
+        "desc": "For å reise sivilt søksmål ved domstolen"
+      },
+      "zalba": {
+        "desc": "For å anke en rettsavgjørelse til en høyere domstol"
+      },
+      "prigovor": {
+        "desc": "For å fremme innsigelse mot en rettslig avgjørelse"
+      },
+      "ovrsni": {
+        "desc": "For å iverksette tvangsfullbyrdelse på grunnlag av et tvangsgrunnlag"
+      }
+    },
+    "fields": {
+      "plaintiff_name": "Saksøkerens fulle navn",
+      "plaintiff_address": "Saksøkerens adresse",
+      "defendant_name": "Saksøktes fulle navn",
+      "defendant_address": "Saksøktes adresse",
+      "appellant_name": "Ankendes fulle navn",
+      "appellant_address": "Ankendes adresse",
+      "objector_name": "Innsigelsesfremmers fulle navn",
+      "objector_address": "Innsigelsesfremmers adresse",
+      "creditor_name": "Kreditors fulle navn",
+      "creditor_address": "Kreditors adresse",
+      "debtor_name": "Debitors fulle navn",
+      "debtor_address": "Debitors adresse",
+      "court_name": "Kompetent domstol",
+      "case_number": "Saksnummer",
+      "claim_value": "Sakens verdi (EUR)",
+      "claim_amount": "Kravets størrelse (EUR)",
+      "claim_description": "Påstand / Petitum",
+      "facts": "Faktiske omstendigheter / Begrunnelse",
+      "legal_basis": "Rettsgrunnlag (valgfritt)",
+      "appeal_grounds": "Ankegrunner",
+      "appeal_request": "Ankepåstand",
+      "judgment_date": "Dato for den ankede avgjørelsen",
+      "objection_grounds": "Innsigelsesgrunner",
+      "enforcement_title": "Tvangsgrunnlag",
+      "enforcement_means": "Fullbyrdelsesmåte (valgfritt)",
+      "date": "Dato",
+      "city": "Sted"
+    },
+    "generate": "Generer PDF",
+    "reset": "Nytt dokument",
+    "required": "Obligatorisk felt",
+    "disclaimer": "Denne generatoren er kun til informasjonsformål og utgjør ikke juridisk rådgivning.",
+    "generating": "Genererer...",
+    "nav": {
+      "back": "Tilbake til dokumenter"
+    }
+  },
+  "deadlines": {
+    "title": "Prosessfrister kalkulator",
+    "subtitle": "Beregn prosessfrister basert på sakstype og innleveringsdato.",
+    "selectCaseType": "Sakstype",
+    "filingDate": "Innleveringsdato",
+    "filingDatePlaceholder": "Velg dato",
+    "timelineTitle": "Prosessfrister",
+    "noDeadlines": "Skriv inn en innleveringsdato for å se frister.",
+    "days": "dager",
+    "hours": "timer",
+    "fromFiling": "fra innlevering",
+    "overdue": "Forfalt",
+    "today": "I dag",
+    "statuteTitle": "Foreldelse",
+    "statute": {
+      "civil": "Generell foreldelse: 5 år. Erstatningsansvar: 3 år subjektiv, 5 år objektiv.",
+      "criminal": "Foreldelse av strafforfølgning: 5–25 år avhengig av maksimumsstraffen.",
+      "commercial": "Handelskrav: 3 år. Generell foreldelse for næringsdrivende: 5 år.",
+      "administrative": "Frist for forvaltningssøksmål: 30 dager fra forkynnelse av den endelige avgjørelsen."
+    },
+    "legalBasis": "Rettsgrunnlag",
+    "legalBasisCivil": "Tvisteloven (ZPP, konsolidert tekst)",
+    "legalBasisCriminal": "Straffeprosessloven (ZKP, endret)",
+    "legalBasisCommercial": "Tvisteloven – anvendelse ved handelsdomstol",
+    "legalBasisAdministrative": "Forvaltningsloven og tvisteloven (forvaltningssaker)",
+    "disclaimer": "Disse fristene er veiledende og utgjør ikke juridisk rådgivning. Kontakt en advokat.",
+    "step": {
+      "filing": "Innsending av stevning / søknad",
+      "responseToLawsuit": "Frist for tilsvar til stevning",
+      "preparatoryHearing": "Forberedende rettsmøte",
+      "mainHearing": "Hovedforhandling",
+      "judgmentAppeal": "Ankefristen mot dom",
+      "secondInstanceDecision": "Lagmannsrettens avgjørelse",
+      "policeDetentionMax": "Maksimal politiarrest",
+      "indictment": "Frist for tiltale",
+      "indictmentObjection": "Innsigelse mot tiltale",
+      "criminalAppeal": "Ankefrist",
+      "paymentOrderObjection": "Innsigelse mot betalingspålegg",
+      "commercialResponse": "Tilsvar til stevning (handelssak)",
+      "commercialHearing": "Rettsmøte ved handelsdomstol",
+      "commercialAppeal": "Ankefrist (handelssak)",
+      "adminRequest": "Forvaltningsbegjæring inngitt",
+      "adminDecision": "Frist for forvaltningsvedtak",
+      "adminObjection": "Klage i forvaltningsprosessen",
+      "adminSecondInstance": "Vedtak fra klageinstans",
+      "adminCourtSuit": "Frist for forvaltningssøksmål"
+    },
+    "legend": {
+      "filing": "Innlevering",
+      "deadline": "Frist",
+      "hearing": "Rettsmøte",
+      "decision": "Vedtak",
+      "overdue": "Forfalt"
+    }
+  },
+  "cookiePolicy": "Informasjonskapselpolicy",
+  "termsOfService": "Vilkår for bruk",
+  "judges": {
+    "detail": {
+      "role": "Dommer",
+      "court": "Domstol",
+      "appointmentDate": "Utnevnelsesdato",
+      "specialization": "Spesialisering",
+      "status": "Status",
+      "contact": "Kontaktinformasjon"
+    }
+  },
+  "legalNews": {
+    "title": "Juridiske nyheter",
+    "subtitle": "Oversikt over aktuelle juridiske nyheter fra nasjonale og europeiske juridiske kilder.",
+    "breadcrumbNews": "Nyheter",
+    "filterBySource": "Filtrer etter kilde",
+    "filterAll": "Alle kilder",
+    "readMore": "Les mer",
+    "noResults": "Ingen nyheter for valgt kilde.",
+    "disclaimer": "Nyheter er hentet fra eksterne kilder. Sudačka mreža er ikke ansvarlig for nøyaktigheten av innhold fra tredjeparter."
+  },
+  "cookies": {
+    "ariaLabel": "Informasjon om informasjonskapsler",
+    "title": "Informasjonskapsler og personvern",
+    "description": "Vi bruker informasjonskapsler for å sikre at nettstedet fungerer korrekt, og med ditt samtykke, for å samle inn anonyme analytiske data for å forbedre tjenesten.",
+    "acceptAll": "Godta alle",
+    "rejectNonEssential": "Avvis ikke-nødvendige",
+    "customize": "Tilpass",
+    "customizeTitle": "Innstillinger for informasjonskapsler",
+    "essential": "Nødvendige informasjonskapsler",
+    "essentialDesc": "Nødvendige for at nettstedet skal fungere korrekt. Alltid aktive og kan ikke deaktiveres.",
+    "analytics": "Analytiske informasjonskapsler",
+    "analyticsDesc": "De hjelper oss med å forstå hvordan brukere bruker nettstedet. Alle data er anonyme.",
+    "alwaysOn": "Alltid aktiv",
+    "savePreferences": "Lagre innstillinger",
+    "policyTitle": "Retningslinjer for informasjonskapsler",
+    "policyLastUpdated": "Sist oppdatert: 28. mars 2026.",
+    "policyIntro": "Disse retningslinjene for informasjonskapsler forklarer hva informasjonskapsler (cookies) er, hvilke informasjonskapsler vi bruker, til hvilke formål, og hvordan du kan kontrollere dem. Ved å bruke vår plattform samtykker du til bruken av informasjonskapsler som beskrevet i dette dokumentet.",
+    "policySection1": {
+      "title": "1. Hva er informasjonskapsler?",
+      "p1": "Informasjonskapsler er små tekstfiler som lagres på enheten din når du besøker en nettside. De gjør det mulig for siden å huske innstillingene dine og forbedre brukeropplevelsen din. Informasjonskapsler kan ikke kjøre programmer eller overføre virus."
+    },
+    "policySection2": {
+      "title": "2. Hvilke informasjonskapsler bruker vi?"
+    },
+    "tableColName": "Navn",
+    "tableColPurpose": "Formål",
+    "tableColCategory": "Kategori",
+    "tableColRetention": "Varighet",
+    "row1Purpose": "Husker valgt språk i brukergrensesnittet",
+    "row1Retention": "12 måneder",
+    "row2Purpose": "Lagrer dine innstillinger for samtykke til informasjonskapsler",
+    "row2Retention": "12 måneder",
+    "row3Purpose": "[nb] Pamti odabrani svjetlosni/tamni način prikaza",
+    "row3Retention": "[nb] 12 mjeseci",
+    "row4Purpose": "[nb] Anonimna analitika posjećenosti (Google Analytics) — samo uz privolu",
+    "row4Retention": "[nb] 26 mjeseci",
+    "policySection3": {
+      "title": "[nb] 3. Upravljanje kolačićima",
+      "p1": "[nb] Možete kontrolirati i/ili brisati kolačiće prema Vašim željama. Pogledajte upute za upravljanje kolačićima u popularnim preglednicima:",
+      "li1": "[nb] Google Chrome: Postavke → Privatnost i sigurnost → Kolačići",
+      "li2": "[nb] Mozilla Firefox: Postavke → Privatnost i sigurnost → Kolačići i podaci stranica",
+      "li3": "[nb] Safari: Preference → Privatnost → Upravljanje podacima web stranica",
+      "li4": "[nb] Microsoft Edge: Postavke → Kolačići i dozvole stranica"
+    },
+    "policySection4": {
+      "title": "[nb] 4. Više informacija",
+      "p1": "[nb] Isključivanje osnovnih kolačića može narušiti funkcionalnost platforme. Analitičke kolačiće možete isključiti u bilo koje vrijeme putem banera za privolu.",
+      "p2": "[nb] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
+    }
+  },
+  "privacy": {
+    "title": "Personvernerklæring",
+    "lastUpdated": "Sist oppdatert: 28. mars 2026.",
+    "intro": "Sudačka mreža (heretter: «vi», «vår», «Sudačka mreža») er dedikert til å beskytte ditt personvern. Denne personvernerklæringen beskriver hvordan vi samler inn, bruker og beskytter dine personopplysninger i samsvar med forordning (EU) 2016/679 (GDPR) og lov om gjennomføring av den generelle personvernforordningen (NN 42/18).",
+    "section1": {
+      "title": "1. Hvilke opplysninger som samles inn",
+      "p1": "Vi samler inn følgende kategorier av personopplysninger, avhengig av hvordan plattformen vår brukes:",
+      "li1": "Kontoopplysninger: navn, e-postadresse og passord (hashet) ved registrering",
+      "li2": "Bruksdata: sider du har besøkt, søk og registrerte avgjørelser",
+      "li3": "Enhetsdata: IP-adresse, nettlesertype og operativsystem",
+      "li4": "Kontaktformularopplysninger: navn, e-post og meldingens innhold"
+    },
+    "section2": {
+      "title": "[nb] 2. Pravna osnova obrade",
+      "p1": "[nb] Vaše osobne podatke obrađujemo na temelju sljedećih pravnih osnova:",
+      "li1": "[nb] Izvršavanje ugovora (čl. 6 st. 1 t. b) GDPR-a): za pružanje usluga korisnicima s računom",
+      "li2": "[nb] Legitimni interes (čl. 6 st. 1 t. f) GDPR-a): za sigurnost platforme i poboljšanje usluge",
+      "li3": "[nb] Privola (čl. 6 st. 1 t. a) GDPR-a): za analitičke kolačiće (samo uz Vaš pristanak)"
+    },
+    "section3": {
+      "title": "[nb] 3. Rokovi čuvanja podataka",
+      "p1": "[nb] Čuvamo Vaše osobne podatke samo onoliko dugo koliko je potrebno za svrhu u koju su prikupljeni:",
+      "li1": "[nb] Podaci računa: trajanje korisničkog računa + 30 dana nakon brisanja",
+      "li2": "[nb] Zapisnici pristupa (IP adrese): 90 dana",
+      "li3": "[nb] Podaci kontaktnog obrasca: 2 godine od zaprimanja"
+    },
+    "section4": {
+      "title": "[nb] 4. Vaša prava",
+      "p1": "[nb] Kao ispitanik imate sljedeća prava prema GDPR-u:",
+      "li1": "[nb] Pravo pristupa: možete zatražiti kopiju osobnih podataka koje o Vama čuvamo",
+      "li2": "[nb] Pravo na ispravak: možete zatražiti ispravak netočnih podataka",
+      "li3": "[nb] Pravo na brisanje (pravo na zaborav): možete zatražiti brisanje podataka koji se više ne trebaju čuvati",
+      "li4": "[nb] Pravo na prenosivost podataka: možete zatražiti strukturirani, strojno čitljivi format Vaših podataka",
+      "li5": "[nb] Pravo na prigovor: možete se usprotiviti obradi podataka na temelju legitimnog interesa",
+      "p2": "[nb] Zahtjeve za ostvarivanje prava uputite na: info@sudacka-mreza.hr. Na zahtjev odgovaramo u roku 30 dana."
+    },
+    "section5": {
+      "title": "[nb] 5. Nadzorno tijelo — AZOP",
+      "p1": "[nb] Ako smatrate da obrada Vaših osobnih podataka krši GDPR, imate pravo podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP):",
+      "azopName": "Personverntilsynet (AZOP)",
+      "azopAddress": "Martićeva 14, 10000 Zagreb, Kroatia",
+      "azopEmail": "E-post: azop@azop.hr",
+      "azopPhone": "Telefon: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "6. Endringer i personvernerklæringen",
+      "p1": "Vi forbeholder oss retten til å endre disse reglene. Vi vil varsle deg om alle vesentlige endringer via e-post eller ved publisering på plattformen minst 14 dager før de trer i kraft. Fortsatt bruk av plattformen etter utløpet av denne perioden anses som en aksept av de endrede reglene."
+    }
+  },
+  "terms": {
+    "title": "[nb] Uvjeti korištenja",
+    "lastUpdated": "[nb] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[nb] Dobrodošli na Sudačku mrežu. Korištenjem ove platforme prihvaćate sljedeće Uvjete korištenja. Molimo pažljivo pročitajte ovaj dokument prije korištenja usluge.",
+    "section1": {
+      "title": "[nb] 1. Opis usluge",
+      "p1": "[nb] Sudačka mreža je neprofitna online platforma koja pruža pristup javnim pravosudnim informacijama u Republici Hrvatskoj: sudska praksa, registar sudova, direktorij vještaka i tumača, stečajni oglasi i pravni sadržaji.",
+      "p2": "[nb] Svi sadržaji na platformi dostupni su isključivo u informativne svrhe i ne predstavljaju pravni savjet. Za konkretne pravne savjete obratite se ovlaštenom odvjetniku."
+    },
+    "section2": {
+      "title": "[nb] 2. Korisnički računi",
+      "p1": "Ved å registrere en brukerkonto godtar du følgende forpliktelser:",
+      "li1": "Oppgi nøyaktige og fullstendige opplysninger ved registrering",
+      "li2": "Hold passordet ditt konfidensielt og ikke del tilgang til kontoen din med tredjeparter",
+      "li3": "Vennligst informer oss umiddelbart om uautorisert bruk av din konto på: info@sudacka-mreza.hr"
+    },
+    "section3": {
+      "title": "3. Akseptabel bruk",
+      "p1": "Brukere forplikter seg til å ikke:",
+      "li1": "Bruke plattformen til ulovlige formål eller for å krenke tredjeparters rettigheter",
+      "li2": "Bruke automatiserte verktøy (boter, skrapere) for å hente ut innhold uten forutgående skriftlig samtykke",
+      "li3": "Publisere usann, krenkende eller opphavsrettslig beskyttet innhold",
+      "li4": "Forsøke å skaffe seg uautorisert tilgang til plattformens systemer eller data"
+    },
+    "section4": {
+      "title": "4. Immaterielle rettigheter",
+      "p1": "Alt originalt innhold på plattformen (design, programvare, tekst, logoer) tilhører Sudačka mreža og er beskyttet av opphavsrett. Offentlige data (domstolsavgjørelser, rettsinformasjon) er tilgjengelige i samsvar med regelverket om retten til innsyn i informasjon."
+    },
+    "section5": {
+      "title": "5. Ansvarsbegrensning",
+      "p1": "Sudačka mreža tilstreber å sikre innholdets nøyaktighet og aktualitet, men garanterer ikke for dets fullstendighet eller nøyaktighet. Plattformen leveres 'som den er' uten garantier om tilgjengelighet eller egnethet for et bestemt formål.",
+      "p2": "Sudačka mreža er ikke ansvarlig for direkte eller indirekte skader som følge av bruk av plattformen eller manglende tilgang til plattformen."
+    },
+    "section6": {
+      "title": "6. Lovvalg",
+      "p1": "Disse brukervilkårene er underlagt lovgivningen i Republikken Kroatia. Alle tvister som oppstår i forbindelse med bruk av plattformen, skal partene forsøke å løse i minnelighet, og dersom dette ikke lykkes, er domstolen i Zagreb kompetent."
+    },
+    "section7": {
+      "title": "7. Endringer i vilkårene",
+      "p1": "Vi forbeholder oss retten til å endre disse brukervilkårene. Registrerte brukere vil bli varslet om vesentlige endringer via e-post. Fortsatt bruk av plattformen etter at endringene er publisert, anses som en aksept av de nye vilkårene.",
+      "p2": "For spørsmål om disse vilkårene, kontakt oss på:"
+    }
+  },
+  "docgen.type.tuzba.desc": "For å reise sivilt søksmål",
+  "docgen.type.zalba.desc": "For å anke en rettslig avgjørelse til en høyere domstol",
+  "docgen.type.prigovor.desc": "For å fremme innsigelse mot en rettslig avgjørelse",
+  "docgen.type.ovrsni.desc": "For å begjære tvangsfullbyrdelse på grunnlag av et tvangsgrunnlag"
+}

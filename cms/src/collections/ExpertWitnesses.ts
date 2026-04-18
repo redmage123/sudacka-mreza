@@ -73,7 +73,7 @@ export const ExpertWitnesses: CollectionConfig = {
     },
     {
       name: 'email',
-      type: 'text',
+      type: 'email',
       label: 'Email',
       access: {
         read: membersOnlyRead,
@@ -86,7 +86,64 @@ export const ExpertWitnesses: CollectionConfig = {
       label: 'Verificiran',
       admin: {
         description: 'Admin-set verified badge prikazan na profilu',
+        position: 'sidebar',
       },
+    },
+    {
+      name: 'verifiedAt',
+      type: 'date',
+      label: 'Datum verifikacije',
+      admin: {
+        position: 'sidebar',
+        condition: (data) => Boolean(data?.verified),
+      },
+    },
+    {
+      name: 'verifiedBy',
+      type: 'relationship',
+      relationTo: 'users',
+      label: 'Verificirao',
+      admin: {
+        position: 'sidebar',
+        condition: (data) => Boolean(data?.verified),
+      },
+    },
+    {
+      name: 'lastConfirmed',
+      type: 'date',
+      label: 'Posljednja potvrda',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'flagReports',
+      type: 'array',
+      label: 'Prijave netočnih podataka',
+      access: {
+        read: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'editor',
+      },
+      admin: {
+        readOnly: true,
+      },
+      fields: [
+        {
+          name: 'reporter',
+          type: 'relationship',
+          relationTo: 'users',
+          label: 'Prijavitelj',
+        },
+        {
+          name: 'reason',
+          type: 'textarea',
+          label: 'Razlog',
+        },
+        {
+          name: 'date',
+          type: 'date',
+          label: 'Datum',
+        },
+      ],
     },
     {
       name: 'assignedCourts',

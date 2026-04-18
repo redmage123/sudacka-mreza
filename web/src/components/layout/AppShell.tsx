@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { Outlet, useLocation, useMatches } from 'react-router'
+import { Link, Outlet, useLocation, useMatches, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { Sidebar } from './Sidebar'
+import { InstallPrompt } from '@/components/ui'
+import { CookieConsent } from '@/components/CookieConsent'
 
 interface BreadcrumbMatch {
   id: string
@@ -33,9 +36,9 @@ function Breadcrumb() {
                 {crumb.handle?.breadcrumb}
               </span>
             ) : (
-              <a href={crumb.pathname} className="text-[color:var(--color-text-link)] hover:text-[color:var(--color-text-link-hover)] transition-colors">
+              <Link to={crumb.pathname} className="text-[color:var(--color-text-link)] hover:text-[color:var(--color-text-link-hover)] transition-colors">
                 {crumb.handle?.breadcrumb}
-              </a>
+              </Link>
             )}
           </li>
         ))}
@@ -45,18 +48,27 @@ function Breadcrumb() {
 }
 
 export function AppShell() {
-  const { t } = useTranslation('nav')
+  const { t, i18n } = useTranslation('nav')
   const location = useLocation()
+  const { lang } = useParams<{ lang: string }>()
   const mainRef = useRef<HTMLElement>(null)
+
+  // Sync i18next language with the URL /:lang param so translations render in
+  // the correct language immediately on load (not just after a manual switch).
+  useEffect(() => {
+    if (lang) {
+      void i18n.changeLanguage(lang)
+    }
+  }, [lang, i18n])
 
   // Move focus to main on route change (SPA accessibility requirement)
   useEffect(() => {
     const h1 = mainRef.current?.querySelector<HTMLElement>('h1')
     if (h1) {
       h1.tabIndex = -1
-      h1.focus({ preventScroll: false })
+      h1.focus({ preventScroll: true })
     } else {
-      mainRef.current?.focus({ preventScroll: false })
+      mainRef.current?.focus({ preventScroll: true })
     }
   }, [location.pathname])
 
@@ -70,16 +82,22 @@ export function AppShell() {
       <Header />
       <Breadcrumb />
 
-      <main
-        id="main-content"
-        ref={mainRef}
-        tabIndex={-1}
-        className="flex-1 outline-none"
-      >
-        <Outlet />
-      </main>
+      {/* Content row: Sidebar (desktop only) + main */}
+      <div className="flex flex-1 min-h-0">
+        <Sidebar />
+        <main
+          id="main-content"
+          ref={mainRef}
+          tabIndex={-1}
+          className="flex-1 min-w-0 outline-none"
+        >
+          <Outlet />
+        </main>
+      </div>
 
       <Footer />
+      <InstallPrompt />
+      <CookieConsent />
     </div>
   )
 }

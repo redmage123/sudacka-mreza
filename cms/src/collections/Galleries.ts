@@ -42,6 +42,7 @@ export const Galleries: CollectionConfig = {
       options: [
         { label: 'Foto', value: 'photo' },
         { label: 'Video', value: 'video' },
+        { label: 'Audio', value: 'audio' },
       ],
     },
     {
@@ -58,8 +59,18 @@ export const Galleries: CollectionConfig = {
           name: 'media',
           type: 'relationship',
           relationTo: 'media',
-          required: true,
-          label: 'Medij',
+          label: 'Medij (slika / audio datoteka)',
+          admin: {
+            description: 'Koristite za foto i audio galerije. Za video galerije koristite Video URL.',
+          },
+        },
+        {
+          name: 'videoUrl',
+          type: 'text',
+          label: 'Video URL (YouTube / Vimeo)',
+          admin: {
+            description: 'Embed URL za YouTube ili Vimeo (za video galerije)',
+          },
         },
         {
           name: 'caption',

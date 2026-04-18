@@ -148,7 +148,8 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
           <div className="border-t border-[color:var(--color-brand-navy-light)] pt-4 space-y-1">
             {[
-              { to: `/${lang}/pristojbe`, label: t('calculator') },
+              { to: `/${lang}/statistika`, label: t('statistics') },
+            { to: `/${lang}/pristojbe`, label: t('calculator') },
               { to: `/${lang}/pravna-pomoc`, label: t('legalAid') },
               { to: `/${lang}/vijesti`, label: t('news') },
               { to: `/${lang}/galerije`, label: t('galleries') },

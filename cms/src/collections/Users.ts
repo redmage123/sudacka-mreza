@@ -3,7 +3,24 @@ import { isAdmin } from '../access.js'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
+  auth: {
+    // SECURITY: require email verification before the account is usable
+    verify: {
+      generateEmailHTML: ({ token, user }) => {
+        const url = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify?token=${token}`
+        return `
+          <h1>Potvrdite svoju e-mail adresu</h1>
+          <p>Poštovani/a ${(user as any).firstName || ''},</p>
+          <p>Molimo potvrdite svoju e-mail adresu klikom na poveznicu:</p>
+          <a href="${url}">${url}</a>
+          <p>Sudačka Mreža</p>
+        `
+      },
+      generateEmailSubject: () => 'Sudačka Mreža — Potvrdite e-mail adresu',
+    },
+    maxLoginAttempts: 5,
+    lockTime: 15 * 60 * 1000, // 15 minute lockout after 5 failed attempts
+  },
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'firstName', 'lastName', 'role'],
@@ -50,6 +67,28 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Prezime',
+    },
+    {
+      name: 'profile',
+      type: 'group',
+      label: 'Profil',
+      fields: [
+        {
+          name: 'bio',
+          type: 'textarea',
+          label: 'Kratka biografija',
+        },
+        {
+          name: 'phone',
+          type: 'text',
+          label: 'Telefon',
+        },
+        {
+          name: 'organisation',
+          type: 'text',
+          label: 'Organizacija / Sud',
+        },
+      ],
     },
     {
       name: 'role',

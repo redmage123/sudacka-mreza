@@ -1,0 +1,57 @@
+# ── Sudačka Mreža — Caddy reverse proxy ───────────────────────────────────────
+# Production: replace {$DOMAIN} with the real domain in your .env
+# e.g.  DOMAIN=sudacka-mreza.hr
+#
+# Caddy automatically provisions Let's Encrypt TLS certificates.
+# For local development, use the docker-compose proxy port directly —
+# Caddy is only needed in production.
+
+{$DOMAIN:localhost} {
+
+  # ── CMS admin, REST API, GraphQL, and uploaded media ──────────────────────
+  handle /admin* {
+    reverse_proxy cms:4094
+  }
+
+  handle /api/* {
+    reverse_proxy cms:4094
+  }
+
+  handle /media/* {
+    reverse_proxy cms:4094
+  }
+
+  handle /graphql {
+    reverse_proxy cms:4094
+  }
+
+  # ── Block source maps ──────────────────────────────────────────────────────
+  @sourcemaps path *.map
+  respond @sourcemaps 404
+
+  # ── Everything else → React SPA (Nginx) ───────────────────────────────────
+  handle {
+    reverse_proxy web:80
+  }
+
+  # ── Security headers ──────────────────────────────────────────────────────
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options "SAMEORIGIN"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    Permissions-Policy "geolocation=(), camera=(), microphone=()"
+    X-XSS-Protection "1; mode=block"
+    Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org; connect-src 'self'; frame-ancestors 'self';"
+    -Server
+  }
+
+  # ── Logging ───────────────────────────────────────────────────────────────
+  log {
+    output file /var/log/caddy/access.log {
+      roll_size 50mb
+      roll_keep 5
+    }
+    format json
+  }
+}

@@ -46,6 +46,17 @@ export const Documents: CollectionConfig = {
       label: 'Opis',
     },
     {
+      name: 'publishedAt',
+      type: 'date',
+      label: 'Datum objave',
+      admin: {
+        description: 'Prazno = neobjavljeno (draft)',
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+      },
+    },
+    {
       name: 'lang',
       type: 'select',
       required: true,

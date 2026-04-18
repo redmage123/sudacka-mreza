@@ -1,0 +1,55 @@
+{
+  "name": "Sudačka Mreža",
+  "short_name": "SM",
+  "description": "Portal za sudsku praksu, sudske vještake, tumače i pravne informacije u Republici Hrvatskoj.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0D2B55",
+  "background_color": "#F8F9FA",
+  "lang": "hr",
+  "dir": "ltr",
+  "categories": ["legal", "government"],
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Sudska praksa",
+      "url": "/hr/court-decisions",
+      "description": "Pregled sudskih odluka"
+    },
+    {
+      "name": "Sudski vještaci",
+      "url": "/hr/expert-witnesses",
+      "description": "Popis sudskih vještaka"
+    }
+  ]
+}

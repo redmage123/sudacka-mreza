@@ -1,0 +1,807 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "بحث",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "المحكمة التجارية العليا",
+      "vrhovni": "المحكمة العليا",
+      "upravni": "المحكمة الإدارية",
+      "ustavni": "المحكمة الدستورية",
+      "echr": "المحكمة الأوروبية لحقوق الإنسان"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "president": "الرئيس"
+    },
+    "officialNameNote": "الاسم الرسمي للمحكمة الكرواتية"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "decisionsSearch": "البحث في القرارات"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "خريطة المحاكم",
+    "courtType": {
+      "municipal": "بلدية",
+      "county": "مقاطعة",
+      "commercial": "تجارية",
+      "misdemeanour": "مخالفات",
+      "administrative": "إدارية"
+    },
+    "legend": "وسيلة الإيضاح",
+    "loading": "جاري تحميل المحاكم...",
+    "filterAll": "جميع المحاكم",
+    "filterMunicipal": "بلدية",
+    "filterCounty": "مقاطعة",
+    "filterCommercial": "تجارية",
+    "filterMisdemeanour": "مخالفات",
+    "filterAdministrative": "إدارية",
+    "viewDetails": "عرض التفاصيل",
+    "courts": "محاكم",
+    "error": "تعذر تحميل بيانات المحاكم. يرجى المحاولة مرة أخرى."
+  },
+  "jurisdiction": {
+    "title": "محدد الاختصاص القضائي",
+    "subtitle": "ابحث عن المحكمة المختصة لقضيتك بناءً على الموقع ونوع القضية.",
+    "cityLabel": "المدينة أو البلدية",
+    "cityPlaceholder": "مثال: زغرب، سبليت، رييكا...",
+    "caseTypeLabel": "نوع القضية",
+    "caseType": {
+      "civilMinor": "مدنية (صغرى) — محكمة بلدية",
+      "criminalMinor": "جنائية (أقل من 5 سنوات) — محكمة بلدية",
+      "criminalSerious": "جنائية (5 سنوات فأكثر) — محكمة مقاطعة",
+      "commercial": "تجارية — محكمة تجارية",
+      "misdemeanour": "مخالفات — محكمة مخالفات",
+      "administrative": "إدارية — محكمة إدارية"
+    },
+    "results": "النتائج",
+    "noResults": "لم يتم العثور على محكمة مطابقة لهذا الموقع ونوع القضية.",
+    "noResultsHint": "جرب اسم مدينة مختلف أو تحقق من دليل المحاكم الكامل.",
+    "viewCourtsDirectory": "عرض دليل المحاكم"
+  },
+  "calculator": {
+    "title": "الرسوم القضائية",
+    "selectCaseType": "نوع القضية",
+    "caseType": {
+      "civil": "نزاع مدني",
+      "criminal": "إجراءات جنائية",
+      "commercial": "نزاع تجاري",
+      "administrative": "نزاع إداري",
+      "nonContentious": "إجراءات غير خلافية"
+    },
+    "claimValue": "قيمة المطالبة (يورو)",
+    "calculate": "احسب الرسوم",
+    "filingFee": "رسوم التقديم",
+    "appealFee": "رسوم الاستئناف",
+    "enforcementFee": "رسوم التنفيذ",
+    "fixedFee": "رسوم ثابتة",
+    "exemptionsTitle": "الإعفاءات من الرسوم",
+    "exemption1": "المستفيدون من الرعاية الاجتماعية معفون من جميع الرسوم القضائية.",
+    "exemption2": "القاصرون معفون من الرسوم القضائية في الإجراءات المتعلقة بحقوقهم.",
+    "exemption3": "العمال في نزاعات العمل بقيمة مطالبة تصل إلى 2,650€ معفون.",
+    "paymentTitle": "طرق الدفع",
+    "payment1": "تحويل مصرفي إلى الحساب الرسمي للمحكمة",
+    "payment2": "بوابة e-Pristojbe (الدفع الإلكتروني)",
+    "payment3": "أمين صندوق المحكمة (شخصياً في المحكمة)",
+    "legalBasis": "الأساس القانوني",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95، مع التعديلات). جميع المبالغ محولة إلى اليورو منذ 01.01.2023.",
+    "minorOffenses": "مخالفات بسيطة",
+    "seriousOffenses": "جرائم خطيرة"
+  },
+  "jurisdictionFinder": {
+    "title": "ابحث عن محكمتك",
+    "description": "أدخل مدينتك ونوع القضية لمعرفة المحكمة المختصة بقضيتك.",
+    "cityLabel": "مدينتك أو بلديتك",
+    "cityPlaceholder": "مثال: زغرب، سبليت، أوسييك...",
+    "caseTypeLabel": "نوع القضية",
+    "caseType": {
+      "civilMinor": "نزاع مدني (حتى 2,654€)",
+      "civilMajor": "نزاع مدني (أكثر من 2,654€)",
+      "criminalMinor": "جنائي (مخالفة بسيطة)",
+      "criminalSerious": "جنائي (جريمة خطيرة)",
+      "commercial": "نزاع تجاري",
+      "misdemeanour": "مخالفة / مخالفة مرورية",
+      "administrative": "نزاع مع جهة حكومية"
+    },
+    "find": "ابحث عن المحكمة",
+    "result": "المحكمة المختصة",
+    "noResult": "لم يتم العثور على محكمة لهذه المدينة. جرب تصفح دليل المحاكم.",
+    "browseAll": "تصفح جميع المحاكم",
+    "viewProfile": "عرض ملف المحكمة"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "بوابة الإفلاس",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "أمناء الإفلاس",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "لا يوجد أمناء إفلاس مسجلون.",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "تشريعات الإفلاس",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "المساعدة القانونية المجانية",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "معارض الصور",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "لم تُنشر أي معارض بعد.",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "إرسال الرسالة",
+      "sending": "Sending...",
+      "success": "تم إرسال رسالتك.",
+      "errorRequired": "هذا الحقل مطلوب.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "الأخبار",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "لم تُنشر مقالات بعد.",
+    "readMore": "اقرأ المزيد",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "تسجيل الدخول",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "إنشاء حساب",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "معلومات عنا",
+    "intro1": "Sudačka mreža (الشبكة القضائية) هي جمعية غير ربحية تعمل منذ أكثر من عشرين عامًا على جمع البيانات ذات الاهتمام العام من الجهاز القضائي في جمهورية كرواتيا ومعالجتها ونشرها. هدفنا هو الشفافية القضائية وإتاحة المعلومات القانونية لجميع المواطنين.",
+    "intro2": "توفر المنصة قواعد بيانات قابلة للبحث في السوابق القضائية (المحكمة العليا، محكمة التجارة العليا، المحكمة الأوروبية لحقوق الإنسان)، ودليل المحاكم مع خريطة الاختصاص التفاعلية، ودليل الخبراء القضائيين والمترجمين، وإعلانات بيع التفليسة، ونظرة عامة على التشريعات ذات الصلة.",
+    "intro3": "جميع الخدمات متاحة مجانًا. التسجيل مطلوب فقط للوصول إلى تفاصيل الاتصال بالمهنيين القضائيين.",
+    "donors": {
+      "title": "المانحون والشركاء",
+      "subtitle": "نشكر المنظمات التي دعمت على مر السنين تطوير وصيانة Sudačka mreža."
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "مولّد الوثائق القانونية",
+    "subtitle": "أكمل النموذج وقم بتنزيل وثيقة قانونية كرواتية جاهزة بصيغة PDF",
+    "selectType": "اختر نوع الوثيقة",
+    "type": {
+      "tuzba": "دعوى",
+      "zalba": "استئناف",
+      "prigovor": "اعتراض",
+      "ovrsni": "طلب تنفيذ"
+    },
+    "fields": {
+      "plaintiff_name": "الاسم الكامل للمدعي",
+      "plaintiff_address": "عنوان المدعي",
+      "defendant_name": "الاسم الكامل للمدعى عليه",
+      "defendant_address": "عنوان المدعى عليه",
+      "appellant_name": "الاسم الكامل للمستأنف",
+      "appellant_address": "عنوان المستأنف",
+      "objector_name": "الاسم الكامل لمقدم الاعتراض",
+      "objector_address": "عنوان مقدم الاعتراض",
+      "creditor_name": "الاسم الكامل للدائن",
+      "creditor_address": "عنوان الدائن",
+      "debtor_name": "الاسم الكامل للمدين",
+      "debtor_address": "عنوان المدين",
+      "court_name": "المحكمة المختصة",
+      "case_number": "رقم القضية",
+      "claim_value": "قيمة المطالبة (EUR)",
+      "claim_amount": "مبلغ الدعوى (EUR)",
+      "claim_description": "الطلب / Petitum",
+      "facts": "وقائع الدعوى / التسبيب",
+      "legal_basis": "الأساس القانوني (اختياري)",
+      "appeal_grounds": "أسباب الاستئناف",
+      "appeal_request": "طلبات الاستئناف",
+      "judgment_date": "تاريخ الحكم المطعون فيه",
+      "objection_grounds": "أسباب الاعتراض",
+      "enforcement_title": "سند التنفيذ",
+      "enforcement_means": "وسيلة التنفيذ (اختياري)",
+      "date": "التاريخ",
+      "city": "المدينة"
+    },
+    "generate": "إنشاء PDF",
+    "reset": "وثيقة جديدة",
+    "required": "حقل إلزامي",
+    "disclaimer": "هذا المولّد لأغراض إعلامية فقط ولا يمثل استشارة قانونية.",
+    "generating": "جارٍ الإنشاء...",
+    "nav": {
+      "back": "العودة إلى الوثائق"
+    }
+  },
+  "deadlines": {
+    "title": "حاسبة المواعيد الإجرائية",
+    "subtitle": "احسب المواعيد الإجرائية بناءً على نوع الإجراءات وتاريخ التقديم.",
+    "selectCaseType": "نوع الإجراء",
+    "filingDate": "تاريخ التقديم",
+    "filingDatePlaceholder": "اختر التاريخ",
+    "timelineTitle": "المواعيد الإجرائية",
+    "noDeadlines": "أدخل تاريخ التقديم لعرض المواعيد.",
+    "days": "أيام",
+    "hours": "ساعات",
+    "fromFiling": "من التقديم",
+    "overdue": "منتهي",
+    "today": "اليوم",
+    "statuteTitle": "تقادم",
+    "statute": {
+      "civil": "تقادم عام: 5 سنوات. المسؤولية التقصيرية: 3 سنوات ذاتية، 5 سنوات موضوعية.",
+      "criminal": "تقادم الملاحقة الجنائية: 5–25 سنة حسب الحد الأقصى للعقوبة.",
+      "commercial": "المطالبات التجارية: 3 سنوات. التقادم العام للتجار: 5 سنوات.",
+      "administrative": "الموعد النهائي لرفع الدعوى الإدارية: 30 يومًا من تبليغ القرار النهائي."
+    },
+    "legalBasis": "الأساس القانوني",
+    "legalBasisCivil": "قانون الإجراءات المدنية (ZPP، النص الموحد)",
+    "legalBasisCriminal": "قانون الإجراءات الجزائية (ZKP، المعدل)",
+    "legalBasisCommercial": "قانون الإجراءات المدنية – التطبيق أمام المحاكم التجارية",
+    "legalBasisAdministrative": "قانون الإجراءات الإدارية العامة وقانون المنازعات الإدارية",
+    "disclaimer": "هذه المواعيد استرشادية ولا تشكل مشورة قانونية. استشر محاميًا لحالتك المحددة.",
+    "step": {
+      "filing": "تقديم الدعوى / الطلب",
+      "responseToLawsuit": "مهلة الرد على الدعوى",
+      "preparatoryHearing": "جلسة تحضيرية",
+      "mainHearing": "الجلسة الرئيسية",
+      "judgmentAppeal": "موعد الطعن في الحكم",
+      "secondInstanceDecision": "قرار محكمة الاستئناف",
+      "policeDetentionMax": "الاحتجاز الشرطي الأقصى",
+      "indictment": "الموعد النهائي للاتهام",
+      "indictmentObjection": "الاعتراض على لائحة الاتهام",
+      "criminalAppeal": "مهلة الطعن",
+      "paymentOrderObjection": "الاعتراض على أمر الدفع",
+      "commercialResponse": "الرد على الدعوى (تجاري)",
+      "commercialHearing": "جلسة المحكمة التجارية",
+      "commercialAppeal": "مهلة الطعن (تجاري)",
+      "adminRequest": "تقديم الطلب الإداري",
+      "adminDecision": "الموعد النهائي للقرار الإداري",
+      "adminObjection": "الطعن في الإجراءات الإدارية",
+      "adminSecondInstance": "قرار الجهة الإدارية من الدرجة الثانية",
+      "adminCourtSuit": "الموعد النهائي لرفع دعوى أمام المحكمة الإدارية"
+    },
+    "legend": {
+      "filing": "تقديم",
+      "deadline": "الموعد النهائي",
+      "hearing": "جلسة",
+      "decision": "قرار",
+      "overdue": "منتهي"
+    }
+  },
+  "cookiePolicy": "سياسة الكوكيز",
+  "termsOfService": "شروط الخدمة",
+  "judges": {
+    "detail": {
+      "role": "قاضٍ",
+      "court": "محكمة",
+      "appointmentDate": "تاريخ التعيين",
+      "specialization": "التخصص",
+      "status": "الحالة",
+      "contact": "بيانات الاتصال"
+    }
+  },
+  "legalNews": {
+    "title": "أخبار قانونية",
+    "subtitle": "نظرة عامة على الأخبار القانونية الحالية من المصادر القانونية المحلية والأوروبية.",
+    "breadcrumbNews": "أخبار",
+    "filterBySource": "تصفية حسب المصدر",
+    "filterAll": "جميع المصادر",
+    "readMore": "اقرأ المزيد",
+    "noResults": "لا توجد أخبار للمصدر المحدد.",
+    "disclaimer": "تم جلب الأخبار من مصادر خارجية. شبكة Sudačka mreža غير مسؤولة عن دقة محتوى الأطراف الثالثة."
+  },
+  "cookies": {
+    "ariaLabel": "إشعار ملفات تعريف الارتباط",
+    "title": "ملفات تعريف الارتباط والخصوصية",
+    "description": "نستخدم ملفات تعريف الارتباط لضمان عمل الموقع بشكل صحيح، وبموافقتكم، نجمع بيانات تحليلية مجهولة المصدر لتحسين الخدمة.",
+    "acceptAll": "قبول الكل",
+    "rejectNonEssential": "رفض غير الضروري",
+    "customize": "تخصيص",
+    "customizeTitle": "إعدادات ملفات تعريف الارتباط",
+    "essential": "ملفات تعريف الارتباط الأساسية",
+    "essentialDesc": "ضرورية لعمل الموقع بشكل صحيح. مفعلة دائماً ولا يمكن إيقاف تشغيلها.",
+    "analytics": "ملفات تعريف الارتباط التحليلية",
+    "analyticsDesc": "تساعدنا في فهم كيفية استخدام المستخدمين للموقع. جميع البيانات مجهولة المصدر.",
+    "alwaysOn": "مفعل دائماً",
+    "savePreferences": "حفظ الإعدادات",
+    "policyTitle": "سياسة ملفات تعريف الارتباط",
+    "policyLastUpdated": "آخر تحديث: 28 مارس 2026.",
+    "policyIntro": "توضح سياسة ملفات تعريف الارتباط هذه ماهية ملفات تعريف الارتباط (cookies)، وأنواع الملفات التي نستخدمها، والأغراض منها، وكيفية التحكم فيها. باستخدام منصتنا، فإنك توافق على استخدام ملفات تعريف الارتباط الموضحة في هذه الوثيقة.",
+    "policySection1": {
+      "title": "1. ما هي ملفات تعريف الارتباط؟",
+      "p1": "ملفات تعريف الارتباط هي ملفات نصية صغيرة يتم تخزينها على جهازك عند زيارة موقع إلكتروني. تتيح هذه الملفات للموقع تذكر إعداداتك وتحسين تجربة المستخدم الخاصة بك. لا يمكن لملفات تعريف الارتباط تشغيل البرامج أو نقل الفيروسات."
+    },
+    "policySection2": {
+      "title": "2. ما هي ملفات تعريف الارتباط التي نستخدمها؟"
+    },
+    "tableColName": "الاسم",
+    "tableColPurpose": "الغرض",
+    "tableColCategory": "الفئة",
+    "tableColRetention": "المدة",
+    "row1Purpose": "تذكر لغة الواجهة المختارة",
+    "row1Retention": "12 شهرًا",
+    "row2Purpose": "تخزين إعدادات الموافقة على ملفات تعريف الارتباط الخاصة بك",
+    "row2Retention": "12 شهرًا",
+    "row3Purpose": "تذكر وضع العرض المختار (فاتح/داكن)",
+    "row3Retention": "١٢ شهرًا",
+    "row4Purpose": "تحليلات الزيارات مجهولة الهوية (Google Analytics) — بموجب الموافقة فقط",
+    "row4Retention": "٢٦ شهرًا",
+    "policySection3": {
+      "title": "٣. إدارة ملفات تعريف الارتباط",
+      "p1": "يمكنك التحكم في ملفات تعريف الارتباط و/أو حذفها وفقًا لرغبتك. راجع تعليمات إدارة ملفات تعريف الارتباط في المتصفحات الشائعة:",
+      "li1": "Google Chrome: الإعدادات ← الخصوصية والأمان ← ملفات تعريف الارتباط",
+      "li2": "Mozilla Firefox: الإعدادات ← الخصوصية والأمان ← ملفات تعريف الارتباط وبيانات الموقع",
+      "li3": "Safari: التفضيلات ← الخصوصية ← إدارة بيانات موقع الويب",
+      "li4": "Microsoft Edge: الإعدادات ← ملفات تعريف الارتباط وأذونات الموقع"
+    },
+    "policySection4": {
+      "title": "٤. مزيد من المعلومات",
+      "p1": "قد يؤدي تعطيل ملفات تعريف الارتباط الأساسية إلى التأثير على وظائف المنصة. يمكنك تعطيل ملفات تعريف الارتباط التحليلية في أي وقت عبر لافتة الموافقة.",
+      "p2": "لمزيد من المعلومات حول كيفية معالجتنا لبياناتك الشخصية، يرجى الاطلاع على"
+    }
+  },
+  "privacy": {
+    "title": "سياسة الخصوصية",
+    "lastUpdated": "آخر تحديث: 28 مارس 2026.",
+    "intro": "تلتزم Sudačka mreža (المشار إليها فيما يلي بـ 'نحن'، 'نا'، 'Sudačka mreža') بحماية خصوصيتكم. توضح سياسة الخصوصية هذه كيفية جمع بياناتكم الشخصية واستخدامها وحمايتها وفقاً للائحة (EU) 2016/679 (GDPR) وقانون تنفيذ اللائحة العامة لحماية البيانات (NN 42/18).",
+    "section1": {
+      "title": "1. ما هي البيانات التي يتم جمعها",
+      "p1": "نقوم بجمع الفئات التالية من البيانات الشخصية، اعتماداً على كيفية استخدام منصتنا:",
+      "li1": "بيانات الحساب: الاسم، وعنوان البريد الإلكتروني، وكلمة المرور (المشفرة/hashed) عند التسجيل",
+      "li2": "بيانات الاستخدام: الصفحات التي زرتها، وعمليات البحث، والقرارات المسجلة",
+      "li3": "بيانات الجهاز: عنوان IP، ونوع المتصفح، ونظام التشغيل",
+      "li4": "بيانات نموذج الاتصال: الاسم، والبريد الإلكتروني، ومحتوى الرسالة"
+    },
+    "section2": {
+      "title": "2. الأساس القانوني للمعالجة",
+      "p1": "نحن نعالج بياناتكم الشخصية بناءً على الأسس القانونية التالية:",
+      "li1": "تنفيذ العقد (المادة 6، الفقرة 1، البند ب من GDPR): لتقديم الخدمات للمستخدمين الذين لديهم حساب",
+      "li2": "المصلحة المشروعة (المادة 6، الفقرة 1، البند و من GDPR): لأمن المنصة وتحسين الخدمة",
+      "li3": "الموافقة (المادة 6، الفقرة 1، البند أ من GDPR): لملفات تعريف الارتباط التحليلية (فقط بموافقتكم)"
+    },
+    "section3": {
+      "title": "3. فترات الاحتفاظ بالبيانات",
+      "p1": "نحتفظ ببياناتكم الشخصية فقط للفترة اللازمة للغرض الذي جُمعت من أجله:",
+      "li1": "بيانات الحساب: مدة حساب المستخدم + 30 يومًا بعد الحذف",
+      "li2": "سجلات الوصول (عناوين IP): 90 يومًا",
+      "li3": "بيانات نموذج الاتصال: سنتان من تاريخ الاستلام"
+    },
+    "section4": {
+      "title": "4. حقوقكم",
+      "p1": "بصفتكم صاحب البيانات، لديكم الحقوق التالية بموجب GDPR:",
+      "li1": "حق الوصول: يمكنكم طلب نسخة من البيانات الشخصية التي نحتفظ بها عنكم",
+      "li2": "حق التصحيح: يمكنكم طلب تصحيح البيانات غير الدقيقة",
+      "li3": "حق المسح (الحق في النسيان): يمكنكم طلب مسح البيانات التي لم يعد هناك حاجة للاحتفاظ بها",
+      "li4": "حق نقل البيانات: يمكنكم طلب الحصول على بياناتكم بتنسيق مهيكل وقابل للقراءة آليًا",
+      "li5": "حق الاعتراض: يمكنكم الاعتراض على معالجة البيانات بناءً على المصلحة المشروعة",
+      "p2": "يرجى توجيه طلبات ممارسة الحقوق إلى: info@sudacka-mreza.hr. سنرد على الطلب في غضون 30 يومًا."
+    },
+    "section5": {
+      "title": "5. سلطة الرقابة — AZOP",
+      "p1": "إذا كنتم تعتقدون أن معالجة بياناتكم الشخصية تنتهك GDPR، فمن حقكم تقديم شكوى إلى وكالة حماية البيانات الشخصية (AZOP):",
+      "azopName": "وكالة حماية البيانات الشخصية (AZOP)",
+      "azopAddress": "Martićeva 14, 10000 Zagreb, Hrvatska",
+      "azopEmail": "البريد الإلكتروني: azop@azop.hr",
+      "azopPhone": "الهاتف: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "6. تعديلات سياسة الخصوصية",
+      "p1": "نحتفظ بالحق في تعديل هذه السياسة. سنقوم بإخطاركم بأي تعديلات جوهرية عبر البريد الإلكتروني أو من خلال النشر على المنصة قبل 14 يومًا على الأقل من دخولها حيز التنفيذ. ويُعتبر استمرار استخدام المنصة بعد انقضاء تلك المدة بمثابة قبول للسياسة المعدلة."
+    }
+  },
+  "terms": {
+    "title": "شروط الاستخدام",
+    "lastUpdated": "آخر تحديث: ٢٨ مارس ٢٠٢٦.",
+    "intro": "مرحبًا بكم في الشبكة القضائية. باستخدام هذه المنصة، فإنك توافق على شروط الاستخدام التالية. يرجى قراءة هذا المستند بعناية قبل استخدام الخدمة.",
+    "section1": {
+      "title": "١. وصف الخدمة",
+      "p1": "الشبكة القضائية هي منصة إلكترونية غير ربحية توفر الوصول إلى المعلومات القضائية العامة في جمهورية كرواتيا: السوابق القضائية، وسجل المحاكم، ودليل الخبراء والمترجمين، وإعلانات الإفلاس، والمحتويات القانونية.",
+      "p2": "جميع المحتويات المتاحة على المنصة هي لأغراض إعلامية فقط ولا تشكل نصيحة قانونية. للحصول على نصيحة قانونية محددة، يرجى الاتصال بمحامٍ معتمد."
+    },
+    "section2": {
+      "title": "٢. حسابات المستخدمين",
+      "p1": "بإنشاء حساب مستخدم، فإنك توافق على الالتزامات التالية:",
+      "li1": "يرجى تقديم بيانات دقيقة وكاملة عند التسجيل",
+      "li2": "يرجى الحفاظ على سرية كلمة المرور وعدم مشاركة بيانات الوصول إلى حسابك مع أطراف ثالثة",
+      "li3": "يرجى إخطارنا فوراً بأي استخدام غير مصرح به لحسابك عبر البريد الإلكتروني: info@sudacka-mreza.hr"
+    },
+    "section3": {
+      "title": "3. الاستخدام المقبول",
+      "p1": "يتعهد المستخدمون بعدم القيام بما يلي:",
+      "li1": "استخدام المنصة لأغراض غير قانونية أو لانتهاك حقوق الأطراف الثالثة",
+      "li2": "استخدام الأدوات المؤتمتة (البوتات، أدوات الكشط) لسحب المحتوى دون موافقة كتابية مسبقة",
+      "li3": "نشر محتويات غير صحيحة أو مسيئة أو محمية بموجب حقوق الملكية",
+      "li4": "محاولة الوصول غير المصرح به إلى أنظمة المنصة أو بياناتها"
+    },
+    "section4": {
+      "title": "4. الملكية الفكرية",
+      "p1": "تعد جميع المحتويات الأصلية للمنصة (التصميم، البرمجيات، النصوص، الشعارات) ملكية خاصة لـ Sudačka mreža وهي محمية بموجب حقوق الطبع والنشر. أما البيانات العامة (الأحكام القضائية، بيانات المحاكم) فهي متاحة وفقاً للوائح المتعلقة بالحق في الوصول إلى المعلومات."
+    },
+    "section5": {
+      "title": "5. تحديد المسؤولية",
+      "p1": "تسعى Sudačka mreža لضمان دقة وحداثة المحتوى، ولكنها لا تضمن اكتماله أو دقته. تُقدم المنصة 'كما هي' دون أي ضمانات بشأن التوافر أو الملاءمة لغرض معين.",
+      "p2": "لا تتحمل Sudačka mreža المسؤولية عن أي أضرار مباشرة أو غير مباشرة ناتجة عن استخدام المنصة أو عدم القدرة على الوصول إليها."
+    },
+    "section6": {
+      "title": "6. القانون الواجب التطبيق",
+      "p1": "تخضع شروط الاستخدام هذه لقوانين جمهورية كرواتيا. سيسعى الأطراف لحل جميع النزاعات الناشئة عن استخدام المنصة ودياً، وفي حال عدم التوصل إلى حل، تكون المحكمة المختصة في زغرب هي الجهة المنوط بها الفصل في النزاع."
+    },
+    "section7": {
+      "title": "7. تعديل الشروط",
+      "p1": "نحتفظ بالحق في تعديل شروط الاستخدام هذه. سيتم إخطار المستخدمين المسجلين بالتغييرات الجوهرية عبر البريد الإلكتروني. ويُعتبر الاستمرار في استخدام المنصة بعد نشر التعديلات قبولاً للشروط الجديدة.",
+      "p2": "للاستفسارات المتعلقة بهذه الشروط، يرجى التواصل معنا عبر:"
+    }
+  },
+  "docgen.type.tuzba.desc": "لبدء إجراءات الدعوى المدنية أمام المحكمة",
+  "docgen.type.zalba.desc": "للطعن في قرار قضائي أمام محكمة أعلى",
+  "docgen.type.prigovor.desc": "لتقديم اعتراض على قرار قضائي",
+  "docgen.type.ovrsni.desc": "لبدء إجراءات التنفيذ بناءً على سند تنفيذي"
+}

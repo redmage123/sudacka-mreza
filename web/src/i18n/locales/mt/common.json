@@ -1,0 +1,815 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "Fittex",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "High Commercial",
+      "vrhovni": "Supreme",
+      "upravni": "Administrative",
+      "ustavni": "Constitutional",
+      "echr": "Qorti Ewropea tad-Drittijiet tal-Bniedem"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "Address",
+      "phone": "Phone",
+      "president": "President"
+    },
+    "officialNameNote": "Official Croatian court name"
+  },
+  "nav": {
+    "home": "Paġna prinċipali",
+    "decisionsSearch": "Fittex deċiżjonijiet"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "Mappa tal-Qrati",
+    "courtType": {
+      "municipal": "Muniċipali",
+      "county": "Distrettwali",
+      "commercial": "Kummerċjali",
+      "misdemeanour": "Kontravenzjonali",
+      "administrative": "Amministrattiv"
+    },
+    "legend": "Leġenda",
+    "loading": "Qed jitgħabbew il-qrati...",
+    "filterAll": "Il-qrati kollha",
+    "filterMunicipal": "Muniċipali",
+    "filterCounty": "Distrettwali",
+    "filterCommercial": "Kummerċjali",
+    "filterMisdemeanour": "Kontravenzjonali",
+    "filterAdministrative": "Amministrattiv",
+    "viewDetails": "Ara d-dettalji",
+    "courts": "qrati",
+    "error": "Ma setax jitgħabbu d-data tal-qrati. Jekk jogħġbok erġa' pprova."
+  },
+  "jurisdiction": {
+    "title": "Sejbien tal-Ġurisdizzjoni",
+    "subtitle": "Sib il-qorti kompetenti għall-każ tiegħek ibbażat fuq il-post u t-tip ta' każ.",
+    "cityLabel": "Belt jew muniċipalità",
+    "cityPlaceholder": "eż. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Tip ta' każ",
+    "caseType": {
+      "civilMinor": "Ċivili (żgħir) — Qorti muniċipali",
+      "criminalMinor": "Kriminali (taħt 5 snin) — Qorti muniċipali",
+      "criminalSerious": "Kriminali (5+ snin) — Qorti distrettwali",
+      "commercial": "Kummerċjali — Qorti kummerċjali",
+      "misdemeanour": "Kontravenzjoni — Qorti kontravenzjonali",
+      "administrative": "Amministrattiv — Qorti amministrattiva"
+    },
+    "results": "Riżultati",
+    "noResults": "Ma nstabet l-ebda qorti kompetenti għal dan il-post u t-tip ta' każ.",
+    "noResultsHint": "Ipprova isem ta' belt ieħor jew ara d-direttorju sħiħ tal-qrati.",
+    "viewCourtsDirectory": "Ara d-direttorju tal-qrati"
+  },
+  "calculator": {
+    "title": "Tariffi tal-Qorti",
+    "selectCaseType": "Tip ta' każ",
+    "caseType": {
+      "civil": "Tilwima ċivili",
+      "criminal": "Proċedimenti kriminali",
+      "commercial": "Tilwima kummerċjali",
+      "administrative": "Tilwima amministrattiva",
+      "nonContentious": "Proċedimenti mhux kontenzjużi"
+    },
+    "claimValue": "Valur tat-talba (EUR)",
+    "calculate": "Ikkalkula t-tariffa",
+    "filingFee": "Tariffa tal-preżentata",
+    "appealFee": "Tariffa tal-appell",
+    "enforcementFee": "Tariffa tal-infurzar",
+    "fixedFee": "Tariffi fissi",
+    "exemptionsTitle": "Eżenzjonijiet mit-Tariffi",
+    "exemption1": "Ir-riċevituri tal-welfare soċjali huma eżenti mit-tariffi kollha tal-qorti.",
+    "exemption2": "Il-minuri huma eżenti mit-tariffi tal-qorti fi proċedimenti dwar id-drittijiet tagħhom.",
+    "exemption3": "Il-ħaddiema fi tilwim tax-xogħol b'valur tat-talba sa €2,650 huma eżenti.",
+    "paymentTitle": "Metodi ta' Ħlas",
+    "payment1": "Trasferiment bankarju għall-kont uffiċjali tal-qorti",
+    "payment2": "Portal e-Pristojbe (ħlas elettroniku)",
+    "payment3": "Każżier tal-qorti (personalment fil-qorti)",
+    "legalBasis": "Bażi Legali",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, b'emendi). L-ammonti kollha kkonvertiti għall-EUR mill-01.01.2023.",
+    "minorOffenses": "Reati żgħar",
+    "seriousOffenses": "Reati gravi"
+  },
+  "jurisdictionFinder": {
+    "title": "Sib il-qorti tiegħek",
+    "description": "Daħħal il-belt tiegħek u t-tip ta' kawża biex issib liema qorti għandha ġuriżdizzjoni.",
+    "cityLabel": "Il-belt jew il-kunsill lokali tiegħek",
+    "cityPlaceholder": "eż. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Tip ta' kawża",
+    "caseType": {
+      "civilMinor": "Tilwima ċivili (sa €2,654)",
+      "civilMajor": "Tilwima ċivili (aktar minn €2,654)",
+      "criminalMinor": "Kriminali (reat żgħir)",
+      "criminalSerious": "Kriminali (reat gravi)",
+      "commercial": "Tilwima kummerċjali",
+      "misdemeanour": "Kontravenzjoni / reat tat-traffiku",
+      "administrative": "Tilwima ma' aġenzija tal-gvern"
+    },
+    "find": "Sib qorti",
+    "result": "Qorti kompetenti",
+    "noResult": "Ma nstabet l-ebda qorti għal din il-belt. Ipprova d-direttorju tal-qrati.",
+    "browseAll": "Ara l-qrati kollha",
+    "viewProfile": "Ara l-profil tal-qorti"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "Bankruptcy Portal",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "Bankruptcy Administrators",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "No bankruptcy administrators are currently registered in the system.",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "Bankruptcy Legislation",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "Free Legal Aid",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "Photo Galleries",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "No galleries have been published yet. Check back soon.",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Your message has been sent. We'll get back to you within 2 business days.",
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "No news articles have been published yet. Check back soon.",
+    "readMore": "Read more",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "Create account",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "intro1": "Sudačka mreža (Judicial Network) is a non-profit association that for over twenty years has been collecting, processing, and publishing publicly relevant data from the judicial system of the Republic of Croatia. Our goal is judicial transparency and the accessibility of legal information to all citizens.",
+    "intro2": "The platform offers searchable databases of case law (Supreme Court, High Commercial Court, European Court of Human Rights), a court directory with an interactive jurisdiction map, a directory of court experts and interpreters, bankruptcy estate sale listings, and an overview of relevant legislation.",
+    "intro3": "All services are available free of charge. Registration is only required to access contact details of court professionals.",
+    "donors": {
+      "title": "Donors and Partners",
+      "subtitle": "We thank the organisations that over the years have supported the development and maintenance of Sudačka mreža."
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "Legal Document Generator",
+    "subtitle": "Fill in the form and download a completed Croatian legal document as a PDF",
+    "selectType": "Select document type",
+    "type": {
+      "tuzba": {
+        "desc": "Għall-bdie ta' proċedura sivil quddiem il-qorti"
+      },
+      "zalba": {
+        "desc": "Għall-appell ta' decisione tal-qorti għal qorti ogħla"
+      },
+      "prigovor": {
+        "desc": "Għall-ippreżentazzjoni ta' oppostizzjoni għal deċiżjoni tal-qorti"
+      },
+      "ovrsni": {
+        "desc": "Għall-bdie ta' eżekuzzjoni bbażata fuq dokument ta' eżekuzzjoni"
+      }
+    },
+    "fields": {
+      "plaintiff_name": "Plaintiff full name",
+      "plaintiff_address": "Plaintiff address",
+      "defendant_name": "Defendant full name",
+      "defendant_address": "Defendant address",
+      "appellant_name": "Appellant full name",
+      "appellant_address": "Appellant address",
+      "objector_name": "Objector full name",
+      "objector_address": "Objector address",
+      "creditor_name": "Creditor full name",
+      "creditor_address": "Creditor address",
+      "debtor_name": "Debtor full name",
+      "debtor_address": "Debtor address",
+      "court_name": "Competent court",
+      "case_number": "Case number",
+      "claim_value": "Claim value (EUR)",
+      "claim_amount": "Claim amount (EUR)",
+      "claim_description": "Claim / Relief sought",
+      "facts": "Statement of facts",
+      "legal_basis": "Legal basis (optional)",
+      "appeal_grounds": "Grounds of appeal",
+      "appeal_request": "Relief requested on appeal",
+      "judgment_date": "Date of challenged decision",
+      "objection_grounds": "Grounds of objection",
+      "enforcement_title": "Enforcement document (title and number)",
+      "enforcement_means": "Enforcement means (optional)",
+      "date": "Date",
+      "city": "City"
+    },
+    "generate": "Generate PDF",
+    "reset": "New document",
+    "required": "This field is required",
+    "disclaimer": "This generator is for informational purposes only and does not constitute legal advice. Consult a lawyer for legal guidance.",
+    "generating": "Generating...",
+    "nav": {
+      "back": "Back to documents"
+    }
+  },
+  "deadlines": {
+    "title": "Kalkulator ta' skadenzi proċedurali",
+    "subtitle": "Ikkalkula l-iskadenzi proċedurali bbażati fuq it-tip ta' proċedura u d-data ta' preżentata.",
+    "selectCaseType": "Tip ta' proċedura",
+    "filingDate": "Data ta' preżentata",
+    "filingDatePlaceholder": "Agħżel data",
+    "timelineTitle": "Skadenzi proċedurali",
+    "noDeadlines": "Daħħal id-data ta' preżentata biex tara l-iskadenzi.",
+    "days": "jiem",
+    "hours": "sigħat",
+    "fromFiling": "mid-depożitu",
+    "overdue": "Skadut",
+    "today": "Illum",
+    "statuteTitle": "Preskrizzjoni",
+    "statute": {
+      "civil": "Preskrizzjoni ġenerali: 5 snin. Responsabbiltà delittwali: 3 snin soġġettiva, 5 snin oġġettiva.",
+      "criminal": "Preskrizzjoni tal-prosekuzzjoni kriminali: 5–25 snin skont il-piena massima.",
+      "commercial": "Talbiet kummerċjali: 3 snin. Preskrizzjoni ġenerali għall-intraprendituri: 5 snin.",
+      "administrative": "Skadenza għal kawża amministrattiva: 30 jum minn notifika tad-deċiżjoni finali."
+    },
+    "legalBasis": "Bażi legali",
+    "legalBasisCivil": "Kodiċi ta' Proċedura Ċivili (ZPP, test konsolidat)",
+    "legalBasisCriminal": "Kodiċi ta' Proċedura Kriminali (ZKP, emendat)",
+    "legalBasisCommercial": "Kodiċi ta' Proċedura Ċivili – applikabbli quddiem qrati kummerċjali",
+    "legalBasisAdministrative": "Kodiċi ta' Proċedura Amministrattiva",
+    "disclaimer": "Dawn l-iskadenzi huma indikaturi u ma jikkostitwixxux parir legali. Ikkonsulta avukat.",
+    "step": {
+      "filing": "Ippreżentar ta' kawża / talba",
+      "responseToLawsuit": "Skadenza għar-risposta",
+      "preparatoryHearing": "Seduta preparatorja",
+      "mainHearing": "Seduta ewlenija",
+      "judgmentAppeal": "Skadenza għall-appell tas-sentenza",
+      "secondInstanceDecision": "Deċiżjoni tal-qorti tal-appell",
+      "policeDetentionMax": "Detenzjoni massima tal-pulizija",
+      "indictment": "Skadenza tal-akkuża",
+      "indictmentObjection": "Oġġezzjoni għall-att ta' akkuża",
+      "criminalAppeal": "Skadenza tal-appell",
+      "paymentOrderObjection": "Oġġezzjoni għall-ordni ta' ħlas",
+      "commercialResponse": "Risposta fil-kawża kummerċjali",
+      "commercialHearing": "Seduta quddiem qorti kummerċjali",
+      "commercialAppeal": "Skadenza tal-appell (kummerċjali)",
+      "adminRequest": "Talba amministrattiva ppreżentata",
+      "adminDecision": "Skadenza tad-deċiżjoni amministrattiva",
+      "adminObjection": "Oġġezzjoni fil-proċedura amministrattiva",
+      "adminSecondInstance": "Deċiżjoni tal-awtorità tat-tieni grad",
+      "adminCourtSuit": "Skadenza biex tippreżenta kawża quddiem il-qorti amministrattiva"
+    },
+    "legend": {
+      "filing": "Preżentata",
+      "deadline": "Skadenza",
+      "hearing": "Seduta",
+      "decision": "Deċiżjoni",
+      "overdue": "Skadut"
+    }
+  },
+  "cookiePolicy": "Politika tal-cookies",
+  "termsOfService": "Termini tas-Servizz",
+  "judges": {
+    "detail": {
+      "role": "[mt] Sudac",
+      "court": "[mt] Sud",
+      "appointmentDate": "[mt] Datum imenovanja",
+      "specialization": "[mt] Specijalizacija",
+      "status": "[mt] Status",
+      "contact": "[mt] Kontakt podaci"
+    }
+  },
+  "legalNews": {
+    "title": "[mt] Pravne vijesti",
+    "subtitle": "[mt] Pregled aktualnih pravnih vijesti iz domaćih i europskih pravnih izvora.",
+    "breadcrumbNews": "[mt] Novosti",
+    "filterBySource": "[mt] Filtriraj po izvoru",
+    "filterAll": "[mt] Svi izvori",
+    "readMore": "[mt] Pročitaj više",
+    "noResults": "[mt] Nema vijesti za odabrani izvor.",
+    "disclaimer": "[mt] Vijesti su preuzete iz vanjskih izvora. Sudačka mreža nije odgovorna za točnost sadržaja trećih strana."
+  },
+  "cookies": {
+    "ariaLabel": "[mt] Obavijest o kolačićima",
+    "title": "[mt] Kolačići i privatnost",
+    "description": "[mt] Koristimo kolačiće kako bismo osigurali ispravan rad stranice i, uz vaš pristanak, prikupili anonimne analitičke podatke za poboljšanje usluge.",
+    "acceptAll": "[mt] Prihvati sve",
+    "rejectNonEssential": "[mt] Odbij nebitne",
+    "customize": "[mt] Prilagodi",
+    "customizeTitle": "[mt] Postavke kolačića",
+    "essential": "[mt] Osnovni kolačići",
+    "essentialDesc": "[mt] Neophodni za ispravan rad stranice. Uvijek aktivni i ne mogu se isključiti.",
+    "analytics": "[mt] Analitički kolačići",
+    "analyticsDesc": "[mt] Pomažu nam razumjeti kako korisnici koriste stranicu. Svi podaci su anonimni.",
+    "alwaysOn": "[mt] Uvijek aktivno",
+    "savePreferences": "[mt] Spremi postavke",
+    "policyTitle": "[mt] Pravila o kolačićima",
+    "policyLastUpdated": "[mt] Zadnje ažuriranje: 28. ožujka 2026.",
+    "policyIntro": "[mt] Ova Pravila o kolačićima objašnjavaju što su kolačići (cookies), koje kolačiće koristimo, u koje svrhe i kako ih možete kontrolirati. Korištenjem naše platforme pristajete na upotrebu kolačića opisanih u ovom dokumentu.",
+    "policySection1": {
+      "title": "[mt] 1. Što su kolačići?",
+      "p1": "[mt] Kolačići su male tekstualne datoteke koje se pohranjuju na Vašem uređaju kada posjetite web stranicu. Omogućuju stranici da zapamti Vaše postavke i poboljšaju Vaše korisničko iskustvo. Kolačići ne mogu pokretati programe niti prenositi viruse."
+    },
+    "policySection2": {
+      "title": "[mt] 2. Koje kolačiće koristimo"
+    },
+    "tableColName": "[mt] Naziv",
+    "tableColPurpose": "[mt] Svrha",
+    "tableColCategory": "[mt] Kategorija",
+    "tableColRetention": "[mt] Trajanje",
+    "row1Purpose": "[mt] Pamti odabrani jezik sučelja",
+    "row1Retention": "[mt] 12 mjeseci",
+    "row2Purpose": "[mt] Pohranjuje Vaše postavke privole za kolačiće",
+    "row2Retention": "[mt] 12 mjeseci",
+    "row3Purpose": "[mt] Pamti odabrani svjetlosni/tamni način prikaza",
+    "row3Retention": "[mt] 12 mjeseci",
+    "row4Purpose": "[mt] Anonimna analitika posjećenosti (Google Analytics) — samo uz privolu",
+    "row4Retention": "[mt] 26 mjeseci",
+    "policySection3": {
+      "title": "[mt] 3. Upravljanje kolačićima",
+      "p1": "[mt] Možete kontrolirati i/ili brisati kolačiće prema Vašim željama. Pogledajte upute za upravljanje kolačićima u popularnim preglednicima:",
+      "li1": "[mt] Google Chrome: Postavke → Privatnost i sigurnost → Kolačići",
+      "li2": "[mt] Mozilla Firefox: Postavke → Privatnost i sigurnost → Kolačići i podaci stranica",
+      "li3": "[mt] Safari: Preference → Privatnost → Upravljanje podacima web stranica",
+      "li4": "[mt] Microsoft Edge: Postavke → Kolačići i dozvole stranica"
+    },
+    "policySection4": {
+      "title": "[mt] 4. Više informacija",
+      "p1": "[mt] Isključivanje osnovnih kolačića može narušiti funkcionalnost platforme. Analitičke kolačiće možete isključiti u bilo koje vrijeme putem banera za privolu.",
+      "p2": "[mt] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
+    }
+  },
+  "privacy": {
+    "title": "[mt] Pravila privatnosti",
+    "lastUpdated": "[mt] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[mt] Sudačka mreža (u daljnjem tekstu: 'mi', 'naš', 'Sudačka mreža') posvećena je zaštiti Vaše privatnosti. Ova Pravila privatnosti opisuju kako prikupljamo, koristimo i štitimo Vaše osobne podatke u skladu s Uredbom (EU) 2016/679 (GDPR) i Zakonom o provedbi Opće uredbe o zaštiti podataka (NN 42/18).",
+    "section1": {
+      "title": "[mt] 1. Koji podaci se prikupljaju",
+      "p1": "[mt] Prikupljamo sljedeće kategorije osobnih podataka, ovisno o načinu korištenja naše platforme:",
+      "li1": "[mt] Podaci o računu: ime, adresa e-pošte i lozinka (hashirana) pri registraciji",
+      "li2": "[mt] Podaci o korištenju: stranice koje ste posjetili, pretraživanja i zabilježene odluke",
+      "li3": "[mt] Podaci o uređaju: IP adresa, vrsta preglednika i operativnog sustava",
+      "li4": "[mt] Podaci iz kontaktnog obrasca: ime, e-pošta i sadržaj poruke"
+    },
+    "section2": {
+      "title": "[mt] 2. Pravna osnova obrade",
+      "p1": "[mt] Vaše osobne podatke obrađujemo na temelju sljedećih pravnih osnova:",
+      "li1": "[mt] Izvršavanje ugovora (čl. 6 st. 1 t. b) GDPR-a): za pružanje usluga korisnicima s računom",
+      "li2": "[mt] Legitimni interes (čl. 6 st. 1 t. f) GDPR-a): za sigurnost platforme i poboljšanje usluge",
+      "li3": "[mt] Privola (čl. 6 st. 1 t. a) GDPR-a): za analitičke kolačiće (samo uz Vaš pristanak)"
+    },
+    "section3": {
+      "title": "[mt] 3. Rokovi čuvanja podataka",
+      "p1": "[mt] Čuvamo Vaše osobne podatke samo onoliko dugo koliko je potrebno za svrhu u koju su prikupljeni:",
+      "li1": "[mt] Podaci računa: trajanje korisničkog računa + 30 dana nakon brisanja",
+      "li2": "[mt] Zapisnici pristupa (IP adrese): 90 dana",
+      "li3": "[mt] Podaci kontaktnog obrasca: 2 godine od zaprimanja"
+    },
+    "section4": {
+      "title": "[mt] 4. Vaša prava",
+      "p1": "[mt] Kao ispitanik imate sljedeća prava prema GDPR-u:",
+      "li1": "[mt] Pravo pristupa: možete zatražiti kopiju osobnih podataka koje o Vama čuvamo",
+      "li2": "[mt] Pravo na ispravak: možete zatražiti ispravak netočnih podataka",
+      "li3": "[mt] Pravo na brisanje (pravo na zaborav): možete zatražiti brisanje podataka koji se više ne trebaju čuvati",
+      "li4": "[mt] Pravo na prenosivost podataka: možete zatražiti strukturirani, strojno čitljivi format Vaših podataka",
+      "li5": "[mt] Pravo na prigovor: možete se usprotiviti obradi podataka na temelju legitimnog interesa",
+      "p2": "[mt] Zahtjeve za ostvarivanje prava uputite na: info@sudacka-mreza.hr. Na zahtjev odgovaramo u roku 30 dana."
+    },
+    "section5": {
+      "title": "[mt] 5. Nadzorno tijelo — AZOP",
+      "p1": "[mt] Ako smatrate da obrada Vaših osobnih podataka krši GDPR, imate pravo podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP):",
+      "azopName": "[mt] Agencija za zaštitu osobnih podataka (AZOP)",
+      "azopAddress": "[mt] Martićeva 14, 10000 Zagreb, Hrvatska",
+      "azopEmail": "[mt] E-pošta: azop@azop.hr",
+      "azopPhone": "[mt] Telefon: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "[mt] 6. Izmjene Pravila privatnosti",
+      "p1": "[mt] Zadržavamo pravo izmjene ovih Pravila. O svim značajnim izmjenama obavijestit ćemo Vas e-poštom ili objavom na platformi najmanje 14 dana prije stupanja na snagu. Nastavak korištenja platforme nakon isteka tog roka smatra se prihvaćanjem izmijenjenih Pravila."
+    }
+  },
+  "terms": {
+    "title": "[mt] Uvjeti korištenja",
+    "lastUpdated": "[mt] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[mt] Dobrodošli na Sudačku mrežu. Korištenjem ove platforme prihvaćate sljedeće Uvjete korištenja. Molimo pažljivo pročitajte ovaj dokument prije korištenja usluge.",
+    "section1": {
+      "title": "[mt] 1. Opis usluge",
+      "p1": "[mt] Sudačka mreža je neprofitna online platforma koja pruža pristup javnim pravosudnim informacijama u Republici Hrvatskoj: sudska praksa, registar sudova, direktorij vještaka i tumača, stečajni oglasi i pravni sadržaji.",
+      "p2": "[mt] Svi sadržaji na platformi dostupni su isključivo u informativne svrhe i ne predstavljaju pravni savjet. Za konkretne pravne savjete obratite se ovlaštenom odvjetniku."
+    },
+    "section2": {
+      "title": "[mt] 2. Korisnički računi",
+      "p1": "Billi tirista l-akkont tal-utent, qbel l-obbligi li jmissu:*",
+      "li1": "Iddata informazzjoni preċiża u sħiħa waqt ir-reġistrazzjoni",
+      "li2": "Żżomm is-sigrietzza tal-password u don'att għal ħaddieħor l-aċċess għall-akkont tiegħek",
+      "li3": "Avvitażni fuqna immedjatament dwar l-użu mhux awtorizzat tal-akkont tiegħek fuq: info@sudacka-mreza.hr"
+    },
+    "section3": {
+      "title": "3. Użu Aċċettabbli",
+      "p1": "L-utenti jimprentaw li ma se jaġixu:",
+      "li1": "L-użu tal-pjattaforma għal skopijiet illegali jew għal vxell tal-piżijiet ta' partijiet terzi",
+      "li2": "L-użu ta' għodod awtomatizzati (bots, scrapers) biex jiġu niżdu l-kontenut mingħajr approvazzjoni preċedenti skritta",
+      "li3": "Il-ippubblikazzjoni ta' kontenut falż, offensiv jew protett",
+      "li4": "L-ippruvar li jidħol b'mod mhux awtorizzat fis-sistemi jew fid-dejti tal-pjattaforma"
+    },
+    "section4": {
+      "title": "4. Proprjetà Intellettwali",
+      "p1": "L-kontenut oriġinali kollu tal-pjattaforma (disinn, softwer, test, logos) huwa proprjetà tal-Sudačka mreža u huwa protett minn dika tal-awtur. Id-dejti pubbliċi (deċiżjonijiet tal-sud, dejti dwar il-qrati) huma disponibbli skont ir-regolamenti dwar id-dritt għal aċċess għall-informazzjoni."
+    },
+    "section5": {
+      "title": "5. Limitazzjoni tal-Responsabbiltà",
+      "p1": "Is-Sudačka mreža tesforti biex tiżgura l-preċiżjoni u l-aġġornament tal-kontenut, iżda ma tiġgarantixxix il-kompletezza jew il-preċiżjoni tiegħu. Il-pjattaforma hija pprovduta 'kif hija' mingħajr garanziji dwar id-disponibbiltà jew il-konvenjenza għal skop partikolari.",
+      "p2": "Is-Sudačka mreža mhijiex responsabbli għal ħsara diretta jew indiretta li saret minħabba l-użu tal-pjattaforma jew l-impossibbiltà li tiġi aċċessata l-pjattaforma."
+    },
+    "section6": {
+      "title": "6. Liġi Applikabbli",
+      "p1": "Dawn it-Termini tal-Użu huma suġġetti għall-liġi tal-Repubblika tal-Kroazja. Kull controversja li tittweġġed rigward l-użu tal-pjattaforma, il-partijiet se jippruvaw li soluzzjonawha b'mod konsenzwali, u fil-każ ta' falliment, il-sud kompetenti jkun f'Zagreb."
+    },
+    "section7": {
+      "title": "7. Bidliet fit-Termini",
+      "p1": "Ir-dritt li nbidlu dawn it-Termini tal-Użu huwa miżmum. Dwar bidliet sinifikanti, ninfurmaw lill-utenti rreġistrati permezz tal-email. Il-kontinwazzjoni tal-użu tal-pjattaforma wara t-tibdil tal-kontenut hija meħtieba bħala aċċettazzjoni tat-Termini l-ġodda.",
+      "p2": "Għal mistejhiet dwar dawn it-Termini, ikkontattana fuq:"
+    }
+  },
+  "docgen.type.tuzba.desc": "Għall-bidu ta' proċedura ċivili quddam il-Qorti",
+  "docgen.type.zalba.desc": "Għall-appell ta' deċiżjoni tal-Qorti għal qorti ogħla",
+  "docgen.type.prigovor.desc": "Għall-ippreżentazzjoni ta' oġġezzjoni kontra deċiżjoni tal-Qorti",
+  "docgen.type.ovrsni.desc": "Għall-bidu tal-eżekuzzjoni ibbażata fuq titlu eżekuttiv"
+}

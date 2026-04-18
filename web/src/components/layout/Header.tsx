@@ -46,24 +46,26 @@ function NavDropdown({ label, items }: NavDropdownProps) {
       {open && (
         <div
           role="menu"
-          className="absolute top-full left-0 mt-1 min-w-48 bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg shadow-lg py-1 z-50"
+          className="absolute top-full left-0 pt-1 min-w-48 z-50"
         >
-          {items.map(item => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                [
-                  'block px-4 py-2 text-sm hover:bg-[color:var(--color-surface-subtle)] hover:text-[color:var(--color-brand-navy)] transition-colors',
-                  isActive ? 'text-[color:var(--color-brand-navy)] font-semibold' : 'text-[color:var(--color-text)]',
-                ].join(' ')
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg shadow-lg py-1">
+            {items.map(item => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                role="menuitem"
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  [
+                    'block px-4 py-2 text-sm hover:bg-[color:var(--color-surface-subtle)] hover:text-[color:var(--color-heading)] transition-colors',
+                    isActive ? 'text-[color:var(--color-heading)] font-semibold' : 'text-[color:var(--color-text)]',
+                  ].join(' ')
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -78,11 +80,29 @@ export function Header() {
 
   const navItems = [
     {
+      label: t('courts'),
+      items: [
+        { to: `/${lang}/sudovi`, label: t('courtsList') },
+        { to: `/${lang}/mapa`, label: t('map') },
+        { to: `/${lang}/sudovi/nadleznost`, label: t('jurisdictionFinder') },
+        { to: `/${lang}/sudovi/performanse`, label: t('courtPerformance') },
+        { to: `/${lang}/pristojbe`, label: t('calculator') },
+      ],
+    },
+    {
       label: t('decisions'),
       items: [
         { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/sudska-praksa/vts`, label: t('decisionsVTS') },
-        { to: `/${lang}/sudska-praksa/esljp`, label: t('decisionsESLJP') },
+        { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
+        { to: `/${lang}/rokovi`, label: t('deadlines') },
+      ],
+    },
+    {
+      label: t('services'),
+      items: [
+        { to: `/${lang}/dokumenti/generator`, label: t('documentGenerator') },
+        { to: `/${lang}/pravna-pomoc`, label: t('legalAid') },
+        { to: `/${lang}/pracenje`, label: t('watchlist') },
       ],
     },
     {
@@ -93,19 +113,21 @@ export function Header() {
       ],
     },
     {
-      label: t('courts'),
-      items: [
-        { to: `/${lang}/sudovi`, label: t('courtsList') },
-        { to: `/${lang}/sudovi/dorh`, label: t('stateAttorneys') },
-        { to: `/${lang}/sudovi/nadleznost`, label: t('jurisdictionFinder') },
-      ],
-    },
-    {
       label: t('bankruptcy'),
       items: [
         { to: `/${lang}/stecaj/oglasi`, label: t('bankruptcyListings') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/stecaj/zakoni`, label: t('bankruptcyLaws') },
+      ],
+    },
+    {
+      label: t('about'),
+      items: [
+        { to: `/${lang}/o-nama`, label: t('about') },
+        { to: `/${lang}/kontakt`, label: t('contact') },
+        { to: `/${lang}/galerije`, label: t('galleries') },
+        { to: `/${lang}/mediji`, label: t('media') },
+        { to: `/${lang}/dokumenti`, label: t('documents') },
       ],
     },
   ]
@@ -118,19 +140,56 @@ export function Header() {
           {/* Logo */}
           <Link
             to={`/${lang}`}
-            className="flex items-center gap-2 shrink-0 text-[color:var(--color-text-inverse)] hover:text-[color:var(--color-brand-gold-light)] transition-colors"
+            className="flex items-center shrink-0 hover:opacity-90 transition-opacity gap-2"
             aria-label="Sudačka Mreža — Početna"
           >
-            {/* Placeholder logo — SVG scales in at build time */}
-            <div className="w-8 h-8 rounded bg-[color:var(--color-brand-gold)] flex items-center justify-center shrink-0" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-[color:var(--color-brand-navy)]">
-                <path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <span className="font-semibold text-sm lg:text-base leading-tight">
-              Sudačka<br className="hidden sm:block lg:hidden" />
-              {' '}Mreža
-            </span>
+            {/* Croatian flag — pointing left */}
+            <svg viewBox="0 0 30 20" className="h-7 w-auto drop-shadow-sm" aria-label="Hrvatska" role="img" style={{ transform: 'scaleX(-1)' }}>
+              <rect width="30" height="6.67" fill="#FF0000" />
+              <rect y="6.67" width="30" height="6.67" fill="#FFFFFF" />
+              <rect y="13.33" width="30" height="6.67" fill="#171796" />
+              <g transform="translate(9,2) scale(0.24)">
+                <rect x="0" y="0" width="50" height="65" fill="#FF0000" stroke="#FFFFFF" strokeWidth="2" rx="2" />
+                <rect x="10" y="0" width="10" height="13" fill="#FFFFFF" />
+                <rect x="30" y="0" width="10" height="13" fill="#FFFFFF" />
+                <rect x="0" y="13" width="10" height="13" fill="#FFFFFF" />
+                <rect x="20" y="13" width="10" height="13" fill="#FFFFFF" />
+                <rect x="40" y="13" width="10" height="13" fill="#FFFFFF" />
+                <rect x="10" y="26" width="10" height="13" fill="#FFFFFF" />
+                <rect x="30" y="26" width="10" height="13" fill="#FFFFFF" />
+                <rect x="0" y="39" width="10" height="13" fill="#FFFFFF" />
+                <rect x="20" y="39" width="10" height="13" fill="#FFFFFF" />
+                <rect x="40" y="39" width="10" height="13" fill="#FFFFFF" />
+                <rect x="10" y="52" width="10" height="13" fill="#FFFFFF" />
+                <rect x="30" y="52" width="10" height="13" fill="#FFFFFF" />
+              </g>
+            </svg>
+
+            <img
+              src="/assets/sudacka-mreza-logo.gif"
+              alt="Sudačka Mreža"
+              className="h-12 w-auto bg-white/90 rounded-lg px-3 py-1.5"
+            />
+
+            {/* EU flag — pointing right */}
+            <svg viewBox="0 0 30 20" className="h-7 w-auto drop-shadow-sm" aria-label="European Union" role="img">
+              <rect width="30" height="20" fill="#003399" />
+              {[...Array(12)].map((_, i) => {
+                const angle = (i * 30 - 90) * Math.PI / 180
+                const cx = 15 + 6 * Math.cos(angle)
+                const cy = 10 + 6 * Math.sin(angle)
+                return (
+                  <polygon
+                    key={i}
+                    points={[...Array(5)].map((_, j) => {
+                      const a = ((j * 144) - 90) * Math.PI / 180
+                      return `${cx + 1.2 * Math.cos(a)},${cy + 1.2 * Math.sin(a)}`
+                    }).join(' ')}
+                    fill="#FFCC00"
+                  />
+                )
+              })}
+            </svg>
           </Link>
 
           {/* Desktop nav */}
@@ -139,7 +198,7 @@ export function Header() {
               <NavDropdown key={item.label} label={item.label} items={item.items} />
             ))}
             <NavLink
-              to={`/${lang}/pristojbe`}
+              to={`/${lang}/statistika`}
               className={({ isActive }) =>
                 `px-3 py-2 text-sm font-medium transition-colors ${
                   isActive
@@ -148,7 +207,7 @@ export function Header() {
                 }`
               }
             >
-              {t('calculator')}
+              {t('statistics')}
             </NavLink>
           </nav>
 

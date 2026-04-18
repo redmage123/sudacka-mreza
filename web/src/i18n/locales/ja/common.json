@@ -1,0 +1,815 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "検索",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "高等商事裁判所",
+      "vrhovni": "最高裁判所",
+      "upravni": "行政裁判所",
+      "ustavni": "憲法裁判所",
+      "echr": "欧州人権裁判所"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "住所",
+      "phone": "電話",
+      "president": "裁判所長"
+    },
+    "officialNameNote": "クロアチア裁判所の公式名称"
+  },
+  "nav": {
+    "home": "ホーム",
+    "decisionsSearch": "判決を検索"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "裁判所マップ",
+    "courtType": {
+      "municipal": "地方裁判所",
+      "county": "県裁判所",
+      "commercial": "商事裁判所",
+      "misdemeanour": "軽犯罪裁判所",
+      "administrative": "行政裁判所"
+    },
+    "legend": "凡例",
+    "loading": "裁判所を読み込み中...",
+    "filterAll": "すべての裁判所",
+    "filterMunicipal": "地方裁判所",
+    "filterCounty": "県裁判所",
+    "filterCommercial": "商事裁判所",
+    "filterMisdemeanour": "軽犯罪裁判所",
+    "filterAdministrative": "行政裁判所",
+    "viewDetails": "詳細を見る",
+    "courts": "裁判所",
+    "error": "裁判所データを読み込めませんでした。もう一度お試しください。"
+  },
+  "jurisdiction": {
+    "title": "管轄裁判所検索",
+    "subtitle": "所在地と事件の種類に基づいて管轄裁判所を検索します。",
+    "cityLabel": "市区町村",
+    "cityPlaceholder": "例：Zagreb、Split、Rijeka...",
+    "caseTypeLabel": "事件の種類",
+    "caseType": {
+      "civilMinor": "民事（軽微）— 地方裁判所",
+      "criminalMinor": "刑事（5年未満）— 地方裁判所",
+      "criminalSerious": "刑事（5年以上）— 県裁判所",
+      "commercial": "商事 — 商事裁判所",
+      "misdemeanour": "軽犯罪 — 軽犯罪裁判所",
+      "administrative": "行政 — 行政裁判所"
+    },
+    "results": "検索結果",
+    "noResults": "この所在地と事件の種類に該当する管轄裁判所が見つかりませんでした。",
+    "noResultsHint": "別の市区町村名をお試しいただくか、裁判所一覧をご確認ください。",
+    "viewCourtsDirectory": "裁判所一覧を見る"
+  },
+  "calculator": {
+    "title": "裁判手数料",
+    "selectCaseType": "事件の種類",
+    "caseType": {
+      "civil": "民事紛争",
+      "criminal": "刑事手続き",
+      "commercial": "商事紛争",
+      "administrative": "行政紛争",
+      "nonContentious": "非訟手続き"
+    },
+    "claimValue": "請求額（EUR）",
+    "calculate": "手数料を計算",
+    "filingFee": "提訴手数料",
+    "appealFee": "控訴手数料",
+    "enforcementFee": "執行手数料",
+    "fixedFee": "固定手数料",
+    "exemptionsTitle": "手数料免除",
+    "exemption1": "社会福祉受給者はすべての裁判手数料が免除されます。",
+    "exemption2": "未成年者はその権利に関する手続きにおいて裁判手数料が免除されます。",
+    "exemption3": "請求額が2,650ユーロ以下の労働紛争における労働者は免除されます。",
+    "paymentTitle": "支払い方法",
+    "payment1": "裁判所の公式口座への銀行振込",
+    "payment2": "e-Pristojbeポータル（電子決済）",
+    "payment3": "裁判所の窓口（裁判所にて対面）",
+    "legalBasis": "法的根拠",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95、改正を含む)。2023年1月1日以降、すべての金額はEURに換算。",
+    "minorOffenses": "軽微な犯罪",
+    "seriousOffenses": "重大な犯罪"
+  },
+  "jurisdictionFinder": {
+    "title": "あなたの裁判所を検索",
+    "description": "市区町村と事件の種類を入力して、管轄裁判所を検索します。",
+    "cityLabel": "あなたの市区町村",
+    "cityPlaceholder": "例：Zagreb、Split、Osijek...",
+    "caseTypeLabel": "事件の種類",
+    "caseType": {
+      "civilMinor": "民事紛争（2,654ユーロまで）",
+      "civilMajor": "民事紛争（2,654ユーロ超）",
+      "criminalMinor": "刑事（軽微な犯罪）",
+      "criminalSerious": "刑事（重大な犯罪）",
+      "commercial": "商事紛争",
+      "misdemeanour": "軽犯罪 / 交通違反",
+      "administrative": "行政機関との紛争"
+    },
+    "find": "裁判所を検索",
+    "result": "管轄裁判所",
+    "noResult": "この市区町村の裁判所が見つかりませんでした。裁判所一覧をお試しください。",
+    "browseAll": "すべての裁判所を閲覧",
+    "viewProfile": "裁判所のプロフィールを見る"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "倒産ポータル",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "破産管財人",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "登録された破産管財人はいません。",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "倒産法",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "無料法律扶助",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "フォトギャラリー",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "まだギャラリーが公開されていません。",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "メッセージを送信",
+      "sending": "Sending...",
+      "success": "メッセージが送信されました。",
+      "errorRequired": "このフィールドは必須です。",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "ニュース",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "まだ記事が公開されていません。",
+    "readMore": "続きを読む",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "ログイン",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "ログイン",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "アカウント作成",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "アカウント作成",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "私たちについて",
+    "intro1": "Sudačka mreža（司法ネットワーク）は、クロアチア共和国の司法制度から公益性の高いデータを20年以上にわたって収集・処理・公開している非営利団体です。私たちの目標は、司法の透明性とすべての市民への法律情報のアクセシビリティの向上です。",
+    "intro2": "このプラットフォームでは、判例データベース（最高裁判所、高等商事裁判所、欧州人権裁判所）の検索、管轄権インタラクティブマップ付きの裁判所ディレクトリ、司法専門家および通訳者のディレクトリ、破産売却公告、関連法令の概要を提供しています。",
+    "intro3": "すべてのサービスは無料でご利用いただけます。登録が必要なのは、司法専門家の連絡先情報にアクセスする場合のみです。",
+    "donors": {
+      "title": "ドナーとパートナー",
+      "subtitle": "長年にわたりSudačka mrežaの開発と維持を支援してくださった組織に感謝します。"
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "法的文書ジェネレーター",
+    "subtitle": "フォームに入力してクロアチアの法的文書をPDF形式でダウンロードしてください",
+    "selectType": "文書の種類を選択",
+    "type": {
+      "tuzba": {
+        "desc": "裁判所への民事訴訟の提起"
+      },
+      "zalba": {
+        "desc": "上級裁判所への判決に対する不服申し立て"
+      },
+      "prigovor": {
+        "desc": "裁判所の決定に対する異議申し立て"
+      },
+      "ovrsni": {
+        "desc": "強制執行文書に基づく強制執行の申立て"
+      }
+    },
+    "fields": {
+      "plaintiff_name": "原告の氏名",
+      "plaintiff_address": "原告の住所",
+      "defendant_name": "被告の氏名",
+      "defendant_address": "被告の住所",
+      "appellant_name": "控訴人の氏名",
+      "appellant_address": "控訴人の住所",
+      "objector_name": "異議申立人の氏名",
+      "objector_address": "異議申立人の住所",
+      "creditor_name": "債権者の氏名",
+      "creditor_address": "債権者の住所",
+      "debtor_name": "債務者の氏名",
+      "debtor_address": "債務者の住所",
+      "court_name": "管轄裁判所",
+      "case_number": "事件番号",
+      "claim_value": "訴額 (EUR)",
+      "claim_amount": "請求金額 (EUR)",
+      "claim_description": "請求の趣旨",
+      "facts": "請求の原因 / 理由",
+      "legal_basis": "法的根拠 (任意)",
+      "appeal_grounds": "控訴の理由",
+      "appeal_request": "控訴の申立て",
+      "judgment_date": "不服申立て対象の判決日",
+      "objection_grounds": "異議の理由",
+      "enforcement_title": "執行名義",
+      "enforcement_means": "執行方法 (任意)",
+      "date": "日付",
+      "city": "都市"
+    },
+    "generate": "PDFを生成",
+    "reset": "新規文書",
+    "required": "必須項目",
+    "disclaimer": "このジェネレーターは情報提供のみを目的としており、法律的なアドバイスを構成するものではありません。",
+    "generating": "生成中...",
+    "nav": {
+      "back": "ドキュメント一覧に戻る"
+    }
+  },
+  "deadlines": {
+    "title": "手続期限計算機",
+    "subtitle": "手続きの種類と申立日に基づいて手続期限を計算します。",
+    "selectCaseType": "手続きの種類",
+    "filingDate": "申立日",
+    "filingDatePlaceholder": "日付を選択",
+    "timelineTitle": "手続期限",
+    "noDeadlines": "申立日を入力して期限を確認してください。",
+    "days": "日",
+    "hours": "時間",
+    "fromFiling": "申立日から",
+    "overdue": "期限超過",
+    "today": "今日",
+    "statuteTitle": "消滅時効",
+    "statute": {
+      "civil": "一般消滅時効：5年。不法行為：主観3年、客観5年。",
+      "criminal": "刑事訴追の消滅時効：最高刑に応じて5〜25年。",
+      "commercial": "商事契約上の請求権：3年。事業者の一般消滅時効：5年。",
+      "administrative": "行政訴訟の提訴期限：最終決定の送達から30日。"
+    },
+    "legalBasis": "法的根拠",
+    "legalBasisCivil": "民事訴訟法（ZPP、統合テキスト）",
+    "legalBasisCriminal": "刑事訴訟法（ZKP、改正版）",
+    "legalBasisCommercial": "民事訴訟法——商事裁判所における適用",
+    "legalBasisAdministrative": "行政手続法及び行政事件訴訟法",
+    "disclaimer": "これらの期限は参考情報であり、法的アドバイスを構成するものではありません。具体的な案件については弁護士にご相談ください。",
+    "step": {
+      "filing": "訴訟/申請提出",
+      "responseToLawsuit": "答弁期限",
+      "preparatoryHearing": "準備的審問",
+      "mainHearing": "主尋問",
+      "judgmentAppeal": "判決に対する控訴期限",
+      "secondInstanceDecision": "第二審裁判",
+      "policeDetentionMax": "最大警察拘留",
+      "indictment": "起訴期限",
+      "indictmentObjection": "起訴状への異議",
+      "criminalAppeal": "上訴期限",
+      "paymentOrderObjection": "支払命令への異議",
+      "commercialResponse": "商事訴訟答弁",
+      "commercialHearing": "商事法院審理",
+      "commercialAppeal": "商事控訴期限",
+      "adminRequest": "行政申請提出済み",
+      "adminDecision": "行政決定期限",
+      "adminObjection": "行政手続内不服申立て",
+      "adminSecondInstance": "第二段階行政決定",
+      "adminCourtSuit": "行政訴訟提起期限"
+    },
+    "legend": {
+      "filing": "提出",
+      "deadline": "期限",
+      "hearing": "審問",
+      "decision": "決定",
+      "overdue": "期限超過"
+    }
+  },
+  "cookiePolicy": "Cookieポリシー",
+  "termsOfService": "利用規約",
+  "judges": {
+    "detail": {
+      "role": "裁判官",
+      "court": "裁判所",
+      "appointmentDate": "任命日",
+      "specialization": "専門分野",
+      "status": "ステータス",
+      "contact": "連絡先"
+    }
+  },
+  "legalNews": {
+    "title": "法律ニュース",
+    "subtitle": "国内および欧州の法的情報源からの最新の法律ニュースの概要。",
+    "breadcrumbNews": "最新情報",
+    "filterBySource": "ソースで絞り込む",
+    "filterAll": "すべてのソース",
+    "readMore": "詳細を見る",
+    "noResults": "選択されたソースのニュースはありません。",
+    "disclaimer": "ニュースは外部ソースから取得されています。Sudačka mrežaは第三者のコンテンツの正確性について責任を負いません。"
+  },
+  "cookies": {
+    "ariaLabel": "クッキーに関する通知",
+    "title": "クッキーとプライバシー",
+    "description": "当サイトでは、ウェブサイトの適切な動作を確保し、お客様の同意に基づき、サービスの向上を目的とした匿名の分析データを収集するためにクッキーを使用しています。",
+    "acceptAll": "すべて同意する",
+    "rejectNonEssential": "必須以外のクッキーを拒否",
+    "customize": "カスタマイズ",
+    "customizeTitle": "クッキー設定",
+    "essential": "必須クッキー",
+    "essentialDesc": "ウェブサイトの適切な動作に必要です。常に有効であり、無効にすることはできません。",
+    "analytics": "分析用クッキー",
+    "analyticsDesc": "ユーザーによるサイトの利用状況を把握するために使用されます。すべてのデータは匿名です。",
+    "alwaysOn": "常時有効",
+    "savePreferences": "設定を保存する",
+    "policyTitle": "クッキーポリシー",
+    "policyLastUpdated": "最終更新日: 2026年3月28日",
+    "policyIntro": "本クッキーポリシーでは、クッキー（cookies）とは何か、どのようなクッキーを使用しているか、その目的、およびクッキーの管理方法について説明します。当プラットフォームを利用することにより、お客様は本ドキュメントに記載されているクッキーの使用に同意したものとみなされます。",
+    "policySection1": {
+      "title": "1. クッキーとは何ですか？",
+      "p1": "クッキーは、ウェブサイトを訪問した際にデバイスに保存される小さなテキストファイルです。これらは、ウェブサイトがお客様の設定を記憶し、ユーザーエクスペリエンスを向上させることを可能にします。クッキーがプログラムを実行したり、ウイルスを転送したりすることはありません。"
+    },
+    "policySection2": {
+      "title": "2. 使用しているクッキー"
+    },
+    "tableColName": "名称",
+    "tableColPurpose": "目的",
+    "tableColCategory": "カテゴリ",
+    "tableColRetention": "有効期間",
+    "row1Purpose": "選択したインターフェース言語を記憶する",
+    "row1Retention": "12ヶ月",
+    "row2Purpose": "クッキーの同意設定を保存する",
+    "row2Retention": "12ヶ月",
+    "row3Purpose": "[ja] Pamti odabrani svjetlosni/tamni način prikaza",
+    "row3Retention": "[ja] 12 mjeseci",
+    "row4Purpose": "[ja] Anonimna analitika posjećenosti (Google Analytics) — samo uz privolu",
+    "row4Retention": "[ja] 26 mjeseci",
+    "policySection3": {
+      "title": "[ja] 3. Upravljanje kolačićima",
+      "p1": "[ja] Možete kontrolirati i/ili brisati kolačiće prema Vašim željama. Pogledajte upute za upravljanje kolačićima u popularnim preglednicima:",
+      "li1": "[ja] Google Chrome: Postavke → Privatnost i sigurnost → Kolačići",
+      "li2": "[ja] Mozilla Firefox: Postavke → Privatnost i sigurnost → Kolačići i podaci stranica",
+      "li3": "[ja] Safari: Preference → Privatnost → Upravljanje podacima web stranica",
+      "li4": "[ja] Microsoft Edge: Postavke → Kolačići i dozvole stranica"
+    },
+    "policySection4": {
+      "title": "[ja] 4. Više informacija",
+      "p1": "[ja] Isključivanje osnovnih kolačića može narušiti funkcionalnost platforme. Analitičke kolačiće možete isključiti u bilo koje vrijeme putem banera za privolu.",
+      "p2": "[ja] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
+    }
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新日：2026年3月28日",
+    "intro": "Sudačka mreža（以下「当社」、「当社の」、「Sudačka mreža」といいます）は、お客様のプライバシー保護に努めています。本プライバシーポリシーは、EU規則 2016/679 (GDPR) および一般データ保護規則施行法 (NN 42/18) に基づき、当社がお客様の個人データをどのように収集、使用、および保護するかについて説明するものです。",
+    "section1": {
+      "title": "1. 収集されるデータ",
+      "p1": "当社のプラットフォームの利用方法に応じて、以下のカテゴリの個人データを収集します。",
+      "li1": "アカウントデータ：登録時の氏名、メールアドレス、およびパスワード（ハッシュ化済み）",
+      "li2": "利用データ：閲覧したページ、検索内容、および記録された決定",
+      "li3": "デバイスデータ：IPアドレス、ブラウザの種類、およびオペレーティングシステム",
+      "li4": "お問い合わせフォームからのデータ：氏名、メールアドレス、およびメッセージ内容"
+    },
+    "section2": {
+      "title": "2. 処理の法的根拠",
+      "p1": "当社は、以下の法的根拠に基づいてお客様の個人データを処理します：",
+      "li1": "契約の履行 (GDPR第6条第1項(b)号): アカウントを持つユーザーへのサービス提供のため",
+      "li2": "正当な利益 (GDPR第6条第1項(f)号): プラットフォームのセキュリティおよびサービスの向上のため",
+      "li3": "同意 (GDPR第6条第1項(a)号): 分析用クッキー（お客様の同意がある場合のみ）"
+    },
+    "section3": {
+      "title": "3. データ保存期間",
+      "p1": "当社は、収集目的のために必要な期間に限り、お客様の個人データを保持します：",
+      "li1": "アカウントデータ: ユーザーアカウントの有効期間 + 削除後30日間",
+      "li2": "アクセスログ (IPアドレス): 90日間",
+      "li3": "お問い合わせフォームのデータ: 受領から2年間"
+    },
+    "section4": {
+      "title": "4. お客様の権利",
+      "p1": "データ主体として、お客様はGDPRに基づき以下の権利を有します：",
+      "li1": "アクセス権: 当社が保有するお客様の個人データの写しを請求できます",
+      "li2": "訂正権: 不正確なデータの訂正を請求できます",
+      "li3": "消去権（忘れられる権利）: 保管の必要がなくなったデータの消去を請求できます",
+      "li4": "データポータビリティ権: お客様のデータを構造化され、機械判読可能な形式で請求できます",
+      "li5": "異議申し立て権: 正当な利益に基づくデータ処理に対して異議を申し立てることができます",
+      "p2": "権利行使に関する請求は、info@sudacka-mreza.hr までお送りください。請求に対し、30日以内に回答いたします。"
+    },
+    "section5": {
+      "title": "5. 監督機関 — AZOP",
+      "p1": "お客様の個人データの処理がGDPRに違反していると思われる場合、お客様は個人データ保護庁 (AZOP) に苦情を申し立てる権利を有します：",
+      "azopName": "個人情報保護庁 (AZOP)",
+      "azopAddress": "Martićeva 14, 10000 Zagreb, Hrvatska",
+      "azopEmail": "メール: azop@azop.hr",
+      "azopPhone": "電話番号: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "6. プライバシーポリシーの変更",
+      "p1": "当庁は本ポリシーを変更する権利を留保します。重要な変更については、効力発生の少なくとも14日前までに、電子メールまたはプラットフォーム上での公示により通知いたします。当該期間の経過後もプラットフォームの利用を継続された場合は、変更後のポリシーに同意したものとみなされます。"
+    }
+  },
+  "terms": {
+    "title": "[ja] Uvjeti korištenja",
+    "lastUpdated": "[ja] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[ja] Dobrodošli na Sudačku mrežu. Korištenjem ove platforme prihvaćate sljedeće Uvjete korištenja. Molimo pažljivo pročitajte ovaj dokument prije korištenja usluge.",
+    "section1": {
+      "title": "[ja] 1. Opis usluge",
+      "p1": "[ja] Sudačka mreža je neprofitna online platforma koja pruža pristup javnim pravosudnim informacijama u Republici Hrvatskoj: sudska praksa, registar sudova, direktorij vještaka i tumača, stečajni oglasi i pravni sadržaji.",
+      "p2": "[ja] Svi sadržaji na platformi dostupni su isključivo u informativne svrhe i ne predstavljaju pravni savjet. Za konkretne pravne savjete obratite se ovlaštenom odvjetniku."
+    },
+    "section2": {
+      "title": "[ja] 2. Korisnički računi",
+      "p1": "ユーザーアカウントを登録することにより、以下の義務に同意するものとします：",
+      "li1": "登録の際は、正確かつ完全な情報を入力してください。",
+      "li2": "パスワードの機密性を保持し、アカウントへのアクセス権を第三者と共有しないでください。",
+      "li3": "アカウントの不正利用が判明した場合は、直ちに info@sudacka-mreza.hr までご連絡ください。"
+    },
+    "section3": {
+      "title": "3. 利用規約",
+      "p1": "利用者は以下の行為を行わないことを約束するものとします：",
+      "li1": "違法な目的での利用、または第三者の権利を侵害する行為",
+      "li2": "事前の書面による承諾なく、自動化ツール（ボット、スクレイパー等）を使用してコンテンツを取得する行為",
+      "li3": "虚偽、侮辱的、または著作権等で保護されたコンテンツを公開する行為",
+      "li4": "プラットフォームのシステムまたはデータへの不正アクセスを試みる行為"
+    },
+    "section4": {
+      "title": "4. 知的財産権",
+      "p1": "プラットフォーム上のすべてのオリジナルコンテンツ（デザイン、ソフトウェア、テキスト、ロゴ）は、Sudačka mrežaの所有物であり、著作権によって保護されています。公開データ（裁判判決、裁判所情報）は、情報公開法に関する規定に従って提供されます。"
+    },
+    "section5": {
+      "title": "5. 免責事項",
+      "p1": "Sudačka mrežaはコンテンツの正確性と最新性の確保に努めますが、その完全性および正確性を保証するものではありません。本プラットフォームは「現状有姿」で提供され、可用性または特定の目的への適合性に関するいかなる保証も行いません。",
+      "p2": "Sudačka mrežaは、本プラットフォームの使用、または本プラットフォームへのアクセス不能から生じる直接的または間接的な損害について、一切の責任を負いません。"
+    },
+    "section6": {
+      "title": "6. 準拠法",
+      "p1": "本利用規約にはクロアチア共和国の法律が適用されます。本プラットフォームの使用に関して生じたすべての紛争について、当事者は協議による解決を図るものとし、解決に至らない場合は、ザグレブの管轄裁判所を専属的合意管轄裁判所とします。"
+    },
+    "section7": {
+      "title": "7. 利用規約の変更",
+      "p1": "当社は、本利用規約を変更する権利を留保します。重要な変更については、登録ユーザーに電子メールで通知します。変更の公開後も本プラットフォームの利用を継続した場合、新しい利用規約に同意したものとみなされます。",
+      "p2": "本規約に関するお問い合わせは、以下までご連絡ください："
+    }
+  },
+  "docgen.type.tuzba.desc": "裁判所における民事訴訟の提起",
+  "docgen.type.zalba.desc": "上級裁判所への判決に対する不服申し立て",
+  "docgen.type.prigovor.desc": "裁判所の決定に対する異議申し立て",
+  "docgen.type.ovrsni.desc": "強制執行証書に基づく強制執行の申立て"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "sudacka-mreza",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "cms",
+    "web"
+  ],
+  "scripts": {
+    "dev:cms": "npm run dev --workspace=cms",
+    "dev:web": "npm run dev --workspace=web",
+    "build:cms": "npm run build --workspace=cms",
+    "build:web": "npm run build --workspace=web",
+    "build": "npm run build --workspaces",
+    "test": "npm run test:run --workspace=web",
+    "test:watch": "npm run test --workspace=web",
+    "type-check": "npm run type-check --workspaces --if-present",
+    "generate:types": "npm run generate:types --workspace=cms",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "deploy": "./scripts/deploy.sh",
+    "test:e2e": "cd tests/e2e && python3 -m pytest . -v --tb=short",
+    "test:e2e:docker": "docker compose --profile test run --rm e2e"
+  },
+  "dependencies": {
+    "@testing-library/dom": "^10.4.1"
+  }
+}

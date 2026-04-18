@@ -1,0 +1,2831 @@
+{
+  "project": "sudacka-mreza",
+  "created_at": "2026-03-28T10:23:24.316288+00:00",
+  "updated_at": "2026-03-28T10:25:52.527298+00:00",
+  "features": {
+    "E0-1": {
+      "id": "E0-1",
+      "description": "Initialise web/ \u2014 Vite 6 + React 19 + TypeScript + React Router 7",
+      "sprint": 0,
+      "stage": "QA",
+      "gate_results": {
+        "DESIGN": {
+          "passed": true,
+          "details": {
+            "summary": "4 checks passed, 0 failed",
+            "passed": [
+              "Design spec found: SOFTWARE_SPEC.md",
+              "i18n locales present: ['ar', 'bg', 'cs', 'da', 'de']...",
+              "Feature E0-1 listed in SPRINT_PLAN.md",
+              "Accessibility requirements found in sprint plan"
+            ],
+            "failed": [],
+            "spec_file": "/opt/ai-elevate/gigforge/projects/sudacka-mreza/SOFTWARE_SPEC.md",
+            "locale_count": 31,
+            "locales": [
+              "eu",
+              "pl",
+              "fi",
+              "fr",
+              "de",
+              "is",
+              "pt",
+              "ja",
+              "mt",
+              "sk",
+              "es",
+              "sl",
+              "hr",
+              "nl",
+              "da",
+              "ar",
+              "zh",
+              "el",
+              "lt",
+              "bg",
+              "ga",
+              "lv",
+              "ro",
+              "hu",
+              "en",
+              "nb",
+              "sv",
+              "it",
+              "et",
+              "uk",
+              "cs"
+            ],
+            "in_sprint_plan": true,
+            "a11y_documented": true
+          },
+          "checked_at": "2026-03-28T10:23:40.877543+00:00",
+          "advanced_by": "gigforge-engineer"
+        },
+        "DEV": {
+          "passed": true,
+          "details": {
+            "summary": "FORCE ADVANCE by braun: Sprint 0 already delivered and verified \u2014 fast-tracking",
+            "passed": [
+              "Force override by authorized operator"
+            ],
+            "failed": [],
+            "override": true,
+            "operator": "braun",
+            "reason": "Sprint 0 already delivered and verified \u2014 fast-tracking"
+          },
+          "checked_at": "2026-03-28T10:23:52.467664+00:00",
+          "advanced_by": "FORCE:braun"
+        }
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        },
+        {
+          "from": "DESIGN",
+          "to": "DEV",
+          "at": "2026-03-28T10:23:40.877563+00:00",
+          "by": "gigforge-engineer",
+          "gate": "4 checks passed, 0 failed"
+        },
+        {
+          "from": "DEV",
+          "to": "QA",
+          "at": "2026-03-28T10:23:52.467678+00:00",
+          "by": "FORCE:braun",
+          "gate": "FORCE ADVANCE by braun: Sprint 0 already delivered and verified \u2014 fast-tracking"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:52.467676+00:00",
+      "stuck_alerted": false
+    },
+    "E0-2": {
+      "id": "E0-2",
+      "description": "Initialise cms/ \u2014 Payload CMS 3 standalone + TypeScript",
+      "sprint": 0,
+      "stage": "DEV",
+      "gate_results": {
+        "DESIGN": {
+          "passed": true,
+          "details": {
+            "summary": "4 checks passed, 0 failed",
+            "passed": [
+              "Design spec found: SOFTWARE_SPEC.md",
+              "i18n locales present: ['ar', 'bg', 'cs', 'da', 'de']...",
+              "Feature E0-2 listed in SPRINT_PLAN.md",
+              "Accessibility requirements found in sprint plan"
+            ],
+            "failed": [],
+            "spec_file": "/opt/ai-elevate/gigforge/projects/sudacka-mreza/SOFTWARE_SPEC.md",
+            "locale_count": 31,
+            "locales": [
+              "eu",
+              "pl",
+              "fi",
+              "fr",
+              "de",
+              "is",
+              "pt",
+              "ja",
+              "mt",
+              "sk",
+              "es",
+              "sl",
+              "hr",
+              "nl",
+              "da",
+              "ar",
+              "zh",
+              "el",
+              "lt",
+              "bg",
+              "ga",
+              "lv",
+              "ro",
+              "hu",
+              "en",
+              "nb",
+              "sv",
+              "it",
+              "et",
+              "uk",
+              "cs"
+            ],
+            "in_sprint_plan": true,
+            "a11y_documented": true
+          },
+          "checked_at": "2026-03-28T10:23:47.818106+00:00",
+          "advanced_by": "gigforge-engineer"
+        }
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        },
+        {
+          "from": "DESIGN",
+          "to": "DEV",
+          "at": "2026-03-28T10:23:47.818126+00:00",
+          "by": "gigforge-engineer",
+          "gate": "4 checks passed, 0 failed"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:47.818123+00:00",
+      "stuck_alerted": false
+    },
+    "E0-3": {
+      "id": "E0-3",
+      "description": "Wire PostgreSQL 16 connection in Payload config (DATABASE_URL)",
+      "sprint": 0,
+      "stage": "DEV",
+      "gate_results": {
+        "DESIGN": {
+          "passed": true,
+          "details": {
+            "summary": "4 checks passed, 0 failed",
+            "passed": [
+              "Design spec found: SOFTWARE_SPEC.md",
+              "i18n locales present: ['ar', 'bg', 'cs', 'da', 'de']...",
+              "Feature E0-3 listed in SPRINT_PLAN.md",
+              "Accessibility requirements found in sprint plan"
+            ],
+            "failed": [],
+            "spec_file": "/opt/ai-elevate/gigforge/projects/sudacka-mreza/SOFTWARE_SPEC.md",
+            "locale_count": 31,
+            "locales": [
+              "eu",
+              "pl",
+              "fi",
+              "fr",
+              "de",
+              "is",
+              "pt",
+              "ja",
+              "mt",
+              "sk",
+              "es",
+              "sl",
+              "hr",
+              "nl",
+              "da",
+              "ar",
+              "zh",
+              "el",
+              "lt",
+              "bg",
+              "ga",
+              "lv",
+              "ro",
+              "hu",
+              "en",
+              "nb",
+              "sv",
+              "it",
+              "et",
+              "uk",
+              "cs"
+            ],
+            "in_sprint_plan": true,
+            "a11y_documented": true
+          },
+          "checked_at": "2026-03-28T10:23:47.884372+00:00",
+          "advanced_by": "gigforge-engineer"
+        }
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        },
+        {
+          "from": "DESIGN",
+          "to": "DEV",
+          "at": "2026-03-28T10:23:47.884387+00:00",
+          "by": "gigforge-engineer",
+          "gate": "4 checks passed, 0 failed"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:47.884385+00:00",
+      "stuck_alerted": false
+    },
+    "E0-4": {
+      "id": "E0-4",
+      "description": "Finalise Docker Compose: caddy, web, cms, db services (skeleton exists)",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E0-5": {
+      "id": "E0-5",
+      "description": "Add web/.env.example and cms/.env.example with all vars from SPEC \u00a710.2",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E0-6": {
+      "id": "E0-6",
+      "description": "GitHub Actions CI skeleton: lint + typecheck jobs on push",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E0-7": {
+      "id": "E0-7",
+      "description": "Configure eslint, prettier, tsconfig in both packages",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U0-1": {
+      "id": "U0-1",
+      "description": "Create docs/design/tokens.md \u2014 colour palette, typography scale, spacing scale",
+      "sprint": 0,
+      "stage": "DEV",
+      "gate_results": {
+        "DESIGN": {
+          "passed": true,
+          "details": {
+            "summary": "4 checks passed, 0 failed",
+            "passed": [
+              "Design spec found: SOFTWARE_SPEC.md",
+              "i18n locales present: ['ar', 'bg', 'cs', 'da', 'de']...",
+              "Feature U0-1 listed in SPRINT_PLAN.md",
+              "Accessibility requirements found in sprint plan"
+            ],
+            "failed": [],
+            "spec_file": "/opt/ai-elevate/gigforge/projects/sudacka-mreza/SOFTWARE_SPEC.md",
+            "locale_count": 31,
+            "locales": [
+              "eu",
+              "pl",
+              "fi",
+              "fr",
+              "de",
+              "is",
+              "pt",
+              "ja",
+              "mt",
+              "sk",
+              "es",
+              "sl",
+              "hr",
+              "nl",
+              "da",
+              "ar",
+              "zh",
+              "el",
+              "lt",
+              "bg",
+              "ga",
+              "lv",
+              "ro",
+              "hu",
+              "en",
+              "nb",
+              "sv",
+              "it",
+              "et",
+              "uk",
+              "cs"
+            ],
+            "in_sprint_plan": true,
+            "a11y_documented": true
+          },
+          "checked_at": "2026-03-28T10:23:48.015187+00:00",
+          "advanced_by": "gigforge-engineer"
+        }
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        },
+        {
+          "from": "DESIGN",
+          "to": "DEV",
+          "at": "2026-03-28T10:23:48.015202+00:00",
+          "by": "gigforge-engineer",
+          "gate": "4 checks passed, 0 failed"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:48.015199+00:00",
+      "stuck_alerted": false
+    },
+    "U0-2": {
+      "id": "U0-2",
+      "description": "Create docs/design/wireframes/ directory; sketch homepage wireframe (lo-fi)",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U0-3": {
+      "id": "U0-3",
+      "description": "Define component inventory in docs/design/components.md \u2014 all 10 components from SPEC \u00a75.4",
+      "sprint": 0,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U1-1": {
+      "id": "U1-1",
+      "description": "Wireframe all primary page layouts: Home, Search results, Detail page, Directory listing, Contact",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U1-2": {
+      "id": "U1-2",
+      "description": "Wireframe mobile navigation (hamburger menu, language switch)",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U1-3": {
+      "id": "U1-3",
+      "description": "Specify Header component: logo, main nav, language switcher, search icon, login button",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U1-4": {
+      "id": "U1-4",
+      "description": "Specify Footer component: links, social, copyright, language, accessibility links",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U1-5": {
+      "id": "U1-5",
+      "description": "Accessibility review of colour palette \u2014 verify WCAG AA contrast ratios",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-1": {
+      "id": "E1-1",
+      "description": "Install and configure Tailwind CSS 4 in web/; add CSS variables for design tokens",
+      "sprint": 1,
+      "stage": "DEV",
+      "gate_results": {
+        "DESIGN": {
+          "passed": true,
+          "details": {
+            "summary": "4 checks passed, 0 failed",
+            "passed": [
+              "Design spec found: SOFTWARE_SPEC.md",
+              "i18n locales present: ['ar', 'bg', 'cs', 'da', 'de']...",
+              "Feature E1-1 listed in SPRINT_PLAN.md",
+              "Accessibility requirements found in sprint plan"
+            ],
+            "failed": [],
+            "spec_file": "/opt/ai-elevate/gigforge/projects/sudacka-mreza/SOFTWARE_SPEC.md",
+            "locale_count": 31,
+            "locales": [
+              "eu",
+              "pl",
+              "fi",
+              "fr",
+              "de",
+              "is",
+              "pt",
+              "ja",
+              "mt",
+              "sk",
+              "es",
+              "sl",
+              "hr",
+              "nl",
+              "da",
+              "ar",
+              "zh",
+              "el",
+              "lt",
+              "bg",
+              "ga",
+              "lv",
+              "ro",
+              "hu",
+              "en",
+              "nb",
+              "sv",
+              "it",
+              "et",
+              "uk",
+              "cs"
+            ],
+            "in_sprint_plan": true,
+            "a11y_documented": true
+          },
+          "checked_at": "2026-03-28T10:23:47.949902+00:00",
+          "advanced_by": "gigforge-engineer"
+        }
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        },
+        {
+          "from": "DESIGN",
+          "to": "DEV",
+          "at": "2026-03-28T10:23:47.949915+00:00",
+          "by": "gigforge-engineer",
+          "gate": "4 checks passed, 0 failed"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:47.949913+00:00",
+      "stuck_alerted": false
+    },
+    "E1-2": {
+      "id": "E1-2",
+      "description": "Install Inter, Source Serif 4, JetBrains Mono via @fontsource",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-3": {
+      "id": "E1-3",
+      "description": "Build Button component \u2014 primary / secondary / ghost / danger variants",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-4": {
+      "id": "E1-4",
+      "description": "Build Card component \u2014 header, footer, badge props",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-5": {
+      "id": "E1-5",
+      "description": "Build Badge/Tag component \u2014 court type, category",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-6": {
+      "id": "E1-6",
+      "description": "Build Alert component \u2014 info / warning / error / success",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-7": {
+      "id": "E1-7",
+      "description": "Build Modal component \u2014 accessible dialog, trap focus, close on Escape",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-8": {
+      "id": "E1-8",
+      "description": "Build Breadcrumb component",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-9": {
+      "id": "E1-9",
+      "description": "Build Pagination component \u2014 numbered + prev/next",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-10": {
+      "id": "E1-10",
+      "description": "Build Header component with React Router 7 NavLink, mobile hamburger, language switcher stub",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-11": {
+      "id": "E1-11",
+      "description": "Build Footer component",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-12": {
+      "id": "E1-12",
+      "description": "Install react-i18next + i18next; create web/src/i18n/ with hr.json and en.json stubs; language detection from URL path (",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-13": {
+      "id": "E1-13",
+      "description": "Build LanguageSwitch component \u2014 HR / EN toggle",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E1-14": {
+      "id": "E1-14",
+      "description": "Write Vitest component tests for all Sprint 1 components (\u2265 80% coverage)",
+      "sprint": 1,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-1": {
+      "id": "E2-1",
+      "description": "Define court-decisions collection \u2014 title, court, date, decision_type, full_text (Lexical), attachments, category, tags,",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-2": {
+      "id": "E2-2",
+      "description": "Define expert-witnesses collection \u2014 name, speciality_areas[], languages[], contact, court_assignments, verified, locale",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-3": {
+      "id": "E2-3",
+      "description": "Define interpreters collection \u2014 name, language_pairs[], contact, court_assignments, verified, locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-4": {
+      "id": "E2-4",
+      "description": "Define courts collection \u2014 name, type enum, address, phone, president, website, county, geolocation (lat/lng), locale fi",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-5": {
+      "id": "E2-5",
+      "description": "Define state-attorneys collection \u2014 name, jurisdiction, address, contact, locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-6": {
+      "id": "E2-6",
+      "description": "Define bankruptcy-listings collection \u2014 case_no, debtor, court, administrator, assets[], deadline, status, locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-7": {
+      "id": "E2-7",
+      "description": "Define bankruptcy-administrators collection \u2014 name, contact, assigned_cases",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-8": {
+      "id": "E2-8",
+      "description": "Define laws collection \u2014 title, type, year, text (Lexical), pdf_attachment, effective_date, superseded_by, locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-9": {
+      "id": "E2-9",
+      "description": "Define news-posts collection \u2014 title, slug (auto), content (Lexical), published_at, category, author, featured_image, lo",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-10": {
+      "id": "E2-10",
+      "description": "Define pages collection \u2014 title, slug, content (flexible layout blocks), locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-11": {
+      "id": "E2-11",
+      "description": "Define galleries collection \u2014 title, type enum (photo/video/audio), items[] (media array), locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-12": {
+      "id": "E2-12",
+      "description": "Define documents collection \u2014 title, category, file, published_at, locale fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-13": {
+      "id": "E2-13",
+      "description": "Define users collection \u2014 email, role enum (admin/editor/member), profile fields",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-14": {
+      "id": "E2-14",
+      "description": "Enable PostgreSQL pg_trgm extension; add GIN indexes on full_text, name, title columns",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-15": {
+      "id": "E2-15",
+      "description": "Add tsvector search fields to court-decisions, expert-witnesses, interpreters; wire to Payload search hook",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-16": {
+      "id": "E2-16",
+      "description": "Configure Payload i18n: locales: ['hr', 'en'], defaultLocale: 'hr'",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-17": {
+      "id": "E2-17",
+      "description": "Configure CORS in Payload: allow http://localhost:5173 (dev) and https://sudacka-mreza.hr (prod)",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-18": {
+      "id": "E2-18",
+      "description": "Configure file upload: max 50 MB; allowedMimeTypes; local storage in cms/uploads/",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-19": {
+      "id": "E2-19",
+      "description": "Write Vitest API tests for all 13 collections using Payload Local API (CRUD + search)",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E2-20": {
+      "id": "E2-20",
+      "description": "Write cms/src/seed/ scripts for demo data (5 court decisions, 5 experts, 5 courts, 2 news posts)",
+      "sprint": 2,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U3-1": {
+      "id": "U3-1",
+      "description": "High-fidelity design for Home page: hero, quick-access cards (6 sections), latest news strip, stats bar",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U3-2": {
+      "id": "U3-2",
+      "description": "High-fidelity design for News listing and News detail page",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U3-3": {
+      "id": "U3-3",
+      "description": "High-fidelity design for Contact page (form + map placeholder)",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-1": {
+      "id": "E3-1",
+      "description": "Set up React Router 7 route tree: all routes from SPEC \u00a73.1 defined as lazy-loaded components",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-2": {
+      "id": "E3-2",
+      "description": "Create web/src/api/ \u2014 typed fetch wrappers for Payload REST API (fetch + Zod validation)",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-3": {
+      "id": "E3-3",
+      "description": "Build HomePage \u2014 hero, quick-access grid (6 cards), latest 5 news posts, bilingual",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-4": {
+      "id": "E3-4",
+      "description": "Build NewsListPage \u2014 paginated list of news posts, category filter",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-5": {
+      "id": "E3-5",
+      "description": "Build NewsDetailPage \u2014 full article with Lexical rich text renderer, breadcrumb, share buttons",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-6": {
+      "id": "E3-6",
+      "description": "Build AboutPage \u2014 static content loaded from Payload pages collection",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-7": {
+      "id": "E3-7",
+      "description": "Build FreeLegalAidPage \u2014 static content from pages collection",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-8": {
+      "id": "E3-8",
+      "description": "Build ContactPage \u2014 form with 5 subject options; Resend integration via Payload email",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-9": {
+      "id": "E3-9",
+      "description": "Build SearchBar component \u2014 global typeahead querying all collections",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-10": {
+      "id": "E3-10",
+      "description": "Build GlobalSearchResultsPage \u2014 unified results across decisions, experts, courts, news",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-11": {
+      "id": "E3-11",
+      "description": "Add React Router meta tags to all Sprint 3 pages: title, description, Open Graph",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E3-12": {
+      "id": "E3-12",
+      "description": "Write component tests for all Sprint 3 pages and components",
+      "sprint": 3,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U4-1": {
+      "id": "U4-1",
+      "description": "High-fidelity design for Case Law search page: filter panel + results table + detail modal",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U4-2": {
+      "id": "U4-2",
+      "description": "High-fidelity design for Expert Witness and Interpreter directory pages",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U4-3": {
+      "id": "U4-3",
+      "description": "Design DataTable component spec \u2014 sortable columns, row click, mobile card fallback",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-1": {
+      "id": "E4-1",
+      "description": "Build DataTable component \u2014 sortable, filterable, paginated, mobile card fallback",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-2": {
+      "id": "E4-2",
+      "description": "Build CaseLawSearchPage (/sudska-praksa/pretraga/) \u2014 keyword, court filter, date range, decision type",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-3": {
+      "id": "E4-3",
+      "description": "Build CaseLawDetailPage \u2014 full decision text (Lexical), metadata panel, PDF download, breadcrumb",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-4": {
+      "id": "E4-4",
+      "description": "Build VTSPage (/sudska-praksa/vts/) \u2014 High Commercial Court decisions filtered view",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-5": {
+      "id": "E4-5",
+      "description": "Build ESLJPPage (/sudska-praksa/esljp/) \u2014 ECtHR/ECJ decisions",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-6": {
+      "id": "E4-6",
+      "description": "Build ExpertWitnessListPage (/strucnjaci/vjestaci/) \u2014 searchable, filterable by speciality + location",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-7": {
+      "id": "E4-7",
+      "description": "Build ExpertWitnessDetailPage \u2014 profile card, specialities, languages, contact",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-8": {
+      "id": "E4-8",
+      "description": "Build InterpreterListPage (/strucnjaci/tumaci/) \u2014 searchable by name and language pair",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-9": {
+      "id": "E4-9",
+      "description": "Build InterpreterDetailPage \u2014 profile, language pairs, contact",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-10": {
+      "id": "E4-10",
+      "description": "Add BookmarkButton component \u2014 save decision to localStorage",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E4-11": {
+      "id": "E4-11",
+      "description": "Write component and integration tests for all Sprint 4 pages",
+      "sprint": 4,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U5-1": {
+      "id": "U5-1",
+      "description": "Wireframe Jurisdiction Finder map page: map fills viewport, click \u2192 popup with court info",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U5-2": {
+      "id": "U5-2",
+      "description": "High-fidelity design for Bankruptcy portal landing page and listings table",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-1": {
+      "id": "E5-1",
+      "description": "Install leaflet + react-leaflet; configure OpenStreetMap tile provider",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-2": {
+      "id": "E5-2",
+      "description": "Source Croatian county GeoJSON (GADM level 2); commit to web/src/assets/croatia-counties.geojson",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-3": {
+      "id": "E5-3",
+      "description": "Build JurisdictionMapPage (/sudovi/nadleznost/) \u2014 choropleth; click county \u2192 popup with responsible court",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-4": {
+      "id": "E5-4",
+      "description": "Build CourtsListPage (/sudovi/) \u2014 court type tabs (Municipal / County / Commercial / Misdemeanour)",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-5": {
+      "id": "E5-5",
+      "description": "Build CourtDetailPage \u2014 court info card, address, Leaflet single-marker map, contacts",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-6": {
+      "id": "E5-6",
+      "description": "Build StateAttorneyListPage (/sudovi/dorh/) \u2014 directory table",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-7": {
+      "id": "E5-7",
+      "description": "Build BankruptcyLandingPage (/stecaj/) \u2014 intro, quick links, latest listings",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-8": {
+      "id": "E5-8",
+      "description": "Build BankruptcySalesPage (/stecaj/ponude/) \u2014 searchable listings; deadline highlight",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-9": {
+      "id": "E5-9",
+      "description": "Build BankruptcyAdministratorsPage (/stecaj/upravitelji/) \u2014 searchable directory",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-10": {
+      "id": "E5-10",
+      "description": "Build BankruptcyLawsPage (/stecaj/zakoni/) \u2014 laws list with PDF downloads",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-11": {
+      "id": "E5-11",
+      "description": "Build BankruptcyExpertPapersPage (/stecaj/radovi/) \u2014 PDF document list",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-12": {
+      "id": "E5-12",
+      "description": "Build BankruptcyCaseLawPage (/stecaj/sudska-praksa/) \u2014 filtered case law view",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E5-13": {
+      "id": "E5-13",
+      "description": "Write component and integration tests for all Sprint 5 pages",
+      "sprint": 5,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U6-1": {
+      "id": "U6-1",
+      "description": "Design Court Fee Calculator page: stepped form, result display",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U6-2": {
+      "id": "U6-2",
+      "description": "Design Login, Register, Member Area pages",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U6-3": {
+      "id": "U6-3",
+      "description": "Design Media Gallery page: photo grid, video embed, audio player",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "U6-4": {
+      "id": "U6-4",
+      "description": "Final design review \u2014 all pages reviewed against WCAG AA checklist",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-1": {
+      "id": "E6-1",
+      "description": "Build CourtFeeCalculatorPage (/pristojbe/) \u2014 form-based calculator; Zod validation",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-2": {
+      "id": "E6-2",
+      "description": "Build LoginPage \u2014 Payload JWT auth via /api/users/login; token in HttpOnly cookie",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-3": {
+      "id": "E6-3",
+      "description": "Build RegisterPage \u2014 create account via /api/users",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-4": {
+      "id": "E6-4",
+      "description": "Build MemberAreaPage (/clanovi/) \u2014 protected route; saved decisions, profile",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-5": {
+      "id": "E6-5",
+      "description": "Implement auth context (useAuth hook) \u2014 user state, login(), logout()",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-6": {
+      "id": "E6-6",
+      "description": "Build GalleriesListPage (/galerije/) \u2014 cards for photo, video, audio albums",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-7": {
+      "id": "E6-7",
+      "description": "Build GalleryDetailPage \u2014 CSS lightbox for photos, YouTube/Vimeo iframe for video, HTML5 <audio>",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-8": {
+      "id": "E6-8",
+      "description": "Build DocumentLibraryPage \u2014 searchable PDFs by category",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-9": {
+      "id": "E6-9",
+      "description": "Add print-friendly CSS \u2014 @media print hides nav/footer; preserves content",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-10": {
+      "id": "E6-10",
+      "description": "Add dark/light mode toggle \u2014 prefers-color-scheme default; manual toggle in localStorage",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-11": {
+      "id": "E6-11",
+      "description": "Add robots.txt and sitemap.xml generation script (reads Payload API at build time)",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-12": {
+      "id": "E6-12",
+      "description": "Add LegalOrganization JSON-LD schema on homepage",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-13": {
+      "id": "E6-13",
+      "description": "Add Plausible/Umami analytics script (cookieless)",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-14": {
+      "id": "E6-14",
+      "description": "Add RSS feed endpoints \u2014 /api/rss/news.xml and /api/rss/court-decisions.xml via Payload custom endpoint",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "E6-15": {
+      "id": "E6-15",
+      "description": "Write component and integration tests for all Sprint 6 pages and hooks",
+      "sprint": 6,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-1": {
+      "id": "T7-1",
+      "description": "Audit Vitest coverage; write missing unit tests (fee calculator logic, i18n helpers, date formatters)",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-2": {
+      "id": "T7-2",
+      "description": "Audit Payload collection test coverage; add missing CRUD + validation tests",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-3": {
+      "id": "T7-3",
+      "description": "Playwright E2E: Homepage loads; HR/EN language switch works",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-4": {
+      "id": "T7-4",
+      "description": "Playwright E2E: Case law search \u2192 results \u2192 click detail \u2192 full text visible",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-5": {
+      "id": "T7-5",
+      "description": "Playwright E2E: Expert witness filter by speciality \u2192 results filter \u2192 profile page opens",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-6": {
+      "id": "T7-6",
+      "description": "Playwright E2E: Contact form \u2014 fill all fields \u2192 submit \u2192 success message shown",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-7": {
+      "id": "T7-7",
+      "description": "Playwright E2E: Register \u2192 login \u2192 member area accessible \u2192 logout \u2192 member area redirects",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-8": {
+      "id": "T7-8",
+      "description": "Playwright E2E: Court fee calculator \u2014 enter values \u2192 result correct",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-9": {
+      "id": "T7-9",
+      "description": "Playwright E2E: Jurisdiction map loads \u2192 click county \u2192 popup shows court info",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-10": {
+      "id": "T7-10",
+      "description": "Playwright E2E: Bankruptcy sales search \u2014 search by debtor \u2192 filtered results",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-11": {
+      "id": "T7-11",
+      "description": "Run axe-core on all 20+ pages via Playwright; fix all critical and serious violations",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-12": {
+      "id": "T7-12",
+      "description": "Playwright visual regression baseline \u2014 screenshots at 1440px and 375px for all key pages",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-13": {
+      "id": "T7-13",
+      "description": "Lighthouse CI on all pages; fix any score below target",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-14": {
+      "id": "T7-14",
+      "description": "Cross-browser smoke test (Chromium, Firefox, WebKit) via Playwright",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "T7-15": {
+      "id": "T7-15",
+      "description": "Add coverage enforcement to CI: fail build if coverage < 80%",
+      "sprint": 7,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-1": {
+      "id": "D8-1",
+      "description": "Finalise docker-compose.yml \u2014 caddy, web (Nginx + Vite build), cms (Payload), db (PostgreSQL 16)",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-2": {
+      "id": "D8-2",
+      "description": "Write Caddyfile \u2014 HTTPS auto via Let's Encrypt; route / \u2192 web, /api/ \u2192 cms:3001, /admin/ \u2192 cms:3001; rate limit on login",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-3": {
+      "id": "D8-3",
+      "description": "Write multi-stage Dockerfile for web (Node builder \u2192 Nginx alpine)",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-4": {
+      "id": "D8-4",
+      "description": "Write multi-stage Dockerfile for cms (Node builder \u2192 Node alpine, non-root)",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-5": {
+      "id": "D8-5",
+      "description": "PostgreSQL volume, healthcheck, pg_trgm init SQL in compose",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-6": {
+      "id": "D8-6",
+      "description": "Write docker-compose.prod.yml override \u2014 registry images, restart: unless-stopped, no dev mounts",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-7": {
+      "id": "D8-7",
+      "description": "GitHub Actions CI/CD: lint \u2192 typecheck \u2192 Vitest \u2192 Playwright \u2192 Docker build \u2192 push to GHCR",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-8": {
+      "id": "D8-8",
+      "description": "Write scripts/deploy.sh \u2014 pull latest images, docker compose up -d, run migrations",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-9": {
+      "id": "D8-9",
+      "description": "Write scripts/backup.sh \u2014 pg_dump to dated .sql.gz; keep last 7 days",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-10": {
+      "id": "D8-10",
+      "description": "Add analytics service (Umami) to compose; configure in frontend",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-11": {
+      "id": "D8-11",
+      "description": "Document deployment in DEPLOYMENT.md \u2014 prerequisites, env vars, first-run, backup restore",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    },
+    "D8-12": {
+      "id": "D8-12",
+      "description": "Final smoke test on production-equivalent Docker stack (local prod compose)",
+      "sprint": 8,
+      "stage": "DESIGN",
+      "gate_results": {},
+      "history": [
+        {
+          "from": null,
+          "to": "DESIGN",
+          "at": "2026-03-28T10:23:24.316288+00:00",
+          "by": "init",
+          "gate": "Pipeline initialized"
+        }
+      ],
+      "last_activity": "2026-03-28T10:23:24.316288+00:00",
+      "stuck_alerted": false
+    }
+  }
+}

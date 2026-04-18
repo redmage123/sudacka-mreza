@@ -1,25 +1,5 @@
 import type { CollectionAfterChangeHook } from 'payload'
-
-/** Recursively walk a Lexical JSON tree and collect all text nodes */
-function extractPlainText(lexicalJson: unknown): string {
-  if (!lexicalJson || typeof lexicalJson !== 'object') return ''
-  const parts: string[] = []
-
-  function walk(node: Record<string, unknown>): void {
-    if (typeof node.text === 'string' && node.text.trim()) {
-      parts.push(node.text)
-    }
-    if (Array.isArray(node.children)) {
-      ;(node.children as Record<string, unknown>[]).forEach(walk)
-    }
-  }
-
-  const root = (lexicalJson as Record<string, unknown>).root
-  if (root && typeof root === 'object') {
-    walk(root as Record<string, unknown>)
-  }
-  return parts.join(' ')
-}
+import { lexicalToText } from '../utils/lexicalToText.js'
 
 export const generateSearchIndex: CollectionAfterChangeHook = async ({
   doc,
@@ -44,7 +24,7 @@ export const generateSearchIndex: CollectionAfterChangeHook = async ({
   }
 
   const searchVector = parts.join(' ').toLowerCase()
-  const plainText = extractPlainText(doc.fullText)
+  const plainText = lexicalToText(doc.fullText)
 
   const updates: Record<string, string> = {}
 

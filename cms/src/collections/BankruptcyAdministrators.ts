@@ -58,6 +58,16 @@ export const BankruptcyAdministrators: CollectionConfig = {
       label: 'Županija',
     },
     {
+      name: 'assignedCases',
+      type: 'relationship',
+      relationTo: 'bankruptcy-listings',
+      hasMany: true,
+      label: 'Dodijeljeni stečajni postupci',
+      admin: {
+        description: 'Stečajni postupci u kojima je ovaj upravitelj imenovan',
+      },
+    },
+    {
       name: 'slug',
       type: 'text',
       unique: true,

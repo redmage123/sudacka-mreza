@@ -1,18 +1,25 @@
 /**
- * GET /api/search
+ * GET /api/search?q=...
  *
- * Global search across all public content types: court decisions, expert witnesses,
- * courts, and news posts (FR-033).
+ * Global search across all public content types (FR-033).
  *
- * Returns results grouped by type, top 3 per group, with total counts.
- * When query is empty, returns recently added content instead.
+ * Returns results grouped by collection type with ranked relevance:
+ *   • court-decisions  — PostgreSQL tsvector FTS with `croatian` config
+ *                        (unaccent strips č/ć→c, š→s, đ→d, ž→z) + ts_rank
+ *   • expert-witnesses — pg_trgm fuzzy name similarity via unaccent()
+ *   • interpreters     — pg_trgm fuzzy name similarity via unaccent()
+ *   • courts           — pg_trgm fuzzy name similarity via unaccent()
+ *   • news-posts       — tsvector FTS with `croatian` config on title
+ *
+ * When query is empty (< 2 chars) returns recently published content instead.
  *
  * Query params:
  *   q    – search term (min 2 chars to trigger search)
- *   type – optional filter: decisions | experts | courts | news
+ *   type – optional filter: decisions | experts | interpreters | courts | news
  */
 
 import { Router, Request, Response } from 'express'
+import { croatianSearch } from '../search/croatianSearch.js'
 
 export function createGlobalSearchRouter(payload: any) {
   const router = Router()
@@ -21,7 +28,9 @@ export function createGlobalSearchRouter(payload: any) {
     const q = String(req.query.q || '').trim()
     const typeFilter = req.query.type ? String(req.query.type) : null
 
-    // Empty query → return recent content
+    // -------------------------------------------------------------------------
+    // Empty query → return recently published content
+    // -------------------------------------------------------------------------
     if (q.length < 2) {
       const [recentDecisions, recentNews] = await Promise.allSettled([
         payload.find({
@@ -43,8 +52,9 @@ export function createGlobalSearchRouter(payload: any) {
             recentDecisions.status === 'fulfilled'
               ? { docs: recentDecisions.value.docs, total: recentDecisions.value.totalDocs }
               : { docs: [], total: 0 },
-          experts: { docs: [], total: 0 },
-          courts: { docs: [], total: 0 },
+          experts:      { docs: [], total: 0 },
+          interpreters: { docs: [], total: 0 },
+          courts:       { docs: [], total: 0 },
           news:
             recentNews.status === 'fulfilled'
               ? { docs: recentNews.value.docs, total: recentNews.value.totalDocs }
@@ -53,68 +63,24 @@ export function createGlobalSearchRouter(payload: any) {
       })
     }
 
-    // Build collection queries based on optional type filter
-    const shouldSearch = (type: string) => !typeFilter || typeFilter === type
-
-    const searches = await Promise.allSettled([
-      shouldSearch('decisions')
-        ? payload.find({
-            collection: 'court-decisions',
-            where: {
-              or: [{ title: { like: q } }, { caseNumber: { like: q } }],
-            },
-            limit: typeFilter === 'decisions' ? 20 : 3,
-          })
-        : Promise.resolve(null),
-
-      shouldSearch('experts')
-        ? payload.find({
-            collection: 'expert-witnesses',
-            where: {
-              or: [{ name: { like: q } }, { county: { like: q } }],
-            },
-            limit: typeFilter === 'experts' ? 20 : 3,
-          })
-        : Promise.resolve(null),
-
-      shouldSearch('courts')
-        ? payload.find({
-            collection: 'courts',
-            where: { name: { like: q } },
-            limit: typeFilter === 'courts' ? 20 : 3,
-          })
-        : Promise.resolve(null),
-
-      shouldSearch('news')
-        ? payload.find({
-            collection: 'news-posts',
-            where: { title: { like: q } },
-            limit: typeFilter === 'news' ? 20 : 3,
-          })
-        : Promise.resolve(null),
-    ])
-
-    const [decisionsResult, expertsResult, courtsResult, newsResult] = searches
-
-    function extract(result: PromiseSettledResult<any>) {
-      if (result.status === 'rejected' || result.value === null) {
-        return { docs: [], total: 0 }
+    // -------------------------------------------------------------------------
+    // Full query → Croatian FTS + trigram search via raw SQL
+    // -------------------------------------------------------------------------
+    try {
+      const pool = payload.db.pool as {
+        query: (sql: string, params: (string | number)[]) => Promise<{ rows: any[] }>
       }
-      return {
-        docs: result.value.docs,
-        total: result.value.totalDocs,
-      }
+
+      const results = await croatianSearch(pool, q, typeFilter)
+
+      return res.json({
+        query: q,
+        results,
+      })
+    } catch (err) {
+      payload.logger.error('global-search error:', err)
+      return res.status(500).json({ error: 'Interna pogreška servera' })
     }
-
-    return res.json({
-      query: q,
-      results: {
-        decisions: extract(decisionsResult),
-        experts: extract(expertsResult),
-        courts: extract(courtsResult),
-        news: extract(newsResult),
-      },
-    })
   })
 
   return router

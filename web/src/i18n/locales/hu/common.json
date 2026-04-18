@@ -1,0 +1,815 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "Keresés",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "High Commercial",
+      "vrhovni": "Supreme",
+      "upravni": "Administrative",
+      "ustavni": "Constitutional",
+      "echr": "Emberi Jogok Európai Bírósága"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "Address",
+      "phone": "Phone",
+      "president": "President"
+    },
+    "officialNameNote": "Official Croatian court name"
+  },
+  "nav": {
+    "home": "Főoldal",
+    "decisionsSearch": "Döntések keresése"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "Bírósági térkép",
+    "courtType": {
+      "municipal": "Községi",
+      "county": "Megyei",
+      "commercial": "Kereskedelmi",
+      "misdemeanour": "Szabálysértési",
+      "administrative": "Közigazgatási"
+    },
+    "legend": "Jelmagyarázat",
+    "loading": "Bíróságok betöltése...",
+    "filterAll": "Minden bíróság",
+    "filterMunicipal": "Községi",
+    "filterCounty": "Megyei",
+    "filterCommercial": "Kereskedelmi",
+    "filterMisdemeanour": "Szabálysértési",
+    "filterAdministrative": "Közigazgatási",
+    "viewDetails": "Részletek megtekintése",
+    "courts": "bíróságok",
+    "error": "Nem sikerült betölteni a bírósági adatokat. Kérjük, próbálja újra."
+  },
+  "jurisdiction": {
+    "title": "Illetékességkereső",
+    "subtitle": "Keresse meg az illetékes bíróságot ügye helyszíne és típusa alapján.",
+    "cityLabel": "Város vagy község",
+    "cityPlaceholder": "pl. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Ügy típusa",
+    "caseType": {
+      "civilMinor": "Polgári (kisebb) — Községi bíróság",
+      "criminalMinor": "Büntető (5 évig) — Községi bíróság",
+      "criminalSerious": "Büntető (5+ év) — Megyei bíróság",
+      "commercial": "Kereskedelmi — Kereskedelmi bíróság",
+      "misdemeanour": "Szabálysértési — Szabálysértési bíróság",
+      "administrative": "Közigazgatási — Közigazgatási bíróság"
+    },
+    "results": "Eredmények",
+    "noResults": "Nem található illetékes bíróság ehhez a helyszínhez és ügytípushoz.",
+    "noResultsHint": "Próbáljon meg egy másik városnevet, vagy tekintse meg a teljes bírósági címtárat.",
+    "viewCourtsDirectory": "Bírósági címtár megtekintése"
+  },
+  "calculator": {
+    "title": "Bírósági illetékek",
+    "selectCaseType": "Ügy típusa",
+    "caseType": {
+      "civil": "Polgári jogvita",
+      "criminal": "Büntetőeljárás",
+      "commercial": "Kereskedelmi jogvita",
+      "administrative": "Közigazgatási jogvita",
+      "nonContentious": "Nemperes eljárás"
+    },
+    "claimValue": "Pertárgyérték (EUR)",
+    "calculate": "Díj kiszámítása",
+    "filingFee": "Beadási illeték",
+    "appealFee": "Fellebbezési illeték",
+    "enforcementFee": "Végrehajtási illeték",
+    "fixedFee": "Fix díjak",
+    "exemptionsTitle": "Illetékmentesség",
+    "exemption1": "A szociális ellátásban részesülők mentesek minden bírósági illeték alól.",
+    "exemption2": "A kiskorúak mentesek a bírósági illetékek alól a jogaikkal kapcsolatos eljárásokban.",
+    "exemption3": "A munkavállalók 2 650 € alatti pertárgyértékű munkaügyi jogvitákban mentesek.",
+    "paymentTitle": "Fizetési módok",
+    "payment1": "Banki átutalás a bíróság hivatalos számlájára",
+    "payment2": "e-Pristojbe portál (elektronikus fizetés)",
+    "payment3": "Bírósági pénztár (személyesen a bíróságon)",
+    "legalBasis": "Jogalap",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, módosításokkal). Minden összeg euróra átszámítva 2023.01.01. óta.",
+    "minorOffenses": "Kisebb bűncselekmények",
+    "seriousOffenses": "Súlyos bűncselekmények"
+  },
+  "jurisdictionFinder": {
+    "title": "Találja meg bíróságát",
+    "description": "Adja meg városát és az ügy típusát az illetékes bíróság megtalálásához.",
+    "cityLabel": "Az Ön városa vagy települése",
+    "cityPlaceholder": "pl. Zágráb, Split, Eszék...",
+    "caseTypeLabel": "Ügy típusa",
+    "caseType": {
+      "civilMinor": "Polgári jogvita (2 654 €-ig)",
+      "civilMajor": "Polgári jogvita (2 654 € felett)",
+      "criminalMinor": "Büntetőügy (kisebb bűncselekmény)",
+      "criminalSerious": "Büntetőügy (súlyos bűncselekmény)",
+      "commercial": "Kereskedelmi jogvita",
+      "misdemeanour": "Szabálysértés / közlekedési szabálysértés",
+      "administrative": "Jogvita államigazgatási szervvel"
+    },
+    "find": "Bíróság keresése",
+    "result": "Illetékes bíróság",
+    "noResult": "Nem található bíróság ehhez a városhoz. Próbálja meg a bírósági névjegyzéket.",
+    "browseAll": "Összes bíróság böngészése",
+    "viewProfile": "Bíróság profiljának megtekintése"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "Bankruptcy Portal",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "Bankruptcy Administrators",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "No bankruptcy administrators are currently registered in the system.",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "Bankruptcy Legislation",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "Free Legal Aid",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "Photo Galleries",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "No galleries have been published yet. Check back soon.",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Your message has been sent. We'll get back to you within 2 business days.",
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "No news articles have been published yet. Check back soon.",
+    "readMore": "Read more",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "Create account",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "intro1": "Sudačka mreža (Judicial Network) is a non-profit association that for over twenty years has been collecting, processing, and publishing publicly relevant data from the judicial system of the Republic of Croatia. Our goal is judicial transparency and the accessibility of legal information to all citizens.",
+    "intro2": "The platform offers searchable databases of case law (Supreme Court, High Commercial Court, European Court of Human Rights), a court directory with an interactive jurisdiction map, a directory of court experts and interpreters, bankruptcy estate sale listings, and an overview of relevant legislation.",
+    "intro3": "All services are available free of charge. Registration is only required to access contact details of court professionals.",
+    "donors": {
+      "title": "Donors and Partners",
+      "subtitle": "We thank the organisations that over the years have supported the development and maintenance of Sudačka mreža."
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "Jogi dokumentumgenerátor",
+    "subtitle": "Töltse ki az űrlapot, és töltse le a kész horvát jogi dokumentumot PDF formátumban",
+    "selectType": "Válasszon dokumentumtípust",
+    "type": {
+      "tuzba": {
+        "desc": "Polgári perindokozáshoz a bíróság előtt"
+      },
+      "zalba": {
+        "desc": "Bírósági határozat felsőbb bírósághoz történő fellebbezéséhez"
+      },
+      "prigovor": {
+        "desc": "Bírósági határozat elleni kifogás benyújtásához"
+      },
+      "ovrsni": {
+        "desc": "Végrehajtási okirat alapján történő végrehajtási eljárás megindításához"
+      }
+    },
+    "fields": {
+      "plaintiff_name": "A felperes teljes neve",
+      "plaintiff_address": "A felperes lakcíme",
+      "defendant_name": "Az alperes teljes neve",
+      "defendant_address": "Az alperes lakcíme",
+      "appellant_name": "A fellebbező teljes neve",
+      "appellant_address": "A fellebbező lakcíme",
+      "objector_name": "A kifogást benyújtó teljes neve",
+      "objector_address": "A kifogást benyújtó lakcíme",
+      "creditor_name": "A végrehajtást kérő teljes neve",
+      "creditor_address": "A végrehajtást kérő lakcíme",
+      "debtor_name": "Az adós teljes neve",
+      "debtor_address": "Az adós lakcíme",
+      "court_name": "Illetékes bíróság",
+      "case_number": "Ügyszám",
+      "claim_value": "Per tárgyi értéke (EUR)",
+      "claim_amount": "Követelés összege (EUR)",
+      "claim_description": "Kereseti kérelem / Petitum",
+      "facts": "Tényállás / Indokolás",
+      "legal_basis": "Jogalap (nem kötelező)",
+      "appeal_grounds": "Fellebbezési okok",
+      "appeal_request": "Fellebbezési kérelem",
+      "judgment_date": "A megtámadott határozat kelte",
+      "objection_grounds": "Kifogás alapja",
+      "enforcement_title": "Végrehajtható okirat",
+      "enforcement_means": "Végrehajtás módja (nem kötelező)",
+      "date": "Dátum",
+      "city": "Helység"
+    },
+    "generate": "PDF generálása",
+    "reset": "Új dokumentum",
+    "required": "Kötelező mező",
+    "disclaimer": "Ez a generátor kizárólag tájékoztatási célokat szolgál, és nem minősül jogi tanácsadásnak.",
+    "generating": "Generálás...",
+    "nav": {
+      "back": "Vissza a dokumentumokhoz"
+    }
+  },
+  "deadlines": {
+    "title": "Eljárási határidők kalkulátora",
+    "subtitle": "Számítsa ki az eljárási határidőket az eljárás típusa és a beadás dátuma alapján.",
+    "selectCaseType": "Eljárás típusa",
+    "filingDate": "Beadás dátuma",
+    "filingDatePlaceholder": "Válasszon dátumot",
+    "timelineTitle": "Eljárási határidők",
+    "noDeadlines": "Adja meg a beadás dátumát a határidők megtekintéséhez.",
+    "days": "nap",
+    "hours": "óra",
+    "fromFiling": "a beadástól",
+    "overdue": "Lejárt",
+    "today": "Ma",
+    "statuteTitle": "Elévülés",
+    "statute": {
+      "civil": "Általános elévülés: 5 év. Kártérítési felelősség: 3 év szubjektív, 5 év objektív.",
+      "criminal": "Büntetőeljárás elévülése: 5–25 év a maximális büntetéstől függően.",
+      "commercial": "Kereskedelmi követelések: 3 év. Általános elévülés vállalkozóknak: 5 év.",
+      "administrative": "Közigazgatási kereset benyújtásának határideje: 30 nap a döntés kézbesítésétől."
+    },
+    "legalBasis": "Jogi alap",
+    "legalBasisCivil": "Polgári perrendtartás (ZPP, egységes szöveg)",
+    "legalBasisCriminal": "Büntetőeljárásról szóló törvény (ZKP, módosítva)",
+    "legalBasisCommercial": "Polgári perrendtartás – kereskedelmi bíróságok előtt",
+    "legalBasisAdministrative": "Közigazgatási eljárásról szóló törvény és közigazgatási perrendtartás",
+    "disclaimer": "Ezek a határidők tájékoztató jellegűek, és nem minősülnek jogi tanácsadásnak. Forduljon ügyvédhez.",
+    "step": {
+      "filing": "Kereset / kérelem benyújtása",
+      "responseToLawsuit": "A keresetlevélre adott válasz határideje",
+      "preparatoryHearing": "Előkészítő tárgyalás",
+      "mainHearing": "Főtárgyalás",
+      "judgmentAppeal": "Fellebbezési határidő ítélet ellen",
+      "secondInstanceDecision": "Másodfokú bírósági döntés",
+      "policeDetentionMax": "Maximális rendőrségi fogva tartás",
+      "indictment": "Vádirat benyújtásának határideje",
+      "indictmentObjection": "Vád elleni kifogás",
+      "criminalAppeal": "Fellebbezési határidő",
+      "paymentOrderObjection": "Fizetési meghagyás elleni kifogás",
+      "commercialResponse": "Kereset elleni válasz (kereskedelmi)",
+      "commercialHearing": "Tárgyalás a kereskedelmi bíróságon",
+      "commercialAppeal": "Fellebbezési határidő (kereskedelmi)",
+      "adminRequest": "Közigazgatási kérelem benyújtva",
+      "adminDecision": "Közigazgatási határozat határideje",
+      "adminObjection": "Fellebbezés a közigazgatási eljárásban",
+      "adminSecondInstance": "Másodfokú közigazgatási döntés",
+      "adminCourtSuit": "Közigazgatási kereseti határidő"
+    },
+    "legend": {
+      "filing": "Beadás",
+      "deadline": "Határidő",
+      "hearing": "Tárgyalás",
+      "decision": "Döntés",
+      "overdue": "Lejárt"
+    }
+  },
+  "cookiePolicy": "Cookie-szabályzat",
+  "termsOfService": "Felhasználási feltételek",
+  "judges": {
+    "detail": {
+      "role": "Bíró",
+      "court": "Bíróság",
+      "appointmentDate": "Kinevezés dátuma",
+      "specialization": "Specializáció",
+      "status": "Státusz",
+      "contact": "Kapcsolati adatok"
+    }
+  },
+  "legalNews": {
+    "title": "Jogi hírek",
+    "subtitle": "Aktuális jogi hírek áttekintése hazai és európai jogi forrásokból.",
+    "breadcrumbNews": "Hírek",
+    "filterBySource": "Szűrés forrás szerint",
+    "filterAll": "Összes forrás",
+    "readMore": "Tovább olvasás",
+    "noResults": "Nincsenek hírek a kiválasztott forráshoz.",
+    "disclaimer": "A hírek külső forrásokból származnak. A Sudačka mreža nem vállal felelősséget a harmadik felek tartalmainak pontosságáért."
+  },
+  "cookies": {
+    "ariaLabel": "Süti tájékoztató",
+    "title": "Sütik és adatvédelem",
+    "description": "A weboldal megfelelő működésének biztosítása érdekében, valamint az Ön hozzájárulásával a szolgáltatás fejlesztése érdekében anonim analitikai adatokat gyűjtünk sütiket használva.",
+    "acceptAll": "Összes elfogadása",
+    "rejectNonEssential": "A nem alapvető sütik elutasítása",
+    "customize": "Testreszabás",
+    "customizeTitle": "Süti beállítások",
+    "essential": "Alapvető sütik",
+    "essentialDesc": "A weboldal megfelelő működéséhez szükségesek. Mindig aktívak, és nem kapcsolhatók ki.",
+    "analytics": "Analitikai sütik",
+    "analyticsDesc": "Segítenek megérteni, hogyan használják a felhasználók a weboldalt. Az összes adat anonim.",
+    "alwaysOn": "Mindig aktív",
+    "savePreferences": "Beállítások mentése",
+    "policyTitle": "Süti szabályzat",
+    "policyLastUpdated": "Utoljára frissítve: 2026. március 28.",
+    "policyIntro": "Ez a süti szabályzat elmagyarázza, hogy mi azok a sütik (cookie-k), melyeket használunk, milyen célból, és hogyan irányíthatja őket. Platformunk használatával hozzájárul a jelen dokumentumban leírt sütik használatához.",
+    "policySection1": {
+      "title": "1. Mik azok a sütik?",
+      "p1": "A sütik apró szöveges fájlok, amelyeket az Ön eszközén tárolunk, amikor egy weboldalt meglátogat. Lehetővé teszik a weboldal számára, hogy megjegyezze a beállításait, és javítsa a felhasználói élményt. A sütik nem tudnak programokat futtatni vagy vírusokat továbbítani."
+    },
+    "policySection2": {
+      "title": "2. Milyen sütiket használunk"
+    },
+    "tableColName": "Név",
+    "tableColPurpose": "Cél",
+    "tableColCategory": "Kategória",
+    "tableColRetention": "Időtartam",
+    "row1Purpose": "Megőrzi a kiválasztott felületi nyelvet",
+    "row1Retention": "12 hónap",
+    "row2Purpose": "Tárolja a süti-hozzájárulási beállításait",
+    "row2Retention": "12 hónap",
+    "row3Purpose": "[hu] Pamti odabrani svjetlosni/tamni način prikaza",
+    "row3Retention": "[hu] 12 mjeseci",
+    "row4Purpose": "[hu] Anonimna analitika posjećenosti (Google Analytics) — samo uz privolu",
+    "row4Retention": "[hu] 26 mjeseci",
+    "policySection3": {
+      "title": "[hu] 3. Upravljanje kolačićima",
+      "p1": "[hu] Možete kontrolirati i/ili brisati kolačiće prema Vašim željama. Pogledajte upute za upravljanje kolačićima u popularnim preglednicima:",
+      "li1": "[hu] Google Chrome: Postavke → Privatnost i sigurnost → Kolačići",
+      "li2": "[hu] Mozilla Firefox: Postavke → Privatnost i sigurnost → Kolačići i podaci stranica",
+      "li3": "[hu] Safari: Preference → Privatnost → Upravljanje podacima web stranica",
+      "li4": "[hu] Microsoft Edge: Postavke → Kolačići i dozvole stranica"
+    },
+    "policySection4": {
+      "title": "[hu] 4. Više informacija",
+      "p1": "[hu] Isključivanje osnovnih kolačića može narušiti funkcionalnost platforme. Analitičke kolačiće možete isključiti u bilo koje vrijeme putem banera za privolu.",
+      "p2": "[hu] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
+    }
+  },
+  "privacy": {
+    "title": "Adatvédelmi irányelvek",
+    "lastUpdated": "Utoljára frissítve: 2026. március 28.",
+    "intro": "A Sudačka mreža (a továbbiakban: „mi”, „miénk”, „Sudačka mreža”) elkötelezett az Ön adatainak védelme mellett. Ez az Adatvédelmi irányelv leírja, hogyan gyűjtjük, használjuk és védjük személyes adatait az 2016/679/EU (GDPR) rendelet és az Általános adatvédelmi rendelet végrehajtásáról szóló törvény (NN 42/18) megfelelően.",
+    "section1": {
+      "title": "1. Milyen adatokat gyűjtünk",
+      "p1": "A platformunk használatának módjától függően az alábbi személyes adatcsoportokat gyűjtjük:",
+      "li1": "Fiólinformációk: név, e-mail cím és jelszó (hashelt) a regisztráció során",
+      "li2": "Használati adatok: a látogatott oldalak, a keresések és a rögzített döntések",
+      "li3": "Eszközadatok: IP-cím, a böngésző és az operációs rendszer típusa",
+      "li4": "Kapcsolatfelvételi űrlap adatai: név, e-mail cím és az üzenet tartalma"
+    },
+    "section2": {
+      "title": "2. Adatkezelés jogalapja",
+      "p1": "Az Ön személyes adatait a következő jogalapok alapján kezeljük:",
+      "li1": "A szerződés teljesítése (a GDPR 6. cikke (1) be) pontja alapján): a felhasználói fiókkal rendelkező ügyfelek számára nyújtott szolgáltatások biztosításához",
+      "li2": "Jogos érdek (a GDPR 6. cikke (1) ff) pontja alapján): a platform biztonsága és a szolgáltatás fejlesztése érdekében",
+      "li3": "Beleegyezés (a GDPR 6. cikke (1) a) pontja alapján): az analitikai sütikhez (csak az Ön hozzájárulásával)"
+    },
+    "section3": {
+      "title": "3. Adattartási időszakok",
+      "p1": "Az Ön személyes adatait csak annyi ideig tároljuk, amennyire az adat gyűjtésének célja eléréséhez szükséges:",
+      "li1": "Fiókadatok: a felhasználói fiók élettartama + 30 nap a törlés után",
+      "li2": "Hozzáférési naplók (IP-címek): 90 nap",
+      "li3": "Kapcsolati űrlap adatai: a megvétel óta eltelt 2 év"
+    },
+    "section4": {
+      "title": "4. Az Ön jogai",
+      "p1": "Az érintettként a GDPR alapján az alábbi jogokat gyakorolhatja:",
+      "li1": "Adatmegtekintési jog: kérheti az Ön személyes adataiból álló másolat kiadását",
+      "li2": "Rektifikációs jog: kérheti a pontatlan adatok helyreállítását",
+      "li3": "Törlési jog (elfelejtés jog): kérheti azok adatok törlését, amelyeknek a tárolása már nem szükséges",
+      "li4": "Adatportabilidade jog: kérheti adatai strukturált, gépileg olvasható formátumban történő átadását",
+      "li5": "Ellanózási jog: tiltakozhat a jogos érdek alapján történő adatkezelés ellen",
+      "p2": "A joggyakorlással kapcsolatos kérelmeket az info@sudacka-mreza.hr címre irányítsa. A kérelemre 30 napon belül válaszolunk."
+    },
+    "section5": {
+      "title": "5. Felügyeletegység — AZOP",
+      "p1": "Amennyiben úgy vélezi, hogy az Ön személyes adatainak kezelése megsérti a GDPR-t, jog van panaszt benyújtania az Adatvédelmi Hatóságnál (AZOP):",
+      "azopName": "Adatvédelmi Hatóság (AZOP)",
+      "azopAddress": "Martićeva 14, 10000 Zagreb, Hrvatska",
+      "azopEmail": "E-mail: azop@azop.hr",
+      "azopPhone": "Telefon: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "6. Az Adatvédelmi Szabályzat módosításai",
+      "p1": "Fenntartjuk a jelen Szabályzat módosításának jogát. Minden jelentős változásról e-mailben vagy a platformon történő közzététel útján tájékoztatjuk Önt legalább 14 nappal a hatályba lépés előtt. A platform használatának folytatása ezen időszak lejárta után a módosított Szabályzat elfogásának tekinthető."
+    }
+  },
+  "terms": {
+    "title": "[hu] Uvjeti korištenja",
+    "lastUpdated": "[hu] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[hu] Dobrodošli na Sudačku mrežu. Korištenjem ove platforme prihvaćate sljedeće Uvjete korištenja. Molimo pažljivo pročitajte ovaj dokument prije korištenja usluge.",
+    "section1": {
+      "title": "[hu] 1. Opis usluge",
+      "p1": "[hu] Sudačka mreža je neprofitna online platforma koja pruža pristup javnim pravosudnim informacijama u Republici Hrvatskoj: sudska praksa, registar sudova, direktorij vještaka i tumača, stečajni oglasi i pravni sadržaji.",
+      "p2": "[hu] Svi sadržaji na platformi dostupni su isključivo u informativne svrhe i ne predstavljaju pravni savjet. Za konkretne pravne savjete obratite se ovlaštenom odvjetniku."
+    },
+    "section2": {
+      "title": "[hu] 2. Korisnički računi",
+      "p1": "A felhasználói fiók regisztrációjával az alábbi kötelezettségeket fogadja}));",
+      "li1": "A regisztráció során adja meg a pontos és teljes adatokat",
+      "li2": "Tartsa titokban jelszavát, és ne adja meg fiókjához való hozzáférést harmadik személyeknek",
+      "li3": "A fiókja illetéktelen használata esetén azonnal értesítsen minket a következő címen: info@sudacka-mreza.hr"
+    },
+    "section3": {
+      "title": "3. Megengedett használat",
+      "p1": "A felhasználók vállalják, hogy nem:",
+      "li1": "Használják a platformot illegális célokra vagy harmadik felek jogainak megsértésére",
+      "li2": "Használnak automatizált eszközöket (botok, scraperek) a tartalom előzetes írásbeli engedély nélküli letöltésére",
+      "li3": "Publikálnak hamis, sértő vagy jogilag védett tartalmakat",
+      "li4": "Megkísérelnek illetéktelenül hozzáférni a platform rendszereihez vagy adataihoz"
+    },
+    "section4": {
+      "title": "4. Szellemi tulajdon",
+      "p1": "A platform minden eredeti tartalma (tervezés, szoftver, szöveg, logók) a Bírósági Hálózat tulajdonát képezi, és szerzői jog tomonidan védett. A nyilvános adatok (bírósági határozatok, bírósági adatok) az információs jogról szóló előírásoknak megfelelően elérhetőek."
+    },
+    "section5": {
+      "title": "5. Felelősségkorlátozás",
+      "p1": "A Bírósági Hálózat törekszik a tartalmak pontosságára és naprakészességére, de nem garantálja azok teljesességét vagy pontosságát. A platform „úgy, ahogy van” állapotban kerül felületre biztosítva, elérhetőségi vagy meghatározott célra való alkalmassági garancia nélkül.",
+      "p2": "A Bírósági Hálózat nem felelős a platform használata vagy a platform elérése nélküli közvetlen vagy közvetett károkért."
+    },
+    "section6": {
+      "title": "6. Irányadó jog",
+      "p1": "Ezen Felhasználási Feltételek alkalmazása esetén a Horvát Köztársaság jogát kell alkalmazni. A platform használatával kapcsolatos összes vitát a felek megkívárhatóan békés úton próbálnak rendezni, és eredményesség hiányában illetékes bíróság a Zagreben található."
+    },
+    "section7": {
+      "title": "7. A Feltételek módosítása",
+      "p1": "Fenntartjuk a jogot a jelen Felhasználási Feltételek módosítására. A jelentős módosításokról a regisztrált felhasználókat e-mailben tájékoztatjuk. A módosítások közzététtele után a platform további használata a új Feltételek elfogadásának tekinthető.",
+      "p2": "A jelen Feltételekkel kapcsolatos kérdések esetén vegye fel velünk a kapcsolatot:"
+    }
+  },
+  "docgen.type.tuzba.desc": "A polgári per megindításához",
+  "docgen.type.zalba.desc": "A bírósági határozat felsőbb bíróság elleni megtámadásához",
+  "docgen.type.prigovor.desc": "A bírósági határozat elleni kifogás benyújtásához",
+  "docgen.type.ovrsni.desc": "Végrehajtási okirat alapján történő végrehajtás megindításához"
+}

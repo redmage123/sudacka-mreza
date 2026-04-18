@@ -1,7 +1,12 @@
-import { Resend } from 'resend'
+// Resend imported dynamically to avoid crash when RESEND_API_KEY is missing
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const BASE_URL = (process.env.SERVER_URL ?? 'https://sudacka-mreza.hr').replace(/\/$/, '')
+
+async function getResend(): Promise<import('resend').Resend | null> {
+  if (!process.env.RESEND_API_KEY) return null
+  const { Resend } = await import('resend')
+  return new Resend(process.env.RESEND_API_KEY!)
+}
 
 async function runDigest(payload: any): Promise<void> {
   try {
@@ -112,6 +117,11 @@ async function runDigest(payload: any): Promise<void> {
           'Sudačka mreža',
         ].join('\n')
 
+        const resend = await getResend()
+        if (!resend) {
+          payload.logger.warn('RESEND_API_KEY not configured — skipping email digest')
+          continue
+        }
         await resend.emails.send({
           from: 'Sudačka Mreža <noreply@sudacka-mreza.hr>',
           to: subscription.email,

@@ -1,95 +1,47 @@
-# ADR-0004: Deployment Strategy — Docker Compose + Caddy
+# ADR-0004: Deployment Strategy
 ## Status: Accepted
 ## Date: 2026-03-21
-## Decider: Chris Novak (CTO)
-
----
 
 ## Context
 
-The project needs a deployment strategy that:
-- Can run locally for development with a single command
-- Deploys to a VPS with HTTPS and auto-renewing SSL
-- Is simple enough for the client (Dražen) to restart services or check logs without GigForge assistance
-- Has a clear upgrade path (scale vertically, add services)
-- Fits GigForge's standard practices
-
-The owner specified Docker Compose.
-
-The current site runs on an unmanaged server at a static IP (69.61.26.116), likely with manual deployments. The new site will move to a fresh VPS.
-
----
+The platform needs a deployment strategy that: runs reliably on a low-cost VPS (1–2 vCPU, 2 GB RAM, ~€10–20/mo), supports automatic HTTPS renewal, isolates services from each other, is reproducible across environments, and can be maintained by a non-specialist administrator. The client explicitly requested Docker Compose.
 
 ## Decision
 
-**Docker Compose** with four services:
+**Docker Compose with Caddy as the edge reverse proxy.**
 
-```yaml
-services:
-  caddy:      # HTTPS reverse proxy + Let's Encrypt
-  web:        # React SPA (Nginx serving Vite build)
-  cms:        # Payload CMS 3 (Node.js)
-  db:         # PostgreSQL 16
-```
+Five services:
+1. `caddy` — Caddy 2 reverse proxy; handles TLS (Let's Encrypt HTTP-01), routes traffic, rate-limits login/contact endpoints, sets security headers
+2. `web` — Nginx Alpine serving the Vite-built React SPA static files
+3. `cms` — Payload CMS 3 Node.js process (port 3001, internal only)
+4. `db` — PostgreSQL 16 with a named volume for persistence and a healthcheck
+5. `analytics` — Umami self-hosted analytics (cookieless, GDPR-compliant)
 
-Optional fifth service (added later):
-```yaml
-  analytics:  # Plausible CE (self-hosted, privacy-preserving)
-```
-
-**Caddy** as the reverse proxy — chosen over Nginx+Certbot because Caddy handles Let's Encrypt certificate provisioning and renewal with zero configuration. The entire HTTPS setup is:
-```
-sudacka-mreza.hr {
-    handle /api/* { reverse_proxy cms:3001 }
-    handle /admin/* { reverse_proxy cms:3001 }
-    handle { reverse_proxy web:80 }
-}
-```
-No cron jobs for certificate renewal, no certbot setup, no annual certificate expiry surprises.
-
----
+A `docker-compose.prod.yml` override file supplies production-specific values (registry image tags, `restart: unless-stopped`, no dev bind mounts).
 
 ## Alternatives Considered
 
-**Railway / Fly.io (PaaS)**
-- Pros: Zero infrastructure management; automatic scaling; no SSH access needed
-- Cons: Higher monthly cost (~€20-40/mo for this stack vs. €10-15/mo for a VPS); less control for a civic organisation; data sovereignty concern for Croatian judicial data being on US infrastructure; harder to self-host Plausible analytics
-- Rejected: Cost and data sovereignty concerns; client is likely more comfortable with a VPS they own
-
-**Kubernetes (k3s)**
-- Pros: Scalable; industry standard for large deployments
-- Cons: Massive operational overhead for a 4-service application with <10k daily users; requires k3s expertise to maintain; overkill by several orders of magnitude
-- Rejected: Wildly disproportionate to the scale
-
-**Single Docker container (all services)**
-- Using supervisord to run PostgreSQL + Node.js inside one container
-- Pros: Simpler to reason about for non-DevOps people
-- Cons: Violates single-responsibility principle; no independent restart per service; shared resource limits; upgrading any single component requires rebuilding the whole container
-- Rejected: Bad practice; makes debugging harder, not easier
-
-**Nginx + Certbot instead of Caddy**
-- Nginx is more widely understood than Caddy
-- Pros: More documentation and Stack Overflow answers; more operators know Nginx
-- Cons: Certbot requires a cron job for renewal; Nginx TLS config has many footguns (old cipher suites, OCSP stapling, etc.); Caddy gets all of this right by default; renewal failures have historically been the #1 cause of HTTPS outages for small sites
-- Rejected: Caddy's automatic certificate management is significantly safer for a civic site that cannot have HTTPS outages
-
----
+| Alternative | Why Rejected |
+|---|---|
+| **Railway / Fly.io (PaaS)** | Client is not confirmed on a new host (BLK-5 blocker). PaaS adds ongoing platform cost and vendor lock-in. Docker Compose keeps all options open — can run on any VPS, DigitalOcean, Hetzner, or the client's existing server. |
+| **Kubernetes (K8s)** | Gross overkill for a 5-service stack on a single VPS. Operational burden is 10× Docker Compose for no benefit at this scale. |
+| **Single container** | Running everything in one container removes service isolation, makes scaling individual components impossible, and complicates health checks. |
+| **Nginx as edge proxy** | Nginx can reverse-proxy but has no built-in Let's Encrypt integration. Auto-renewing TLS certs with Nginx requires Certbot cron jobs — more moving parts than Caddy's zero-config HTTPS. |
+| **Traefik as edge proxy** | A valid alternative to Caddy. Rejected because the `Caddyfile` syntax is simpler for the rate-limiting and header configuration required here, and Caddy's automatic HTTPS is more reliable in practice on a single-host setup. |
+| **Serverless (AWS Lambda / Vercel)** | Payload CMS 3 standalone is a long-running Node.js process — not suitable for serverless cold-start constraints. PostgreSQL also requires a persistent connection pool, which is poorly suited to serverless. |
 
 ## Consequences
 
 **Positive:**
-- `docker compose up -d` starts the entire stack from scratch in under 2 minutes
-- Caddy eliminates all manual SSL certificate management forever
-- Each service restarts independently (`docker compose restart cms`)
-- Database upgrades, CMS upgrades, and frontend deploys are all independent
-- Persistent data in named Docker volumes (`db_data`, `media_data`) survives container restarts
-- Easy to add services (Meilisearch, Redis for caching) without restructuring
+- `docker compose up` brings the entire stack from zero in < 2 minutes — reproducible on any machine with Docker installed
+- Caddy auto-renews Let's Encrypt certs via HTTP-01 challenge with zero configuration beyond the `Caddyfile`
+- Named PostgreSQL volume persists data across container restarts and `compose up/down` cycles
+- `restart: unless-stopped` in prod compose ensures all services recover automatically after a reboot
+- Caddy rate-limits `/api/users/login` (5 req/min) and `/api/contact` (3 req/min) at the edge before traffic reaches Node.js
+- `scripts/backup.sh` uses `pg_dump` inside the `db` container — no external tools needed; outputs compressed `.sql.gz` with 7-day retention
 
-**Negative:**
-- Client (Dražen) needs basic Docker knowledge to run operational commands — mitigated by a `OPERATIONS.md` guide with exact copy-paste commands
-- Docker Compose is not as resilient as Kubernetes for crash recovery — mitigated by `restart: unless-stopped` on all services
-- No horizontal scaling — this is a single-VPS deployment; acceptable for this traffic level
-
-**Risk:**
-- The VPS must have enough RAM for all four services. Estimated: Caddy (50MB) + Nginx/web (20MB) + Payload CMS (300MB) + PostgreSQL (200MB) = ~600MB. A 1GB VPS is the minimum; 2GB recommended. This must be communicated to the client when selecting a server.
-- Docker volume backups are critical. A `docker compose exec db pg_dump` cron job MUST be set up on day one. See `OPERATIONS.md` for the backup script.
+**Negative / Risks:**
+- All 5 services share one host's resources — no horizontal scaling. Acceptable at expected traffic levels for a Croatian judicial information site.
+- Let's Encrypt HTTP-01 challenge requires ports 80 and 443 to be publicly reachable — client must provide DNS/domain control (BLK-3 blocker)
+- PostgreSQL exposed on port 5432 in dev compose must be removed in prod override — enforced by `docker-compose.prod.yml`
+- Umami analytics service adds ~200 MB RAM idle; can be removed if server resources are constrained

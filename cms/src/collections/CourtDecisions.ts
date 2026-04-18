@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { generateSlug } from '../hooks/generateSlug.js'
 import { generateSearchIndex } from '../hooks/generateSearchIndex.js'
+import { ingestToRag } from '../hooks/ingestToRag.js'
+import { citationLinker } from '../hooks/citationLinker.js'
 import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 
 export const CourtDecisions: CollectionConfig = {
@@ -17,7 +19,7 @@ export const CourtDecisions: CollectionConfig = {
   },
   hooks: {
     beforeChange: [generateSlug('title')],
-    afterChange: [generateSearchIndex],
+    afterChange: [generateSearchIndex, citationLinker, ingestToRag],
   },
   fields: [
     {
@@ -87,9 +89,22 @@ export const CourtDecisions: CollectionConfig = {
       },
     },
     {
+      name: 'categories',
+      type: 'relationship',
+      relationTo: 'legal-categories',
+      hasMany: true,
+      label: 'Pravne kategorije',
+      admin: {
+        description: 'Pravna područja kojima ova odluka pripada',
+      },
+    },
+    {
       name: 'category',
       type: 'text',
       label: 'Kategorija',
+      admin: {
+        description: 'Zastarjelo — koristite polje "Pravne kategorije" umjesto ovog',
+      },
     },
     {
       name: 'tags',
@@ -128,6 +143,28 @@ export const CourtDecisions: CollectionConfig = {
       index: true,
       admin: {
         hidden: true,
+      },
+    },
+    {
+      name: 'cited_decisions',
+      type: 'relationship',
+      relationTo: 'court-decisions',
+      hasMany: true,
+      label: 'Citirane odluke',
+      admin: {
+        description: 'Odluke na koje ova odluka upućuje (automatski detektirano iz teksta)',
+        readOnly: true,
+      },
+    },
+    {
+      name: 'cited_by',
+      type: 'relationship',
+      relationTo: 'court-decisions',
+      hasMany: true,
+      label: 'Odluke koje citiraju ovu',
+      admin: {
+        description: 'Odluke koje upućuju na ovu odluku (automatski ažurirano)',
+        readOnly: true,
       },
     },
     {

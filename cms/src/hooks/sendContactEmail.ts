@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+// Resend imported dynamically
 
 interface ContactEmailParams {
   name: string
@@ -16,7 +16,7 @@ export async function sendContactEmail(params: ContactEmailParams): Promise<bool
     return false
   }
 
-  const resend = new Resend(apiKey)
+  const { Resend } = await import('resend'); const resend = new Resend(apiKey!)
 
   try {
     await resend.emails.send({

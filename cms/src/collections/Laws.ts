@@ -51,6 +51,14 @@ export const Laws: CollectionConfig = {
       label: 'Opis',
     },
     {
+      name: 'fullText',
+      type: 'richText',
+      label: 'Puni tekst zakona',
+      admin: {
+        description: 'Puni tekst propisa (ako nije samo PDF)',
+      },
+    },
+    {
       name: 'file',
       type: 'relationship',
       relationTo: 'media',
@@ -62,6 +70,20 @@ export const Laws: CollectionConfig = {
       label: 'Vanjski URL',
       admin: {
         description: 'Link na Narodne novine ili drugi izvor',
+      },
+    },
+    {
+      name: 'effectiveDate',
+      type: 'date',
+      label: 'Datum stupanja na snagu',
+    },
+    {
+      name: 'supersededBy',
+      type: 'relationship',
+      relationTo: 'laws',
+      label: 'Zamijenjen zakonom',
+      admin: {
+        description: 'Noviji propis koji je zamijenio ovaj (za starije verzije/novele)',
       },
     },
     {

@@ -65,10 +65,16 @@ export function Footer() {
 
         {/* Legal bar */}
         <div className="border-t border-[color:var(--color-brand-navy-light)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[color:var(--color-text-inverse)] opacity-70">
-          <p>© {year} {tc('copyright')}. Sva prava pridržana.</p>
-          <nav className="flex items-center gap-4" aria-label="Legal links">
+          <p>© {year} {tc('copyright')}. {tc('allRightsReserved')}.</p>
+          <nav className="flex items-center gap-4 flex-wrap justify-center sm:justify-end" aria-label="Legal links">
             <Link to={`/${lang}/privatnost`} className="hover:opacity-100 hover:text-[color:var(--color-brand-gold-light)] transition-colors">
               {tc('privacyPolicy')}
+            </Link>
+            <Link to={`/${lang}/kolacici`} className="hover:opacity-100 hover:text-[color:var(--color-brand-gold-light)] transition-colors">
+              {tc('cookiePolicy')}
+            </Link>
+            <Link to={`/${lang}/uvjeti`} className="hover:opacity-100 hover:text-[color:var(--color-brand-gold-light)] transition-colors">
+              {tc('termsOfService')}
             </Link>
             <Link to={`/${lang}/pristupacnost`} className="hover:opacity-100 hover:text-[color:var(--color-brand-gold-light)] transition-colors">
               {tc('accessibility')}

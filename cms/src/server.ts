@@ -6,14 +6,32 @@ import config from './payload.config.js'
 import contactRouter from './routes/contact.js'
 import courtFeeRouter from './routes/court-fee.js'
 import { createDecisionsSearchRouter } from './routes/decisions-search.js'
+import { createHybridSearchRouter } from './routes/hybrid-search.js'
 import { createGlobalSearchRouter } from './routes/global-search.js'
 import { createJurisdictionRouter } from './routes/jurisdiction.js'
 import { createRssRouter } from './routes/rss.js'
 import { createPdfExportRouter } from './routes/pdfExport.js'
 import { createSubscribeRouter } from './routes/subscribe.js'
+import { createStatisticsRouter } from './routes/statistics.js'
+import { createPublicApiRouter } from './endpoints/publicApi.js'
+import { createSitemapRouter } from './endpoints/sitemap.js'
+import { createRobotsRouter } from './endpoints/robots.js'
 import { startNotificationDigest } from './jobs/notificationDigest.js'
 
 const app = express()
+
+// ── Security hardening ────────────────────────────────────────────────────
+// Disable X-Powered-By header (reveals Express)
+app.disable('x-powered-by')
+
+// Security headers for all CMS responses
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+  res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=()')
+  next()
+})
 
 // Parse JSON bodies for all routes (including our custom POST /api/contact)
 app.use(express.json())
@@ -49,6 +67,7 @@ const start = async () => {
   //
   //   POST /api/contact                     Contact form (rate-limited, Zod, Resend)
   //   GET  /api/decisions/search            Full-text search with ts_rank / ts_headline
+  //   GET  /api/decisions/hybrid-search     Hybrid search: FTS + RAG semantic (RRF merge)
   //   GET  /api/search                      Global search across all content types
   //   GET  /api/court-fee/calculate         Court fee calculator
   //   GET  /api/court-fee/types             Proceeding type list for UI dropdowns
@@ -58,15 +77,31 @@ const start = async () => {
   //   GET  /api/rss/news                    RSS feed for published news posts
   //   POST /api/subscribe                   Email subscription creation
   //   GET  /api/unsubscribe                 Email unsubscription
+  //   GET  /api/v1/decisions                Public API — paginated decisions
+  //   GET  /api/v1/decisions/:id            Public API — single decision with full text
+  //   GET  /api/v1/experts                  Public API — expert witness directory
+  //   GET  /api/v1/interpreters             Public API — interpreter directory
+  //   GET  /api/v1/courts                   Public API — courts directory
+  //   GET  /api/v1/statistics               Public API — aggregate counts
+  //   GET  /sitemap.xml                    XML sitemap (all content)
+  //   GET  /robots.txt                     Robots directive + sitemap pointer
   // ---------------------------------------------------------------------------
+
+  // Root-level SEO endpoints — must be before Payload catch-all
+  app.use('/', createRobotsRouter())
+  app.use('/', createSitemapRouter(payload))
+
   app.use('/api', contactRouter)
   app.use('/api', courtFeeRouter)
   app.use('/api', createDecisionsSearchRouter(payload))
+  app.use('/api', createHybridSearchRouter(payload))
   app.use('/api', createGlobalSearchRouter(payload))
   app.use('/api', createJurisdictionRouter(payload))
   app.use('/api', createRssRouter(payload))
   app.use('/api', createPdfExportRouter(payload))
   app.use('/api', createSubscribeRouter(payload))
+  app.use('/api', createStatisticsRouter(payload))
+  app.use('/api', createPublicApiRouter(payload))
 
   startNotificationDigest(payload)
 

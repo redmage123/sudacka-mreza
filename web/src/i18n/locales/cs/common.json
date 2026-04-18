@@ -1,0 +1,807 @@
+{
+  "loading": "Loading...",
+  "error": "Error",
+  "notFound": "Page not found",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "search": "Hledat",
+  "filter": "Filter",
+  "clear": "Clear",
+  "more": "More",
+  "less": "Less",
+  "close": "Close",
+  "open": "Open",
+  "download": "Download",
+  "share": "Share",
+  "print": "Print",
+  "page": "Page",
+  "of": "of",
+  "results": "results",
+  "noResults": "No results found",
+  "verified": "Verified",
+  "saveDecision": "Save decision",
+  "savedDecision": "Decision saved",
+  "loginRequired": "Log in to view contact details",
+  "copyright": "Sudačka Mreža",
+  "allRightsReserved": "All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "accessibility": "Accessibility",
+  "donate": "Donate",
+  "home": {
+    "hero": {
+      "headline": "Legal information for everyone",
+      "subtitle": "Case law, expert witnesses, interpreters and courts in one place.",
+      "cta": "Search case law"
+    },
+    "sections": {
+      "decisions": "Case Law",
+      "decisionsDesc": "Search thousands of court decisions",
+      "experts": "Expert Witnesses",
+      "expertsDesc": "Find a certified expert witness",
+      "interpreters": "Interpreters",
+      "interpretersDesc": "Find an interpreter by language pair",
+      "courts": "Courts",
+      "courtsDesc": "Court directory and contacts",
+      "bankruptcy": "Bankruptcy Portal",
+      "bankruptcyDesc": "Listings, administrators and laws",
+      "calculator": "Court Fees",
+      "calculatorDesc": "Calculate court costs"
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "All news",
+      "readMore": "Read more",
+      "noNewsYet": "No news articles yet. Check back soon."
+    },
+    "stats": {
+      "decisions": "Court decisions",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters",
+      "courts": "Courts"
+    },
+    "donors": {
+      "title": "Donors & Partners"
+    }
+  },
+  "decisions": {
+    "searchTitle": "Search case law",
+    "searchPlaceholder": "Search by keyword...",
+    "filterCourt": "Court",
+    "filterCourtAll": "All courts",
+    "filterDateFrom": "Date from",
+    "filterDateTo": "Date to",
+    "filterType": "Decision type",
+    "type": {
+      "all": "All types",
+      "vts": "VTS decisions",
+      "esljp": "ECtHR / ECJ",
+      "general": "General decisions"
+    },
+    "clearFilters": "Clear filters",
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "noResults": "No court decisions match your search.",
+    "semanticMatch": "Semantic match"
+  },
+  "experts": {
+    "searchTitle": "Expert Witnesses",
+    "searchPlaceholder": "Search by name...",
+    "filterSpeciality": "Speciality",
+    "filterSpecialityAll": "All specialities",
+    "filterCounty": "County",
+    "filterCountyAll": "All counties",
+    "noResults": "No expert witnesses match your search.",
+    "detail": {
+      "role": "Expert Witness",
+      "specialities": "Speciality areas",
+      "spokenLanguages": "Languages",
+      "county": "County",
+      "assignedCourts": "Assigned courts",
+      "contactDetails": "Contact details"
+    }
+  },
+  "interpreters": {
+    "searchTitle": "Interpreters",
+    "searchPlaceholder": "Search by name...",
+    "filterLanguage": "Language pair",
+    "filterLanguageAll": "All language pairs",
+    "noResults": "No interpreters match your search.",
+    "detail": {
+      "role": "Interpreter",
+      "languagePairs": "Language pairs",
+      "county": "County",
+      "contactDetails": "Contact details"
+    }
+  },
+  "courts": {
+    "searchTitle": "Courts",
+    "tab": {
+      "opcinski": "Municipal",
+      "zupanijski": "County",
+      "trgovacki": "Commercial",
+      "prekrsajni": "Misdemeanour",
+      "highCommercial": "High Commercial",
+      "vrhovni": "Supreme",
+      "upravni": "Administrative",
+      "ustavni": "Constitutional",
+      "echr": "Evropský soud pro lidská práva"
+    },
+    "noResults": "No courts in this category.",
+    "fields": {
+      "address": "Address",
+      "phone": "Phone",
+      "president": "President"
+    },
+    "officialNameNote": "Official Croatian court name"
+  },
+  "nav": {
+    "home": "Domů",
+    "decisionsSearch": "Hledat rozhodnutí"
+  },
+  "underConstruction": "This page is under construction.",
+  "pwa": {
+    "installApp": "Install app",
+    "title": "Install Sudačka Mreža",
+    "description": "Quick access to case law, even offline.",
+    "install": "Install",
+    "noThanks": "No thanks"
+  },
+  "map": {
+    "title": "Mapa soudů",
+    "courtType": {
+      "municipal": "Okresní",
+      "county": "Krajský",
+      "commercial": "Obchodní",
+      "misdemeanour": "Přestupkový",
+      "administrative": "Správní"
+    },
+    "legend": "Legenda",
+    "loading": "Načítání soudů...",
+    "filterAll": "Všechny soudy",
+    "filterMunicipal": "Okresní",
+    "filterCounty": "Krajský",
+    "filterCommercial": "Obchodní",
+    "filterMisdemeanour": "Přestupkový",
+    "filterAdministrative": "Správní",
+    "viewDetails": "Zobrazit podrobnosti",
+    "courts": "soudy",
+    "error": "Nelze načíst data soudů. Zkuste to prosím znovu."
+  },
+  "jurisdiction": {
+    "title": "Vyhledávač příslušnosti",
+    "subtitle": "Najděte příslušný soud pro váš případ na základě místa a typu případu.",
+    "cityLabel": "Město nebo obec",
+    "cityPlaceholder": "např. Záhřeb, Split, Rijeka...",
+    "caseTypeLabel": "Typ případu",
+    "caseType": {
+      "civilMinor": "Občanský (drobný) — Okresní soud",
+      "criminalMinor": "Trestní (do 5 let) — Okresní soud",
+      "criminalSerious": "Trestní (5+ let) — Krajský soud",
+      "commercial": "Obchodní — Obchodní soud",
+      "misdemeanour": "Přestupek — Přestupkový soud",
+      "administrative": "Správní — Správní soud"
+    },
+    "results": "Výsledky",
+    "noResults": "Pro toto místo a typ případu nebyl nalezen odpovídající soud.",
+    "noResultsHint": "Zkuste jiný název města nebo se podívejte do úplného adresáře soudů.",
+    "viewCourtsDirectory": "Zobrazit adresář soudů"
+  },
+  "calculator": {
+    "title": "Soudní poplatky",
+    "selectCaseType": "Typ případu",
+    "caseType": {
+      "civil": "Občanský spor",
+      "criminal": "Trestní řízení",
+      "commercial": "Obchodní spor",
+      "administrative": "Správní spor",
+      "nonContentious": "Nesporné řízení"
+    },
+    "claimValue": "Hodnota nároku (EUR)",
+    "calculate": "Vypočítat poplatek",
+    "filingFee": "Poplatek za podání",
+    "appealFee": "Poplatek za odvolání",
+    "enforcementFee": "Poplatek za výkon rozhodnutí",
+    "fixedFee": "Pevné poplatky",
+    "exemptionsTitle": "Osvobození od poplatků",
+    "exemption1": "Příjemci sociální péče jsou osvobozeni od všech soudních poplatků.",
+    "exemption2": "Nezletilí jsou osvobozeni od soudních poplatků v řízeních týkajících se jejich práv.",
+    "exemption3": "Pracovníci v pracovních sporech s hodnotou nároku do 2 650 € jsou osvobozeni.",
+    "paymentTitle": "Způsoby platby",
+    "payment1": "Bankovní převod na oficiální účet soudu",
+    "payment2": "Portál e-Pristojbe (elektronická platba)",
+    "payment3": "Pokladna soudu (osobně na soudu)",
+    "legalBasis": "Právní základ",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ve znění pozdějších předpisů). Všechny částky přepočteny na EUR od 01.01.2023.",
+    "minorOffenses": "Drobné přestupky",
+    "seriousOffenses": "Závažné trestné činy"
+  },
+  "jurisdictionFinder": {
+    "title": "Najděte svůj soud",
+    "description": "Zadejte své město a typ případu a zjistěte, který soud je příslušný.",
+    "cityLabel": "Vaše město nebo obec",
+    "cityPlaceholder": "např. Záhřeb, Split, Osijek...",
+    "caseTypeLabel": "Typ případu",
+    "caseType": {
+      "civilMinor": "Občanský spor (do 2 654 €)",
+      "civilMajor": "Občanský spor (nad 2 654 €)",
+      "criminalMinor": "Trestní (drobný přestupek)",
+      "criminalSerious": "Trestní (závažný trestný čin)",
+      "commercial": "Obchodní spor",
+      "misdemeanour": "Přestupek / dopravní přestupek",
+      "administrative": "Spor se státním úřadem"
+    },
+    "find": "Najít soud",
+    "result": "Příslušný soud",
+    "noResult": "Pro toto město nebyl nalezen žádný soud. Zkuste procházet adresář soudů.",
+    "browseAll": "Procházet všechny soudy",
+    "viewProfile": "Zobrazit profil soudu"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Overview of court decisions, courts, expert witnesses and interpreters in the Republic of Croatia.",
+    "loadError": "Unable to load statistics. Please try again.",
+    "noData": "No data available.",
+    "footer": "Data refreshes every hour. Charts show only decisions with a date and court assigned.",
+    "loading": {
+      "ariaLabel": "Loading statistics"
+    },
+    "totals": {
+      "ariaLabel": "Summary totals"
+    },
+    "metric": {
+      "decisions": "Court decisions",
+      "courts": "Courts",
+      "experts": "Expert witnesses",
+      "interpreters": "Interpreters"
+    },
+    "chart": {
+      "monthlyTrend": "Monthly trend (last 24 months)",
+      "byType": "Decisions by type",
+      "perCourtYear": "Decisions by court and year (top 8 courts, last 5 years)",
+      "topCourts": "Most active courts",
+      "bySpecialty": "Expert witnesses by speciality area"
+    },
+    "table": {
+      "ariaLabel": "Ranking of most active courts",
+      "court": "Court",
+      "decisions": "Decisions",
+      "share": "Share"
+    },
+    "series": {
+      "decisions": "Decisions",
+      "experts": "Expert witnesses"
+    },
+    "type": {
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "administrative": "Administrative",
+      "constitutional": "Constitutional",
+      "ecj": "ECJ",
+      "ecthr": "ECtHR",
+      "unknown": "Other"
+    }
+  },
+  "library": {
+    "title": "My Library",
+    "subtitle": "Your saved decisions and annotations",
+    "loginRequired": "You must be logged in to access your library.",
+    "login": "Log in",
+    "tabsLabel": "Library categories",
+    "tab": {
+      "bookmarks": "Saved decisions",
+      "annotations": "Annotations"
+    },
+    "noBookmarks": "You haven't saved any decisions yet.",
+    "searchDecisions": "Search decisions",
+    "loadError": "Error loading library.",
+    "addedOn": "Added",
+    "removeBookmark": "Remove saved decision",
+    "annotationsHint": "Annotations are shown directly on decision pages.",
+    "annotationsInstructions": "Select text on a decision page and add an annotation.",
+    "defaultFolder": "General"
+  },
+  "bankruptcy": {
+    "title": "Bankruptcy Portal",
+    "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
+    "overview": {
+      "title": "What is Bankruptcy?",
+      "text": "Bankruptcy (stečaj) in Croatia is regulated by the Stečajni zakon (NN 71/15, 104/17, 36/22). It is a legal procedure initiated when a debtor becomes insolvent or over-indebted. The goal is to collectively satisfy creditors through liquidation of assets or financial restructuring."
+    },
+    "sections": {
+      "listings": "Bankruptcy Listings",
+      "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "administrators": "Administrators",
+      "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
+      "legislation": "Legislation",
+      "legislationDesc": "Stečajni zakon and related EU directives"
+    },
+    "process": {
+      "title": "The Bankruptcy Process",
+      "step1": "1. Petition — Filed by debtor or creditor with the commercial court",
+      "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
+      "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
+      "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    }
+  },
+  "administrators": {
+    "title": "Bankruptcy Administrators",
+    "subtitle": "Licensed insolvency administrators registered in Croatia",
+    "searchPlaceholder": "Search by name or licence number...",
+    "noResults": "No bankruptcy administrators are currently registered in the system.",
+    "loadError": "Unable to load administrators. Please try again.",
+    "fields": {
+      "name": "Name",
+      "licenseNo": "Licence No.",
+      "contact": "Contact",
+      "assignedCourts": "Assigned courts"
+    }
+  },
+  "laws": {
+    "title": "Bankruptcy Legislation",
+    "subtitle": "Key Croatian and EU laws governing insolvency and bankruptcy proceedings",
+    "national": {
+      "title": "Croatian Legislation"
+    },
+    "eu": {
+      "title": "EU Legislation"
+    },
+    "readFull": "Read full text",
+    "officialGazette": "Official Gazette",
+    "lastUpdated": "Last amended"
+  },
+  "legalAid": {
+    "title": "Free Legal Aid",
+    "intro": "The Republic of Croatia provides free legal aid (besplatna pravna pomoć) to persons who cannot afford legal representation. The system is governed by the Zakon o besplatnoj pravnoj pomoći (NN 143/13, 98/19).",
+    "primary": {
+      "title": "Primary Legal Aid",
+      "desc": "General legal information, advice, and assistance filling in forms for administrative and judicial proceedings. Provided free of charge without means testing."
+    },
+    "secondary": {
+      "title": "Secondary Legal Aid",
+      "desc": "Full legal representation in court proceedings, including a lawyer appointed by the Croatian Bar Association. Subject to a means test and case merits assessment."
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "income": "Household income does not exceed the threshold (approx. €441/month per member). Special categories include: victims of domestic violence, asylum seekers, persons with disabilities, and minors."
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "step1": "1. Submit application form to your county court (županijski sud) or Ministry of Justice office",
+      "step2": "2. Attach proof of income (employer certificate, social welfare confirmation)",
+      "step3": "3. The court decides within 15 days; approved applicants receive a referral to a licensed lawyer"
+    },
+    "offices": {
+      "title": "County Legal Aid Offices",
+      "contactHint": "Contact your county court or the Ministry of Justice regional office for appointments."
+    },
+    "officialSource": "Official source: Ministry of Justice (pravosudje.gov.hr)"
+  },
+  "galleries": {
+    "title": "Photo Galleries",
+    "subtitle": "Images and media from judicial events and court facilities",
+    "noGalleries": "No galleries have been published yet. Check back soon.",
+    "viewGallery": "View gallery",
+    "loadError": "Unable to load galleries. Please try again."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with the Sudačka Mreža team",
+    "form": {
+      "name": "Your name",
+      "email": "Your email address",
+      "subject": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or feedback (at least 20 characters)...",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Your message has been sent. We'll get back to you within 2 business days.",
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorMinLength": "Message must be at least 20 characters."
+    },
+    "org": {
+      "title": "Organisation",
+      "address": "Savska cesta 41, 10000 Zagreb, Croatia",
+      "email": "info@sudacka-mreza.hr"
+    },
+    "social": {
+      "title": "Follow us"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and updates from the Croatian judicial system",
+    "noNews": "No news articles have been published yet. Check back soon.",
+    "readMore": "Read more",
+    "publishedOn": "Published",
+    "loadError": "Unable to load news. Please try again."
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Access your saved decisions and annotations",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "comingSoon": "Authentication is coming soon. This form is a preview."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Sudačka Mreža to save decisions and annotate case law",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Your role",
+      "roleOptions": {
+        "lawyer": "Lawyer",
+        "judge": "Judge",
+        "researcher": "Researcher / Academic",
+        "other": "Other"
+      },
+      "terms": "I agree to the",
+      "termsLink": "terms of service",
+      "submit": "Create account",
+      "comingSoon": "Registration is coming soon. This form is a preview.",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    },
+    "form": {
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorPasswordMatch": "Passwords do not match.",
+      "errorMinPassword": "Password must be at least 8 characters."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "intro1": "Sudačka mreža (Judicial Network) is a non-profit association that for over twenty years has been collecting, processing, and publishing publicly relevant data from the judicial system of the Republic of Croatia. Our goal is judicial transparency and the accessibility of legal information to all citizens.",
+    "intro2": "The platform offers searchable databases of case law (Supreme Court, High Commercial Court, European Court of Human Rights), a court directory with an interactive jurisdiction map, a directory of court experts and interpreters, bankruptcy estate sale listings, and an overview of relevant legislation.",
+    "intro3": "All services are available free of charge. Registration is only required to access contact details of court professionals.",
+    "donors": {
+      "title": "Donors and Partners",
+      "subtitle": "We thank the organisations that over the years have supported the development and maintenance of Sudačka mreža."
+    }
+  },
+  "documents": {
+    "title": "Document Library",
+    "subtitle": "Official forms, fee schedules, regulations and guidelines available for download",
+    "noDocuments": "No documents have been published yet. Check back soon.",
+    "loadError": "Unable to load documents. Please try again.",
+    "filterAll": "All categories",
+    "publishedOn": "Published"
+  },
+  "media": {
+    "title": "Press & Media",
+    "subtitle": "Press resources, logo files, releases and media contact information",
+    "noMedia": "No press materials have been published yet.",
+    "noMediaHint": "Contact our press office for logos, images and press releases.",
+    "loadError": "Unable to load media resources. Please try again.",
+    "logos": {
+      "title": "Logos & Branding",
+      "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
+    },
+    "press": {
+      "title": "Press Releases",
+      "desc": "Official statements and announcements published by Sudačka Mreža."
+    },
+    "contact": {
+      "title": "Press Contact",
+      "desc": "For interview requests, photo permissions or background information, contact our press team."
+    }
+  },
+  "courtPerformance": {
+    "title": "Court Performance Dashboard",
+    "description": "Key performance indicators by court: average case duration, backlog, and clearance rate.",
+    "filterAll": "All courts",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "County",
+    "filterCommercial": "Commercial",
+    "filterMisdemeanour": "Misdemeanour",
+    "metric": {
+      "avgClearance": "Avg. clearance rate",
+      "avgDuration": "Avg. case duration",
+      "totalBacklog": "Total backlog",
+      "courtsShown": "Courts shown"
+    },
+    "chart": {
+      "clearanceRate": "Clearance rate by court (%)",
+      "clearanceRateSeries": "Clearance rate",
+      "backlog": "Backlog by court (cases)",
+      "backlogSeries": "Backlog",
+      "durationTrend": "Avg. case duration trend by court type (days)"
+    },
+    "table": {
+      "court": "Court",
+      "type": "Type",
+      "clearance": "Clearance rate",
+      "backlog": "Backlog",
+      "avgDuration": "Avg. duration (days)",
+      "ariaLabel": "Court performance table"
+    },
+    "type": {
+      "municipal": "Municipal",
+      "county": "County",
+      "commercial": "Commercial",
+      "misdemeanour": "Misdemeanour"
+    },
+    "source": "Data is illustrative and based on 2024 averages. Official data is available on the Ministry of Justice website.",
+    "days": "days"
+  },
+  "docgen": {
+    "title": "Generátor právních dokumentů",
+    "subtitle": "Vyplňte formulář a stáhněte hotový chorvatský právní dokument ve formátu PDF",
+    "selectType": "Vyberte typ dokumentu",
+    "type": {
+      "tuzba": "Žaloba",
+      "zalba": "Odvolání",
+      "prigovor": "Námitka",
+      "ovrsni": "Návrh na exekuci"
+    },
+    "fields": {
+      "plaintiff_name": "Jméno a příjmení žalobce",
+      "plaintiff_address": "Adresa žalobce",
+      "defendant_name": "Jméno a příjmení žalovaného",
+      "defendant_address": "Adresa žalovaného",
+      "appellant_name": "Jméno a příjmení odvolatele",
+      "appellant_address": "Adresa odvolatele",
+      "objector_name": "Jméno a příjmení namitatele",
+      "objector_address": "Adresa namitatele",
+      "creditor_name": "Jméno a příjmení oprávněného",
+      "creditor_address": "Adresa oprávněného",
+      "debtor_name": "Jméno a příjmení povinného",
+      "debtor_address": "Adresa povinného",
+      "court_name": "Příslušný soud",
+      "case_number": "Číslo jednací",
+      "claim_value": "Hodnota předmětu sporu (EUR)",
+      "claim_amount": "Výše pohledávky (EUR)",
+      "claim_description": "Žalobní nárok / Petit",
+      "facts": "Skutkové okolnosti / Odůvodnění",
+      "legal_basis": "Právní základ (volitelné)",
+      "appeal_grounds": "Důvody odvolání",
+      "appeal_request": "Odvolací návrh",
+      "judgment_date": "Datum napadeného rozhodnutí",
+      "objection_grounds": "Důvody námitky",
+      "enforcement_title": "Exekuční titul",
+      "enforcement_means": "Způsob provedení (volitelné)",
+      "date": "Datum",
+      "city": "Místo"
+    },
+    "generate": "Generovat PDF",
+    "reset": "Nový dokument",
+    "required": "Povinné pole",
+    "disclaimer": "Tento generátor slouží pouze informačním účelům a nepředstavuje právní poradenství.",
+    "generating": "Generování...",
+    "nav": {
+      "back": "Zpět na dokumenty"
+    }
+  },
+  "deadlines": {
+    "title": "Kalkulačka procesních lhůt",
+    "subtitle": "Vypočítejte procesní lhůty podle druhu řízení a data podání.",
+    "selectCaseType": "Druh řízení",
+    "filingDate": "Datum podání",
+    "filingDatePlaceholder": "Vyberte datum",
+    "timelineTitle": "Procesní lhůty",
+    "noDeadlines": "Zadejte datum podání pro zobrazení lhůt.",
+    "days": "dní",
+    "hours": "hodin",
+    "fromFiling": "od podání",
+    "overdue": "Po lhůtě",
+    "today": "Dnes",
+    "statuteTitle": "Promlčení",
+    "statute": {
+      "civil": "Obecné promlčení: 5 let. Deliktní odpovědnost: 3 roky subjektivní, 5 let objektivní.",
+      "criminal": "Promlčení trestního stíhání: 5–25 let dle maximálního trestu.",
+      "commercial": "Obchodní pohledávky: 3 roky. Obecné promlčení pro podnikatele: 5 let.",
+      "administrative": "Lhůta pro podání správní žaloby: 30 dní od doručení konečného rozhodnutí."
+    },
+    "legalBasis": "Právní základ",
+    "legalBasisCivil": "Občanský soudní řád (ZPP, konsolidované znění)",
+    "legalBasisCriminal": "Trestní řád (ZKP, ve znění novel)",
+    "legalBasisCommercial": "Občanský soudní řád – aplikace před obchodními soudy",
+    "legalBasisAdministrative": "Správní řád a zákon o správním soudnictví",
+    "disclaimer": "Tyto lhůty jsou informativní a nepředstavují právní poradenství. Pro konkrétní případy se obraťte na advokáta.",
+    "step": {
+      "filing": "Podání žaloby / návrhu",
+      "responseToLawsuit": "Lhůta pro odpověď na žalobu",
+      "preparatoryHearing": "Přípravné jednání",
+      "mainHearing": "Hlavní líčení",
+      "judgmentAppeal": "Lhůta pro odvolání proti rozsudku",
+      "secondInstanceDecision": "Rozhodnutí odvolacího soudu",
+      "policeDetentionMax": "Maximální policejní vazba",
+      "indictment": "Lhůta pro podání obžaloby",
+      "indictmentObjection": "Námitka k obžalobě",
+      "criminalAppeal": "Odvolací lhůta",
+      "paymentOrderObjection": "Odpor proti platebnímu rozkazu",
+      "commercialResponse": "Odpověď na žalobu (obchodní)",
+      "commercialHearing": "Jednání před obchodním soudem",
+      "commercialAppeal": "Odvolací lhůta (obchodní)",
+      "adminRequest": "Správní žádost podána",
+      "adminDecision": "Lhůta pro správní rozhodnutí",
+      "adminObjection": "Odvolání ve správním řízení",
+      "adminSecondInstance": "Rozhodnutí odvolacího orgánu",
+      "adminCourtSuit": "Lhůta pro správní žalobu"
+    },
+    "legend": {
+      "filing": "Podání",
+      "deadline": "Lhůta",
+      "hearing": "Jednání",
+      "decision": "Rozhodnutí",
+      "overdue": "Po lhůtě"
+    }
+  },
+  "cookiePolicy": "Zásady cookies",
+  "termsOfService": "Podmínky použití",
+  "judges": {
+    "detail": {
+      "role": "Soudce",
+      "court": "Soud",
+      "appointmentDate": "Datum jmenování",
+      "specialization": "Specializace",
+      "status": "Stav",
+      "contact": "Kontaktní údaje"
+    }
+  },
+  "legalNews": {
+    "title": "Právní zprávy",
+    "subtitle": "Přehled aktuálních právních zpráv z domácích a evropských právních zdrojů.",
+    "breadcrumbNews": "Novinky",
+    "filterBySource": "Filtrovat podle zdroje",
+    "filterAll": "Všechny zdroje",
+    "readMore": "Číst více",
+    "noResults": "Pro vybraný zdroj nejsou k dispozici žádné zprávy.",
+    "disclaimer": "Zprávy jsou čerpány z externích zdrojů. Sudačka mreža neodpovídá za přesnost obsahu třetích stran."
+  },
+  "cookies": {
+    "ariaLabel": "Oznámení o souborech cookie",
+    "title": "Soubory cookie a soukromí",
+    "description": "Používáme soubory cookie, abychom zajistili správné fungování webových stránek a s vaším souhlasem shromažďovali anonymní analytické údaje pro zlepšení služeb.",
+    "acceptAll": "Přijmout vše",
+    "rejectNonEssential": "Odmítnout nepodstatné",
+    "customize": "Přizpůsobit",
+    "customizeTitle": "Nastavení souborů cookie",
+    "essential": "Základní soubory cookie",
+    "essentialDesc": "Nezbytné pro správné fungování webových stránek. Jsou vždy aktivní a nelze je vypnout.",
+    "analytics": "Analytické soubory cookie",
+    "analyticsDesc": "Pomáhají nám rozumět tomu, jak uživatelé web používají. Všechna data jsou anonymní.",
+    "alwaysOn": "Vždy aktivní",
+    "savePreferences": "Uložit nastavení",
+    "policyTitle": "[cs] Pravila o kolačićima",
+    "policyLastUpdated": "[cs] Zadnje ažuriranje: 28. ožujka 2026.",
+    "policyIntro": "[cs] Ova Pravila o kolačićima objašnjavaju što su kolačići (cookies), koje kolačiće koristimo, u koje svrhe i kako ih možete kontrolirati. Korištenjem naše platforme pristajete na upotrebu kolačića opisanih u ovom dokumentu.",
+    "policySection1": {
+      "title": "[cs] 1. Što su kolačići?",
+      "p1": "[cs] Kolačići su male tekstualne datoteke koje se pohranjuju na Vašem uređaju kada posjetite web stranicu. Omogućuju stranici da zapamti Vaše postavke i poboljšaju Vaše korisničko iskustvo. Kolačići ne mogu pokretati programe niti prenositi viruse."
+    },
+    "policySection2": {
+      "title": "[cs] 2. Koje kolačiće koristimo"
+    },
+    "tableColName": "[cs] Naziv",
+    "tableColPurpose": "[cs] Svrha",
+    "tableColCategory": "[cs] Kategorija",
+    "tableColRetention": "[cs] Trajanje",
+    "row1Purpose": "[cs] Pamti odabrani jezik sučelja",
+    "row1Retention": "[cs] 12 mjeseci",
+    "row2Purpose": "[cs] Pohranjuje Vaše postavke privole za kolačiće",
+    "row2Retention": "[cs] 12 mjeseci",
+    "row3Purpose": "[cs] Pamti odabrani svjetlosni/tamni način prikaza",
+    "row3Retention": "[cs] 12 mjeseci",
+    "row4Purpose": "[cs] Anonimna analitika posjećenosti (Google Analytics) — samo uz privolu",
+    "row4Retention": "[cs] 26 mjeseci",
+    "policySection3": {
+      "title": "[cs] 3. Upravljanje kolačićima",
+      "p1": "[cs] Možete kontrolirati i/ili brisati kolačiće prema Vašim željama. Pogledajte upute za upravljanje kolačićima u popularnim preglednicima:",
+      "li1": "[cs] Google Chrome: Postavke → Privatnost i sigurnost → Kolačići",
+      "li2": "[cs] Mozilla Firefox: Postavke → Privatnost i sigurnost → Kolačići i podaci stranica",
+      "li3": "[cs] Safari: Preference → Privatnost → Upravljanje podacima web stranica",
+      "li4": "[cs] Microsoft Edge: Postavke → Kolačići i dozvole stranica"
+    },
+    "policySection4": {
+      "title": "[cs] 4. Više informacija",
+      "p1": "[cs] Isključivanje osnovnih kolačića može narušiti funkcionalnost platforme. Analitičke kolačiće možete isključiti u bilo koje vrijeme putem banera za privolu.",
+      "p2": "[cs] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
+    }
+  },
+  "privacy": {
+    "title": "Zásady ochrany osobních údajů",
+    "lastUpdated": "Poslední aktualizace: 28. března 2026.",
+    "intro": "Sudačka mreža (dále v textu: „my“, „náš“, „Sudačka mreža“) se věnuje ochraně Vašeho soukromí. Tyto Zásady ochrany osobních údajů popisují, jak shromažďujeme, používáme a chráníme Vaše osobní údaje v souladu s Nařízením (EU) 2016/679 (GDPR) a Zákonem o provádění obecného nařízení o ochraně osobních údajů (NN 42/18).",
+    "section1": {
+      "title": "1. Jaké údaje jsou shromažďovány",
+      "p1": "Shromažďujeme následující kategorie osobních údajů v závislosti na způsobu používání naší platformy:",
+      "li1": "Účtové údaje: jméno, e-mailová adresa a heslo (hashované) při registraci",
+      "li2": "Údaje o používání: navštívené stránky, vyhledávání a zaznamenaná rozhodnutí",
+      "li3": "Údaje o zařízení: IP adresa, typ prohlížeče a operační systém",
+      "li4": "Údaje z kontaktního formuláře: jméno, e-mail a obsah zprávy"
+    },
+    "section2": {
+      "title": "2. Právní základ zpracování",
+      "p1": "Vaše osobní údaje zpracováváme na základě následujících právních základů:",
+      "li1": "Vykonávání smlouvy (čl. 6 odst. 1 písm. b) GDPR): za poskytování služeb uživatelům s účtem",
+      "li2": "Legitimní zájem (čl. 6 odst. 1 písm. f) GDPR): pro zajištění bezpečnosti platformy a zlepšení služeb",
+      "li3": "Souhlas (čl. 6 odst. 1 písm. a) GDPR): pro analytické soubory cookie (pouze na základě Vašeho souhlasu)"
+    },
+    "section3": {
+      "title": "3. Doba uchovávání údajů",
+      "p1": "Vaše osobní údaje uchováváme pouze po dobu nezbytnou pro účely, pro které byly shromážděny:",
+      "li1": "Účtové údaje: po dobu existence uživatelského účtu + 30 dní po jeho smazání",
+      "li2": "Záznamy přístupu (IP adresy): 90 dní",
+      "li3": "Údaje z kontaktního formuláře: 2 roky od přijetí"
+    },
+    "section4": {
+      "title": "4. Vaše práva",
+      "p1": "Jako dotyčná osoba máte podle GDPR následující práva:",
+      "li1": "Právo na přístup k údajům: můžete požádat o kopii svých osobních údajů, které o Vás uchováváme",
+      "li2": "Právo na opravu: můžete požádat o opravu nepřesných údajů",
+      "li3": "Právo na výmaz (právo být zapomenut): můžete požádat o výmaz údajů, které již nemusí být uchovávány",
+      "li4": "Právo na přenositelnost údajů: můžete požádat o poskytnutí svých údajů ve strukturovaném, strojově čitelném formátu",
+      "li5": "Právo na vznesení námitky: můžete vznést námitku proti zpracování údajů na základě legitimního zájmu",
+      "p2": "Žádosti o realizaci práv zasílejte na: info@sudacka-mreza.hr. Na žádost odpovídáme do 30 dnů."
+    },
+    "section5": {
+      "title": "5. Dozorový orgán — AZOP",
+      "p1": "Pokud se domníváte, že zpracování Vašich osobních údajů porušuje GDPR, máte právo podat stížnost Úřadu pro ochranu osobních údajů (AZOP):",
+      "azopName": "[cs] Agencija za zaštitu osobnih podataka (AZOP)",
+      "azopAddress": "[cs] Martićeva 14, 10000 Zagreb, Hrvatska",
+      "azopEmail": "[cs] E-pošta: azop@azop.hr",
+      "azopPhone": "[cs] Telefon: +385 1 4609 000"
+    },
+    "section6": {
+      "title": "[cs] 6. Izmjene Pravila privatnosti",
+      "p1": "[cs] Zadržavamo pravo izmjene ovih Pravila. O svim značajnim izmjenama obavijestit ćemo Vas e-poštom ili objavom na platformi najmanje 14 dana prije stupanja na snagu. Nastavak korištenja platforme nakon isteka tog roka smatra se prihvaćanjem izmijenjenih Pravila."
+    }
+  },
+  "terms": {
+    "title": "[cs] Uvjeti korištenja",
+    "lastUpdated": "[cs] Zadnje ažuriranje: 28. ožujka 2026.",
+    "intro": "[cs] Dobrodošli na Sudačku mrežu. Korištenjem ove platforme prihvaćate sljedeće Uvjete korištenja. Molimo pažljivo pročitajte ovaj dokument prije korištenja usluge.",
+    "section1": {
+      "title": "[cs] 1. Opis usluge",
+      "p1": "[cs] Sudačka mreža je neprofitna online platforma koja pruža pristup javnim pravosudnim informacijama u Republici Hrvatskoj: sudska praksa, registar sudova, direktorij vještaka i tumača, stečajni oglasi i pravni sadržaji.",
+      "p2": "[cs] Svi sadržaji na platformi dostupni su isključivo u informativne svrhe i ne predstavljaju pravni savjet. Za konkretne pravne savjete obratite se ovlaštenom odvjetniku."
+    },
+    "section2": {
+      "title": "[cs] 2. Korisnički računi",
+      "p1": "Registrací uživatelského účtu přijímáte následující závazky:",
+      "li1": "Při registraci uveďte přesné a úplné údaje",
+      "li2": "Chraňte důvěrnost svého hesla a nesdílejte přístup ke svému účtu s třetími osobami",
+      "li3": "O neoprávněném použití Vašeho účtu nás neprodleně informujte na: info@sudacka-mreza.hr"
+    },
+    "section3": {
+      "title": "3. Přípustné užívání",
+      "p1": "Uživatelé se zavazují, že nebudou:",
+      "li1": "Používat platformu k nezákonným účelům nebo k porušování práv třetích osob",
+      "li2": "Využívat automatizované nástroje (boty, scrapery) k přenosu obsahu bez předchozího písemného souhlasu",
+      "li3": "Publikovat nepravdivý, urážlivý nebo chráněný obsah",
+      "li4": "Pokoušet se o neoprávněný přístup k systémům nebo datům platformy"
+    },
+    "section4": {
+      "title": "4. Duševní vlastnictví",
+      "p1": "Veškerý originální obsah platformy (design, software, text, logotypy) je vlastnictvím Sudačke mreže a je chráněn autorským právem. Veřejné údaje (soudní rozhodnutí, údaje o soudech) jsou dostupné v souladu s předpisy o právu na přístup k informacím."
+    },
+    "section5": {
+      "title": "5. Omezení odpovědnosti",
+      "p1": "Sudačka mreža se usiluje o zajištění přesnosti a aktuálnosti obsahu, ale nezaručuje jeho úplnost ani přesnost. Platforma je poskytována v režimu „tak, jak je“ bez záruk dostupnosti nebo vhodnosti pro konkrétní účel.",
+      "p2": "Sudačka mreža neodpovídá za přímou ani nepřímou škodu vzniklou použitím platformy nebo nemožností přistupovat k platformě."
+    },
+    "section6": {
+      "title": "6. Příslušné právo",
+      "p1": "Na tyto Obchodní podmínky se vztahuje právo Republiky Chorvatsko. Veškeré spory vzniklé v souvislosti s používáním platformy se strany pokusí vyřešit smírně a v případě neúspěchu je příslušným soudem soud v Zagrebu."
+    },
+    "section7": {
+      "title": "7. Změny podmínek",
+      "p1": "Vyhrazujeme si právo měnit tyto Obchodní podmínky. O významných změnách budeme registrované uživatele informovat e-mailem. Pokračování v používání platformy po zveřejnění změn se považuje za přijetí nových Podmínek.",
+      "p2": "Pro dotazy týkající se těchto Podmínek nás kontaktujte na:"
+    }
+  },
+  "docgen.type.tuzba.desc": "Pro zahájení civilního řízení před soudem",
+  "docgen.type.zalba.desc": "Pro odvolání proti soudnímu rozhodnutí u vyššího soudu",
+  "docgen.type.prigovor.desc": "Pro podání námitky proti soudnímu rozhodnutí",
+  "docgen.type.ovrsni.desc": "Pro zahájení exekuce na základě výkonného listu"
+}

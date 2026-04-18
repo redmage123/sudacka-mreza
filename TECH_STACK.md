@@ -1,1095 +1,561 @@
 # Tech Stack Decision
+
 ## Project: Sudačka Mreža — Website Rebuild (GF-GFWEB-002)
 ## Date: 2026-03-21
-## Decision By: Chris Novak (CTO), GigForge Engineering
+## Decision By: Chris Novak (CTO)
 
 ---
 
-## Executive Summary
+### Backend
 
-The owner has selected a **React 19 + Vite 6 + React Router 7 + Payload CMS 3 + PostgreSQL 16** stack. This document translates that decision into a complete, opinionated build specification: every file, every endpoint, every dependency, every port. The engineer who follows this document should be able to build without ambiguity.
+- **Language: TypeScript (Node.js 22 LTS)**
+  TypeScript is mandated by Payload CMS 3, which is a TypeScript-first framework.
+  It also gives us full type safety across the monorepo — shared types between the
+  CMS collection definitions and the frontend API client, eliminating an entire class
+  of runtime bugs. Node.js 22 LTS is the current long-term-support release with
+  native fetch, stable ESM, and good performance for I/O-heavy CMS workloads.
 
-This is a **two-service architecture**: a static React SPA served by Nginx, and a standalone Payload CMS 3 instance serving REST + GraphQL APIs. Caddy sits in front of both, handling TLS termination and routing. PostgreSQL 16 is the shared database (used exclusively by Payload CMS).
+- **Framework: Payload CMS 3 (standalone, headless)**
+  Payload CMS 3 runs as a standalone Express-based Node.js service with its own
+  admin UI, REST API, GraphQL API, file upload handling, JWT authentication, and
+  Lexical rich text editor. It maps directly to this project's data model (13
+  collections). Running it standalone (not embedded in Next.js) gives clean
+  service separation — the frontend can be rebuilt without touching the CMS, and
+  the CMS can be upgraded independently. No vendor lock-in: Payload is open-source
+  and self-hosted.
 
----
+- **Database: PostgreSQL 16**
+  Client requirement. PostgreSQL 16 is the right choice regardless — it has
+  native full-text search (tsvector + GIN indexes), pg_trgm for trigram similarity
+  search, and JSONB for flexible fields (geolocation, asset metadata). The case law
+  database will grow to thousands of records; PostgreSQL's query planner handles
+  this well. Payload CMS has first-class PostgreSQL support via its
+  `@payloadcms/db-postgres` adapter.
 
-## Backend
-
-### Language
-**TypeScript 5.4** — both the CMS (`cms/`) and any migration/tooling scripts.
-
-Rationale: The owner specified TypeScript. Payload CMS 3 is TypeScript-native. Type safety is essential for a long-lived civic platform that will be handed off and maintained by non-GigForge developers. The shared type system between frontend and backend via generated Payload types eliminates a whole class of integration bugs.
-
-### Framework
-**Payload CMS 3** (standalone mode, `@payloadcms/next` NOT used — pure standalone Express server).
-
-Version: `payload@3.x` with `@payloadcms/db-postgres` adapter.
-
-Rationale: Payload 3 in standalone mode runs as its own Node.js/Express process completely independent of the React frontend. It provides: REST API (auto-generated from collections), GraphQL API, Admin UI, JWT authentication, file uploads with local storage, Lexical rich text editor, access control, webhooks. This is exactly what this project needs — a content management backend with a good admin UI that a non-technical editor (Dražen) can use to manage court decisions, news, expert profiles, etc.
-
-Payload runs on **port 3001** internally.
-
-### Database
-**PostgreSQL 16** with `pg_trgm` and `tsvector` for full-text search.
-
-Connected via Payload's `@payloadcms/db-postgres` adapter (Drizzle ORM under the hood).
-
-Key PostgreSQL extensions required:
-- `pg_trgm` — trigram similarity search (fuzzy name matching for experts/interpreters)
-- `tsvector` — full-text search for case law decisions
-- `unaccent` — accent-insensitive Croatian search (č→c, š→s, ž→z)
-
-Payload manages all schema migrations automatically via Drizzle. No manual `CREATE TABLE` SQL needed.
-
-### Key Libraries (CMS service)
-
-```
-payload@3                    CMS framework
-@payloadcms/db-postgres      PostgreSQL adapter (Drizzle)
-@payloadcms/richtext-lexical Lexical editor for rich text fields
-@payloadcms/storage-local    Local filesystem media storage (Phase 1)
-express                      HTTP server (bundled by Payload standalone)
-sharp                        Image optimisation (required by Payload)
-resend                       Transactional email (contact form, notifications)
-zod                          Request validation on custom endpoints
-typescript@5.4               Language
-tsx                          TypeScript execution (dev)
-```
+- **Key backend libraries:**
+  - `payload@3` — CMS, admin UI, REST API, auth
+  - `@payloadcms/db-postgres` — PostgreSQL adapter for Payload
+  - `@payloadcms/richtext-lexical` — Lexical editor for legal documents
+  - `express` (bundled with Payload) — HTTP server
+  - `zod` — request validation for custom endpoints
+  - `sharp` — image optimisation for expert photos and gallery uploads
 
 ---
 
-## Frontend
+### Frontend
 
-### Framework
-**React 19** with **Vite 6** and **React Router 7** (client-side routing only, no SSR).
+- **Framework: React 19 + Vite 6 + React Router 7**
+  Client requirement. React 19 brings concurrent features and improved Suspense
+  for data loading. Vite 6 provides sub-second HMR and fast production builds.
+  React Router 7 (formerly Remix Router in library mode) gives file-based routing
+  with lazy-loading support, essential for a site with 20+ routes. The frontend is
+  a pure SPA served as static files from Nginx — all data comes from Payload's REST
+  API. This separation keeps concerns clean and makes the frontend independently
+  deployable.
 
-This is a pure SPA. Vite 6 builds static assets into `dist/`. Nginx serves the built assets. All data fetched at runtime from Payload CMS API.
+- **Styling: Tailwind CSS 4**
+  Client requirement. Tailwind CSS 4 (Oxide engine) is a significant performance
+  improvement over v3 — full builds in milliseconds, no JIT vs AOT distinction.
+  The CSS variable–based design token system maps directly to the colour palette
+  and typography scale in SPEC §5.2–5.3. Utility-first approach keeps component
+  styles co-located and eliminates CSS naming conflicts.
 
-**SEO note:** Case law detail pages and key directory pages need to be indexable. Strategy: `vite-plugin-ssg` (static site generation at build time for known routes) + React Helmet Async for `<head>` management. The sitemap is generated as a build step by calling the Payload API and writing `dist/sitemap.xml`.
+- **Build tool: Vite 6**
+  Bundled with the React 19 + Vite template. Rollup-based production builds,
+  native ESM in dev, excellent TypeScript support out of the box.
 
-### Styling
-**Tailwind CSS 4** with CSS custom properties for the design token system.
-
-Tailwind 4 uses a CSS-first configuration approach — design tokens defined in `src/styles/globals.css` using `@theme`. No `tailwind.config.js` file needed.
-
-Typography plugin for legal document body text rendering.
-
-### Build Tool
-**Vite 6** with plugins:
-- `@vitejs/plugin-react` — React 19 support with Fast Refresh
-- `vite-plugin-ssg` — static HTML generation for SEO-critical routes
-- `vite-tsconfig-paths` — TypeScript path aliases
-
-### Key Libraries (Frontend)
-
-```
-react@19                      UI framework
-react-dom@19                  DOM renderer
-react-router@7                Client-side routing
-react-i18next@15              Internationalisation
-i18next@24                    i18n core
-i18next-browser-languagedetector URL path language detection
-leaflet@1.9                   Interactive maps (jurisdiction finder)
-react-leaflet@4               React bindings for Leaflet
-@tanstack/react-query@5       Server state, caching, pagination
-axios@1                       HTTP client for Payload API calls
-react-helmet-async            <head> management for SEO
-@testing-library/react        Component testing
-@testing-library/user-event   User interaction testing
-vitest@2                      Test runner
-@playwright/test              E2E tests
-axe-core                      Accessibility testing
-typescript@5.4                Language
-tailwindcss@4                 Styling
-@tailwindcss/typography       Prose styles for legal text
-lucide-react                  Icon library
-date-fns                      Date formatting (Croatian locale)
-dompurify                     Sanitise Payload rich text HTML output
-```
+- **Key frontend libraries:**
+  - `react@19` + `react-dom@19`
+  - `react-router@7` — routing, lazy loading, nested layouts
+  - `tailwindcss@4` — styling
+  - `react-i18next` + `i18next` — bilingual HR/EN, URL-path language detection
+  - `leaflet@1.9` + `react-leaflet@4` — interactive Croatian jurisdiction map
+  - `@fontsource/inter`, `@fontsource/source-serif-4`, `@fontsource/jetbrains-mono` — self-hosted fonts (GDPR clean, no Google CDN)
+  - `zod` — API response validation
+  - `dompurify` — sanitise Lexical rich text HTML before rendering
+  - `vitest` + `@testing-library/react` + `@testing-library/user-event` — unit and component tests
+  - `playwright` — E2E and visual regression tests
+  - `@axe-core/playwright` — accessibility testing
+  - `@vitejs/plugin-react` — React plugin for Vite
 
 ---
 
-## Infrastructure
+### Infrastructure
 
-### Containerisation
-**Docker Compose** — five core services (four in Phase 1; analytics added in Phase 2).
+- **Containerisation: Docker + Docker Compose**
+  Client requirement. Every service runs in a container. The compose file defines
+  four production services plus an optional analytics service.
 
-### Deployment Strategy
+- **Deployment strategy: Multi-service Docker Compose on a single VPS**
+  Five services:
+  1. `caddy` — HTTPS reverse proxy with auto Let's Encrypt cert renewal
+  2. `web` — Nginx Alpine serving the Vite SPA build (static files)
+  3. `cms` — Payload CMS 3 Node.js process
+  4. `db` — PostgreSQL 16 with pg_trgm extension enabled on first boot
+  5. `analytics` — Umami (self-hosted, cookieless, GDPR-compliant)
 
-Multi-service Docker Compose on a **dedicated VPS** provisioned for Dražen's project (not the GigForge dev server). The target server has no pre-existing port conflicts; Caddy owns ports 80 and 443 directly.
+- **Port mapping:**
 
-```
-caddy        TLS proxy + Let's Encrypt  host :80 + :443
-web          React SPA (Nginx)          internal :80   (no host exposure — Caddy proxies)
-cms          Payload CMS 3 (Node.js)    internal :3001 (no host exposure — Caddy proxies)
-db           PostgreSQL 16              internal :5432  → host :127.0.0.1:5432 (dev only)
-analytics    Plausible CE (Phase 2)     internal :8000 (no host exposure — Caddy proxies /stats)
-```
+  | Service   | Internal | Exposed | Notes |
+  |-----------|----------|---------|-------|
+  | caddy     | 80, 443  | 80, 443 | Public-facing |
+  | web       | 80       | —       | Internal only (Caddy proxy) |
+  | cms       | 3001     | —       | Internal only (Caddy proxy) |
+  | db        | 5432     | —       | Internal only (never exposed) |
+  | analytics | 3000     | —       | Internal only (Caddy proxy at `/stats/`) |
 
-See ADR-0004 for the full deployment strategy rationale.
-
-### Port Mapping
-
-| Service | Internal Port | Host Port | Notes |
-|---------|--------------|-----------|-------|
-| caddy | 80, 443 | 80, 443 | Public-facing TLS terminator |
-| web | 80 | not exposed | Proxied by Caddy (`/` → web:80) |
-| cms | 3001 | not exposed | Proxied by Caddy (`/api`, `/admin`, `/graphql` → cms:3001) |
-| db | 5432 | 127.0.0.1:5432 (dev only) | Localhost-only in dev; never in prod |
-| analytics | 8000 | not exposed | Proxied by Caddy (`/stats` → analytics:8000) |
-
-### Reverse Proxy (Caddy)
-
-`caddy/Caddyfile` — Caddy handles Let's Encrypt automatically, zero-config TLS:
-
-```caddyfile
-sudacka-mreza.hr, www.sudacka-mreza.hr {
-
-    # Payload CMS: API, Admin UI, GraphQL
-    handle /api/* {
-        reverse_proxy cms:3001
-    }
-    handle /admin/* {
-        reverse_proxy cms:3001
-    }
-    handle /graphql {
-        reverse_proxy cms:3001
-    }
-
-    # Self-hosted analytics (Phase 2)
-    handle /stats/* {
-        reverse_proxy analytics:8000
-    }
-
-    # React SPA (catch-all — must be last)
-    handle {
-        reverse_proxy web:80
-    }
-
-    # Rate limiting on sensitive endpoints
-    rate_limit {
-        zone login {
-            match path /api/users/login
-            key {remote_host}
-            events 10
-            window 1m
-        }
-        zone contact {
-            match path /api/contact
-            key {remote_host}
-            events 5
-            window 10m
-        }
-    }
-
-    # Security headers
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        X-Content-Type-Options "nosniff"
-        X-Frame-Options "SAMEORIGIN"
-        Referrer-Policy "strict-origin-when-cross-origin"
-    }
-
-    # URL redirect map (old ASP.NET → new SPA URLs)
-    import redirects.conf
-}
-```
-
-`caddy/Caddyfile.dev` — local development (HTTP only, no TLS):
-
-```caddyfile
-:80 {
-    handle /api/* { reverse_proxy cms:3001 }
-    handle /admin/* { reverse_proxy cms:3001 }
-    handle /graphql { reverse_proxy cms:3001 }
-    handle { reverse_proxy web:80 }
-}
-```
-
-`caddy/redirects.conf` — 301 redirects from old ASP.NET URLs to new SPA URLs (generated by `scripts/migrate/generate-redirects.ts`).
+- **Reverse proxy: Caddy 2**
+  Caddyfile routing rules:
+  ```
+  sudacka-mreza.hr {
+      reverse_proxy /api/*   cms:3001
+      reverse_proxy /admin/* cms:3001
+      reverse_proxy /stats/* analytics:3000
+      reverse_proxy /*       web:80
+  }
+  ```
+  Caddy handles TLS certificate provisioning and renewal automatically via
+  ACME/Let's Encrypt. Rate limits applied at Caddy layer on `/api/users/login`
+  and the contact form endpoint.
 
 ---
 
-## File Structure
+### File Structure
 
-Every file that needs to be created, organised by directory:
+Every file that must be created, organised by directory:
 
 ```
 sudacka-mreza/
-├── docker-compose.yml               # Dev environment (with port exposure)
-├── docker-compose.prod.yml          # Production (no exposed db/cms ports)
-├── .env.example                     # All required env vars documented
-├── .gitignore
-├── README.md
 │
-├── caddy/
-│   ├── Caddyfile                    # Production (HTTPS + Let's Encrypt auto-renew)
-│   ├── Caddyfile.dev                # Dev (HTTP only, no TLS)
-│   └── redirects.conf               # 301 redirects: old ASP.NET URLs → new SPA URLs
+├── docker-compose.yml                        # Dev compose (with volume mounts)
+├── docker-compose.prod.yml                   # Prod compose override (registry images, restart: unless-stopped)
+├── .env.example                              # Root-level env var documentation
+├── TECH_STACK.md                             # This file
+├── SPEC.md                                   # Requirements specification
+├── SPRINT_PLAN.md                            # Agile sprint plan
+├── DEPLOYMENT.md                             # Deployment runbook (authored Sprint 8)
 │
-├── web/                             # React SPA (Vite 6)
-│   ├── Dockerfile
-│   ├── nginx.conf                   # Serve dist/, SPA fallback to index.html
+├── docker/
+│   ├── Caddyfile                             # Caddy reverse proxy + HTTPS config
+│   └── nginx.conf                            # Nginx config for SPA (try_files, gzip, cache headers)
+│
+├── scripts/
+│   ├── deploy.sh                             # Pull latest images, docker compose up -d, run migrations
+│   └── backup.sh                             # pg_dump to dated .sql.gz; keep last 7 days
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml                            # lint → typecheck → vitest → playwright → docker build → GHCR push
+│
+├── docs/
+│   ├── adr/
+│   │   ├── 0001-choice-of-backend-language.md
+│   │   ├── 0002-choice-of-database.md
+│   │   ├── 0003-choice-of-frontend-framework.md
+│   │   ├── 0004-deployment-strategy.md
+│   │   ├── 0005-cms-selection.md
+│   │   ├── 0006-i18n-strategy.md
+│   │   ├── 0007-map-solution.md
+│   │   └── 0008-authentication.md
+│   └── design/
+│       ├── tokens.md                         # Colour palette, typography scale, spacing scale
+│       ├── components.md                     # Component inventory with prop interfaces
+│       ├── wireframes/                       # Lo-fi wireframes (Sprint 0)
+│       │   ├── home.md
+│       │   ├── search.md
+│       │   ├── detail.md
+│       │   ├── directory.md
+│       │   └── contact.md
+│       └── hifi/                             # Hi-fi mockups (Sprints 3–6)
+│           ├── home.png
+│           ├── news.png
+│           ├── contact.png
+│           ├── case-law.png
+│           ├── experts.png
+│           ├── jurisdiction.png
+│           ├── stecaj.png
+│           ├── calculator.png
+│           ├── auth.png
+│           └── gallery.png
+│
+├── web/                                      # React 19 SPA
+│   ├── public/
+│   │   ├── robots.txt                        # Disallow /admin/; allow all public routes
+│   │   ├── favicon.ico
+│   │   └── og-default.png                    # Default Open Graph share image
+│   │
+│   ├── src/
+│   │   ├── main.tsx                          # Entry point — ReactDOM.createRoot + i18n init
+│   │   ├── App.tsx                           # Root component — Router + AuthProvider + ThemeProvider
+│   │   │
+│   │   ├── router/
+│   │   │   └── index.tsx                     # React Router 7 route tree; all 20+ routes lazy-loaded
+│   │   │
+│   │   ├── assets/
+│   │   │   └── croatia-counties.geojson      # GADM Level 2 Croatian county polygons (21 counties)
+│   │   │
+│   │   ├── styles/
+│   │   │   └── globals.css                   # Tailwind @import + CSS custom properties for design tokens
+│   │   │
+│   │   ├── i18n/
+│   │   │   ├── index.ts                      # i18next config: URL-path language detection, namespaces
+│   │   │   ├── hr.json                       # Croatian translations (primary language)
+│   │   │   └── en.json                       # English translations
+│   │   │
+│   │   ├── api/
+│   │   │   ├── client.ts                     # Base fetch: auth headers, locale param, error handling, Zod parse
+│   │   │   ├── types.ts                      # Zod schemas + inferred TypeScript types for all 13 collections
+│   │   │   ├── court-decisions.ts            # getCourtDecisions(), getCourtDecision(id), searchDecisions(params)
+│   │   │   ├── expert-witnesses.ts           # getExpertWitnesses(filters), getExpertWitness(id)
+│   │   │   ├── interpreters.ts               # getInterpreters(filters), getInterpreter(id)
+│   │   │   ├── courts.ts                     # getCourts(type?), getCourt(id)
+│   │   │   ├── state-attorneys.ts            # getStateAttorneys()
+│   │   │   ├── bankruptcy.ts                 # getBankruptcyListings(), getAdministrators(), getLaws(), getPapers()
+│   │   │   ├── news.ts                       # getNewsPosts(page, category), getNewsPost(slug)
+│   │   │   ├── pages.ts                      # getPage(slug)
+│   │   │   ├── galleries.ts                  # getGalleries(type?), getGallery(id)
+│   │   │   ├── documents.ts                  # getDocuments(category?)
+│   │   │   ├── search.ts                     # globalSearch(query, locale): returns grouped results
+│   │   │   └── auth.ts                       # login(email, password), logout(), getMe(), register(data)
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useAuth.ts                    # Consumes AuthContext: user, login(), logout(), isLoading
+│   │   │   └── useBookmarks.ts               # localStorage CRUD for saved case law decisions
+│   │   │
+│   │   ├── context/
+│   │   │   ├── AuthContext.tsx               # JWT user state, persisted in sessionStorage
+│   │   │   └── ThemeContext.tsx              # dark/light mode; prefers-color-scheme default + localStorage override
+│   │   │
+│   │   ├── components/
+│   │   │   ├── ui/
+│   │   │   │   ├── Button.tsx                # primary / secondary / ghost / danger; loading spinner; disabled state
+│   │   │   │   ├── Card.tsx                  # header slot, body, footer slot, optional badge
+│   │   │   │   ├── Badge.tsx                 # court-type and category colour variants
+│   │   │   │   ├── Alert.tsx                 # info / warning / error / success; dismissable; role="alert"
+│   │   │   │   ├── Modal.tsx                 # focus-trap, Escape-to-close, aria-modal, aria-labelledby
+│   │   │   │   ├── Breadcrumb.tsx            # <nav aria-label="breadcrumb"> > ol > li
+│   │   │   │   ├── Pagination.tsx            # numbered + prev/next; aria-current="page"
+│   │   │   │   ├── DataTable.tsx             # sortable (aria-sort), paginated, mobile card fallback
+│   │   │   │   └── SearchBar.tsx             # global typeahead; 300ms debounce; keyboard nav; Escape closes
+│   │   │   │
+│   │   │   ├── layout/
+│   │   │   │   ├── Header.tsx                # logo, NavLink navigation, hamburger (mobile), LanguageSwitch, login button
+│   │   │   │   ├── Footer.tsx                # link columns, social links, copyright, accessibility links
+│   │   │   │   └── LanguageSwitch.tsx        # HR/EN toggle; switches URL path prefix /hr/ vs /en/
+│   │   │   │
+│   │   │   ├── BookmarkButton.tsx            # Save/unsave a court decision; filled/unfilled heart icon
+│   │   │   └── LexicalRenderer.tsx           # Converts Payload Lexical JSON → safe HTML via DOMPurify
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── HomePage.tsx                  # /            Hero, quick-access grid (6 cards), news strip, stats bar
+│   │   │   ├── GlobalSearchResultsPage.tsx   # /pretraga/   Unified results grouped by collection type
+│   │   │   ├── NotFoundPage.tsx              # *            404 fallback
+│   │   │   ├── ContactPage.tsx               # /kontakt/    Form (5 subjects) + Resend email via Payload
+│   │   │   ├── AboutPage.tsx                 # /o-nama/     Lexical layout blocks from CMS pages collection
+│   │   │   ├── FreeLegalAidPage.tsx          # /pravna-pomoc/   Lexical blocks
+│   │   │   ├── DocumentLibraryPage.tsx       # /dokumenti/  Searchable PDFs by category
+│   │   │   ├── CourtFeeCalculatorPage.tsx    # /pristojbe/  Stepped form + calculated result
+│   │   │   │
+│   │   │   ├── news/
+│   │   │   │   ├── NewsListPage.tsx          # /vijesti/    Paginated, category filter
+│   │   │   │   └── NewsDetailPage.tsx        # /vijesti/:slug   Full article, Lexical, OG meta
+│   │   │   │
+│   │   │   ├── case-law/
+│   │   │   │   ├── CaseLawSearchPage.tsx     # /sudska-praksa/pretraga/   Keyword + court + date + type filters
+│   │   │   │   ├── CaseLawDetailPage.tsx     # /sudska-praksa/:id         Full decision, PDF download, bookmark
+│   │   │   │   ├── VTSPage.tsx               # /sudska-praksa/vts/        Filtered to court=VTS
+│   │   │   │   └── ESLJPPage.tsx             # /sudska-praksa/esljp/      Filtered to decision_type=esljp
+│   │   │   │
+│   │   │   ├── experts/
+│   │   │   │   ├── ExpertWitnessListPage.tsx     # /strucnjaci/vjestaci/       Search + speciality + location
+│   │   │   │   ├── ExpertWitnessDetailPage.tsx   # /strucnjaci/vjestaci/:id    Profile, verified badge
+│   │   │   │   ├── InterpreterListPage.tsx       # /strucnjaci/tumaci/         Language pair filter
+│   │   │   │   └── InterpreterDetailPage.tsx     # /strucnjaci/tumaci/:id      Profile, language pairs
+│   │   │   │
+│   │   │   ├── courts/
+│   │   │   │   ├── CourtsListPage.tsx            # /sudovi/           Type tabs (Municipal/County/Commercial/Misdemeanour)
+│   │   │   │   ├── CourtDetailPage.tsx           # /sudovi/:id        Info card + single-marker Leaflet map
+│   │   │   │   ├── StateAttorneyListPage.tsx     # /sudovi/dorh/      Directory table, sortable
+│   │   │   │   └── JurisdictionMapPage.tsx       # /sudovi/nadleznost/ Choropleth; click county → popup
+│   │   │   │
+│   │   │   ├── bankruptcy/
+│   │   │   │   ├── BankruptcyLandingPage.tsx         # /stecaj/           Intro + quick links
+│   │   │   │   ├── BankruptcySalesPage.tsx           # /stecaj/ponude/    Searchable listings, deadline highlight
+│   │   │   │   ├── BankruptcyAdministratorsPage.tsx  # /stecaj/upravitelji/ Searchable directory
+│   │   │   │   ├── BankruptcyLawsPage.tsx            # /stecaj/zakoni/    Laws grouped by year + PDF downloads
+│   │   │   │   ├── BankruptcyExpertPapersPage.tsx    # /stecaj/radovi/    Document list + category filter
+│   │   │   │   └── BankruptcyCaseLawPage.tsx         # /stecaj/sudska-praksa/ Filtered case law
+│   │   │   │
+│   │   │   ├── auth/
+│   │   │   │   ├── LoginPage.tsx             # /prijava/    Payload JWT auth; sets HttpOnly cookie
+│   │   │   │   ├── RegisterPage.tsx          # /registracija/ Create member account
+│   │   │   │   └── MemberAreaPage.tsx        # /clanovi/    Protected route; saved decisions, profile
+│   │   │   │
+│   │   │   └── galleries/
+│   │   │       ├── GalleriesListPage.tsx     # /galerije/   Photo/video/audio type tabs
+│   │   │       └── GalleryDetailPage.tsx     # /galerije/:id Lightbox / YouTube iframe / HTML5 audio
+│   │   │
+│   │   └── utils/
+│   │       ├── dates.ts                      # Locale-aware date formatting (HR: dd.MM.yyyy, EN: MM/dd/yyyy)
+│   │       ├── feeCalculator.ts              # Court fee calculation logic (pure functions, fully tested)
+│   │       └── richText.ts                   # Lexical JSON → plain text (used for meta description generation)
+│   │
+│   ├── tests/
+│   │   ├── e2e/
+│   │   │   ├── homepage.spec.ts
+│   │   │   ├── language-switch.spec.ts
+│   │   │   ├── case-law-search.spec.ts
+│   │   │   ├── expert-filter.spec.ts
+│   │   │   ├── contact-form.spec.ts
+│   │   │   ├── auth.spec.ts
+│   │   │   ├── fee-calculator.spec.ts
+│   │   │   ├── jurisdiction-map.spec.ts
+│   │   │   ├── bankruptcy-search.spec.ts
+│   │   │   └── accessibility.spec.ts         # axe-core scan on every public page
+│   │   └── screenshots/
+│   │       └── baseline/                     # Visual regression baselines at 1440px and 375px
+│   │
+│   ├── .env.example
+│   ├── index.html
 │   ├── package.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
+│   ├── tailwind.config.ts
 │   ├── vite.config.ts
-│   ├── index.html                   # Vite entry point
-│   ├── public/
-│   │   ├── robots.txt
-│   │   ├── favicon.ico
-│   │   └── assets/                  # Static assets not processed by Vite
-│   └── src/
-│       ├── main.tsx                 # React entry point
-│       ├── App.tsx                  # Root component with router + providers
-│       ├── router.tsx               # All route definitions (React Router 7)
-│       │
-│       ├── styles/
-│       │   ├── globals.css          # Tailwind 4 @theme tokens, base styles
-│       │   └── print.css            # Print-friendly styles
-│       │
-│       ├── i18n/
-│       │   ├── index.ts             # i18next init + language detection
-│       │   └── locales/
-│       │       ├── hr/
-│       │       │   ├── common.json  # Shared: buttons, labels, errors
-│       │       │   ├── nav.json     # Navigation labels
-│       │       │   ├── home.json    # Homepage copy
-│       │       │   ├── decisions.json
-│       │       │   ├── experts.json
-│       │       │   ├── courts.json
-│       │       │   ├── bankruptcy.json
-│       │       │   ├── calculator.json
-│       │       │   ├── news.json
-│       │       │   ├── contact.json
-│       │       │   └── auth.json
-│       │       └── en/
-│       │           └── (same files)
-│       │
-│       ├── components/
-│       │   ├── ui/                  # Reusable design system components
-│       │   │   ├── Button.tsx
-│       │   │   ├── Button.test.tsx
-│       │   │   ├── Card.tsx
-│       │   │   ├── Card.test.tsx
-│       │   │   ├── Badge.tsx
-│       │   │   ├── Modal.tsx
-│       │   │   ├── Modal.test.tsx
-│       │   │   ├── Alert.tsx
-│       │   │   ├── Breadcrumb.tsx
-│       │   │   ├── Pagination.tsx
-│       │   │   ├── Pagination.test.tsx
-│       │   │   ├── DataTable.tsx
-│       │   │   ├── DataTable.test.tsx
-│       │   │   ├── SearchBar.tsx
-│       │   │   └── SearchBar.test.tsx
-│       │   │
-│       │   ├── layout/
-│       │   │   ├── Header.tsx
-│       │   │   ├── Header.test.tsx
-│       │   │   ├── Footer.tsx
-│       │   │   ├── MobileMenu.tsx
-│       │   │   ├── LanguageSwitch.tsx
-│       │   │   └── DarkModeToggle.tsx
-│       │   │
-│       │   └── features/
-│       │       ├── JurisdictionMap.tsx      # Leaflet map, GADM polygons
-│       │       ├── JurisdictionMap.test.tsx
-│       │       ├── CourtFeeCalculator.tsx   # Pure client-side logic
-│       │       ├── CourtFeeCalculator.test.tsx
-│       │       ├── DecisionCard.tsx
-│       │       ├── ExpertCard.tsx
-│       │       ├── CourtCard.tsx
-│       │       └── NewsCard.tsx
-│       │
-│       ├── pages/
-│       │   ├── HomePage.tsx
-│       │   ├── HomePage.test.tsx
-│       │   ├── NotFoundPage.tsx
-│       │   │
-│       │   ├── decisions/
-│       │   │   ├── DecisionsSearchPage.tsx  # /sudska-praksa/pretraga
-│       │   │   ├── DecisionDetailPage.tsx   # /sudska-praksa/:id
-│       │   │   ├── VTSDecisionsPage.tsx     # /sudska-praksa/vts
-│       │   │   └── ESLJPDecisionsPage.tsx   # /sudska-praksa/esljp
-│       │   │
-│       │   ├── experts/
-│       │   │   ├── ExpertsPage.tsx          # /strucnjaci/vjestaci
-│       │   │   ├── ExpertDetailPage.tsx     # /strucnjaci/vjestaci/:id
-│       │   │   ├── InterpretersPage.tsx     # /strucnjaci/tumaci
-│       │   │   └── InterpreterDetailPage.tsx
-│       │   │
-│       │   ├── courts/
-│       │   │   ├── CourtsPage.tsx           # /sudovi
-│       │   │   ├── CourtDetailPage.tsx      # /sudovi/:id
-│       │   │   ├── StateAttorneysPage.tsx   # /sudovi/dorh
-│       │   │   └── JurisdictionFinderPage.tsx # /sudovi/nadleznost
-│       │   │
-│       │   ├── bankruptcy/
-│       │   │   ├── BankruptcyPage.tsx       # /stecaj
-│       │   │   ├── BankruptcyListingsPage.tsx
-│       │   │   ├── BankruptcyListingDetailPage.tsx
-│       │   │   ├── AdministratorsPage.tsx
-│       │   │   ├── BankruptcyLawsPage.tsx
-│       │   │   └── BankruptcyDecisionsPage.tsx
-│       │   │
-│       │   ├── CalculatorPage.tsx           # /pristojbe
-│       │   ├── LegalAidPage.tsx             # /pravna-pomoc
-│       │   ├── AboutPage.tsx                # /o-nama
-│       │   ├── ContactPage.tsx              # /kontakt
-│       │   ├── GalleriesPage.tsx            # /galerije
-│       │   ├── GalleryDetailPage.tsx        # /galerije/:id
-│       │   ├── NewsPage.tsx                 # /vijesti
-│       │   ├── NewsDetailPage.tsx           # /vijesti/:slug
-│       │   ├── MembersPage.tsx              # /clanovi (auth-gated)
-│       │   ├── LoginPage.tsx                # /login
-│       │   └── RegisterPage.tsx             # /register
-│       │
-│       ├── hooks/
-│       │   ├── useSearch.ts                 # Debounced search + React Query
-│       │   ├── useAuth.ts                   # Token storage, login/logout
-│       │   ├── usePagination.ts
-│       │   └── useDarkMode.ts               # System preference + manual override
-│       │
-│       ├── services/
-│       │   ├── api.ts                       # Axios instance, base URL, auth headers
-│       │   ├── decisions.service.ts         # API calls for court-decisions
-│       │   ├── experts.service.ts
-│       │   ├── interpreters.service.ts
-│       │   ├── courts.service.ts
-│       │   ├── bankruptcy.service.ts
-│       │   ├── news.service.ts
-│       │   ├── galleries.service.ts
-│       │   ├── documents.service.ts
-│       │   └── auth.service.ts
-│       │
-│       ├── types/
-│       │   ├── payload-types.ts             # Auto-generated by `payload generate:types`
-│       │   ├── api.ts                       # Payload list/detail response wrappers
-│       │   └── search.ts
-│       │
-│       └── utils/
-│           ├── feeCalculator.ts             # Court fee calculation logic (pure)
-│           ├── feeCalculator.test.ts
-│           ├── slugify.ts                   # Croatian slug generation (handles đ,č,š,ž,ć)
-│           ├── slugify.test.ts
-│           ├── seo.ts                       # Build sitemap, structured data helpers
-│           └── richText.ts                  # DOMPurify wrapper for Payload Lexical HTML
+│   ├── vitest.config.ts
+│   └── playwright.config.ts
 │
-├── cms/                                     # Payload CMS 3 standalone
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── payload.config.ts                    # Main Payload configuration
-│   └── src/
-│       ├── server.ts                        # Express server entry point
-│       │
-│       ├── collections/
-│       │   ├── Users.ts                     # admin / editor / member roles
-│       │   ├── CourtDecisions.ts            # Full-text indexed
-│       │   ├── ExpertWitnesses.ts           # pg_trgm indexed
-│       │   ├── Interpreters.ts              # pg_trgm indexed
-│       │   ├── Courts.ts
-│       │   ├── StateAttorneys.ts
-│       │   ├── BankruptcyListings.ts
-│       │   ├── BankruptcyAdministrators.ts
-│       │   ├── Laws.ts
-│       │   ├── NewsPosts.ts
-│       │   ├── Pages.ts
-│       │   ├── Galleries.ts
-│       │   ├── Documents.ts
-│       │   └── Media.ts                     # Payload media uploads
-│       │
-│       ├── globals/
-│       │   ├── Settings.ts                  # Site name, contact email, social links
-│       │   └── Navigation.ts                # Menu structure managed in admin
-│       │
-│       ├── endpoints/
-│       │   ├── contact.ts                   # POST /api/contact → Resend
-│       │   ├── search.ts                    # GET /api/search?q=... (global)
-│       │   └── sitemap.ts                   # GET /api/sitemap.xml
-│       │
-│       ├── hooks/
-│       │   ├── generateSlug.ts              # beforeChange: auto-generate slugs
-│       │   ├── generateSearchIndex.ts       # afterChange: update tsvector column
-│       │   └── sendContactEmail.ts          # afterChange: Resend integration
-│       │
-│       └── migrations/
-│           └── (Drizzle auto-generated migration files)
-│
-├── scripts/
-│   ├── migrate/
-│   │   ├── README.md                        # Migration instructions
-│   │   ├── parse-sql-dump.ts                # Parse SQL Server dump → JSON
-│   │   ├── import-decisions.ts              # JSON → Payload Local API
-│   │   ├── import-experts.ts
-│   │   ├── import-interpreters.ts
-│   │   ├── import-courts.ts
-│   │   └── import-state-attorneys.ts
-│   │
-│   └── seed/
-│       ├── seed.ts                          # Seed with Croatian dummy data for dev
-│       └── data/
-│           ├── courts.json
-│           ├── experts.json
-│           └── decisions.json
-│
-├── docs/
-│   ├── adr/                                 # Architecture Decision Records
-│   │   └── 0001-*.md ... 0012-*.md
-│   └── api/
-│       └── endpoints.md                     # Full API reference
-│
-└── .github/
-    └── workflows/
-        ├── ci.yml                           # Lint + test + build on PR
-        └── deploy.yml                       # Build + push Docker images on main
+└── cms/                                      # Payload CMS 3 standalone
+    ├── src/
+    │   ├── payload.config.ts                 # Root config: DB adapter, collections, i18n, CORS, upload, email
+    │   │
+    │   ├── collections/
+    │   │   ├── CourtDecisions.ts             # title, court, date, decision_type, full_text (Lexical), attachments, category, tags; HR/EN locale
+    │   │   ├── ExpertWitnesses.ts            # name, speciality_areas[], languages[], contact, court_assignments, verified; locale
+    │   │   ├── Interpreters.ts               # name, language_pairs[], contact, court_assignments, verified; locale
+    │   │   ├── Courts.ts                     # name, type enum, address, phone, president, website, county, geolocation (lat/lng JSONB); locale
+    │   │   ├── StateAttorneys.ts             # name, jurisdiction, address, contact; locale
+    │   │   ├── BankruptcyListings.ts         # case_no, debtor, court, administrator, assets[], deadline, status; locale
+    │   │   ├── BankruptcyAdministrators.ts   # name, contact, assigned_cases
+    │   │   ├── Laws.ts                       # title, type, year, text (Lexical), pdf_attachment, effective_date, superseded_by; locale
+    │   │   ├── NewsPosts.ts                  # title, slug (auto from title), content (Lexical), published_at, category, featured_image; locale
+    │   │   ├── Pages.ts                      # title, slug, content (blocks: text/image/CTA/divider); locale
+    │   │   ├── Galleries.ts                  # title, type enum (photo/video/audio), items[] (media); locale
+    │   │   ├── Documents.ts                  # title, category, file, published_at; MIME allowlist: pdf/doc/docx
+    │   │   └── Users.ts                      # email, role enum (admin/editor/member), profile fields
+    │   │
+    │   ├── endpoints/
+    │   │   ├── rss-news.ts                   # GET /api/rss/news.xml — RSS 2.0 (latest 20 news posts)
+    │   │   ├── rss-court-decisions.ts        # GET /api/rss/court-decisions.xml — RSS 2.0 (latest 20 decisions)
+    │   │   └── global-search.ts              # GET /api/search?q=&locale= — cross-collection FTS via pg_trgm
+    │   │
+    │   ├── migrations/
+    │   │   └── 20260321_enable_pg_trgm.ts    # CREATE EXTENSION IF NOT EXISTS pg_trgm; GIN indexes on full_text/name/title
+    │   │
+    │   └── seed/
+    │       └── index.ts                      # Demo data: 5 decisions, 5 experts, 5 courts, 2 news posts; idempotent
+    │
+    ├── .env.example
+    ├── Dockerfile                            # Multi-stage: node:22-alpine builder → node:22-alpine runner (non-root)
+    ├── package.json
+    └── tsconfig.json
 ```
 
 ---
 
-## API Design
+### API Design
 
-### Base URL
-- Development: `http://localhost:3001/api`
-- Production: `https://sudacka-mreza.hr/api`
-
-### Authentication
-Payload CMS JWT. Login returns a token in an HttpOnly cookie AND the response body. Include `Cookie: payload-token=<jwt>` or `Authorization: Bearer <jwt>` on authenticated requests.
-
-### Payload REST API (auto-generated)
-
-All collection endpoints follow Payload's standard REST pattern. Query parameters: `where`, `limit` (default 20, max 100), `page`, `sort`, `depth` (relation depth).
-
-#### Court Decisions
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/court-decisions` | List/search decisions. Use `where[full_text_search][like]=keyword` for full-text |
-| GET | `/api/court-decisions/:id` | Get single decision by ID |
-| POST | `/api/court-decisions` | Create decision (admin/editor only) |
-| PATCH | `/api/court-decisions/:id` | Update decision (admin/editor only) |
-| DELETE | `/api/court-decisions/:id` | Delete decision (admin only) |
-
-Key `where` filters: `court`, `decision_type`, `date[gte]`, `date[lte]`, `category`, `tags`
-
-#### Expert Witnesses
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/expert-witnesses` | List/search experts. `where[name][like]=`, `where[speciality_areas][in]=` |
-| GET | `/api/expert-witnesses/:id` | Get single expert |
-| POST | `/api/expert-witnesses` | Create (admin/editor) |
-| PATCH | `/api/expert-witnesses/:id` | Update (admin/editor) |
-| DELETE | `/api/expert-witnesses/:id` | Delete (admin) |
-
-#### Interpreters
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/interpreters` | List/search. `where[language_pairs][in]=`, `where[name][like]=` |
-| GET | `/api/interpreters/:id` | Get single interpreter |
-
-#### Courts
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/courts` | List all courts. Filter: `where[type][equals]=municipal` |
-| GET | `/api/courts/:id` | Get single court with address + map coordinates |
-
-Court types: `municipal`, `county`, `commercial`, `misdemeanour`, `high_commercial`, `supreme`, `administrative`
-
-#### State Attorneys
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/state-attorneys` | List all offices |
-| GET | `/api/state-attorneys/:id` | Get single office |
-
-#### Bankruptcy Listings
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/bankruptcy-listings` | List listings. Filter: `status`, `court`, date range |
-| GET | `/api/bankruptcy-listings/:id` | Get single listing |
-
-#### Bankruptcy Administrators
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/bankruptcy-administrators` | List administrators |
-| GET | `/api/bankruptcy-administrators/:id` | Get single administrator |
-
-#### Laws
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/laws` | List laws. Filter: `type`, `year` |
-| GET | `/api/laws/:id` | Get single law (with PDF attachment) |
-
-#### News Posts
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/news-posts` | List published posts. Sort: `-published_at` |
-| GET | `/api/news-posts/:id` | Get single post |
-
-Slug-based lookup via `where[slug][equals]=my-slug`.
-
-#### Galleries
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/galleries` | List galleries. Filter: `where[type][equals]=photo` |
-| GET | `/api/galleries/:id` | Get gallery with items |
-
-#### Documents
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/documents` | List documents. Filter: `category` |
-| GET | `/api/documents/:id` | Get document (with file URL) |
+All REST endpoints are auto-generated by Payload CMS 3 except where marked **(custom)**.
 
 #### Authentication
+
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/api/users` | Register new member |
-| POST | `/api/users/login` | Authenticate, receive JWT |
-| POST | `/api/users/logout` | Invalidate token |
-| GET | `/api/users/me` | Get current user profile |
-| POST | `/api/users/forgot-password` | Send password reset email |
-| POST | `/api/users/reset-password` | Complete password reset |
+| POST | `/api/users/login` | Login — body: `{email, password}`; returns user + JWT; sets HttpOnly cookie |
+| POST | `/api/users/logout` | Logout — clears auth cookie |
+| GET | `/api/users/me` | Get current user (requires auth) |
+| POST | `/api/users` | Register — body: `{email, password, name}`; role defaults to `member` |
+| POST | `/api/users/forgot-password` | Send password reset link to email |
+| POST | `/api/users/reset-password` | Complete reset — body: `{token, password}` |
+
+#### Court Decisions
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/court-decisions` | Paginated list; supports `?where[_search][like]=keyword&where[court][equals]=VTS&locale=hr&limit=20&page=1&sort=-date` |
+| GET | `/api/court-decisions/:id` | Single decision including full Lexical content |
+| POST | `/api/court-decisions` | Create (admin/editor only) |
+| PATCH | `/api/court-decisions/:id` | Update (admin/editor only) |
+| DELETE | `/api/court-decisions/:id` | Delete (admin only) |
+
+#### Expert Witnesses
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/expert-witnesses` | List; `?where[_search][like]=name&where[speciality_areas][in]=medicina&locale=hr` |
+| GET | `/api/expert-witnesses/:id` | Single profile |
+| POST/PATCH/DELETE | `/api/expert-witnesses(/:id)` | Admin/editor only |
+
+#### Interpreters
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/interpreters` | List; `?where[language_pairs][in]=engleski&locale=hr` |
+| GET | `/api/interpreters/:id` | Single profile |
+| POST/PATCH/DELETE | `/api/interpreters(/:id)` | Admin/editor only |
+
+#### Courts
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/courts` | List; `?where[type][equals]=opcinski` |
+| GET | `/api/courts/:id` | Single court with geolocation `{lat, lng}` |
+| POST/PATCH/DELETE | `/api/courts(/:id)` | Admin/editor only |
+
+#### State Attorneys
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/state-attorneys` | Full list; sortable by name/jurisdiction |
+| GET | `/api/state-attorneys/:id` | Single record |
+| POST/PATCH/DELETE | `/api/state-attorneys(/:id)` | Admin/editor only |
+
+#### Bankruptcy
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/bankruptcy-listings` | List; `?where[status][equals]=active&sort=-deadline` |
+| GET | `/api/bankruptcy-listings/:id` | Single listing |
+| GET | `/api/bankruptcy-administrators` | Full list; searchable by name |
+| GET | `/api/bankruptcy-administrators/:id` | Single administrator |
+| POST/PATCH/DELETE | (all) | Admin/editor only |
+
+#### Laws and Documents
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/laws` | List; `?where[type][equals]=stecajni&sort=-year` |
+| GET | `/api/laws/:id` | Full law text (Lexical) + PDF attachment URL |
+| GET | `/api/documents` | List; `?where[category][equals]=strucni-rad&sort=-published_at` |
+| GET | `/api/documents/:id` | Single document + file download URL |
+| POST/PATCH/DELETE | (all) | Admin/editor only |
+
+#### News
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/news-posts` | Paginated; `?where[category][equals]=vijesti&locale=hr&limit=10&sort=-published_at` |
+| GET | `/api/news-posts/:id` | Single post (also supports `?where[slug][equals]=slug-value`) |
+| POST/PATCH/DELETE | `/api/news-posts(/:id)` | Admin/editor only |
+
+#### Pages
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/pages` | All pages |
+| GET | `/api/pages/:id` | Page with layout blocks; `?where[slug][equals]=o-nama&locale=hr` |
+| POST/PATCH/DELETE | `/api/pages(/:id)` | Admin only |
+
+#### Galleries
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/galleries` | List; `?where[type][equals]=photo` |
+| GET | `/api/galleries/:id` | Gallery with full media items array |
+| POST/PATCH/DELETE | `/api/galleries(/:id)` | Admin/editor only |
 
 #### Custom Endpoints
-| Method | Path | Description | Auth |
-|--------|------|-------------|------|
-| POST | `/api/contact` | Contact form submission → Resend email | Public |
-| GET | `/api/search?q=&type=` | Global search across all collections. `type`: all/decisions/experts/courts/news | Public |
-| GET | `/api/sitemap.xml` | Dynamic sitemap (all public content URLs) | Public |
-| GET | `/api/feed/rss` | RSS feed (latest 50 news posts + decisions) | Public |
 
-### Request/Response Formats
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/search?q={query}&locale={hr\|en}&limit=5` | **(custom)** Cross-collection full-text search via pg_trgm; response: `{decisions: [], experts: [], courts: [], news: []}` |
+| GET | `/api/rss/news.xml` | **(custom)** RSS 2.0 feed for news posts (latest 20); Content-Type: application/rss+xml |
+| GET | `/api/rss/court-decisions.xml` | **(custom)** RSS 2.0 feed for court decisions (latest 20) |
 
-**Payload list response:**
-```json
-{
-  "docs": [...],
-  "totalDocs": 1847,
-  "limit": 20,
-  "totalPages": 93,
-  "page": 1,
-  "pagingCounter": 1,
-  "hasPrevPage": false,
-  "hasNextPage": true,
-  "prevPage": null,
-  "nextPage": 2
-}
-```
+#### Payload GraphQL
 
-**Contact form request (POST /api/contact):**
-```json
-{
-  "subject": "suggestion" | "criticism" | "collaboration" | "media" | "other",
-  "name": "string",
-  "email": "string",
-  "message": "string"
-}
-```
+| Path | Description |
+|------|-------------|
+| `/api/graphql` | Full GraphQL API (auto-generated by Payload 3) |
+| `/api/graphql-playground` | GraphQL Playground — **disabled in production** |
 
-**Global search response (GET /api/search?q=keyword):**
-```json
-{
-  "decisions": [{ "id": "...", "title": "...", "court": "...", "date": "..." }],
-  "experts": [{ "id": "...", "name": "...", "speciality_areas": [...] }],
-  "courts": [{ "id": "...", "name": "...", "type": "..." }],
-  "news": [{ "id": "...", "title": "...", "slug": "...", "published_at": "..." }]
-}
-```
+#### Standard Response Envelope
 
-### GraphQL API
-Available at `/graphql`. Auto-generated by Payload from collections. Used for any complex nested queries (e.g., bankruptcy listing with administrator profile and court details in one request).
-
----
-
-## Quality Requirements
-
-### Test Framework
-**Vitest 2** — unit + component tests (fast, Vite-native, no Jest configuration overhead).
-**@testing-library/react** — component tests (user-centric, ARIA queries).
-**Playwright** — E2E tests and visual regression.
-**axe-core** via `@axe-core/playwright` — accessibility checks on every page in E2E suite.
-
-### Coverage Target
-**80% minimum** — hard gate in CI. No merge if coverage drops below threshold.
-
-Coverage scope: all utility functions, all UI components, all custom Payload endpoints.
-
-### Test Structure
-
-```
-web/src/
-  components/ui/Button.test.tsx          # All states: primary/secondary/disabled/loading
-  components/ui/Pagination.test.tsx      # Page navigation, edge cases
-  components/features/CourtFeeCalculator.test.tsx  # All fee calculation scenarios
-  utils/feeCalculator.test.ts            # Pure logic, 100% coverage required
-  utils/slugify.test.ts                  # Croatian character handling: č,š,ž,ć,đ
-
-e2e/
-  search.spec.ts                         # Full-text search, filters, pagination
-  contact-form.spec.ts                   # Form validation, submission, success state
-  auth.spec.ts                           # Register, login, member area access
-  calculator.spec.ts                     # Court fee calculator scenarios
-  jurisdiction-map.spec.ts               # Leaflet map loads, polygon click
-  a11y.spec.ts                           # axe scan on all public pages
-  visual.spec.ts                         # Screenshot regression: homepage, search, courts
-```
-
-### Linting / Formatting
-- **ESLint** with `@typescript-eslint/eslint-plugin`, `eslint-plugin-react`, `eslint-plugin-jsx-a11y`
-- **Prettier** — consistent code style, enforced in CI
-- **TypeScript strict mode** — `"strict": true` in both `web/tsconfig.json` and `cms/tsconfig.json`
-
-### CI/CD (GitHub Actions)
-
-**ci.yml** — runs on every PR:
-1. `npm ci` (both `web/` and `cms/`)
-2. `npm run lint` (both)
-3. `npm run type-check` (both)
-4. `npm run test:coverage` (web — must be ≥80%)
-5. `npm run build` (web — must compile clean)
-6. `docker compose build` — verify all containers build successfully
-
-**deploy.yml** — runs on push to `main`:
-1. Run full CI suite
-2. Build Docker images
-3. Push to registry
-4. SSH to production server, pull new images, `docker compose up -d`
-5. Health check: `curl https://sudacka-mreza.hr/api/health`
-
----
-
-## Environment Variables
-
-```bash
-# docker-compose.yml / .env
-
-# Database
-DATABASE_URL=postgresql://sudacka:changeme@db:5432/sudacka_mreza
-
-# Payload CMS
-PAYLOAD_SECRET=<32-char random string — NEVER commit>
-PAYLOAD_PUBLIC_SERVER_URL=https://sudacka-mreza.hr
-
-# CORS
-CORS_ORIGIN=https://sudacka-mreza.hr
-
-# Email (Resend)
-RESEND_API_KEY=re_...
-RESEND_FROM=info@sudacka-mreza.hr
-
-# Analytics (Plausible)
-PLAUSIBLE_DOMAIN=sudacka-mreza.hr
-
-# Frontend (build-time Vite env)
-VITE_API_BASE_URL=https://sudacka-mreza.hr/api
-VITE_PLAUSIBLE_DOMAIN=sudacka-mreza.hr
-```
-
----
-
-## Design System Tokens (Tailwind 4 CSS-first)
-
-Defined in `web/src/styles/globals.css` using `@theme`:
-
-```css
-@theme {
-  --color-primary: #1B3A6B;
-  --color-secondary: #2E6DA4;
-  --color-accent: #C9A227;
-  --color-background: #F8F9FB;
-  --color-surface: #FFFFFF;
-  --color-text: #1A1A2E;
-  --color-muted: #6B7280;
-  --color-danger: #DC2626;
-  --color-border: #E5E7EB;
-
-  --font-sans: 'Inter', ui-sans-serif;
-  --font-serif: 'Source Serif 4', ui-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace;
-}
-```
-
-Dark mode overrides via `.dark` class (toggled by `useDarkMode` hook):
-```css
-.dark {
-  --color-background: #0F172A;
-  --color-surface: #1E293B;
-  --color-text: #F1F5F9;
-}
-```
-
----
-
-## Data Models (Payload Collections)
-
-### Users
 ```typescript
-{
-  email: string (unique)
-  password: string (hashed bcrypt-12)
-  role: 'admin' | 'editor' | 'member'
-  firstName: string
-  lastName: string
-  createdAt: Date
+// Collection list response (Payload standard)
+interface PayloadListResponse<T> {
+  docs: T[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: number | null;
+  nextPage: number | null;
+}
+
+// Error response
+interface PayloadError {
+  errors: Array<{ message: string; field?: string }>;
 }
 ```
 
-### CourtDecisions
-```typescript
-{
-  title: string
-  court: relationship → Courts
-  decisionType: 'civil' | 'criminal' | 'commercial' | 'administrative' | 'constitutional' | 'ecj' | 'ecthr'
-  date: Date
-  caseNumber: string
-  fullText: richText (Lexical)
-  summary: textarea
-  attachments: array of Media
-  category: string
-  tags: array of strings
-  searchVector: text (tsvector, populated by afterChange hook)
-  lang: 'hr' | 'en'
-  slug: string (auto-generated)
-}
-```
+Query parameters:
+- `locale=hr|en` — language for localised fields (defaults to `hr`)
+- `limit=20` — page size (max 100, enforced by Payload)
+- `page=1` — page number (1-indexed)
+- `sort=-createdAt` — sort field; `-` prefix = descending
+- `where[field][operator]=value` — operators: `equals`, `not_equals`, `like`, `in`, `exists`, `greater_than`, `less_than`
+- `depth=1` — relationship population depth (0 = IDs, 1 = one level populated)
 
-### ExpertWitnesses
-```typescript
-{
-  name: string
-  specialityAreas: array of strings
-  languages: array of strings
-  county: string
-  city: string
-  phone: string
-  email: string
-  verified: boolean
-  courtAssignments: array of relationship → Courts
-  notes: richText
-  lang: 'hr' | 'en'
-  slug: string
-}
-```
+---
 
-### Interpreters
-```typescript
-{
-  name: string
-  languagePairs: array of strings  // e.g. ['hr-en', 'hr-de']
-  county: string
-  city: string
-  phone: string
-  email: string
-  verified: boolean
-  courtAssignments: array of relationship → Courts
-  slug: string
-}
-```
+### Quality Requirements
 
-### Courts
-```typescript
-{
-  name: string
-  type: 'municipal' | 'county' | 'commercial' | 'misdemeanour' | 'high_commercial' | 'supreme' | 'administrative' | 'constitutional'
-  address: string
-  city: string
-  county: string
-  phone: string
-  fax: string
-  email: string
-  website: string
-  president: string
-  lat: number
-  lng: number
-  jurisdictionArea: string  // GeoJSON polygon (for Leaflet)
-  slug: string
-}
-```
+- **Test framework: Vitest 2** (unit + component) + **Playwright 1.44** (E2E + visual regression)
+- **Coverage target: ≥ 80% line coverage** across `web/src/` and `cms/src/collections/`
+- **Coverage gate: Hard CI failure** when coverage drops below threshold
 
-### BankruptcyListings
-```typescript
-{
-  caseNumber: string
-  debtorName: string
-  court: relationship → Courts
-  administrator: relationship → BankruptcyAdministrators
-  assets: richText
-  deadline: Date
-  status: 'active' | 'completed' | 'withdrawn'
-  publishedAt: Date
-  attachments: array of Media
-}
-```
+**Test types:**
 
-### NewsPosts
-```typescript
-{
-  title: string
-  slug: string (auto-generated)
-  content: richText (Lexical)
-  excerpt: textarea
-  featuredImage: relationship → Media
-  category: string
-  publishedAt: Date
-  author: relationship → Users
-  lang: 'hr' | 'en'
-}
+| Type | Tool | Scope |
+|------|------|-------|
+| Unit | Vitest | Fee calculator, i18n helpers, date formatters, Zod schemas, utility functions |
+| Component | Vitest + @testing-library/react | All 10 UI components + layout components |
+| API | Vitest + Payload Local API | All 13 collections: CRUD, validation, search, file upload |
+| E2E | Playwright | 10 critical journeys (Sprint 7: T7-3 through T7-10) |
+| Accessibility | axe-core via @axe-core/playwright | All 20+ pages; zero critical/serious violations |
+| Visual regression | Playwright screenshots | Key pages at 1440px and 375px |
+| Cross-browser | Playwright | Chromium, Firefox, WebKit |
+| Performance | @lhci/cli | Perf ≥ 90, A11y ≥ 95, SEO ≥ 95, Best Practices ≥ 90 |
+
+**Linting and formatting:**
+
+| Tool | Config file | Scope |
+|------|-------------|-------|
+| ESLint 9 (flat config) | `eslint.config.ts` | Both `web/` and `cms/` |
+| Prettier 3 | `.prettierrc` | TypeScript, JSON, CSS |
+| TypeScript | `tsconfig.json` (`"strict": true`) | Both packages |
+
+ESLint plugins: `@typescript-eslint/recommended`, `react-hooks`, `jsx-a11y`, `import`
+
+**CI/CD (GitHub Actions — `ci.yml`):**
+
+```
+On every push:
+  job: lint        → eslint + prettier --check (web + cms in parallel)
+  job: typecheck   → tsc --noEmit (web + cms in parallel)
+  job: test:unit   → vitest run --coverage (web + cms; fails if < 80%)
+  job: test:e2e    → docker compose up + playwright test
+  job: docker:build → docker build web + docker build cms (verify builds)
+
+On push to main only (after all above pass):
+  job: docker:push → tag with git SHA + push to GHCR
 ```
 
 ---
 
-## Croatian Full-Text Search Implementation
-
-PostgreSQL full-text search using Croatian language support:
-
-```sql
--- Enable extensions (run once at setup)
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-CREATE EXTENSION IF NOT EXISTS unaccent;
-
--- Create custom Croatian text search configuration
-CREATE TEXT SEARCH CONFIGURATION hr (COPY = simple);
-ALTER TEXT SEARCH CONFIGURATION hr
-  ALTER MAPPING FOR hword, hword_part, word
-  WITH unaccent, simple;
-
--- court_decisions table (managed by Payload/Drizzle)
--- The search_vector column is populated by an afterChange hook:
-ALTER TABLE court_decisions ADD COLUMN search_vector tsvector;
-CREATE INDEX court_decisions_search_idx ON court_decisions USING GIN(search_vector);
-
--- Trigram index for name-based expert/interpreter search
-CREATE INDEX expert_witnesses_name_trgm_idx ON expert_witnesses USING GIN(name gin_trgm_ops);
-CREATE INDEX interpreters_name_trgm_idx ON interpreters USING GIN(name gin_trgm_ops);
-```
-
-The `generateSearchIndex` hook in `cms/src/hooks/` updates the `search_vector` column after every court decision save by calling:
-```sql
-UPDATE court_decisions
-SET search_vector = to_tsvector('hr', coalesce(title,'') || ' ' || coalesce(full_text_plain,''))
-WHERE id = $1;
-```
-
----
-
-## SEO Strategy
-
-The React SPA has a specific SEO challenge: search engines crawl the initial HTML, which for a pure SPA is nearly empty. Strategy:
-
-1. **`vite-plugin-ssg`** — at build time, crawl all known routes and generate static HTML snapshots. This covers: homepage, all court pages, all news post pages, all expert profiles, all court decisions (critical for search engine indexing of case law).
-
-2. **`react-helmet-async`** — dynamic `<title>`, `<meta>`, `<link rel="canonical">` management per page.
-
-3. **Structured data** — JSON-LD schemas injected per page type:
-   - Homepage: `LegalOrganization`
-   - Court decision: `LegalCase`
-   - Expert profile: `Person` + `OccupationalExpert`
-   - Court: `Courthouse`
-   - News post: `NewsArticle`
-
-4. **sitemap.xml** — generated as a build step by the `scripts/generate-sitemap.ts` script, which calls the Payload API and writes `web/public/sitemap.xml`.
-
-5. **robots.txt** — static file in `web/public/robots.txt`. Disallows `/admin/`, `/api/`.
-
----
-
-## Internationalisation (i18n)
-
-React Router 7 handles language routing via path prefix: `/hr/...` and `/en/...`. Default is Croatian (`/hr/`). The root `/` redirects to `/hr/`.
-
-`i18next-browser-languagedetector` is configured to detect from URL path (highest priority), then `localStorage`, then browser `Accept-Language`.
-
-Translation files are loaded lazily by namespace — `common.json` is loaded on every page, namespace-specific files are loaded only when that page renders.
-
-Croatian is the primary language. English translations start incomplete and are filled in over time. Missing English translations fall back to Croatian.
-
----
-
-## Migration Scripts
-
-Located in `scripts/migrate/`. Run with Node.js (tsx):
-
-```bash
-cd scripts && npx tsx migrate/parse-sql-dump.ts data/dump.sql > data/decisions.json
-npx tsx migrate/import-decisions.ts data/decisions.json
-npx tsx migrate/import-experts.ts data/experts.json
-```
-
-Each script uses Payload's Local API (direct DB access, no HTTP overhead) for bulk imports. Expects a running PostgreSQL instance.
-
-URL redirect map is generated by `scripts/migrate/generate-redirects.ts` and output as a Caddy rewrite config file (`caddy/redirects.conf`) that is included in the Caddyfile.
-
----
-
-## DevOps Review
-
-**Reviewer:** gigforge-devops
-**Date:** 2026-03-21
-**Verdict:** CONDITIONAL — stack is sound but 4 hard blockers must be resolved before dev environment spins up
-
----
-
-### 1. Containerisation — FEASIBLE ✓
-
-All four services (caddy, web, cms, db) containerise cleanly:
-
-- `web` — Vite 6 builds to static `dist/`, served by Nginx in a multi-stage Docker image. Standard pattern; no issues.
-- `cms` — Payload CMS 3 standalone is a Node.js/Express process. Standard multi-stage build (`node:20-alpine` or `node:22-alpine`). `sharp` requires native bindings — use `--platform linux/amd64` if building on ARM Mac, and pin `sharp@^0.33` which ships prebuilt binaries for Alpine.
-- `db` — `pgvector/pgvector:pg16` image supports all required extensions (`pg_trgm`, `unaccent`, `tsvector`). Extension init SQL should be in `db/init/01-extensions.sql` mounted as an initdb script, not run manually.
-- `analytics` — Plausible CE is available as `ghcr.io/plausible/community-edition`. Requires a `plausible-conf.env` secrets file; document this in `.env.example`.
-
-Multi-stage Dockerfiles are **mandatory** for both `web` and `cms` to keep image sizes manageable (Payload with all deps is ~600 MB dev → ~120 MB production image after tree-shaking).
-
----
-
-### 2. Port Conflicts — BLOCKERS ⚠️
-
-**Critical finding: the host already has processes bound to ports 80, 443, 3000, 3001, and 8000.**
-
-| Planned Port | Status | Conflict |
-|---|---|---|
-| 80 (Caddy) | **BLOCKED** | Host Nginx (pid 15853 + workers) owns port 80 |
-| 443 (Caddy) | **BLOCKED** | Host Nginx owns port 443 |
-| 3001 (CMS dev) | **BLOCKED** | `course-creator-frontend-1` → `0.0.0.0:3001→80` |
-| 3000 (web dev) | **BLOCKED** | `course-creator-frontend-1` → `0.0.0.0:3000→3000` |
-| 8000 (Plausible) | **BLOCKED** | `course-creator-user-management-1` → `0.0.0.0:8000→8000` |
-| 5432 (db dev) | Clear | Not exposed on host |
-
-**Required fix — Caddy is not viable as the public-facing container on this host.**
-
-The host Nginx is the TLS terminator for all services. Every other project on this host follows the same pattern: containers run on high internal ports (4090, 4091, 4095, 4096, 4098 range) and Nginx proxies domain traffic to them.
-
-**Resolution — drop the Caddy container; integrate with host Nginx instead:**
-
-1. Remove the `caddy` service from `docker-compose.yml`.
-2. Assign fixed host ports from the available `409x` range:
-
-| Service | Internal | Host Port |
-|---|---|---|
-| web (Nginx) | 80 | **4093** |
-| cms (Payload) | 3001 | **4094** |
-| analytics (Plausible) | 8000 | **4097** (if used) |
-| db (PostgreSQL) | 5432 | not exposed in prod |
-
-3. Add a Nginx vhost on the host (to be created by DevOps at deploy time):
-
-```nginx
-server {
-    listen 80;
-    server_name sudacka-mreza.hr www.sudacka-mreza.hr;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name sudacka-mreza.hr www.sudacka-mreza.hr;
-
-    # TLS — managed by certbot on the host
-    ssl_certificate     /etc/letsencrypt/live/sudacka-mreza.hr/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/sudacka-mreza.hr/privkey.pem;
-
-    # React SPA
-    location / {
-        proxy_pass http://127.0.0.1:4093;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    # Payload CMS API + Admin
-    location ~ ^/(api|admin|graphql) {
-        proxy_pass http://127.0.0.1:4094;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        client_max_body_size 50M;  # for file uploads
-    }
-}
-```
-
-4. **TLS:** Use `certbot --nginx -d sudacka-mreza.hr` on the host. Caddy's automatic TLS is not available since we're removing it.
-5. **Redirect map:** The `caddy/redirects.conf` approach needs to become an Nginx `rewrite` map instead. The `scripts/migrate/generate-redirects.ts` script should output an Nginx `map` block or a set of `rewrite` rules to an `nginx/redirects.conf` include file.
-
----
-
-### 3. Resource Assessment — CLEAR ✓
-
-| Resource | Available | Estimated Usage | Status |
-|---|---|---|---|
-| RAM | 16 GB free (32 GB total) | ~800 MB–1.2 GB peak | ✓ Comfortable |
-| CPU | 32 GB host, not constrained | Moderate (SSG build, Payload indexing) | ✓ Fine |
-| Disk | 364 GB free (601 GB total) | ~5 GB initial + media growth | ✓ Fine |
-| Swap | **0 MB** | N/A | ⚠️ See below |
-
-**Swap concern:** The host has no swap. Payload CMS 3 can spike to ~400–600 MB at startup (Drizzle migration + TypeScript compilation in dev). Combined with PostgreSQL shared_buffers, a cold start during a low-memory moment could OOM-kill the container. Add memory limits to `docker-compose.yml` to bound the blast radius:
-
-```yaml
-cms:
-  mem_limit: 768m
-  memswap_limit: 768m  # no swap available anyway
-db:
-  mem_limit: 512m
-  environment:
-    - POSTGRES_SHARED_BUFFERS=128MB  # keep conservative
-```
-
-**Media/upload growth:** Payload uses `@payloadcms/storage-local` (Phase 1). Court decision PDFs, expert profile photos, gallery images, and law documents will accumulate on disk. Set a reminder to evaluate S3/R2 migration before the 10 GB mark. No action needed now, but plan for it.
-
----
-
-### 4. Database — DEPLOYABLE ✓ (with initdb fix)
-
-PostgreSQL 16 is already proven on this host (crm-postgres, cms-postgres, video-creator-db all running). Using a dedicated container with an isolated Docker volume is correct — do not share a PostgreSQL instance with other projects.
-
-**Required:** The Croatian FTS extensions (`pg_trgm`, `unaccent`) and the custom `hr` text search configuration must be initialised before Payload runs its Drizzle migrations. Create `db/init/01-extensions.sql`:
-
-```sql
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-CREATE EXTENSION IF NOT EXISTS unaccent;
-CREATE TEXT SEARCH CONFIGURATION hr (COPY = simple);
-ALTER TEXT SEARCH CONFIGURATION hr
-  ALTER MAPPING FOR hword, hword_part, word
-  WITH unaccent, simple;
-```
-
-Mount this in `docker-compose.yml`:
-```yaml
-db:
-  volumes:
-    - ./db/init:/docker-entrypoint-initdb.d:ro
-    - sudacka_db_data:/var/lib/postgresql/data
-```
-
-PostgreSQL 16 on Alpine (`pgvector/pgvector:pg16`) ships both extensions. **Do not use `postgres:16-alpine`** (missing `pg_trgm` build — use `pgvector/pgvector:pg16` as specified, which includes it, or `postgis/postgis:16-3.4` if GeoJSON polygon queries are ever moved server-side).
-
-**Dev port:** The spec exposes `5432:5432`. Since the host port 5432 is currently clear, this works now — but to be consistent with every other project on this host (which all use 5435, 5436, 5437), use `127.0.0.1:5438:5432` to avoid a future conflict and restrict to loopback.
-
----
-
-### 5. Security Concerns — ACTION REQUIRED ⚠️
-
-| # | Severity | Finding | Required Action |
-|---|---|---|---|
-| S-1 | **HIGH** | `DATABASE_URL` password is `changeme` in `.env.example` | Generate 24+ char random password at deploy time; document in `.env.example` that this MUST be changed |
-| S-2 | **HIGH** | GraphQL endpoint `/graphql` exposes full schema introspection | Disable introspection in production: set `graphQL.disable: true` in `payload.config.ts` for prod, or add Nginx `deny all` to `location /graphql` and only allow trusted IPs |
-| S-3 | **MEDIUM** | Payload Admin UI at `/admin` is publicly reachable | Restrict to trusted IPs at the Nginx level (team IPs + VPN). Add to host Nginx vhost: `location /admin { allow 203.0.113.0/24; deny all; proxy_pass ... }` |
-| S-4 | **MEDIUM** | No rate limiting on `POST /api/contact` | Add `express-rate-limit` middleware scoped to `/api/contact` — 5 requests per 15 minutes per IP |
-| S-5 | **MEDIUM** | Local file uploads — no size or MIME limits specified | Configure `upload.limits` in each Payload collection: `{ mimeTypes: ['image/jpeg', 'image/png', 'application/pdf'], fileSize: 10_000_000 }` (10 MB). Nginx `client_max_body_size 50M` is already noted above. |
-| S-6 | **LOW** | `PAYLOAD_SECRET` placeholder in `.env.example` | Good that it's documented — add a validator in `server.ts` that throws on startup if `PAYLOAD_SECRET.length < 32` |
-| S-7 | **LOW** | JWT returned in response body (in addition to HttpOnly cookie) | Confirm the frontend uses the HttpOnly cookie for all authenticated requests (not localStorage). `api.ts` Axios instance should send `withCredentials: true` and not manually attach the token from localStorage. |
-| S-8 | **LOW** | `robots.txt` disallows `/api/` and `/admin/` | Confirmed in spec ✓ — good. Verify these are `Disallow: /api/` and `Disallow: /admin/` on the deployed `robots.txt`. |
-
----
-
-### Summary of Required Changes Before Dev Spinup
-
-1. **Remove Caddy container** from `docker-compose.yml` and `docker-compose.prod.yml`; assign host ports 4093 (web) and 4094 (cms)
-2. **Create `db/init/01-extensions.sql`** with extension + FTS config init
-3. **Change dev PostgreSQL host port** to `127.0.0.1:5438:5432`
-4. **Add memory limits** to `cms` and `db` services in `docker-compose.yml`
-5. **Add `express-rate-limit`** to `POST /api/contact` in `cms/src/endpoints/contact.ts`
-6. **Disable GraphQL introspection** in production Payload config
-7. **Nginx vhost config** needs to be provisioned on the host at deploy time (DevOps will handle this step)
-8. **`scripts/migrate/generate-redirects.ts`** should target Nginx rewrite syntax, not Caddy
-
-**Non-blocking recommendations (Phase 2):**
-- Plan S3/Cloudflare R2 migration for media storage before 10 GB disk usage
-- Add Plausible CE (`analytics` service) only after core site is live — it is optional in Phase 1
-- Consider a read replica for PostgreSQL once court decisions corpus grows past ~50k rows and full-text search latency becomes noticeable
+*Authored by Chris Novak (CTO) · GF-GFWEB-002 · 2026-03-21*
+*This document is the single source of truth for the build. The engineer follows it exactly.*

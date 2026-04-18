@@ -81,5 +81,21 @@ export const BankruptcyListings: CollectionConfig = {
       hasMany: true,
       label: 'Privitci',
     },
+    {
+      name: 'contactEmail',
+      type: 'email',
+      label: 'Kontakt email',
+      admin: {
+        description: 'Javni kontakt email za pitanja o stečajnom postupku',
+      },
+    },
+    {
+      name: 'contactPhone',
+      type: 'text',
+      label: 'Kontakt telefon',
+      admin: {
+        description: 'Javni kontakt telefon za pitanja o stečajnom postupku',
+      },
+    },
   ],
 }

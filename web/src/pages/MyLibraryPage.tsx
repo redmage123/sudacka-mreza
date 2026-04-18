@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { BookmarkCheck, StickyNote, FolderOpen, ChevronRight, Trash2 } from 'lucide-react'
 import { getBookmarks, deleteBookmark } from '@/api/bookmarks'
 import type { Bookmark } from '@/api/types'
@@ -18,9 +19,9 @@ function bookmarkDecisionCase(bm: Bookmark): string | undefined {
   return typeof bm.decision === 'string' ? undefined : bm.decision.caseNumber
 }
 
-function groupByFolder(bookmarks: Bookmark[]): Record<string, Bookmark[]> {
+function groupByFolder(bookmarks: Bookmark[], defaultFolder: string): Record<string, Bookmark[]> {
   return bookmarks.reduce<Record<string, Bookmark[]>>((acc, bm) => {
-    const key = bm.folder ?? 'Opće'
+    const key = bm.folder ?? defaultFolder
     if (!acc[key]) acc[key] = []
     acc[key].push(bm)
     return acc
@@ -36,6 +37,7 @@ interface BookmarkCardProps {
 }
 
 function BookmarkCard({ bookmark, lang, onDelete }: BookmarkCardProps) {
+  const { t } = useTranslation('common')
   const [deleting, setDeleting] = useState(false)
   const decisionId = bookmarkDecisionId(bookmark)
   const title = bookmarkDecisionTitle(bookmark)
@@ -65,8 +67,8 @@ function BookmarkCard({ bookmark, lang, onDelete }: BookmarkCardProps) {
         )}
         {bookmark.created_at && (
           <p className="mt-1 text-xs text-[color:var(--color-text-muted)]">
-            Dodano:{' '}
-            {new Date(bookmark.created_at).toLocaleDateString('hr-HR', {
+            {t('library.addedOn')}:{' '}
+            {new Date(bookmark.created_at).toLocaleDateString(lang === 'hr' ? 'hr-HR' : 'en-US', {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
@@ -78,7 +80,7 @@ function BookmarkCard({ bookmark, lang, onDelete }: BookmarkCardProps) {
         type="button"
         onClick={handleDelete}
         disabled={deleting}
-        aria-label="Ukloni zabilježenu stranicu"
+        aria-label={t('library.removeBookmark')}
         className="shrink-0 rounded p-1 text-[color:var(--color-text-muted)] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 disabled:opacity-50 transition-colors"
       >
         <Trash2 className="h-4 w-4" aria-hidden="true" />
@@ -93,6 +95,7 @@ type Tab = 'bookmarks' | 'annotations'
 
 export default function MyLibraryPage() {
   const { lang = 'hr' } = useParams<{ lang: string }>()
+  const { t } = useTranslation('common')
   const [tab, setTab] = useState<Tab>('bookmarks')
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
   const [loading, setLoading] = useState(true)
@@ -114,7 +117,7 @@ export default function MyLibraryPage() {
           if (err.message.includes('401') || err.message.includes('403')) {
             setError('unauthenticated')
           } else {
-            setError('Greška pri učitavanju knjižnice.')
+            setError('load_error')
           }
         }
       })
@@ -133,31 +136,36 @@ export default function MyLibraryPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
         <BookmarkCheck className="mx-auto h-12 w-12 text-[color:var(--color-text-muted)] mb-4" aria-hidden="true" />
-        <h1 className="text-2xl font-bold text-[color:var(--color-heading)] mb-2">Moja knjižnica</h1>
+        <h1 className="text-2xl font-bold text-[color:var(--color-heading)] mb-2">{t('library.title')}</h1>
         <p className="text-[color:var(--color-text-muted)] mb-6">
-          Morate biti prijavljeni da biste pristupili svojoj knjižnici.
+          {t('library.loginRequired')}
         </p>
         <Link
           to={`/${lang}/login`}
           className="inline-flex items-center gap-2 rounded-md bg-[color:var(--color-brand-navy)] px-4 py-2 text-sm font-medium text-white hover:bg-[color:var(--color-brand-navy-light)] transition-colors"
         >
-          Prijava
+          {t('library.login')}
           <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
     )
   }
 
-  const grouped = groupByFolder(bookmarks)
+  const grouped = groupByFolder(bookmarks, t('library.defaultFolder'))
   const folderKeys = Object.keys(grouped).sort()
+
+  const TABS = [
+    { id: 'bookmarks' as const, labelKey: 'library.tab.bookmarks', icon: BookmarkCheck },
+    { id: 'annotations' as const, labelKey: 'library.tab.annotations', icon: StickyNote },
+  ]
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
       {/* Page header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[color:var(--color-heading)]">Moja knjižnica</h1>
+        <h1 className="text-3xl font-bold text-[color:var(--color-heading)]">{t('library.title')}</h1>
         <p className="mt-2 text-[color:var(--color-text-muted)]">
-          Vaše zabilježene odluke i bilješke
+          {t('library.subtitle')}
         </p>
       </div>
 
@@ -165,14 +173,9 @@ export default function MyLibraryPage() {
       <div
         className="mb-6 flex gap-1 border-b border-[color:var(--color-border)]"
         role="tablist"
-        aria-label="Kategorije knjižnice"
+        aria-label={t('library.tabsLabel')}
       >
-        {(
-          [
-            { id: 'bookmarks', label: 'Zabilježene odluke', icon: BookmarkCheck },
-            { id: 'annotations', label: 'Bilješke', icon: StickyNote },
-          ] as const
-        ).map(({ id, label, icon: Icon }) => (
+        {TABS.map(({ id, labelKey, icon: Icon }) => (
           <button
             key={id}
             role="tab"
@@ -187,7 +190,7 @@ export default function MyLibraryPage() {
             ].join(' ')}
           >
             <Icon className="h-4 w-4" aria-hidden="true" />
-            {label}
+            {t(labelKey)}
             {id === 'bookmarks' && bookmarks.length > 0 && (
               <span className="ml-1 rounded-full bg-[color:var(--color-surface-subtle)] px-2 py-0.5 text-xs">
                 {bookmarks.length}
@@ -199,7 +202,7 @@ export default function MyLibraryPage() {
 
       {/* Bookmarks panel */}
       {tab === 'bookmarks' && (
-        <div id="panel-bookmarks" role="tabpanel" aria-label="Zabilježene odluke">
+        <div id="panel-bookmarks" role="tabpanel" aria-label={t('library.tab.bookmarks')}>
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map((n) => (
@@ -211,19 +214,19 @@ export default function MyLibraryPage() {
             </div>
           ) : error ? (
             <p className="text-[color:var(--color-error)]" role="alert">
-              {error}
+              {t('library.loadError')}
             </p>
           ) : bookmarks.length === 0 ? (
             <div className="rounded-xl border-2 border-dashed border-[color:var(--color-border)] py-16 text-center">
               <BookmarkCheck className="mx-auto h-10 w-10 text-[color:var(--color-text-muted)] mb-3" aria-hidden="true" />
               <p className="text-[color:var(--color-text-muted)]">
-                Niste još zabilježili nijednu odluku.
+                {t('library.noBookmarks')}
               </p>
               <Link
                 to={`/${lang}/sudska-praksa/pretraga`}
                 className="mt-4 inline-flex items-center gap-1 text-sm text-[color:var(--color-brand-navy)] hover:underline"
               >
-                Pretražite odluke
+                {t('library.searchDecisions')}
                 <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
@@ -262,20 +265,20 @@ export default function MyLibraryPage() {
 
       {/* Annotations panel */}
       {tab === 'annotations' && (
-        <div id="panel-annotations" role="tabpanel" aria-label="Bilješke">
+        <div id="panel-annotations" role="tabpanel" aria-label={t('library.tab.annotations')}>
           <div className="rounded-xl border-2 border-dashed border-[color:var(--color-border)] py-16 text-center">
             <StickyNote className="mx-auto h-10 w-10 text-[color:var(--color-text-muted)] mb-3" aria-hidden="true" />
             <p className="text-[color:var(--color-text-muted)]">
-              Bilješke se prikazuju izravno na stranicama odluka.
+              {t('library.annotationsHint')}
             </p>
             <p className="mt-1 text-sm text-[color:var(--color-text-muted)]">
-              Označite tekst na stranici odluke i dodajte bilješku.
+              {t('library.annotationsInstructions')}
             </p>
             <Link
               to={`/${lang}/sudska-praksa/pretraga`}
               className="mt-4 inline-flex items-center gap-1 text-sm text-[color:var(--color-brand-navy)] hover:underline"
             >
-              Pretražite odluke
+              {t('library.searchDecisions')}
               <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>

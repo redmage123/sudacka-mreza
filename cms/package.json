@@ -2,26 +2,44 @@
   "name": "sudacka-mreza-cms",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "generate:types": "payload generate:types"
+    "generate:types": "payload generate:types",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "seed": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx src/seed/index.ts",
+    "migrate:scrape": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx src/migration/migrate.ts scrape",
+    "migrate:import": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx src/migration/migrate.ts import",
+    "migrate": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx src/migration/migrate.ts all",
+    "rag:reindex": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx src/scripts/rag-reindex.ts"
   },
   "dependencies": {
-    "payload": "^3.0.0",
     "@payloadcms/db-postgres": "^3.0.0",
     "@payloadcms/richtext-lexical": "^3.0.0",
-    "express": "^4.21.0",
-    "resend": "^4.0.0",
+    "cheerio": "^1.2.0",
     "cross-env": "^7.0.3",
+    "express": "^4.21.0",
+    "node-fetch": "^3.3.2",
+    "payload": "^3.0.0",
+    "playwright": "^1.48.0",
+    "resend": "^4.0.0",
+    "sharp": "^0.33.5",
     "slugify": "^1.6.6",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "~5.4.5",
-    "tsx": "^4.19.0",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "@types/supertest": "^6.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "supertest": "^7.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "~5.4.5",
+    "vitest": "^2.1.9"
   }
 }
