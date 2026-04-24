@@ -1,0 +1,35 @@
+[Unit]
+Description=Sudačka Mreža Legal Q&A — FastAPI + retrieval pipeline
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bbrelin
+Group=bbrelin
+WorkingDirectory=/home/bbrelin/sudacka-finetune
+# Secrets (OLLAMA_TOKEN) live in /etc/sudacka-legal-ai.env — create that file
+# with mode 0640 before enabling the unit:
+#   sudo install -m 0640 -o root -g bbrelin /dev/stdin /etc/sudacka-legal-ai.env <<'EOF'
+#   OLLAMA_TOKEN=<token-for-ollama-nginx-proxy>
+#   EOF
+EnvironmentFile=/etc/sudacka-legal-ai.env
+Environment=LLM_MODEL=gemma-4-e4b-croatian-legal-v3-robust
+Environment=NLI_VERIFY=1
+Environment=NLI_MODEL=gemma-4-e4b-base
+Environment=INDEX_ROOT=/home/bbrelin/sudacka-finetune/indexes/default
+Environment=PORT=8191
+ExecStart=/home/bbrelin/sudacka-finetune/.venv/bin/python3 /home/bbrelin/sudacka-finetune/scripts/24_serve.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/var/log/sudacka-legal-ai.log
+StandardError=append:/var/log/sudacka-legal-ai.log
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/log /home/bbrelin/sudacka-finetune
+
+[Install]
+WantedBy=multi-user.target

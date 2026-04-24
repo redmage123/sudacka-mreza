@@ -1,0 +1,45 @@
+# Sudačka Mreža Legal AI — bearer-auth proxy in front of the FastAPI service.
+# Same pattern as /etc/nginx/sites-available/ollama, scoped to a distinct token.
+#
+# Internal service:  127.0.0.1:8191 (FastAPI)
+# Public listener:   0.0.0.0:8190 (bearer-auth)
+#
+# Before installing this file, replace the placeholder token below with a
+# real 64-hex-char secret:
+#     TOK=$(python3 -c "import secrets; print(secrets.token_hex(32))")
+#     sudo sed -i "s/LEGAL_AI_BEARER_TOKEN_PLACEHOLDER/$TOK/" \
+#         /etc/nginx/sites-available/sudacka-legal-ai
+# Share the same token with the CMS via its LEGAL_AI_TOKEN env var.
+
+map $http_authorization $legal_ai_auth_ok {
+    default 0;
+    "~^Bearer\\s+LEGAL_AI_BEARER_TOKEN_PLACEHOLDER$" 1;
+}
+
+server {
+    listen 8190 default_server;
+    listen [::]:8190 default_server;
+    server_name _;
+    server_tokens off;
+
+    # Health passthrough (no auth) so monitors can probe.
+    location = /health {
+        proxy_pass http://127.0.0.1:8191/health;
+        proxy_set_header Host $host;
+    }
+
+    location / {
+        if ($legal_ai_auth_ok = 0) {
+            return 401 '{"error":"missing or invalid Authorization: Bearer <token> header"}\n';
+        }
+        proxy_pass http://127.0.0.1:8191;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        client_max_body_size 1m;
+    }
+}

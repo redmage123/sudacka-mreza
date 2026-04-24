@@ -1,0 +1,37 @@
+# Training stack — install on the RunPod pod.
+# For data collection (scripts 01–05), only the "data" section is needed.
+
+# ── Data collection (lightweight, CPU-only) ────────────────────────────────
+psycopg[binary]>=3.2
+httpx>=0.28
+beautifulsoup4>=4.12
+lxml>=5.0
+pypdf>=4.0
+pdfminer.six>=20240706
+pyyaml>=6.0
+tqdm>=4.66
+tenacity>=9.0
+rich>=13.7
+
+# ── Training (GPU, install on RunPod) ──────────────────────────────────────
+# Pinned versions that have been verified to work together with Gemma 4 MoE.
+# Comment these out on the Toronto server if you only run data steps there.
+torch>=2.4,<2.8
+transformers>=4.50
+accelerate>=1.1
+peft>=0.14
+trl>=0.13
+bitsandbytes>=0.45
+datasets>=3.2
+
+# Unsloth ships pre-patched kernels for Gemma 4; install from their repo to
+# pick up the MoE-aware training path. The wheel below is the pip install
+# name — Unsloth's setup.py detects CUDA version at install time.
+unsloth>=2025.1
+
+# ── Export / quantization helpers ──────────────────────────────────────────
+# llama.cpp's convert + quantize binaries are shelled out to, not imported.
+# Install separately on the RunPod pod:
+#   git clone https://github.com/ggerganov/llama.cpp && cd llama.cpp && make quantize
+sentencepiece>=0.2
+protobuf>=5.0

@@ -1,0 +1,116 @@
+# Sudacka-finetune pipeline configuration.
+# Override any value with environment variables of the same uppercased name.
+
+# ── Base model ──────────────────────────────────────────────────────────────
+# E4B (4B effective params) chosen because the dev-server GPU (RTX 4000 SFF
+# Ada, 20 GB) can't QLoRA the 26B-A4B without quality compromises. Same
+# Gemma 4 family, same tokenizer, same license.
+base_model: "unsloth/gemma-4-E4B-it"
+hf_token_env: HF_TOKEN     # read from env at runtime
+load_in_4bit: true
+
+# ── Sudacka CMS database (source of court decisions, laws, ECHR, VSRH) ─────
+db:
+  host: "23.164.48.64"
+  # When running on the Toronto server itself, set host to localhost.
+  port: 5432
+  user: "postgres"
+  name: "sudacka_mreza"
+  password_env: "POSTGRES_PASSWORD"   # fall back prompts if unset
+  # If you have an SSH tunnel open, point db.host to localhost + tunnel port.
+
+# ── Public Croatian statute scrape (Narodne Novine) ─────────────────────────
+narodne_novine:
+  # Consolidated (pročišćeni) acts published since 2015. The list page pattern:
+  # https://narodne-novine.nn.hr/search.aspx?sort=najnovije_prvo&q={query}&kategorija=1
+  years: [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+  max_acts_per_year: 120
+  request_delay_seconds: 1.0        # polite scraping
+  user_agent: "sudacka-finetune/1.0 (+training corpus; contact@ai-elevate.ai)"
+
+# ── EUR-Lex (EU law in Croatian — language code HRV) ───────────────────────
+eurlex:
+  # CELEX document types we care about:
+  #   3 — Directives        (3xxxxLxxxx)
+  #   4 — Regulations       (3xxxxRxxxx)
+  #   6 — ECJ case-law      (6xxxxCJxxxx)
+  sectors: ["3", "6"]
+  # Limit the initial pull; increase after pipeline is proven end-to-end.
+  max_docs_per_sector: 1500
+  language: "HRV"
+  request_delay_seconds: 1.0
+
+# ── Textbook PDFs (drop yours into ./textbooks/) ────────────────────────────
+textbooks:
+  input_dir: "./textbooks"
+  min_chunk_chars: 500
+  max_chunk_chars: 3500
+  # If a PDF is scanned/image-only, shell out to tesseract for OCR.
+  ocr_fallback: true
+
+# ── Instruction synthesis ──────────────────────────────────────────────────
+instructions:
+  # Per-document, ask the Gemma instance on the dev server to generate
+  # training-style questions. Temperature 0.4 keeps variety without
+  # hallucinating legal facts. Reasoning budget is needed (Gemma 4 thinks
+  # internally before emitting the final JSON).
+  llm_endpoint: "http://176.9.99.103:11434/v1/chat/completions"
+  llm_model: "gemma-4-26b-a4b"
+  max_new_tokens: 2000
+  temperature: 0.4
+  requests_per_source: 3            # generate up to 3 Q&A pairs per doc
+  skip_if_exists: true              # resume-friendly
+  parallel_workers: 4               # modest parallelism — shared GPU
+  system_prompt: |
+    You are an expert in Croatian law helping build a training dataset for
+    a Croatian legal assistant model. Generate realistic questions a Croatian
+    lawyer, judge, or law student would ask about this document, and answer
+    them accurately using ONLY facts present in the document text. Output
+    valid JSON. Never invent case numbers, dates, or citations.
+
+# ── Training (QLoRA via Unsloth) ───────────────────────────────────────────
+train:
+  output_dir: "./adapters/gemma-4-e4b-croatian-legal"
+  # LoRA config — rank 32 gives the adapter enough capacity for a narrow
+  # legal domain; alpha=rank*2 is a safe default for Gemma.
+  lora_r: 32
+  lora_alpha: 64
+  lora_dropout: 0.05
+  # All linear projections plus the MoE gating; Unsloth handles the MoE
+  # routing internally when target_modules="all-linear".
+  target_modules: "all-linear"
+
+  # Sequence + batching tuned for RTX 4090 24 GB + 26B base.
+  max_seq_length: 2048
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 32   # effective batch = 32
+  num_train_epochs: 1
+  warmup_ratio: 0.03
+  learning_rate: 2.0e-4
+  lr_scheduler_type: "cosine"
+  optim: "paged_adamw_8bit"
+  weight_decay: 0.01
+  max_grad_norm: 0.3
+  logging_steps: 10
+  save_steps: 250
+  save_total_limit: 3
+  gradient_checkpointing: true
+  seed: 42
+  # Set true for a fast sanity run (500 steps, small subset).
+  smoke_test: false
+
+# ── Post-training: merge adapter + re-quantize to GGUF for Ollama ──────────
+export:
+  gguf_output: "./adapters/gemma-4-e4b-croatian-legal.gguf"
+  quantization: "q4_k_m"            # same quant as the deployed 26B
+  ollama_model_name: "gemma-4-e4b-croatian-legal"
+  ollama_system_prompt: |
+    Ti si pravni asistent specijaliziran za hrvatsko i europsko pravo.
+    Odgovaraj precizno, citiraj relevantne propise i sudske odluke kada je
+    moguće. Ako nisi siguran, reci otvoreno da ne znaš umjesto nagađanja.
+
+# ── Evaluation ─────────────────────────────────────────────────────────────
+eval:
+  holdout_ratio: 0.05               # 5% held out for eval
+  eval_samples: 50                  # run held-out subset against the model
+  metrics: ["loss", "legal_citation_accuracy"]
