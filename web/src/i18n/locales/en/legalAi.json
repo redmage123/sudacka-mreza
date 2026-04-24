@@ -1,0 +1,44 @@
+{
+  "title": "Legal Assistant",
+  "lead": "Ask a question about Croatian law. Every answer is backed by citations to primary sources — statutes and court decisions — that you can inspect.",
+  "disclaimer": "Answers are automated and intended as informational support only. They do not constitute legal advice. Always verify each claim against the cited sources or consult a licensed lawyer.",
+  "placeholder": "e.g. When does the statute of limitations begin to run for a damages claim?",
+  "submit": "Ask",
+  "submitting": "Finding an answer…",
+  "clear": "Clear",
+  "status": {
+    "answered": "Answer grounded in sources",
+    "flagged": "Answer needs review (see below)",
+    "flagged_nli": "Answer needs review — some claims not fully supported",
+    "refused_by_model": "The assistant could not answer this question",
+    "refused_low_retrieval": "Not enough source material for a reliable answer",
+    "llm_error": "Error — the assistant is temporarily unavailable"
+  },
+  "answerHeading": "Answer",
+  "sourcesHeading": "Sources",
+  "sourcesHint": "Every claim in the answer draws from these passages. Always review the source before acting on the answer.",
+  "noSources": "No relevant sources were found for this question.",
+  "passageLabel": "Passage",
+  "openSource": "Open source",
+  "verification": {
+    "heading": "Verification",
+    "citationsValid": "All [N] references resolve to real passages",
+    "citationsInvalid": "Invalid [N] references: {{list}}",
+    "entitiesGrounded": "All legal entities (case numbers, articles, dates) appear in the cited sources",
+    "ungrounded": "Entities not grounded in sources: {{list}}",
+    "nliSupported": "Semantic check: {{n}} claims fully supported",
+    "nliPartial": "Partially supported claims: {{n}}",
+    "nliUnsupported": "Unsupported claims: {{n}}",
+    "nliNeutral": "Neutral (introductory) statements: {{n}}"
+  },
+  "retrieval": {
+    "low": "Search returned only weakly relevant material.",
+    "ok": "Search returned relevant sources."
+  },
+  "errors": {
+    "tooShort": "Question must be at least 3 characters",
+    "tooLong": "Question is too long (max 2000 chars)",
+    "network": "Network error — please try again",
+    "rateLimit": "Too many requests. Please wait a moment."
+  }
+}

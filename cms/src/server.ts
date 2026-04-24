@@ -7,6 +7,7 @@ import courtFeeRouter from './routes/court-fee.js'
 import { createDecisionsSearchRouter } from './routes/decisions-search.js'
 import { createGlobalSearchRouter } from './routes/global-search.js'
 import { createJurisdictionRouter } from './routes/jurisdiction.js'
+import { createLegalAiRouter } from './routes/legal-ai.js'
 import { createRssRouter } from './routes/rss.js'
 
 const app = express()
@@ -49,6 +50,7 @@ const start = async () => {
   //   GET  /api/court-fee/calculate         Court fee calculator
   //   GET  /api/court-fee/types             Proceeding type list for UI dropdowns
   //   GET  /api/jurisdiction                Point-in-polygon jurisdiction lookup
+  //   POST /api/legal-ai/ask                Retrieval-grounded Q&A over Croatian law
   //   GET  /api/rss/court-decisions.xml     RSS 2.0 feed (latest 50 decisions)
   // ---------------------------------------------------------------------------
   app.use('/api', contactRouter)
@@ -56,6 +58,7 @@ const start = async () => {
   app.use('/api', createDecisionsSearchRouter(payload))
   app.use('/api', createGlobalSearchRouter(payload))
   app.use('/api', createJurisdictionRouter(payload))
+  app.use('/api', createLegalAiRouter())
   app.use('/api', createRssRouter(payload))
 
   const port = parseInt(process.env.PORT || '4094', 10)

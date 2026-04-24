@@ -38,6 +38,7 @@ const BankruptcyDecisionsPage = lazy(() => import('@/pages/bankruptcy/Bankruptcy
 // Static pages
 const CalculatorPage = lazy(() => import('@/pages/CalculatorPage'))
 const LegalAidPage = lazy(() => import('@/pages/LegalAidPage'))
+const LegalAiPage = lazy(() => import('@/pages/LegalAiPage'))
 const AboutPage = lazy(() => import('@/pages/AboutPage'))
 const ContactPage = lazy(() => import('@/pages/ContactPage'))
 
@@ -110,6 +111,7 @@ export const router = createBrowserRouter([
       // Calculator & static
       { path: 'pristojbe', element: S(CalculatorPage) },
       { path: 'pravna-pomoc', element: S(LegalAidPage) },
+      { path: 'pravni-asistent', element: S(LegalAiPage) },
       { path: 'o-nama', element: S(AboutPage) },
       { path: 'kontakt', element: S(ContactPage) },
 

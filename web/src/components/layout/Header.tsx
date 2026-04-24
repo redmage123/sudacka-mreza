@@ -150,6 +150,18 @@ export function Header() {
             >
               {t('calculator')}
             </NavLink>
+            <NavLink
+              to={`/${lang}/pravni-asistent`}
+              className={({ isActive }) =>
+                `px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'text-[color:var(--color-brand-gold)] border-b-2 border-[color:var(--color-brand-gold)]'
+                    : 'text-[color:var(--color-text-inverse)] hover:text-[color:var(--color-brand-gold-light)]'
+                }`
+              }
+            >
+              {t('legalAi')}
+            </NavLink>
           </nav>
 
           {/* Right-side controls */}

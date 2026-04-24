@@ -1,0 +1,44 @@
+{
+  "title": "Pravni asistent",
+  "lead": "Postavite pitanje o hrvatskom pravu. Odgovor uključuje citate iz izvornih zakonskih akata i sudskih odluka koji su dostupni za provjeru.",
+  "disclaimer": "Odgovori su automatizirani i služe isključivo kao informativna pomoć. Ne predstavljaju pravni savjet. Svaku tvrdnju uvijek provjerite u priloženim izvorima ili se obratite ovlaštenom pravniku.",
+  "placeholder": "Npr. Kada zastara zahtjeva za naknadu štete počinje teći?",
+  "submit": "Postavi pitanje",
+  "submitting": "Tražim odgovor…",
+  "clear": "Obriši",
+  "status": {
+    "answered": "Odgovor grounded u izvorima",
+    "flagged": "Odgovor zahtijeva pregled (vidi ispod)",
+    "flagged_nli": "Odgovor zahtijeva pregled — dio tvrdnji nije u potpunosti potvrđen",
+    "refused_by_model": "Asistent nije mogao odgovoriti",
+    "refused_low_retrieval": "Nedovoljno izvora za pouzdan odgovor",
+    "llm_error": "Greška — asistent trenutno nije dostupan"
+  },
+  "answerHeading": "Odgovor",
+  "sourcesHeading": "Izvori",
+  "sourcesHint": "Sve tvrdnje u odgovoru oslanjaju se na ove pasuse. Uvijek otvorite izvor prije donošenja odluke.",
+  "noSources": "Nema relevantnih izvora za ovo pitanje.",
+  "passageLabel": "Pasus",
+  "openSource": "Otvori izvor",
+  "verification": {
+    "heading": "Provjera",
+    "citationsValid": "Sve reference [N] vode do stvarnih pasusa",
+    "citationsInvalid": "Reference [N] koje ne postoje: {{list}}",
+    "entitiesGrounded": "Svi navedeni pravni entiteti (brojevi predmeta, članci, datumi) nalaze se u izvorima",
+    "ungrounded": "Entiteti koji nisu potvrđeni u izvorima: {{list}}",
+    "nliSupported": "Semantička provjera: {{n}} tvrdnji potpuno potvrđeno",
+    "nliPartial": "Djelomično potvrđenih tvrdnji: {{n}}",
+    "nliUnsupported": "Neotvrđenih tvrdnji: {{n}}",
+    "nliNeutral": "Neutralnih tvrdnji (uvodnih): {{n}}"
+  },
+  "retrieval": {
+    "low": "Pretraga pronašla samo slabo relevantne materijale.",
+    "ok": "Pretraga pronašla relevantne izvore."
+  },
+  "errors": {
+    "tooShort": "Pitanje mora imati najmanje 3 znaka",
+    "tooLong": "Pitanje je predugačko (maks. 2000 znakova)",
+    "network": "Greška mreže — pokušajte ponovno",
+    "rateLimit": "Previše upita u kratkom vremenu. Pričekajte koju minutu."
+  }
+}

@@ -4,8 +4,10 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import hrNav from './locales/hr/nav.json'
 import hrCommon from './locales/hr/common.json'
+import hrLegalAi from './locales/hr/legalAi.json'
 import enNav from './locales/en/nav.json'
 import enCommon from './locales/en/common.json'
+import enLegalAi from './locales/en/legalAi.json'
 
 export const SUPPORTED_LANGUAGES = ['hr', 'en'] as const
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
@@ -16,13 +18,13 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      hr: { nav: hrNav, common: hrCommon },
-      en: { nav: enNav, common: enCommon },
+      hr: { nav: hrNav, common: hrCommon, legalAi: hrLegalAi },
+      en: { nav: enNav, common: enCommon, legalAi: enLegalAi },
     },
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: SUPPORTED_LANGUAGES,
     defaultNS: 'common',
-    ns: ['common', 'nav'],
+    ns: ['common', 'nav', 'legalAi'],
     interpolation: {
       escapeValue: false, // React already escapes
     },
