@@ -21,6 +21,17 @@
 import { Router, type Request, type Response } from 'express'
 import type { Payload } from 'payload'
 
+import {
+  detectCaseNumberInQuery,
+  exactCaseLookup,
+  isRefusal,
+  nliVerify,
+  trimLlmOutput,
+  verifyAnswerRegex,
+  type NliResult,
+  type RegexVerification,
+} from './_chat_verify.js'
+
 type PgPool = {
   query: (sql: string, params: unknown[]) => Promise<{ rows: Array<Record<string, unknown>> }>
 }
@@ -51,6 +62,18 @@ function llmHeaders(): Record<string, string> {
 
 const RETRIEVAL_CANDIDATE_K = Number(process.env.RETRIEVAL_CANDIDATE_K || '50')
 const ENABLE_RERANK = process.env.ENABLE_RERANK !== '0'
+
+// ── Verification toggles ──────────────────────────────────────────────────
+// Default-on: accuracy > latency for a legal assistant.
+const VERIFY_REGEX = process.env.VERIFY_REGEX !== '0'
+const VERIFY_NLI = process.env.VERIFY_NLI !== '0'
+const EXACT_CASE_LOOKUP = process.env.EXACT_CASE_LOOKUP !== '0'
+const REFUSE_ON_EMPTY_RETRIEVAL = process.env.REFUSE_ON_EMPTY_RETRIEVAL !== '0'
+// Judge model for NLI. Must be a model that's already loaded on Ollama so
+// we don't pay cold-start latency per claim. gemma-4-e4b-base coexists
+// fine with the main chat model on a 20 GB GPU.
+const NLI_MODEL = process.env.NLI_MODEL || 'gemma-4-e4b-base'
+const NLI_MAX_CLAIMS = Number(process.env.NLI_MAX_CLAIMS || '6')
 
 // Shape of a single hybrid-search result we need for context + citations.
 interface SearchDoc {
@@ -674,11 +697,65 @@ export function createChatRouter(payload: Payload): Router {
       : undefined
 
     let docs: SearchDoc[] = []
+    const pool = (payload.db as { pool: PgPool }).pool
+
+    // ── Exact case-number shortcut ─────────────────────────────────────────
+    // Questions like "Sažmi kratko predmet Pp-4159/2024-5" or "Kojeg datuma je
+    // donesena odluka u predmetu Gž-461/2022-2?" are keyed lookups, not
+    // semantic ones. Hybrid search loses these among ~9k near-identical court
+    // templates — resolve them directly against court_decisions so the right
+    // decision lands at position [1] before the hybrid retriever runs.
+    const exactCaseNumber = EXACT_CASE_LOOKUP ? detectCaseNumberInQuery(question) : null
+    let exactHit: SearchDoc | null = null
+    if (exactCaseNumber) {
+      const hits = await exactCaseLookup(exactCaseNumber, pool, 1)
+      if (hits.length > 0) {
+        const h = hits[0]
+        exactHit = {
+          id: h.id,
+          kind: 'decision' as const,
+          title: h.title,
+          caseNumber: h.caseNumber,
+          date: h.date,
+          court: h.court,
+          slug: h.slug,
+          excerpt: h.excerpt,
+        }
+        payload.logger.info({ caseNumber: exactCaseNumber }, 'chat: exact case-ID shortcut hit')
+      }
+    }
+
     try {
-      const pool = (payload.db as { pool: PgPool }).pool
       docs = await retrieveContext(question, pool, RETRIEVAL_TOP_K)
     } catch (e) {
       payload.logger.warn({ err: e }, 'hybrid-search failed; proceeding without context')
+    }
+
+    // Prepend the exact hit (if any) and dedupe by id so it's at position [1].
+    if (exactHit) {
+      docs = [exactHit, ...docs.filter((d) => d.id !== exactHit!.id)]
+    }
+
+    // ── Empty-retrieval refusal gate ──────────────────────────────────────
+    // Without any cited context the model will try to answer from parametric
+    // memory. For a legal assistant that's the path to hallucinations.
+    if (REFUSE_ON_EMPTY_RETRIEVAL && docs.length === 0) {
+      res.setHeader('Content-Type', 'application/x-ndjson; charset=utf-8')
+      res.setHeader('Cache-Control', 'no-cache, no-store')
+      res.flushHeaders?.()
+      const refusal =
+        'Na temelju priloženih izvora ne mogu pouzdano odgovoriti na ovo pitanje. ' +
+        'Preporučujem konzultirati izvornu zakonsku odredbu ili nadležni sud.'
+      res.write(JSON.stringify({ type: 'token', text: refusal }) + '\n')
+      res.write(JSON.stringify({ type: 'citations', citations: [] }) + '\n')
+      res.write(JSON.stringify({
+        type: 'done',
+        answer: refusal,
+        status: 'refused_low_retrieval',
+        trustworthy: false,
+      }) + '\n')
+      res.end()
+      return
     }
 
     const messages = buildMessages(question, docs, history, preferredLang)
@@ -714,9 +791,89 @@ export function createChatRouter(payload: Payload): Router {
         res.write(JSON.stringify({ type: 'token', text: chunk }) + '\n')
       })
       payload.logger.info({ totalMs: Date.now() - t0, chars: full.length }, 'chat: streamModel done')
-      const answer = full.replace(/^<think>[\s\S]*?<\/think>\s*/i, '').trim()
+
+      // Strip thinking tags + trim any trailing context-delimiter leakage.
+      const stripped = full.replace(/^<think>[\s\S]*?<\/think>\s*/i, '').trim()
+      const answer = trimLlmOutput(stripped)
+
       res.write(JSON.stringify({ type: 'citations', citations }) + '\n')
-      res.write(JSON.stringify({ type: 'done', answer }) + '\n')
+
+      // ── Post-stream verification ─────────────────────────────────────────
+      // Passage texts the verifiers compare against — what the LLM actually
+      // saw, including header + excerpt.
+      const passagesForVerify = docs.map((d, i) => ({
+        index: i + 1,
+        text: [
+          d.title ?? '',
+          d.court?.name ?? '',
+          d.caseNumber ?? '',
+          d.author ?? '',
+          d.excerpt ?? '',
+        ].filter((x) => x).join(' · '),
+      }))
+      const passageTexts = passagesForVerify.map((p) => p.text)
+
+      let regex: RegexVerification | null = null
+      let nli: NliResult | null = null
+
+      if (VERIFY_REGEX && answer.length > 0) {
+        try {
+          regex = verifyAnswerRegex(answer, passageTexts, question)
+        } catch (e) {
+          payload.logger.warn({ err: e }, 'regex verify failed')
+        }
+      }
+
+      const refusedByModel = isRefusal(answer)
+      if (VERIFY_NLI && answer.length > 0 && !refusedByModel) {
+        try {
+          nli = await nliVerify(answer, passagesForVerify, {
+            endpoint: CHAT_ENDPOINT,
+            model: NLI_MODEL,
+            token: LLM_API_TOKEN || undefined,
+            maxClaims: NLI_MAX_CLAIMS,
+          })
+          payload.logger.info({
+            faithful: nli.faithful,
+            nClaims: nli.nClaims,
+            sup: nli.nSupported,
+            uns: nli.nUnsupported,
+          }, 'chat: NLI verification done')
+        } catch (e) {
+          payload.logger.warn({ err: e }, 'NLI verify failed')
+        }
+      }
+
+      // Status resolution
+      let status: 'answered' | 'flagged' | 'flagged_nli' | 'refused_by_model'
+      if (refusedByModel) {
+        status = 'refused_by_model'
+      } else if (regex && (!regex.citationsValid || !regex.entitiesGrounded)) {
+        status = 'flagged'
+      } else if (nli && !nli.faithful) {
+        status = 'flagged_nli'
+      } else {
+        status = 'answered'
+      }
+      const trustworthy = status === 'answered'
+
+      if (regex || nli) {
+        res.write(JSON.stringify({
+          type: 'verification',
+          regex,
+          nli: nli ? {
+            faithful: nli.faithful,
+            nClaims: nli.nClaims,
+            nSupported: nli.nSupported,
+            nPartial: nli.nPartial,
+            nUnsupported: nli.nUnsupported,
+            nNeutral: nli.nNeutral,
+            claims: nli.claims,
+          } : null,
+        }) + '\n')
+      }
+
+      res.write(JSON.stringify({ type: 'done', answer, status, trustworthy }) + '\n')
       res.end()
     } catch (e) {
       payload.logger.error({ err: e }, 'chat LLM streaming failed')
