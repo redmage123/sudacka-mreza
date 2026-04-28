@@ -2,6 +2,7 @@ import * as migration_20260321_191618 from './20260321_191618';
 import * as migration_20260321_enable_pg_trgm from './20260321_enable_pg_trgm';
 import * as migration_20260322_legal_categories from './20260322_legal_categories';
 import * as migration_20260327_judges from './20260327_judges';
+import * as migration_20260428_chat_feedback from './20260428_chat_feedback';
 
 export const migrations = [
   {
@@ -23,5 +24,10 @@ export const migrations = [
     up: migration_20260327_judges.up,
     down: migration_20260327_judges.down,
     name: '20260327_judges',
+  },
+  {
+    up: migration_20260428_chat_feedback.up,
+    down: migration_20260428_chat_feedback.down,
+    name: '20260428_chat_feedback',
   },
 ];
