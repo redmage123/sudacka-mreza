@@ -48,13 +48,24 @@ function celexPattern() {
   throw new Error('--scope must be caselaw | legislation | both')
 }
 
-function buildDiscoverQuery(offset) {
+function buildDiscoverQuery(offset, fromYear, toYear) {
+  // Year-bounded sub-query keeps every individual SELECT under the
+  // 10 000-row server cap (Virtuoso ResultSetMaxRows). Without
+  // year filters the SPARQL endpoint returns at most 10 000 rows
+  // *across all pagination*, so the obvious LIMIT/OFFSET loop never
+  // gets past 10 K. Caller chunks across years; each chunk is a
+  // fresh query with a fresh row budget.
+  const yearFilter =
+    fromYear && toYear
+      ? `FILTER (year(?date) >= ${fromYear} && year(?date) <= ${toYear})`
+      : ''
   return `
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 SELECT DISTINCT ?celex ?date WHERE {
   ?work cdm:resource_legal_id_celex ?celex ;
         cdm:work_date_document      ?date .
   FILTER (regex(STR(?celex), "${celexPattern()}"))
+  ${yearFilter}
 }
 ORDER BY ASC(?date)
 LIMIT ${PAGE_SIZE}
@@ -80,33 +91,63 @@ async function runQuery(query) {
 
 async function phaseDiscover() {
   log(`phase=discover scope=${SCOPE} out=${OUT}/index.csv`)
+  const yearFrom = parseInt(getArg('year-from', '0'), 10) // 0 = no filter
+  const yearTo = parseInt(getArg('year-to', '0'), 10)
   const idxPath = path.join(OUT, 'index.csv')
   const fd = fs.openSync(idxPath, 'a')
+  let queriesUsed = 0
+  let totalRows = 0
   try {
     if (fs.statSync(idxPath).size === 0) fs.writeSync(fd, 'celex,date\n')
-    let offset = 0
-    let totalRows = 0
-    for (let q = 0; q < MAX_QUERIES; q++) {
-      log(`  query #${q + 1} offset=${offset}`)
-      let rows
-      try {
-        rows = await runQuery(buildDiscoverQuery(offset))
-      } catch (e) {
-        log(`  ! ${e.message} — backing off 30s`)
-        await sleep(30000)
-        rows = await runQuery(buildDiscoverQuery(offset))
+
+    // Chunk by year buckets when caller didn't pin a single window.
+    // Default buckets cover 1952 → next year, in 5-year slices.
+    let buckets
+    if (yearFrom && yearTo) {
+      buckets = [[yearFrom, yearTo]]
+    } else {
+      const now = new Date().getUTCFullYear() + 1
+      buckets = []
+      const start = SCOPE === 'caselaw' ? 1952 : 1952
+      let y = start
+      while (y < now) {
+        const end = Math.min(y + 4, now - 1)
+        buckets.push([y, end])
+        y = end + 1
       }
-      for (const row of rows) {
-        const celex = (row.celex?.value || '').trim()
-        const date = (row.date?.value || '').slice(0, 10)
-        if (celex) {
-          fs.writeSync(fd, `${celex},${date}\n`)
-          totalRows++
+    }
+
+    for (const [fy, ty] of buckets) {
+      log(`bucket ${fy}–${ty}`)
+      let offset = 0
+      for (let q = 0; q < MAX_QUERIES && queriesUsed < MAX_QUERIES; q++) {
+        log(`  query #${++queriesUsed} bucket=${fy}-${ty} offset=${offset}`)
+        let rows
+        try {
+          rows = await runQuery(buildDiscoverQuery(offset, fy, ty))
+        } catch (e) {
+          log(`  ! ${e.message} — backing off 30s`)
+          await sleep(30000)
+          try {
+            rows = await runQuery(buildDiscoverQuery(offset, fy, ty))
+          } catch (ee) {
+            log(`  !! second failure: ${ee.message} — skipping bucket`)
+            break
+          }
         }
+        for (const row of rows) {
+          const celex = (row.celex?.value || '').trim()
+          const date = (row.date?.value || '').slice(0, 10)
+          if (celex) {
+            fs.writeSync(fd, `${celex},${date}\n`)
+            totalRows++
+          }
+        }
+        log(`    +${rows.length} rows (running total ${totalRows})`)
+        if (rows.length < PAGE_SIZE) break
+        offset += PAGE_SIZE
+        await sleep(DELAY)
       }
-      log(`    +${rows.length} rows (total ${totalRows})`)
-      if (rows.length < PAGE_SIZE) break
-      offset += PAGE_SIZE
       await sleep(DELAY)
     }
     log(`discover done — ${totalRows} CELEX rows → ${idxPath}`)

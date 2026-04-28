@@ -93,6 +93,7 @@ export function Header() {
       label: t('decisions'),
       items: [
         { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
+        { to: `/${lang}/eur-lex`, label: t('eurlexSearch', 'EUR-Lex search') },
         { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
         { to: `/${lang}/rokovi`, label: t('deadlines') },
       ],

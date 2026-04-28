@@ -17,6 +17,7 @@ const DecisionDetailPage = lazy(() => import('@/pages/decisions/DecisionDetailPa
 const VTSDecisionsPage = lazy(() => import('@/pages/decisions/VTSDecisionsPage'))
 const ESLJPDecisionsPage = lazy(() => import('@/pages/decisions/ESLJPDecisionsPage'))
 const ECJDecisionsPage = lazy(() => import('@/pages/decisions/ECJDecisionsPage'))
+const EurLexSearchPage = lazy(() => import('@/pages/EurLexSearchPage'))
 
 // Experts
 const ExpertsPage = lazy(() => import('@/pages/experts/ExpertsPage'))
@@ -156,6 +157,7 @@ export const router = createBrowserRouter([
       { path: 'sudska-praksa/vts', element: S(VTSDecisionsPage) },
       { path: 'sudska-praksa/esljp', element: S(ESLJPDecisionsPage) },
       { path: 'sudska-praksa/ecj', element: S(ECJDecisionsPage) },
+      { path: 'eur-lex', element: S(EurLexSearchPage) },
       { path: 'sudska-praksa/:id', element: S(DecisionDetailPage) },
 
       // Experts
