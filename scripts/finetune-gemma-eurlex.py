@@ -97,6 +97,10 @@ def main() -> None:
         dtype=None,  # auto
         load_in_4bit=True,
     )
+    # Gemma 3n loads as a multimodal Processor. SFTTrainer wants a plain
+    # PreTrainedTokenizer — unwrap if needed.
+    if hasattr(tokenizer, "tokenizer"):
+        tokenizer = tokenizer.tokenizer
     model = FastLanguageModel.get_peft_model(
         model,
         r=args.lora_r,
