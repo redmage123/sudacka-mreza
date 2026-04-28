@@ -1,0 +1,22 @@
+{
+  "title": "Juridiskais asistent",
+  "openWidget": "Atvērt juridiskais asistents",
+  "closeWidget": "Slēpt juridiskais asistents",
+  "placeholder": "Jautājiet par Kroācijas vai ES tiesību...",
+  "send": "Sūtīt",
+  "stop": "Pārtraukt",
+  "clear": "Lietotni aprietnieku",
+  "thinking": "Dum...",
+  "emptyHint": "Jautājiet man par tiesas praksi, likumdošanu vai juridiskajiem jēdzieniem.",
+  "sources": "Avoti",
+  "error": "Kasdien kaut ko nebija pareizi. Lūdzu, mēģiniet atkal.",
+  "helpful": "Vai šis atbilde bija noderīga?",
+  "yes": "Jā",
+  "no": "Nē",
+  "cancel": "Atcel{",
+  "correctionTitle": "Iieteikt labāku atbildi",
+  "correctionPlaceholder": "Ko asistents vajadzētu teikt?",
+  "correctionSubmit": "Iesniegt atsauci",
+  "correctionThanks": "Paldies par jūsu atsauci.",
+  "langSwitched": "Pātrunots uz {{lang}} — jaunas atbildes tiks šajā valodā."
+}

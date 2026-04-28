@@ -1,0 +1,22 @@
+{
+  "title": "Teisinis asistentas",
+  "openWidget": "Atsidaryti teisinės pagalbos asistentą",
+  "closeWidget": "Pasleisti teisinės pagalbos asistentą",
+  "placeholder": "Pasiteikykite klausimą apie Kroatijos ar ES teisę...",
+  "send": "Siųsti",
+  "stop": "Pauzė",
+  "clear": "Išvalyti pokalbį",
+  "thinking": "Mąšilau...",
+  "emptyHint": "Pasiteikykite klausimą apie teisinę jurisprudenciją, teisėkainę teisę ar teisinius konceptus.",
+  "sources": "Šaltiniai",
+  "error": "Įvyko klaida. Išbandykite dar kartą.",
+  "helpful": "Ar šis atsakymas buvo naudingas?",
+  "yes": "Taip",
+  "no": "Ne",
+  "cancel": "Atšaukti",
+  "correctionTitle": "Siūlyti geresnį atsakymą",
+  "correctionPlaceholder": "Kas turėjo pasakyti asistentas?",
+  "correctionSubmit": "Pateikti atsiliepimą",
+  "correctionThanks": "Ačiū už jūsų atsiliepimą.",
+  "langSwitched": "Perjungta į {{lang}} — nauji atsakymai bus šiuo kalba."
+}

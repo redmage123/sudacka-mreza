@@ -1,0 +1,22 @@
+{
+  "title": "法務アシスタント",
+  "openWidget": "法務アシスタントを開く",
+  "closeWidget": "法務アシスタントを閉じる",
+  "placeholder": "クロアチア法またはEU法に関する質問をしてください...",
+  "send": "送信",
+  "stop": "停止",
+  "clear": "会話を消去",
+  "thinking": "思考中...",
+  "emptyHint": "判例、法令、または法概念について質問してください。",
+  "sources": "出典",
+  "error": "何らかの誤りが発生しました。もう一度お試しください。",
+  "helpful": "この回答は役に立ちましたか？",
+  "yes": "はい",
+  "no": "いいえ",
+  "cancel": "キャンセル",
+  "correctionTitle": "より良い回答を提案してください",
+  "correctionPlaceholder": "アシスタントは何と言うべきでしたか？",
+  "correctionSubmit": "フィードバックを送信",
+  "correctionThanks": "フィードバックありがとうございます。",
+  "langSwitched": "{{lang}}に切り替えました — 新しい返信はこの言語で表示されます。"
+}

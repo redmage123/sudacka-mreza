@@ -1,0 +1,22 @@
+{
+  "title": "Jogi asszisztens",
+  "openWidget": "Megnyitni jogi asszisztenset",
+  "closeWidget": "Bezaktivirati jogi asszisztenset",
+  "placeholder": "Kérj kérdést hrvatski vagy EU jogról...",
+  "send": "Küldés",
+  "stop": "Leállítása",
+  "clear": "Üzenet törlése",
+  "thinking": "Gondolkodik...",
+  "emptyHint": "Kérj kérdést jogi precedensiókról, jogszabályokról vagy jogi fogalmakról.",
+  "sources": "Források",
+  "error": "Valami hibás történt. Kérjük, próbálja újra.",
+  "helpful": "E válasz hasznos volt?",
+  "yes": "Igen",
+  "no": "Nem",
+  "cancel": "Mégse",
+  "correctionTitle": "Javasol egy jobb választ",
+  "correctionPlaceholder": "Mit kellett volna mondania az asszisztensnek?",
+  "correctionSubmit": "Visszajelzés küldése",
+  "correctionThanks": "Köszönjük visszajelzését.",
+  "langSwitched": "Átváltam a {{lang}}-re — az új válaszok ebben a nyelvbben érkeznek."
+}

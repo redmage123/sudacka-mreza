@@ -1,0 +1,22 @@
+{
+  "title": "Pravni asistent",
+  "openWidget": "Otvori pravnog asistenta",
+  "closeWidget": "Zatvori pravnog asistenta",
+  "placeholder": "Postavite pitanje o hrvatskom ili EU pravu...",
+  "send": "Pošalji",
+  "stop": "Zaustavi",
+  "clear": "Očisti razgovor",
+  "thinking": "Razmišljam...",
+  "emptyHint": "Pitajte me o sudskoj praksi, propisima ili pravnim pojmovima.",
+  "sources": "Izvori",
+  "error": "Nešto je pošlo po zlu. Pokušajte ponovno.",
+  "helpful": "Je li ovaj odgovor bio koristan?",
+  "yes": "Da",
+  "no": "Ne",
+  "cancel": "Odustani",
+  "correctionTitle": "Predloži bolji odgovor",
+  "correctionPlaceholder": "Što je asistent trebao reći?",
+  "correctionSubmit": "Pošalji povratnu informaciju",
+  "correctionThanks": "Hvala na povratnoj informaciji.",
+  "langSwitched": "Prebačeno na {{lang}} — novi odgovori bit će na tom jeziku."
+}

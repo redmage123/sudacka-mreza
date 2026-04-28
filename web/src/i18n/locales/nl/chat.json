@@ -1,0 +1,22 @@
+{
+  "title": "Juridisch Assistent",
+  "openWidget": "Open juridisch assistent",
+  "closeWidget": "Sluit juridisch assistent",
+  "placeholder": "Stel een vraag over Kroatisch of EU recht...",
+  "send": "Verzenden",
+  "stop": "Stoppen",
+  "clear": "Gesprek wissen",
+  "thinking": "Denkt...",
+  "emptyHint": "Vraag mij iets over jurisprudentie, wetgeving of juridische concepten.",
+  "sources": "Bronnen",
+  "error": "Er is iets misgegaan. Probeer het opnieuw.",
+  "helpful": "Was dit antwoord behulpzaam?",
+  "yes": "Ja",
+  "no": "Nee",
+  "cancel": "Annuleren",
+  "correctionTitle": "Suggesteer een beter antwoord",
+  "correctionPlaceholder": "Wat had de assistent moeten zeggen?",
+  "correctionSubmit": "Feedback indienen",
+  "correctionThanks": "Bedankt voor uw feedback.",
+  "langSwitched": "Omgeschakeld naar {{lang}} — nieuwe antwoorden zullen in deze taal komen."
+}

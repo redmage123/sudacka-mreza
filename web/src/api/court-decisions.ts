@@ -46,6 +46,10 @@ export async function searchDecisions(
   if (params.type !== undefined && params.type !== '') {
     queryParams['decisionType'] = params.type
   }
+  if (params.locale !== undefined && params.locale !== '') {
+    // Backend translates title + excerpt of the page slice when lang ≠ hr.
+    queryParams['lang'] = params.locale
+  }
 
   return apiFetch('/decisions/hybrid-search', PayloadListSchema(CourtDecisionSummarySchema), {
     params: queryParams,

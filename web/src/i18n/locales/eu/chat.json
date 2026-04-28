@@ -1,0 +1,22 @@
+{
+  "title": "Asistente Legal",
+  "openWidget": "Abre el asistente legal",
+  "closeWidget": "Cerrar asistente legal",
+  "placeholder": "Pregunta sobre derecho croata o de la UE...",
+  "send": "Enviar",
+  "stop": "Detener",
+  "clear": "Borrar conversación",
+  "thinking": "Pensando...",
+  "emptyHint": "Pregúntame sobre jurisprudencia, legislación o conceptos legales.",
+  "sources": "Fuentes",
+  "error": "Algo salió mal. Por favor, inténtalo de nuevo.",
+  "helpful": "¿Fue útil esta respuesta?",
+  "yes": "Sí",
+  "no": "No",
+  "cancel": "Cancelar",
+  "correctionTitle": "Sugerir una mejor respuesta",
+  "correctionPlaceholder": "¿Qué debería haber dicho el asistente?",
+  "correctionSubmit": "Enviar comentarios",
+  "correctionThanks": "Gracias por tus comentarios.",
+  "langSwitched": "Cambiado a {{lang}} — las nuevas respuestas vendrán en este idioma."
+}

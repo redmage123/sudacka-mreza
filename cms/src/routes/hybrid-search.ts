@@ -28,6 +28,8 @@
 
 import { Router, type Request, type Response } from 'express'
 
+import { translateBatch } from '../utils/translateLegal.js'
+
 const RAG_URL = process.env.RAG_URL || 'http://localhost:8020'
 const RAG_API_KEY = process.env.RAG_API_KEY || 'rag_ak_aielevate_2026_secret'
 
@@ -312,6 +314,37 @@ export function createHybridSearchRouter(payload: any) {
           return formatDoc(row, ftsEntry?.row?.excerpt ?? null, score, mode)
         })
         .filter((d): d is NonNullable<typeof d> => d !== null)
+
+      // Optional on-demand translation of title + excerpt for non-Croatian
+      // UI languages. We translate the page slice only (not the full result
+      // set) so latency scales with `limit`, not the corpus.
+      const lang = String(req.query.lang || '').toLowerCase().trim()
+      if (lang && lang !== 'hr' && /^[a-z]{2}$/.test(lang)) {
+        try {
+          const fields = docs.flatMap((d) => {
+            const out: Array<{ entityType: 'decision'; entityId: string; field: 'title' | 'excerpt'; text: string }> = []
+            if (d.title) out.push({ entityType: 'decision', entityId: d.id, field: 'title', text: d.title })
+            if (d.excerpt) out.push({ entityType: 'decision', entityId: d.id, field: 'excerpt', text: d.excerpt })
+            return out
+          })
+          const translations = await translateBatch(payload, lang, fields)
+          for (const d of docs) {
+            const tT = translations.get(`decision:${d.id}:title`)
+            const tE = translations.get(`decision:${d.id}:excerpt`)
+            if (tT && tT !== d.title) {
+              ;(d as Record<string, unknown>).titleOriginal = d.title
+              d.title = tT
+            }
+            if (tE && tE !== d.excerpt) {
+              ;(d as Record<string, unknown>).excerptOriginal = d.excerpt
+              d.excerpt = tE
+            }
+            ;(d as Record<string, unknown>).translatedLang = lang
+          }
+        } catch (err) {
+          payload.logger.warn({ err: String(err), lang }, 'hybrid-search translation pass failed')
+        }
+      }
 
       return res.json({
         docs,

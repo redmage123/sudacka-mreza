@@ -1,0 +1,22 @@
+{
+  "title": "Legal Assistant",
+  "openWidget": "Open legal assistant",
+  "closeWidget": "Close legal assistant",
+  "placeholder": "Ask a question about Croatian or EU law...",
+  "send": "Send",
+  "stop": "Stop",
+  "clear": "Clear conversation",
+  "thinking": "Thinking...",
+  "emptyHint": "Ask me about case law, legislation, or legal concepts.",
+  "sources": "Sources",
+  "error": "Something went wrong. Please try again.",
+  "helpful": "Was this answer helpful?",
+  "yes": "Yes",
+  "no": "No",
+  "cancel": "Cancel",
+  "correctionTitle": "Suggest a better answer",
+  "correctionPlaceholder": "What should the assistant have said?",
+  "correctionSubmit": "Submit feedback",
+  "correctionThanks": "Thank you for your feedback.",
+  "langSwitched": "Switched to {{lang}} — new replies will come back in this language."
+}

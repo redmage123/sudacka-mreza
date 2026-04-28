@@ -1,0 +1,22 @@
+{
+  "title": "Asystent Prawny",
+  "openWidget": "Otwórz asystenta prawnego",
+  "closeWidget": "Zamknij asystenta prawnego",
+  "placeholder": "Zapytaj o prawo chorwackie lub UE...",
+  "send": "Wyślij",
+  "stop": "Stop",
+  "clear": "Wyczyść rozmowę",
+  "thinking": "Myślenie...",
+  "emptyHint": "Zapytaj mnie o orzecznictwo, ustawodawstwo lub koncepcje prawne.",
+  "sources": "Źródła",
+  "error": "Coś poszło nie tak. Spróbuj ponownie.",
+  "helpful": "Czy ta odpowiedź była pomocna?",
+  "yes": "Tak",
+  "no": "Nie",
+  "cancel": "Anuluj",
+  "correctionTitle": "Sugeruj lepszą odpowiedź",
+  "correctionPlaceholder": "Co asystent powinien odpowiedzieć?",
+  "correctionSubmit": "Wyślij informację zwrotną",
+  "correctionThanks": "Dziękujemy za Twoją opinię.",
+  "langSwitched": "Przełączono na {{lang}} — nowe odpowiedzi będą w tym języku."
+}

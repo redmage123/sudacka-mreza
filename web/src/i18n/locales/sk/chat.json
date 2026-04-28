@@ -1,0 +1,22 @@
+{
+  "title": "Právnik asistent",
+  "openWidget": "Otvoriť právneho asistenta",
+  "closeWidget": "Zatvoriť právneho asistenta",
+  "placeholder": "Buďte zvedaví otázku o chorvátskom alebo právu EÚ...",
+  "send": "Poslať",
+  "stop": "Zastaviť",
+  "clear": "Vymazať konverzáciu",
+  "thinking": "Uvažujem...",
+  "emptyHint": "Buďte zvedaví na prípadovom práve, legislatíve alebo právnych konceptoch.",
+  "sources": "Zdroje",
+  "error": "Niečo sa pokazilo. Skúste znova.",
+  "helpful": "Bola táto odpoveď užitočná?",
+  "yes": "Áno",
+  "no": "Nie",
+  "cancel": "Zrušiť",
+  "correctionTitle": "Navrhnúť lepšiu odpoveď",
+  "correctionPlaceholder": "Čo by mal asistent povedať?",
+  "correctionSubmit": "Odoslať spätnú väzbu",
+  "correctionThanks": "Ďakujeme za vašu spätnú väzbu.",
+  "langSwitched": "Prepnutie na {{lang}} — nové odpovede budú v tomto jazyku."
+}

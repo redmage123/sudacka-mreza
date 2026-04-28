@@ -1,0 +1,22 @@
+{
+  "title": "Õigusasistent",
+  "openWidget": "Ava õigusasistent",
+  "closeWidget": "Sulge õigusasistent",
+  "placeholder": "Küsi küsimus kroatsia- või EL-õiguse kohta...",
+  "send": "Saada",
+  "stop": "Päga",
+  "clear": "Klari küsimus",
+  "thinking": "Mõtlen...",
+  "emptyHint": "Küsi mul juhtumõogi, seadusanduse või õiguslikke mõisteid.",
+  "sources": "Allikad",
+  "error": "Midagi läksimine. Proovi uuesti.",
+  "helpful": "Kas oli see vastus kasulik?",
+  "yes": "Jah",
+  "no": "Ei",
+  "cancel": "Tühista",
+  "correctionTitle": "Pakuta paremat vastust",
+  "correctionPlaceholder": "Mida asutante peaks öelama?",
+  "correctionSubmit": "Saada tagasiside",
+  "correctionThanks": "Täname teie tagasisidest.",
+  "langSwitched": "Ütletud {{lang}} — uued vastused tulevad selle keeles."
+}

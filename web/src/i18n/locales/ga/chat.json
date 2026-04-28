@@ -1,0 +1,22 @@
+{
+  "title": "Assistant Dlíseach",
+  "openWidget": "Oscail an asistant dlíseach",
+  "closeWidget": "Éirí an asistant dlíseach",
+  "placeholder": "Seo ceist faoi dhlí Croatach nó dlí Aengasca...",
+  "send": "Ceannach",
+  "stop": "Stop",
+  "clear": "Shíochan caint",
+  "thinking": "Ag iarraidh...",
+  "emptyHint": "Seo ceist faoi chásfhírinne, leachtas, nó ceangailteas dlí.",
+  "sources": "Téacsanna",
+  "error": "Bhí aon rud arís. Seachtra arís.",
+  "helpful": "An bhfuil an freagra seo láidir?",
+  "yes": "Tá",
+  "no": "Ní hea",
+  "cancel": "Cailleadh",
+  "correctionTitle": "Cuir le chéile freagra níos fearr",
+  "correctionPlaceholder": "Cén gceann a dorthair an asistant?",
+  "correctionSubmit": "Cuir an fhoireann isteach",
+  "correctionThanks": "Go raibh maith agat as do fhoireann.",
+  "langSwitched": "Shuimiúil ar {{lang}} — beidh freagraí nua ag teacht ar an gcallainne seo."
+}

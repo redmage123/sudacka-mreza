@@ -1,0 +1,22 @@
+{
+  "title": "Assistenti Legali",
+  "openWidget": "Iftiħ il-assistenti legali",
+  "closeWidget": "Ikkallim l-assistenti legali",
+  "placeholder": "Issegni trick ma' ħaqqa l-każi jew il-leġi jew il-kunċetti legali tal-Kroġja jew l-UE...",
+  "send": "Iwgħad",
+  "stop": "Aqta",
+  "clear": "Ikkallim il-konversazzjoni",
+  "thinking": "Qiegħed ifkkak...",
+  "emptyHint": "Issegni trick dwar il-każi, il-leġi, jew il-kunċetti legali.",
+  "sources": "Il-Sorsi",
+  "error": "Ħixxem ħażin. Jekk jogħġbok r-rarixxi.",
+  "helpful": "Kien dan l-risposta nyttupl?",
+  "yes": "Iva",
+  "no": "Le",
+  "cancel": "Aqta",
+  "correctionTitle": "Ippreżenta risposta aħjar",
+  "correctionPlaceholder": "X'għand il-assistenti jiġi jgħid?",
+  "correctionSubmit": "Iwgħad ir-riżenja",
+  "correctionThanks": "Grazzi għar-riżenja tiegħek.",
+  "langSwitched": "Inbidel għal {{lang}} — ir-risponsi ġimgħad jiġu b'dan il-lingwa."
+}

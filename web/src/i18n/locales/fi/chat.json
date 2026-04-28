@@ -1,0 +1,22 @@
+{
+  "title": "Lakiasistentti",
+  "openWidget": "Avaa lakiasistentti",
+  "closeWidget": "Sulje lakiasistentti",
+  "placeholder": "Kysy kysymys kroaattilaisesta tai EU-oikeudesta...",
+  "send": "Lähetä",
+  "stop": "Pysäytä",
+  "clear": "Tyhjennä keskustelu",
+  "thinking": "Ajattelu...",
+  "emptyHint": "Kysy minulta tapoista, lainsäädännöstä tai oikeudellisista käsitteistä.",
+  "sources": "Lähteet",
+  "error": "Jotain meni pieleen. Yritä uudelleen.",
+  "helpful": "Oliko tämä vastaus hyödyllinen?",
+  "yes": "Kyllä",
+  "no": "Ei",
+  "cancel": "Peruuta",
+  "correctionTitle": "Ehdotä parempaa vastausta",
+  "correctionPlaceholder": "Mitä avustajan pitäisi sanoa?",
+  "correctionSubmit": "Lähetä palaute",
+  "correctionThanks": "Kiitos palautteestasi.",
+  "langSwitched": "Vaihdetty {{lang}} -kielelle — uudet vastaukset tulevat tällä kielellä."
+}

@@ -21,6 +21,7 @@ import { LegalCategories } from './collections/LegalCategories.js'
 import { Subscriptions } from './collections/Subscriptions.js'
 import { Annotations } from './collections/Annotations.js'
 import { Bookmarks } from './collections/Bookmarks.js'
+import { ChatFeedback } from './collections/ChatFeedback.js'
 import { ApiKeys } from './collections/ApiKeys.js'
 import { Judges } from './collections/Judges.js'
 
@@ -86,6 +87,7 @@ export default buildConfig({
     Bookmarks,
     ApiKeys,
     Judges,
+    ChatFeedback,
   ],
 
   globals: [

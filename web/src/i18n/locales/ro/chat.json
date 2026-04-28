@@ -1,0 +1,22 @@
+{
+  "title": "Asistent Juridic",
+  "openWidget": "Deschide asistentul juridic",
+  "closeWidget": "Închide asistentul juridic",
+  "placeholder": "Puneți o întrebare despre dreptul croat sau UE...",
+  "send": "Trimite",
+  "stop": "Oprire",
+  "clear": "Șterge conversația",
+  "thinking": "Gândire...",
+  "emptyHint": "Întrebați-mă despre jurisprudență, legislație sau concepte juridice.",
+  "sources": "Surse",
+  "error": "S-a întâmplat ceva. Vă rugăm să încercați din nou.",
+  "helpful": "A fost utilă acest răspuns?",
+  "yes": "Da",
+  "no": "Nu",
+  "cancel": "Anulează",
+  "correctionTitle": "Sugerează un răspuns mai bun",
+  "correctionPlaceholder": "Ce ar fi trebuit să spună asistentul?",
+  "correctionSubmit": "Trimite feedback-ul",
+  "correctionThanks": "Vă mulțumim pentru feedback.",
+  "langSwitched": "Comutat la {{lang}} — răspunsurile noi vor veni în această limbă."
+}

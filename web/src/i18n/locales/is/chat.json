@@ -1,0 +1,22 @@
+{
+  "title": "Lögfræðileg aðstoð",
+  "openWidget": "Opna lögfræðilega aðstoð",
+  "closeWidget": "Knúna lögfræðilega aðstoð",
+  "placeholder": "Spurnastu um kroátískt eða sambundu lög...",
+  "send": "Send",
+  "stop": "Halt",
+  "clear": "Rækka samræðu",
+  "thinking": "Hugsað...",
+  "emptyHint": "Spurnastu mig um málsrétt, lagaframkvæmd eða lögfræðilega hugmyndir.",
+  "sources": "Heimer",
+  "error": "Eitthvað gengur ekki. Vinsamlegast reyna aftur.",
+  "helpful": "Var þetta svar aðstoðarlegt?",
+  "yes": "Já",
+  "no": "Nei",
+  "cancel": "Flokkan",
+  "correctionTitle": "Göfleir betri svar",
+  "correctionPlaceholder": "Hvaða eitthvað ætti aðstoðinn að hafa sagt?",
+  "correctionSubmit": "Skila áherslu",
+  "correctionThanks": "Takk fyrir áhersluna þína.",
+  "langSwitched": "Skiptið yfir á {{lang}} — nýr svari mun koma á þessu tungumáli."
+}

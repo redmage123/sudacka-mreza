@@ -6,6 +6,7 @@ import { Footer } from './Footer'
 import { Sidebar } from './Sidebar'
 import { InstallPrompt } from '@/components/ui'
 import { CookieConsent } from '@/components/CookieConsent'
+import { ChatWidget } from '@/components/chat/ChatWidget'
 
 interface BreadcrumbMatch {
   id: string
@@ -98,6 +99,7 @@ export function AppShell() {
       <Footer />
       <InstallPrompt />
       <CookieConsent />
+      <ChatWidget />
     </div>
   )
 }

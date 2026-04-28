@@ -1,0 +1,22 @@
+{
+  "title": "法律助理",
+  "openWidget": "打开法律助理",
+  "closeWidget": "关闭法律助理",
+  "placeholder": "请问有关克罗地亚或欧盟法律的问题...",
+  "send": "发送",
+  "stop": "停止",
+  "clear": "清除对话",
+  "thinking": "思考中...",
+  "emptyHint": "请问我关于判例法、立法或法律概念的问题。",
+  "sources": "来源",
+  "error": "发生错误。请重试。",
+  "helpful": "此答案有帮助吗？",
+  "yes": "是",
+  "no": "否",
+  "cancel": "取消",
+  "correctionTitle": "建议更好的答案",
+  "correctionPlaceholder": "助理应该说什么？",
+  "correctionSubmit": "提交反馈",
+  "correctionThanks": "感谢您的反馈。",
+  "langSwitched": "已切换到 {{lang}} — 新回复将使用此语言。"
+}

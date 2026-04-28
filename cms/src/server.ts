@@ -13,6 +13,8 @@ import { createRssRouter } from './routes/rss.js'
 import { createPdfExportRouter } from './routes/pdfExport.js'
 import { createSubscribeRouter } from './routes/subscribe.js'
 import { createStatisticsRouter } from './routes/statistics.js'
+import { createChatRouter } from './routes/chat.js'
+import { createChatFeedbackRouter } from './routes/chat-feedback.js'
 import { createPublicApiRouter } from './endpoints/publicApi.js'
 import { createSitemapRouter } from './endpoints/sitemap.js'
 import { createRobotsRouter } from './endpoints/robots.js'
@@ -101,6 +103,8 @@ const start = async () => {
   app.use('/api', createPdfExportRouter(payload))
   app.use('/api', createSubscribeRouter(payload))
   app.use('/api', createStatisticsRouter(payload))
+  app.use('/api', createChatRouter(payload))
+  app.use('/api', createChatFeedbackRouter(payload))
   app.use('/api', createPublicApiRouter(payload))
 
   startNotificationDigest(payload)

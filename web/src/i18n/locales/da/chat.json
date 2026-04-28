@@ -1,0 +1,22 @@
+{
+  "title": "Juridisk assistent",
+  "openWidget": "Åbn juridisk assistent",
+  "closeWidget": "Luk juridisk assistent",
+  "placeholder": "Spørg om kroatisk eller EU-ret...",
+  "send": "Send",
+  "stop": "Stop",
+  "clear": "Ryd samtale",
+  "thinking": "Tænker...",
+  "emptyHint": "Spørg mig om retspraksis, lovgivning eller juridiske koncepter.",
+  "sources": "Kilder",
+  "error": "Noget gik galt. Prøv venligst igen.",
+  "helpful": "Var dette svar hjælpsomt?",
+  "yes": "Ja",
+  "no": "Nej",
+  "cancel": "Annuller",
+  "correctionTitle": "Foreslå et bedre svar",
+  "correctionPlaceholder": "Hvad skulle assistenten have sagt?",
+  "correctionSubmit": "Indsend feedback",
+  "correctionThanks": "Tak for din feedback.",
+  "langSwitched": "Skiftet til {{lang}} — nye svar vil komme på dette sprog."
+}

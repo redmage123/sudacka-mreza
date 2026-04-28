@@ -1,0 +1,22 @@
+{
+  "title": "Rechtlicher Assistent",
+  "openWidget": "Rechtlichen Assistent öffnen",
+  "closeWidget": "Rechtlichen Assistent schließen",
+  "placeholder": "Stellen Sie eine Frage zum kroatischen oder EU-Recht...",
+  "send": "Senden",
+  "stop": "Stopp",
+  "clear": "Gespräch löschen",
+  "thinking": "Denke nach...",
+  "emptyHint": "Fragen Sie mich nach Präzedenzfällen, Gesetzgebung oder Rechtskonzepten.",
+  "sources": "Quellen",
+  "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+  "helpful": "War diese Antwort hilfreich?",
+  "yes": "Ja",
+  "no": "Nein",
+  "cancel": "Abbrechen",
+  "correctionTitle": "Vorschlag für eine bessere Antwort",
+  "correctionPlaceholder": "Was hätte der Assistent sagen sollen?",
+  "correctionSubmit": "Feedback senden",
+  "correctionThanks": "Vielen Dank für Ihr Feedback.",
+  "langSwitched": "Auf {{lang}} umgeschaltet — neue Antworten werden in dieser Sprache erfolgen."
+}
