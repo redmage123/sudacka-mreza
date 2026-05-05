@@ -16,6 +16,8 @@ import { createStatisticsRouter } from './routes/statistics.js'
 import { createChatRouter } from './routes/chat.js'
 import { createChatFeedbackRouter } from './routes/chat-feedback.js'
 import { createEurLexSearchRouter } from './routes/eurlex-search.js'
+import { createDecisionBriefRouter } from './routes/decisionBrief.js'
+import { createTranslateRouter } from './routes/translate.js'
 import { createPublicApiRouter } from './endpoints/publicApi.js'
 import { createSitemapRouter } from './endpoints/sitemap.js'
 import { createRobotsRouter } from './endpoints/robots.js'
@@ -107,6 +109,8 @@ const start = async () => {
   app.use('/api', createChatRouter(payload))
   app.use('/api', createChatFeedbackRouter(payload))
   app.use('/api', createEurLexSearchRouter(payload))
+  app.use('/api', createDecisionBriefRouter(payload))
+  app.use('/api', createTranslateRouter(payload))
   app.use('/api', createPublicApiRouter(payload))
 
   startNotificationDigest(payload)

@@ -84,8 +84,26 @@ export function createHybridSearchRouter(payload: any) {
     const limit = Math.min(50, Math.max(1, parseInt(String(req.query.limit || '20'), 10)))
     const offset = (page - 1) * limit
 
-    const courtId = req.query.court ? String(req.query.court) : null
+    let courtId = req.query.court ? String(req.query.court) : null
     const courtType = req.query.courtType ? String(req.query.courtType) : null
+    // Backwards-compat: older clients sent the court NAME in `court=…`.
+    // Coerce non-numeric values to a name-lookup so the integer FK filter
+    // works without errorring. Numeric strings pass through unchanged.
+    if (courtId && !/^\d+$/.test(courtId)) {
+      try {
+        const r = await (payload.db.pool as { query: (s: string, p: unknown[]) => Promise<{ rows: Array<{ id: number }> }> })
+          .query('SELECT id FROM courts WHERE name = $1 LIMIT 1', [courtId])
+        if (r.rows[0]?.id != null) {
+          courtId = String(r.rows[0].id)
+        } else {
+          payload.logger.warn(`hybrid-search: court name not found: ${courtId.slice(0, 80)}`)
+          courtId = null
+        }
+      } catch (e) {
+        payload.logger.warn(`hybrid-search: court name lookup failed: ${e instanceof Error ? e.message : String(e)}`)
+        courtId = null
+      }
+    }
     const decisionType = req.query.decisionType ? String(req.query.decisionType) : null
     const category = req.query.category ? String(req.query.category) : null
     const from = req.query.from ? String(req.query.from) : null
