@@ -56,15 +56,24 @@ export async function searchDecisions(
   })
 }
 
-export async function getCourts_forFilter(locale?: string): Promise<string[]> {
+export interface CourtFilterOption {
+  id: string
+  name: string
+  type?: string
+}
+
+export async function getCourts_forFilter(locale?: string): Promise<CourtFilterOption[]> {
   const result = await apiFetch('/courts', PayloadListSchema(CourtSchema), {
     params: {
-      limit: 100,
+      limit: 1000,
       locale: locale ?? 'hr',
       sort: 'name',
     },
   })
-  const names = [...new Set(result.docs.map((c) => c.name))]
-  names.sort()
-  return names
+  const seen = new Map<string, CourtFilterOption>()
+  for (const c of result.docs) {
+    if (!c.name || c.id == null) continue
+    if (!seen.has(c.name)) seen.set(c.name, { id: c.id, name: c.name, type: c.type })
+  }
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name))
 }

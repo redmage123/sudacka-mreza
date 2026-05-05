@@ -7,9 +7,22 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Pagination } from '@/components/ui/Pagination'
 import { SearchBar } from '@/components/ui/SearchBar'
 import { Skeleton } from '@/components/ui/Skeleton'
-import { searchDecisions, getCourts_forFilter } from '@/api/court-decisions'
+import { searchDecisions, getCourts_forFilter, type CourtFilterOption } from '@/api/court-decisions'
 import { formatDate } from '@/utils/dates'
 import type { CourtDecisionSummary, PayloadList } from '@/api/types'
+
+const COURT_TYPE_TO_I18N_KEY: Record<string, string> = {
+  municipal: 'opcinski',
+  county: 'zupanijski',
+  commercial: 'trgovacki',
+  misdemeanour: 'prekrsajni',
+  high_commercial: 'highCommercial',
+  supreme: 'vrhovni',
+  administrative: 'upravni',
+  constitutional: 'ustavni',
+  echr: 'echr',
+  ecj: 'ecj',
+}
 
 export default function DecisionsSearchPage() {
   const { lang } = useParams<{ lang: string }>()
@@ -25,7 +38,7 @@ export default function DecisionsSearchPage() {
   const type = searchParams.get('type') ?? ''
   const page = parseInt(searchParams.get('page') ?? '1', 10)
 
-  const [courtOptions, setCourtOptions] = useState<string[]>([])
+  const [courtOptions, setCourtOptions] = useState<CourtFilterOption[]>([])
   const [results, setResults] = useState<PayloadList<CourtDecisionSummary> | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -42,8 +55,8 @@ export default function DecisionsSearchPage() {
 
   // Load court options once
   useEffect(() => {
-    getCourts_forFilter(locale).then((names) => {
-      if (isMounted.current) setCourtOptions(names)
+    getCourts_forFilter(locale).then((opts) => {
+      if (isMounted.current) setCourtOptions(opts)
     }).catch(() => {/* non-critical */})
   }, [locale])
 
@@ -149,9 +162,66 @@ export default function DecisionsSearchPage() {
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             >
               <option value="">{t('decisions.filterCourtAll')}</option>
-              {courtOptions.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
+              {(() => {
+                const TIER_ONLY = new Set(['echr', 'ecj', 'supreme', 'high_commercial', 'constitutional'])
+                // Sub-tier modifiers used in compound court names like
+                // "Općinski kazneni sud u Zagrebu". Each modifier gets its own
+                // English label so distinct courts don't collapse to the same
+                // bare tier label.
+                const MOD_LABEL: Record<string, string> = {
+                  kazneni: 'Criminal',
+                  građanski: 'Civil',
+                  gradanski: 'Civil',
+                  prekršajni: 'Misdemeanour',
+                  prekrsajni: 'Misdemeanour',
+                  radni: 'Labour',
+                  obiteljski: 'Family',
+                }
+                const stripPrefix = (s: string) =>
+                  s
+                    .replace(/^Općinski sud (u |na |za |- )?/i, '')
+                    .replace(/^Županijski sud (u |na |za |- )?/i, '')
+                    .replace(/^Trgovački sud (u |na |za |- )?/i, '')
+                    .replace(/^Prekršajni sud (u |na |za |- )?/i, '')
+                    .replace(/^Upravni sud (u |na |za |- )?/i, '')
+
+                const computeLabel = (c: CourtFilterOption): string => {
+                  if (locale === 'hr') return c.name
+                  const i18nKey = c.type ? COURT_TYPE_TO_I18N_KEY[c.type] : undefined
+                  if (!i18nKey) return c.name
+                  const tierLabel = t(`courts.tab.${i18nKey}`, c.name)
+                  if (c.type && TIER_ONLY.has(c.type)) return tierLabel
+                  // Compound modifier ("Općinski <mod> sud u <city>")
+                  const compound = /^Općinski\s+([a-zšđčćž]+)\s+sud\s+(?:u\s+|na\s+|za\s+|-\s+)?(.+)$/i.exec(c.name)
+                  if (compound) {
+                    const mod = MOD_LABEL[compound[1].toLowerCase()]
+                    const city = compound[2].trim()
+                    if (mod && city) return `${tierLabel} ${mod} — ${city}`
+                    if (city) return `${tierLabel} (${compound[1]}) — ${city}`
+                  }
+                  const cityStub = stripPrefix(c.name).trim()
+                  if (cityStub && cityStub !== c.name) return `${tierLabel} — ${cityStub}`
+                  // Couldn't translate cleanly — keep the raw Croatian rather
+                  // than collapsing several different courts to bare tier.
+                  return c.name
+                }
+
+                // Build labels first, then dedupe by label so cosmetic
+                // collisions (multiple rows producing identical display text)
+                // don't render as duplicate options.
+                const seen = new Set<string>()
+                const out: { id: string; label: string }[] = []
+                for (const c of courtOptions) {
+                  const label = computeLabel(c)
+                  if (seen.has(label)) continue
+                  seen.add(label)
+                  out.push({ id: c.id, label })
+                }
+                out.sort((a, b) => a.label.localeCompare(b.label))
+                return out.map((o) => (
+                  <option key={o.id} value={o.id}>{o.label}</option>
+                ))
+              })()}
             </select>
           </div>
 
