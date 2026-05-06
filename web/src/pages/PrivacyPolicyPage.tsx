@@ -17,7 +17,21 @@ export default function PrivacyPolicyPage() {
         {t('privacy.title', 'Privacy Policy')}
       </h1>
       <div className="prose dark:prose-invert max-w-none space-y-6 text-[color:var(--color-text)]">
-        <p className="text-[color:var(--color-text-muted)]">{t('privacy.lastUpdated', 'Last updated: March 2026')}</p>
+        <p className="text-[color:var(--color-text-muted)]">{t('privacy.lastUpdated', 'Last updated: May 2026')}</p>
+
+        <section>
+          <h2 className="text-xl font-semibold">{t('privacy.controller.title', 'Data Controller')}</h2>
+          <p>{t('privacy.controller.body', 'For the purposes of GDPR Article 13, the data controller for this site is:')}</p>
+          <p className="font-medium">
+            Sudačka Mreža<br />
+            c/o AI Elevate Limited<br />
+            Kilcock, Co. Kildare, Ireland<br />
+            Email: <a className="text-[color:var(--color-text-link)] hover:text-[color:var(--color-text-link-hover)]" href="mailto:privacy@sudacka-mreza.hr">privacy@sudacka-mreza.hr</a>
+          </p>
+          <p className="text-sm text-[color:var(--color-text-muted)]">
+            {t('privacy.controller.dpo', 'Data Protection enquiries: privacy@sudacka-mreza.hr')}
+          </p>
+        </section>
 
         <section>
           <h2 className="text-xl font-semibold">{t('privacy.dataCollected.title', 'Data We Collect')}</h2>

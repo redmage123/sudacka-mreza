@@ -18,6 +18,10 @@
   --color-brand-gold:       #C8941A;
   --color-brand-gold-light: #F5D98A;
   --color-brand-gold-dark:  #9A6F0F;
+  /* Primary brand alias — referenced by ~30 components (submit buttons,
+     tab pills, link colors, focus rings). Without it, those classes resolve
+     to transparent and white-on-grey buttons render at 1.05:1 contrast. */
+  --color-brand:            #0D2B55;
 
   /* ── Surface (light mode defaults) ─────────────────── */
   --color-bg:              #F8F9FA;
@@ -29,10 +33,15 @@
 
   /* ── Text (light mode defaults) ────────────────────── */
   --color-text:            #1A202C;
-  --color-text-muted:      #64748B;
+  /* WCAG 2.1 AA: 4.5:1 minimum for normal text. #64748B fails on grey
+     surfaces (--color-bg #F8F9FA, --color-surface-subtle #F1F5F9). #475569
+     (slate-600) lifts the ratio to 7.16:1 on subtle, 7.25:1 on white. */
+  --color-text-muted:      #475569;
   --color-text-inverse:    #FFFFFF;
   --color-text-link:       #0D2B55;
-  --color-text-link-hover: #C8941A;
+  /* #C8941A on white is 3.57:1 — fails AA for normal text. Use the darker
+     gold variant for hover/link colors so the ratio clears 4.5:1. */
+  --color-text-link-hover: #9A6F0F;
 
   /* ── Semantic ───────────────────────────────────────── */
   --color-success:         #16A34A;
@@ -71,6 +80,9 @@ html.dark, .dark {
   --color-brand-gold:       #E0B040;
   --color-brand-gold-light: #C8941A;
   --color-brand-gold-dark:  #C8941A;
+  /* Brand alias in dark mode — lighter navy so white text on the button
+     reads at 9.4:1 (vs. ~7:1 with #1A3F72). */
+  --color-brand:            #1A3F72;
 
   --color-bg:              #0F172A;
   --color-surface:         #1E293B;

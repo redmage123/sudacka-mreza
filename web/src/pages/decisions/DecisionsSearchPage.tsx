@@ -153,12 +153,14 @@ export default function DecisionsSearchPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Court dropdown */}
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="filter-court" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('decisions.filterCourt')}
             </label>
             <select
+              id="filter-court"
               value={court}
               onChange={(e) => handleFilterChange('court', e.target.value)}
+              aria-label={t('decisions.filterCourt')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             >
               <option value="">{t('decisions.filterCourtAll')}</option>
@@ -227,38 +229,44 @@ export default function DecisionsSearchPage() {
 
           {/* Date from */}
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="filter-date-from" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('decisions.filterDateFrom')}
             </label>
             <input
+              id="filter-date-from"
               type="date"
               value={from}
               onChange={(e) => handleFilterChange('from', e.target.value)}
+              aria-label={t('decisions.filterDateFrom')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             />
           </div>
 
           {/* Date to */}
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="filter-date-to" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('decisions.filterDateTo')}
             </label>
             <input
+              id="filter-date-to"
               type="date"
               value={to}
               onChange={(e) => handleFilterChange('to', e.target.value)}
+              aria-label={t('decisions.filterDateTo')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             />
           </div>
 
           {/* Decision type */}
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="filter-decision-type" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('decisions.filterType')}
             </label>
             <select
+              id="filter-decision-type"
               value={type}
               onChange={(e) => handleFilterChange('type', e.target.value)}
+              aria-label={t('decisions.filterType')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             >
               <option value="">{t('decisions.type.all')}</option>
