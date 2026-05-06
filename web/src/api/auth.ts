@@ -10,12 +10,23 @@ export const UserSchema = z.object({
 })
 export type AuthUser = z.infer<typeof UserSchema>
 
-const LoginResponseSchema = z.object({
+const LoginSuccessSchema = z.object({
   user: UserSchema,
   token: z.string(),
   exp: z.number().optional(),
   message: z.string().optional(),
 })
+
+// MFA-aware login response: either a real success or an mfaRequired challenge
+// from the email-OTP flow (cms/src/routes/mfa.ts).
+const LoginMfaSchema = z.object({
+  mfaRequired: z.literal(true),
+  challenge: z.string(),
+  channel: z.string().optional(),
+  emailHint: z.string().optional(),
+})
+
+const VerifyMfaResponseSchema = LoginSuccessSchema
 
 const RegisterResponseSchema = z.object({
   doc: UserSchema,
@@ -55,17 +66,40 @@ async function postJson(path: string, body: unknown): Promise<unknown> {
   return resp.json()
 }
 
-export async function login(identifier: string, password: string): Promise<AuthUser> {
-  // Accept either an email address or a short username. Payload's Users
-  // collection has `loginWithUsername` enabled with `allowEmailLogin: true`,
-  // so we route based on whether the input looks like an email.
+export type LoginResult =
+  | { kind: 'success'; user: AuthUser }
+  | { kind: 'mfa'; challenge: string; channel: string; emailHint: string }
+
+// MFA-aware login. Routes through the custom /api/users/auth/login endpoint
+// (cms/src/routes/mfa.ts). For non-admins, the server returns the token
+// directly; for admins, it returns { mfaRequired, challenge, emailHint } and
+// the caller must follow up with verifyMfa(challenge, code).
+export async function login(identifier: string, password: string): Promise<LoginResult> {
   const trimmed = identifier.trim()
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
   const payload = isEmail
     ? { email: trimmed, password }
     : { username: trimmed, password }
-  const json = await postJson('/users/login', payload)
-  const parsed = LoginResponseSchema.parse(json)
+  const json = await postJson('/users/auth/login', payload)
+
+  // Try MFA challenge first (cheap discriminator on `mfaRequired`).
+  const mfa = LoginMfaSchema.safeParse(json)
+  if (mfa.success) {
+    return {
+      kind: 'mfa',
+      challenge: mfa.data.challenge,
+      channel: mfa.data.channel ?? 'email',
+      emailHint: mfa.data.emailHint ?? '',
+    }
+  }
+  const parsed = LoginSuccessSchema.parse(json)
+  setAuthToken(parsed.token)
+  return { kind: 'success', user: parsed.user }
+}
+
+export async function verifyMfa(challenge: string, code: string): Promise<AuthUser> {
+  const json = await postJson('/users/auth/verify-mfa', { challenge, code: code.trim() })
+  const parsed = VerifyMfaResponseSchema.parse(json)
   setAuthToken(parsed.token)
   return parsed.user
 }
@@ -82,12 +116,18 @@ export async function register(input: RegisterInput): Promise<AuthUser> {
   const json = await postJson('/users', input)
   const parsed = RegisterResponseSchema.parse(json)
   // Immediately attempt to log in; auto-verify hook means this will work.
-  return login(input.email, input.password).catch((err) => {
-    // Fall back to returning the created doc without a token if auto-login
-    // fails for any reason (e.g. verify still required in prod).
+  // Members never trigger MFA, so .kind === 'success' is guaranteed for
+  // self-registered accounts.
+  try {
+    const result = await login(input.email, input.password)
+    if (result.kind === 'success') return result.user
+    // Defensive: if a registered account somehow gets MFA, fall back to the
+    // unauthenticated record so the caller can route to the MFA UI.
+    return parsed.doc
+  } catch (err) {
     if (err instanceof ApiError) throw err
     return parsed.doc
-  })
+  }
 }
 
 export async function logout(): Promise<void> {

@@ -18,10 +18,12 @@ import { createChatFeedbackRouter } from './routes/chat-feedback.js'
 import { createEurLexSearchRouter } from './routes/eurlex-search.js'
 import { createDecisionBriefRouter } from './routes/decisionBrief.js'
 import { createTranslateRouter } from './routes/translate.js'
+import { createMfaRouter } from './routes/mfa.js'
 import { createPublicApiRouter } from './endpoints/publicApi.js'
 import { createSitemapRouter } from './endpoints/sitemap.js'
 import { createRobotsRouter } from './endpoints/robots.js'
 import { startNotificationDigest } from './jobs/notificationDigest.js'
+import { validatePassword } from './utils/password-policy.js'
 
 const app = express()
 
@@ -111,7 +113,27 @@ const start = async () => {
   app.use('/api', createEurLexSearchRouter(payload))
   app.use('/api', createDecisionBriefRouter(payload))
   app.use('/api', createTranslateRouter(payload))
+  // MFA router — must be mounted BEFORE Payload's catch-all so /api/users/auth/login
+  // and /api/users/auth/verify-mfa take precedence over Payload's /api/users/* REST surface.
+  app.use('/api', createMfaRouter(payload))
   app.use('/api', createPublicApiRouter(payload))
+
+  // Registration password-policy gate. Payload's POST /api/users (create) only
+  // applies its built-in length check. We intercept the create path here to run
+  // the project policy (length + HIBP breach check) before the request reaches
+  // Payload. Restricted to exactly POST /api/users so password-reset and
+  // verify-email endpoints are left alone.
+  app.use(async (req, res, next) => {
+    if (req.method !== 'POST' || req.path !== '/api/users') return next()
+    const body = req.body as { password?: unknown } | undefined
+    const pwd = typeof body?.password === 'string' ? body.password : ''
+    if (!pwd) return next() // let Payload reject missing-password as usual
+    const check = await validatePassword(pwd, payload.logger)
+    if (!check.ok) {
+      return res.status(400).json({ errors: [{ message: check.message ?? 'Password rejected.' }] })
+    }
+    next()
+  })
 
   startNotificationDigest(payload)
 

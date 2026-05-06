@@ -20,8 +20,19 @@ export const Users: CollectionConfig = {
     },
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000, // 15 minute lockout after 5 failed attempts
+    // Allow logging in with a short username (e.g. "gordan") alongside email.
+    // The MFA router relays to Payload's /api/users/login and forwards both
+    // the `email` and `username` fields, so this config is required for the
+    // username path to resolve.
+    loginWithUsername: {
+      allowEmailLogin: true,
+      requireEmail: true,
+      requireUsername: false,
+    },
   },
   admin: {
+    group: 'Korisnici',
+    description: 'Registrirani korisnici i administratori. Email i 2FA enrolment.',
     useAsTitle: 'email',
     defaultColumns: ['email', 'firstName', 'lastName', 'role'],
   },
@@ -105,6 +116,28 @@ export const Users: CollectionConfig = {
         // Only admins can set or change role
         update: ({ req }) => req.user?.role === 'admin',
       },
+    },
+
+    // ── Email-based two-factor authentication (admins only) ───────────────
+    //
+    // On every admin login the MFA router (cms/src/routes/mfa.ts) generates a
+    // 6-digit one-time code, stores its SHA-256 hash + 10-minute expiry, and
+    // emails the plain code to the registered address. The legacy TOTP
+    // columns below are retained for rollback only — no longer referenced
+    // by the active login flow.
+    { name: 'emailOtpHash', type: 'text', label: 'Email OTP hash', admin: { hidden: true } },
+    { name: 'emailOtpExpiresAt', type: 'date', label: 'Email OTP expires', admin: { hidden: true } },
+    { name: 'emailOtpAttempts', type: 'number', defaultValue: 0, label: 'Email OTP attempts', admin: { hidden: true } },
+
+    // Legacy TOTP columns retained for rollback; no longer written to.
+    { name: 'totpSecret', type: 'text', label: 'TOTP secret (legacy)', admin: { hidden: true } },
+    { name: 'totpEnabled', type: 'checkbox', defaultValue: false, label: 'TOTP enabled (legacy)' },
+    { name: 'totpEnrolledAt', type: 'date', label: 'TOTP enrolled at (legacy)', admin: { readOnly: true } },
+    {
+      name: 'totpRecoveryCodes',
+      type: 'json',
+      label: 'TOTP recovery codes (legacy, hashed)',
+      admin: { readOnly: true, description: 'No longer used — retained for rollback.' },
     },
   ],
 }
