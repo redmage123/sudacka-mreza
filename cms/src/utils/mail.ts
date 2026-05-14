@@ -24,7 +24,13 @@ export interface MailMessage {
   from?: string
 }
 
-const DEFAULT_FROM = process.env.MAIL_FROM ?? 'noreply@sudacka-mreza.hr'
+// Includes a display name so the message shows as "Sudačka Mreža" rather than
+// a bare address. NOTE: when sent through the Gmail SMTP relay (the msmtp
+// transport), Gmail rewrites the address part to the authenticated account
+// (semackenzie@gmail.com) because noreply@sudacka-mreza.hr isn't a verified
+// "send mail as" alias — but it keeps this display name. A real sender domain
+// still needs either that alias verified or a Resend-style service.
+const DEFAULT_FROM = process.env.MAIL_FROM ?? 'Sudačka Mreža <noreply@sudacka-mreza.hr>'
 
 export async function sendMail(payload: Payload, msg: MailMessage): Promise<'resend' | 'msmtp' | 'console'> {
   const from = msg.from ?? DEFAULT_FROM
