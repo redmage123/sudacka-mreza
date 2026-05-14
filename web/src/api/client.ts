@@ -7,45 +7,91 @@ export const AUTH_TOKEN_KEY = 'sudacka.authToken'
 // the spec only fires it on other windows that share the storage area.
 export const AUTH_TOKEN_EVENT = 'sudacka:authTokenChanged'
 
-// In-memory mirror of the auth token. localStorage is the source of truth for
-// cross-tab persistence, but it can throw or be unavailable (private-mode
-// quirks, "block site data" privacy settings, Safari ITP, full quota, embedded
-// webviews). When that happens we must NOT silently drop the token — that
-// leaves the user authenticated in the API's eyes but logged-out in the UI:
-// they pass login/MFA, then the very next request sends no Authorization
-// header and bounces them back to the login screen. The in-memory copy keeps
-// the current tab's session working even when persistence fails.
-let inMemoryToken: string | null = null
-let storageWorks = true
+// The auth token is persisted through three layers, most-durable first:
+//
+//   1. localStorage          — survives reloads, shared across tabs (normal case)
+//   2. a client-managed cookie — survives reloads even when localStorage is
+//      blocked. Safari Private Browsing, iOS low-storage, and "block site data"
+//      make localStorage.setItem THROW, but cookies are a separate mechanism
+//      that still works in those modes. This is why a login could succeed and
+//      then immediately bounce the user back to the login screen: the token
+//      had nowhere durable to live.
+//   3. in-memory mirror      — last resort, lives only for the current page load
+//
+// The token is ALWAYS sent to the API as an `Authorization: JWT` header (never
+// relied on as a cookie server-side), so this cookie is purely a client-side
+// persistence mirror and is intentionally NOT httpOnly — the client must read
+// it back. Payload ignores it (it looks for its own `payload-token` cookie).
+const AUTH_COOKIE_KEY = 'sudacka_auth'
+const AUTH_COOKIE_MAX_AGE = 7200 // seconds — matches Payload's default token lifetime
 
-export function getAuthToken(): string | null {
+let inMemoryToken: string | null = null
+let warnedNoPersistence = false
+
+function readLocalStorageToken(): string | null {
   try {
-    const stored = localStorage.getItem(AUTH_TOKEN_KEY)
-    // localStorage wins when present; otherwise fall back to the memory mirror.
-    return stored ?? inMemoryToken
+    return localStorage.getItem(AUTH_TOKEN_KEY)
   } catch {
-    return inMemoryToken
+    return null
   }
 }
 
-export function setAuthToken(token: string | null): void {
-  // Always update the in-memory mirror first — this is the part that cannot fail.
-  inMemoryToken = token
+function writeLocalStorageToken(token: string | null): boolean {
   try {
     if (token) localStorage.setItem(AUTH_TOKEN_KEY, token)
     else localStorage.removeItem(AUTH_TOKEN_KEY)
-    storageWorks = true
-  } catch (err) {
-    // Persistence failed — the session still works for this tab via the memory
-    // mirror, but it won't survive a reload or reach other tabs. Surface it
-    // once instead of swallowing it, so it's diagnosable.
-    if (storageWorks) {
-      storageWorks = false
-      console.error(
-        '[auth] localStorage is unavailable — session will not persist across reloads/tabs.',
-        err,
-      )
+    return true
+  } catch {
+    // setItem can throw (quota / private mode) while removeItem usually does
+    // not. Clear the key so a STALE value can't shadow the cookie/memory copy.
+    try {
+      localStorage.removeItem(AUTH_TOKEN_KEY)
+    } catch {
+      /* ignore — nothing we can do */
     }
+    return false
+  }
+}
+
+function readCookieToken(): string | null {
+  try {
+    const match = document.cookie.match(/(?:^|;\s*)sudacka_auth=([^;]*)/)
+    return match ? decodeURIComponent(match[1]) || null : null
+  } catch {
+    return null
+  }
+}
+
+function writeCookieToken(token: string | null): boolean {
+  try {
+    document.cookie = token
+      ? `${AUTH_COOKIE_KEY}=${encodeURIComponent(token)}; path=/; max-age=${AUTH_COOKIE_MAX_AGE}; SameSite=Lax`
+      : `${AUTH_COOKIE_KEY}=; path=/; max-age=0; SameSite=Lax`
+    return true
+  } catch {
+    return false
+  }
+}
+
+export function getAuthToken(): string | null {
+  // localStorage first so a logout/login in another tab is honored; then the
+  // cookie (survives reload when localStorage is blocked); then the in-memory
+  // mirror (current page load only).
+  return readLocalStorageToken() ?? readCookieToken() ?? inMemoryToken
+}
+
+export function setAuthToken(token: string | null): void {
+  // In-memory mirror first — this layer cannot fail.
+  inMemoryToken = token
+  const lsOk = writeLocalStorageToken(token)
+  const cookieOk = writeCookieToken(token)
+  // Only a real problem if NOTHING durable accepted the write: the session
+  // then works for this page load only and won't survive a reload.
+  if (token && !lsOk && !cookieOk && !warnedNoPersistence) {
+    warnedNoPersistence = true
+    console.error('[auth] no persistent storage available — session will not survive a reload.')
+  } else if (lsOk || cookieOk) {
+    warnedNoPersistence = false
   }
   // Always dispatch — useAuth in the same tab needs to know.
   try {
