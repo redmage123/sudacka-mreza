@@ -222,7 +222,10 @@ export function createMfaRouter(payload: Payload): Router {
     try {
       deliveredVia = await sendMail(payload, {
         to: userEmail,
-        subject: 'Sudačka Mreža — prijavni kod',
+        // Unique per request (timestamp to the second) so mail clients like
+        // Gmail do NOT thread successive codes into one conversation — each
+        // login attempt must land as its own separate email.
+        subject: `Sudačka Mreža — prijavni kod (${stampNow()})`,
         text:
           `Vaš jednokratni prijavni kod je: ${code}\n\n` +
           `Kod vrijedi 10 minuta i može se iskoristiti samo jednom. ` +
@@ -360,7 +363,8 @@ export function createMfaRouter(payload: Payload): Router {
     try {
       await sendMail(payload, {
         to: email.trim(),
-        subject: 'Sudačka Mreža — ponovno postavljanje lozinke',
+        // Unique subject — same anti-threading reason as the login-code email.
+        subject: `Sudačka Mreža — ponovno postavljanje lozinke (${stampNow()})`,
         text:
           'Zatražili ste ponovno postavljanje lozinke za Sudačku Mrežu.\n\n' +
           `Otvorite ovu poveznicu da postavite novu lozinku (vrijedi 1 sat):\n${link}\n\n` +
@@ -405,4 +409,14 @@ function maskEmail(email: string): string {
   if (!domain) return '***'
   const head = local.slice(0, Math.min(2, local.length))
   return `${head}${'*'.repeat(Math.max(1, local.length - head.length))}@${domain}`
+}
+
+/**
+ * "2026-05-14 14:05:32 UTC" — a per-request timestamp appended to auth email
+ * subjects so every message has a unique subject line. Mail clients (Gmail in
+ * particular) thread messages by subject; a unique subject keeps each login
+ * code / reset request as its own separate email instead of a stacked thread.
+ */
+function stampNow(): string {
+  return new Date().toISOString().slice(0, 19).replace('T', ' ') + ' UTC'
 }
