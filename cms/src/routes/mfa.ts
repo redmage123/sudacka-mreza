@@ -248,9 +248,12 @@ export function createMfaRouter(payload: Payload): Router {
       return res.status(500).json({ errors: [{ message: 'Could not send 2FA code to your email.' }] })
     }
 
+    // The challenge must live at least as long as the OTP it wraps — the
+    // client submits both together on verify-mfa. Keep it equal to
+    // OTP_TTL_SECONDS so it matches the 10-minute validity stated in the email.
     const challenge = signChallenge(
       { sub: user.id, email: userEmail, kind: 'mfa-pending', pendingToken: token, channel: 'email' },
-      180,
+      OTP_TTL_SECONDS,
     )
     return res.json({
       mfaRequired: true,
