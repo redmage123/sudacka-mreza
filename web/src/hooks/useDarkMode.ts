@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
+import { safeLocalStorage } from '@/lib/safeStorage'
 
 type Theme = 'light' | 'dark'
 
 export function useDarkMode() {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light'
-    const stored = localStorage.getItem('theme') as Theme | null
+    const stored = safeLocalStorage.getItem('theme') as Theme | null
     if (stored === 'dark' || stored === 'light') return stored
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
@@ -17,7 +18,7 @@ export function useDarkMode() {
     } else {
       root.classList.remove('dark')
     }
-    localStorage.setItem('theme', theme)
+    safeLocalStorage.setItem('theme', theme)
   }, [theme])
 
   const toggle = useCallback(() => {

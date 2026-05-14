@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from 'react'
+import { safeSessionStorage } from '@/lib/safeStorage'
 
 interface Props {
   children: ReactNode
@@ -37,10 +38,10 @@ export class ChunkErrorBoundary extends Component<Props, State> {
     if (!isChunkError(error)) return
 
     const RELOAD_KEY = 'chunk_reload_attempted'
-    const alreadyTried = sessionStorage.getItem(RELOAD_KEY) === '1'
+    const alreadyTried = safeSessionStorage.getItem(RELOAD_KEY) === '1'
 
     if (!alreadyTried) {
-      sessionStorage.setItem(RELOAD_KEY, '1')
+      safeSessionStorage.setItem(RELOAD_KEY, '1')
       window.location.reload()
     }
   }
@@ -59,7 +60,7 @@ export class ChunkErrorBoundary extends Component<Props, State> {
         <button
           type="button"
           onClick={() => {
-            sessionStorage.removeItem('chunk_reload_attempted')
+            safeSessionStorage.removeItem('chunk_reload_attempted')
             window.location.reload()
           }}
           className="px-4 py-2 text-sm font-medium bg-[color:var(--color-brand-navy)] text-white rounded hover:opacity-90 transition-opacity"

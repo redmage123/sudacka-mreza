@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { safeLocalStorage } from '@/lib/safeStorage'
 
 interface WatchlistItem {
   id: string
@@ -13,12 +14,12 @@ interface WatchlistItem {
 
 function loadWatchlist(): WatchlistItem[] {
   try {
-    return JSON.parse(localStorage.getItem('sudacka-watchlist') || '[]')
+    return JSON.parse(safeLocalStorage.getItem('sudacka-watchlist') || '[]')
   } catch { return [] }
 }
 
 function saveWatchlist(items: WatchlistItem[]) {
-  localStorage.setItem('sudacka-watchlist', JSON.stringify(items))
+  safeLocalStorage.setItem('sudacka-watchlist', JSON.stringify(items))
 }
 
 export default function WatchlistPage() {

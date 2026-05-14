@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { safeLocalStorage } from '@/lib/safeStorage'
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[]
@@ -17,7 +18,7 @@ export function InstallPrompt() {
   const { t } = useTranslation('common')
   const [promptEvent, setPromptEvent] = useState<BeforeInstallPromptEvent | null>(null)
   const [dismissed, setDismissed] = useState(() =>
-    localStorage.getItem('pwa-install-dismissed') === '1',
+    safeLocalStorage.getItem('pwa-install-dismissed') === '1',
   )
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export function InstallPrompt() {
   }
 
   const handleDismiss = () => {
-    localStorage.setItem('pwa-install-dismissed', '1')
+    safeLocalStorage.setItem('pwa-install-dismissed', '1')
     setDismissed(true)
   }
 
