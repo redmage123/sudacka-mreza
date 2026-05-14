@@ -1,0 +1,89 @@
+name: CMS migrations
+
+# Verifies that the CMS schema is fully driven by migrations — not by the
+# Postgres adapter's dev-only "push" mode. Catches collections that were added
+# to payload.config.ts without a matching migration: invisible in dev, a hard
+# 500 in production. See cms/scripts/ci/assert-schema.mjs.
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'cms/**'
+      - '.github/workflows/cms-migrations.yml'
+  pull_request:
+    paths:
+      - 'cms/**'
+      - '.github/workflows/cms-migrations.yml'
+
+jobs:
+  migrate-and-smoke:
+    name: Clean-DB migrate + authenticated smoke test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: sudacka_mreza
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d sudacka_mreza"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      # NODE_ENV=production turns OFF the Postgres adapter's dev "push" mode, so
+      # migrations are the ONLY thing that can create tables — exactly the
+      # production behaviour this workflow exists to verify.
+      NODE_ENV: production
+      DATABASE_URI: postgresql://postgres:postgres@localhost:5432/sudacka_mreza
+      PAYLOAD_SECRET: ci-payload-secret-at-least-32-characters-long
+      PII_ENCRYPTION_KEY: ci-pii-encryption-key-0123456789abcd
+      PORT: '4094'
+      PAYLOAD_CONFIG_PATH: dist/payload.config.js
+      PAYLOAD_MIGRATIONS_DIR: dist/migrations
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CMS
+        run: npm run build --workspace=cms
+
+      - name: Run Payload migrations against a clean database
+        working-directory: cms
+        run: npx --no-install payload migrate
+
+      - name: Assert every collection has a table
+        working-directory: cms
+        run: node scripts/ci/assert-schema.mjs
+
+      - name: Start CMS
+        working-directory: cms
+        run: |
+          node dist/server.js > /tmp/cms.log 2>&1 &
+          echo $! > /tmp/cms.pid
+
+      - name: Smoke-test authenticated endpoints
+        working-directory: cms
+        run: node scripts/ci/smoke-auth-endpoints.mjs
+
+      - name: CMS log (on failure)
+        if: failure()
+        run: cat /tmp/cms.log || true
+
+      - name: Stop CMS
+        if: always()
+        run: kill "$(cat /tmp/cms.pid)" 2>/dev/null || true
