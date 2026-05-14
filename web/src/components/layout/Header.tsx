@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Link, NavLink, useParams } from 'react-router'
+import { Link, NavLink, useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { DarkModeToggle } from './DarkModeToggle'
 import { LanguageSwitch } from './LanguageSwitch'
 import { MobileNav } from './MobileNav'
+import { useAuth } from '@/hooks/useAuth'
+import { logout } from '@/api/auth'
 
 interface NavDropdownItem {
   to: string
@@ -77,6 +79,15 @@ export function Header() {
   const params = useParams<{ lang: string }>()
   const lang = params.lang ?? 'hr'
   const [mobileOpen, setMobileOpen] = useState(false)
+  // Without this, the header showed "Login / Register" even after a successful
+  // login — making a working login look like it did nothing.
+  const { user, loading } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleSignOut() {
+    await logout()
+    navigate(`/${lang}`)
+  }
 
   const navItems = [
     {
@@ -219,20 +230,41 @@ export function Header() {
             </div>
             <DarkModeToggle />
 
-            {/* Auth buttons — desktop */}
+            {/* Auth buttons — desktop. Reflects auth state so a successful
+                login visibly changes the header. */}
             <div className="hidden lg:flex items-center gap-2 ml-2">
-              <Link
-                to={`/${lang}/login`}
-                className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
-              >
-                {t('login')}
-              </Link>
-              <Link
-                to={`/${lang}/register`}
-                className="px-3 py-1.5 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
-              >
-                {t('register')}
-              </Link>
+              {loading ? null : user ? (
+                <>
+                  <Link
+                    to={`/${lang}/moja-knjiznica`}
+                    className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+                  >
+                    {t('myLibrary', 'Moja knjižnica')}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="px-3 py-1.5 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+                  >
+                    {t('signOut', 'Odjava')}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to={`/${lang}/login`}
+                    className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+                  >
+                    {t('login')}
+                  </Link>
+                  <Link
+                    to={`/${lang}/register`}
+                    className="px-3 py-1.5 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+                  >
+                    {t('register')}
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Hamburger — mobile */}

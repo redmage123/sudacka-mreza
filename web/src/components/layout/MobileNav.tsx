@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitch } from './LanguageSwitch'
+import { useAuth } from '@/hooks/useAuth'
+import { logout } from '@/api/auth'
 
 interface MobileNavProps {
   isOpen: boolean
@@ -14,6 +16,14 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const lang = params.lang ?? 'hr'
   const closeRef = useRef<HTMLButtonElement>(null)
   const navRef = useRef<HTMLElement>(null)
+  const { user, loading } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleSignOut() {
+    await logout()
+    onClose()
+    navigate(`/${lang}`)
+  }
 
   // Focus close button when opened
   useEffect(() => {
@@ -169,20 +179,41 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </div>
 
         <div className="px-4 py-4 border-t border-[color:var(--color-brand-navy-light)] flex gap-2">
-          <Link
-            to={`/${lang}/login`}
-            onClick={onClose}
-            className="flex-1 text-center px-4 py-2 text-sm font-medium border border-[color:var(--color-brand-gold)] text-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
-          >
-            {t('login')}
-          </Link>
-          <Link
-            to={`/${lang}/register`}
-            onClick={onClose}
-            className="flex-1 text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
-          >
-            {t('register')}
-          </Link>
+          {loading ? null : user ? (
+            <>
+              <Link
+                to={`/${lang}/moja-knjiznica`}
+                onClick={onClose}
+                className="flex-1 text-center px-4 py-2 text-sm font-medium border border-[color:var(--color-brand-gold)] text-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+              >
+                {t('myLibrary', 'Moja knjižnica')}
+              </Link>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="flex-1 text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+              >
+                {t('signOut', 'Odjava')}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to={`/${lang}/login`}
+                onClick={onClose}
+                className="flex-1 text-center px-4 py-2 text-sm font-medium border border-[color:var(--color-brand-gold)] text-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+              >
+                {t('login')}
+              </Link>
+              <Link
+                to={`/${lang}/register`}
+                onClick={onClose}
+                className="flex-1 text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+              >
+                {t('register')}
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </>
