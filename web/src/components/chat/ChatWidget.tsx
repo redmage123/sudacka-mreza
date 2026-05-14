@@ -139,6 +139,17 @@ export function ChatWidget() {
     }
   }, [open, turns])
 
+  // Close the widget on Escape — expected of any dialog, and the only other
+  // way out was the floating button below the panel, which isn't obvious.
+  useEffect(() => {
+    if (!open) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
   const send = useCallback(async () => {
     const q = input.trim()
     if (!q || sending) return
@@ -254,13 +265,23 @@ export function ChatWidget() {
         >
           <div className="flex items-center justify-between px-3 py-2 border-b border-[color:var(--color-border)]">
             <strong className="text-sm">{t('title')}</strong>
-            <button
-              type="button"
-              onClick={clearConvo}
-              className="text-xs text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"
-            >
-              {t('clear')}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={clearConvo}
+                className="text-xs text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"
+              >
+                {t('clear')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label={t('closeWidget')}
+                className="flex h-6 w-6 items-center justify-center rounded text-lg leading-none text-[color:var(--color-text-muted)] hover:bg-[color:var(--color-surface-alt,#f3f4f6)] hover:text-[color:var(--color-text)]"
+              >
+                <span aria-hidden>×</span>
+              </button>
+            </div>
           </div>
 
           {langBanner && (

@@ -225,9 +225,10 @@ export function Header() {
 
           {/* Right-side controls */}
           <div className="flex items-center gap-1 ml-auto">
-            <div className="hidden sm:block">
-              <LanguageSwitch />
-            </div>
+            {/* Language switch stays visible at every width — a multilingual
+                legal site must not bury its language selector in the hamburger
+                menu on mobile. */}
+            <LanguageSwitch />
             <DarkModeToggle />
 
             {/* Auth buttons — desktop. Reflects auth state so a successful
