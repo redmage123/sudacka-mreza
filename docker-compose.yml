@@ -8,7 +8,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d:ro
-    mem_limit: 512m
+    # 512m is too tight for Postgres: cgroup memory accounting includes the
+    # page cache for the DB's own data files, so under query load the container
+    # exceeds the limit and the kernel OOM-kills the postgres process, forcing
+    # repeated crash-recovery. (Observed in production 2026-05-14.)
+    mem_limit: 2g
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-sudacka_mreza}"]
       interval: 10s
