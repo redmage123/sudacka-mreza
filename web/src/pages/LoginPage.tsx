@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
@@ -32,6 +32,16 @@ export default function LoginPage() {
   const [mfaChallenge, setMfaChallenge] = useState<string | null>(null)
   const [mfaEmailHint, setMfaEmailHint] = useState<string>('')
   const [mfaCode, setMfaCode] = useState('')
+  // Resend-code cooldown: seconds left before another resend is allowed, and a
+  // one-shot "a new code was sent" confirmation.
+  const [resendIn, setResendIn] = useState(0)
+  const [resent, setResent] = useState(false)
+
+  useEffect(() => {
+    if (resendIn <= 0) return
+    const id = window.setTimeout(() => setResendIn((n) => n - 1), 1000)
+    return () => window.clearTimeout(id)
+  }, [resendIn])
 
   function validate(): FormErrors {
     const errs: FormErrors = {}
@@ -86,6 +96,36 @@ export default function LoginPage() {
     }
   }
 
+  // Re-run step 1 of the login to issue a fresh code + challenge. The
+  // identifier/password are still in state from the first step, so we don't
+  // have to send the user back to the password form just to get a new email.
+  async function handleResend() {
+    if (submitting || resendIn > 0) return
+    setServerError(null)
+    setErrors((p) => ({ ...p, mfa: undefined }))
+    setSubmitting(true)
+    try {
+      const result = await login(identifier, password)
+      if (result.kind === 'mfa') {
+        setMfaChallenge(result.challenge)
+        setMfaEmailHint(result.emailHint)
+        setMfaCode('')
+        setResent(true)
+        setResendIn(30)
+      } else {
+        // Role changed to non-admin between steps — just complete the login.
+        navigate(`/${locale}/moja-knjiznica`, { replace: true })
+      }
+    } catch (err) {
+      const msg = err instanceof ApiError && err.messages[0]
+        ? err.messages[0]
+        : t('auth.login.errorGeneric', 'Login failed. Please try again.')
+      setServerError(msg)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <div className="mx-auto max-w-md px-4 py-16">
       <h1 className="text-3xl font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)] mb-1 text-center">
@@ -117,7 +157,7 @@ export default function LoginPage() {
               pattern="[0-9]*"
               maxLength={6}
               value={mfaCode}
-              onChange={(e) => { setMfaCode(e.target.value.replace(/\s+/g, '')); setErrors((p) => ({ ...p, mfa: undefined })) }}
+              onChange={(e) => { setMfaCode(e.target.value.replace(/\s+/g, '')); setErrors((p) => ({ ...p, mfa: undefined })); setResent(false) }}
               disabled={submitting}
               autoFocus
               className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-center text-lg tracking-[0.4em] font-mono text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
@@ -133,10 +173,30 @@ export default function LoginPage() {
           >
             {submitting ? t('auth.login.submitting', 'Signing in…') : t('auth.login.mfaSubmit', 'Verify code')}
           </button>
+
+          {/* Resend the code — re-runs step 1 to issue a fresh email + challenge. */}
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={submitting || resendIn > 0}
+              className="text-xs text-[color:var(--color-brand)] hover:underline disabled:opacity-60 disabled:no-underline disabled:cursor-default"
+            >
+              {resendIn > 0
+                ? t('auth.login.mfaResendIn', { defaultValue: 'Resend code in {{n}}s', n: resendIn })
+                : t('auth.login.mfaResend', 'Didn’t get the code? Resend it')}
+            </button>
+            {resent && (
+              <p className="mt-1 text-xs text-green-600 dark:text-green-400">
+                {t('auth.login.mfaResent', 'A new code has been sent — check your inbox (and spam folder).')}
+              </p>
+            )}
+          </div>
+
           <button
             type="button"
             disabled={submitting}
-            onClick={() => { setMfaChallenge(null); setMfaCode(''); setServerError(null) }}
+            onClick={() => { setMfaChallenge(null); setMfaCode(''); setServerError(null); setResent(false) }}
             className="w-full rounded-lg border border-[color:var(--color-border)] px-6 py-2.5 text-sm font-medium text-[color:var(--color-text)] hover:border-[color:var(--color-brand)] transition-colors disabled:opacity-60"
           >
             {t('auth.login.mfaCancel', 'Use a different account')}
