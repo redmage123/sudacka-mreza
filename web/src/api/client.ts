@@ -2,22 +2,56 @@ import { type ZodSchema } from 'zod'
 
 export const API_BASE = '/api'
 export const AUTH_TOKEN_KEY = 'sudacka.authToken'
+// Custom event fired on the current tab whenever the auth token is set or cleared.
+// We can't rely on the native `storage` event for same-tab notifications since
+// the spec only fires it on other windows that share the storage area.
+export const AUTH_TOKEN_EVENT = 'sudacka:authTokenChanged'
+
+// In-memory mirror of the auth token. localStorage is the source of truth for
+// cross-tab persistence, but it can throw or be unavailable (private-mode
+// quirks, "block site data" privacy settings, Safari ITP, full quota, embedded
+// webviews). When that happens we must NOT silently drop the token — that
+// leaves the user authenticated in the API's eyes but logged-out in the UI:
+// they pass login/MFA, then the very next request sends no Authorization
+// header and bounces them back to the login screen. The in-memory copy keeps
+// the current tab's session working even when persistence fails.
+let inMemoryToken: string | null = null
+let storageWorks = true
 
 export function getAuthToken(): string | null {
   try {
-    return localStorage.getItem(AUTH_TOKEN_KEY)
+    const stored = localStorage.getItem(AUTH_TOKEN_KEY)
+    // localStorage wins when present; otherwise fall back to the memory mirror.
+    return stored ?? inMemoryToken
   } catch {
-    return null
+    return inMemoryToken
   }
 }
 
 export function setAuthToken(token: string | null): void {
+  // Always update the in-memory mirror first — this is the part that cannot fail.
+  inMemoryToken = token
   try {
     if (token) localStorage.setItem(AUTH_TOKEN_KEY, token)
     else localStorage.removeItem(AUTH_TOKEN_KEY)
-    window.dispatchEvent(new StorageEvent('storage', { key: AUTH_TOKEN_KEY, newValue: token }))
+    storageWorks = true
+  } catch (err) {
+    // Persistence failed — the session still works for this tab via the memory
+    // mirror, but it won't survive a reload or reach other tabs. Surface it
+    // once instead of swallowing it, so it's diagnosable.
+    if (storageWorks) {
+      storageWorks = false
+      console.error(
+        '[auth] localStorage is unavailable — session will not persist across reloads/tabs.',
+        err,
+      )
+    }
+  }
+  // Always dispatch — useAuth in the same tab needs to know.
+  try {
+    window.dispatchEvent(new CustomEvent(AUTH_TOKEN_EVENT, { detail: { token } }))
   } catch {
-    // localStorage might be disabled — fail quietly
+    /* SSR / no window */
   }
 }
 
