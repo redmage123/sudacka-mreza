@@ -178,26 +178,37 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
           </div>
         </div>
 
-        <div className="px-4 py-4 border-t border-[color:var(--color-brand-navy-light)] flex gap-2">
+        <div className="px-4 py-4 border-t border-[color:var(--color-brand-navy-light)] space-y-2">
           {loading ? null : user ? (
             <>
-              <Link
-                to={`/${lang}/moja-knjiznica`}
-                onClick={onClose}
-                className="flex-1 text-center px-4 py-2 text-sm font-medium border border-[color:var(--color-brand-gold)] text-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
-              >
-                {t('myLibrary', 'Moja knjižnica')}
-              </Link>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="flex-1 text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
-              >
-                {t('signOut', 'Odjava')}
-              </button>
+              {user.role === 'admin' && (
+                <Link
+                  to={`/${lang}/admin`}
+                  onClick={onClose}
+                  className="block text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+                >
+                  {t('adminConsole', 'Administracija')}
+                </Link>
+              )}
+              <div className="flex gap-2">
+                <Link
+                  to={`/${lang}/moja-knjiznica`}
+                  onClick={onClose}
+                  className="flex-1 text-center px-4 py-2 text-sm font-medium border border-[color:var(--color-brand-gold)] text-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+                >
+                  {t('myLibrary', 'Moja knjižnica')}
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="flex-1 text-center px-4 py-2 text-sm font-semibold bg-[color:var(--color-brand-gold)] text-[color:var(--color-brand-navy)] rounded hover:bg-[color:var(--color-brand-gold-light)] transition-colors"
+                >
+                  {t('signOut', 'Odjava')}
+                </button>
+              </div>
             </>
           ) : (
-            <>
+            <div className="flex gap-2">
               <Link
                 to={`/${lang}/login`}
                 onClick={onClose}
@@ -212,7 +223,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               >
                 {t('register')}
               </Link>
-            </>
+            </div>
           )}
         </div>
       </nav>

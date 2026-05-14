@@ -236,6 +236,14 @@ export function Header() {
             <div className="hidden lg:flex items-center gap-2 ml-2">
               {loading ? null : user ? (
                 <>
+                  {user.role === 'admin' && (
+                    <Link
+                      to={`/${lang}/admin`}
+                      className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+                    >
+                      {t('adminConsole', 'Administracija')}
+                    </Link>
+                  )}
                   <Link
                     to={`/${lang}/moja-knjiznica`}
                     className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"

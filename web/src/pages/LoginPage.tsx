@@ -43,6 +43,11 @@ export default function LoginPage() {
     return () => window.clearTimeout(id)
   }, [resendIn])
 
+  // Where to send the user after a successful login. Admins land straight on
+  // the admin console; everyone else on their personal library.
+  const landingPath = (u: { role?: string | null }) =>
+    u.role === 'admin' ? `/${locale}/admin` : `/${locale}/moja-knjiznica`
+
   function validate(): FormErrors {
     const errs: FormErrors = {}
     if (!identifier.trim()) errs.identifier = t('auth.form.errorRequired')
@@ -63,7 +68,7 @@ export default function LoginPage() {
         setMfaEmailHint(result.emailHint)
         return
       }
-      navigate(`/${locale}/moja-knjiznica`, { replace: true })
+      navigate(landingPath(result.user), { replace: true })
     } catch (err) {
       const msg = err instanceof ApiError && err.messages[0]
         ? err.messages[0]
@@ -84,8 +89,8 @@ export default function LoginPage() {
     }
     setSubmitting(true)
     try {
-      await verifyMfa(mfaChallenge, mfaCode)
-      navigate(`/${locale}/moja-knjiznica`, { replace: true })
+      const user = await verifyMfa(mfaChallenge, mfaCode)
+      navigate(landingPath(user), { replace: true })
     } catch (err) {
       const msg = err instanceof ApiError && err.messages[0]
         ? err.messages[0]
