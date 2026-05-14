@@ -218,8 +218,9 @@ export function createMfaRouter(payload: Payload): Router {
       payload.logger.error({ err: e }, 'failed to store email OTP')
       return res.status(500).json({ errors: [{ message: 'Could not issue 2FA code.' }] })
     }
+    let deliveredVia: 'resend' | 'msmtp' | 'console'
     try {
-      await sendMail(payload, {
+      deliveredVia = await sendMail(payload, {
         to: userEmail,
         subject: 'Sudačka Mreža — prijavni kod',
         text:
@@ -231,6 +232,19 @@ export function createMfaRouter(payload: Payload): Router {
       })
     } catch (e) {
       payload.logger.error({ err: e }, 'email OTP delivery failed')
+      return res.status(500).json({ errors: [{ message: 'Could not send 2FA code to your email.' }] })
+    }
+    // sendMail() never throws — with no real transport it falls through to a
+    // console-log fallback. In production that means the code was never
+    // actually delivered, so fail loudly instead of handing back a challenge
+    // the user can never satisfy. Non-prod keeps the fallback so developers
+    // can read the code from the log.
+    if (deliveredVia === 'console' && process.env.NODE_ENV === 'production') {
+      payload.logger.error(
+        { userId: user.id },
+        'OTP fell through to console fallback — no mail transport configured in production',
+      )
+      await clearOtp(payload, user.id)
       return res.status(500).json({ errors: [{ message: 'Could not send 2FA code to your email.' }] })
     }
 

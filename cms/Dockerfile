@@ -16,6 +16,11 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PAYLOAD_MIGRATIONS_DIR=dist/migrations
+# msmtp is the mail transport used by src/utils/mail.ts (tier 2). The config
+# lives in /etc/msmtprc (bind-mounted read-only by docker-compose); without the
+# binary here, sendMail() silently falls through to the console fallback and
+# admin 2FA OTP emails are never delivered.
+RUN apk add --no-cache msmtp
 # Non-root execution
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder /app/dist ./dist
