@@ -76,6 +76,8 @@ const MediaPage = lazy(() => import('@/pages/MediaPage'))
 const MembersPage = lazy(() => import('@/pages/MembersPage'))
 const LoginPage = lazy(() => import('@/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'))
+const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'))
 const MyLibraryPage = lazy(() => import('@/pages/MyLibraryPage'))
 
 const WatchlistPage = lazy(() => import('@/pages/WatchlistPage'))
@@ -227,6 +229,8 @@ export const router = createBrowserRouter([
       { path: 'clanovi', element: S(MembersPage) },
       { path: 'login', element: S(LoginPage) },
       { path: 'prijava', element: S(LoginPage) },
+      { path: 'prijava/zaboravljena-lozinka', element: S(ForgotPasswordPage) },
+      { path: 'prijava/nova-lozinka', element: S(ResetPasswordPage) },
       { path: 'register', element: S(RegisterPage) },
       { path: 'registracija', element: S(RegisterPage) },
       { path: 'moja-knjiznica', element: S(MyLibraryPage) },

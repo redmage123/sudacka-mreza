@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Alert } from '@/components/ui/Alert'
+import { PasswordInput } from '@/components/ui/PasswordInput'
 import { ApiError } from '@/api/client'
 import { register } from '@/api/auth'
 
@@ -147,16 +148,17 @@ export default function RegisterPage() {
             <label htmlFor={`reg-${field}`} className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t(`auth.register.${field === 'confirm' ? 'confirmPassword' : 'password'}`)}
             </label>
-            <input
+            <PasswordInput
               id={`reg-${field}`}
               name={field}
-              type="password"
-              autoComplete={field === 'password' ? 'new-password' : 'new-password'}
+              autoComplete="new-password"
               value={form[field]}
               onChange={handleChange}
               disabled={submitting}
               className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
               aria-invalid={!!errors[field]}
+              showLabel={t('auth.password.show', 'Show password')}
+              hideLabel={t('auth.password.hide', 'Hide password')}
             />
             {errors[field] && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors[field]}</p>}
           </div>

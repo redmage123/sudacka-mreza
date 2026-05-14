@@ -53,14 +53,19 @@ export const Users: CollectionConfig = {
   },
   hooks: {
     beforeChange: [
-      ({ data, req, operation }) => {
+      ({ data, req, operation, originalDoc }) => {
         // Force member role on self-registration
         if (operation === 'create' && req.user?.role !== 'admin') {
           data!.role = 'member'
         }
-        // Prevent non-admins from escalating their own role
-        if (operation === 'update' && req.user?.role !== 'admin') {
-          delete data!.role
+        // Prevent non-admins — and system-initiated updates that run with no
+        // req.user at all (forgot-password, email verification, login-attempt
+        // counters) — from changing `role`. PIN it to the stored value rather
+        // than `delete`-ing it: `role` is required, and those internal updates
+        // pass the whole document, so deleting the key makes validation fail
+        // with "This field is required" and breaks the operation entirely.
+        if (operation === 'update' && req.user?.role !== 'admin' && originalDoc) {
+          data!.role = (originalDoc as { role?: string }).role
         }
         return data
       },
@@ -112,10 +117,14 @@ export const Users: CollectionConfig = {
         { label: 'Urednik', value: 'editor' },
         { label: 'Član', value: 'member' },
       ],
-      access: {
-        // Only admins can set or change role
-        update: ({ req }) => req.user?.role === 'admin',
-      },
+      // NOTE: no field-level `access.update` here. Restricting it to admins
+      // broke every UNAUTHENTICATED internal update Payload performs on a user
+      // row — forgot-password, email verification, login-attempt counters —
+      // with `ValidationError: ... Uloga`, because those run with no req.user.
+      // Privilege escalation is already prevented by the beforeChange hook
+      // above (`operation === 'update' && req.user?.role !== 'admin'` strips
+      // `role` from the incoming data), which does it without breaking
+      // system-initiated writes.
     },
 
     // ── Email-based two-factor authentication (admins only) ───────────────

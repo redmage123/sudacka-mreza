@@ -130,6 +130,18 @@ export async function register(input: RegisterInput): Promise<AuthUser> {
   }
 }
 
+// Request a password-reset email. The server always responds 200 (it never
+// reveals whether the address is registered), so this resolves either way.
+export async function requestPasswordReset(email: string, lang: string): Promise<void> {
+  await postJson('/users/auth/forgot-password', { email: email.trim(), lang })
+}
+
+// Consume a reset token (from the emailed link) and set a new password.
+// Throws ApiError if the token is invalid or expired.
+export async function resetPassword(token: string, password: string): Promise<void> {
+  await postJson('/users/auth/reset-password', { token, password })
+}
+
 export async function logout(): Promise<void> {
   const token = getAuthToken()
   if (token) {

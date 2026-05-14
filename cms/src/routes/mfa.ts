@@ -322,6 +322,81 @@ export function createMfaRouter(payload: Payload): Router {
     })
   })
 
+  // ── Forgot password — request a reset link ─────────────────────────────
+  // Payload has no email adapter configured, so its built-in forgot-password
+  // would only console-log the mail. We generate the token via the Local API
+  // with disableEmail and send the link ourselves through the msmtp transport.
+  router.post('/users/auth/forgot-password', async (req, res) => {
+    const { email, lang } = (req.body ?? {}) as { email?: string; lang?: string }
+    if (!email || typeof email !== 'string') {
+      return res.status(400).json({ errors: [{ message: 'email is required' }] })
+    }
+    // Anti-enumeration: always answer 200, regardless of whether the address
+    // exists or the mail send succeeds.
+    const respondOk = () => res.json({ ok: true })
+
+    let token: string
+    try {
+      token = (await payload.forgotPassword({
+        collection: 'users',
+        data: { email: email.trim().toLowerCase() },
+        disableEmail: true,
+      })) as string
+    } catch {
+      return respondOk()
+    }
+    if (typeof token !== 'string' || token.length === 0) return respondOk()
+
+    // Build the reset URL from the REQUEST host — never from a client-supplied
+    // value (that would be a phishing vector). lang is only a path segment.
+    const safeLang = /^[a-z]{2}$/.test(String(lang)) ? String(lang) : 'hr'
+    const host = String(req.headers['x-forwarded-host'] ?? req.headers.host ?? '').replace(
+      /[^a-zA-Z0-9.:-]/g,
+      '',
+    )
+    const proto = req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http'
+    const link = `${proto}://${host}/${safeLang}/prijava/nova-lozinka?token=${encodeURIComponent(token)}`
+
+    try {
+      await sendMail(payload, {
+        to: email.trim(),
+        subject: 'Sudačka Mreža — ponovno postavljanje lozinke',
+        text:
+          'Zatražili ste ponovno postavljanje lozinke za Sudačku Mrežu.\n\n' +
+          `Otvorite ovu poveznicu da postavite novu lozinku (vrijedi 1 sat):\n${link}\n\n` +
+          'Ako niste zatražili ovu promjenu, zanemarite ovu poruku.\n\n' +
+          '--\n\n' +
+          'You requested a password reset for Sudačka Mreža.\n\n' +
+          `Open this link to set a new password (valid for 1 hour):\n${link}\n\n` +
+          'If you did not request this, ignore this message.\n',
+      })
+    } catch (e) {
+      payload.logger.error({ err: e }, 'failed to send password-reset email')
+    }
+    return respondOk()
+  })
+
+  // ── Reset password — consume the token, set a new password ─────────────
+  router.post('/users/auth/reset-password', async (req, res) => {
+    const { token, password } = (req.body ?? {}) as { token?: string; password?: string }
+    if (!token || !password) {
+      return res.status(400).json({ errors: [{ message: 'token and password are required' }] })
+    }
+    if (password.length < 8) {
+      return res.status(400).json({ errors: [{ message: 'Password must be at least 8 characters.' }] })
+    }
+    try {
+      await payload.resetPassword({
+        collection: 'users',
+        data: { token, password },
+        overrideAccess: true,
+      })
+    } catch {
+      return res.status(400).json({ errors: [{ message: 'This reset link is invalid or has expired.' }] })
+    }
+    return res.json({ ok: true })
+  })
+
   return router
 }
 

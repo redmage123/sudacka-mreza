@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Alert } from '@/components/ui/Alert'
+import { PasswordInput } from '@/components/ui/PasswordInput'
 import { ApiError } from '@/api/client'
 import { login, verifyMfa } from '@/api/auth'
 
@@ -170,15 +171,16 @@ export default function LoginPage() {
               {t('auth.login.forgotPassword')}
             </Link>
           </div>
-          <input
+          <PasswordInput
             id="login-password"
-            type="password"
             autoComplete="current-password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setErrors((p) => ({ ...p, password: undefined })) }}
             disabled={submitting}
             className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
             aria-invalid={!!errors.password}
+            showLabel={t('auth.password.show', 'Show password')}
+            hideLabel={t('auth.password.hide', 'Hide password')}
           />
           {errors.password && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.password}</p>}
         </div>
