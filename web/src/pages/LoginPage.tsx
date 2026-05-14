@@ -155,9 +155,12 @@ export default function LoginPage() {
               inputMode="numeric"
               autoComplete="one-time-code"
               pattern="[0-9]*"
-              maxLength={6}
               value={mfaCode}
-              onChange={(e) => { setMfaCode(e.target.value.replace(/\s+/g, '')); setErrors((p) => ({ ...p, mfa: undefined })); setResent(false) }}
+              // Normalise to digits-only, capped at 6, HERE — not via
+              // maxLength. maxLength truncates the raw value (including pasted
+              // whitespace) before this runs, which could drop a real digit
+              // and leave the code stuck under 6 chars.
+              onChange={(e) => { setMfaCode(e.target.value.replace(/\D/g, '').slice(0, 6)); setErrors((p) => ({ ...p, mfa: undefined })); setResent(false) }}
               disabled={submitting}
               autoFocus
               className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-center text-lg tracking-[0.4em] font-mono text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
@@ -168,7 +171,11 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            disabled={submitting || mfaCode.length < 6}
+            // Enabled as soon as anything is entered. Don't gate on an exact
+            // length — a too-short or wrong code should be submittable so the
+            // server can say WHY it failed, instead of leaving a dead button
+            // with no feedback.
+            disabled={submitting || mfaCode.length === 0}
             className="w-full rounded-lg bg-[color:var(--color-brand)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-60"
           >
             {submitting ? t('auth.login.submitting', 'Signing in…') : t('auth.login.mfaSubmit', 'Verify code')}
