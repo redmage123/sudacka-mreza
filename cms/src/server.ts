@@ -18,7 +18,6 @@ import { createChatFeedbackRouter } from './routes/chat-feedback.js'
 import { createEurLexSearchRouter } from './routes/eurlex-search.js'
 import { createDecisionBriefRouter } from './routes/decisionBrief.js'
 import { createTranslateRouter } from './routes/translate.js'
-import { createEditorRouter } from './routes/editor.js'
 import { createMfaRouter } from './routes/mfa.js'
 import { createPublicApiRouter } from './endpoints/publicApi.js'
 import { createSitemapRouter } from './endpoints/sitemap.js'
@@ -114,7 +113,6 @@ const start = async () => {
   app.use('/api', createEurLexSearchRouter(payload))
   app.use('/api', createDecisionBriefRouter(payload))
   app.use('/api', createTranslateRouter(payload))
-  app.use('/api', createEditorRouter(payload))
   // MFA router — must be mounted BEFORE Payload's catch-all so /api/users/auth/login
   // and /api/users/auth/verify-mfa take precedence over Payload's /api/users/* REST surface.
   app.use('/api', createMfaRouter(payload))

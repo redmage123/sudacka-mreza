@@ -5,6 +5,7 @@ import * as migration_20260327_judges from './20260327_judges';
 import * as migration_20260428_chat_feedback from './20260428_chat_feedback';
 import * as migration_20260514_080000_user_action_collections from './20260514_080000_user_action_collections';
 import * as migration_20260520_120000_bankruptcy_filings from './20260520_120000_bankruptcy_filings';
+import * as migration_20260520_180000_bankruptcy_filings_published_at from './20260520_180000_bankruptcy_filings_published_at';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260520_120000_bankruptcy_filings.up,
     down: migration_20260520_120000_bankruptcy_filings.down,
     name: '20260520_120000_bankruptcy_filings',
+  },
+  {
+    up: migration_20260520_180000_bankruptcy_filings_published_at.up,
+    down: migration_20260520_180000_bankruptcy_filings_published_at.down,
+    name: '20260520_180000_bankruptcy_filings_published_at',
   },
 ];

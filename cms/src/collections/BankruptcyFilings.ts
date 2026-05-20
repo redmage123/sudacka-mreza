@@ -96,5 +96,15 @@ export const BankruptcyFilings: CollectionConfig = {
         description: 'Admin notes when approving or rejecting this filing.',
       },
     },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      label: 'Submitted at',
+      admin: {
+        description: 'Original submission timestamp from the editor.',
+        date: { pickerAppearance: 'dayAndTime' },
+        readOnly: true,
+      },
+    },
   ],
 }
