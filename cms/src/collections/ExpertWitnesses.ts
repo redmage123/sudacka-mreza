@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead, membersOnlyRead } from '../access
 export const ExpertWitnesses: CollectionConfig = {
   slug: 'expert-witnesses',
   admin: {
+    group: 'Stručnjaci',
+    description: 'Sudski vještaci po struci i županiji.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'county', 'verified', 'lang'],
   },
@@ -33,7 +35,15 @@ export const ExpertWitnesses: CollectionConfig = {
           name: 'area',
           type: 'text',
           required: true,
-          label: 'Područje',
+          label: 'Grana djelatnosti / Branch',
+        },
+        {
+          name: 'subArea',
+          type: 'text',
+          label: 'Podgrana djelatnosti / Sub-branch',
+          admin: {
+            description: 'Uža specijalizacija unutar grane (opcionalno).',
+          },
         },
       ],
     },
@@ -54,6 +64,11 @@ export const ExpertWitnesses: CollectionConfig = {
       ],
     },
     {
+      name: 'address',
+      type: 'text',
+      label: 'Adresa',
+    },
+    {
       name: 'county',
       type: 'text',
       label: 'Županija',
@@ -62,6 +77,33 @@ export const ExpertWitnesses: CollectionConfig = {
       name: 'city',
       type: 'text',
       label: 'Grad',
+    },
+    {
+      name: 'company',
+      type: 'text',
+      label: 'Tvrtka / Firm',
+      admin: {
+        description: 'Naziv tvrtke / poduzeća kojem vještak pripada (opcionalno).',
+      },
+    },
+    {
+      name: 'cv',
+      type: 'relationship',
+      relationTo: 'media',
+      label: 'Životopis (CV)',
+      admin: {
+        description: 'Prilog s životopisom.',
+      },
+    },
+    {
+      name: 'works',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
+      label: 'Priloženi radovi',
+      admin: {
+        description: 'Stručni radovi i druge javno dostupne publikacije.',
+      },
     },
     {
       name: 'phone',

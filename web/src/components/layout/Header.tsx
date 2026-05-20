@@ -128,6 +128,7 @@ export function Header() {
       label: t('bankruptcy'),
       items: [
         { to: `/${lang}/stecaj/oglasi`, label: t('bankruptcyListings') },
+        { to: `/${lang}/stecaj/duznici`, label: t('bankruptcyDebtors') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/stecaj/zakoni`, label: t('bankruptcyLaws') },
       ],
@@ -231,9 +232,11 @@ export function Header() {
             <LanguageSwitch />
             <DarkModeToggle />
 
-            {/* Auth buttons — desktop. Reflects auth state so a successful
-                login visibly changes the header. */}
-            <div className="hidden lg:flex items-center gap-2 ml-2">
+            {/* Auth buttons. Visible from the `sm` breakpoint up — NOT gated
+                at `lg` — so the admin link / sign-in state stays in the header
+                on narrow laptop windows instead of being buried in the
+                hamburger menu. Below `sm` (true phones) it lives in MobileNav. */}
+            <div className="hidden sm:flex items-center gap-2 ml-2">
               {loading ? null : user ? (
                 <>
                   {user.role === 'admin' && (

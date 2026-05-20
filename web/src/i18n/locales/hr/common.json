@@ -235,6 +235,8 @@
   "bankruptcy.overview.text": "Stečaj u Hrvatskoj reguliran je Stečajnim zakonom (NN 71/15, 104/17, 36/22). Radi se o pravnom postupku koji se pokreće kada dužnik postane nesolventan ili prezadužen. Cilj je skupno namiriti vjerovnike likvidacijom imovine ili financijskim restrukturiranjem.",
   "bankruptcy.sections.listings": "Stečajni oglasi",
   "bankruptcy.sections.listingsDesc": "Objavljene stečajne obavijesti, pozivi vjerovnicima i aukcije imovine",
+  "bankruptcy.sections.debtors": "Stečajni dužnici",
+  "bankruptcy.sections.debtorsDesc": "Direktorij dužnika s profilom i poviješću svih povezanih postupaka",
   "bankruptcy.sections.administrators": "Stečajni upravitelji",
   "bankruptcy.sections.administratorsDesc": "Licencirani stečajni upravitelji i kontakt podaci",
   "bankruptcy.sections.legislation": "Zakonodavstvo",
@@ -365,6 +367,7 @@
   "courts.fields.president": "Predsjednik",
   "courts.officialNameNote": "Službeni naziv suda",
   "courts.tab.echr": "Europski sud za ljudska prava",
+  "courts.tab.ecj": "Sud Europske unije",
   "courtPerformance.title": "Performanse sudova",
   "courtPerformance.description": "Pregled ključnih pokazatelja učinkovitosti po sudovima: prosječno trajanje predmeta, zaostaci i stopa rješavanja.",
   "courtPerformance.filterAll": "Svi sudovi",
@@ -595,5 +598,6 @@
   "terms.section6.p1": "Na ove Uvjete korištenja primjenjuje se pravo Republike Hrvatske. Sve sporove nastale u vezi s korištenjem platforme stranke će nastojati riješiti sporazumno, a u slučaju neuspjeha nadležan je sud u Zagrebu.",
   "terms.section7.title": "7. Izmjene Uvjeta",
   "terms.section7.p1": "Zadržavamo pravo izmjene ovih Uvjeta korištenja. O značajnim izmjenama obavijestit ćemo registrirane korisnike e-poštom. Nastavak korištenja platforme nakon objave izmjena smatra se prihvaćanjem novih Uvjeta.",
-  "terms.section7.p2": "Za pitanja o ovim Uvjetima kontaktirajte nas na:"
+  "terms.section7.p2": "Za pitanja o ovim Uvjetima kontaktirajte nas na:",
+  "decisions.summaryOnlyNote": "Na ovoj je platformi dostupan samo službeni sažetak. Pročitajte cjeloviti tekst na web-mjestu suda izdavatelja."
 }

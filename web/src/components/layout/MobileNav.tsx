@@ -94,6 +94,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       label: t('bankruptcy'),
       items: [
         { to: `/${lang}/stecaj/oglasi`, label: t('bankruptcyListings') },
+        { to: `/${lang}/stecaj/duznici`, label: t('bankruptcyDebtors') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/stecaj/zakoni`, label: t('bankruptcyLaws') },
       ],

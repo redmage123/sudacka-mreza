@@ -12,6 +12,7 @@ export default function BankruptcyPage() {
 
   const sections = [
     { key: 'listings', href: `/${locale}/stecaj/oglasi`, icon: '📋' },
+    { key: 'debtors', href: `/${locale}/stecaj/duznici`, icon: '🏢' },
     { key: 'administrators', href: `/${locale}/stecaj/upravitelji`, icon: '👤' },
     { key: 'legislation', href: `/${locale}/stecaj/zakoni`, icon: '📖' },
   ]
@@ -29,7 +30,7 @@ export default function BankruptcyPage() {
       </h1>
       <p className="text-[color:var(--color-text-muted)] mb-10">{t('bankruptcy.subtitle')}</p>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-12">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-12">
         {sections.map((s) => (
           <Link
             key={s.key}

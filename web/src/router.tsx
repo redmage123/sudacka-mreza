@@ -39,6 +39,8 @@ const BankruptcyPage = lazy(() => import('@/pages/bankruptcy/BankruptcyPage'))
 const BankruptcyListingsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingsPage'))
 const BankruptcyListingDetailPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingDetailPage'))
 const AdministratorsPage = lazy(() => import('@/pages/bankruptcy/AdministratorsPage'))
+const DebtorsPage = lazy(() => import('@/pages/bankruptcy/DebtorsPage'))
+const DebtorDetailPage = lazy(() => import('@/pages/bankruptcy/DebtorDetailPage'))
 const BankruptcyLawsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyLawsPage'))
 const BankruptcyDecisionsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyDecisionsPage'))
 
@@ -183,6 +185,8 @@ export const router = createBrowserRouter([
       { path: 'stecaj/oglasi', element: S(BankruptcyListingsPage) },
       { path: 'stecaj/oglasi/:id', element: S(BankruptcyListingDetailPage) },
       { path: 'stecaj/upravitelji', element: S(AdministratorsPage) },
+      { path: 'stecaj/duznici', element: S(DebtorsPage) },
+      { path: 'stecaj/duznici/:id', element: S(DebtorDetailPage) },
       { path: 'stecaj/zakoni', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/zakonodavstvo', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/odluke', element: S(BankruptcyDecisionsPage) },

@@ -7,6 +7,9 @@ import * as migration_20260514_080000_user_action_collections from './20260514_0
 import * as migration_20260520_120000_bankruptcy_filings from './20260520_120000_bankruptcy_filings';
 import * as migration_20260520_180000_bankruptcy_filings_published_at from './20260520_180000_bankruptcy_filings_published_at';
 import * as migration_20260520_200000_admin_courts_and_departments from './20260520_200000_admin_courts_and_departments';
+import * as migration_20260520_210000_bankruptcy_debtors from './20260520_210000_bankruptcy_debtors';
+import * as migration_20260520_220000_experts_interpreters_fields from './20260520_220000_experts_interpreters_fields';
+import * as migration_20260520_240000_user_legal_entity from './20260520_240000_user_legal_entity';
 
 export const migrations = [
   {
@@ -53,5 +56,20 @@ export const migrations = [
     up: migration_20260520_200000_admin_courts_and_departments.up,
     down: migration_20260520_200000_admin_courts_and_departments.down,
     name: '20260520_200000_admin_courts_and_departments',
+  },
+  {
+    up: migration_20260520_210000_bankruptcy_debtors.up,
+    down: migration_20260520_210000_bankruptcy_debtors.down,
+    name: '20260520_210000_bankruptcy_debtors',
+  },
+  {
+    up: migration_20260520_220000_experts_interpreters_fields.up,
+    down: migration_20260520_220000_experts_interpreters_fields.down,
+    name: '20260520_220000_experts_interpreters_fields',
+  },
+  {
+    up: migration_20260520_240000_user_legal_entity.up,
+    down: migration_20260520_240000_user_legal_entity.down,
+    name: '20260520_240000_user_legal_entity',
   },
 ];

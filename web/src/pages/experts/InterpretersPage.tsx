@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Alert } from '@/components/ui/Alert'
@@ -7,6 +7,7 @@ import { Pagination } from '@/components/ui/Pagination'
 import { SearchBar } from '@/components/ui/SearchBar'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { getInterpreters } from '@/api/interpreters'
+import { CROATIAN_COUNTIES } from '@/utils/counties'
 import type { PayloadList, Interpreter } from '@/api/types'
 
 export default function InterpretersPage() {
@@ -17,12 +18,31 @@ export default function InterpretersPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const q = searchParams.get('q') ?? ''
   const languagePair = searchParams.get('lang') ?? ''
+  const language2 = searchParams.get('lang2') ?? ''
+  const county = searchParams.get('county') ?? ''
+  const city = searchParams.get('city') ?? ''
+  const hasCv = searchParams.get('hasCv') === '1'
+  const hasWorks = searchParams.get('hasWorks') === '1'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
 
   const [results, setResults] = useState<PayloadList<Interpreter> | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [languagePairOptions, setLanguagePairOptions] = useState<string[]>([])
+
+  // Derive single-language options from existing pair list (e.g. 'hr-en' →
+  // ['hr', 'en']) so the "language 2" filter can offer single-language
+  // values. Languages are BCP-47 two-letter codes.
+  const languageOptions = useMemo(() => {
+    const langs = new Set<string>()
+    for (const pair of languagePairOptions) {
+      for (const code of pair.split('-')) {
+        const c = code.trim().toLowerCase()
+        if (c) langs.add(c)
+      }
+    }
+    return [...langs].sort()
+  }, [languagePairOptions])
 
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined)
   const isMounted = useRef(true)
@@ -51,6 +71,11 @@ export default function InterpretersPage() {
     getInterpreters({
       q: q || undefined,
       languagePair: languagePair || undefined,
+      language2: language2 || undefined,
+      county: county || undefined,
+      city: city || undefined,
+      hasCv: hasCv || undefined,
+      hasWorks: hasWorks || undefined,
       page,
       locale,
     })
@@ -66,7 +91,7 @@ export default function InterpretersPage() {
           setLoading(false)
         }
       })
-  }, [q, languagePair, page, locale])
+  }, [q, languagePair, language2, county, city, hasCv, hasWorks, page, locale])
 
   function handleKeywordChange(value: string) {
     clearTimeout(debounceRef.current)
@@ -106,20 +131,88 @@ export default function InterpretersPage() {
           aria-label={t('interpreters.searchTitle')}
         />
 
-        <div>
-          <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
-            {t('interpreters.filterLanguage')}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('interpreters.filterLanguage')}
+            </label>
+            <select
+              value={languagePair}
+              onChange={(e) => handleFilterChange('lang', e.target.value)}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            >
+              <option value="">{t('interpreters.filterLanguageAll')}</option>
+              {languagePairOptions.map((lp) => (
+                <option key={lp} value={lp}>{lp}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('interpreters.filterLanguage2', 'Drugi jezik / Second language')}
+            </label>
+            <select
+              value={language2}
+              onChange={(e) => handleFilterChange('lang2', e.target.value)}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            >
+              <option value="">{t('interpreters.filterLanguage2All', 'Bilo koji / Any')}</option>
+              {languageOptions.map((lc) => (
+                <option key={lc} value={lc}>{lc}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('interpreters.filterCounty', 'Županija')}
+            </label>
+            <select
+              value={county}
+              onChange={(e) => handleFilterChange('county', e.target.value)}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            >
+              <option value="">{t('interpreters.filterCountyAll', 'Sve županije')}</option>
+              {CROATIAN_COUNTIES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('interpreters.filterCity', 'Grad')}
+            </label>
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => handleFilterChange('city', e.target.value)}
+              placeholder={t('interpreters.filterCityPh', 'Grad…')}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-4 pt-1">
+          <label className="inline-flex items-center gap-2 text-sm text-[color:var(--color-text-muted)] cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hasCv}
+              onChange={(e) => handleFilterChange('hasCv', e.target.checked ? '1' : '')}
+              className="rounded border-[color:var(--color-border)]"
+            />
+            {t('interpreters.filterHasCv', 'Ima priloženi CV')}
           </label>
-          <select
-            value={languagePair}
-            onChange={(e) => handleFilterChange('lang', e.target.value)}
-            className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
-          >
-            <option value="">{t('interpreters.filterLanguageAll')}</option>
-            {languagePairOptions.map((lp) => (
-              <option key={lp} value={lp}>{lp}</option>
-            ))}
-          </select>
+          <label className="inline-flex items-center gap-2 text-sm text-[color:var(--color-text-muted)] cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hasWorks}
+              onChange={(e) => handleFilterChange('hasWorks', e.target.checked ? '1' : '')}
+              className="rounded border-[color:var(--color-border)]"
+            />
+            {t('interpreters.filterHasWorks', 'Ima priložene radove')}
+          </label>
         </div>
       </div>
 

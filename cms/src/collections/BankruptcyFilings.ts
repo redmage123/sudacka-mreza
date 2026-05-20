@@ -1,11 +1,12 @@
 import type { Access, CollectionConfig } from 'payload'
-import { isAdmin, isAdminOrEditor } from '../access.js'
+import { isAdmin, isLegalEntityOrAbove } from '../access.js'
 
-// Editors can read only their own submissions; admins can read everything.
+// Non-admins (editors + legal entities) read only their own submissions;
+// admins read everything.
 const readOwnOrAdmin: Access = ({ req }) => {
   if (!req.user) return false
   if (req.user.role === 'admin') return true
-  if (req.user.role === 'editor') {
+  if (req.user.role === 'editor' || req.user.role === 'legal_entity') {
     return { submittedBy: { equals: req.user.email } }
   }
   return false
@@ -21,7 +22,7 @@ export const BankruptcyFilings: CollectionConfig = {
   },
   access: {
     read: readOwnOrAdmin,
-    create: isAdminOrEditor,
+    create: isLegalEntityOrAbove,
     update: isAdmin,
     delete: isAdmin,
   },

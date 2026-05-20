@@ -115,6 +115,10 @@ export const Users: CollectionConfig = {
       options: [
         { label: 'Admin', value: 'admin' },
         { label: 'Urednik', value: 'editor' },
+        // Pravno lice — registrirana organizacija / odvjetničko društvo /
+        // stečajni upravitelj koji djeluje u svoje ime. Može podnositi
+        // stečajne podneske kao i urednici.
+        { label: 'Pravno lice / Legal entity', value: 'legal_entity' },
         { label: 'Član', value: 'member' },
       ],
       // NOTE: no field-level `access.update` here. Restricting it to admins
@@ -125,6 +129,26 @@ export const Users: CollectionConfig = {
       // above (`operation === 'update' && req.user?.role !== 'admin'` strips
       // `role` from the incoming data), which does it without breaking
       // system-initiated writes.
+    },
+
+    // ── Legal-entity profile (only shown when role=legal_entity) ─────────
+    {
+      name: 'organisationName',
+      type: 'text',
+      label: 'Naziv pravne osobe',
+      admin: {
+        description: 'Naziv tvrtke / odvjetničkog društva / udruge.',
+        condition: (data) => (data as { role?: string })?.role === 'legal_entity',
+      },
+    },
+    {
+      name: 'organisationOib',
+      type: 'text',
+      label: 'OIB pravne osobe',
+      admin: {
+        description: '11-znamenkasti OIB pravne osobe.',
+        condition: (data) => (data as { role?: string })?.role === 'legal_entity',
+      },
     },
 
     // ── Email-based two-factor authentication (admins only) ───────────────

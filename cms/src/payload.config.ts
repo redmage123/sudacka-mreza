@@ -1,6 +1,8 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { hr } from '@payloadcms/translations/languages/hr'
+import { en } from '@payloadcms/translations/languages/en'
 
 // Collections
 import { Users } from './collections/Users.js'
@@ -13,6 +15,7 @@ import { StateAttorneys } from './collections/StateAttorneys.js'
 import { BankruptcyAdministrators } from './collections/BankruptcyAdministrators.js'
 import { BankruptcyListings } from './collections/BankruptcyListings.js'
 import { BankruptcyFilings } from './collections/BankruptcyFilings.js'
+import { BankruptcyDebtors } from './collections/BankruptcyDebtors.js'
 import { Laws } from './collections/Laws.js'
 import { NewsPosts } from './collections/NewsPosts.js'
 import { Pages } from './collections/Pages.js'
@@ -51,6 +54,15 @@ export default buildConfig({
     fallback: true,
   },
 
+  // Admin UI translations. Without this Payload defaults the admin shell to
+  // English and the "select language" picker in the user menu only shows
+  // English — which is item 8 on the corrections doc. Per-user language
+  // preference is stored on the user; default is Croatian.
+  i18n: {
+    fallbackLanguage: 'hr',
+    supportedLanguages: { hr, en },
+  },
+
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || 'postgresql://postgres:postgres@localhost:5432/sudacka_mreza',
@@ -79,6 +91,7 @@ export default buildConfig({
     BankruptcyAdministrators,
     BankruptcyListings,
     BankruptcyFilings,
+    BankruptcyDebtors,
     Laws,
     NewsPosts,
     Pages,

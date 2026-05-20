@@ -45,6 +45,7 @@ export function Sidebar() {
       heading: t('bankruptcy'),
       items: [
         { to: `/${lang}/stecaj/oglasi`, label: t('bankruptcyListings') },
+        { to: `/${lang}/stecaj/duznici`, label: t('bankruptcyDebtors') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/stecaj/zakoni`, label: t('bankruptcyLaws') },
         { to: `/${lang}/stecaj/odluke`, label: t('bankruptcyDecisions') },

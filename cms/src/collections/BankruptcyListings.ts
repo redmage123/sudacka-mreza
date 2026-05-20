@@ -4,6 +4,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const BankruptcyListings: CollectionConfig = {
   slug: 'bankruptcy-listings',
   admin: {
+    group: 'Stečaj',
+    description: 'Aktivni stečajni postupci s rokovima i kontaktima.',
     useAsTitle: 'caseNumber',
     defaultColumns: ['caseNumber', 'debtorName', 'court', 'status', 'deadline'],
   },
@@ -24,7 +26,19 @@ export const BankruptcyListings: CollectionConfig = {
       name: 'debtorName',
       type: 'text',
       required: true,
-      label: 'Dužnik',
+      label: 'Dužnik (naziv)',
+      admin: {
+        description: 'Naziv stečajnog dužnika. Zadržano radi povratne kompatibilnosti — preferirajte vezu prema `debtor` zapisu kada postoji.',
+      },
+    },
+    {
+      name: 'debtor',
+      type: 'relationship',
+      relationTo: 'bankruptcy-debtors',
+      label: 'Stečajni dužnik',
+      admin: {
+        description: 'Veza prema zapisu dužnika s OIB-om, adresom i poviješću postupaka.',
+      },
     },
     {
       name: 'court',

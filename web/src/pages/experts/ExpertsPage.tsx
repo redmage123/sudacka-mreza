@@ -19,7 +19,11 @@ export default function ExpertsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const q = searchParams.get('q') ?? ''
   const speciality = searchParams.get('speciality') ?? ''
+  const subSpeciality = searchParams.get('subSpeciality') ?? ''
   const county = searchParams.get('county') ?? ''
+  const city = searchParams.get('city') ?? ''
+  const hasCv = searchParams.get('hasCv') === '1'
+  const hasWorks = searchParams.get('hasWorks') === '1'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
 
   const [allExperts, setAllExperts] = useState<ExpertWitness[]>([])
@@ -57,7 +61,11 @@ export default function ExpertsPage() {
     getExpertWitnesses({
       q: q || undefined,
       speciality: speciality || undefined,
+      subSpeciality: subSpeciality || undefined,
       county: county || undefined,
+      city: city || undefined,
+      hasCv: hasCv || undefined,
+      hasWorks: hasWorks || undefined,
       page,
       locale,
     })
@@ -73,7 +81,7 @@ export default function ExpertsPage() {
           setLoading(false)
         }
       })
-  }, [q, speciality, county, page, locale])
+  }, [q, speciality, subSpeciality, county, city, hasCv, hasWorks, page, locale])
 
   function handleKeywordChange(value: string) {
     clearTimeout(debounceRef.current)
@@ -140,6 +148,20 @@ export default function ExpertsPage() {
             </select>
           </div>
 
+          {/* Sub-speciality */}
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('experts.filterSubSpeciality', 'Podgrana / Sub-branch')}
+            </label>
+            <input
+              type="text"
+              value={subSpeciality}
+              onChange={(e) => handleFilterChange('subSpeciality', e.target.value)}
+              placeholder={t('experts.filterSubSpecialityPh', 'Uža specijalizacija…')}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            />
+          </div>
+
           {/* County */}
           <div>
             <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
@@ -156,6 +178,42 @@ export default function ExpertsPage() {
               ))}
             </select>
           </div>
+
+          {/* City */}
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('experts.filterCity', 'Grad')}
+            </label>
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => handleFilterChange('city', e.target.value)}
+              placeholder={t('experts.filterCityPh', 'Grad…')}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            />
+          </div>
+        </div>
+
+        {/* Attachment filters */}
+        <div className="flex flex-wrap gap-4 pt-1">
+          <label className="inline-flex items-center gap-2 text-sm text-[color:var(--color-text-muted)] cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hasCv}
+              onChange={(e) => handleFilterChange('hasCv', e.target.checked ? '1' : '')}
+              className="rounded border-[color:var(--color-border)]"
+            />
+            {t('experts.filterHasCv', 'Ima priloženi CV')}
+          </label>
+          <label className="inline-flex items-center gap-2 text-sm text-[color:var(--color-text-muted)] cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hasWorks}
+              onChange={(e) => handleFilterChange('hasWorks', e.target.checked ? '1' : '')}
+              className="rounded border-[color:var(--color-border)]"
+            />
+            {t('experts.filterHasWorks', 'Ima priložene radove')}
+          </label>
         </div>
       </div>
 

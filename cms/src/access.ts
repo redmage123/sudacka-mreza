@@ -7,6 +7,16 @@ export const isAdmin: Access = ({ req }) => req.user?.role === 'admin'
 export const isAdminOrEditor: Access = ({ req }) =>
   req.user?.role === 'admin' || req.user?.role === 'editor'
 
+/**
+ * Access for admins, editors, and legal entities (pravne osobe).
+ * Used where a registered legal entity acts on its own behalf — e.g.
+ * submitting bankruptcy filings — alongside internal-staff roles.
+ */
+export const isLegalEntityOrAbove: Access = ({ req }) =>
+  req.user?.role === 'admin' ||
+  req.user?.role === 'editor' ||
+  req.user?.role === 'legal_entity'
+
 /** Unrestricted public read */
 export const publicRead: Access = () => true
 

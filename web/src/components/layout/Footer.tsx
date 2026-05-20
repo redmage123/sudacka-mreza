@@ -30,6 +30,7 @@ export function Footer() {
       heading: t('bankruptcy'),
       links: [
         { to: `/${lang}/stecaj/oglasi`, label: t('bankruptcyListings') },
+        { to: `/${lang}/stecaj/duznici`, label: t('bankruptcyDebtors') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/pristojbe`, label: t('calculator') },
         { to: `/${lang}/pravna-pomoc`, label: t('legalAid') },

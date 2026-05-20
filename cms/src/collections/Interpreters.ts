@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead, membersOnlyRead } from '../access
 export const Interpreters: CollectionConfig = {
   slug: 'interpreters',
   admin: {
+    group: 'Stručnjaci',
+    description: 'Sudski tumači po jezicima i županiji.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'county', 'verified', 'lang'],
   },
@@ -42,6 +44,11 @@ export const Interpreters: CollectionConfig = {
       ],
     },
     {
+      name: 'address',
+      type: 'text',
+      label: 'Adresa',
+    },
+    {
       name: 'county',
       type: 'text',
       label: 'Županija',
@@ -50,6 +57,27 @@ export const Interpreters: CollectionConfig = {
       name: 'city',
       type: 'text',
       label: 'Grad',
+    },
+    {
+      name: 'company',
+      type: 'text',
+      label: 'Tvrtka / Firm',
+      admin: {
+        description: 'Naziv tvrtke / poduzeća kojem tumač pripada (opcionalno).',
+      },
+    },
+    {
+      name: 'cv',
+      type: 'relationship',
+      relationTo: 'media',
+      label: 'Životopis (CV)',
+    },
+    {
+      name: 'works',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
+      label: 'Priloženi radovi',
     },
     {
       name: 'phone',

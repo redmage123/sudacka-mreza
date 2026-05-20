@@ -82,7 +82,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Only an official summary is available on this platform. Read the full text on the issuing court’s site."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -125,7 +126,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "European Court of Human Rights"
+      "echr": "European Court of Human Rights",
+      "ecj": "Court of Justice of the European Union"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -312,6 +314,8 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Bankruptcy Debtors",
+      "debtorsDesc": "Directory of debtors with each profile and the full history of linked cases",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
