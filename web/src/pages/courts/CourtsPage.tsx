@@ -94,10 +94,13 @@ export default function CourtsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const activeType = (searchParams.get('type') as CourtType | null) ?? 'municipal'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
+  const q = searchParams.get('q') ?? ''
 
   const [results, setResults] = useState<PayloadList<Court> | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [queryDraft, setQueryDraft] = useState(q)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const isMounted = useRef(true)
   useEffect(() => {
@@ -105,10 +108,13 @@ export default function CourtsPage() {
     return () => { isMounted.current = false }
   }, [])
 
+  // Keep the local draft in sync if the URL changes (back/forward navigation).
+  useEffect(() => { setQueryDraft(q) }, [q])
+
   useEffect(() => {
     setLoading(true)
     setError(false)
-    getCourts({ type: activeType, page, locale })
+    getCourts({ type: activeType, q: q || undefined, page, locale })
       .then((data) => {
         if (isMounted.current) {
           setResults(data)
@@ -121,10 +127,24 @@ export default function CourtsPage() {
           setLoading(false)
         }
       })
-  }, [activeType, page, locale])
+  }, [activeType, q, page, locale])
 
   function handleTabClick(type: CourtType) {
-    setSearchParams({ type, page: '1' }, { replace: true })
+    const params = new URLSearchParams(searchParams)
+    params.set('type', type)
+    params.set('page', '1')
+    setSearchParams(params, { replace: true })
+  }
+
+  function handleKeywordChange(value: string) {
+    setQueryDraft(value)
+    clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => {
+      const params = new URLSearchParams(searchParams)
+      if (value) params.set('q', value); else params.delete('q')
+      params.set('page', '1')
+      setSearchParams(params, { replace: true })
+    }, 300)
   }
 
   function handlePageChange(p: number) {
@@ -146,6 +166,18 @@ export default function CourtsPage() {
       <h1 className="text-3xl font-bold text-[color:var(--color-heading)] mb-6">
         {t('courts.searchTitle')}
       </h1>
+
+      {/* Keyword search — matches against name OR address */}
+      <div className="mb-4">
+        <input
+          type="search"
+          value={queryDraft}
+          onChange={(e) => handleKeywordChange(e.target.value)}
+          placeholder={t('courts.searchPlaceholder', 'Naziv ili adresa suda…')}
+          aria-label={t('courts.searchPlaceholder', 'Naziv ili adresa suda…')}
+          className="w-full max-w-md rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+        />
+      </div>
 
       {/* Tab navigation */}
       <div

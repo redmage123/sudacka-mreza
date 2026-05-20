@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const Courts: CollectionConfig = {
   slug: 'courts',
   admin: {
+    group: 'Sudovi',
+    description: 'Hrvatski sudovi: županijski, općinski, trgovački, prekršajni, Vrhovni i Ustavni.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'city', 'county'],
   },
@@ -80,6 +82,54 @@ export const Courts: CollectionConfig = {
       name: 'president',
       type: 'text',
       label: 'Predsjednik suda',
+    },
+    {
+      name: 'departments',
+      type: 'array',
+      label: 'Odjeli suda',
+      admin: {
+        description: 'Pisarnica, ured predsjednika, tajnik, glasnogovornik i drugi unutarnji odjeli',
+      },
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+          label: 'Naziv odjela',
+        },
+        {
+          name: 'type',
+          type: 'select',
+          label: 'Vrsta odjela',
+          options: [
+            { label: 'Pisarnica / Registry', value: 'registry' },
+            { label: 'Ured predsjednika / President’s office', value: 'president' },
+            { label: 'Tajnik / Secretary', value: 'secretary' },
+            { label: 'Glasnogovornik / Spokesperson', value: 'spokesperson' },
+            { label: 'Ostalo / Other', value: 'other' },
+          ],
+        },
+        {
+          name: 'head',
+          type: 'text',
+          label: 'Voditelj / Odgovorna osoba',
+        },
+        {
+          name: 'phone',
+          type: 'text',
+          label: 'Telefon',
+        },
+        {
+          name: 'email',
+          type: 'email',
+          label: 'Email',
+        },
+        {
+          name: 'notes',
+          type: 'textarea',
+          label: 'Napomene',
+        },
+      ],
     },
     {
       name: 'lat',

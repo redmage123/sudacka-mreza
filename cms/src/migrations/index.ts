@@ -6,6 +6,7 @@ import * as migration_20260428_chat_feedback from './20260428_chat_feedback';
 import * as migration_20260514_080000_user_action_collections from './20260514_080000_user_action_collections';
 import * as migration_20260520_120000_bankruptcy_filings from './20260520_120000_bankruptcy_filings';
 import * as migration_20260520_180000_bankruptcy_filings_published_at from './20260520_180000_bankruptcy_filings_published_at';
+import * as migration_20260520_200000_admin_courts_and_departments from './20260520_200000_admin_courts_and_departments';
 
 export const migrations = [
   {
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20260520_180000_bankruptcy_filings_published_at.up,
     down: migration_20260520_180000_bankruptcy_filings_published_at.down,
     name: '20260520_180000_bankruptcy_filings_published_at',
+  },
+  {
+    up: migration_20260520_200000_admin_courts_and_departments.up,
+    down: migration_20260520_200000_admin_courts_and_departments.down,
+    name: '20260520_200000_admin_courts_and_departments',
   },
 ];

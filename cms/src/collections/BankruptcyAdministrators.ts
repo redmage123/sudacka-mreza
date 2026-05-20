@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const BankruptcyAdministrators: CollectionConfig = {
   slug: 'bankruptcy-administrators',
   admin: {
+    group: 'Stečaj',
+    description: 'Stečajni upravitelji.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'licenceNumber', 'city', 'county'],
   },
@@ -56,6 +58,16 @@ export const BankruptcyAdministrators: CollectionConfig = {
       name: 'county',
       type: 'text',
       label: 'Županija',
+    },
+    {
+      name: 'courts',
+      type: 'relationship',
+      relationTo: 'courts',
+      hasMany: true,
+      label: 'Pripadnost sudu',
+      admin: {
+        description: 'Sudovi kojima stečajni upravitelj pripada / na kojima je imenovan',
+      },
     },
     {
       name: 'assignedCases',

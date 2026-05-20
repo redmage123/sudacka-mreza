@@ -15,6 +15,7 @@ export type CourtType =
 
 export interface GetCourtsParams {
   type?: CourtType
+  q?: string
   page?: number
   locale?: string
 }
@@ -28,6 +29,12 @@ export async function getCourts(params: GetCourtsParams = {}): Promise<PayloadLi
 
   if (params.type !== undefined) {
     queryParams['where[type][equals]'] = params.type
+  }
+  if (params.q) {
+    // OR across name and address — matches the SM-REDESIGN search bar §3.4.2
+    // ("Naziv / adresa suda").
+    queryParams['where[or][0][name][like]'] = params.q
+    queryParams['where[or][1][address][like]'] = params.q
   }
   if (params.page !== undefined) {
     queryParams['page'] = params.page
