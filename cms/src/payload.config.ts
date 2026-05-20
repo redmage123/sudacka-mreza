@@ -12,6 +12,7 @@ import { Interpreters } from './collections/Interpreters.js'
 import { StateAttorneys } from './collections/StateAttorneys.js'
 import { BankruptcyAdministrators } from './collections/BankruptcyAdministrators.js'
 import { BankruptcyListings } from './collections/BankruptcyListings.js'
+import { BankruptcyFilings } from './collections/BankruptcyFilings.js'
 import { Laws } from './collections/Laws.js'
 import { NewsPosts } from './collections/NewsPosts.js'
 import { Pages } from './collections/Pages.js'
@@ -77,6 +78,7 @@ export default buildConfig({
     StateAttorneys,
     BankruptcyAdministrators,
     BankruptcyListings,
+    BankruptcyFilings,
     Laws,
     NewsPosts,
     Pages,
