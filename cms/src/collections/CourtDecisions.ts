@@ -167,6 +167,154 @@ export const CourtDecisions: CollectionConfig = {
         readOnly: true,
       },
     },
+    // ── Phase 1: judge-dashboard analytics fields ─────────────────────────
+    // All fields are nullable so existing 12,830 rows stay valid. Backfill
+    // happens via scripts/extract-decision-analytics.mjs (LLM pass over
+    // full_text_plain) and scripts/extract-appeal-outcomes.mjs (cite-chase).
+    {
+      name: 'judges',
+      type: 'relationship',
+      relationTo: 'judges',
+      hasMany: true,
+      label: 'Suci u vijeću',
+      admin: {
+        description: 'Suci koji su odlučivali — auto-extrahiran iz teksta presude.',
+      },
+    },
+    {
+      name: 'expertWitnesses',
+      type: 'relationship',
+      relationTo: 'expert-witnesses',
+      hasMany: true,
+      label: 'Vještaci u predmetu',
+    },
+    {
+      name: 'plaintiffAttorneys',
+      type: 'relationship',
+      relationTo: 'attorneys',
+      hasMany: true,
+      label: 'Odvjetnici tužitelja',
+    },
+    {
+      name: 'defendantAttorneys',
+      type: 'relationship',
+      relationTo: 'attorneys',
+      hasMany: true,
+      label: 'Odvjetnici tuženika',
+    },
+    {
+      name: 'appealOutcome',
+      type: 'select',
+      label: 'Ishod žalbe',
+      admin: {
+        description: 'Ispunjava se na prvostupanjskoj odluci kad je viša instanca odlučila — cite-chased.',
+      },
+      options: [
+        { label: 'Potvrđena', value: 'upheld' },
+        { label: 'Preinačena', value: 'modified' },
+        { label: 'Ukinuta', value: 'overturned' },
+        { label: 'Bez žalbe / nepoznato', value: 'na' },
+      ],
+    },
+    {
+      name: 'appealedDecision',
+      type: 'relationship',
+      relationTo: 'court-decisions',
+      label: 'Drugostupanjska odluka',
+      admin: {
+        description: 'Veza na drugostupanjsku presudu koja je razmatrala ovu odluku.',
+      },
+    },
+    {
+      name: 'winningParty',
+      type: 'select',
+      label: 'Stranka u korist',
+      admin: {
+        description: 'Glavni ishod prvostupanjske odluke — extrahiran iz dispositiva.',
+      },
+      options: [
+        { label: 'Tužitelj', value: 'plaintiff' },
+        { label: 'Tuženik', value: 'defendant' },
+        { label: 'Djelomično', value: 'partial' },
+        { label: 'Nagodba', value: 'settled' },
+        { label: 'Odbačen', value: 'dismissed' },
+      ],
+    },
+    {
+      name: 'appealFiled',
+      type: 'checkbox',
+      label: 'Pravni lijek izjavljen',
+      defaultValue: false,
+    },
+    {
+      name: 'appealType',
+      type: 'select',
+      label: 'Vrsta pravnog lijeka',
+      options: [
+        { label: 'Žalba', value: 'zalba' },
+        { label: 'Revizija', value: 'revizija' },
+        { label: 'Ustavna tužba', value: 'ustavnaTuzba' },
+        { label: 'Ponavljanje postupka', value: 'ponavljanjePostupka' },
+      ],
+    },
+    {
+      name: 'caseDurationDays',
+      type: 'number',
+      label: 'Trajanje predmeta (dani)',
+      admin: {
+        description: 'Razlika datum_otvaranja → date — auto-extrahiran iz teksta.',
+      },
+    },
+    {
+      name: 'disputeType',
+      type: 'select',
+      label: 'Vrsta spora',
+      options: [
+        { label: 'Naknada štete', value: 'naknadaStete' },
+        { label: 'Isplata', value: 'isplata' },
+        { label: 'Vlasništvo', value: 'vlasnistvo' },
+        { label: 'Razvod', value: 'razvod' },
+        { label: 'Radni spor', value: 'radniSpor' },
+        { label: 'Ugovorni', value: 'ugovorni' },
+        { label: 'Nasljedstvo', value: 'nasljednistvo' },
+        { label: 'Obiteljski', value: 'obiteljski' },
+        { label: 'Kazneno djelo', value: 'kaznenoDjelo' },
+        { label: 'Prekršaj', value: 'prekrsaj' },
+        { label: 'Drugo', value: 'drugo' },
+      ],
+    },
+    {
+      name: 'disputeValue',
+      type: 'number',
+      label: 'Vrijednost spora',
+      admin: {
+        description: 'Novčani iznos spora u valuti `currency`.',
+      },
+    },
+    {
+      name: 'currency',
+      type: 'select',
+      label: 'Valuta',
+      defaultValue: 'EUR',
+      admin: {
+        description: 'Predmeti prije 2023-01-01 mogu biti u HRK.',
+      },
+      options: [
+        { label: 'EUR', value: 'EUR' },
+        { label: 'HRK', value: 'HRK' },
+        { label: 'USD', value: 'USD' },
+      ],
+    },
+    {
+      name: 'analyticsExtractedAt',
+      type: 'date',
+      label: 'Analitika ekstrahirana',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Kad je extract-decision-analytics zadnji put obradio ovu odluku.',
+      },
+    },
     {
       name: 'slug',
       type: 'text',

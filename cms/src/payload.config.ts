@@ -28,6 +28,7 @@ import { Bookmarks } from './collections/Bookmarks.js'
 import { ChatFeedback } from './collections/ChatFeedback.js'
 import { ApiKeys } from './collections/ApiKeys.js'
 import { Judges } from './collections/Judges.js'
+import { Attorneys } from './collections/Attorneys.js'
 
 // Globals
 import { Settings } from './globals/Settings.js'
@@ -102,6 +103,7 @@ export default buildConfig({
     Bookmarks,
     ApiKeys,
     Judges,
+    Attorneys,
     ChatFeedback,
   ],
 

@@ -10,6 +10,9 @@ import * as migration_20260520_200000_admin_courts_and_departments from './20260
 import * as migration_20260520_210000_bankruptcy_debtors from './20260520_210000_bankruptcy_debtors';
 import * as migration_20260520_220000_experts_interpreters_fields from './20260520_220000_experts_interpreters_fields';
 import * as migration_20260520_240000_user_legal_entity from './20260520_240000_user_legal_entity';
+import * as migration_20260522_100000_judges_dashboard_fields from './20260522_100000_judges_dashboard_fields';
+import * as migration_20260522_110000_attorneys from './20260522_110000_attorneys';
+import * as migration_20260522_120000_decisions_analytics_fields from './20260522_120000_decisions_analytics_fields';
 
 export const migrations = [
   {
@@ -71,5 +74,20 @@ export const migrations = [
     up: migration_20260520_240000_user_legal_entity.up,
     down: migration_20260520_240000_user_legal_entity.down,
     name: '20260520_240000_user_legal_entity',
+  },
+  {
+    up: migration_20260522_100000_judges_dashboard_fields.up,
+    down: migration_20260522_100000_judges_dashboard_fields.down,
+    name: '20260522_100000_judges_dashboard_fields',
+  },
+  {
+    up: migration_20260522_110000_attorneys.up,
+    down: migration_20260522_110000_attorneys.down,
+    name: '20260522_110000_attorneys',
+  },
+  {
+    up: migration_20260522_120000_decisions_analytics_fields.up,
+    down: migration_20260522_120000_decisions_analytics_fields.down,
+    name: '20260522_120000_decisions_analytics_fields',
   },
 ];
