@@ -446,7 +446,13 @@
         "lawyer": "Lawyer",
         "judge": "Judge",
         "researcher": "Researcher / Academic",
+        "legal_entity": "Legal entity",
         "other": "Other"
+      },
+      "organisationName": "Legal entity name",
+      "organisationOib": "Legal entity OIB",
+      "legalEntity": {
+        "notice": "The account is created as a Member; an administrator will verify the legal-entity status."
       },
       "terms": "I agree to the",
       "termsLink": "terms of service",
@@ -459,7 +465,8 @@
       "errorRequired": "This field is required.",
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
-      "errorMinPassword": "Password must be at least 8 characters."
+      "errorMinPassword": "Password must be at least 8 characters.",
+      "errorOib": "OIB must be 11 digits."
     }
   },
   "about": {

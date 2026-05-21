@@ -164,8 +164,14 @@ const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur'])
 
 function applyLangAndDir(lng: string): void {
   const base = lng.split('-')[0]
-  document.documentElement.lang = base
-  document.documentElement.dir = RTL_LANGS.has(base) ? 'rtl' : 'ltr'
+  // Reject non-language URL segments such as "admin" (the path-detector
+  // happily extracts the first segment regardless of supportedLngs); fall
+  // back to the default so screen readers and :lang() CSS stay correct.
+  const safe = (SUPPORTED_LANGUAGES as readonly string[]).includes(base)
+    ? base
+    : DEFAULT_LANGUAGE
+  document.documentElement.lang = safe
+  document.documentElement.dir = RTL_LANGS.has(safe) ? 'rtl' : 'ltr'
 }
 
 // AC-6: keep <html lang> + dir in sync with i18next language changes

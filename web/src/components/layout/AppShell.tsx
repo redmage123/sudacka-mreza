@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link, Outlet, useLocation, useMatches, useParams } from 'react-router'
+import { Link, Navigate, Outlet, useLocation, useMatches, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Header } from './Header'
 import { Footer } from './Footer'
@@ -7,6 +7,7 @@ import { Sidebar } from './Sidebar'
 import { InstallPrompt } from '@/components/ui'
 import { CookieConsent } from '@/components/CookieConsent'
 import { ChatWidget } from '@/components/chat/ChatWidget'
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '@/i18n'
 
 interface BreadcrumbMatch {
   id: string
@@ -54,13 +55,23 @@ export function AppShell() {
   const { lang } = useParams<{ lang: string }>()
   const mainRef = useRef<HTMLElement>(null)
 
+  // If the :lang segment isn't a real locale (e.g. someone hit /admin without
+  // the /hr prefix), prepend the default language and redirect. Otherwise the
+  // router happily treats "admin" as the locale and downstream components
+  // (MetaTags, Header, etc.) render `<html lang="admin">` and broken nav.
+  const langIsSupported = lang && (SUPPORTED_LANGUAGES as readonly string[]).includes(lang)
+  if (lang && !langIsSupported) {
+    const rest = `${location.pathname}${location.search}${location.hash}`
+    return <Navigate to={`/${DEFAULT_LANGUAGE}${rest}`} replace />
+  }
+
   // Sync i18next language with the URL /:lang param so translations render in
   // the correct language immediately on load (not just after a manual switch).
   useEffect(() => {
-    if (lang) {
+    if (langIsSupported) {
       void i18n.changeLanguage(lang)
     }
-  }, [lang, i18n])
+  }, [lang, langIsSupported, i18n])
 
   // Move focus to main on route change (SPA accessibility requirement)
   useEffect(() => {

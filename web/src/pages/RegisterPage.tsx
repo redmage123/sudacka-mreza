@@ -14,6 +14,8 @@ interface FormState {
   password: string
   confirm: string
   role: string
+  organisationName: string
+  organisationOib: string
   terms: boolean
 }
 
@@ -24,6 +26,8 @@ interface FormErrors {
   password?: string
   confirm?: string
   role?: string
+  organisationName?: string
+  organisationOib?: string
   terms?: string
 }
 
@@ -35,13 +39,15 @@ export default function RegisterPage() {
   usePageTitle('register')
 
   const [form, setForm] = useState<FormState>({
-    firstName: '', lastName: '', email: '', password: '', confirm: '', role: '', terms: false,
+    firstName: '', lastName: '', email: '', password: '', confirm: '',
+    role: '', organisationName: '', organisationOib: '', terms: false,
   })
   const [errors, setErrors] = useState<FormErrors>({})
   const [serverError, setServerError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
-  const roles = ['lawyer', 'judge', 'researcher', 'other'] as const
+  const roles = ['lawyer', 'judge', 'researcher', 'legal_entity', 'other'] as const
+  const isLegalEntity = form.role === 'legal_entity'
 
   function validate(): FormErrors {
     const errs: FormErrors = {}
@@ -53,6 +59,14 @@ export default function RegisterPage() {
     else if (form.password.length < 8) errs.password = t('auth.form.errorMinPassword')
     if (form.confirm !== form.password) errs.confirm = t('auth.form.errorPasswordMatch')
     if (!form.role) errs.role = t('auth.form.errorRequired')
+    if (isLegalEntity) {
+      if (!form.organisationName.trim()) errs.organisationName = t('auth.form.errorRequired')
+      // OIB is 11 digits in Croatia
+      if (!form.organisationOib.trim()) errs.organisationOib = t('auth.form.errorRequired')
+      else if (!/^\d{11}$/.test(form.organisationOib.trim())) {
+        errs.organisationOib = t('auth.form.errorOib', 'OIB mora imati 11 znamenki.')
+      }
+    }
     if (!form.terms) errs.terms = t('auth.form.errorRequired')
     return errs
   }
@@ -76,7 +90,14 @@ export default function RegisterPage() {
         lastName: form.lastName.trim(),
         email: form.email.trim(),
         password: form.password,
-        profile: { organisation: form.role },
+        profile: {
+          organisation: isLegalEntity ? form.organisationName.trim() : form.role,
+          ...(isLegalEntity ? {
+            organisationName: form.organisationName.trim(),
+            organisationOib: form.organisationOib.trim(),
+            requestedRole: 'legal_entity',
+          } : {}),
+        },
       })
       navigate(`/${locale}/moja-knjiznica`, { replace: true })
     } catch (err) {
@@ -184,6 +205,50 @@ export default function RegisterPage() {
           </select>
           {errors.role && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.role}</p>}
         </div>
+
+        {isLegalEntity && (
+          <div className="space-y-4 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface-muted)] p-4">
+            <p className="text-xs text-[color:var(--color-text-muted)]">
+              {t('auth.register.legalEntity.notice', 'Račun se otvara kao “Član”; administrator naknadno potvrđuje status pravne osobe.')}
+            </p>
+            <div>
+              <label htmlFor="reg-org-name" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+                {t('auth.register.organisationName', 'Naziv pravne osobe')}
+              </label>
+              <input
+                id="reg-org-name"
+                name="organisationName"
+                type="text"
+                autoComplete="organization"
+                value={form.organisationName}
+                onChange={handleChange}
+                disabled={submitting}
+                className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
+                aria-invalid={!!errors.organisationName}
+              />
+              {errors.organisationName && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.organisationName}</p>}
+            </div>
+            <div>
+              <label htmlFor="reg-org-oib" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+                {t('auth.register.organisationOib', 'OIB pravne osobe')}
+              </label>
+              <input
+                id="reg-org-oib"
+                name="organisationOib"
+                type="text"
+                inputMode="numeric"
+                pattern="\d{11}"
+                maxLength={11}
+                value={form.organisationOib}
+                onChange={handleChange}
+                disabled={submitting}
+                className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2.5 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)] disabled:opacity-60"
+                aria-invalid={!!errors.organisationOib}
+              />
+              {errors.organisationOib && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.organisationOib}</p>}
+            </div>
+          </div>
+        )}
 
         <div className="flex items-start gap-3">
           <input

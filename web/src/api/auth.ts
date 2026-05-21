@@ -109,7 +109,16 @@ export interface RegisterInput {
   password: string
   firstName: string
   lastName: string
-  profile?: { organisation?: string; phone?: string }
+  profile?: {
+    organisation?: string
+    phone?: string
+    organisationName?: string
+    organisationOib?: string
+    // Self-registration always lands as role=member on the CMS side; this
+    // flag tells admins which role the user *requested* (e.g. legal_entity
+    // for organisations awaiting verification).
+    requestedRole?: string
+  }
 }
 
 export async function register(input: RegisterInput): Promise<AuthUser> {
