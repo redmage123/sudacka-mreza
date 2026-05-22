@@ -303,23 +303,34 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
   'expert-witnesses': {
     slug: 'expert-witnesses',
     title: 'Expert witnesses',
-    columns: ['name', 'email', 'phone'],
+    columns: ['name', 'company', 'city', 'county', 'email'],
+    // Note: specialityAreas (array with subArea), cv (media rel), works
+    // (media hasMany) are part of the schema but need a richer editor than
+    // this scalar form supports. Use the Payload admin for those, or
+    // extend FieldDef to handle arrays/relationships.
     fields: [
       { name: 'name', type: 'text', required: true },
-      { name: 'email', type: 'text' },
-      { name: 'phone', type: 'text' },
+      { name: 'company', type: 'text', label: 'Tvrtka / Company' },
       { name: 'address', type: 'text' },
+      { name: 'city', type: 'text', label: 'Grad / City' },
+      { name: 'county', type: 'text', label: 'Županija / County' },
+      { name: 'phone', type: 'text' },
+      { name: 'email', type: 'text' },
     ],
   },
   interpreters: {
     slug: 'interpreters',
     title: 'Interpreters',
-    columns: ['name', 'email', 'phone'],
+    columns: ['name', 'company', 'city', 'county', 'email'],
+    // Note: languagePairs (array) and cv/works (media) need richer editors.
     fields: [
       { name: 'name', type: 'text', required: true },
-      { name: 'email', type: 'text' },
-      { name: 'phone', type: 'text' },
+      { name: 'company', type: 'text', label: 'Tvrtka / Company' },
       { name: 'address', type: 'text' },
+      { name: 'city', type: 'text', label: 'Grad / City' },
+      { name: 'county', type: 'text', label: 'Županija / County' },
+      { name: 'phone', type: 'text' },
+      { name: 'email', type: 'text' },
     ],
   },
   'state-attorneys': {
@@ -347,6 +358,49 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'city', type: 'text' },
       { name: 'county', type: 'text' },
     ],
+  },
+  'bankruptcy-debtors': {
+    slug: 'bankruptcy-debtors',
+    title: 'Bankruptcy debtors / Stečajni dužnici',
+    columns: ['name', 'oib', 'city', 'county'],
+    fields: [
+      { name: 'name', type: 'text', required: true, label: 'Naziv / Ime dužnika' },
+      { name: 'oib', type: 'text', label: 'OIB' },
+      { name: 'address', type: 'text', label: 'Adresa' },
+      { name: 'city', type: 'text', label: 'Grad' },
+      { name: 'county', type: 'text', label: 'Županija' },
+      { name: 'phone', type: 'text', label: 'Telefon' },
+      { name: 'email', type: 'text' },
+      { name: 'notes', type: 'textarea', label: 'Bilješke' },
+    ],
+  },
+  'bankruptcy-filings': {
+    slug: 'bankruptcy-filings',
+    title: 'Bankruptcy filings / Stečajni podnesci',
+    columns: ['filingType', 'caseNumber', 'status', 'submittedBy'],
+    fields: [
+      { name: 'filingType', type: 'select', required: true, label: 'Vrsta podneska / Filing type', options: [
+        { label: 'Motion to open / Prijedlog za pokretanje', value: 'motion-to-open' },
+        { label: 'Prijava tražbine / Creditor claim', value: 'prijava-trazbine' },
+        { label: 'Asset inventory / Popis imovine', value: 'asset-inventory' },
+        { label: 'Asset sale / Prodaja imovine', value: 'asset-sale' },
+        { label: 'Trustee report / Izvještaj stečajnog upravitelja', value: 'trustee-report' },
+        { label: 'Distribution proposal / Prijedlog raspodjele', value: 'distribution-proposal' },
+        { label: 'Final accounting / Završni račun', value: 'final-accounting' },
+        { label: 'Restructuring plan / Plan restrukturiranja', value: 'restructuring-plan' },
+        { label: 'Pre-bankruptcy settlement / Predstečajna nagodba', value: 'pre-bankruptcy-settlement' },
+      ]},
+      { name: 'caseNumber', type: 'text', label: 'Broj predmeta / Case number' },
+      { name: 'status', type: 'select', required: true, options: [
+        { label: 'Pending review', value: 'pending_review' },
+        { label: 'Approved', value: 'approved' },
+        { label: 'Rejected', value: 'rejected' },
+      ]},
+      { name: 'submittedBy', type: 'text', label: 'Submitted by (email)' },
+      { name: 'attachmentFilename', type: 'text', label: 'Attachment filename' },
+      { name: 'reviewNotes', type: 'textarea', label: 'Review notes' },
+    ],
+    defaults: { status: 'pending_review' },
   },
   laws: {
     slug: 'laws',

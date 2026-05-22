@@ -8,7 +8,11 @@ interface SyncEvent extends ExtendableEvent {
 }
 
 // ─── Cache names (bump CACHE_VERSION to invalidate all) ─────────────────────
-const CACHE_VERSION = 'v1'
+// v1 → v2 (2026-05-22): the v1 cache was still serving pre-corrections-doc
+// bundles to clients who had visited before the redesign; the activate hook
+// below deletes every cache whose name isn't in KNOWN_CACHES, so changing
+// the version triggers a one-time purge across every browser.
+const CACHE_VERSION = 'v2'
 const STATIC_CACHE = `sm-static-${CACHE_VERSION}`
 const API_CACHE = `sm-api-${CACHE_VERSION}`
 const DECISIONS_CACHE = `sm-decisions-${CACHE_VERSION}`
