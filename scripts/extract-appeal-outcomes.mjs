@@ -22,7 +22,7 @@
 import { execSync } from 'node:child_process'
 
 const DRY = process.argv.includes('--dry-run')
-const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F\\t -q'
+const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F~ -q'
 
 const log = (...a) => console.log(new Date().toISOString(), ...a)
 const psql = (sqlText) =>
@@ -59,7 +59,7 @@ const extractReferencedCases = (text) => {
 // appellate court is encoded in court_id (the court's name/level), so we
 // also check the title text for "županijski" / "vrhovni" keywords.
 const rows = psql(`
-  SELECT cd.id, cd.full_text_plain
+  SELECT cd.id, regexp_replace(cd.full_text_plain, E'[\\n\\r\\t]+', ' ', 'g') AS full_text_plain
   FROM court_decisions cd
   JOIN courts c ON c.id = cd.court_id
   WHERE cd.full_text_plain IS NOT NULL
@@ -78,7 +78,7 @@ log(`appellate decisions to scan: ${rows.length}`)
 let matched = 0
 let linked = 0
 for (const row of rows) {
-  const tabIdx = row.indexOf('\t')
+  const tabIdx = row.indexOf('~')
   const appellateId = row.slice(0, tabIdx)
   const text = row.slice(tabIdx + 1)
 

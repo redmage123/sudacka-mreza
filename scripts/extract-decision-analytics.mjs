@@ -33,13 +33,16 @@ const ALL = arg('all', false)
 const REDO = arg('redo', false)
 const WHERE = arg('where', null)
 
-const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F\\t -q'
+const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F~ -q'
 const OLLAMA = process.env.OLLAMA_URL || 'http://172.18.0.1:11434'
 const MODEL = process.env.ANALYTICS_MODEL || 'gemma-4-e4b-eurlex-v1:latest'
 
 const log = (...a) => console.log(new Date().toISOString(), ...a)
+// Big enough to hold a 100-row batch of full_text_plain (up to ~14K each →
+// ~1.4MB) plus headroom. The default 200KB blows up on the work SELECT.
 const psql = (sqlText) =>
-  execSync(`${PG} -c "${sqlText.replaceAll('"', '\\"')}"`, { encoding: 'utf8' })
+  execSync(`${PG} -c "${sqlText.replaceAll('"', '\\"')}"`,
+    { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
 const esc = (s) => s == null ? null : String(s).replaceAll("'", "''")
 
 const EXTRACT_PROMPT = (text) => `You are a legal-text analyst. Read this Croatian court decision and return a JSON object with these fields (use null when unknown):
@@ -117,64 +120,82 @@ const writeRels = (decisionId, path, targetCol, ids) => {
   psql(`INSERT INTO court_decisions_rels ("order", parent_id, path, judges_id, expert_witnesses_id, attorneys_id) VALUES ${values}`)
 }
 
-// Build the work query.
+// Build the WHERE clause.
 const whereClauses = []
 if (!REDO) whereClauses.push('analytics_extracted_at IS NULL')
 whereClauses.push('full_text_plain IS NOT NULL AND length(full_text_plain) > 200')
 if (WHERE) whereClauses.push(WHERE)
-const limit = ALL ? '' : `LIMIT ${BATCH}`
-const work = psql(`
-  SELECT id, date, full_text_plain
+
+// When --all is set we stream in chunks of BATCH so the maxBuffer for any
+// single SELECT stays well under 64MB. Without --all we honor BATCH as a
+// hard cap (existing behavior).
+const fetchChunk = (lastId) => psql(`
+  SELECT id, date, regexp_replace(full_text_plain, E'[\\n\\r\\t]+', ' ', 'g') AS full_text_plain
   FROM court_decisions
   WHERE ${whereClauses.join(' AND ')}
+    ${lastId ? `AND id > ${Number(lastId)}` : ''}
   ORDER BY id ASC
-  ${limit}
+  LIMIT ${BATCH}
 `).trim().split('\n').filter(Boolean)
 
-log(`decisions to process: ${work.length}`)
-let ok = 0, fail = 0
-for (const row of work) {
-  const tabIdx1 = row.indexOf('\t')
-  const tabIdx2 = row.indexOf('\t', tabIdx1 + 1)
-  const id = row.slice(0, tabIdx1)
-  const date = row.slice(tabIdx1 + 1, tabIdx2)
-  const text = row.slice(tabIdx2 + 1)
-  try {
-    const raw = await callLLM(EXTRACT_PROMPT(text))
-    const j = safeJSON(raw)
-    if (!j) { fail++; continue }
+const countTotal = () => Number(psql(`
+  SELECT COUNT(*) FROM court_decisions WHERE ${whereClauses.join(' AND ')}
+`).trim()) || 0
 
-    const judgeIds = resolveJudges(j.judgeNames, date)
-    const expertIds = resolveByName('expert_witnesses', j.expertWitnessNames)
-    const pAttIds = resolveByName('attorneys', j.plaintiffAttorneyNames)
-    const dAttIds = resolveByName('attorneys', j.defendantAttorneyNames)
+const eligible = ALL ? countTotal() : BATCH
+log(`decisions to process: ~${eligible} (BATCH=${BATCH}, mode=${ALL ? 'streaming' : 'one-batch'})`)
 
-    let durationDays = null
-    if (j.filingDateISO && /^\d{4}-\d{2}-\d{2}$/.test(j.filingDateISO)) {
-      const out = psql(`SELECT EXTRACT(EPOCH FROM ('${date}'::timestamptz - '${j.filingDateISO}'::date)) / 86400`).trim()
-      durationDays = Math.max(0, Math.round(Number(out)))
+let ok = 0, fail = 0, lastId = null
+let chunk = fetchChunk(null)
+while (chunk.length) {
+  for (const row of chunk) {
+    const tabIdx1 = row.indexOf('~')
+    const tabIdx2 = row.indexOf('~', tabIdx1 + 1)
+    const id = row.slice(0, tabIdx1)
+    const date = row.slice(tabIdx1 + 1, tabIdx2)
+    const text = row.slice(tabIdx2 + 1)
+    lastId = id
+    try {
+      const raw = await callLLM(EXTRACT_PROMPT(text))
+      const j = safeJSON(raw)
+      if (!j) { fail++; continue }
+
+      const judgeIds = resolveJudges(j.judgeNames, date)
+      const expertIds = resolveByName('expert_witnesses', j.expertWitnessNames)
+      const pAttIds = resolveByName('attorneys', j.plaintiffAttorneyNames)
+      const dAttIds = resolveByName('attorneys', j.defendantAttorneyNames)
+
+      let durationDays = null
+      if (j.filingDateISO && /^\d{4}-\d{2}-\d{2}$/.test(j.filingDateISO)) {
+        const out = psql(`SELECT EXTRACT(EPOCH FROM ('${date}'::timestamptz - '${j.filingDateISO}'::date)) / 86400`).trim()
+        durationDays = Math.max(0, Math.round(Number(out)))
+      }
+
+      const sets = [
+        `analytics_extracted_at = now()`,
+        j.winningParty ? `winning_party = '${esc(j.winningParty)}'` : null,
+        j.disputeType ? `dispute_type = '${esc(j.disputeType)}'` : null,
+        j.disputeValueEUR ? `dispute_value = ${Number(j.disputeValueEUR)}` : null,
+        j.currency ? `currency = '${esc(j.currency)}'` : null,
+        durationDays ? `case_duration_days = ${durationDays}` : null,
+      ].filter(Boolean).join(', ')
+      psql(`UPDATE court_decisions SET ${sets} WHERE id = ${id}`)
+
+      writeRels(id, 'judges', 'judges_id', judgeIds)
+      writeRels(id, 'expertWitnesses', 'expert_witnesses_id', expertIds)
+      writeRels(id, 'plaintiffAttorneys', 'attorneys_id', pAttIds)
+      writeRels(id, 'defendantAttorneys', 'attorneys_id', dAttIds)
+
+      ok++
+    } catch (e) {
+      fail++
+      if (fail < 5) log(`fail id=${id}:`, e.message)
     }
-
-    const sets = [
-      `analytics_extracted_at = now()`,
-      j.winningParty ? `winning_party = '${esc(j.winningParty)}'` : null,
-      j.disputeType ? `dispute_type = '${esc(j.disputeType)}'` : null,
-      j.disputeValueEUR ? `dispute_value = ${Number(j.disputeValueEUR)}` : null,
-      j.currency ? `currency = '${esc(j.currency)}'` : null,
-      durationDays ? `case_duration_days = ${durationDays}` : null,
-    ].filter(Boolean).join(', ')
-    psql(`UPDATE court_decisions SET ${sets} WHERE id = ${id}`)
-
-    writeRels(id, 'judges', 'judges_id', judgeIds)
-    writeRels(id, 'expertWitnesses', 'expert_witnesses_id', expertIds)
-    writeRels(id, 'plaintiffAttorneys', 'attorneys_id', pAttIds)
-    writeRels(id, 'defendantAttorneys', 'attorneys_id', dAttIds)
-
-    ok++
-  } catch (e) {
-    fail++
-    if (fail < 5) log(`fail id=${id}:`, e.message)
+    if ((ok + fail) % 20 === 0) log(`progress ok=${ok} fail=${fail} / ~${eligible}`)
   }
-  if ((ok + fail) % 20 === 0) log(`progress ok=${ok} fail=${fail} / ${work.length}`)
+  // Next chunk after the highest id we just processed (avoids re-fetching
+  // already-touched rows because analytics_extracted_at is now set on those).
+  if (!ALL) break  // one-batch mode honours the existing --batch=N contract
+  chunk = fetchChunk(lastId)
 }
 log(`done — ok=${ok} fail=${fail}`)
