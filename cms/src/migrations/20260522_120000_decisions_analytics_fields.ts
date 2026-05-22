@@ -68,7 +68,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
     CREATE INDEX IF NOT EXISTS "court_decisions_analytics_extracted_at_idx"
       ON "court_decisions" USING btree ("analytics_extracted_at");
     -- Composite index for "outcome by date range" aggregation (mockup §2).
-    -- EXTRACT(YEAR FROM ...) isn't IMMUTABLE so we index `date` instead and
+    -- EXTRACT(YEAR FROM ...) isn't IMMUTABLE so we index date instead and
     -- queries use date >= 'YYYY-01-01' / < 'YYYY+1-01-01' which uses this.
     CREATE INDEX IF NOT EXISTS "court_decisions_date_outcome_idx"
       ON "court_decisions" ("date", "appeal_outcome", "winning_party");

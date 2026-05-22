@@ -9,8 +9,14 @@ import { Judges } from '../collections/Judges.js'
 import { Attorneys } from '../collections/Attorneys.js'
 import { CourtDecisions } from '../collections/CourtDecisions.js'
 
-function findField(collection: { fields: Array<{ name: string; type: string; [key: string]: unknown }> }, name: string) {
-  return collection.fields.find((f) => f.name === name)
+// Loose helper — Payload's CollectionConfig.fields is a discriminated union
+// covering presentational fields without `name`. We just want to find named
+// data fields, so cast at the boundary.
+function findField(collection: { fields: unknown[] }, name: string) {
+  return collection.fields.find(
+    (f): f is { name: string; type: string } & Record<string, unknown> =>
+      typeof f === 'object' && f !== null && 'name' in f && (f as { name: unknown }).name === name,
+  )
 }
 
 describe('Judges collection — Phase 1 dashboard fields', () => {

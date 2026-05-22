@@ -32,7 +32,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
       ADD CONSTRAINT "judges_photo_id_fk"
       FOREIGN KEY ("photo_id") REFERENCES "media"("id") ON DELETE SET NULL;
 
-    -- Note: backfilling first_name/last_name from existing `name` is done by
+    -- Note: backfilling first_name/last_name from existing name is done by
     -- scripts/legacy-migrate-appointments.mjs (row-by-row, so it can skip
     -- the handful of rows where a pre-existing duplicate slug would trigger
     -- a re-index violation). Doing it inline here would fail because some
