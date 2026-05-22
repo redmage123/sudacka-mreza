@@ -45,6 +45,35 @@ const psql = (sqlText) =>
     { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
 const esc = (s) => s == null ? null : String(s).replaceAll("'", "''")
 
+// Strip Croatian diacritics (š→s, č→c, ž→z, ć→c, đ→d) so an LLM that returns
+// "prekršaj" matches the enum value "prekrsaj" defined without diacritics.
+const stripDiacritics = (s) =>
+  String(s).normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/đ/gi, (c) => c === 'Đ' ? 'D' : 'd')
+
+// Normalise an LLM-returned enum string. Tries an exact match first, then a
+// case+diacritic-insensitive match against the allowed list. Returns the
+// canonical enum value, or null if nothing matches (caller skips the field).
+const normalizeEnum = (v, allowed) => {
+  if (v == null) return null
+  const s = String(v).trim()
+  if (!s) return null
+  if (allowed.includes(s)) return s
+  const stripped = stripDiacritics(s).toLowerCase()
+  for (const a of allowed) {
+    if (stripDiacritics(a).toLowerCase() === stripped) return a
+  }
+  return null
+}
+
+// Allowed enum values, mirroring cms/src/migrations/20260522_120000_*.ts.
+const WINNING_PARTY = ['plaintiff', 'defendant', 'partial', 'settled', 'dismissed']
+const DISPUTE_TYPE = [
+  'naknadaStete', 'isplata', 'vlasnistvo', 'razvod', 'radniSpor',
+  'ugovorni', 'nasljednistvo', 'obiteljski', 'kaznenoDjelo', 'prekrsaj', 'drugo',
+]
+const CURRENCY = ['EUR', 'HRK', 'USD']
+
 const EXTRACT_PROMPT = (text) => `You are a legal-text analyst. Read this Croatian court decision and return a JSON object with these fields (use null when unknown):
 
 {
@@ -171,12 +200,19 @@ while (chunk.length) {
         durationDays = Math.max(0, Math.round(Number(out)))
       }
 
+      // Normalise enum values to canonical spellings — the LLM tends to add
+      // diacritics ("prekršaj") or return non-allowed currencies ("DEM")
+      // that the PG enum rejects. Unknown values are silently dropped so the
+      // row's analytics_extracted_at still advances.
+      const winningParty = normalizeEnum(j.winningParty, WINNING_PARTY)
+      const disputeType = normalizeEnum(j.disputeType, DISPUTE_TYPE)
+      const currency = normalizeEnum(j.currency, CURRENCY)
       const sets = [
         `analytics_extracted_at = now()`,
-        j.winningParty ? `winning_party = '${esc(j.winningParty)}'` : null,
-        j.disputeType ? `dispute_type = '${esc(j.disputeType)}'` : null,
+        winningParty ? `winning_party = '${esc(winningParty)}'` : null,
+        disputeType ? `dispute_type = '${esc(disputeType)}'` : null,
         j.disputeValueEUR ? `dispute_value = ${Number(j.disputeValueEUR)}` : null,
-        j.currency ? `currency = '${esc(j.currency)}'` : null,
+        currency ? `currency = '${esc(currency)}'` : null,
         durationDays ? `case_duration_days = ${durationDays}` : null,
       ].filter(Boolean).join(', ')
       psql(`UPDATE court_decisions SET ${sets} WHERE id = ${id}`)
