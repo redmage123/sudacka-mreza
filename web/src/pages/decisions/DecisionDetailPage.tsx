@@ -533,7 +533,9 @@ export default function DecisionDetailPage() {
   const [analyzing, setAnalyzing] = useState(false)
   const [translated, setTranslated] = useState('')
   const [translating, setTranslating] = useState(false)
+  const [translatedTitle, setTranslatedTitle] = useState('')
   const [brief, setBrief] = useState<string>('')
+  const [briefKind, setBriefKind] = useState<'summary' | 'brief' | null>(null)
   const [briefLoading, setBriefLoading] = useState(false)
   const [briefError, setBriefError] = useState<string>('')
   const [briefVerification, setBriefVerification] = useState<{
@@ -543,9 +545,14 @@ export default function DecisionDetailPage() {
 
   useEffect(() => {
     if (!id) return
+    // /sudska-praksa/:id is a catch-all that also matches non-numeric paths
+    // (anything not covered by the static /pretraga, /vts, /esljp, /ecj
+    // siblings). Block early so `/api/court-decisions/NaN` never fires.
+    if (!/^\d+$/.test(id)) { setError(true); setLoading(false); return }
     setLoading(true)
     setAnalysis(null)
     setTranslated('')
+    setTranslatedTitle('')
     setBrief('')
     setBriefError('')
     fetch(`/api/court-decisions/${id}`)
@@ -637,19 +644,26 @@ export default function DecisionDetailPage() {
   // cached version (or generates if cache miss).
   useEffect(() => {
     setBrief('')
+    setBriefKind(null)
     setBriefError('')
     setBriefVerification(null)
   }, [locale])
 
-  const handleSummary = useCallback(async () => {
+  // Shared fetch for both 'summary' and 'brief' kinds. Clears prior content
+  // up front so the spinner shows when toggling between kinds (otherwise the
+  // panel would render the previous result while the new one loads).
+  const fetchBrief = useCallback(async (kind: 'summary' | 'brief') => {
     if (!decision) return
-    setBriefLoading(true)
+    setBriefKind(kind)
+    setBrief('')
+    setBriefVerification(null)
     setBriefError('')
+    setBriefLoading(true)
     try {
       const r = await fetch(`/api/decisions/${decision.id}/brief`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ kind: 'summary', locale }),
+        body: JSON.stringify({ kind, locale }),
       })
       if (!r.ok) {
         const j = await r.json().catch(() => ({})) as { error?: string }
@@ -663,59 +677,85 @@ export default function DecisionDetailPage() {
       setBrief(j.content || '')
       setBriefVerification(j.verification ?? null)
     } catch (e) {
-      setBriefError(e instanceof Error ? e.message : 'Failed to generate summary')
+      setBriefError(e instanceof Error ? e.message : `Failed to generate ${kind === 'brief' ? 'brief' : 'summary'}`)
     } finally {
       setBriefLoading(false)
     }
   }, [decision, locale])
 
-  const handleFullBrief = useCallback(async () => {
-    if (!decision) return
-    setBriefLoading(true)
-    setBriefError('')
-    try {
-      const r = await fetch(`/api/decisions/${decision.id}/brief`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ kind: 'brief', locale }),
-      })
-      if (!r.ok) {
-        const j = await r.json().catch(() => ({})) as { error?: string }
-        throw new Error(j.error || `HTTP ${r.status}`)
-      }
-      const j = (await r.json()) as {
-        content: string;
-        verification?: { total: number; verified: number; unverified: number;
-          refs: Array<{ kind: string; ref: string; verified: boolean; source?: string }> }
-      }
-      setBrief(j.content || '')
-      setBriefVerification(j.verification ?? null)
-    } catch (e) {
-      setBriefError(e instanceof Error ? e.message : 'Failed to generate brief')
-    } finally {
-      setBriefLoading(false)
-    }
-  }, [decision, locale])
+  const handleSummary = useCallback(() => fetchBrief('summary'), [fetchBrief])
+  const handleFullBrief = useCallback(() => fetchBrief('brief'), [fetchBrief])
 
-  // Run a fresh translate request, optionally suppressing the toggle behavior
-  // (used by the auto-translate effect to avoid clearing the body).
+  // Single combined translate call for title + body. Two separate effects
+  // raced under React 19's auto-batching and one of the calls would silently
+  // drop ~50% of the time. Now we issue one fetch with a TITLE/BODY sentinel
+  // and split the response, so there's exactly one in-flight request and
+  // one state update. Also detects when the model echoed the source back
+  // (Maltese case) and falls back to leaving the field empty.
+  const TITLE_SENTINEL = '<<<__TITLE_END__>>>'
+  const isModelEchoingSource = (out: string, src: string): boolean => {
+    if (!out || !src) return false
+    const norm = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase()
+    return norm(out) === norm(src)
+  }
+
   const runTranslate = useCallback(async () => {
     if (!decision) return
+    if (locale === 'hr') return
     const bodyText = decision.fullTextPlain || decision.body || decision.content || decision.text || ''
-    if (!bodyText || locale === 'hr') return
+    const rawTitle = (decision.title || '').trim()
+    if (!bodyText && !rawTitle) return
+
+    // ECtHR rows already have language-localized titles; the lang-redirect
+    // brings the user to the matching sibling, so skip the title pass there.
+    let translateTitle = !!rawTitle
+    if (translateTitle && decision.decisionType === 'ecthr') {
+      const titleIsEn = /^CASE OF\s/i.test(rawTitle)
+      const titleIsFr = /^AFFAIRE\s/i.test(rawTitle)
+      if ((locale !== 'fr' && titleIsEn) || (locale === 'fr' && titleIsFr)) {
+        translateTitle = false
+      }
+    }
+
     setTranslating(true)
+    const composed =
+      (translateTitle ? rawTitle + '\n' + TITLE_SENTINEL + '\n' : '') +
+      bodyText.substring(0, 5000)
     try {
       const resp = await fetch(`${NLP_BASE}/translate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: bodyText.substring(0, 5000), source: 'hr', target: locale }),
+        body: JSON.stringify({ text: composed, source: 'hr', target: locale }),
       })
-      if (resp.ok) {
-        const data = await resp.json()
-        setTranslated(data.translated || '')
-      } else {
+      if (!resp.ok) {
         const body = await resp.text().catch(() => '')
-        console.warn(`[translate] HTTP ${resp.status} src=hr→${locale} decision=${decision.id}: ${body.slice(0, 200)}`)
+        console.warn(`[translate] HTTP ${resp.status} decision=${decision.id}: ${body.slice(0, 200)}`)
+        return
+      }
+      const data = (await resp.json()) as { translated?: string }
+      const out = (data.translated || '').trim()
+      if (!out) return
+      let titlePart = ''
+      let bodyPart = out
+      if (translateTitle && out.includes(TITLE_SENTINEL)) {
+        const idx = out.indexOf(TITLE_SENTINEL)
+        titlePart = out.slice(0, idx).trim()
+        bodyPart = out.slice(idx + TITLE_SENTINEL.length).trim()
+      } else if (translateTitle) {
+        // Sentinel got eaten — fall back to first newline as a heuristic.
+        const nl = out.indexOf('\n')
+        if (nl > 0 && nl < 200) {
+          titlePart = out.slice(0, nl).trim()
+          bodyPart = out.slice(nl + 1).trim()
+        }
+      }
+      // Guard against the model echoing the Croatian source back unchanged
+      // (rare but observed for Maltese on this 9 B model).
+      if (titlePart && !isModelEchoingSource(titlePart, rawTitle)) {
+        setTranslatedTitle(titlePart)
+      }
+      if (bodyPart && !isModelEchoingSource(bodyPart, bodyText)) {
+        setTranslated(bodyPart)
       }
     } catch (e) {
       console.error(`[translate] threw for decision=${decision.id}:`, e)
@@ -726,19 +766,22 @@ export default function DecisionDetailPage() {
   // Manual button — toggles between original and translation. First press
   // fetches; second press clears (back to Croatian).
   const handleTranslate = useCallback(async () => {
-    if (translated) { setTranslated(''); return }
+    if (translated) {
+      setTranslated('')
+      setTranslatedTitle('')
+      return
+    }
     await runTranslate()
   }, [translated, runTranslate])
 
-  // Auto-translate body the first time we land on a non-HR locale with a
-  // body present. The user picked English/etc. — they expect the body in
-  // that language without having to click. They can still use the
-  // Show Original / Translate toggle to flip back.
+  // Auto-translate (title + body) the first time we land on a non-HR locale.
   useEffect(() => {
     if (!decision) return
     if (locale === 'hr') return
+    if (translated || translating) return
     const bodyText = decision.fullTextPlain || decision.body || decision.content || decision.text || ''
-    if (!bodyText || translated || translating) return
+    const hasTitle = !!(decision.title || '').trim()
+    if (!bodyText && !hasTitle) return
     runTranslate()
   }, [decision, locale, translated, translating, runTranslate])
 
@@ -807,14 +850,17 @@ export default function DecisionDetailPage() {
       <Breadcrumb items={[
         { label: tn('home'), href: `/${locale}` },
         { label: t('decisions.search', 'Case Law'), href: `/${locale}/sudska-praksa/pretraga` },
-        { label: decision.caseNumber || decision.title?.substring(0, 40) || `#${id}` },
+        { label: decision.caseNumber || (translatedTitle || decision.title)?.substring(0, 40) || `#${id}` },
       ]} />
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main content — 2/3 */}
         <div className="lg:col-span-2">
-          <h1 className="text-2xl font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)]">
-            {decision.title}
+          <h1
+            className="text-2xl font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)]"
+            lang={translatedTitle ? locale : 'hr'}
+          >
+            {translatedTitle || decision.title}
           </h1>
 
           {/* Metadata badges */}
@@ -890,18 +936,32 @@ export default function DecisionDetailPage() {
                 <button
                   onClick={handleSummary}
                   disabled={briefLoading}
-                  className="inline-flex items-center gap-1.5 text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-brand-navy)] dark:hover:text-[color:var(--color-brand-gold)] disabled:opacity-50"
+                  className={`inline-flex items-center gap-1.5 text-sm transition-colors disabled:cursor-wait disabled:opacity-60 ${
+                    briefKind === 'summary' && !briefError
+                      ? 'text-[color:var(--color-brand-gold)] font-medium'
+                      : 'text-[color:var(--color-text-muted)] hover:text-[color:var(--color-brand-navy)] dark:hover:text-[color:var(--color-brand-gold)]'
+                  }`}
+                  aria-busy={briefLoading && briefKind === 'summary'}
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z" /></svg>
-                  {briefLoading ? t('decisions.generating', 'Generating…') : t('decisions.aiSummaryAction', 'AI Summary')}
+                  {briefLoading && briefKind === 'summary'
+                    ? t('decisions.generating', 'Generating…')
+                    : t('decisions.aiSummaryAction', 'AI Summary')}
                 </button>
                 <button
                   onClick={handleFullBrief}
                   disabled={briefLoading}
-                  className="inline-flex items-center gap-1.5 text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-brand-navy)] dark:hover:text-[color:var(--color-brand-gold)] disabled:opacity-50"
+                  className={`inline-flex items-center gap-1.5 text-sm transition-colors disabled:cursor-wait disabled:opacity-60 ${
+                    briefKind === 'brief' && !briefError
+                      ? 'text-[color:var(--color-brand-gold)] font-medium'
+                      : 'text-[color:var(--color-text-muted)] hover:text-[color:var(--color-brand-navy)] dark:hover:text-[color:var(--color-brand-gold)]'
+                  }`}
+                  aria-busy={briefLoading && briefKind === 'brief'}
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0Zm5-3h8m-8 4h8m-8 4h6" /></svg>
-                  {briefLoading ? t('decisions.generating', 'Generating…') : t('decisions.fullBriefAction', 'Full Legal Brief')}
+                  {briefLoading && briefKind === 'brief'
+                    ? t('decisions.generating', 'Generating…')
+                    : t('decisions.fullBriefAction', 'Full Legal Brief')}
                 </button>
               </>
             )}
@@ -910,7 +970,7 @@ export default function DecisionDetailPage() {
           {/* AI Summary / Brief panel */}
           {(brief || briefError || briefLoading) && (
             <div className="mt-4 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] dark:bg-[color:var(--color-surface-dark)] p-4">
-              {briefLoading && !brief ? (
+              {briefLoading ? (
                 <div className="flex items-center justify-center gap-3 py-12">
                   <svg
                     className="h-6 w-6 animate-spin text-[color:var(--color-brand-gold)]"

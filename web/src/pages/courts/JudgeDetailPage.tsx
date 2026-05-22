@@ -20,6 +20,9 @@ export default function JudgeDetailPage() {
 
   useEffect(() => {
     if (!id) return
+    // /sudovi/suci/:id catches non-numeric paths too; short-circuit so a
+    // path like /sudovi/suci/anything doesn't trigger an API call with NaN.
+    if (!/^\d+$/.test(id)) { setNotFound(true); setLoading(false); return }
     setLoading(true)
     setError(false)
     setNotFound(false)

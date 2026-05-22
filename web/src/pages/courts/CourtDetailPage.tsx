@@ -20,7 +20,9 @@ export default function CourtDetailPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!id) return
+    // Catch-all /sudovi/:id route also matches non-numeric paths (e.g. an
+    // accidental /sudovi/karta link); don't hit the API with garbage.
+    if (!id || !/^\d+$/.test(id)) { setLoading(false); return }
     fetch(`/api/courts/${id}`)
       .then(r => r.ok ? r.json() : null)
       .then(d => { setCourt(d); setLoading(false) })

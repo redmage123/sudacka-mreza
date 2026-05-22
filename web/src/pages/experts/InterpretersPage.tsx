@@ -133,10 +133,11 @@ export default function InterpretersPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="interp-language-pair" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterLanguage')}
             </label>
             <select
+              id="interp-language-pair"
               value={languagePair}
               onChange={(e) => handleFilterChange('lang', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
@@ -149,10 +150,11 @@ export default function InterpretersPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="interp-language-2" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterLanguage2', 'Drugi jezik / Second language')}
             </label>
             <select
+              id="interp-language-2"
               value={language2}
               onChange={(e) => handleFilterChange('lang2', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
@@ -165,10 +167,11 @@ export default function InterpretersPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label htmlFor="interp-county" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterCounty', 'Županija')}
             </label>
             <select
+              id="interp-county"
               value={county}
               onChange={(e) => handleFilterChange('county', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
