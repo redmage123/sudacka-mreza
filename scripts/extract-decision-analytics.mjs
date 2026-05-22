@@ -100,14 +100,23 @@ TEXT:
 ${text.slice(0, 14000)}`
 
 async function callLLM(prompt) {
-  const res = await fetch(`${OLLAMA}/api/generate`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ model: MODEL, prompt, stream: false, options: { temperature: 0 } }),
-  })
-  if (!res.ok) throw new Error(`LLM HTTP ${res.status}`)
-  const data = await res.json()
-  return data.response
+  // Node's fetch has no default timeout; a hung pod connection blocked the
+  // whole pipeline for 50+ minutes in production before we noticed. 120 s
+  // is generous (typical responses are 3-8 s) and bounded.
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), 120_000)
+  try {
+    const res = await fetch(`${OLLAMA}/api/generate`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: MODEL, prompt, stream: false, options: { temperature: 0 } }),
+      signal: ctrl.signal,
+    })
+    if (!res.ok) throw new Error(`LLM HTTP ${res.status}`)
+    return (await res.json()).response
+  } finally {
+    clearTimeout(timer)
+  }
 }
 
 const safeJSON = (s) => {
