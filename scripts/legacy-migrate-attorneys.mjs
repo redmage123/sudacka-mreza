@@ -16,7 +16,7 @@
 import { execSync } from 'node:child_process'
 
 const DRY = process.argv.includes('--dry-run')
-const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F\\t -q'
+const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza -v ON_ERROR_STOP=1 -X -At -F~ -q'
 
 const log = (...a) => console.log(new Date().toISOString(), ...a)
 const psql = (sqlText) =>
@@ -39,10 +39,11 @@ const rows = psql(`
          o.ime1, o.prezime1, o.ime2, o.prezime2, o.ime3, o.prezime3,
          o.ime4, o.prezime4, o.ime5, o.prezime5, o.ime6, o.prezime6,
          o.ime7, o.prezime7, o.ime8, o.prezime8, o.ime9, o.prezime9,
-         (SELECT odv.naziv
+         (SELECT odv.naziv0
             FROM odvjetnik_odvjetnistva link
             JOIN odvjetnistva odv ON odv.id = link.odvjetnistvoid
             WHERE link.odvjetnikid = o.odvjetnikid
+              AND odv.naziv0 IS NOT NULL AND odv.naziv0 <> ''
             LIMIT 1) AS firm
     FROM odvjetnici o
    WHERE NOT EXISTS (SELECT 1 FROM attorneys a WHERE a.legacy_id = o.id)
@@ -57,7 +58,7 @@ if (DRY) {
 let migrated = 0
 const usedSlugs = new Set()
 for (const row of rows) {
-  const cols = row.split('\t').map((v) => (v === '\\N' ? null : v))
+  const cols = row.split('~').map((v) => (v === '\\N' ? null : v))
   const [legacyId, ime0, prezime0, email, slika, aktivan,
          ime1, prezime1, ime2, prezime2, ime3, prezime3,
          ime4, prezime4, ime5, prezime5, ime6, prezime6,
@@ -88,24 +89,33 @@ for (const row of rows) {
     `).trim() || null
   }
 
-  const attorneyId = psql(`
-    INSERT INTO attorneys (name, first_name, last_name, email, photo_id,
-                           firm, legacy_id, lang, slug, updated_at, created_at)
-    VALUES (
-      '${esc(canonical)}',
-      '${esc(ime0 || '')}',
-      '${esc(prezime0 || '')}',
-      ${email ? `'${esc(email)}'` : 'NULL'},
-      ${photoId || 'NULL'},
-      ${firm ? `'${esc(firm)}'` : 'NULL'},
-      ${legacyId},
-      'hr',
-      '${esc(slug)}',
-      now(), now()
-    )
-    RETURNING id
-  `).trim()
-  if (!attorneyId) continue
+  let attorneyId
+  try {
+    attorneyId = psql(`
+      INSERT INTO attorneys (name, first_name, last_name, email, photo_id,
+                             firm, legacy_id, lang, slug, updated_at, created_at)
+      VALUES (
+        '${esc(canonical)}',
+        '${esc(ime0 || '')}',
+        '${esc(prezime0 || '')}',
+        ${email ? `'${esc(email)}'` : 'NULL'},
+        ${photoId || 'NULL'},
+        ${firm ? `'${esc(firm)}'` : 'NULL'},
+        ${legacyId},
+        'hr',
+        '${esc(slug)}',
+        now(), now()
+      )
+      RETURNING id
+    `).trim()
+  } catch (e) {
+    if (migrated < 3) log(`first-failure legacyId=${legacyId} canonical="${canonical}" slug="${slug}" err:`, String(e).slice(0, 300))
+    continue
+  }
+  if (!attorneyId) {
+    if (migrated < 3) log(`empty-id legacyId=${legacyId} canonical="${canonical}" slug="${slug}"`)
+    continue
+  }
 
   // Aliases: non-empty (imeN, prezimeN) pairs for N≥1.
   const aliasPairs = [
