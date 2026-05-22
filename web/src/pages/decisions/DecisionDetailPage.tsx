@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { TextToSpeech } from '@/components/TextToSpeech'
+import { redactText } from '@/utils/pii'
 
 interface Decision {
   id: number; title: string; date: string;
@@ -563,7 +564,21 @@ export default function DecisionDetailPage() {
         }
         return r.json()
       })
-      .then(d => { setDecision(d); setLoading(false) })
+      .then(d => {
+        // Redact citizen PII (OIBs, addresses, party names following Croatian
+        // role markers) at the point the response enters local state so every
+        // downstream consumer — display, translate, brief, search — sees the
+        // sanitised version. Public-record names (judges, court personnel,
+        // licensed professionals) are not in scope per redactText's contract.
+        if (d) {
+          if (d.fullTextPlain) d.fullTextPlain = redactText(d.fullTextPlain)
+          if (d.body) d.body = redactText(d.body)
+          if (d.content) d.content = redactText(d.content)
+          if (d.text) d.text = redactText(d.text)
+          if (d.summary) d.summary = redactText(d.summary)
+        }
+        setDecision(d); setLoading(false)
+      })
       .catch((e) => {
         console.error(`[decision-load] id=${id}:`, e)
         setError(true)
