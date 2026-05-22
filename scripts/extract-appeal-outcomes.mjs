@@ -26,7 +26,8 @@ const PG = 'docker exec -i sudacka-mreza-db-1 psql -U postgres -d sudacka_mreza 
 
 const log = (...a) => console.log(new Date().toISOString(), ...a)
 const psql = (sqlText) =>
-  execSync(`${PG} -c "${sqlText.replaceAll('"', '\\"')}"`, { encoding: 'utf8' })
+  execSync(`${PG} -c "${sqlText.replaceAll('"', '\\"')}"`,
+    { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
 const esc = (s) => s == null ? null : String(s).replaceAll("'", "''")
 
 const detectOutcome = (text) => {
