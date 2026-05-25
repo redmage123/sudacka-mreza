@@ -8,7 +8,7 @@ interface SyncEvent extends ExtendableEvent {
 }
 
 // ─── Cache names (bump CACHE_VERSION to invalidate all) ─────────────────────
-const CACHE_VERSION = 'v1'
+const CACHE_VERSION = 'v3'
 const STATIC_CACHE = `sm-static-${CACHE_VERSION}`
 const API_CACHE = `sm-api-${CACHE_VERSION}`
 const DECISIONS_CACHE = `sm-decisions-${CACHE_VERSION}`

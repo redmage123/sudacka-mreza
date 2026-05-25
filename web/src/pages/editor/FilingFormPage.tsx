@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { getAuthToken } from '@/api/client'
+import MarkdownEditor from '@/components/admin/MarkdownEditor'
 import { getSchema, type FilingField } from './filingSchemas'
 
 function validateOib(oib: string): boolean {
@@ -24,8 +25,57 @@ function fieldInput(
 ): React.ReactElement {
   const common =
     'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm disabled:opacity-60'
+  // Non-scalar / specialised inputs handled before the string coercion below.
+  if (field.type === 'richtext') {
+    return (
+      <MarkdownEditor
+        value={typeof value === 'string' ? value : ''}
+        onChange={(v) => onChange(v)}
+        rows={field.rows ?? 12}
+        disabled={disabled}
+      />
+    )
+  }
+  if (field.type === 'checkboxes') {
+    const selected = Array.isArray(value) ? (value as string[]) : []
+    return (
+      <div className="flex flex-col gap-1.5 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2">
+        {field.options?.map((o) => {
+          const checked = selected.includes(o.value)
+          return (
+            <label key={o.value} className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={checked}
+                disabled={disabled}
+                onChange={(e) =>
+                  onChange(
+                    e.target.checked
+                      ? [...selected, o.value]
+                      : selected.filter((v) => v !== o.value),
+                  )
+                }
+              />
+              {o.label}
+            </label>
+          )
+        })}
+      </div>
+    )
+  }
   const str = value == null ? '' : String(value)
   switch (field.type) {
+    case 'email':
+      return (
+        <input
+          type="email"
+          required={field.required}
+          value={str}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+          className={common}
+        />
+      )
     case 'textarea':
       return (
         <textarea
@@ -186,7 +236,9 @@ export default function FilingFormPage() {
     const out: Record<string, string> = {}
     for (const f of schema.fields) {
       const v = values[f.key]
-      if (f.required && (v == null || v === '')) out[f.key] = 'Obavezno / Required'
+      const empty =
+        v == null || v === '' || (f.type === 'checkboxes' && (!Array.isArray(v) || v.length === 0))
+      if (f.required && empty) out[f.key] = 'Obavezno / Required'
       else if (f.type === 'oib' && typeof v === 'string' && v.length > 0) {
         if (!validateOib(v)) out[f.key] = 'Invalid OIB (11 digits, checksum)'
       }

@@ -46,3 +46,15 @@ cms/src/payload-types.ts
 
 # Migration scraped data (large, machine-generated)
 cms/src/migration/data/
+
+# Toronto production deployment artifacts / secrets
+web-dist/
+web/dist/
+cms/dist/
+.pii-key
+.env.bak*
+data/
+*.bak
+*.bak.*
+*.bak-*
+*.orig
