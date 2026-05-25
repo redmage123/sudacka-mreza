@@ -21,7 +21,7 @@ const getArg = (n, dflt) => {
 
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const VSRH_COURT_ID = parseInt(process.env.VSRH_COURT_ID ?? '195', 10)
 const MAX_PAGES = parseInt(getArg('max-pages', '200'), 10)
 const BACKFILL_FROM = getArg('backfill-from', null)

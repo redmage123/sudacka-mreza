@@ -26,7 +26,7 @@ const getArg = (n, dflt) => {
 }
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const SINCE = getArg('since', null) // YYYY-MM-DD; defaults to MAX(issued) - 7d
 const REQ_DELAY_MS = parseInt(getArg('delay', '450'), 10) // ~2 req/s
 

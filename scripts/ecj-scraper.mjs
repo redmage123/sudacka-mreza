@@ -33,7 +33,7 @@ const HEADFUL = hasFlag('headful')
 const DEBUG = hasFlag('debug')
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const ECJ_COURT_ID = parseInt(process.env.ECJ_COURT_ID ?? '355', 10)
 
 // Real Chrome 128 on Linux x86_64 — matches what an actual user reports.

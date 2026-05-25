@@ -29,7 +29,7 @@ const SCOPE = getArg('scope', 'caselaw')
 const PG_URL =
   getArg('pg', null) ??
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const OLLAMA = getArg('ollama', process.env.OLLAMA_BASE || 'http://127.0.0.1:11434')
 const EMBED_MODEL = getArg('embed-model', 'nomic-embed-text')
 const CONCURRENCY = parseInt(getArg('concurrency', '4'), 10)

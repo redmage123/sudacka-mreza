@@ -19,7 +19,7 @@ const getArg = (n, d) => {
 }
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const OUT = getArg('out', '/tmp/finetune-corpus.jsonl')
 const MIN_CHARS = parseInt(getArg('min-chars', '500'), 10)
 

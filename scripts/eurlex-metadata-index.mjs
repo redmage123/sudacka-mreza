@@ -30,7 +30,7 @@ const getArg = (n, dflt) => {
 const SCOPE = getArg('scope', 'caselaw')
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const OLLAMA = process.env.OLLAMA_BASE || 'http://172.18.0.1:11434'
 const EMBED_MODEL = process.env.EMBED_MODEL || 'nomic-embed-text'
 const SPARQL = 'https://publications.europa.eu/webapi/rdf/sparql'

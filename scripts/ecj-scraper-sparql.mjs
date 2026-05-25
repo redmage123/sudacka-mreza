@@ -21,7 +21,7 @@ const KEYWORD = getArg('keyword', 'Croatia')
 const SPARQL_ENDPOINT = 'https://publications.europa.eu/webapi/rdf/sparql'
 const PG_URL =
   process.env.DATABASE_URI ??
-  'postgresql://postgres:Sudacka2026!SecureDB@localhost:5432/sudacka_mreza'
+  'postgresql://postgres:postgres@localhost:5432/sudacka_mreza'
 const ECJ_COURT_ID = parseInt(process.env.ECJ_COURT_ID ?? '355', 10)
 
 function log(...a) {
