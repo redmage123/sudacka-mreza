@@ -1,0 +1,118 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: sudacka_mreza
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # No ports published — only reachable from CMS container on the internal network
+    networks:
+      - internal
+    # 512m was far too tight for Postgres + pgvector: cgroup memory accounting
+    # includes the page cache for the DB's own data files, so under query load
+    # the container blew past the limit and the kernel OOM-killed the postgres
+    # process (signal 9) — repeatedly forcing crash-recovery. Host has ~5GB
+    # free, so give the database real headroom.
+    mem_limit: 2g
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sudacka_mreza"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  web:
+    image: nginx:stable-alpine
+    ports:
+      - "127.0.0.1:4092:80"
+    volumes:
+      - ./web-dist:/usr/share/nginx/html:ro
+      - ./web-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      cms:
+        condition: service_healthy
+    networks:
+      - internal
+    mem_limit: 256m
+    restart: unless-stopped
+
+  cms:
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+    # CMS only on internal network — accessed via web container proxy
+    networks:
+      - internal
+    volumes:
+      # Mount the host's msmtp config read-only so utils/mail.ts can send
+      # 2FA emails through the same Gmail relay the bankruptcy-ingest uses.
+      - /etc/msmtprc:/etc/msmtprc:ro
+    environment:
+      PII_ENCRYPTION_KEY: ${PII_ENCRYPTION_KEY}
+      DATABASE_URI: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/sudacka_mreza
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:-dev-secret-change-in-prod-min-32-chars!!}
+      PORT: 4094
+      SERVER_URL: ${SERVER_URL:-https://sudacka-mreza.hr}
+      FRONTEND_URL: ${FRONTEND_URL:-https://sudacka-mreza.hr}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-info@sudacka-mreza.hr}
+      RAG_URL: ${RAG_URL:-}
+      RAG_API_KEY: ${RAG_API_KEY:-}
+      PAYLOAD_MIGRATIONS_DIR: dist/migrations
+      LLM_ENDPOINT: ${LLM_ENDPOINT:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      EMBED_MODEL: ${EMBED_MODEL:-}
+      CHAT_NUM_CTX: ${CHAT_NUM_CTX:-}
+      RETRIEVAL_TOP_K: ${RETRIEVAL_TOP_K:-}
+      RETRIEVAL_CANDIDATE_K: ${RETRIEVAL_CANDIDATE_K:-}
+      ENABLE_RERANK: ${ENABLE_RERANK:-}
+      LLM_API_TOKEN: ${LLM_API_TOKEN:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 600m
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 4094 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  bankruptcy-ingest:
+    build:
+      context: ./bankruptcy-ingest
+    volumes:
+      - /etc/msmtprc:/etc/msmtprc:ro
+    networks:
+      - internal
+    ports:
+      - "127.0.0.1:4095:8080"  # host nginx will proxy /webhook/mailgun to this
+    environment:
+      DATABASE_URI: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/sudacka_mreza
+      LLM_ENDPOINT: ${LLM_ENDPOINT:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      MAILGUN_SIGNING_KEY: ${MAILGUN_SIGNING_KEY:-}
+      AUTO_PUBLISH_THRESHOLD: "0.95"
+      ADMIN_NOTIFY_EMAIL: ${ADMIN_NOTIFY_EMAIL:-admin@sudacka-mreza.hr}
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 512m
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import httpx; r=httpx.get('http://localhost:8080/health', timeout=5); exit(0 if r.status_code==200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  postgres_data:

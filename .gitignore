@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+web-dist/
+web/dist/
+cms/dist/
+
+# Secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+.env.bak*
+.pii-key
+
+# Local data / runtime state
+data/
+postgres_data/
+
+# Backups / scratch
+*.bak
+*.bak.*
+*.bak-*
+*.orig
+
+# OS / editor
+.DS_Store
+*.log
