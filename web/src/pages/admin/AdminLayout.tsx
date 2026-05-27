@@ -106,6 +106,7 @@ export default function AdminLayout() {
           <NavLink to={`/${locale}/admin/interpreters`} className={linkClass}>{t('admin.nav.interpreters', 'Interpreters')}</NavLink>
           <NavLink to={`/${locale}/admin/state-attorneys`} className={linkClass}>{t('admin.nav.stateAttorneys', 'State attorneys')}</NavLink>
           <NavLink to={`/${locale}/admin/bankruptcy-administrators`} className={linkClass}>{t('admin.nav.bankAdmins', 'Bankruptcy admins')}</NavLink>
+          <NavLink to={`/${locale}/admin/bankruptcy-debtors`} className={linkClass}>{t('admin.nav.bankDebtors', 'Bankruptcy debtors')}</NavLink>
           <NavLink to={`/${locale}/admin/laws`} className={linkClass}>{t('admin.nav.laws', 'Laws')}</NavLink>
           <NavLink to={`/${locale}/admin/legal-categories`} className={linkClass}>{t('admin.nav.categories', 'Categories')}</NavLink>
           <NavLink to={`/${locale}/admin/documents`} className={linkClass}>{t('admin.nav.documents', 'Documents')}</NavLink>

@@ -348,6 +348,21 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'county', type: 'text' },
     ],
   },
+  'bankruptcy-debtors': {
+    slug: 'bankruptcy-debtors',
+    title: 'Bankruptcy debtors',
+    columns: ['name', 'oib', 'city', 'county'],
+    fields: [
+      { name: 'name', type: 'text', required: true, label: 'Naziv / Ime dužnika' },
+      { name: 'oib', type: 'text', label: 'OIB' },
+      { name: 'address', type: 'text', label: 'Adresa' },
+      { name: 'city', type: 'text', label: 'Grad' },
+      { name: 'county', type: 'text', label: 'Županija' },
+      { name: 'phone', type: 'text', label: 'Telefon' },
+      { name: 'email', type: 'text', label: 'Email' },
+      { name: 'notes', type: 'textarea', label: 'Bilješke' },
+    ],
+  },
   laws: {
     slug: 'laws',
     title: 'Laws',
