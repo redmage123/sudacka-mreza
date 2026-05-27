@@ -4,10 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
+interface Department {
+  id?: string; name?: string; type?: string; head?: string; phone?: string; email?: string;
+}
 interface Court {
   id: number; name: string; type: string; address?: string; city?: string;
   phone?: string; fax?: string; email?: string; website?: string;
   president?: string; county?: string; jurisdiction?: string;
+  departments?: Department[];
 }
 
 export default function CourtDetailPage() {
@@ -42,6 +46,16 @@ export default function CourtDetailPage() {
     { label: t('courts.jurisdiction', 'Jurisdiction'), value: court.jurisdiction },
   ].filter(f => f.value)
 
+  // Court departments (Odjeli suda): registry, president's office, etc.
+  const DEPT_TYPE: Record<string, string> = {
+    registry: t('courts.dept.registry', 'Pisarnica'),
+    president: t('courts.dept.president', 'Ured predsjednika'),
+    secretary: t('courts.dept.secretary', 'Tajništvo'),
+    spokesperson: t('courts.dept.spokesperson', 'Glasnogovornik'),
+    other: t('courts.dept.other', 'Ostalo'),
+  }
+  const departments = (court.departments ?? []).filter(d => d?.name)
+
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
       <Breadcrumb items={[{ label: tn('home'), href: `/${locale}` }, { label: tn('courts'), href: `/${locale}/sudovi` }, { label: court.name }]} />
@@ -55,6 +69,33 @@ export default function CourtDetailPage() {
           </div>
         ))}
       </div>
+
+      {departments.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-lg font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)] mb-3">
+            {t('courts.departments', 'Odjeli suda')}
+          </h2>
+          <div className="bg-[color:var(--color-surface)] dark:bg-[color:var(--color-surface-dark)] border border-[color:var(--color-border)] rounded-lg divide-y divide-[color:var(--color-border)]">
+            {departments.map((d, i) => (
+              <div key={d.id ?? i} className="px-4 py-3">
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-sm font-semibold">{d.name}</span>
+                  {d.type && DEPT_TYPE[d.type] && (
+                    <span className="text-xs font-medium text-[color:var(--color-brand-gold)] bg-[color:var(--color-brand-gold)]/10 rounded-full px-2 py-0.5">
+                      {DEPT_TYPE[d.type]}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-[color:var(--color-text-muted)]">
+                  {d.head && <span>{t('courts.dept.head', 'Voditelj')}: {d.head}</span>}
+                  {d.phone && <span>{t('courts.phone', 'Telefon')}: {d.phone}</span>}
+                  {d.email && <span>{d.email}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }
