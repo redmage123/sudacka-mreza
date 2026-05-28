@@ -499,15 +499,85 @@ async function retrieveContext(question: string, pool: PgPool, topK = 5): Promis
   const hydratedDecisionsTop = decisionTopKIdx.map((i) => hydratedDecisions[i]).filter(Boolean)
   const legalHits = legalTopKIdx.map((i) => legalPool[i]).filter(Boolean)
 
+  // ── KG expansion: 1-hop traversal of the citation graph ────────────────
+  // The top decisions usually cite the foundational rulings the user actually
+  // needs to see — but those foundational rulings rarely score well on FTS
+  // alone (different vocabulary, older boilerplate). Pull cited_decisions for
+  // the top 3 retrieved decisions so the answer can ground on the chain.
+  // Empty `kg_decisions` is the no-op fallback (e.g. citation graph empty or
+  // no overlap), so callers see the same shape as before.
+  const kgDecisions = await expandWithCitationGraph(hydratedDecisionsTop, pool)
+
   // Interleave: alternate decision / legal_source so both types appear early
-  // in the context block regardless of their raw rank.
+  // in the context block regardless of their raw rank. KG-expanded decisions
+  // come last so they don't displace the directly-relevant top-K.
   const merged: SearchDoc[] = []
   const maxLen = Math.max(hydratedDecisionsTop.length, legalHits.length)
   for (let i = 0; i < maxLen; i++) {
     if (i < hydratedDecisionsTop.length) merged.push(hydratedDecisionsTop[i])
     if (i < legalHits.length) merged.push(legalHits[i])
   }
-  return merged.slice(0, topK * 2)
+  for (const d of kgDecisions) merged.push(d)
+  return merged.slice(0, topK * 2 + kgDecisions.length)
+}
+
+// ── KG retrieval ─────────────────────────────────────────────────────────
+// Pull 1-hop cited_decisions for the top decisions so the chat can ground on
+// the foundational chain. Safe to call on an empty citation graph — returns [].
+const KG_EXPAND_TOP_N = Number(process.env.KG_EXPAND_TOP_N || '3')
+const KG_EXPAND_PER_NODE = Number(process.env.KG_EXPAND_PER_NODE || '2')
+async function expandWithCitationGraph(
+  topDocs: SearchDoc[],
+  pool: PgPool,
+): Promise<SearchDoc[]> {
+  const seedIds = topDocs
+    .filter((d) => d.kind === 'decision' && /^\d+$/.test(d.id))
+    .slice(0, KG_EXPAND_TOP_N)
+    .map((d) => parseInt(d.id, 10))
+  if (seedIds.length === 0) return []
+  try {
+    const sql = `
+      SELECT cd.id::text                        AS id,
+             cd.title                           AS title,
+             cd.case_number                     AS case_number,
+             cd.date                            AS date,
+             cd.slug                            AS slug,
+             COALESCE(cd.summary, LEFT(cd.full_text_plain, 1500)) AS excerpt,
+             c.id::text                         AS court_id,
+             c.name                             AS court_name,
+             r.parent_id                        AS via_citing
+        FROM court_decisions_rels r
+        JOIN court_decisions cd ON cd.id = r.court_decisions_id
+        LEFT JOIN courts c ON c.id = cd.court_id
+       WHERE r.path = 'cited_decisions'
+         AND r.parent_id = ANY($1::int[])
+         AND cd.id <> ALL($1::int[])
+       ORDER BY r.parent_id, r."order"
+       LIMIT $2`
+    const cap = KG_EXPAND_TOP_N * KG_EXPAND_PER_NODE
+    const rows = await pool.query(sql, [seedIds, cap])
+    const seen = new Set<string>()
+    const out: SearchDoc[] = []
+    for (const r of rows.rows) {
+      const id = String(r.id)
+      if (seen.has(id)) continue
+      seen.add(id)
+      out.push({
+        id,
+        kind: 'decision' as const,
+        title: typeof r.title === 'string' ? r.title : '',
+        caseNumber: typeof r.case_number === 'string' ? r.case_number : '',
+        date: r.date instanceof Date ? r.date.toISOString().slice(0, 10) : (typeof r.date === 'string' ? r.date : undefined),
+        slug: typeof r.slug === 'string' ? r.slug : undefined,
+        excerpt: typeof r.excerpt === 'string' ? r.excerpt : '',
+        court: { id: r.court_id ? String(r.court_id) : undefined, name: typeof r.court_name === 'string' ? r.court_name : '' },
+      })
+    }
+    return out
+  } catch {
+    // Citation graph empty or table missing — RAG still works without it.
+    return []
+  }
 }
 
 // ── Prompt construction ───────────────────────────────────────────────────
