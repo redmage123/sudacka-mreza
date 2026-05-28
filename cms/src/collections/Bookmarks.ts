@@ -38,7 +38,10 @@ export const Bookmarks: CollectionConfig = {
       label: 'Korisnik',
       admin: {
         readOnly: true,
-        description: 'Auto-populated from the authenticated user on create',
+        description: {
+          hr: 'Automatski postavljeno na prijavljenog korisnika pri stvaranju.',
+          en: 'Auto-populated from the authenticated user on create.',
+        },
       },
     },
     {
@@ -63,7 +66,10 @@ export const Bookmarks: CollectionConfig = {
       label: 'Stvoreno',
       admin: {
         readOnly: true,
-        description: 'Auto-populated on create',
+        description: {
+          hr: 'Automatski postavljeno pri stvaranju.',
+          en: 'Auto-populated on create.',
+        },
       },
     },
   ],

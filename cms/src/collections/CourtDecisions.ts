@@ -77,7 +77,10 @@ export const CourtDecisions: CollectionConfig = {
       label: 'Puni tekst (ravni)',
       admin: {
         hidden: true,
-        description: 'Auto-populated from fullText for full-text search indexing',
+        description: {
+          hr: 'Automatski popunjeno iz "Puni tekst" za indeksiranje cjelovitog pretraživanja.',
+          en: 'Auto-populated from fullText for full-text search indexing.',
+        },
       },
     },
     {

@@ -38,7 +38,10 @@ export const Annotations: CollectionConfig = {
       label: 'Korisnik',
       admin: {
         readOnly: true,
-        description: 'Auto-populated from the authenticated user on create',
+        description: {
+          hr: 'Automatski postavljeno na prijavljenog korisnika pri stvaranju.',
+          en: 'Auto-populated from the authenticated user on create.',
+        },
       },
     },
     {
@@ -59,7 +62,10 @@ export const Annotations: CollectionConfig = {
           required: true,
           label: 'Početak (indeks znaka)',
           admin: {
-            description: 'Zero-based character offset of the selection start within the decision plain text',
+            description: {
+              hr: 'Pomak (od 0) početka odabira u plain-text verziji odluke.',
+              en: 'Zero-based character offset of the selection start within the decision plain text.',
+            },
           },
         },
         {
@@ -68,7 +74,10 @@ export const Annotations: CollectionConfig = {
           required: true,
           label: 'Kraj (indeks znaka)',
           admin: {
-            description: 'Zero-based character offset of the selection end within the decision plain text',
+            description: {
+              hr: 'Pomak (od 0) kraja odabira u plain-text verziji odluke.',
+              en: 'Zero-based character offset of the selection end within the decision plain text.',
+            },
           },
         },
       ],
@@ -100,7 +109,10 @@ export const Annotations: CollectionConfig = {
       label: 'Stvoreno',
       admin: {
         readOnly: true,
-        description: 'Auto-populated on create',
+        description: {
+          hr: 'Automatski postavljeno pri stvaranju.',
+          en: 'Auto-populated on create.',
+        },
       },
     },
   ],

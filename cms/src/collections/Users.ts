@@ -31,8 +31,11 @@ export const Users: CollectionConfig = {
     },
   },
   admin: {
-    group: 'Korisnici',
-    description: 'Registrirani korisnici i administratori. Email i 2FA enrolment.',
+    group: { hr: 'Korisnici', en: 'Users' },
+    description: {
+      hr: 'Registrirani korisnici i administratori. Email i upis dvostruke autentifikacije (2FA).',
+      en: 'Registered users and administrators. Email and 2FA enrolment.',
+    },
     useAsTitle: 'email',
     defaultColumns: ['email', 'firstName', 'lastName', 'role'],
   },
@@ -111,15 +114,15 @@ export const Users: CollectionConfig = {
       type: 'select',
       defaultValue: 'member',
       required: true,
-      label: 'Uloga',
+      label: { hr: 'Uloga', en: 'Role' },
       options: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Urednik', value: 'editor' },
+        { label: { hr: 'Administrator', en: 'Admin' }, value: 'admin' },
+        { label: { hr: 'Urednik', en: 'Editor' }, value: 'editor' },
         // Pravno lice — registrirana organizacija / odvjetničko društvo /
         // stečajni upravitelj koji djeluje u svoje ime. Može podnositi
         // stečajne podneske kao i urednici.
-        { label: 'Pravno lice / Legal entity', value: 'legal_entity' },
-        { label: 'Član', value: 'member' },
+        { label: { hr: 'Pravno lice', en: 'Legal entity' }, value: 'legal_entity' },
+        { label: { hr: 'Član', en: 'Member' }, value: 'member' },
       ],
       // NOTE: no field-level `access.update` here. Restricting it to admins
       // broke every UNAUTHENTICATED internal update Payload performs on a user
@@ -158,19 +161,25 @@ export const Users: CollectionConfig = {
     // emails the plain code to the registered address. The legacy TOTP
     // columns below are retained for rollback only — no longer referenced
     // by the active login flow.
-    { name: 'emailOtpHash', type: 'text', label: 'Email OTP hash', admin: { hidden: true } },
-    { name: 'emailOtpExpiresAt', type: 'date', label: 'Email OTP expires', admin: { hidden: true } },
-    { name: 'emailOtpAttempts', type: 'number', defaultValue: 0, label: 'Email OTP attempts', admin: { hidden: true } },
+    { name: 'emailOtpHash', type: 'text', label: { hr: 'Email OTP hash', en: 'Email OTP hash' }, admin: { hidden: true } },
+    { name: 'emailOtpExpiresAt', type: 'date', label: { hr: 'Email OTP istek', en: 'Email OTP expires' }, admin: { hidden: true } },
+    { name: 'emailOtpAttempts', type: 'number', defaultValue: 0, label: { hr: 'Email OTP pokušaji', en: 'Email OTP attempts' }, admin: { hidden: true } },
 
     // Legacy TOTP columns retained for rollback; no longer written to.
-    { name: 'totpSecret', type: 'text', label: 'TOTP secret (legacy)', admin: { hidden: true } },
-    { name: 'totpEnabled', type: 'checkbox', defaultValue: false, label: 'TOTP enabled (legacy)' },
-    { name: 'totpEnrolledAt', type: 'date', label: 'TOTP enrolled at (legacy)', admin: { readOnly: true } },
+    { name: 'totpSecret', type: 'text', label: { hr: 'TOTP tajna (zastarjelo)', en: 'TOTP secret (legacy)' }, admin: { hidden: true } },
+    { name: 'totpEnabled', type: 'checkbox', defaultValue: false, label: { hr: 'TOTP omogućen (zastarjelo)', en: 'TOTP enabled (legacy)' } },
+    { name: 'totpEnrolledAt', type: 'date', label: { hr: 'TOTP upisan (zastarjelo)', en: 'TOTP enrolled at (legacy)' }, admin: { readOnly: true } },
     {
       name: 'totpRecoveryCodes',
       type: 'json',
-      label: 'TOTP recovery codes (legacy, hashed)',
-      admin: { readOnly: true, description: 'No longer used — retained for rollback.' },
+      label: { hr: 'TOTP kodovi za oporavak (zastarjelo, hash)', en: 'TOTP recovery codes (legacy, hashed)' },
+      admin: {
+        readOnly: true,
+        description: {
+          hr: 'Više se ne koristi — zadržano za eventualni vraćanja.',
+          en: 'No longer used — retained for rollback.',
+        },
+      },
     },
   ],
 }
