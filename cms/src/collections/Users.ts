@@ -57,9 +57,22 @@ export const Users: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ data, req, operation, originalDoc }) => {
-        // Force member role on self-registration
+        // QA #7: legal-entity self-registration. When the public RegisterPage
+        // submits both organisationName + a well-formed 11-digit OIB, promote
+        // the account to `legal_entity` so it can submit bankruptcy filings
+        // (matches `isLegalEntityOrAbove` on BankruptcyFilings). Server-side
+        // OIB digit-count check is the same one the form enforces — a real
+        // mod-11 checksum is a future hardening step. All other self-creates
+        // remain `member` (existing behaviour).
         if (operation === 'create' && req.user?.role !== 'admin') {
-          data!.role = 'member'
+          const d = data as { organisationName?: string; organisationOib?: string; role?: string }
+          const orgName = (d.organisationName || '').trim()
+          const oib = (d.organisationOib || '').trim()
+          if (orgName && /^\d{11}$/.test(oib)) {
+            d.role = 'legal_entity'
+          } else {
+            d.role = 'member'
+          }
         }
         // Prevent non-admins — and system-initiated updates that run with no
         // req.user at all (forgot-password, email verification, login-attempt
@@ -68,7 +81,7 @@ export const Users: CollectionConfig = {
         // pass the whole document, so deleting the key makes validation fail
         // with "This field is required" and breaks the operation entirely.
         if (operation === 'update' && req.user?.role !== 'admin' && originalDoc) {
-          data!.role = (originalDoc as { role?: string }).role
+          (data as { role?: string }).role = (originalDoc as { role?: string }).role
         }
         return data
       },

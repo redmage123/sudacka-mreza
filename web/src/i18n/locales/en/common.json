@@ -448,6 +448,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Account type",
+      "userTypeOptions": {
+        "person": "Person",
+        "legal_entity": "Legal entity"
+      },
+      "organisationName": "Legal entity name",
+      "organisationOib": "Legal entity OIB",
+      "legalEntityNote": "Legal entities (law firms, bankruptcy administrators acting on their own behalf, registered organizations) can submit bankruptcy filings through the editor interface. Your privileges will be activated automatically after registration.",
+      "errorOib": "OIB must be exactly 11 digits.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",

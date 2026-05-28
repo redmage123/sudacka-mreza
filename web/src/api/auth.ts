@@ -110,6 +110,11 @@ export interface RegisterInput {
   firstName: string
   lastName: string
   profile?: { organisation?: string; phone?: string }
+  // Legal-entity self-registration (QA #7). When both fields are present, the
+  // Users beforeChange hook on the CMS side promotes role from 'member' to
+  // 'legal_entity'. Sending just one or neither stays role='member'.
+  organisationName?: string
+  organisationOib?: string
 }
 
 export async function register(input: RegisterInput): Promise<AuthUser> {
