@@ -30,7 +30,9 @@ RUN find dist/migrations -name "*.d.ts" -o -name "*.d.ts.map" -o -name "*.js.map
 COPY --from=builder /app/node_modules ./node_modules
 COPY package.json ./
 COPY entrypoint.sh ./
-RUN chmod +x entrypoint.sh
+# entrypoint.sh and package.json need world-read so the non-root appuser can
+# load them; the host build context inherits umask 027 (no read for other).
+RUN chmod 755 entrypoint.sh && chmod 644 package.json
 USER appuser
 
 EXPOSE 4094

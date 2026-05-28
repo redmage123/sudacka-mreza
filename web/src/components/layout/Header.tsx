@@ -247,6 +247,14 @@ export function Header() {
                       {t('adminConsole', 'Administracija')}
                     </Link>
                   )}
+                  {(user.role === 'editor' || user.role === 'data_editor' || user.role === 'legal_entity') && (
+                    <Link
+                      to={`/${lang}/editor`}
+                      className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"
+                    >
+                      {t('editorConsole', 'Uređivanje')}
+                    </Link>
+                  )}
                   <Link
                     to={`/${lang}/moja-knjiznica`}
                     className="px-3 py-1.5 text-sm font-medium text-[color:var(--color-brand-gold)] border border-[color:var(--color-brand-gold)] rounded hover:bg-[color:var(--color-brand-gold)] hover:text-[color:var(--color-brand-navy)] transition-colors"

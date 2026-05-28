@@ -3,7 +3,11 @@ import { useAuth } from '@/hooks/useAuth'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
-const ALLOWED_ROLES = new Set(['admin', 'editor', 'data_editor'])
+// `legal_entity` (pravno lice) is included so registered legal entities can
+// submit bankruptcy filings — matches `isLegalEntityOrAbove` on the server-side
+// BankruptcyFilings access rule. Without this, legal entities could create
+// filings via the API but had no UI surface to do so.
+const ALLOWED_ROLES = new Set(['admin', 'editor', 'data_editor', 'legal_entity'])
 
 export default function EditorLayout() {
   const { user, loading } = useAuth()
