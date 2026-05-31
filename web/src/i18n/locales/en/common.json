@@ -149,8 +149,8 @@
       "closed": "Closed"
     },
     "jurisdictionScope": "Jurisdiction area",
-    "departmentsCount_one": "{{n}} department",
-    "departmentsCount_other": "{{n}} departments"
+    "departmentsCount_one": "{{count}} department",
+    "departmentsCount_other": "{{count}} departments"
   },
   "nav": {
     "home": "Home",

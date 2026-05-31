@@ -159,9 +159,9 @@
       "closed": "Zatvoreno"
     },
     "jurisdictionScope": "Područje nadležnosti",
-    "departmentsCount_one": "{{n}} odjel",
-    "departmentsCount_few": "{{n}} odjela",
-    "departmentsCount_other": "{{n}} odjela"
+    "departmentsCount_one": "{{count}} odjel",
+    "departmentsCount_few": "{{count}} odjela",
+    "departmentsCount_other": "{{count}} odjela"
   },
   "nav": {
     "home": "Početna",
