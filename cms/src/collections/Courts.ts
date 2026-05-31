@@ -150,6 +150,32 @@ export const Courts: CollectionConfig = {
       },
     },
     {
+      name: 'jurisdictionScope',
+      type: 'richText',
+      label: { hr: 'Područje nadležnosti', en: 'Jurisdiction area' },
+      admin: {
+        description: 'Tekstualni opis područja koje sud pokriva (gradovi, općine, vrste predmeta).',
+      },
+    },
+    {
+      name: 'timeAvailability',
+      type: 'group',
+      label: { hr: 'Radno vrijeme', en: 'Working hours' },
+      admin: {
+        description: 'Radno vrijeme suda za stranke (može se ostaviti prazno za zatvoreno).',
+      },
+      fields: [
+        { name: 'monday',    type: 'text', label: { hr: 'Ponedjeljak', en: 'Monday' } },
+        { name: 'tuesday',   type: 'text', label: { hr: 'Utorak',      en: 'Tuesday' } },
+        { name: 'wednesday', type: 'text', label: { hr: 'Srijeda',     en: 'Wednesday' } },
+        { name: 'thursday',  type: 'text', label: { hr: 'Četvrtak',    en: 'Thursday' } },
+        { name: 'friday',    type: 'text', label: { hr: 'Petak',       en: 'Friday' } },
+        { name: 'saturday',  type: 'text', label: { hr: 'Subota',      en: 'Saturday' } },
+        { name: 'sunday',    type: 'text', label: { hr: 'Nedjelja',    en: 'Sunday' } },
+        { name: 'notes',     type: 'textarea', label: { hr: 'Napomena', en: 'Notes' } },
+      ],
+    },
+    {
       name: 'slug',
       type: 'text',
       unique: true,

@@ -7,11 +7,40 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 interface Department {
   id?: string; name?: string; type?: string; head?: string; phone?: string; email?: string;
 }
+interface JurisdictionRich { root?: { children?: Array<{ children?: Array<{ text?: string }> }> } }
+interface TimeAvailability {
+  monday?: string; tuesday?: string; wednesday?: string; thursday?: string;
+  friday?: string; saturday?: string; sunday?: string; notes?: string;
+}
 interface Court {
   id: number; name: string; type: string; address?: string; city?: string;
   phone?: string; fax?: string; email?: string; website?: string;
-  president?: string; county?: string; jurisdiction?: string;
+  president?: string; county?: string;
+  jurisdiction?: string;
+  jurisdictionScope?: JurisdictionRich | string;
+  jurisdictionArea?: unknown;
+  timeAvailability?: TimeAvailability;
   departments?: Department[];
+}
+
+
+
+function hasTimeAvailability(ta?: TimeAvailability): boolean {
+  if (!ta) return false
+  return Boolean(ta.monday || ta.tuesday || ta.wednesday || ta.thursday || ta.friday || ta.saturday || ta.sunday || ta.notes)
+}
+
+function extractJurisdiction(court: { jurisdictionScope?: JurisdictionRich | string; jurisdiction?: string }): string | undefined {
+  if (typeof court.jurisdictionScope === 'string' && court.jurisdictionScope) return court.jurisdictionScope
+  const root = (typeof court.jurisdictionScope === 'object' ? court.jurisdictionScope?.root : undefined)
+  if (root && Array.isArray(root.children)) {
+    const text = root.children
+      .map((block) => (block.children ?? []).map((n) => n.text ?? '').join(''))
+      .filter(Boolean)
+      .join('\n')
+    if (text) return text
+  }
+  return court.jurisdiction
 }
 
 export default function CourtDetailPage() {
@@ -43,7 +72,7 @@ export default function CourtDetailPage() {
     { label: t('courts.website', 'Website'), value: court.website },
     { label: t('courts.president', 'President'), value: court.president },
     { label: t('courts.county', 'County'), value: court.county },
-    { label: t('courts.jurisdiction', 'Jurisdiction'), value: court.jurisdiction },
+    { label: t('courts.jurisdictionScope', 'Područje nadležnosti'), value: extractJurisdiction(court) },
   ].filter(f => f.value)
 
   // Court departments (Odjeli suda): registry, president's office, etc.
@@ -93,6 +122,39 @@ export default function CourtDetailPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+      {hasTimeAvailability(court.timeAvailability) && (
+        <section className="mt-8">
+          <h2 className="text-lg font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)] mb-3">
+            {t('courts.timeAvailability.heading', 'Radno vrijeme')}
+          </h2>
+          <div className="bg-[color:var(--color-surface)] dark:bg-[color:var(--color-surface-dark)] border border-[color:var(--color-border)] rounded-lg divide-y divide-[color:var(--color-border)]">
+            {([
+              ['monday',    t('courts.timeAvailability.monday',    'Ponedjeljak')],
+              ['tuesday',   t('courts.timeAvailability.tuesday',   'Utorak')],
+              ['wednesday', t('courts.timeAvailability.wednesday', 'Srijeda')],
+              ['thursday',  t('courts.timeAvailability.thursday',  'Četvrtak')],
+              ['friday',    t('courts.timeAvailability.friday',    'Petak')],
+              ['saturday',  t('courts.timeAvailability.saturday',  'Subota')],
+              ['sunday',    t('courts.timeAvailability.sunday',    'Nedjelja')],
+            ] as Array<[keyof TimeAvailability, string]>).map(([key, label]) => {
+              const ta = court.timeAvailability
+              const value = ta ? ta[key] : undefined
+              return (
+                <div key={key} className="flex px-4 py-3">
+                  <dt className="w-1/3 text-sm font-medium text-[color:var(--color-text-muted)]">{label}</dt>
+                  <dd className="w-2/3 text-sm">{value || t('courts.timeAvailability.closed', 'Zatvoreno')}</dd>
+                </div>
+              )
+            })}
+            {court.timeAvailability?.notes && (
+              <div className="flex px-4 py-3">
+                <dt className="w-1/3 text-sm font-medium text-[color:var(--color-text-muted)]">{t('courts.timeAvailability.notes', 'Napomena')}</dt>
+                <dd className="w-2/3 text-sm whitespace-pre-line">{court.timeAvailability.notes}</dd>
+              </div>
+            )}
           </div>
         </section>
       )}

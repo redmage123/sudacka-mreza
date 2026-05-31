@@ -135,7 +135,22 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Working hours",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "notes": "Notes",
+      "closed": "Closed"
+    },
+    "jurisdictionScope": "Jurisdiction area",
+    "departmentsCount_one": "{{n}} department",
+    "departmentsCount_other": "{{n}} departments"
   },
   "nav": {
     "home": "Home",
@@ -327,6 +342,16 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Bankruptcy Listings",
+      "description": "Active bankruptcy proceedings published in the official gazette.",
+      "searchPlaceholder": "Search by debtor name…",
+      "count": "{{n}} listings",
+      "loadError": "Could not load bankruptcy listings.",
+      "empty": "No active bankruptcy listings.",
+      "unknownDebtor": "Unknown debtor",
+      "deadline": "Deadline"
     }
   },
   "administrators": {

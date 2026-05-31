@@ -145,7 +145,23 @@
       "phone": "Telefon",
       "president": "Predsjednik"
     },
-    "officialNameNote": "Službeni naziv suda"
+    "officialNameNote": "Službeni naziv suda",
+    "timeAvailability": {
+      "heading": "Radno vrijeme",
+      "monday": "Ponedjeljak",
+      "tuesday": "Utorak",
+      "wednesday": "Srijeda",
+      "thursday": "Četvrtak",
+      "friday": "Petak",
+      "saturday": "Subota",
+      "sunday": "Nedjelja",
+      "notes": "Napomena",
+      "closed": "Zatvoreno"
+    },
+    "jurisdictionScope": "Područje nadležnosti",
+    "departmentsCount_one": "{{n}} odjel",
+    "departmentsCount_few": "{{n}} odjela",
+    "departmentsCount_other": "{{n}} odjela"
   },
   "nav": {
     "home": "Početna",
@@ -337,6 +353,19 @@
       "step2": "2. Otvaranje — Sud ispituje solventnost; ako prihvati, otvara stečajni postupak",
       "step3": "3. Upravitelj — Sud imenuje stečajnog upravitelja",
       "step4": "4. Rješenje — Likvidacija imovine ili prihvaćanje plana restrukturiranja od strane vjerovnika"
+    },
+    "listings": {
+      "title": "Stečajni oglasi",
+      "description": "Aktivni stečajni postupci objavljeni u Narodnim novinama i službenom glasilu.",
+      "searchPlaceholder": "Pretraga po nazivu dužnika…",
+      "count": "{{n}} oglasa",
+      "count_one": "{{n}} oglas",
+      "count_few": "{{n}} oglasa",
+      "count_other": "{{n}} oglasa",
+      "loadError": "Nije moguće učitati stečajne oglase.",
+      "empty": "Nema aktivnih stečajnih oglasa.",
+      "unknownDebtor": "Nepoznati dužnik",
+      "deadline": "Rok"
     }
   },
   "administrators": {

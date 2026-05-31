@@ -31,6 +31,25 @@ const COURT_TYPE_LABEL: Record<string, string> = {
   echr: 'courts.tab.echr',
 }
 
+
+function hasJurisdiction(court: Court): boolean {
+  const c = court as unknown as { jurisdictionScope?: unknown; jurisdiction?: unknown }
+  return !!(c.jurisdictionScope || c.jurisdiction)
+}
+
+function jurisdictionSnippet(court: Court): string {
+  const c = court as unknown as { jurisdictionScope?: { root?: { children?: Array<{ children?: Array<{ text?: string }> }> } } | string; jurisdiction?: string }
+  if (typeof c.jurisdictionScope === 'string' && c.jurisdictionScope) return c.jurisdictionScope
+  const root = (typeof c.jurisdictionScope === 'object' ? c.jurisdictionScope?.root : undefined)
+  if (root && Array.isArray(root.children)) {
+    for (const block of root.children) {
+      const text = (block.children ?? []).map((n) => n.text ?? '').join('').trim()
+      if (text) return text
+    }
+  }
+  return c.jurisdiction ?? ''
+}
+
 function CourtCard({
   court,
   locale,
@@ -38,7 +57,7 @@ function CourtCard({
 }: {
   court: Court
   locale: string
-  t: (key: string) => string
+  t: ReturnType<typeof useTranslation>['t']
 }) {
   const typeLabelKey = court.type ? COURT_TYPE_LABEL[court.type] : undefined
 
@@ -77,6 +96,20 @@ function CourtCard({
               <div className="flex gap-1.5">
                 <dt className="font-medium shrink-0">{t('courts.fields.president')}:</dt>
                 <dd>{court.president}</dd>
+              </div>
+            )}
+            {Array.isArray(court.departments) && court.departments.length > 0 && (
+              <div className="flex gap-1.5">
+                <dt className="font-medium shrink-0">{t('courts.departments', 'Odjeli')}:</dt>
+                <dd>
+                  {t('courts.departmentsCount', { count: court.departments.length, defaultValue: `${court.departments.length}` })}
+                </dd>
+              </div>
+            )}
+            {hasJurisdiction(court) && (
+              <div className="flex gap-1.5">
+                <dt className="font-medium shrink-0">{t('courts.jurisdictionScope', 'Područje nadležnosti')}:</dt>
+                <dd className="line-clamp-2 text-[color:var(--color-text-muted)]">{jurisdictionSnippet(court)}</dd>
               </div>
             )}
           </dl>
