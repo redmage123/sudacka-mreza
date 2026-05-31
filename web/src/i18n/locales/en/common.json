@@ -334,7 +334,9 @@
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Submit a filing",
+      "filingDesc": "Submit a bankruptcy filing — creditor claim, motion to open, trustee report, restructuring plan"
     },
     "process": {
       "title": "The Bankruptcy Process",

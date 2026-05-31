@@ -1,10 +1,11 @@
-"""Re-do the parse pass with the actually-correct selectors for sudovi.hr's
-Drupal templates: name lives in <title>, working hours appear in an <h3>
-on the landing page, departments are sidebar <a> entries on o-sudu."""
+"""Parse pass v4 — fixes the double-pad regex bug in v3.
+
+The pad-leading-zero regex `\b(\d):(\d{2})\b` was matching '0:00' inside an
+already-padded '09:00', producing '009:00'. Reworked: normalisation happens
+once in `_find_range` and `normalize_time` is gone."""
 import html as html_lib
 import json
 import re
-import sys
 from pathlib import Path
 
 CACHE = Path("/tmp/sudovi-scrape")
@@ -19,60 +20,55 @@ def strip_tags(s: str) -> str:
 
 
 def extract_name(idx_html: str) -> str:
-    """<title>Županijski sud u Bjelovaru | Sudovi Republike Hrvatske</title>"""
     m = re.search(r"<title[^>]*>([^<]+)</title>", idx_html, flags=re.I)
     if not m:
         return ""
-    title = html_lib.unescape(m.group(1)).strip()
-    # Strip the site-name tail.
-    title = re.split(r"\s*\|\s*Sudovi\b", title, maxsplit=1)[0].strip()
-    return title
+    return re.split(r"\s*\|\s*Sudovi\b", html_lib.unescape(m.group(1)).strip(), 1)[0].strip()
 
 
-def extract_contact_line(idx_html: str) -> dict:
-    """The h3 block bundles address+phone+fax for the court."""
-    out = {}
-    for raw in re.findall(r"<h3[^>]*>([\s\S]*?)</h3>", idx_html, flags=re.I):
-        text = strip_tags(raw)
-        if not text or "Radno vrijeme" in text:
-            continue
-        m_phone = re.search(r"tel\.?\s*([+()\d\s/.-]{7,30})", text, flags=re.I)
-        m_fax = re.search(r"fax\.?\s*([+()\d\s/.-]{7,30})", text, flags=re.I)
-        m_zip = re.search(r"\b(\d{5})\s+([A-ZŠĐČĆŽ][\w\sčćžšđČĆŽŠĐ.,'-]+?)(?:\s*tel|\s*$|\s*fax)", text)
-        if m_phone:
-            out["phone"] = re.sub(r"\s+", " ", m_phone.group(1)).strip(" .-")
-        if m_fax:
-            out["fax"] = re.sub(r"\s+", " ", m_fax.group(1)).strip(" .-")
-        if m_zip:
-            out["postal"] = m_zip.group(1)
-            out["city"] = m_zip.group(2).strip(" .,")
-        if out:
-            return out
-    return out
+def _fmt_hm(value: str) -> str:
+    """'7,30' -> '07:30'  ;  '7' -> '07:00'  ;  '08:00' -> '08:00'"""
+    v = value.replace(",", ":").replace(".", ":").strip()
+    if ":" in v:
+        h, m = v.split(":", 1)
+        return f"{int(h):02d}:{m[:2]}"
+    return f"{int(v):02d}:00"
+
+
+PATTERNS = (
+    re.compile(r"(\d{1,2}[,:.]\d{2})\s*[-–]\s*(\d{1,2}[,:.]\d{2})"),
+    re.compile(r"od\s*(\d{1,2}[,:.]\d{2})\s*do\s*(\d{1,2}[,:.]\d{2})", re.I),
+    re.compile(r"\b(\d{1,2})\s*[-–]\s*(\d{1,2})\b(?![,:.])"),
+)
+
+
+def _find_range(text: str) -> str | None:
+    for p in PATTERNS:
+        m = p.search(text)
+        if m:
+            return f"{_fmt_hm(m.group(1))}-{_fmt_hm(m.group(2))}"
+    return None
 
 
 def extract_working_hours(idx_html: str) -> dict:
-    """Look for <h3>Radno vrijeme suda od 7,00-15,00 sati</h3>
-       and <h3>Radno vrijeme za prijem stranaka ...</h3>"""
-    overall = None
+    text = strip_tags(idx_html)
     party = None
+    overall = None
     notes = []
-    for raw in re.findall(r"<h3[^>]*>([\s\S]*?)</h3>", idx_html, flags=re.I):
-        text = strip_tags(raw)
-        if "Radno vrijeme" not in text:
+    for m in re.finditer(r"Radno\s*vrijeme[^.]{0,400}", text, flags=re.I):
+        chunk = m.group(0).strip()
+        is_party = bool(re.search(
+            r"stranke|stranaka|primanje\s+stranak|register\s*suda|registra\s+suda|pisarnic",
+            chunk, flags=re.I,
+        ))
+        rng = _find_range(chunk)
+        if not rng:
             continue
-        # Match HH,MM-HH,MM or HH:MM-HH:MM
-        m = re.search(r"(\d{1,2}[,:.]\d{2})\s*[-–]\s*(\d{1,2}[,:.]\d{2})", text)
-        if not m:
-            continue
-        rng = f"{m.group(1)}-{m.group(2)}".replace(",", ":").replace(".", ":")
-        # Normalise leading zero
-        rng = re.sub(r"\b(\d):(\d{2})\b", r"0\1:\2", rng)
-        if re.search(r"prijem\s+stranaka|stranke|stranaka", text, flags=re.I):
+        if is_party and not party:
             party = rng
-        else:
+        elif not is_party and not overall:
             overall = rng
-        notes.append(text)
+        notes.append(chunk[:160])
     if not overall and not party:
         return {}
     out = {}
@@ -91,25 +87,17 @@ def extract_departments(osu_html: str) -> list[dict]:
     for raw in items:
         text = html_lib.unescape(re.sub(r"\s+", " ", raw)).strip()
         key = text.lower()
-        if key in seen:
+        if key in seen or text.lower() == "odjel":
             continue
         if not any(p in key for p in ("odjel", "pisarn", "ured predsj", "tajništ",
                                      "glasnogovor", "kabinet")):
             continue
-        # Filter out plain "Odjel" / "Unutarnje ustrojstvo" / nav crumbs.
-        if text.lower() == "odjel":
-            continue
         seen.add(key)
-        if "pisarn" in key:
-            t = "registry"
-        elif "predsj" in key:
-            t = "president"
-        elif "tajništ" in key:
-            t = "secretary"
-        elif "glasnogovor" in key:
-            t = "spokesperson"
-        else:
-            t = "other"
+        t = ("registry" if "pisarn" in key
+             else "president" if "predsj" in key
+             else "secretary" if "tajništ" in key
+             else "spokesperson" if "glasnogovor" in key
+             else "other")
         out.append({"name": text, "type": t})
     return out
 
@@ -126,23 +114,20 @@ def main() -> None:
         name = extract_name(idx)
         if not name:
             continue
-        rec = {
+        records.append({
             "slug": s,
             "name": name,
-            "contact": extract_contact_line(idx),
             "time_availability": extract_working_hours(idx),
             "departments": extract_departments(osu),
-        }
-        records.append(rec)
+        })
     with OUT.open("w", encoding="utf-8") as f:
         for r in records:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"wrote {len(records)} records → {OUT}")
-    # Stats
     hrs = sum(1 for r in records if r["time_availability"])
     deps = sum(1 for r in records if r["departments"])
-    print(f"  with working hours: {hrs}/{len(records)}")
-    print(f"  with departments:   {deps}/{len(records)}")
+    print(f"wrote {len(records)} → {OUT}")
+    print(f"  with hours:        {hrs}/{len(records)}")
+    print(f"  with departments:  {deps}/{len(records)}")
 
 
 if __name__ == "__main__":

@@ -345,7 +345,9 @@
       "administrators": "Stečajni upravitelji",
       "administratorsDesc": "Licencirani stečajni upravitelji i kontakt podaci",
       "legislation": "Zakonodavstvo",
-      "legislationDesc": "Stečajni zakon i relevantne EU direktive"
+      "legislationDesc": "Stečajni zakon i relevantne EU direktive",
+      "filing": "Predaj podnesak",
+      "filingDesc": "Predaj stečajni podnesak — prijavu tražbine, prijedlog za pokretanje, izvještaj, plan restrukturiranja"
     },
     "process": {
       "title": "Stečajni postupak",
