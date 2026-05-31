@@ -1,0 +1,161 @@
+name: Corrections-sheet audit
+
+# Runs the YAML-driven feature catalog against the live Toronto deploy.
+# Triggered on:
+#   - push to toronto-prod (the branch that drives the Toronto deploy)
+#     when files that change observable behaviour land
+#   - daily at 06:00 UTC, to catch data drift that no code change caused
+#   - manual workflow_dispatch
+#
+# The audit asserts at the layer where each failure actually shows up
+# (DOM text, API shape, bundle marker, response header, multi-step
+# interaction) rather than at the HTTP-200 level that the previous
+# route sweep used. See tests/e2e/corrections-sheet-README.md.
+
+on:
+  push:
+    branches:
+      - toronto-prod
+    paths:
+      - 'tests/e2e/corrections-sheet.yaml'
+      - 'tests/e2e/test_corrections_sheet.py'
+      - 'web/**'
+      - 'cms/**'
+      - '.github/workflows/corrections-sheet-audit.yml'
+  schedule:
+    # Daily 06:00 UTC = 07:00 Croatia winter / 08:00 summer.
+    # Catches data drift independent of any code push.
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Override base URL'
+        required: false
+        default: 'http://23.164.48.64'
+
+jobs:
+  audit:
+    name: Run corrections-sheet audit vs ${{ inputs.base_url || 'Toronto prod' }}
+    runs-on: ubuntu-latest
+    # Don't block CI for hours if the deploy is unreachable.
+    timeout-minutes: 10
+
+    env:
+      BASE_URL: ${{ inputs.base_url || 'http://23.164.48.64' }}
+      # Fixtures point at known-populated rows on Toronto. If those ids
+      # change, override at this layer instead of editing the catalog.
+      FIXTURE_POPULATED_COURT_ID: '481'
+      FIXTURE_POPULATED_COURT_NAME: 'Županijski sud u Bjelovaru'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install audit dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest==8.3.* playwright==1.49.* pyyaml==6.0.*
+
+      - name: Install Chromium for Playwright
+        run: python -m playwright install --with-deps chromium
+
+      - name: Pre-flight - confirm target is reachable
+        # Fail fast with a clear message if Toronto is unreachable. Without
+        # this, the audit fails 21 times with vague network errors and the
+        # report is unreadable.
+        run: |
+          if ! curl -fs --max-time 10 "$BASE_URL/" >/dev/null; then
+            echo "::error::$BASE_URL is unreachable from the GitHub runner"
+            echo "If Toronto is being rebooted or its IP changed, set"
+            echo "  inputs.base_url via workflow_dispatch to override."
+            exit 1
+          fi
+          echo "$BASE_URL reachable"
+
+      - name: Run corrections-sheet audit
+        id: audit
+        run: |
+          pytest tests/e2e/test_corrections_sheet.py \
+            -v \
+            --tb=short \
+            --junitxml=audit-report.xml \
+            -o junit_logging=all \
+          | tee audit-output.txt
+
+      - name: Build job summary
+        # Always run, even on failure. Renders a Markdown table in the
+        # GitHub UI showing which corrections-sheet items passed, failed,
+        # and which are xfailed open gaps.
+        if: always()
+        run: |
+          python3 <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import xml.etree.ElementTree as ET
+          import os
+          try:
+              tree = ET.parse("audit-report.xml")
+          except Exception as e:
+              print(f"### Audit report missing\n\n{e}\n")
+              raise SystemExit(0)
+          suite = tree.getroot().find("testsuite")
+          passed, failed, xfailed, errors = [], [], [], []
+          for tc in suite.findall("testcase"):
+              name = tc.get("name", "").replace("test_corrections_assertion[", "").rstrip("]")
+              if tc.find("failure") is not None:
+                  failed.append((name, tc.find("failure").get("message", "")))
+              elif tc.find("error") is not None:
+                  errors.append((name, tc.find("error").get("message", "")))
+              elif tc.find("skipped") is not None and "xfail" in (tc.find("skipped").get("type", "") or "").lower():
+                  xfailed.append((name, tc.find("skipped").get("message", "")))
+              else:
+                  passed.append(name)
+
+          print(f"# Corrections-sheet audit: {os.environ.get('BASE_URL')}")
+          print()
+          print(f"- Passed: {len(passed)}")
+          print(f"- Failed: {len(failed)}")
+          print(f"- Errors: {len(errors)}")
+          print(f"- Open gaps (xfail): {len(xfailed)}")
+          print()
+          if failed:
+              print("## Failures")
+              print("| Test id | Message |")
+              print("|---|---|")
+              for n, msg in failed:
+                  print(f"| `{n}` | {msg.splitlines()[0][:200] if msg else ''} |")
+              print()
+          if errors:
+              print("## Errors")
+              print("| Test id | Message |")
+              print("|---|---|")
+              for n, msg in errors:
+                  print(f"| `{n}` | {msg.splitlines()[0][:200] if msg else ''} |")
+              print()
+          if xfailed:
+              print("## Open gaps (expected failures)")
+              print("| Test id | Reason |")
+              print("|---|---|")
+              for n, msg in xfailed:
+                  print(f"| `{n}` | {msg.splitlines()[0][:200] if msg else ''} |")
+              print()
+          if passed:
+              print("<details><summary>Passed cases</summary>")
+              print()
+              for n in passed:
+                  print(f"- `{n}`")
+              print()
+              print("</details>")
+          PY
+
+      - name: Upload audit artefacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corrections-sheet-audit
+          path: |
+            audit-report.xml
+            audit-output.txt
+          retention-days: 14

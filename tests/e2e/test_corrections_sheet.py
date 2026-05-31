@@ -34,7 +34,12 @@ HERE = Path(__file__).resolve().parent
 SHEET = yaml.safe_load((HERE / "corrections-sheet.yaml").read_text())
 
 BASE_URL = os.environ.get("BASE_URL", SHEET.get("env", {}).get("base_url", "http://23.164.48.64"))
-FIXTURES: dict[str, Any] = SHEET.get("env", {}).get("fixtures", {})
+FIXTURES: dict[str, Any] = dict(SHEET.get("env", {}).get("fixtures", {}))
+# Env-var overrides: FIXTURE_POPULATED_COURT_ID=42 wins over the YAML default.
+# Lets CI seed a fresh court and pass its id without editing the catalog.
+for _k, _v in os.environ.items():
+    if _k.startswith("FIXTURE_"):
+        FIXTURES[_k.removeprefix("FIXTURE_").lower()] = _v
 
 
 def _interpolate(s: str) -> str:
