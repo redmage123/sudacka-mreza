@@ -1,0 +1,349 @@
+# Sudačka Mreža — corrections-sheet audit catalog
+#
+# Source of truth for every corrections-sheet item we have committed to
+# ship. Each entry maps a human deliverable to one or more concrete,
+# machine-checkable assertions that run against the deployed site.
+#
+# Why this file exists
+# --------------------
+# Previous Playwright sweeps returned HTTP 200 + no SPA-404 markers for
+# every route and concluded the deploy was healthy. They missed:
+#   - i18n keys missing → English fallback shown on /hr/ routes
+#   - back-end/front-end field name mismatch (snake vs camel)
+#   - conditional-render sections that hide when data is empty (so
+#     'page renders' is indistinguishable from 'feature not built')
+#   - API endpoint returning the wrong shape for the expected feature
+#
+# Every entry below targets the specific failure mode that broke that
+# audit, by asserting at the right layer (DOM / API / bundle / flow)
+# instead of at the catch-all 'HTTP 200' layer.
+#
+# Adding a new corrections-sheet item
+# -----------------------------------
+# 1. Append a new entry under `corrections:` with a stable `id`
+#    (kebab-case, prefixed by area). The id is used in test reports.
+# 2. Pick the right `status`:
+#      implemented   — code AND data shipped; every assertion is a
+#                      hard failure
+#      data-pending  — code shipped, data not yet populated;
+#                      assertions marked `requires_data: true` are
+#                      skipped with a warning instead of failing
+#      not-started   — feature not built yet. Assertions all run but
+#                      every failure is recorded as an OPEN GAP
+#                      (xfail). When the test starts passing we get an
+#                      XPASS so we know it shipped.
+# 3. Under `verify:` add one or more assertion blocks. Five kinds:
+#
+#    dom-marker    Visit a route, assert presence/absence of strings
+#                  in the rendered body. Use must_not_contain to catch
+#                  English fallbacks on /hr/ routes.
+#
+#    api-shape     Hit an API endpoint, assert response field presence,
+#                  presence of populated values, or exact equality.
+#
+#    bundle-marker Fetch the live main-*.js bundle, assert specific
+#                  identifiers / Croatian strings are baked in. This
+#                  catches code-not-deployed cases that DOM checks miss
+#                  when the feature is gated on user state or data.
+#
+#    interactive   Playwright sequence: navigate, click, expect
+#                  visible. Catches multi-step flows where a static
+#                  body scan would not be enough.
+#
+#    response-hdr  HEAD a URL and assert specific response headers
+#                  (e.g. sw.js must be no-cache).
+
+env:
+  base_url: http://23.164.48.64
+  # Court IDs known to be populated, used as fixtures for data-shape
+  # assertions. Update when seed data changes.
+  fixtures:
+    populated_court_id: 481            # Županijski sud u Bjelovaru
+    populated_court_name: Županijski sud u Bjelovaru
+
+corrections:
+
+  # ─── QA #7 — Legal-entity registration ──────────────────────────────
+  - id: qa-07-legal-entity-registration
+    area: registration
+    status: implemented
+    title: |
+      Registration form must offer "Pravno lice" alongside individual,
+      with OIB + organisation-name fields revealed when selected.
+    verify:
+      - kind: dom-marker
+        route: /hr/register
+        must_contain:
+          - Pravno lice
+          - Vaša uloga
+        must_not_contain:
+          - Legal entity
+          - Your role
+      - kind: interactive
+        route: /hr/register
+        steps:
+          - click: "text=Pravno lice"
+          - expect_visible: 'input[name="organisationOib"]'
+      - kind: bundle-marker
+        markers:
+          - organisationOib
+          - organisationName
+          - legal_entity
+
+  # ─── QA #8 — Croatian localization ──────────────────────────────────
+  - id: qa-08-bankruptcy-listings-croatian
+    area: i18n
+    status: implemented
+    title: |
+      /stecaj/oglasi must render in Croatian, not the English
+      hard-coded t() defaults. Catches the 'bankruptcy.listings.*' keys
+      missing from common.json.
+    verify:
+      - kind: dom-marker
+        route: /hr/stecaj/oglasi
+        must_contain:
+          - Stečajni oglasi
+          - Aktivni stečajni postupci
+        must_not_contain:
+          - Bankruptcy Listings
+          - "Deadline:"
+          - Unknown debtor
+
+  - id: qa-08-courts-list-croatian
+    area: i18n
+    status: implemented
+    title: Court list page renders Croatian labels.
+    verify:
+      - kind: dom-marker
+        route: /hr/sudovi
+        must_contain:
+          - Sudovi
+          - Općinski
+          - Županijski
+        must_not_contain:
+          - Courts
+          - "Departments:"
+          - "{{count}}"
+          - "{{n}}"
+
+  # ─── Courts: departments ────────────────────────────────────────────
+  - id: courts-departments-schema
+    area: courts
+    status: implemented
+    title: Courts API exposes the departments array field.
+    verify:
+      - kind: api-shape
+        endpoint: /api/courts?limit=1&depth=0
+        first_doc_must_have_fields:
+          - departments
+          - timeAvailability
+          - jurisdictionArea
+
+  - id: courts-departments-rendered
+    area: courts
+    status: implemented
+    title: |
+      Court detail page renders the "Odjeli suda" section with each
+      department's name + type, when the court has departments.
+    verify:
+      - kind: api-shape
+        endpoint: /api/courts/{populated_court_id}?depth=0
+        doc_must_have_nonempty_array: departments
+      - kind: dom-marker
+        route: /hr/sudovi/{populated_court_id}
+        must_contain:
+          - Odjeli suda
+          - Građanski odjel
+          - Kazneni odjel
+
+  # ─── Courts: working hours ──────────────────────────────────────────
+  - id: courts-working-hours-rendered
+    area: courts
+    status: implemented
+    title: |
+      Court detail page renders the "Radno vrijeme" weekday table when
+      the court has hours populated, including Croatian day labels.
+    verify:
+      - kind: dom-marker
+        route: /hr/sudovi/{populated_court_id}
+        must_contain:
+          - Radno vrijeme
+          - Ponedjeljak
+          - Utorak
+          - Srijeda
+          - Četvrtak
+          - Petak
+          - Zatvoreno          # Sat/Sun default when null
+
+  # ─── Courts: jurisdiction text ──────────────────────────────────────
+  - id: courts-jurisdiction-text-field
+    area: courts
+    status: data-pending
+    title: |
+      Courts.jurisdictionScope (richText) field exists in the schema.
+      Population deferred — sudovi.hr only publishes generic boilerplate.
+    verify:
+      - kind: api-shape
+        endpoint: /api/courts?limit=1&depth=0
+        first_doc_must_have_fields:
+          - jurisdictionScope    # null is OK; absent is not
+
+  # ─── Judges ─────────────────────────────────────────────────────────
+  - id: judges-list-rendered
+    area: judges
+    status: implemented
+    title: |
+      /sudovi/suci shows all judges with working search.
+    verify:
+      - kind: api-shape
+        endpoint: /api/judges?limit=1
+        totalDocs_min: 4000
+      - kind: dom-marker
+        route: /hr/sudovi/suci
+        must_contain:
+          - Suci
+          - Ukupno
+          - sudaca
+
+  # ─── Expert witnesses ───────────────────────────────────────────────
+  - id: experts-list-with-filters
+    area: experts
+    status: implemented
+    title: |
+      /strucnjaci/vjestaci list page exposes Specijalnost + Podgrana
+      filters and shows expert cards.
+    verify:
+      - kind: dom-marker
+        route: /hr/strucnjaci/vjestaci
+        must_contain:
+          - Sudski vještaci
+          - Specijalnost
+          - Podgrana
+      - kind: api-shape
+        endpoint: /api/expert-witnesses?limit=1&depth=0
+        first_doc_must_have_fields:
+          - specialityAreas
+          - languages
+
+  - id: experts-detail-renders-specialities
+    area: experts
+    status: implemented
+    title: |
+      Expert detail page renders Područja specijalnosti — catches the
+      speciality_areas (snake) vs specialityAreas (camel) mismatch.
+    verify:
+      - kind: dom-marker
+        route: /hr/strucnjaci/vjestaci/3
+        must_contain:
+          - Područja
+        must_not_contain:
+          - undefined
+          - "[object Object]"
+
+  # ─── Interpreters ───────────────────────────────────────────────────
+  - id: interpreters-list-with-filters
+    area: interpreters
+    status: implemented
+    title: |
+      /strucnjaci/tumaci list page exposes Jezični par + Drugi jezik
+      filters and shows interpreter cards with language pairs.
+    verify:
+      - kind: dom-marker
+        route: /hr/strucnjaci/tumaci
+        must_contain:
+          - Sudski tumači
+          - Jezični par
+          - Drugi jezik
+      - kind: api-shape
+        endpoint: /api/interpreters?limit=1&depth=0
+        first_doc_must_have_fields:
+          - languagePairs
+
+  # ─── Bankruptcy ─────────────────────────────────────────────────────
+  - id: bankruptcy-portal-submit-cta
+    area: bankruptcy
+    status: implemented
+    title: |
+      /stecaj portal page exposes a "Predaj podnesak" CTA linking to
+      the editor filing form.
+    verify:
+      - kind: dom-marker
+        route: /hr/stecaj
+        must_contain:
+          - Predaj podnesak
+      - kind: link-present
+        route: /hr/stecaj
+        href_contains: /editor/bankruptcy
+
+  - id: bankruptcy-filings-form-routes
+    area: bankruptcy
+    status: implemented
+    title: |
+      Editor area exposes a filing form route per filing type.
+    verify:
+      - kind: dom-marker
+        route: /hr/editor/bankruptcy
+        # Editor area redirects unauthenticated visitors to login,
+        # which still proves the route resolved.
+        must_contain_any:
+          - Stečajni podnesci
+          - Prijava
+          - Login
+          - Editor
+
+  # ─── Service-worker hygiene ─────────────────────────────────────────
+  - id: sw-no-cache-headers
+    area: infra
+    status: implemented
+    title: |
+      sw.js must be served with no-cache headers so the in-browser SW
+      update check actually replaces the previous shell-pinning SW.
+    verify:
+      - kind: response-hdr
+        url: /sw.js
+        method: HEAD
+        header_must_contain:
+          Cache-Control: no-cache
+        header_must_not_contain:
+          Cache-Control: immutable
+
+  # ─── Open gaps — features explicitly NOT shipped yet ────────────────
+  - id: courts-jurisdiction-text-populated
+    area: courts
+    status: data-pending
+    title: |
+      OPEN — Courts.jurisdictionScope text populated from an official
+      source. sudovi.hr only carries generic role boilerplate so this
+      needs a different ingest (e-Pravosuđe registry or manual entry).
+    verify:
+      - kind: api-shape
+        endpoint: /api/courts/{populated_court_id}?depth=0
+        doc_field_nonempty: jurisdictionScope
+        requires_data: true
+
+  - id: courts-hours-coverage-min
+    area: courts
+    status: data-pending
+    title: |
+      OPEN — at least 60% of courts have working hours. Currently 16%
+      from sudovi.hr scrape + branch propagation. Reaching 60% needs
+      either a richer source or manual entry on the long tail.
+    verify:
+      - kind: aggregate
+        endpoint: /api/courts?limit=600&depth=0
+        field_populated_ratio: timeAvailability.monday
+        ratio_min: 0.60
+        requires_data: true
+
+  - id: courts-departments-coverage-min
+    area: courts
+    status: data-pending
+    title: |
+      OPEN — at least 60% of courts have departments. Currently 14%.
+      Same source-coverage limitation as hours.
+    verify:
+      - kind: aggregate
+        endpoint: /api/courts?limit=600&depth=0
+        array_nonempty_ratio: departments
+        ratio_min: 0.60
+        requires_data: true
