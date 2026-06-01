@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Search Sudačka Mreža…",
+      "submit": "Search",
+      "aria": "Search"
     }
   },
   "decisions": {

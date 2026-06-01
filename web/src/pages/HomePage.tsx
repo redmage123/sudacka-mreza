@@ -170,11 +170,35 @@ export default function HomePage() {
           <p className="text-lg text-[color:var(--color-text-inverse)] opacity-80 mb-8 max-w-2xl mx-auto">
             {t('home.hero.subtitle')}
           </p>
-          <Link
-            to={`/${locale}/sudska-praksa/pretraga`}
-            className="inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all bg-[color:var(--color-brand-gold)] text-white px-8 py-3.5 text-base hover:brightness-110 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-border-focus)]"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              const q = (e.currentTarget.elements.namedItem('q') as HTMLInputElement)?.value.trim()
+              const dest = q ? `/${locale}/pretraga?q=${encodeURIComponent(q)}` : `/${locale}/pretraga`
+              window.location.href = dest
+            }}
+            className="mx-auto w-full max-w-2xl mb-6 flex flex-col sm:flex-row gap-2"
+            role="search"
           >
-            <Scale size={20} />
+            <input
+              type="search"
+              name="q"
+              placeholder={t('home.search.placeholder', 'Pretražite Sudačku Mrežu…')}
+              aria-label={t('home.search.aria', 'Pretraga')}
+              className="flex-1 rounded-lg border-2 border-white/30 bg-white/95 text-[color:var(--color-text)] px-4 py-3 text-base placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:border-[color:var(--color-brand-gold)]"
+            />
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all bg-[color:var(--color-brand-gold)] text-white px-6 py-3 text-base hover:brightness-110 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-border-focus)]"
+            >
+              <Scale size={20} />
+              {t('home.search.submit', 'Pretraži')}
+            </button>
+          </form>
+          <Link
+            to={`/${locale}/pretraga`}
+            className="inline-flex items-center justify-center gap-2 font-semibold text-[color:var(--color-text-inverse)] underline underline-offset-4 hover:opacity-80"
+          >
             {t('home.hero.cta')}
           </Link>
         </div>
