@@ -963,6 +963,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Back to Admin"
+    "backToAdmin": "Back to Admin",
+    "table": {
+      "range": "Showing {{from}}–{{to}} of {{total}}",
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {{page}} of {{total}}",
+      "empty": "No records."
+    }
   }
 }

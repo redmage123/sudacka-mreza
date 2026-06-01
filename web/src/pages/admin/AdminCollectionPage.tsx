@@ -291,11 +291,47 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
               ))}
             </tbody>
           </table>
+          {/* Pagination */}
+          {total > 25 && (
+            <div className="mt-4 flex items-center justify-between text-sm">
+              <p className="text-[color:var(--color-text-muted)]">
+                {t('admin.table.range', 'Showing {{from}}–{{to}} of {{total}}', {
+                  from: (page - 1) * 25 + 1,
+                  to: Math.min(page * 25, total),
+                  total,
+                })}
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  className="rounded border border-[color:var(--color-border)] px-3 py-1 disabled:opacity-40"
+                >
+                  ‹ {t('admin.table.prev', 'Previous')}
+                </button>
+                <span className="px-2">
+                  {t('admin.table.pageOf', 'Page {{page}} of {{total}}', {
+                    page,
+                    total: Math.max(1, Math.ceil(total / 25)),
+                  })}
+                </span>
+                <button
+                  type="button"
+                  disabled={page >= Math.ceil(total / 25)}
+                  onClick={() => setPage((p) => p + 1)}
+                  className="rounded border border-[color:var(--color-border)] px-3 py-1 disabled:opacity-40"
+                >
+                  {t('admin.table.next', 'Next')} ›
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
       {!loading && rows.length === 0 && (
-        <p className="text-[color:var(--color-text-muted)]">No records.</p>
+        <p className="text-[color:var(--color-text-muted)]">{t('admin.table.empty', 'No records.')}</p>
       )}
     </div>
   )

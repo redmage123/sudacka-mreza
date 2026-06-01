@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Natrag na Admin"
+    "backToAdmin": "Natrag na Admin",
+    "table": {
+      "range": "Prikazano {{from}}–{{to}} od {{total}}",
+      "prev": "Prethodna",
+      "next": "Sljedeća",
+      "pageOf": "Stranica {{page}} od {{total}}",
+      "empty": "Nema zapisa."
+    }
   }
 }
