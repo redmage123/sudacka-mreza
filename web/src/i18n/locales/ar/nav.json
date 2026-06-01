@@ -78,5 +78,8 @@
   "courtPerformance": "أداء المحاكم",
   "services": "الخدمات",
   "documentGenerator": "مولّد المستندات",
-  "watchlist": "قائمة المراقبة"
+  "watchlist": "قائمة المراقبة",
+  "adminConsole": "الإدارة",
+  "myLibrary": "مكتبتي",
+  "signOut": "تسجيل الخروج"
 }

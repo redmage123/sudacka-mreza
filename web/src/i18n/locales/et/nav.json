@@ -78,5 +78,8 @@
   "courtPerformance": "Kohtute tulemuslikkus",
   "services": "Teenused",
   "documentGenerator": "Dokumentide generaator",
-  "watchlist": "Jälgimine"
+  "watchlist": "Jälgimine",
+  "adminConsole": "Haldus",
+  "myLibrary": "Minu raamatukogu",
+  "signOut": "Logi välja"
 }

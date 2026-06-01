@@ -78,5 +78,8 @@
   "courtPerformance": "Performance des tribunaux",
   "services": "Services",
   "documentGenerator": "Générateur de documents",
-  "watchlist": "Surveillance"
+  "watchlist": "Surveillance",
+  "adminConsole": "Administration",
+  "myLibrary": "Ma bibliothèque",
+  "signOut": "Déconnexion"
 }

@@ -78,5 +78,8 @@
   "courtPerformance": "Výkonnost soudů",
   "services": "Služby",
   "documentGenerator": "Generátor dokumentů",
-  "watchlist": "Sledování"
+  "watchlist": "Sledování",
+  "adminConsole": "Administrace",
+  "myLibrary": "Moje knihovna",
+  "signOut": "Odhlásit se"
 }

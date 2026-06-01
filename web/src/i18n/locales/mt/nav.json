@@ -78,5 +78,8 @@
   "courtPerformance": "Rendiment tal-qrati",
   "services": "Servizzi",
   "documentGenerator": "Ġeneratur ta' dokumenti",
-  "watchlist": "Sorveljanza"
+  "watchlist": "Sorveljanza",
+  "adminConsole": "Amministrazzjoni",
+  "myLibrary": "Il-Librerija Tiegħi",
+  "signOut": "Oħroġ"
 }

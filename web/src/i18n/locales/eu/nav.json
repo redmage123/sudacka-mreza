@@ -78,5 +78,8 @@
   "courtPerformance": "Auzitegien errendimendua",
   "services": "Zerbitzuak",
   "documentGenerator": "Dokumentu sortzailea",
-  "watchlist": "Jarraipena"
+  "watchlist": "Jarraipena",
+  "adminConsole": "Administrazioa",
+  "myLibrary": "Nire liburutegia",
+  "signOut": "Itxi saioa"
 }

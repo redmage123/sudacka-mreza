@@ -78,5 +78,8 @@
   "courtPerformance": "Frammistöðu dómstóla",
   "services": "Þjónusta",
   "documentGenerator": "Skjalamyndari",
-  "watchlist": "Eftirlitslisti"
+  "watchlist": "Eftirlitslisti",
+  "adminConsole": "Stjórnun",
+  "myLibrary": "Bókasafnið mitt",
+  "signOut": "Skrá út"
 }

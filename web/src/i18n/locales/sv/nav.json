@@ -78,5 +78,8 @@
   "courtPerformance": "Domstolarnas prestanda",
   "services": "Tjänster",
   "documentGenerator": "Dokumentgenerator",
-  "watchlist": "Bevakningslista"
+  "watchlist": "Bevakningslista",
+  "adminConsole": "Administration",
+  "myLibrary": "Mitt bibliotek",
+  "signOut": "Logga ut"
 }

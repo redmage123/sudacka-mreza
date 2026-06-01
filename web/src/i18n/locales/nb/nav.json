@@ -78,5 +78,8 @@
   "courtPerformance": "Domstolenes ytelse",
   "services": "Tjenester",
   "documentGenerator": "Dokumentgenerator",
-  "watchlist": "Overvåking"
+  "watchlist": "Overvåking",
+  "adminConsole": "Administrasjon",
+  "myLibrary": "Mitt bibliotek",
+  "signOut": "Logg ut"
 }

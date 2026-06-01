@@ -78,5 +78,8 @@
   "courtPerformance": "Bíróságok teljesítménye",
   "services": "Szolgáltatások",
   "documentGenerator": "Dokumentumgenerátor",
-  "watchlist": "Figyelőlista"
+  "watchlist": "Figyelőlista",
+  "adminConsole": "Adminisztráció",
+  "myLibrary": "Saját könyvtár",
+  "signOut": "Kijelentkezés"
 }

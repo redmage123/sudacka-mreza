@@ -78,5 +78,8 @@
   "courtPerformance": "法院绩效",
   "services": "服务",
   "documentGenerator": "文档生成器",
-  "watchlist": "监控列表"
+  "watchlist": "监控列表",
+  "adminConsole": "管理",
+  "myLibrary": "我的图书馆",
+  "signOut": "退出"
 }

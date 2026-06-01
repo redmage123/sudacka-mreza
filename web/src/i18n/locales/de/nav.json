@@ -78,5 +78,8 @@
   "courtPerformance": "Gerichtsleistung",
   "services": "Dienste",
   "documentGenerator": "Dokumentengenerator",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "adminConsole": "Administration",
+  "myLibrary": "Meine Bibliothek",
+  "signOut": "Abmelden"
 }

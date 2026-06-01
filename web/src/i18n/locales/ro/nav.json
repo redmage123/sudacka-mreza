@@ -78,5 +78,8 @@
   "courtPerformance": "Performanța instanțelor",
   "services": "Servicii",
   "documentGenerator": "Generator de documente",
-  "watchlist": "Monitorizare"
+  "watchlist": "Monitorizare",
+  "adminConsole": "Administrare",
+  "myLibrary": "Biblioteca mea",
+  "signOut": "Deconectare"
 }

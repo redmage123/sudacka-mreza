@@ -78,5 +78,8 @@
   "courtPerformance": "Wydajność sądów",
   "services": "Usługi",
   "documentGenerator": "Generator dokumentów",
-  "watchlist": "Lista obserwowanych"
+  "watchlist": "Lista obserwowanych",
+  "adminConsole": "Administracja",
+  "myLibrary": "Moja biblioteka",
+  "signOut": "Wyloguj się"
 }

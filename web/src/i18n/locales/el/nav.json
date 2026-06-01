@@ -78,5 +78,8 @@
   "courtPerformance": "Απόδοση δικαστηρίων",
   "services": "Υπηρεσίες",
   "documentGenerator": "Δημιουργός εγγράφων",
-  "watchlist": "Παρακολούθηση"
+  "watchlist": "Παρακολούθηση",
+  "adminConsole": "Διαχείριση",
+  "myLibrary": "Η βιβλιοθήκη μου",
+  "signOut": "Αποσύνδεση"
 }

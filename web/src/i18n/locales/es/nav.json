@@ -78,5 +78,8 @@
   "courtPerformance": "Rendimiento judicial",
   "services": "Servicios",
   "documentGenerator": "Generador de documentos",
-  "watchlist": "Seguimiento"
+  "watchlist": "Seguimiento",
+  "adminConsole": "Administración",
+  "myLibrary": "Mi biblioteca",
+  "signOut": "Cerrar sesión"
 }

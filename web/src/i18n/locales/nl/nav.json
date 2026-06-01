@@ -78,5 +78,8 @@
   "courtPerformance": "Rechtbankprestaties",
   "services": "Diensten",
   "documentGenerator": "Documentgenerator",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "adminConsole": "Administratie",
+  "myLibrary": "Mijn bibliotheek",
+  "signOut": "Afmelden"
 }

@@ -78,5 +78,8 @@
   "courtPerformance": "Ефективність судів",
   "services": "Послуги",
   "documentGenerator": "Генератор документів",
-  "watchlist": "Список спостереження"
+  "watchlist": "Список спостереження",
+  "adminConsole": "Адміністрація",
+  "myLibrary": "Моя бібліотека",
+  "signOut": "Вийти"
 }

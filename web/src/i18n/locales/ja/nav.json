@@ -78,5 +78,8 @@
   "courtPerformance": "裁判所の実績",
   "services": "サービス",
   "documentGenerator": "書類生成",
-  "watchlist": "ウォッチリスト"
+  "watchlist": "ウォッチリスト",
+  "adminConsole": "管理",
+  "myLibrary": "マイ ライブラリ",
+  "signOut": "サインアウト"
 }

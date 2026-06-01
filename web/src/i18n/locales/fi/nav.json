@@ -78,5 +78,8 @@
   "courtPerformance": "Tuomioistuinten suorituskyky",
   "services": "Palvelut",
   "documentGenerator": "Asiakirjageneraattori",
-  "watchlist": "Seuranta"
+  "watchlist": "Seuranta",
+  "adminConsole": "Hallinta",
+  "myLibrary": "Kirjastoni",
+  "signOut": "Kirjaudu ulos"
 }
