@@ -370,6 +370,36 @@ corrections:
           - Početak rada
           - Endpoint-i
 
+
+  - id: auth-forgot-and-reset-password-i18n
+    area: i18n
+    status: implemented
+    title: |
+      Forgot-password and reset-password pages were rendering the English
+      t() defaults on the /hr/ locale because the auth.forgotPassword.*,
+      auth.resetPassword.* and auth.password.* namespaces were missing
+      from common.json. Both locales now have the full keyset; the
+      Reset your password H1 on /hr/prijava/zaboravljena-lozinka was
+      the original symptom.
+    verify:
+      - kind: dom-marker
+        route: /hr/prijava/zaboravljena-lozinka
+        must_contain:
+          - Zaboravljena lozinka
+          - Pošalji poveznicu
+          - Natrag na prijavu
+        must_not_contain:
+          - Reset your password
+          - Send reset link
+      - kind: dom-marker
+        route: /en/prijava/zaboravljena-lozinka
+        must_contain:
+          - Reset your password
+          - Send reset link
+        must_not_contain:
+          - Zaboravljena lozinka
+          - Pošalji poveznicu
+
   # ─── Open gaps — features explicitly NOT shipped yet ────────────────
   - id: courts-jurisdiction-text-populated
     area: courts

@@ -517,6 +517,31 @@
       "errorEmail": "Unesite ispravnu e-mail adresu.",
       "errorPasswordMatch": "Lozinke se ne podudaraju.",
       "errorMinPassword": "Lozinka mora imati najmanje 8 znakova."
+    },
+    "forgotPassword": {
+      "title": "Zaboravljena lozinka",
+      "subtitle": "Upišite svoju e-mail adresu i poslat ćemo vam poveznicu za postavljanje nove lozinke.",
+      "submit": "Pošalji poveznicu",
+      "submitting": "Šaljemo…",
+      "backToLogin": "Natrag na prijavu",
+      "errorGeneric": "Nešto je pošlo po krivu. Pokušajte ponovno."
+    },
+    "resetPassword": {
+      "title": "Postavi novu lozinku",
+      "subtitle": "Odaberite novu lozinku za svoj račun.",
+      "newPassword": "Nova lozinka",
+      "confirmPassword": "Potvrdi novu lozinku",
+      "submit": "Postavi novu lozinku",
+      "submitting": "Spremamo…",
+      "done": "Vaša je lozinka uspješno postavljena. Sada se možete prijaviti.",
+      "goToLogin": "Idi na prijavu",
+      "missingToken": "Ova poveznica za promjenu lozinke nema token. Zatražite novu.",
+      "requestNew": "Zatraži novu poveznicu",
+      "errorGeneric": "Lozinku nije bilo moguće postaviti. Pokušajte ponovno."
+    },
+    "password": {
+      "show": "Prikaži lozinku",
+      "hide": "Sakrij lozinku"
     }
   },
   "about": {

@@ -503,6 +503,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we will send you a link to set a new password.",
+      "submit": "Send reset link",
+      "submitting": "Sending…",
+      "backToLogin": "Back to sign in",
+      "errorGeneric": "Something went wrong. Please try again."
+    },
+    "resetPassword": {
+      "title": "Set a new password",
+      "subtitle": "Choose a new password for your account.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Set new password",
+      "submitting": "Saving…",
+      "done": "Your password has been reset. You can now sign in.",
+      "goToLogin": "Go to sign in",
+      "missingToken": "This reset link is missing its token. Request a new one.",
+      "requestNew": "Request a new reset link",
+      "errorGeneric": "Could not reset your password. Please try again."
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
     }
   },
   "about": {
