@@ -975,6 +975,33 @@
     }
   },
   "admin": {
-    "backToAdmin": "Back to Admin"
+    "backToAdmin": "Back to Admin",
+    "collections": {
+      "expertWitnesses": {
+        "name": "Full name",
+        "specialityAreas": "Specialty areas (one per line)",
+        "languages": "Languages (codes: hr, en, de, fr...)",
+        "address": "Address",
+        "county": "County",
+        "city": "City",
+        "company": "Company",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry language"
+      },
+      "interpreters": {
+        "name": "Full name",
+        "languagePairs": "Language pairs (one per line, e.g. hr-en)",
+        "address": "Address",
+        "county": "County",
+        "city": "City",
+        "company": "Company",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry language"
+      }
+    }
   }
 }

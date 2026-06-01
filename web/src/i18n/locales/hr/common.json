@@ -980,6 +980,33 @@
     }
   },
   "admin": {
-    "backToAdmin": "Natrag na Admin"
+    "backToAdmin": "Natrag na Admin",
+    "collections": {
+      "expertWitnesses": {
+        "name": "Ime i prezime",
+        "specialityAreas": "Područja vještačenja (jedno po retku)",
+        "languages": "Jezici (kodovi: hr, en, de, fr...)",
+        "address": "Adresa",
+        "county": "Županija",
+        "city": "Grad",
+        "company": "Tvrtka",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verificiran",
+        "lang": "Jezik unosa"
+      },
+      "interpreters": {
+        "name": "Ime i prezime",
+        "languagePairs": "Jezični parovi (jedan po retku, npr. hr-en)",
+        "address": "Adresa",
+        "county": "Županija",
+        "city": "Grad",
+        "company": "Tvrtka",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verificiran",
+        "lang": "Jezik unosa"
+      }
+    }
   }
 }

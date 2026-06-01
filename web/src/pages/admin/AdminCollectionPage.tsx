@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { getAuthToken } from '@/api/client'
 
 // Field type descriptors for the generic editor.
@@ -66,7 +67,17 @@ function renderCell(value: unknown): string {
   return String(value)
 }
 
+
+// REDESIGN: labels in collectionConfigs are i18n keys when they contain a
+// dot; otherwise they are rendered as-is. Falls back to the field name.
+function labelOf(f: FieldDef, t: ReturnType<typeof useTranslation>['t']): string {
+  if (!f.label) return f.name
+  if (f.label.includes('.')) return t(f.label, f.name)
+  return f.label
+}
+
 export function AdminCollectionPage({ config }: { config: CollectionAdminConfig }) {
+  const { t } = useTranslation('common')
   const { lang } = useParams<{ lang: string }>()
   const locale = lang ?? 'hr'
   const [rows, setRows] = useState<Array<Record<string, unknown>>>([])
@@ -188,7 +199,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
             return (
               <div key={f.name}>
                 <label className="block text-sm font-medium mb-1">
-                  {f.label ?? f.name}
+                  {labelOf(f, t)}
                   {f.required && <span className="text-red-600"> *</span>}
                 </label>
                 {f.type === 'textarea' ? (
@@ -325,17 +336,17 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Expert witnesses',
     columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name',            type: 'text',     required: true, label: 'Ime i prezime' },
-      { name: 'specialityAreas', type: 'lines',    label: 'Područja vještačenja (jedno po retku)', itemKey: 'area' },
-      { name: 'languages',       type: 'lines',    label: 'Jezici (kodovi: hr, en, de, fr...)', itemKey: 'language' },
-      { name: 'address',         type: 'text',     label: 'Adresa' },
-      { name: 'county',          type: 'text',     label: 'Županija' },
-      { name: 'city',            type: 'text',     label: 'Grad' },
-      { name: 'company',         type: 'text',     label: 'Tvrtka' },
-      { name: 'phone',           type: 'text',     label: 'Telefon' },
-      { name: 'email',           type: 'text',     label: 'Email' },
-      { name: 'verified',        type: 'checkbox', label: 'Verificiran' },
-      { name: 'lang',            type: 'select',   label: 'Jezik unosa',
+      { name: 'name',            type: 'text',     required: true, label: 'admin.collections.expertWitnesses.name' },
+      { name: 'specialityAreas', type: 'lines',    label: 'admin.collections.expertWitnesses.specialityAreas', itemKey: 'area' },
+      { name: 'languages',       type: 'lines',    label: 'admin.collections.expertWitnesses.languages', itemKey: 'language' },
+      { name: 'address',         type: 'text',     label: 'admin.collections.expertWitnesses.address' },
+      { name: 'county',          type: 'text',     label: 'admin.collections.expertWitnesses.county' },
+      { name: 'city',            type: 'text',     label: 'admin.collections.expertWitnesses.city' },
+      { name: 'company',         type: 'text',     label: 'admin.collections.expertWitnesses.company' },
+      { name: 'phone',           type: 'text',     label: 'admin.collections.expertWitnesses.phone' },
+      { name: 'email',           type: 'text',     label: 'admin.collections.expertWitnesses.email' },
+      { name: 'verified',        type: 'checkbox', label: 'admin.collections.expertWitnesses.verified' },
+      { name: 'lang',            type: 'select',   label: 'admin.collections.expertWitnesses.lang',
                                   options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
     ],
     defaults: { lang: 'hr' },
@@ -345,16 +356,16 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Interpreters',
     columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name',          type: 'text',     required: true, label: 'Ime i prezime' },
-      { name: 'languagePairs', type: 'lines',    label: 'Jezični parovi (jedan po retku, npr. hr-en)', itemKey: 'pair' },
-      { name: 'address',       type: 'text',     label: 'Adresa' },
-      { name: 'county',        type: 'text',     label: 'Županija' },
-      { name: 'city',          type: 'text',     label: 'Grad' },
-      { name: 'company',       type: 'text',     label: 'Tvrtka' },
-      { name: 'phone',         type: 'text',     label: 'Telefon' },
-      { name: 'email',         type: 'text',     label: 'Email' },
-      { name: 'verified',      type: 'checkbox', label: 'Verificiran' },
-      { name: 'lang',          type: 'select',   label: 'Jezik unosa',
+      { name: 'name',          type: 'text',     required: true, label: 'admin.collections.interpreters.name' },
+      { name: 'languagePairs', type: 'lines',    label: 'admin.collections.interpreters.languagePairs', itemKey: 'pair' },
+      { name: 'address',       type: 'text',     label: 'admin.collections.interpreters.address' },
+      { name: 'county',        type: 'text',     label: 'admin.collections.interpreters.county' },
+      { name: 'city',          type: 'text',     label: 'admin.collections.interpreters.city' },
+      { name: 'company',       type: 'text',     label: 'admin.collections.interpreters.company' },
+      { name: 'phone',         type: 'text',     label: 'admin.collections.interpreters.phone' },
+      { name: 'email',         type: 'text',     label: 'admin.collections.interpreters.email' },
+      { name: 'verified',      type: 'checkbox', label: 'admin.collections.interpreters.verified' },
+      { name: 'lang',          type: 'select',   label: 'admin.collections.interpreters.lang',
                                 options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
     ],
     defaults: { lang: 'hr' },
