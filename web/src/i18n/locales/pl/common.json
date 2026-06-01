@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Powrót do Admina"
+    "backToAdmin": "Powrót do Admina",
+    "table": {
+      "range": "Wyświetlanie {{from}}–{{to}} z {{total}}",
+      "prev": "Poprzedni",
+      "next": "Następny",
+      "pageOf": "Strona {{page}} z {{total}}",
+      "empty": "Brak zapisów."
+    }
   }
 }

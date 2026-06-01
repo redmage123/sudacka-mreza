@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Aftur í Admin"
+    "backToAdmin": "Aftur í Admin",
+    "table": {
+      "range": "Sýnir {{from}}–{{to}} af {{total}}",
+      "prev": "Sú fyrri",
+      "next": "Næst",
+      "pageOf": "Síða {{page}} af {{total}}",
+      "empty": "Engar skrár."
+    }
   }
 }

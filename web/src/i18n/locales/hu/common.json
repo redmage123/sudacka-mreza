@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Vissza az Adminisztrációhoz"
+    "backToAdmin": "Vissza az Adminisztrációhoz",
+    "table": {
+      "range": "{{from}}–{{to}}/{{total}} megjelenítése",
+      "prev": "Az előző",
+      "next": "Következő",
+      "pageOf": "{{page}}/{{total}} oldal",
+      "empty": "Nincsenek rekordok."
+    }
   }
 }

@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Tagasi administraatori juurde"
+    "backToAdmin": "Tagasi administraatori juurde",
+    "table": {
+      "range": "Kuvatakse {{from}}–{{to}} / {{total}}",
+      "prev": "Eelmine",
+      "next": "Edasi",
+      "pageOf": "Leht {{page}} / {{total}}",
+      "empty": "Kirjeid pole."
+    }
   }
 }

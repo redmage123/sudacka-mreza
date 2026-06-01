@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Takaisin järjestelmänvalvojaan"
+    "backToAdmin": "Takaisin järjestelmänvalvojaan",
+    "table": {
+      "range": "Näytetään {{from}}–{{to}} / {{total}}",
+      "prev": "Edellinen",
+      "next": "Seuraavaksi",
+      "pageOf": "Sivu {{page}} / {{total}}",
+      "empty": "Ei tietueita."
+    }
   }
 }

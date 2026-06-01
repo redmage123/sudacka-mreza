@@ -969,7 +969,8 @@
       "prev": "Previous",
       "next": "Next",
       "pageOf": "Page {{page}} of {{total}}",
-      "empty": "No records."
+      "empty": "No records.",
+      "searchPlaceholder": "Filter by {{col}}…"
     }
   }
 }

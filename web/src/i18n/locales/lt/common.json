@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Grįžti į administratorių"
+    "backToAdmin": "Grįžti į administratorių",
+    "table": {
+      "range": "Rodomi {{from}}–{{to}} iš {{total}}",
+      "prev": "Ankstesnis",
+      "next": "Kitas",
+      "pageOf": "Puslapis {{page}} iš {{total}}",
+      "empty": "Jokių įrašų."
+    }
   }
 }

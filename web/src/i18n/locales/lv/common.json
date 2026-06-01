@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Atpakaļ uz administratoru"
+    "backToAdmin": "Atpakaļ uz administratoru",
+    "table": {
+      "range": "Rāda {{from}}–{{to}} no {{total}}",
+      "prev": "Iepriekšējais",
+      "next": "Tālāk",
+      "pageOf": "{{page}} lapa no {{total}}",
+      "empty": "Nav ierakstu."
+    }
   }
 }

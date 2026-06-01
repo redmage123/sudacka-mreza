@@ -974,7 +974,8 @@
       "prev": "Prethodna",
       "next": "Sljedeća",
       "pageOf": "Stranica {{page}} od {{total}}",
-      "empty": "Nema zapisa."
+      "empty": "Nema zapisa.",
+      "searchPlaceholder": "Filtriraj po {{col}}…"
     }
   }
 }

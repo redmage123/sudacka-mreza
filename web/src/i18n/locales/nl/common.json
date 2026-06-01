@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Terug naar beheerder"
+    "backToAdmin": "Terug naar beheerder",
+    "table": {
+      "range": "Toont {{from}}–{{to}} van {{total}}",
+      "prev": "De vorige",
+      "next": "Volgende",
+      "pageOf": "Pagina {{page}} van {{total}}",
+      "empty": "Geen gegevens."
+    }
   }
 }

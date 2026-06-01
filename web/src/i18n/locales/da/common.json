@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Tilbage til Admin"
+    "backToAdmin": "Tilbage til Admin",
+    "table": {
+      "range": "Viser {{from}}–{{to}} af {{total}}",
+      "prev": "Den forrige",
+      "next": "Næste",
+      "pageOf": "Side {{page}} af {{total}}",
+      "empty": "Ingen optegnelser."
+    }
   }
 }

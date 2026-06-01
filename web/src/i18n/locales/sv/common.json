@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Tillbaka till Admin"
+    "backToAdmin": "Tillbaka till Admin",
+    "table": {
+      "range": "Visar {{from}}–{{to}} av {{total}}",
+      "prev": "Den förra",
+      "next": "Nästa",
+      "pageOf": "Sida {{page}} av {{total}}",
+      "empty": "Inga poster."
+    }
   }
 }

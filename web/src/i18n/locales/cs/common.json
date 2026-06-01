@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Zpět na správce"
+    "backToAdmin": "Zpět na správce",
+    "table": {
+      "range": "Zobrazeno {{from}}–{{to}} z {{total}}",
+      "prev": "Ten předchozí",
+      "next": "Další",
+      "pageOf": "Strana {{page}} z {{total}}",
+      "empty": "Žádné záznamy."
+    }
   }
 }

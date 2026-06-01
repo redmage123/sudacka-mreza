@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Ar ais go Riarachán"
+    "backToAdmin": "Ar ais go Riarachán",
+    "table": {
+      "range": "Ag taispeáint {{from}}–{{to}} de {{total}}",
+      "prev": "An ceann roimhe sin",
+      "next": "Ar aghaidh",
+      "pageOf": "Leathanach {{page}} de {{total}}",
+      "empty": "Uimh taifid."
+    }
   }
 }

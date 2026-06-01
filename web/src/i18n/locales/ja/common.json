@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "管理者に戻る"
+    "backToAdmin": "管理者に戻る",
+    "table": {
+      "range": "{{from}}–{{to}} / {{total}} を表示中",
+      "prev": "前回のもの",
+      "next": "次",
+      "pageOf": "ページ {{page}}/{{total}}",
+      "empty": "記録はありません。"
+    }
   }
 }

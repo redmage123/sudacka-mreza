@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Înapoi la Admin"
+    "backToAdmin": "Înapoi la Admin",
+    "table": {
+      "range": "Se afișează {{from}}–{{to}} din {{total}}",
+      "prev": "Cel precedent",
+      "next": "Următorul",
+      "pageOf": "Pagina {{page}} din {{total}}",
+      "empty": "Fără înregistrări."
+    }
   }
 }

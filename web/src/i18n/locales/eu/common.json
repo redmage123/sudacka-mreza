@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "Itzuli Admin"
+    "backToAdmin": "Itzuli Admin",
+    "table": {
+      "range": "{{from}}–{{to}}/{{total}} erakusten",
+      "prev": "Aurrekoa",
+      "next": "Hurrengoa",
+      "pageOf": "{{page}} orrialdea {{total}}",
+      "empty": "Erregistrorik ez."
+    }
   }
 }

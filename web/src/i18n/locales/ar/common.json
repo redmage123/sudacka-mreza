@@ -968,6 +968,13 @@
     }
   },
   "admin": {
-    "backToAdmin": "العودة إلى المشرف"
+    "backToAdmin": "العودة إلى المشرف",
+    "table": {
+      "range": "عرض {{from}}–{{to}} من {{total}}",
+      "prev": "السابق",
+      "next": "التالي",
+      "pageOf": "الصفحة {{page}} من {{total}}",
+      "empty": "لا توجد سجلات."
+    }
   }
 }
