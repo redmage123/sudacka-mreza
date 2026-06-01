@@ -8,9 +8,11 @@ import { getAuthToken } from '@/api/client'
 export interface FieldDef {
   name: string
   label?: string
-  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select'
+  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines'
   required?: boolean
   options?: Array<{ label: string; value: string }>
+  itemKey?: string
+  placeholder?: string
 }
 
 export interface CollectionAdminConfig {
@@ -125,7 +127,12 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
       for (const f of config.fields) {
         const v = editing[f.name]
         if (f.type === 'number' && v === '') continue
-        body[f.name] = v
+        if (f.type === 'lines' && Array.isArray(v)) {
+          const key = f.itemKey ?? 'value'
+          body[f.name] = v.filter((x) => x != null && x !== '').map((x) => ({ [key]: x }))
+        } else {
+          body[f.name] = v
+        }
       }
       const resp = await authFetch(url, { method, body: JSON.stringify(body) })
       if (!resp.ok) {
@@ -195,6 +202,19 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                     <option value="">—</option>
                     {f.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
+                ) : f.type === 'lines' ? (
+                  <textarea
+                    rows={4}
+                    required={f.required}
+                    value={Array.isArray(value)
+                      ? value.map((it) => typeof it === 'string' ? it : (it?.[f.itemKey ?? 'value'] ?? '')).join('\n')
+                      : String(value ?? '')}
+                    onChange={(e) => onChange(
+                      e.target.value.split('\n').map((l) => l.trim()).filter(Boolean)
+                    )}
+                    placeholder={f.placeholder ?? 'One value per line'}
+                    className={common}
+                  />
                 ) : (
                   <input type="text" required={f.required} value={String(value ?? '')} onChange={(e) => onChange(e.target.value)} className={common} />
                 )}
@@ -303,24 +323,41 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
   'expert-witnesses': {
     slug: 'expert-witnesses',
     title: 'Expert witnesses',
-    columns: ['name', 'email', 'phone'],
+    columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'email', type: 'text' },
-      { name: 'phone', type: 'text' },
-      { name: 'address', type: 'text' },
+      { name: 'name',            type: 'text',     required: true, label: 'Ime i prezime' },
+      { name: 'specialityAreas', type: 'lines',    label: 'Područja vještačenja (jedno po retku)', itemKey: 'area' },
+      { name: 'languages',       type: 'lines',    label: 'Jezici (kodovi: hr, en, de, fr...)', itemKey: 'language' },
+      { name: 'address',         type: 'text',     label: 'Adresa' },
+      { name: 'county',          type: 'text',     label: 'Županija' },
+      { name: 'city',            type: 'text',     label: 'Grad' },
+      { name: 'company',         type: 'text',     label: 'Tvrtka' },
+      { name: 'phone',           type: 'text',     label: 'Telefon' },
+      { name: 'email',           type: 'text',     label: 'Email' },
+      { name: 'verified',        type: 'checkbox', label: 'Verificiran' },
+      { name: 'lang',            type: 'select',   label: 'Jezik unosa',
+                                  options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
     ],
+    defaults: { lang: 'hr' },
   },
   interpreters: {
     slug: 'interpreters',
     title: 'Interpreters',
-    columns: ['name', 'email', 'phone'],
+    columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'email', type: 'text' },
-      { name: 'phone', type: 'text' },
-      { name: 'address', type: 'text' },
+      { name: 'name',          type: 'text',     required: true, label: 'Ime i prezime' },
+      { name: 'languagePairs', type: 'lines',    label: 'Jezični parovi (jedan po retku, npr. hr-en)', itemKey: 'pair' },
+      { name: 'address',       type: 'text',     label: 'Adresa' },
+      { name: 'county',        type: 'text',     label: 'Županija' },
+      { name: 'city',          type: 'text',     label: 'Grad' },
+      { name: 'company',       type: 'text',     label: 'Tvrtka' },
+      { name: 'phone',         type: 'text',     label: 'Telefon' },
+      { name: 'email',         type: 'text',     label: 'Email' },
+      { name: 'verified',      type: 'checkbox', label: 'Verificiran' },
+      { name: 'lang',          type: 'select',   label: 'Jezik unosa',
+                                options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
     ],
+    defaults: { lang: 'hr' },
   },
   'state-attorneys': {
     slug: 'state-attorneys',
