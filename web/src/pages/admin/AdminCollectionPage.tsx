@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
 import { getAuthToken } from '@/api/client'
 
 // Field type descriptors for the generic editor.
@@ -266,13 +267,25 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
             </thead>
             <tbody className="divide-y divide-[color:var(--color-border)]">
               {rows.map((r) => (
-                <tr key={String(r.id)}>
+                <tr
+                  key={String(r.id)}
+                  className="cursor-pointer hover:bg-[color:var(--color-surface-alt)] transition-colors"
+                  onClick={() => setEditing(r)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setEditing(r)
+                    }
+                  }}
+                >
                   {config.columns.map((c) => (
                     <td key={c} className="py-2 pr-3">{renderCell(r[c])}</td>
                   ))}
                   <td className="py-2 pr-3 space-x-2">
-                    <button onClick={() => setEditing(r)} className="rounded bg-[color:var(--color-brand)] px-2 py-1 text-xs text-white hover:opacity-90">Edit</button>
-                    <button onClick={() => remove(r.id)} className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700">Delete</button>
+                    <button onClick={(e) => { e.stopPropagation(); setEditing(r) }} className="rounded bg-[color:var(--color-brand)] px-2 py-1 text-xs text-white hover:opacity-90">{t('admin.table.edit', 'Edit')}</button>
+                    <button onClick={(e) => { e.stopPropagation(); remove(r.id) }} className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700">{t('admin.table.delete', 'Delete')}</button>
                   </td>
                 </tr>
               ))}
@@ -313,6 +326,8 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'email', type: 'text' },
       { name: 'website', type: 'text' },
       { name: 'president', type: 'text' },
+      { name: 'fax',   type: 'text', label: 'admin.collections.courts.fax' },
+      { name: 'notes', type: 'textarea', label: 'admin.collections.courts.notes' },
     ],
   },
   judges: {
@@ -329,6 +344,14 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
         { label: 'Retired', value: 'retired' },
         { label: 'Other', value: 'other' },
       ]},
+      { name: 'firstName',          type: 'text',     label: 'admin.collections.judges.firstName' },
+      { name: 'lastName',           type: 'text',     label: 'admin.collections.judges.lastName' },
+      { name: 'court',              type: 'number',   label: 'admin.collections.judges.court' },
+      { name: 'department',         type: 'text',     label: 'admin.collections.judges.department' },
+      { name: 'yearsOfExperience',  type: 'number',   label: 'admin.collections.judges.yearsOfExperience' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.judges.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'expert-witnesses': {
@@ -347,7 +370,8 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'email',           type: 'text',     label: 'admin.collections.expertWitnesses.email' },
       { name: 'verified',        type: 'checkbox', label: 'admin.collections.expertWitnesses.verified' },
       { name: 'lang',            type: 'select',   label: 'admin.collections.expertWitnesses.lang',
-                                  options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
+                                  options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
+      { name: 'notes', type: 'textarea', label: 'admin.collections.expertWitnesses.notes' },
     ],
     defaults: { lang: 'hr' },
   },
@@ -366,7 +390,7 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'email',         type: 'text',     label: 'admin.collections.interpreters.email' },
       { name: 'verified',      type: 'checkbox', label: 'admin.collections.interpreters.verified' },
       { name: 'lang',          type: 'select',   label: 'admin.collections.interpreters.lang',
-                                options: [{ value: 'hr', label: 'Hrvatski' }, { value: 'en', label: 'English' }] },
+                                options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
     defaults: { lang: 'hr' },
   },
@@ -380,6 +404,8 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'address', type: 'text' },
       { name: 'phone', type: 'text' },
       { name: 'email', type: 'text' },
+      { name: 'county', type: 'text', label: 'admin.collections.stateAttorneys.county' },
+      { name: 'fax',    type: 'text', label: 'admin.collections.stateAttorneys.fax' },
     ],
   },
   'bankruptcy-administrators': {
@@ -394,6 +420,7 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'address', type: 'text' },
       { name: 'city', type: 'text' },
       { name: 'county', type: 'text' },
+      { name: 'courts', type: 'lines', itemKey: 'value', label: 'admin.collections.bankruptcyAdministrators.courts' },
     ],
   },
   'bankruptcy-debtors': {
@@ -421,6 +448,13 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'effectiveDate', type: 'text', label: 'Effective date (YYYY-MM-DD)' },
       { name: 'officialGazette', type: 'text' },
       { name: 'summary', type: 'textarea' },
+      { name: 'type',        type: 'text',     label: 'admin.collections.laws.type' },
+      { name: 'year',        type: 'number',   label: 'admin.collections.laws.year' },
+      { name: 'fullText',    type: 'textarea', label: 'admin.collections.laws.fullText' },
+      { name: 'externalUrl', type: 'text',     label: 'admin.collections.laws.externalUrl' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.laws.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'legal-categories': {
@@ -441,6 +475,10 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'title', type: 'text', required: true },
       { name: 'description', type: 'textarea' },
       { name: 'category', type: 'text' },
+      { name: 'publishedAt', type: 'text', label: 'admin.collections.documents.publishedAt' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.documents.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   pages: {
@@ -451,6 +489,11 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'title', type: 'text', required: true },
       { name: 'slug', type: 'text', required: true },
       { name: 'content', type: 'textarea' },
+      { name: 'metaTitle',       type: 'text',     label: 'admin.collections.pages.metaTitle' },
+      { name: 'metaDescription', type: 'textarea', label: 'admin.collections.pages.metaDescription' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.pages.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'api-keys': {
@@ -460,6 +503,9 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     fields: [
       { name: 'label', type: 'text', required: true },
       { name: 'active', type: 'checkbox' },
+      { name: 'organization', type: 'text',     label: 'admin.collections.apiKeys.organization' },
+      { name: 'email',        type: 'text',     label: 'admin.collections.apiKeys.email' },
+      { name: 'rateLimit',    type: 'number',   label: 'admin.collections.apiKeys.rateLimit' },
     ],
   },
 }

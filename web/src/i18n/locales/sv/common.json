@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Sök i Judge Network...",
+      "submit": "Söka",
+      "aria": "Söka"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Endast den officiella sammanfattningen är tillgänglig på denna plattform. Läs hela texten på den utfärdande domstolens webbplats."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Namn/företag/adress...",
+    "filterCompany": "Företag",
+    "filterCompanyPh": "Företagsnamn..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Domare",
+      "court": "Domstol",
+      "appointmentDate": "Utnämningsdatum",
+      "specialization": "Specialisering",
+      "status": "Status",
+      "contact": "Kontaktuppgifter"
+    },
+    "searchPlaceholder": "Sök på domarens namn...",
+    "totalCount": "Totalt: {{count}} domare",
+    "totalCount_one": "Totalt: {{count}} domare",
+    "totalCount_few": "Totalt: {{count}} domare",
+    "totalCount_other": "Totalt: {{count}} domare"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Namn/företag/adress...",
+    "filterCompany": "Företag",
+    "filterCompanyPh": "Företagsnamn..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Europeiska domstolen för de mänskliga rättigheterna"
+      "echr": "Europeiska domstolen för de mänskliga rättigheterna",
+      "ecj": "Europeiska unionens domstol"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Arbetstid",
+      "monday": "måndag",
+      "tuesday": "tisdag",
+      "wednesday": "onsdag",
+      "thursday": "torsdag",
+      "friday": "fredag",
+      "saturday": "lördag",
+      "sunday": "söndag",
+      "notes": "Anmärkning",
+      "closed": "Stängd"
+    },
+    "jurisdictionScope": "Jurisdiktionsområde",
+    "departmentsCount_one": "{{count}} avdelning",
+    "departmentsCount_few": "{{count}} avdelning",
+    "departmentsCount_other": "{{count}} avdelning",
+    "searchPlaceholderNameAddr": "Rättens namn eller adress..."
   },
   "nav": {
     "home": "Hem",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Domstolskarta",
-    "courtType": {
-      "municipal": "Kommunal",
-      "county": "Läns",
-      "commercial": "Handels",
-      "misdemeanour": "Förseelse",
-      "administrative": "Förvaltnings"
-    },
-    "legend": "Teckenförklaring",
-    "loading": "Laddar domstolar...",
-    "filterAll": "Alla domstolar",
-    "filterMunicipal": "Kommunal",
-    "filterCounty": "Läns",
-    "filterCommercial": "Handels",
-    "filterMisdemeanour": "Förseelse",
-    "filterAdministrative": "Förvaltnings",
-    "viewDetails": "Visa detaljer",
-    "courts": "domstolar",
-    "error": "Det gick inte att ladda domstolsdata. Försök igen."
-  },
-  "jurisdiction": {
-    "title": "Behörighetssökare",
-    "subtitle": "Hitta behörig domstol för ditt ärende baserat på plats och ärendetyp.",
-    "cityLabel": "Stad eller kommun",
-    "cityPlaceholder": "t.ex. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Ärendetyp",
-    "caseType": {
-      "civilMinor": "Civilmål (mindre) — Kommunal domstol",
-      "criminalMinor": "Brottmål (under 5 år) — Kommunal domstol",
-      "criminalSerious": "Brottmål (5+ år) — Länsdomstol",
-      "commercial": "Handelsmål — Handelsdomstol",
-      "misdemeanour": "Förseelse — Förseelsedomstol",
-      "administrative": "Förvaltningsmål — Förvaltningsdomstol"
-    },
-    "results": "Resultat",
-    "noResults": "Ingen matchande domstol hittades för denna plats och ärendetyp.",
-    "noResultsHint": "Prova ett annat stadsnamn eller kontrollera den fullständiga domstolskatalogen.",
-    "viewCourtsDirectory": "Visa domstolskatalog"
-  },
-  "calculator": {
-    "title": "Domstolsavgifter",
-    "selectCaseType": "Ärendetyp",
-    "caseType": {
-      "civil": "Civilmål",
-      "criminal": "Brottmål",
-      "commercial": "Handelsmål",
-      "administrative": "Förvaltningsmål",
-      "nonContentious": "Ärenden utan tvist"
-    },
-    "claimValue": "Yrkandets värde (EUR)",
-    "calculate": "Beräkna avgift",
-    "filingFee": "Ansökningsavgift",
-    "appealFee": "Överklagandeavgift",
-    "enforcementFee": "Verkställighetsavgift",
-    "fixedFee": "Fasta avgifter",
-    "exemptionsTitle": "Avgiftsbefrielser",
-    "exemption1": "Mottagare av socialbidrag är befriade från alla domstolsavgifter.",
-    "exemption2": "Minderåriga är befriade från domstolsavgifter i förfaranden som rör deras rättigheter.",
-    "exemption3": "Arbetstagare i arbetstvister med ett yrkande på upp till 2 650 € är befriade.",
-    "paymentTitle": "Betalningsmetoder",
-    "payment1": "Banköverföring till domstolens officiella konto",
-    "payment2": "e-Pristojbe-portalen (elektronisk betalning)",
-    "payment3": "Domstolskassan (personligen vid domstolen)",
-    "legalBasis": "Rättslig grund",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, med ändringar). Alla belopp omräknade till EUR sedan 01.01.2023.",
-    "minorOffenses": "Lindriga brott",
-    "seriousOffenses": "Allvarliga brott"
-  },
-  "jurisdictionFinder": {
-    "title": "Hitta din domstol",
-    "description": "Ange din stad och ärendetyp för att hitta behörig domstol.",
-    "cityLabel": "Din stad eller kommun",
-    "cityPlaceholder": "t.ex. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Ärendetyp",
-    "caseType": {
-      "civilMinor": "Civilmål (upp till 2 654 €)",
-      "civilMajor": "Civilmål (över 2 654 €)",
-      "criminalMinor": "Brottmål (lindrigt brott)",
-      "criminalSerious": "Brottmål (allvarligt brott)",
-      "commercial": "Handelstvist",
-      "misdemeanour": "Förseelse / trafikförseelse",
-      "administrative": "Tvist med myndighet"
-    },
-    "find": "Hitta domstol",
-    "result": "Behörig domstol",
-    "noResult": "Ingen domstol hittades för denna stad. Prova domstolskatalogen.",
-    "browseAll": "Bläddra bland alla domstolar",
-    "viewProfile": "Visa domstolsprofil"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Domstolsavgifter",
+    "selectCaseType": "Ärendetyp",
+    "caseType": {
+      "civil": "Civilmål",
+      "criminal": "Brottmål",
+      "commercial": "Handelsmål",
+      "administrative": "Förvaltningsmål",
+      "nonContentious": "Ärenden utan tvist"
+    },
+    "claimValue": "Yrkandets värde (EUR)",
+    "fixedFee": "Fasta avgifter",
+    "minorOffenses": "Lindriga brott",
+    "seriousOffenses": "Allvarliga brott",
+    "filingFee": "Ansökningsavgift",
+    "appealFee": "Överklagandeavgift",
+    "enforcementFee": "Verkställighetsavgift",
+    "exemptionsTitle": "Avgiftsbefrielser",
+    "exemption1": "Mottagare av socialbidrag är befriade från alla domstolsavgifter.",
+    "exemption2": "Minderåriga är befriade från domstolsavgifter i förfaranden som rör deras rättigheter.",
+    "exemption3": "Arbetstagare i arbetstvister med ett yrkande på upp till 2 650 € är befriade.",
+    "paymentTitle": "Betalningsmetoder",
+    "payment1": "Banköverföring till domstolens officiella konto",
+    "payment2": "e-Pristojbe-portalen (elektronisk betalning)",
+    "payment3": "Domstolskassan (personligen vid domstolen)",
+    "legalBasis": "Rättslig grund",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, med ändringar). Alla belopp omräknade till EUR sedan 01.01.2023.",
+    "calculate": "Beräkna avgift"
+  },
+  "map": {
+    "title": "Domstolskarta",
+    "filterAll": "Alla domstolar",
+    "filterMunicipal": "Kommunal",
+    "filterCounty": "Läns",
+    "filterCommercial": "Handels",
+    "filterMisdemeanour": "Förseelse",
+    "filterAdministrative": "Förvaltnings",
+    "courtType": {
+      "municipal": "Kommunal",
+      "county": "Läns",
+      "commercial": "Handels",
+      "misdemeanour": "Förseelse",
+      "administrative": "Förvaltnings"
+    },
+    "legend": "Teckenförklaring",
+    "error": "Det gick inte att ladda domstolsdata. Försök igen.",
+    "viewDetails": "Visa detaljer",
+    "loading": "Laddar domstolar...",
+    "courts": "domstolar"
+  },
+  "jurisdiction": {
+    "title": "Behörighetssökare",
+    "subtitle": "Hitta behörig domstol för ditt ärende baserat på plats och ärendetyp.",
+    "cityLabel": "Stad eller kommun",
+    "cityPlaceholder": "t.ex. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Ärendetyp",
+    "caseType": {
+      "civilMinor": "Civilmål (mindre) — Kommunal domstol",
+      "criminalMinor": "Brottmål (under 5 år) — Kommunal domstol",
+      "criminalSerious": "Brottmål (5+ år) — Länsdomstol",
+      "commercial": "Handelsmål — Handelsdomstol",
+      "misdemeanour": "Förseelse — Förseelsedomstol",
+      "administrative": "Förvaltningsmål — Förvaltningsdomstol"
+    },
+    "results": "Resultat",
+    "noResults": "Ingen matchande domstol hittades för denna plats och ärendetyp.",
+    "noResultsHint": "Prova ett annat stadsnamn eller kontrollera den fullständiga domstolskatalogen.",
+    "viewCourtsDirectory": "Visa domstolskatalog"
+  },
+  "jurisdictionFinder": {
+    "title": "Hitta din domstol",
+    "description": "Ange din stad och ärendetyp för att hitta behörig domstol.",
+    "cityLabel": "Din stad eller kommun",
+    "cityPlaceholder": "t.ex. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Ärendetyp",
+    "caseType": {
+      "civilMinor": "Civilmål (upp till 2 654 €)",
+      "civilMajor": "Civilmål (över 2 654 €)",
+      "criminalMinor": "Brottmål (lindrigt brott)",
+      "criminalSerious": "Brottmål (allvarligt brott)",
+      "commercial": "Handelstvist",
+      "misdemeanour": "Förseelse / trafikförseelse",
+      "administrative": "Tvist med myndighet"
+    },
+    "find": "Hitta domstol",
+    "result": "Behörig domstol",
+    "noResult": "Ingen domstol hittades för denna stad. Prova domstolskatalogen.",
+    "browseAll": "Bläddra bland alla domstolar",
+    "viewProfile": "Visa domstolsprofil"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Konkurs gäldenärer",
+      "debtorsDesc": "Gäldenärsregister med profil och historik över alla relaterade förfaranden",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Skicka in en inlämning",
+      "filingDesc": "Lämna in en konkursansökan - lämna in en fordran, initieringsförslag, rapport, omstruktureringsplan"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Konkursannonser",
+      "description": "Aktiva konkursförfaranden publicerade i Officiella tidningen och officiella tidningen.",
+      "searchPlaceholder": "Sök på gäldenärens namn...",
+      "count": "{{n}} annonser",
+      "count_one": "{{n}} annons",
+      "count_few": "{{n}} annonser",
+      "count_other": "{{n}} annonser",
+      "loadError": "Det gick inte att ladda konkursannonser.",
+      "empty": "Det finns inga aktiva konkursannonser.",
+      "unknownDebtor": "Okänd gäldenär",
+      "deadline": "Tidsfrist"
+    },
+    "decisions": {
+      "title": "Konkursbeslut",
+      "description": "Sudske odluke iz stečajnih postupaka u Hrvatskoj.",
+      "loadError": "Det går inte att ladda konkursbeslut.",
+      "noResults": "Inga resultat.",
+      "viewDecision": "Öppna beslutet"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Användartyp",
+      "userTypeOptions": {
+        "person": "Person",
+        "legal_entity": "Juridisk person"
+      },
+      "organisationName": "Namn på juridisk person",
+      "organisationOib": "OIB för juridiska personer",
+      "legalEntityNote": "Juridiska personer (advokatbyråer, konkursförvaltare som agerar för egen räkning, registrerade organisationer) kan lämna in konkursansökningar genom det redaktionella tillvägagångssättet. Din auktorisering kommer att aktiveras automatiskt efter registrering.",
+      "errorOib": "OIB måste ha exakt 11 siffror.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Glömt lösenordet",
+      "subtitle": "Ange din e-postadress så skickar vi en länk till dig för att skapa ett nytt lösenord.",
+      "submit": "Skicka en länk",
+      "submitting": "Vi skickar…",
+      "backToLogin": "Tillbaka till inloggning",
+      "errorGeneric": "Något gick fel. Försök igen."
+    },
+    "resetPassword": {
+      "title": "Ange ett nytt lösenord",
+      "subtitle": "Välj ett nytt lösenord för ditt konto.",
+      "newPassword": "Nytt lösenord",
+      "confirmPassword": "Bekräfta nytt lösenord",
+      "submit": "Ange ett nytt lösenord",
+      "submitting": "Vi förbereder...",
+      "done": "Ditt lösenord har ställts in. Du kan registrera dig nu.",
+      "goToLogin": "Gå till ansökan",
+      "missingToken": "Denna lösenordsändringslänk har ingen token. Begär en ny.",
+      "requestNew": "Begär en ny länk",
+      "errorGeneric": "Lösenordet kunde inte ställas in. Försök igen."
+    },
+    "password": {
+      "show": "Visa lösenord",
+      "hide": "Dölj lösenord"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Pressklipp — tidningsartiklar och webbportaler där Domarnätverket nämns. Innehållet kommer att fyllas i som en del av datamigreringen från den gamla webbplatsen."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Ljudgallerier",
+      "placeholder": "Ljudomnämnanden — radiointervjuer och program om Judge Network. Innehållet kommer att fyllas i som en del av datamigreringen från den gamla webbplatsen."
+    },
+    "video": {
+      "title": "Videogallerier",
+      "placeholder": "Videoomnämnanden — tv-specialer och intervjuer. Innehållet kommer att fyllas i som en del av datamigreringen från den gamla webbplatsen."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Välj dokumenttyp",
     "type": {
       "tuzba": {
+        "_value": "Rättegång",
         "desc": "För inledande av civilrättslig process vid domstol"
       },
       "zalba": {
+        "_value": "Klagomål",
         "desc": "För överklagande av domstolsbeslut till högre instans"
       },
       "prigovor": {
+        "_value": "Klagomål",
         "desc": "För framställande av invändning mot domstolsbeslut"
       },
       "ovrsni": {
+        "_value": "Verkställande förslag",
         "desc": "För inledande av verkställighet på grund av verkställbart dokument"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Förfallen"
     }
   },
-  "cookiePolicy": "Cookiepolicy",
-  "termsOfService": "Användarvillkor",
-  "judges": {
-    "detail": {
-      "role": "Domare",
-      "court": "Domstol",
-      "appointmentDate": "Utnämningsdatum",
-      "specialization": "Specialisering",
-      "status": "Status",
-      "contact": "Kontaktuppgifter"
-    }
-  },
   "legalNews": {
     "title": "Rättsliga nyheter",
     "subtitle": "Översikt över aktuella rättsliga nyheter från inhemska och europeiska rättskällor.",
@@ -716,6 +819,8 @@
       "p2": "[sv] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Cookiepolicy",
+  "termsOfService": "Användarvillkor",
   "privacy": {
     "title": "Integritetspolicy",
     "lastUpdated": "Senast uppdaterad: 28 mars 2026.",
@@ -808,8 +913,61 @@
       "p2": "För frågor om dessa villkor, kontakta oss på:"
     }
   },
-  "docgen.type.tuzba.desc": "För inledande av civilrättslig process vid domstol",
-  "docgen.type.zalba.desc": "För överklagande av domstolsbeslut till högre instans",
-  "docgen.type.prigovor.desc": "För invändning mot domstolsbeslut",
-  "docgen.type.ovrsni.desc": "För inledande av verkställighet på grund av verkställbar handling"
+  "debtors": {
+    "title": "Konkurs gäldenärer",
+    "subtitle": "Register över gäldenärer för vilka konkursförfarandet genomförs eller har genomförts.",
+    "searchPlaceholder": "Sök på namn eller stad...",
+    "oibPh": "OIB...",
+    "loadError": "Det gick inte att ladda gäldenären.",
+    "noResults": "Det finns inga gäldenärer som matchar sökningen.",
+    "linkedListings": "Konkursförfarande",
+    "noLinkedListings": "Det finns inga relaterade konkursförfaranden.",
+    "fields": {
+      "name": "Namn / Namn",
+      "address": "Adress",
+      "city": "Stad",
+      "county": "Grevskap",
+      "phone": "Telefon",
+      "caseNumber": "Artikelnummer",
+      "status": "Status",
+      "deadline": "Tidsfrist",
+      "publishedAt": "Publicerad"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API-dokumentation — Judge Network",
+    "metaDescription": "Public REST API för tillgång till databaser över domstolsbeslut, experter, tolkar och domstolar i det rättsliga nätverket.",
+    "title": "Public REST API",
+    "intro": "Öppna API för partnerinstitutioner och forskare som vill ha programmatisk tillgång till databaser över domstolspraxis, experter, tolkar och domstolar i Republiken Kroatien.",
+    "paginationNote": "Alla listslutpunkter returnerar samma paginerade svarsformat:",
+    "endpointsNote": "Klicka på endpoint för parametrar, exempelbegäran och svar.",
+    "sections": {
+      "gettingStarted": "Början av arbetet",
+      "pagination": "Paginering",
+      "endpoints": "Slutpunkter"
+    },
+    "cards": {
+      "baseUrl": "Bas-URL",
+      "auth": "Autentisering",
+      "rateLimit": "Gränser (prisgräns)",
+      "baseUrlNote": "Alla svar är JSON, UTF-8",
+      "authNote": "API-nyckeln är valfri, men ökar gränsen."
+    },
+    "endpoint": {
+      "params": "Parametrar",
+      "exampleRequest": "Provförfrågan",
+      "exampleResponse": "Exempelsvar",
+      "fields": {
+        "name": "Namn",
+        "description": "Beskrivning",
+        "type": "Typ",
+        "required": "Obligatorisk",
+        "example": "Exempel",
+        "in": "i"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Tillbaka till Admin"
+  }
 }

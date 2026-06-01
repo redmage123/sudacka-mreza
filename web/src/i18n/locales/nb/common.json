@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Søk i Judge Network...",
+      "submit": "Søk",
+      "aria": "Søk"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Bare det offisielle sammendraget er tilgjengelig på denne plattformen. Les hele teksten på nettsiden til den utstedende retten."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Navn / firma / adresse...",
+    "filterCompany": "Bedrift",
+    "filterCompanyPh": "Firmanavn..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Dommer",
+      "court": "Domstol",
+      "appointmentDate": "Utnevnelsesdato",
+      "specialization": "Spesialisering",
+      "status": "Status",
+      "contact": "Kontaktinformasjon"
+    },
+    "searchPlaceholder": "Søk etter dommernavn...",
+    "totalCount": "Totalt: {{count}} dommere",
+    "totalCount_one": "Totalt: {{count}} dommer",
+    "totalCount_few": "Totalt: {{count}} dommere",
+    "totalCount_other": "Totalt: {{count}} dommere"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Navn / firma / adresse...",
+    "filterCompany": "Bedrift",
+    "filterCompanyPh": "Firmanavn..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Den europeiske menneskerettsdomstolen"
+      "echr": "Den europeiske menneskerettsdomstolen",
+      "ecj": "Den europeiske unions domstol"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Arbeidstid",
+      "monday": "mandag",
+      "tuesday": "tirsdag",
+      "wednesday": "onsdag",
+      "thursday": "torsdag",
+      "friday": "fredag",
+      "saturday": "lørdag",
+      "sunday": "søndag",
+      "notes": "Bemerke",
+      "closed": "Lukket"
+    },
+    "jurisdictionScope": "Jurisdiksjonsområde",
+    "departmentsCount_one": "{{count}} avdeling",
+    "departmentsCount_few": "{{count}} avdeling",
+    "departmentsCount_other": "{{count}} avdeling",
+    "searchPlaceholderNameAddr": "Rettens navn eller adresse..."
   },
   "nav": {
     "home": "Hjem",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Domstolskart",
-    "courtType": {
-      "municipal": "Tingrett",
-      "county": "Lagmannsrett",
-      "commercial": "Handelsrett",
-      "misdemeanour": "Forseelsesrett",
-      "administrative": "Forvaltningsrett"
-    },
-    "legend": "Tegnforklaring",
-    "loading": "Laster domstoler...",
-    "filterAll": "Alle domstoler",
-    "filterMunicipal": "Tingrett",
-    "filterCounty": "Lagmannsrett",
-    "filterCommercial": "Handelsrett",
-    "filterMisdemeanour": "Forseelsesrett",
-    "filterAdministrative": "Forvaltningsrett",
-    "viewDetails": "Vis detaljer",
-    "courts": "domstoler",
-    "error": "Kunne ikke laste domstolsdata. Vennligst prøv igjen."
-  },
-  "jurisdiction": {
-    "title": "Vernetingssøk",
-    "subtitle": "Finn riktig domstol for din sak basert på sted og sakstype.",
-    "cityLabel": "By eller kommune",
-    "cityPlaceholder": "f.eks. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Sakstype",
-    "caseType": {
-      "civilMinor": "Sivil (mindre) — Tingrett",
-      "criminalMinor": "Straff (under 5 år) — Tingrett",
-      "criminalSerious": "Straff (5+ år) — Lagmannsrett",
-      "commercial": "Handels — Handelsrett",
-      "misdemeanour": "Forseelse — Forseelsesrett",
-      "administrative": "Forvaltning — Forvaltningsrett"
-    },
-    "results": "Resultater",
-    "noResults": "Ingen kompetent domstol funnet for dette stedet og denne sakstypen.",
-    "noResultsHint": "Prøv et annet bynavn eller se den fullstendige domstolskatalogen.",
-    "viewCourtsDirectory": "Se domstolskatalogen"
-  },
-  "calculator": {
-    "title": "Rettsgebyrer",
-    "selectCaseType": "Sakstype",
-    "caseType": {
-      "civil": "Sivil tvist",
-      "criminal": "Straffesak",
-      "commercial": "Handelstvist",
-      "administrative": "Forvaltningstvst",
-      "nonContentious": "Frivillig rettspleie"
-    },
-    "claimValue": "Tvistesum (EUR)",
-    "calculate": "Beregn gebyr",
-    "filingFee": "Innleveringsgebyr",
-    "appealFee": "Ankegebyr",
-    "enforcementFee": "Fullbyrdelsesgebyr",
-    "fixedFee": "Faste gebyrer",
-    "exemptionsTitle": "Gebyrfritak",
-    "exemption1": "Mottakere av sosialhjelp er fritatt fra alle rettsgebyrer.",
-    "exemption2": "Mindreårige er fritatt fra rettsgebyrer i saker som gjelder deres rettigheter.",
-    "exemption3": "Arbeidstakere i arbeidstvister med tvistesum opptil 2 650 € er fritatt.",
-    "paymentTitle": "Betalingsmetoder",
-    "payment1": "Bankoverføring til rettens offisielle konto",
-    "payment2": "e-Pristojbe-portalen (elektronisk betaling)",
-    "payment3": "Rettens kasse (personlig oppmøte ved retten)",
-    "legalBasis": "Rettslig grunnlag",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, med endringer). Alle beløp omregnet til EUR siden 01.01.2023.",
-    "minorOffenses": "Mindre forseelser",
-    "seriousOffenses": "Alvorlige forbrytelser"
-  },
-  "jurisdictionFinder": {
-    "title": "Finn din domstol",
-    "description": "Oppgi din by og sakstype for å finne hvilken domstol som er kompetent.",
-    "cityLabel": "Din by eller kommune",
-    "cityPlaceholder": "f.eks. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Sakstype",
-    "caseType": {
-      "civilMinor": "Sivil tvist (opptil 2 654 €)",
-      "civilMajor": "Sivil tvist (over 2 654 €)",
-      "criminalMinor": "Straffesak (mindre forseelse)",
-      "criminalSerious": "Straffesak (alvorlig forbrytelse)",
-      "commercial": "Handelstvist",
-      "misdemeanour": "Forseelse / trafikkforseelse",
-      "administrative": "Tvist med offentlig myndighet"
-    },
-    "find": "Finn domstol",
-    "result": "Kompetent domstol",
-    "noResult": "Ingen domstol funnet for denne byen. Prøv domstolskatalogen.",
-    "browseAll": "Bla gjennom alle domstoler",
-    "viewProfile": "Vis domstolsprofil"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Rettsgebyrer",
+    "selectCaseType": "Sakstype",
+    "caseType": {
+      "civil": "Sivil tvist",
+      "criminal": "Straffesak",
+      "commercial": "Handelstvist",
+      "administrative": "Forvaltningstvst",
+      "nonContentious": "Frivillig rettspleie"
+    },
+    "claimValue": "Tvistesum (EUR)",
+    "fixedFee": "Faste gebyrer",
+    "minorOffenses": "Mindre forseelser",
+    "seriousOffenses": "Alvorlige forbrytelser",
+    "filingFee": "Innleveringsgebyr",
+    "appealFee": "Ankegebyr",
+    "enforcementFee": "Fullbyrdelsesgebyr",
+    "exemptionsTitle": "Gebyrfritak",
+    "exemption1": "Mottakere av sosialhjelp er fritatt fra alle rettsgebyrer.",
+    "exemption2": "Mindreårige er fritatt fra rettsgebyrer i saker som gjelder deres rettigheter.",
+    "exemption3": "Arbeidstakere i arbeidstvister med tvistesum opptil 2 650 € er fritatt.",
+    "paymentTitle": "Betalingsmetoder",
+    "payment1": "Bankoverføring til rettens offisielle konto",
+    "payment2": "e-Pristojbe-portalen (elektronisk betaling)",
+    "payment3": "Rettens kasse (personlig oppmøte ved retten)",
+    "legalBasis": "Rettslig grunnlag",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, med endringer). Alle beløp omregnet til EUR siden 01.01.2023.",
+    "calculate": "Beregn gebyr"
+  },
+  "map": {
+    "title": "Domstolskart",
+    "filterAll": "Alle domstoler",
+    "filterMunicipal": "Tingrett",
+    "filterCounty": "Lagmannsrett",
+    "filterCommercial": "Handelsrett",
+    "filterMisdemeanour": "Forseelsesrett",
+    "filterAdministrative": "Forvaltningsrett",
+    "courtType": {
+      "municipal": "Tingrett",
+      "county": "Lagmannsrett",
+      "commercial": "Handelsrett",
+      "misdemeanour": "Forseelsesrett",
+      "administrative": "Forvaltningsrett"
+    },
+    "legend": "Tegnforklaring",
+    "error": "Kunne ikke laste domstolsdata. Vennligst prøv igjen.",
+    "viewDetails": "Vis detaljer",
+    "loading": "Laster domstoler...",
+    "courts": "domstoler"
+  },
+  "jurisdiction": {
+    "title": "Vernetingssøk",
+    "subtitle": "Finn riktig domstol for din sak basert på sted og sakstype.",
+    "cityLabel": "By eller kommune",
+    "cityPlaceholder": "f.eks. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Sakstype",
+    "caseType": {
+      "civilMinor": "Sivil (mindre) — Tingrett",
+      "criminalMinor": "Straff (under 5 år) — Tingrett",
+      "criminalSerious": "Straff (5+ år) — Lagmannsrett",
+      "commercial": "Handels — Handelsrett",
+      "misdemeanour": "Forseelse — Forseelsesrett",
+      "administrative": "Forvaltning — Forvaltningsrett"
+    },
+    "results": "Resultater",
+    "noResults": "Ingen kompetent domstol funnet for dette stedet og denne sakstypen.",
+    "noResultsHint": "Prøv et annet bynavn eller se den fullstendige domstolskatalogen.",
+    "viewCourtsDirectory": "Se domstolskatalogen"
+  },
+  "jurisdictionFinder": {
+    "title": "Finn din domstol",
+    "description": "Oppgi din by og sakstype for å finne hvilken domstol som er kompetent.",
+    "cityLabel": "Din by eller kommune",
+    "cityPlaceholder": "f.eks. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Sakstype",
+    "caseType": {
+      "civilMinor": "Sivil tvist (opptil 2 654 €)",
+      "civilMajor": "Sivil tvist (over 2 654 €)",
+      "criminalMinor": "Straffesak (mindre forseelse)",
+      "criminalSerious": "Straffesak (alvorlig forbrytelse)",
+      "commercial": "Handelstvist",
+      "misdemeanour": "Forseelse / trafikkforseelse",
+      "administrative": "Tvist med offentlig myndighet"
+    },
+    "find": "Finn domstol",
+    "result": "Kompetent domstol",
+    "noResult": "Ingen domstol funnet for denne byen. Prøv domstolskatalogen.",
+    "browseAll": "Bla gjennom alle domstoler",
+    "viewProfile": "Vis domstolsprofil"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Konkurs skyldnere",
+      "debtorsDesc": "Debitorkatalog med profil og historikk over alle relaterte prosedyrer",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Send inn en innsending",
+      "filingDesc": "Send inn en konkursmelding - innlevering av et krav, initieringsforslag, rapport, restruktureringsplan"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Konkursannonser",
+      "description": "Aktiv konkursbehandling publisert i Offisiell Tidende og Offisiell Tidende.",
+      "searchPlaceholder": "Søk på debitornavn...",
+      "count": "{{n}} annonser",
+      "count_one": "{{n}} annonse",
+      "count_few": "{{n}} annonser",
+      "count_other": "{{n}} annonser",
+      "loadError": "Kan ikke laste inn konkursannonser.",
+      "empty": "Det er ingen aktive konkursannonser.",
+      "unknownDebtor": "Ukjent debitor",
+      "deadline": "Frist"
+    },
+    "decisions": {
+      "title": "Konkursbeslutninger",
+      "description": "Rettsavgjørelser fra konkursbehandling i Kroatia.",
+      "loadError": "Det er ikke mulig å laste konkursvedtak.",
+      "noResults": "Ingen resultater.",
+      "viewDecision": "Åpne avgjørelsen"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Brukertype",
+      "userTypeOptions": {
+        "person": "Person",
+        "legal_entity": "Juridisk enhet"
+      },
+      "organisationName": "Navn på juridisk enhet",
+      "organisationOib": "OIB av juridiske personer",
+      "legalEntityNote": "Juridiske personer (advokatfirmaer, konkursforvaltere som handler på egne vegne, registrerte organisasjoner) kan sende inn konkursbegjæringer gjennom den redaksjonelle tilnærmingen. Din autorisasjon vil bli aktivert automatisk etter registrering.",
+      "errorOib": "OIB må ha nøyaktig 11 sifre.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Glemt passord",
+      "subtitle": "Skriv inn e-postadressen din, så sender vi deg en lenke for å sette opp et nytt passord.",
+      "submit": "Send en lenke",
+      "submitting": "Vi sender…",
+      "backToLogin": "Tilbake til innlogging",
+      "errorGeneric": "Noe gikk galt. Vennligst prøv igjen."
+    },
+    "resetPassword": {
+      "title": "Angi et nytt passord",
+      "subtitle": "Velg et nytt passord for kontoen din.",
+      "newPassword": "Nytt passord",
+      "confirmPassword": "Bekreft nytt passord",
+      "submit": "Angi et nytt passord",
+      "submitting": "Vi forbereder...",
+      "done": "Passordet ditt er angitt. Du kan registrere deg nå.",
+      "goToLogin": "Gå til søknad",
+      "missingToken": "Denne passordendringslenken har ingen token. Be om en ny.",
+      "requestNew": "Be om en ny lenke",
+      "errorGeneric": "Passordet kunne ikke angis. Vennligst prøv igjen."
+    },
+    "password": {
+      "show": "Vis passord",
+      "hide": "Skjul passord"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Presseklipp — avisartikler og nettportaler der Dommernettverket er omtalt. Innholdet fylles ut som en del av datamigrering fra det gamle nettstedet."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Lydgallerier",
+      "placeholder": "Lydomtaler — radiointervjuer og programmer om Judge Network. Innholdet fylles ut som en del av datamigrering fra det gamle nettstedet."
+    },
+    "video": {
+      "title": "Videogallerier",
+      "placeholder": "Videoomtaler — TV-spesialiteter og intervjuer. Innholdet fylles ut som en del av datamigrering fra det gamle nettstedet."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Velg dokumenttype",
     "type": {
       "tuzba": {
+        "_value": "Rettssak",
         "desc": "For å reise sivilt søksmål ved domstolen"
       },
       "zalba": {
+        "_value": "Klage",
         "desc": "For å anke en rettsavgjørelse til en høyere domstol"
       },
       "prigovor": {
+        "_value": "Klage",
         "desc": "For å fremme innsigelse mot en rettslig avgjørelse"
       },
       "ovrsni": {
+        "_value": "Utøvende forslag",
         "desc": "For å iverksette tvangsfullbyrdelse på grunnlag av et tvangsgrunnlag"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Forfalt"
     }
   },
-  "cookiePolicy": "Informasjonskapselpolicy",
-  "termsOfService": "Vilkår for bruk",
-  "judges": {
-    "detail": {
-      "role": "Dommer",
-      "court": "Domstol",
-      "appointmentDate": "Utnevnelsesdato",
-      "specialization": "Spesialisering",
-      "status": "Status",
-      "contact": "Kontaktinformasjon"
-    }
-  },
   "legalNews": {
     "title": "Juridiske nyheter",
     "subtitle": "Oversikt over aktuelle juridiske nyheter fra nasjonale og europeiske juridiske kilder.",
@@ -716,6 +819,8 @@
       "p2": "[nb] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Informasjonskapselpolicy",
+  "termsOfService": "Vilkår for bruk",
   "privacy": {
     "title": "Personvernerklæring",
     "lastUpdated": "Sist oppdatert: 28. mars 2026.",
@@ -808,8 +913,61 @@
       "p2": "For spørsmål om disse vilkårene, kontakt oss på:"
     }
   },
-  "docgen.type.tuzba.desc": "For å reise sivilt søksmål",
-  "docgen.type.zalba.desc": "For å anke en rettslig avgjørelse til en høyere domstol",
-  "docgen.type.prigovor.desc": "For å fremme innsigelse mot en rettslig avgjørelse",
-  "docgen.type.ovrsni.desc": "For å begjære tvangsfullbyrdelse på grunnlag av et tvangsgrunnlag"
+  "debtors": {
+    "title": "Konkurs skyldnere",
+    "subtitle": "Register over skyldnere som er eller har blitt ført konkurs for.",
+    "searchPlaceholder": "Søk etter navn eller by...",
+    "oibPh": "OIB...",
+    "loadError": "Feil ved innlasting av debitor.",
+    "noResults": "Det er ingen debitorer som samsvarer med søket.",
+    "linkedListings": "Konkursbehandling",
+    "noLinkedListings": "Det er ingen relaterte konkursbehandlinger.",
+    "fields": {
+      "name": "Navn / Navn",
+      "address": "Adresse",
+      "city": "By",
+      "county": "fylke",
+      "phone": "Telefon",
+      "caseNumber": "Varenummer",
+      "status": "Status",
+      "deadline": "Frist",
+      "publishedAt": "Publisert"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API-dokumentasjon — Judge Network",
+    "metaDescription": "Public REST API for tilgang til databaser over rettsavgjørelser, eksperter, tolker og domstoler i det rettslige nettverket.",
+    "title": "Offentlig REST API",
+    "intro": "Åpen API for partnerinstitusjoner og forskere som ønsker programmatisk tilgang til databaser over domstolspraksis, eksperter, tolker og domstoler i Republikken Kroatia.",
+    "paginationNote": "Alle listeendepunkter returnerer det samme paginerte svarformatet:",
+    "endpointsNote": "Klikk på endepunkt for parametere, eksempelforespørsel og svar.",
+    "sections": {
+      "gettingStarted": "Start av arbeidet",
+      "pagination": "Paginering",
+      "endpoints": "Endepunkter"
+    },
+    "cards": {
+      "baseUrl": "Base URL",
+      "auth": "Autentisering",
+      "rateLimit": "Grenser (takstgrense)",
+      "baseUrlNote": "Alle svar er JSON, UTF-8",
+      "authNote": "API-nøkkelen er valgfri, men øker grensen."
+    },
+    "endpoint": {
+      "params": "Parametere",
+      "exampleRequest": "Eksempelforespørsel",
+      "exampleResponse": "Eksempel svar",
+      "fields": {
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "type": "Type",
+        "required": "Påbudt",
+        "example": "Eksempel",
+        "in": "i"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Tilbake til Admin"
+  }
 }

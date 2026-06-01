@@ -14,6 +14,7 @@ import * as migration_20260522_100000_judges_dashboard_fields from './20260522_1
 import * as migration_20260522_110000_attorneys from './20260522_110000_attorneys';
 import * as migration_20260522_120000_decisions_analytics_fields from './20260522_120000_decisions_analytics_fields';
 import * as migration_20260531_120000_courts_jurisdiction_time from './20260531_120000_courts_jurisdiction_time';
+import * as migration_20260601_201500_lang_enum_extend from './20260601_201500_lang_enum_extend';
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20260531_120000_courts_jurisdiction_time.up,
     down: migration_20260531_120000_courts_jurisdiction_time.down,
     name: '20260531_120000_courts_jurisdiction_time',
+  },
+  {
+    up: migration_20260601_201500_lang_enum_extend.up,
+    down: migration_20260601_201500_lang_enum_extend.down,
+    name: '20260601_201500_lang_enum_extend',
   },
 ];

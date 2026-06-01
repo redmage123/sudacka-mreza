@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "搜索法官网络...",
+      "submit": "搜索",
+      "aria": "搜索"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "该平台上仅提供官方摘要。请在发证法院的网站上阅读全文。"
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "姓名/公司/地址...",
+    "filterCompany": "公司",
+    "filterCompanyPh": "公司名称..."
+  },
+  "judges": {
+    "detail": {
+      "role": "法官",
+      "court": "法院",
+      "appointmentDate": "任命日期",
+      "specialization": "专业领域",
+      "status": "状态",
+      "contact": "联系方式"
+    },
+    "searchPlaceholder": "按裁判姓名搜索...",
+    "totalCount": "总计：{{count}} 评委",
+    "totalCount_one": "总计：{{count}}法官",
+    "totalCount_few": "总计：{{count}} 评委",
+    "totalCount_other": "总计：{{count}} 评委"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "姓名/公司/地址...",
+    "filterCompany": "公司",
+    "filterCompanyPh": "公司名称..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "最高法院",
       "upravni": "行政法院",
       "ustavni": "宪法法院",
-      "echr": "欧洲人权法院"
+      "echr": "欧洲人权法院",
+      "ecj": "欧盟法院"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "电话",
       "president": "院长"
     },
-    "officialNameNote": "克罗地亚法院官方名称"
+    "officialNameNote": "克罗地亚法院官方名称",
+    "timeAvailability": {
+      "heading": "工作时间",
+      "monday": "周一",
+      "tuesday": "周二",
+      "wednesday": "周三",
+      "thursday": "周四",
+      "friday": "星期五",
+      "saturday": "周六",
+      "sunday": "星期日",
+      "notes": "评论",
+      "closed": "关闭"
+    },
+    "jurisdictionScope": "管辖范围",
+    "departmentsCount_one": "{{count}}部门",
+    "departmentsCount_few": "{{count}}部门",
+    "departmentsCount_other": "{{count}}部门",
+    "searchPlaceholderNameAddr": "法院名称或地址..."
   },
   "nav": {
     "home": "主页",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "法院地图",
-    "courtType": {
-      "municipal": "基层",
-      "county": "县级",
-      "commercial": "商事",
-      "misdemeanour": "违法行为",
-      "administrative": "行政"
-    },
-    "legend": "图例",
-    "loading": "正在加载法院...",
-    "filterAll": "所有法院",
-    "filterMunicipal": "基层",
-    "filterCounty": "县级",
-    "filterCommercial": "商事",
-    "filterMisdemeanour": "违法行为",
-    "filterAdministrative": "行政",
-    "viewDetails": "查看详情",
-    "courts": "法院",
-    "error": "无法加载法院数据，请重试。"
-  },
-  "jurisdiction": {
-    "title": "管辖权查询",
-    "subtitle": "根据地点和案件类型查找有管辖权的法院。",
-    "cityLabel": "城市或市镇",
-    "cityPlaceholder": "例如 萨格勒布、斯普利特、里耶卡...",
-    "caseTypeLabel": "案件类型",
-    "caseType": {
-      "civilMinor": "民事（小额）— 基层法院",
-      "criminalMinor": "刑事（5年以下）— 基层法院",
-      "criminalSerious": "刑事（5年以上）— 县级法院",
-      "commercial": "商事 — 商事法院",
-      "misdemeanour": "违法行为 — 违法行为法院",
-      "administrative": "行政 — 行政法院"
-    },
-    "results": "结果",
-    "noResults": "未找到与该地点和案件类型匹配的法院。",
-    "noResultsHint": "请尝试其他城市名称或查看完整的法院目录。",
-    "viewCourtsDirectory": "查看法院目录"
-  },
-  "calculator": {
-    "title": "法院费用",
-    "selectCaseType": "案件类型",
-    "caseType": {
-      "civil": "民事纠纷",
-      "criminal": "刑事诉讼",
-      "commercial": "商事纠纷",
-      "administrative": "行政纠纷",
-      "nonContentious": "非诉讼程序"
-    },
-    "claimValue": "诉讼标的额（EUR）",
-    "calculate": "计算费用",
-    "filingFee": "立案费",
-    "appealFee": "上诉费",
-    "enforcementFee": "执行费",
-    "fixedFee": "固定费用",
-    "exemptionsTitle": "费用减免",
-    "exemption1": "社会救助对象免缴所有法院费用。",
-    "exemption2": "未成年人在涉及其权利的诉讼中免缴法院费用。",
-    "exemption3": "诉讼标的额不超过2,650欧元的劳动争议中的劳动者免缴费用。",
-    "paymentTitle": "支付方式",
-    "payment1": "银行转账至法院官方账户",
-    "payment2": "e-Pristojbe门户（电子支付）",
-    "payment3": "法院收费窗口（亲自到法院缴纳）",
-    "legalBasis": "法律依据",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95，含修正案)。自2023年1月1日起所有金额已折算为欧元。",
-    "minorOffenses": "轻微违法行为",
-    "seriousOffenses": "严重犯罪"
-  },
-  "jurisdictionFinder": {
-    "title": "查找您的法院",
-    "description": "输入您的城市和案件类型，查找有管辖权的法院。",
-    "cityLabel": "您的城市或市镇",
-    "cityPlaceholder": "例如 Zagreb、Split、Osijek...",
-    "caseTypeLabel": "案件类型",
-    "caseType": {
-      "civilMinor": "民事纠纷（不超过2,654欧元）",
-      "civilMajor": "民事纠纷（超过2,654欧元）",
-      "criminalMinor": "刑事（轻微犯罪）",
-      "criminalSerious": "刑事（严重犯罪）",
-      "commercial": "商事纠纷",
-      "misdemeanour": "违规行为 / 交通违规",
-      "administrative": "与政府机构的纠纷"
-    },
-    "find": "查找法院",
-    "result": "有管辖权的法院",
-    "noResult": "未找到该城市的法院。请尝试浏览法院目录。",
-    "browseAll": "浏览所有法院",
-    "viewProfile": "查看法院简介"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "法院费用",
+    "selectCaseType": "案件类型",
+    "caseType": {
+      "civil": "民事纠纷",
+      "criminal": "刑事诉讼",
+      "commercial": "商事纠纷",
+      "administrative": "行政纠纷",
+      "nonContentious": "非诉讼程序"
+    },
+    "claimValue": "诉讼标的额（EUR）",
+    "fixedFee": "固定费用",
+    "minorOffenses": "轻微违法行为",
+    "seriousOffenses": "严重犯罪",
+    "filingFee": "立案费",
+    "appealFee": "上诉费",
+    "enforcementFee": "执行费",
+    "exemptionsTitle": "费用减免",
+    "exemption1": "社会救助对象免缴所有法院费用。",
+    "exemption2": "未成年人在涉及其权利的诉讼中免缴法院费用。",
+    "exemption3": "诉讼标的额不超过2,650欧元的劳动争议中的劳动者免缴费用。",
+    "paymentTitle": "支付方式",
+    "payment1": "银行转账至法院官方账户",
+    "payment2": "e-Pristojbe门户（电子支付）",
+    "payment3": "法院收费窗口（亲自到法院缴纳）",
+    "legalBasis": "法律依据",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95，含修正案)。自2023年1月1日起所有金额已折算为欧元。",
+    "calculate": "计算费用"
+  },
+  "map": {
+    "title": "法院地图",
+    "filterAll": "所有法院",
+    "filterMunicipal": "基层",
+    "filterCounty": "县级",
+    "filterCommercial": "商事",
+    "filterMisdemeanour": "违法行为",
+    "filterAdministrative": "行政",
+    "courtType": {
+      "municipal": "基层",
+      "county": "县级",
+      "commercial": "商事",
+      "misdemeanour": "违法行为",
+      "administrative": "行政"
+    },
+    "legend": "图例",
+    "error": "无法加载法院数据，请重试。",
+    "viewDetails": "查看详情",
+    "loading": "正在加载法院...",
+    "courts": "法院"
+  },
+  "jurisdiction": {
+    "title": "管辖权查询",
+    "subtitle": "根据地点和案件类型查找有管辖权的法院。",
+    "cityLabel": "城市或市镇",
+    "cityPlaceholder": "例如 萨格勒布、斯普利特、里耶卡...",
+    "caseTypeLabel": "案件类型",
+    "caseType": {
+      "civilMinor": "民事（小额）— 基层法院",
+      "criminalMinor": "刑事（5年以下）— 基层法院",
+      "criminalSerious": "刑事（5年以上）— 县级法院",
+      "commercial": "商事 — 商事法院",
+      "misdemeanour": "违法行为 — 违法行为法院",
+      "administrative": "行政 — 行政法院"
+    },
+    "results": "结果",
+    "noResults": "未找到与该地点和案件类型匹配的法院。",
+    "noResultsHint": "请尝试其他城市名称或查看完整的法院目录。",
+    "viewCourtsDirectory": "查看法院目录"
+  },
+  "jurisdictionFinder": {
+    "title": "查找您的法院",
+    "description": "输入您的城市和案件类型，查找有管辖权的法院。",
+    "cityLabel": "您的城市或市镇",
+    "cityPlaceholder": "例如 Zagreb、Split、Osijek...",
+    "caseTypeLabel": "案件类型",
+    "caseType": {
+      "civilMinor": "民事纠纷（不超过2,654欧元）",
+      "civilMajor": "民事纠纷（超过2,654欧元）",
+      "criminalMinor": "刑事（轻微犯罪）",
+      "criminalSerious": "刑事（严重犯罪）",
+      "commercial": "商事纠纷",
+      "misdemeanour": "违规行为 / 交通违规",
+      "administrative": "与政府机构的纠纷"
+    },
+    "find": "查找法院",
+    "result": "有管辖权的法院",
+    "noResult": "未找到该城市的法院。请尝试浏览法院目录。",
+    "browseAll": "浏览所有法院",
+    "viewProfile": "查看法院简介"
+  },
   "bankruptcy": {
     "title": "破产门户",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "破产债务人",
+      "debtorsDesc": "债务人目录，包含所有相关程序的简介和历史记录",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "提交意见",
+      "filingDesc": "提交破产申请——提交索赔、发起提案、报告、重组计划"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "破产广告",
+      "description": "在官方公报和官方公报上公布正在进行的破产程序。",
+      "searchPlaceholder": "按债务人姓名搜索...",
+      "count": "{{n}} 广告",
+      "count_one": "{{n}} 广告",
+      "count_few": "{{n}} 广告",
+      "count_other": "{{n}} 广告",
+      "loadError": "无法加载破产广告。",
+      "empty": "没有活跃的破产广告。",
+      "unknownDebtor": "债务人不明",
+      "deadline": "最后期限"
+    },
+    "decisions": {
+      "title": "破产决定",
+      "description": "克罗地亚破产程序中的法院判决。",
+      "loadError": "无法加载破产决定。",
+      "noResults": "没有结果。",
+      "viewDecision": "打开决定"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "用户类型",
+      "userTypeOptions": {
+        "person": "人",
+        "legal_entity": "法人实体"
+      },
+      "organisationName": "法人名称",
+      "organisationOib": "法人OIB",
+      "legalEntityNote": "法人实体（律师事务所、代表其行事的破产受托人、注册组织）可以通过编辑方式提交破产申请。您的授权将在注册后自动激活。",
+      "errorOib": "OIB 必须正好有 11 位数字。",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "创建账户",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "忘记密码",
+      "subtitle": "输入您的电子邮件地址，我们将向您发送用于设置新密码的链接。",
+      "submit": "发送链接",
+      "submitting": "我们发送...",
+      "backToLogin": "返回登录",
+      "errorGeneric": "出了点问题。请再试一次。"
+    },
+    "resetPassword": {
+      "title": "设置新密码",
+      "subtitle": "为您的帐户选择一个新密码。",
+      "newPassword": "新密码",
+      "confirmPassword": "确认新密码",
+      "submit": "设置新密码",
+      "submitting": "我们正在准备...",
+      "done": "您的密码已成功设置。您现在就可以注册。",
+      "goToLogin": "前往申请",
+      "missingToken": "此密码更改链接没有令牌。请求一份新的。",
+      "requestNew": "请求新链接",
+      "errorGeneric": "无法设置密码。请再试一次。"
+    },
+    "password": {
+      "show": "显示密码",
+      "hide": "隐藏密码"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "新闻剪报——提及法官网络的报纸文章和门户网站。该内容将作为旧站点数据迁移的一部分进行填充。"
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "音频画廊",
+      "placeholder": "音频提及——关于法官网络的广播采访和节目。该内容将作为旧站点数据迁移的一部分进行填充。"
+    },
+    "video": {
+      "title": "视频库",
+      "placeholder": "视频提及——电视特别节目和采访。该内容将作为旧站点数据迁移的一部分进行填充。"
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "选择文书类型",
     "type": {
       "tuzba": {
+        "_value": "诉讼",
         "desc": "向法院提起民事诉讼"
       },
       "zalba": {
+        "_value": "抱怨",
         "desc": "向高级法院提起上诉"
       },
       "prigovor": {
+        "_value": "抱怨",
         "desc": "对法院裁定提出异议"
       },
       "ovrsni": {
+        "_value": "执行提案",
         "desc": "根据执行文书申请强制执行"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "已逾期"
     }
   },
-  "cookiePolicy": "Cookie政策",
-  "termsOfService": "服务条款",
-  "judges": {
-    "detail": {
-      "role": "法官",
-      "court": "法院",
-      "appointmentDate": "任命日期",
-      "specialization": "专业领域",
-      "status": "状态",
-      "contact": "联系方式"
-    }
-  },
   "legalNews": {
     "title": "法律新闻",
     "subtitle": "国内及欧洲法律来源的最新法律新闻概览。",
@@ -716,6 +819,8 @@
       "p2": "[zh] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Cookie政策",
+  "termsOfService": "服务条款",
   "privacy": {
     "title": "隐私政策",
     "lastUpdated": "最后更新日期：2026年3月28日。",
@@ -808,8 +913,61 @@
       "p2": "[zh] Za pitanja o ovim Uvjetima kontaktirajte nas na:"
     }
   },
-  "docgen.type.tuzba.desc": "用于向法院提起民事诉讼",
-  "docgen.type.zalba.desc": "用于向高级法院提起对法院判决的上诉",
-  "docgen.type.prigovor.desc": "用于对法院裁定提出异议",
-  "docgen.type.ovrsni.desc": "用于根据执行文书申请强制执行"
+  "debtors": {
+    "title": "破产债务人",
+    "subtitle": "正在或已经进行破产程序的债务人名录。",
+    "searchPlaceholder": "按名称或城市搜索...",
+    "oibPh": "奥伊布...",
+    "loadError": "加载债务人时出错。",
+    "noResults": "没有符合搜索条件的债务人。",
+    "linkedListings": "破产程序",
+    "noLinkedListings": "不存在相关破产程序。",
+    "fields": {
+      "name": "姓名/姓名",
+      "address": "地址",
+      "city": "城市",
+      "county": "县",
+      "phone": "电话",
+      "caseNumber": "货号",
+      "status": "地位",
+      "deadline": "最后期限",
+      "publishedAt": "已发表"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API 文档 — Judge Network",
+    "metaDescription": "公共 REST API，用于访问法院判决、专家、口译员和司法网络法院的数据库。",
+    "title": "公共 REST API",
+    "intro": "为希望以编程方式访问克罗地亚共和国法院实践、专家、口译员和法院数据库的合作机构和研究人员提供开放 API。",
+    "paginationNote": "所有列表端点返回相同的分页响应格式：",
+    "endpointsNote": "单击端点以获取参数、示例请求和响应。",
+    "sections": {
+      "gettingStarted": "开始工作",
+      "pagination": "分页",
+      "endpoints": "端点"
+    },
+    "cards": {
+      "baseUrl": "基本网址",
+      "auth": "验证",
+      "rateLimit": "限制（速率限制）",
+      "baseUrlNote": "所有响应均为 JSON、UTF-8",
+      "authNote": "API 密钥是可选的，但增加了限制。"
+    },
+    "endpoint": {
+      "params": "参数",
+      "exampleRequest": "样品请求",
+      "exampleResponse": "示例答案",
+      "fields": {
+        "name": "姓名",
+        "description": "描述",
+        "type": "类型",
+        "required": "强制的",
+        "example": "例子",
+        "in": "在"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "返回管理"
+  }
 }

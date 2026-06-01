@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Шукайте в суддівській мережі...",
+      "submit": "Пошук",
+      "aria": "Пошук"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "На цій платформі доступне лише офіційне резюме. Повний текст читайте на сайті суду, який ухвалив рішення."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Ім'я / Компанія / Адреса...",
+    "filterCompany": "Компанія",
+    "filterCompanyPh": "Назва компанії..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Суддя",
+      "court": "Суд",
+      "appointmentDate": "Дата призначення",
+      "specialization": "Спеціалізація",
+      "status": "Статус",
+      "contact": "Контактні дані"
+    },
+    "searchPlaceholder": "Пошук за іменем арбітра...",
+    "totalCount": "Всього: {{count}} суддів",
+    "totalCount_one": "Разом: {{count}} суддя",
+    "totalCount_few": "Всього: {{count}} суддів",
+    "totalCount_other": "Всього: {{count}} суддів"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Ім'я / Компанія / Адреса...",
+    "filterCompany": "Компанія",
+    "filterCompanyPh": "Назва компанії..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Європейський суд з прав людини"
+      "echr": "Європейський суд з прав людини",
+      "ecj": "Суд Європейського Союзу"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Робочий час",
+      "monday": "понеділок",
+      "tuesday": "вівторок",
+      "wednesday": "Середа",
+      "thursday": "четвер",
+      "friday": "П'ятниця",
+      "saturday": "Субота",
+      "sunday": "неділя",
+      "notes": "Зауваження",
+      "closed": "ЗАЧИНЕНО"
+    },
+    "jurisdictionScope": "Зона юрисдикції",
+    "departmentsCount_one": "{{count}} відділ",
+    "departmentsCount_few": "{{count}} відділ",
+    "departmentsCount_other": "{{count}} відділ",
+    "searchPlaceholderNameAddr": "Назва або адреса суду..."
   },
   "nav": {
     "home": "Головна",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Карта судів",
-    "courtType": {
-      "municipal": "Міський",
-      "county": "Окружний",
-      "commercial": "Господарський",
-      "misdemeanour": "Адміністративних правопорушень",
-      "administrative": "Адміністративний"
-    },
-    "legend": "Легенда",
-    "loading": "Завантаження судів...",
-    "filterAll": "Усі суди",
-    "filterMunicipal": "Міський",
-    "filterCounty": "Окружний",
-    "filterCommercial": "Господарський",
-    "filterMisdemeanour": "Адміністративних правопорушень",
-    "filterAdministrative": "Адміністративний",
-    "viewDetails": "Переглянути деталі",
-    "courts": "суди",
-    "error": "Не вдалося завантажити дані про суди. Спробуйте ще раз."
-  },
-  "jurisdiction": {
-    "title": "Пошук юрисдикції",
-    "subtitle": "Знайдіть компетентний суд для вашої справи за місцезнаходженням та типом справи.",
-    "cityLabel": "Місто або громада",
-    "cityPlaceholder": "напр. Загреб, Спліт, Рієка...",
-    "caseTypeLabel": "Тип справи",
-    "caseType": {
-      "civilMinor": "Цивільна (незначна) — Міський суд",
-      "criminalMinor": "Кримінальна (до 5 років) — Міський суд",
-      "criminalSerious": "Кримінальна (5+ років) — Окружний суд",
-      "commercial": "Господарська — Господарський суд",
-      "misdemeanour": "Правопорушення — Суд у справах про правопорушення",
-      "administrative": "Адміністративна — Адміністративний суд"
-    },
-    "results": "Результати",
-    "noResults": "Не знайдено відповідного суду для цього місцезнаходження та типу справи.",
-    "noResultsHint": "Спробуйте іншу назву міста або перегляньте повний довідник судів.",
-    "viewCourtsDirectory": "Переглянути довідник судів"
-  },
-  "calculator": {
-    "title": "Судові збори",
-    "selectCaseType": "Тип справи",
-    "caseType": {
-      "civil": "Цивільний спір",
-      "criminal": "Кримінальне провадження",
-      "commercial": "Господарський спір",
-      "administrative": "Адміністративний спір",
-      "nonContentious": "Непозовне провадження"
-    },
-    "claimValue": "Сума позову (EUR)",
-    "calculate": "Розрахувати збір",
-    "filingFee": "Збір за подання",
-    "appealFee": "Збір за апеляцію",
-    "enforcementFee": "Збір за виконання",
-    "fixedFee": "Фіксовані збори",
-    "exemptionsTitle": "Звільнення від зборів",
-    "exemption1": "Отримувачі соціальної допомоги звільнені від усіх судових зборів.",
-    "exemption2": "Неповнолітні звільнені від судових зборів у провадженнях щодо їхніх прав.",
-    "exemption3": "Працівники у трудових спорах із сумою позову до 2 650 € звільнені від зборів.",
-    "paymentTitle": "Способи оплати",
-    "payment1": "Банківський переказ на офіційний рахунок суду",
-    "payment2": "Портал e-Pristojbe (електронна оплата)",
-    "payment3": "Каса суду (особисто в суді)",
-    "legalBasis": "Правова основа",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, зі змінами). Усі суми перераховані в EUR з 01.01.2023.",
-    "minorOffenses": "Незначні правопорушення",
-    "seriousOffenses": "Тяжкі злочини"
-  },
-  "jurisdictionFinder": {
-    "title": "Знайдіть свій суд",
-    "description": "Введіть ваше місто та тип справи, щоб знайти компетентний суд.",
-    "cityLabel": "Ваше місто або громада",
-    "cityPlaceholder": "напр. Загреб, Спліт, Осієк...",
-    "caseTypeLabel": "Тип справи",
-    "caseType": {
-      "civilMinor": "Цивільний спір (до 2 654 €)",
-      "civilMajor": "Цивільний спір (понад 2 654 €)",
-      "criminalMinor": "Кримінальна (незначне правопорушення)",
-      "criminalSerious": "Кримінальна (тяжкий злочин)",
-      "commercial": "Комерційний спір",
-      "misdemeanour": "Проступок / дорожнє правопорушення",
-      "administrative": "Спір з державним органом"
-    },
-    "find": "Знайти суд",
-    "result": "Компетентний суд",
-    "noResult": "Суд для цього міста не знайдено. Спробуйте каталог судів.",
-    "browseAll": "Переглянути всі суди",
-    "viewProfile": "Переглянути профіль суду"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Судові збори",
+    "selectCaseType": "Тип справи",
+    "caseType": {
+      "civil": "Цивільний спір",
+      "criminal": "Кримінальне провадження",
+      "commercial": "Господарський спір",
+      "administrative": "Адміністративний спір",
+      "nonContentious": "Непозовне провадження"
+    },
+    "claimValue": "Сума позову (EUR)",
+    "fixedFee": "Фіксовані збори",
+    "minorOffenses": "Незначні правопорушення",
+    "seriousOffenses": "Тяжкі злочини",
+    "filingFee": "Збір за подання",
+    "appealFee": "Збір за апеляцію",
+    "enforcementFee": "Збір за виконання",
+    "exemptionsTitle": "Звільнення від зборів",
+    "exemption1": "Отримувачі соціальної допомоги звільнені від усіх судових зборів.",
+    "exemption2": "Неповнолітні звільнені від судових зборів у провадженнях щодо їхніх прав.",
+    "exemption3": "Працівники у трудових спорах із сумою позову до 2 650 € звільнені від зборів.",
+    "paymentTitle": "Способи оплати",
+    "payment1": "Банківський переказ на офіційний рахунок суду",
+    "payment2": "Портал e-Pristojbe (електронна оплата)",
+    "payment3": "Каса суду (особисто в суді)",
+    "legalBasis": "Правова основа",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, зі змінами). Усі суми перераховані в EUR з 01.01.2023.",
+    "calculate": "Розрахувати збір"
+  },
+  "map": {
+    "title": "Карта судів",
+    "filterAll": "Усі суди",
+    "filterMunicipal": "Міський",
+    "filterCounty": "Окружний",
+    "filterCommercial": "Господарський",
+    "filterMisdemeanour": "Адміністративних правопорушень",
+    "filterAdministrative": "Адміністративний",
+    "courtType": {
+      "municipal": "Міський",
+      "county": "Окружний",
+      "commercial": "Господарський",
+      "misdemeanour": "Адміністративних правопорушень",
+      "administrative": "Адміністративний"
+    },
+    "legend": "Легенда",
+    "error": "Не вдалося завантажити дані про суди. Спробуйте ще раз.",
+    "viewDetails": "Переглянути деталі",
+    "loading": "Завантаження судів...",
+    "courts": "суди"
+  },
+  "jurisdiction": {
+    "title": "Пошук юрисдикції",
+    "subtitle": "Знайдіть компетентний суд для вашої справи за місцезнаходженням та типом справи.",
+    "cityLabel": "Місто або громада",
+    "cityPlaceholder": "напр. Загреб, Спліт, Рієка...",
+    "caseTypeLabel": "Тип справи",
+    "caseType": {
+      "civilMinor": "Цивільна (незначна) — Міський суд",
+      "criminalMinor": "Кримінальна (до 5 років) — Міський суд",
+      "criminalSerious": "Кримінальна (5+ років) — Окружний суд",
+      "commercial": "Господарська — Господарський суд",
+      "misdemeanour": "Правопорушення — Суд у справах про правопорушення",
+      "administrative": "Адміністративна — Адміністративний суд"
+    },
+    "results": "Результати",
+    "noResults": "Не знайдено відповідного суду для цього місцезнаходження та типу справи.",
+    "noResultsHint": "Спробуйте іншу назву міста або перегляньте повний довідник судів.",
+    "viewCourtsDirectory": "Переглянути довідник судів"
+  },
+  "jurisdictionFinder": {
+    "title": "Знайдіть свій суд",
+    "description": "Введіть ваше місто та тип справи, щоб знайти компетентний суд.",
+    "cityLabel": "Ваше місто або громада",
+    "cityPlaceholder": "напр. Загреб, Спліт, Осієк...",
+    "caseTypeLabel": "Тип справи",
+    "caseType": {
+      "civilMinor": "Цивільний спір (до 2 654 €)",
+      "civilMajor": "Цивільний спір (понад 2 654 €)",
+      "criminalMinor": "Кримінальна (незначне правопорушення)",
+      "criminalSerious": "Кримінальна (тяжкий злочин)",
+      "commercial": "Комерційний спір",
+      "misdemeanour": "Проступок / дорожнє правопорушення",
+      "administrative": "Спір з державним органом"
+    },
+    "find": "Знайти суд",
+    "result": "Компетентний суд",
+    "noResult": "Суд для цього міста не знайдено. Спробуйте каталог судів.",
+    "browseAll": "Переглянути всі суди",
+    "viewProfile": "Переглянути профіль суду"
+  },
   "bankruptcy": {
     "title": "Портал банкрутства",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Боржники-банкрути",
+      "debtorsDesc": "Довідник боржників із профілем та історією всіх пов’язаних процедур",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Надіслати подання",
+      "filingDesc": "Подати заяву про банкрутство — подати претензію, ініціаційну пропозицію, звіт, план реструктуризації"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Оголошення про банкрутство",
+      "description": "Активні процедури банкрутства опубліковані в Офіційному віснику та офіційному віснику.",
+      "searchPlaceholder": "Пошук за найменуванням боржника...",
+      "count": "{{n}} оголошень",
+      "count_one": "{{n}} оголошення",
+      "count_few": "{{n}} оголошень",
+      "count_other": "{{n}} оголошень",
+      "loadError": "Не вдалося завантажити оголошення про банкрутство.",
+      "empty": "Активних оголошень про банкрутство немає.",
+      "unknownDebtor": "Невідомий боржник",
+      "deadline": "Дедлайн"
+    },
+    "decisions": {
+      "title": "Рішення про банкрутство",
+      "description": "Судові рішення з процедур банкрутства в Хорватії.",
+      "loadError": "Неможливо завантажити рішення про банкрутство.",
+      "noResults": "Результатів немає.",
+      "viewDecision": "Відкрийте рішення"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Тип користувача",
+      "userTypeOptions": {
+        "person": "особа",
+        "legal_entity": "Юридична особа"
+      },
+      "organisationName": "Найменування юридичної особи",
+      "organisationOib": "OIB юридичних осіб",
+      "legalEntityNote": "Юридичні особи (юридичні фірми, арбітражні керуючі від свого імені, зареєстровані організації) можуть подавати заяви про банкрутство через редакційний спосіб. Ваша авторизація буде активована автоматично після реєстрації.",
+      "errorOib": "OIB має містити рівно 11 цифр.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Створити акаунт",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "забув пароль",
+      "subtitle": "Введіть свою електронну адресу, і ми надішлемо вам посилання для встановлення нового пароля.",
+      "submit": "Надішліть посилання",
+      "submitting": "Надсилаємо…",
+      "backToLogin": "Назад до входу",
+      "errorGeneric": "Щось пішло не так. Спробуйте ще раз."
+    },
+    "resetPassword": {
+      "title": "Встановіть новий пароль",
+      "subtitle": "Виберіть новий пароль для свого облікового запису.",
+      "newPassword": "Новий пароль",
+      "confirmPassword": "Підтвердьте новий пароль",
+      "submit": "Встановіть новий пароль",
+      "submitting": "Ми готуємо...",
+      "done": "Ваш пароль успішно встановлено. Ви можете зареєструватися зараз.",
+      "goToLogin": "Перейдіть до програми",
+      "missingToken": "Це посилання для зміни пароля не має маркера. Запит на новий.",
+      "requestNew": "Запит на нове посилання",
+      "errorGeneric": "Не вдалося встановити пароль. Спробуйте ще раз."
+    },
+    "password": {
+      "show": "Показати пароль",
+      "hide": "Приховати пароль"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Прес-кліпінг — газетні статті та веб-портали, в яких згадується Суддівська мережа. Вміст буде заповнено в рамках міграції даних зі старого сайту."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Аудіо галереї",
+      "placeholder": "Аудіозгадки — радіоінтерв’ю та шоу про суддівську мережу. Вміст буде заповнено в рамках міграції даних зі старого сайту."
+    },
+    "video": {
+      "title": "Відео галереї",
+      "placeholder": "Відеозгадки — телевізійні випуски та інтерв’ю. Вміст буде заповнено в рамках міграції даних зі старого сайту."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Оберіть тип документа",
     "type": {
       "tuzba": {
+        "_value": "Позов",
         "desc": "Для порушення цивільного судового провадження в суді"
       },
       "zalba": {
+        "_value": "Скарга",
         "desc": "Для оскарження судового рішення в суді вищої інстанції"
       },
       "prigovor": {
+        "_value": "Скарга",
         "desc": "Для подання заперечення на судове рішення"
       },
       "ovrsni": {
+        "_value": "Виконавча пропозиція",
         "desc": "Для ініціювання виконавчого провадження на підставі виконавчого документа"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Прострочено"
     }
   },
-  "cookiePolicy": "Політика cookies",
-  "termsOfService": "Умови використання",
-  "judges": {
-    "detail": {
-      "role": "Суддя",
-      "court": "Суд",
-      "appointmentDate": "Дата призначення",
-      "specialization": "Спеціалізація",
-      "status": "Статус",
-      "contact": "Контактні дані"
-    }
-  },
   "legalNews": {
     "title": "Юридичні новини",
     "subtitle": "Огляд актуальних юридичних новин із вітчизняних та європейських правових джерел.",
@@ -716,6 +819,8 @@
       "p2": "Для отримання додаткової інформації про те, як ми обробляємо Ваші персональні дані, ознайомтеся з нашими"
     }
   },
+  "cookiePolicy": "Політика cookies",
+  "termsOfService": "Умови використання",
   "privacy": {
     "title": "Політика конфіденційності",
     "lastUpdated": "Останнє оновлення: 28 березня 2026 р.",
@@ -808,8 +913,61 @@
       "p2": "З питань щодо цих Умов звертайтеся до нас за адресою:"
     }
   },
-  "docgen.type.tuzba.desc": "Для ініціювання цивільного судового процесу",
-  "docgen.type.zalba.desc": "Для оскарження судового рішення в суді вищої інстанції",
-  "docgen.type.prigovor.desc": "Для подання заперечення на судове рішення",
-  "docgen.type.ovrsni.desc": "Для ініціювання виконавчого провадження на підставі виконавчого документа"
+  "debtors": {
+    "title": "Боржники-банкрути",
+    "subtitle": "Довідник боржників, щодо яких відкрито або відкрито провадження у справі про банкрутство.",
+    "searchPlaceholder": "Пошук за назвою чи містом...",
+    "oibPh": "OIB...",
+    "loadError": "Помилка завантаження боржника.",
+    "noResults": "Боржників за пошуком немає.",
+    "linkedListings": "Процедура банкрутства",
+    "noLinkedListings": "Відсутні відповідні процедури банкрутства.",
+    "fields": {
+      "name": "Ім'я / Ім'я",
+      "address": "Адреса",
+      "city": "Місто",
+      "county": "графство",
+      "phone": "Телефон",
+      "caseNumber": "Номер позиції",
+      "status": "Статус",
+      "deadline": "Дедлайн",
+      "publishedAt": "Опубліковано"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Документація API — Judge Network",
+    "metaDescription": "Public REST API для доступу до баз даних судових рішень, експертів, перекладачів та судів Судової мережі.",
+    "title": "Загальнодоступний REST API",
+    "intro": "Відкритий API для партнерських установ і дослідників, яким потрібен програмний доступ до баз даних судової практики, експертів, перекладачів і судів Республіки Хорватія.",
+    "paginationNote": "Усі кінцеві точки списку повертають однаковий формат відповіді з розбивкою на сторінки:",
+    "endpointsNote": "Клацніть кінцеву точку, щоб переглянути параметри, приклад запиту та відповіді.",
+    "sections": {
+      "gettingStarted": "Початок роботи",
+      "pagination": "Пагінація",
+      "endpoints": "Кінцеві точки"
+    },
+    "cards": {
+      "baseUrl": "Базовий URL",
+      "auth": "Аутентифікація",
+      "rateLimit": "Ліміти (ліміт швидкості)",
+      "baseUrlNote": "Усі відповіді – JSON, UTF-8",
+      "authNote": "Ключ API необов’язковий, але збільшує ліміт."
+    },
+    "endpoint": {
+      "params": "Параметри",
+      "exampleRequest": "Зразок запиту",
+      "exampleResponse": "Приклад відповіді",
+      "fields": {
+        "name": "Ім'я",
+        "description": "опис",
+        "type": "Тип",
+        "required": "Обов'язковий",
+        "example": "приклад",
+        "in": "в"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Назад до адміністратора"
+  }
 }

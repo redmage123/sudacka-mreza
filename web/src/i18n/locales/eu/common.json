@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Bilatu Epaileen Sarean...",
+      "submit": "Bilatu",
+      "aria": "Bilatu"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Laburpen ofiziala soilik dago eskuragarri plataforma honetan. Irakurri testu osoa epaitegiaren webgunean."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Izena / Enpresa / Helbidea...",
+    "filterCompany": "Enpresa",
+    "filterCompanyPh": "Enpresaren izena..."
+  },
+  "judges": {
+    "detail": {
+      "role": "[eu] Sudac",
+      "court": "[eu] Sud",
+      "appointmentDate": "[eu] Datum imenovanja",
+      "specialization": "[eu] Specijalizacija",
+      "status": "[eu] Status",
+      "contact": "[eu] Kontakt podaci"
+    },
+    "searchPlaceholder": "Bilatu arbitroaren izenaren arabera...",
+    "totalCount": "Guztira: {{count}} epaile",
+    "totalCount_one": "Guztira: {{count}} epaile",
+    "totalCount_few": "Guztira: {{count}} epaile",
+    "totalCount_other": "Guztira: {{count}} epaile"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Izena / Enpresa / Helbidea...",
+    "filterCompany": "Enpresa",
+    "filterCompanyPh": "Enpresaren izena..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Europako Giza Eskubideen Auzitegia"
+      "echr": "Europako Giza Eskubideen Auzitegia",
+      "ecj": "Europar Batasuneko Auzitegia"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Lanaldia",
+      "monday": "astelehena",
+      "tuesday": "asteartea",
+      "wednesday": "asteazkena",
+      "thursday": "Osteguna",
+      "friday": "ostirala",
+      "saturday": "Larunbata",
+      "sunday": "Igandea",
+      "notes": "Oharra",
+      "closed": "Itxita"
+    },
+    "jurisdictionScope": "Eskumen-eremua",
+    "departmentsCount_one": "{{count}} saila",
+    "departmentsCount_few": "{{count}} saila",
+    "departmentsCount_other": "{{count}} saila",
+    "searchPlaceholderNameAddr": "Epaitegiaren izena edo helbidea..."
   },
   "nav": {
     "home": "Hasiera",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Auzitegien mapa",
-    "courtType": {
-      "municipal": "Udal-",
-      "county": "Probintzia-",
-      "commercial": "Merkataritza-",
-      "misdemeanour": "Falta-",
-      "administrative": "Administrazio-"
-    },
-    "legend": "Legenda",
-    "loading": "Auzitegiak kargatzen...",
-    "filterAll": "Auzitegi guztiak",
-    "filterMunicipal": "Udal-",
-    "filterCounty": "Probintzia-",
-    "filterCommercial": "Merkataritza-",
-    "filterMisdemeanour": "Falta-",
-    "filterAdministrative": "Administrazio-",
-    "viewDetails": "Xehetasunak ikusi",
-    "courts": "auzitegiak",
-    "error": "Ezin dira auzitegien datuak kargatu. Mesedez, saiatu berriro."
-  },
-  "jurisdiction": {
-    "title": "Jurisdikzio-bilatzailea",
-    "subtitle": "Aurkitu zure kasurako auzitegi eskuduna kokapenean eta kasu motan oinarrituta.",
-    "cityLabel": "Hiria edo udalerria",
-    "cityPlaceholder": "adib. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Kasu mota",
-    "caseType": {
-      "civilMinor": "Zibila (txikia) — Udal-auzitegia",
-      "criminalMinor": "Penala (5 urte baino gutxiago) — Udal-auzitegia",
-      "criminalSerious": "Penala (5+ urte) — Probintzia-auzitegia",
-      "commercial": "Merkataritza — Merkataritza-auzitegia",
-      "misdemeanour": "Falta — Falta-auzitegia",
-      "administrative": "Administrazioa — Administrazio-auzitegia"
-    },
-    "results": "Emaitzak",
-    "noResults": "Ez da auzitegi egokirik aurkitu kokapen eta kasu mota honetarako.",
-    "noResultsHint": "Saiatu beste hiri-izen batekin edo begiratu auzitegien direktorio osoa.",
-    "viewCourtsDirectory": "Ikusi auzitegien direktorioa"
-  },
-  "calculator": {
-    "title": "Auzitegi-tasak",
-    "selectCaseType": "Kasu mota",
-    "caseType": {
-      "civil": "Auzi zibila",
-      "criminal": "Prozedura penala",
-      "commercial": "Merkataritza-auzia",
-      "administrative": "Administrazio-auzia",
-      "nonContentious": "Borondatezko jurisdikzioko prozedura"
-    },
-    "claimValue": "Erreklamazio-balioa (EUR)",
-    "calculate": "Tasa kalkulatu",
-    "filingFee": "Aurkezteko tasa",
-    "appealFee": "Apelazioko tasa",
-    "enforcementFee": "Betearazpeneko tasa",
-    "fixedFee": "Tasa finkoak",
-    "exemptionsTitle": "Tasa-salbuespenak",
-    "exemption1": "Gizarte-laguntzaren onuradunak auzitegi-tasa guztietatik salbuetsita daude.",
-    "exemption2": "Adingabeak auzitegi-tasetatik salbuetsita daude beren eskubideei buruzko prozeduretan.",
-    "exemption3": "Lan-auzietako langileak 2.650 €-rainoko erreklamazio-balioarekin salbuetsita daude.",
-    "paymentTitle": "Ordainketa-metodoak",
-    "payment1": "Banku-transferentzia auzitegiaren kontu ofizialera",
-    "payment2": "e-Pristojbe ataria (ordainketa elektronikoa)",
-    "payment3": "Auzitegiko kutxa (aurrez aurre auzitegian)",
-    "legalBasis": "Oinarri juridikoa",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, aldaketekin). Zenbateko guztiak EUR-ra bihurtuta 2023.01.01etik.",
-    "minorOffenses": "Arau-hauste arinak",
-    "seriousOffenses": "Delitu larriak"
-  },
-  "jurisdictionFinder": {
-    "title": "Aurkitu zure auzitegia",
-    "description": "Sartu zure hiria eta kasu mota zure kasuan eskumena duen auzitegia aurkitzeko.",
-    "cityLabel": "Zure hiria edo udalerria",
-    "cityPlaceholder": "adib. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Kasu mota",
-    "caseType": {
-      "civilMinor": "Auzi zibila (2.654 € arte)",
-      "civilMajor": "Auzi zibila (2.654 € baino gehiago)",
-      "criminalMinor": "Penala (arau-hauste arina)",
-      "criminalSerious": "Penala (delitu larria)",
-      "commercial": "Merkataritza auzia",
-      "misdemeanour": "Falta / trafiko arau-haustea",
-      "administrative": "Administrazio publikoarekiko auzia"
-    },
-    "find": "Aurkitu auzitegia",
-    "result": "Auzitegi eskuduna",
-    "noResult": "Ez da auzitegirik aurkitu hiri honetarako. Saiatu auzitegien direktorioa arakatzen.",
-    "browseAll": "Auzitegi guztiak arakatu",
-    "viewProfile": "Auzitegiaren profila ikusi"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Auzitegi-tasak",
+    "selectCaseType": "Kasu mota",
+    "caseType": {
+      "civil": "Auzi zibila",
+      "criminal": "Prozedura penala",
+      "commercial": "Merkataritza-auzia",
+      "administrative": "Administrazio-auzia",
+      "nonContentious": "Borondatezko jurisdikzioko prozedura"
+    },
+    "claimValue": "Erreklamazio-balioa (EUR)",
+    "fixedFee": "Tasa finkoak",
+    "minorOffenses": "Arau-hauste arinak",
+    "seriousOffenses": "Delitu larriak",
+    "filingFee": "Aurkezteko tasa",
+    "appealFee": "Apelazioko tasa",
+    "enforcementFee": "Betearazpeneko tasa",
+    "exemptionsTitle": "Tasa-salbuespenak",
+    "exemption1": "Gizarte-laguntzaren onuradunak auzitegi-tasa guztietatik salbuetsita daude.",
+    "exemption2": "Adingabeak auzitegi-tasetatik salbuetsita daude beren eskubideei buruzko prozeduretan.",
+    "exemption3": "Lan-auzietako langileak 2.650 €-rainoko erreklamazio-balioarekin salbuetsita daude.",
+    "paymentTitle": "Ordainketa-metodoak",
+    "payment1": "Banku-transferentzia auzitegiaren kontu ofizialera",
+    "payment2": "e-Pristojbe ataria (ordainketa elektronikoa)",
+    "payment3": "Auzitegiko kutxa (aurrez aurre auzitegian)",
+    "legalBasis": "Oinarri juridikoa",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, aldaketekin). Zenbateko guztiak EUR-ra bihurtuta 2023.01.01etik.",
+    "calculate": "Tasa kalkulatu"
+  },
+  "map": {
+    "title": "Auzitegien mapa",
+    "filterAll": "Auzitegi guztiak",
+    "filterMunicipal": "Udal-",
+    "filterCounty": "Probintzia-",
+    "filterCommercial": "Merkataritza-",
+    "filterMisdemeanour": "Falta-",
+    "filterAdministrative": "Administrazio-",
+    "courtType": {
+      "municipal": "Udal-",
+      "county": "Probintzia-",
+      "commercial": "Merkataritza-",
+      "misdemeanour": "Falta-",
+      "administrative": "Administrazio-"
+    },
+    "legend": "Legenda",
+    "error": "Ezin dira auzitegien datuak kargatu. Mesedez, saiatu berriro.",
+    "viewDetails": "Xehetasunak ikusi",
+    "loading": "Auzitegiak kargatzen...",
+    "courts": "auzitegiak"
+  },
+  "jurisdiction": {
+    "title": "Jurisdikzio-bilatzailea",
+    "subtitle": "Aurkitu zure kasurako auzitegi eskuduna kokapenean eta kasu motan oinarrituta.",
+    "cityLabel": "Hiria edo udalerria",
+    "cityPlaceholder": "adib. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Kasu mota",
+    "caseType": {
+      "civilMinor": "Zibila (txikia) — Udal-auzitegia",
+      "criminalMinor": "Penala (5 urte baino gutxiago) — Udal-auzitegia",
+      "criminalSerious": "Penala (5+ urte) — Probintzia-auzitegia",
+      "commercial": "Merkataritza — Merkataritza-auzitegia",
+      "misdemeanour": "Falta — Falta-auzitegia",
+      "administrative": "Administrazioa — Administrazio-auzitegia"
+    },
+    "results": "Emaitzak",
+    "noResults": "Ez da auzitegi egokirik aurkitu kokapen eta kasu mota honetarako.",
+    "noResultsHint": "Saiatu beste hiri-izen batekin edo begiratu auzitegien direktorio osoa.",
+    "viewCourtsDirectory": "Ikusi auzitegien direktorioa"
+  },
+  "jurisdictionFinder": {
+    "title": "Aurkitu zure auzitegia",
+    "description": "Sartu zure hiria eta kasu mota zure kasuan eskumena duen auzitegia aurkitzeko.",
+    "cityLabel": "Zure hiria edo udalerria",
+    "cityPlaceholder": "adib. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Kasu mota",
+    "caseType": {
+      "civilMinor": "Auzi zibila (2.654 € arte)",
+      "civilMajor": "Auzi zibila (2.654 € baino gehiago)",
+      "criminalMinor": "Penala (arau-hauste arina)",
+      "criminalSerious": "Penala (delitu larria)",
+      "commercial": "Merkataritza auzia",
+      "misdemeanour": "Falta / trafiko arau-haustea",
+      "administrative": "Administrazio publikoarekiko auzia"
+    },
+    "find": "Aurkitu auzitegia",
+    "result": "Auzitegi eskuduna",
+    "noResult": "Ez da auzitegirik aurkitu hiri honetarako. Saiatu auzitegien direktorioa arakatzen.",
+    "browseAll": "Auzitegi guztiak arakatu",
+    "viewProfile": "Auzitegiaren profila ikusi"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Porrotaren zordunak",
+      "debtorsDesc": "Zordunen direktorioa, erlazionatutako prozedura guztien profila eta historiarekin",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Bidali bidalketa",
+      "filingDesc": "Porrotaren espediente bat aurkeztu — erreklamazioa aurkeztea, hasierako proposamena, txostena, berregituraketa plana"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Porrotaren iragarkiak",
+      "description": "Aldizkari Ofizialean eta Aldizkari Ofizialean argitaratutako konkurtso-prozedura aktiboa.",
+      "searchPlaceholder": "Bilatu zordunaren izenaren arabera...",
+      "count": "{{n}} iragarkiak",
+      "count_one": "{{n}} ad",
+      "count_few": "{{n}} iragarkiak",
+      "count_other": "{{n}} iragarkiak",
+      "loadError": "Ezin dira kargatu porrotaren iragarkiak.",
+      "empty": "Ez dago porrotaren iragarki aktiborik.",
+      "unknownDebtor": "Zordun ezezaguna",
+      "deadline": "Epea"
+    },
+    "decisions": {
+      "title": "Porrotaren erabakiak",
+      "description": "Kroaziako porrot-prozeduretako auzitegien erabakiak.",
+      "loadError": "Ezin da porrotaren erabakiak kargatu.",
+      "noResults": "Ez dago emaitzarik.",
+      "viewDecision": "Ireki erabakia"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Erabiltzaile mota",
+      "userTypeOptions": {
+        "person": "Pertsona",
+        "legal_entity": "Pertsona juridikoa"
+      },
+      "organisationName": "Pertsona juridikoaren izena",
+      "organisationOib": "Pertsona juridikoen OIB",
+      "legalEntityNote": "Pertsona juridikoek (abokatu-bulegoak, beren izenean jarduten duten porrotaren administratzaileak, erregistratutako erakundeak) porrot-eskaerak aurkez ditzakete ikuspegi editorialaren bidez. Zure baimena automatikoki aktibatuko da erregistratu ondoren.",
+      "errorOib": "OIBek zehazki 11 zifra izan behar ditu.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Pasahitza ahaztu zait",
+      "subtitle": "Sartu zure helbide elektronikoa eta esteka bat bidaliko dizugu pasahitz berri bat konfiguratzeko.",
+      "submit": "Bidali esteka bat",
+      "submitting": "Bidaltzen dugu…",
+      "backToLogin": "Itzuli saioa hasteko",
+      "errorGeneric": "Zerbait gaizki joan da. Mesedez, saiatu berriro."
+    },
+    "resetPassword": {
+      "title": "Ezarri pasahitz berri bat",
+      "subtitle": "Aukeratu pasahitz berri bat zure konturako.",
+      "newPassword": "Pasahitz berria",
+      "confirmPassword": "Berretsi pasahitz berria",
+      "submit": "Ezarri pasahitz berri bat",
+      "submitting": "Prestatzen ari gara...",
+      "done": "Zure pasahitza behar bezala ezarri da. Izena eman dezakezu orain.",
+      "goToLogin": "Joan aplikaziora",
+      "missingToken": "Pasahitza aldatzeko esteka honek ez du tokenik. Eskatu berri bat.",
+      "requestNew": "Eskatu esteka berri bat",
+      "errorGeneric": "Ezin izan da pasahitza ezarri. Mesedez, saiatu berriro."
+    },
+    "password": {
+      "show": "Erakutsi pasahitza",
+      "hide": "Ezkutatu pasahitza"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Prentsa laburpena — Epaileen Sarea aipatzen den egunkarietako artikuluak eta web atariak. Edukia gune zaharreko datuen migrazioaren zati gisa beteko da."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audio galeriak",
+      "placeholder": "Audio-aipamenak — irratiko elkarrizketak eta Epaileen Sareari buruzko saioak. Edukia gune zaharreko datuen migrazioaren zati gisa beteko da."
+    },
+    "video": {
+      "title": "Bideo galeriak",
+      "placeholder": "Bideo-aipamenak — telebistako bereziak eta elkarrizketak. Edukia gune zaharreko datuen migrazioaren zati gisa beteko da."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Select document type",
     "type": {
       "tuzba": {
+        "_value": "Auzia",
         "desc": "Auztegi aurrean prozedura zivil bat hasiarazteko"
       },
       "zalba": {
+        "_value": "Salaketa",
         "desc": "Auztegiaren erabakia arraibete bidez erralatzeko"
       },
       "prigovor": {
+        "_value": "Salaketa",
         "desc": "Auztegi-erabaki bati objekzioa aurkezteko"
       },
       "ovrsni": {
+        "_value": "Proposamen exekutiboa",
         "desc": "Behinbetzeraketa-dokumentu baten oinarrizan behinbetzeraketa hasiarazteko"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Iraungita"
     }
   },
-  "cookiePolicy": "Cookie politika",
-  "termsOfService": "Erabilera baldintzak",
-  "judges": {
-    "detail": {
-      "role": "[eu] Sudac",
-      "court": "[eu] Sud",
-      "appointmentDate": "[eu] Datum imenovanja",
-      "specialization": "[eu] Specijalizacija",
-      "status": "[eu] Status",
-      "contact": "[eu] Kontakt podaci"
-    }
-  },
   "legalNews": {
     "title": "[eu] Pravne vijesti",
     "subtitle": "[eu] Pregled aktualnih pravnih vijesti iz domaćih i europskih pravnih izvora.",
@@ -716,6 +819,8 @@
       "p2": "[eu] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Cookie politika",
+  "termsOfService": "Erabilera baldintzak",
   "privacy": {
     "title": "Privatutasun politika",
     "lastUpdated": "Azken eguneratzea: 2026ko martxoaren 28a.",
@@ -808,8 +913,61 @@
       "p2": "Baldintza haueei buruzko galdergaentzat, kontaktatu gurekin honetan:"
     }
   },
-  "docgen.type.tuzba.desc": "Auzitegi aurrean prozedura zivil bat hasiarazteko",
-  "docgen.type.zalba.desc": "Errege-auzitegi baten erabaki bat apegarteko",
-  "docgen.type.prigovor.desc": "Auzitegi erabaki bati oharra aurkezteko",
-  "docgen.type.ovrsni.desc": "Behinbetzearazpen-dokumentu baten oinarrizian behinbetzearazpena hasiarazteko"
+  "debtors": {
+    "title": "Porrotaren zordunak",
+    "subtitle": "Konkurtso-prozedura egin edo egin zaien zordunen direktorioa.",
+    "searchPlaceholder": "Bilatu izena edo hiriaren arabera...",
+    "oibPh": "OIB...",
+    "loadError": "Errore bat gertatu da zorduna kargatzean.",
+    "noResults": "Ez dago bilaketarekin bat datorren zordunik.",
+    "linkedListings": "Konkurtso-prozedura",
+    "noLinkedListings": "Ez dago erlazionatutako konkurtso-prozedurarik.",
+    "fields": {
+      "name": "Izena / Izena",
+      "address": "Helbidea",
+      "city": "Hiria",
+      "county": "Konderria",
+      "phone": "Telefonoa",
+      "caseNumber": "Elementu zenbakia",
+      "status": "Egoera",
+      "deadline": "Epea",
+      "publishedAt": "Argitaratu"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API Dokumentazioa — Epaileen Sarea",
+    "metaDescription": "REST API publikoa Sare Judizialaren ebazpen judizialen, adituen, interpreteen eta epaitegien datu-baseetara sartzeko.",
+    "title": "REST API publikoa",
+    "intro": "API irekia Kroaziako Errepublikako epaitegien, adituen, interpreteen eta auzitegien datu-baseetarako sarbide programatikoa nahi duten erakunde bazkideentzat eta ikertzaileentzat.",
+    "paginationNote": "Zerrendako amaiera-puntu guztiek orri-erantzun formatu bera itzultzen dute:",
+    "endpointsNote": "Egin klik amaierako puntuan parametroak, adibide eskaera eta erantzuna ikusteko.",
+    "sections": {
+      "gettingStarted": "Lanaren hasiera",
+      "pagination": "Paginazioa",
+      "endpoints": "Amaiera-puntuak"
+    },
+    "cards": {
+      "baseUrl": "Oinarrizko URLa",
+      "auth": "Autentifikazioa",
+      "rateLimit": "Mugak (tasa muga)",
+      "baseUrlNote": "Erantzun guztiak JSON, UTF-8 dira",
+      "authNote": "API gakoa aukerakoa da, baina muga handitzen du."
+    },
+    "endpoint": {
+      "params": "Parametroak",
+      "exampleRequest": "Lagin eskaera",
+      "exampleResponse": "Erantzun adibidea",
+      "fields": {
+        "name": "Izena",
+        "description": "Deskribapena",
+        "type": "Mota",
+        "required": "Nahitaezkoa",
+        "example": "Adibidea",
+        "in": "urtean"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Itzuli Admin"
+  }
 }

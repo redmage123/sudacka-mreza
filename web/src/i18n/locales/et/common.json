@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Otsige kohtunike võrgustikust...",
+      "submit": "Otsi",
+      "aria": "Otsi"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Sellel platvormil on saadaval ainult ametlik kokkuvõte. Lugege täisteksti määruse teinud kohtu veebisaidilt."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nimi/ettevõte/aadress...",
+    "filterCompany": "Ettevõte",
+    "filterCompanyPh": "Firma nimi..."
+  },
+  "judges": {
+    "detail": {
+      "role": "[et] Sudac",
+      "court": "[et] Sud",
+      "appointmentDate": "[et] Datum imenovanja",
+      "specialization": "[et] Specijalizacija",
+      "status": "[et] Status",
+      "contact": "[et] Kontakt podaci"
+    },
+    "searchPlaceholder": "Otsi kohtuniku nime järgi...",
+    "totalCount": "Kokku: {{count}} kohtunikku",
+    "totalCount_one": "Kokku: {{count}} kohtunik",
+    "totalCount_few": "Kokku: {{count}} kohtunikku",
+    "totalCount_other": "Kokku: {{count}} kohtunikku"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nimi/ettevõte/aadress...",
+    "filterCompany": "Ettevõte",
+    "filterCompanyPh": "Firma nimi..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Euroopa Inimõiguste Kohus"
+      "echr": "Euroopa Inimõiguste Kohus",
+      "ecj": "Euroopa Liidu kohus"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Tööaeg",
+      "monday": "esmaspäev",
+      "tuesday": "teisipäeval",
+      "wednesday": "kolmapäeval",
+      "thursday": "neljapäeval",
+      "friday": "reedel",
+      "saturday": "laupäeval",
+      "sunday": "pühapäev",
+      "notes": "Märkus",
+      "closed": "Suletud"
+    },
+    "jurisdictionScope": "Jurisdiktsiooni piirkond",
+    "departmentsCount_one": "{{count}} osakond",
+    "departmentsCount_few": "{{count}} osakond",
+    "departmentsCount_other": "{{count}} osakond",
+    "searchPlaceholderNameAddr": "Kohtu nimi või aadress..."
   },
   "nav": {
     "home": "Avaleht",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Kohtute kaart",
-    "courtType": {
-      "municipal": "Maa-",
-      "county": "Ringkonna-",
-      "commercial": "Kaubandus-",
-      "misdemeanour": "Väärteo-",
-      "administrative": "Haldus-"
-    },
-    "legend": "Legend",
-    "loading": "Kohtute laadimine...",
-    "filterAll": "Kõik kohtud",
-    "filterMunicipal": "Maa-",
-    "filterCounty": "Ringkonna-",
-    "filterCommercial": "Kaubandus-",
-    "filterMisdemeanour": "Väärteo-",
-    "filterAdministrative": "Haldus-",
-    "viewDetails": "Vaata üksikasju",
-    "courts": "kohtud",
-    "error": "Kohtute andmeid ei saa laadida. Palun proovige uuesti."
-  },
-  "jurisdiction": {
-    "title": "Kohtualluvuse otsing",
-    "subtitle": "Leidke oma kohtuasja jaoks pädev kohus asukoha ja kohtuasja liigi alusel.",
-    "cityLabel": "Linn või vald",
-    "cityPlaceholder": "nt Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Kohtuasja liik",
-    "caseType": {
-      "civilMinor": "Tsiviil (väike) — Maakohus",
-      "criminalMinor": "Kriminaal (alla 5 aasta) — Maakohus",
-      "criminalSerious": "Kriminaal (5+ aastat) — Ringkonnakohus",
-      "commercial": "Kaubandus — Kaubanduskohus",
-      "misdemeanour": "Väärtegu — Väärteokohus",
-      "administrative": "Haldus — Halduskohus"
-    },
-    "results": "Tulemused",
-    "noResults": "Selle asukoha ja kohtuasja liigi jaoks ei leitud sobivat kohut.",
-    "noResultsHint": "Proovige teist linna nime või vaadake kohtute täielikku kataloogi.",
-    "viewCourtsDirectory": "Vaata kohtute kataloogi"
-  },
-  "calculator": {
-    "title": "Kohtukulud",
-    "selectCaseType": "Kohtuasja liik",
-    "caseType": {
-      "civil": "Tsiviilvaidlus",
-      "criminal": "Kriminaalmenetlus",
-      "commercial": "Kaubandusvaidlus",
-      "administrative": "Haldusvaidlus",
-      "nonContentious": "Hagita menetlus"
-    },
-    "claimValue": "Nõude väärtus (EUR)",
-    "calculate": "Arvuta tasu",
-    "filingFee": "Esitamise tasu",
-    "appealFee": "Apellatsiooni tasu",
-    "enforcementFee": "Täitmise tasu",
-    "fixedFee": "Fikseeritud tasud",
-    "exemptionsTitle": "Tasuvabastused",
-    "exemption1": "Sotsiaalhoolekannet saavad isikud on kõigist kohtukuludest vabastatud.",
-    "exemption2": "Alaealised on kohtukuludest vabastatud menetlustes, mis puudutavad nende õigusi.",
-    "exemption3": "Töötajad töövaidlustes nõude väärtusega kuni 2 650 € on vabastatud.",
-    "paymentTitle": "Makseviisid",
-    "payment1": "Pangaülekanne kohtu ametlikule kontole",
-    "payment2": "e-Pristojbe portaal (elektrooniline makse)",
-    "payment3": "Kohtu kassa (isiklikult kohtus)",
-    "legalBasis": "Õiguslik alus",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, koos muudatustega). Kõik summad on alates 01.01.2023 ümber arvestatud eurodesse.",
-    "minorOffenses": "Kergemad rikkumised",
-    "seriousOffenses": "Rasked kuriteod"
-  },
-  "jurisdictionFinder": {
-    "title": "Leidke oma kohus",
-    "description": "Sisestage oma linn ja kohtuasja liik, et leida pädev kohus.",
-    "cityLabel": "Teie linn või omavalitsus",
-    "cityPlaceholder": "nt Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Kohtuasja liik",
-    "caseType": {
-      "civilMinor": "Tsiviilvaidlus (kuni 2 654 €)",
-      "civilMajor": "Tsiviilvaidlus (üle 2 654 €)",
-      "criminalMinor": "Kriminaalasi (kerge rikkumine)",
-      "criminalSerious": "Kriminaalasi (raske kuritegu)",
-      "commercial": "Kaubandusvaidlus",
-      "misdemeanour": "Väärtegu / liiklusrikkumine",
-      "administrative": "Vaidlus riigiasutusega"
-    },
-    "find": "Leia kohus",
-    "result": "Pädev kohus",
-    "noResult": "Selle linna jaoks kohut ei leitud. Proovige kohtute kataloogi.",
-    "browseAll": "Sirvi kõiki kohtuid",
-    "viewProfile": "Vaata kohtu profiili"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Kohtukulud",
+    "selectCaseType": "Kohtuasja liik",
+    "caseType": {
+      "civil": "Tsiviilvaidlus",
+      "criminal": "Kriminaalmenetlus",
+      "commercial": "Kaubandusvaidlus",
+      "administrative": "Haldusvaidlus",
+      "nonContentious": "Hagita menetlus"
+    },
+    "claimValue": "Nõude väärtus (EUR)",
+    "fixedFee": "Fikseeritud tasud",
+    "minorOffenses": "Kergemad rikkumised",
+    "seriousOffenses": "Rasked kuriteod",
+    "filingFee": "Esitamise tasu",
+    "appealFee": "Apellatsiooni tasu",
+    "enforcementFee": "Täitmise tasu",
+    "exemptionsTitle": "Tasuvabastused",
+    "exemption1": "Sotsiaalhoolekannet saavad isikud on kõigist kohtukuludest vabastatud.",
+    "exemption2": "Alaealised on kohtukuludest vabastatud menetlustes, mis puudutavad nende õigusi.",
+    "exemption3": "Töötajad töövaidlustes nõude väärtusega kuni 2 650 € on vabastatud.",
+    "paymentTitle": "Makseviisid",
+    "payment1": "Pangaülekanne kohtu ametlikule kontole",
+    "payment2": "e-Pristojbe portaal (elektrooniline makse)",
+    "payment3": "Kohtu kassa (isiklikult kohtus)",
+    "legalBasis": "Õiguslik alus",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, koos muudatustega). Kõik summad on alates 01.01.2023 ümber arvestatud eurodesse.",
+    "calculate": "Arvuta tasu"
+  },
+  "map": {
+    "title": "Kohtute kaart",
+    "filterAll": "Kõik kohtud",
+    "filterMunicipal": "Maa-",
+    "filterCounty": "Ringkonna-",
+    "filterCommercial": "Kaubandus-",
+    "filterMisdemeanour": "Väärteo-",
+    "filterAdministrative": "Haldus-",
+    "courtType": {
+      "municipal": "Maa-",
+      "county": "Ringkonna-",
+      "commercial": "Kaubandus-",
+      "misdemeanour": "Väärteo-",
+      "administrative": "Haldus-"
+    },
+    "legend": "Legend",
+    "error": "Kohtute andmeid ei saa laadida. Palun proovige uuesti.",
+    "viewDetails": "Vaata üksikasju",
+    "loading": "Kohtute laadimine...",
+    "courts": "kohtud"
+  },
+  "jurisdiction": {
+    "title": "Kohtualluvuse otsing",
+    "subtitle": "Leidke oma kohtuasja jaoks pädev kohus asukoha ja kohtuasja liigi alusel.",
+    "cityLabel": "Linn või vald",
+    "cityPlaceholder": "nt Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Kohtuasja liik",
+    "caseType": {
+      "civilMinor": "Tsiviil (väike) — Maakohus",
+      "criminalMinor": "Kriminaal (alla 5 aasta) — Maakohus",
+      "criminalSerious": "Kriminaal (5+ aastat) — Ringkonnakohus",
+      "commercial": "Kaubandus — Kaubanduskohus",
+      "misdemeanour": "Väärtegu — Väärteokohus",
+      "administrative": "Haldus — Halduskohus"
+    },
+    "results": "Tulemused",
+    "noResults": "Selle asukoha ja kohtuasja liigi jaoks ei leitud sobivat kohut.",
+    "noResultsHint": "Proovige teist linna nime või vaadake kohtute täielikku kataloogi.",
+    "viewCourtsDirectory": "Vaata kohtute kataloogi"
+  },
+  "jurisdictionFinder": {
+    "title": "Leidke oma kohus",
+    "description": "Sisestage oma linn ja kohtuasja liik, et leida pädev kohus.",
+    "cityLabel": "Teie linn või omavalitsus",
+    "cityPlaceholder": "nt Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Kohtuasja liik",
+    "caseType": {
+      "civilMinor": "Tsiviilvaidlus (kuni 2 654 €)",
+      "civilMajor": "Tsiviilvaidlus (üle 2 654 €)",
+      "criminalMinor": "Kriminaalasi (kerge rikkumine)",
+      "criminalSerious": "Kriminaalasi (raske kuritegu)",
+      "commercial": "Kaubandusvaidlus",
+      "misdemeanour": "Väärtegu / liiklusrikkumine",
+      "administrative": "Vaidlus riigiasutusega"
+    },
+    "find": "Leia kohus",
+    "result": "Pädev kohus",
+    "noResult": "Selle linna jaoks kohut ei leitud. Proovige kohtute kataloogi.",
+    "browseAll": "Sirvi kõiki kohtuid",
+    "viewProfile": "Vaata kohtu profiili"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Pankrotis võlgnikud",
+      "debtorsDesc": "Võlgnike kataloog kõigi seotud protseduuride profiili ja ajalooga",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Esitage avaldus",
+      "filingDesc": "Pankrotiavalduse esitamine — nõude, algatamisettepaneku, aruande, restruktureerimiskava esitamine"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Pankrotikuulutused",
+      "description": "Aktiivne pankrotimenetlus on avaldatud Ametlikes Teadaannetes ja Ametlikes Teadaannetes.",
+      "searchPlaceholder": "Otsi võlgniku nime järgi...",
+      "count": "{{n}} reklaamid",
+      "count_one": "{{n}} reklaam",
+      "count_few": "{{n}} reklaamid",
+      "count_other": "{{n}} reklaamid",
+      "loadError": "Pankrotikuulutusi ei saa laadida.",
+      "empty": "Aktiivseid pankrotikuulutusi pole.",
+      "unknownDebtor": "Tundmatu võlgnik",
+      "deadline": "Tähtaeg"
+    },
+    "decisions": {
+      "title": "Pankrotiotsused",
+      "description": "Horvaatia pankrotimenetluse kohtuotsused.",
+      "loadError": "Pankrotiotsuseid pole võimalik laadida.",
+      "noResults": "Tulemusi pole.",
+      "viewDecision": "Ava otsus"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Kasutaja tüüp",
+      "userTypeOptions": {
+        "person": "Isik",
+        "legal_entity": "Juriidiline isik"
+      },
+      "organisationName": "Juriidilise isiku nimi",
+      "organisationOib": "juriidiliste isikute OIB",
+      "legalEntityNote": "Juriidilised isikud (advokaadibürood, enda nimel tegutsevad pankrotihaldurid, registreeritud organisatsioonid) saavad pankrotiavaldusi esitada toimetuse kaudu. Teie autoriseerimine aktiveeritakse automaatselt pärast registreerimist.",
+      "errorOib": "OIB peab koosnema täpselt 11 numbrist.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Unustasin parooli",
+      "subtitle": "Sisestage oma e-posti aadress ja me saadame teile lingi uue parooli seadistamiseks.",
+      "submit": "Saada link",
+      "submitting": "Saadame…",
+      "backToLogin": "Tagasi sisselogimise juurde",
+      "errorGeneric": "Midagi läks valesti. Palun proovi uuesti."
+    },
+    "resetPassword": {
+      "title": "Seadke uus parool",
+      "subtitle": "Valige oma konto jaoks uus parool.",
+      "newPassword": "Uus parool",
+      "confirmPassword": "Kinnitage uus parool",
+      "submit": "Seadke uus parool",
+      "submitting": "Valmistame ette...",
+      "done": "Teie parool on edukalt seadistatud. Saate nüüd registreeruda.",
+      "goToLogin": "Mine rakendusse",
+      "missingToken": "Sellel parooli muutmise lingil pole luba. Taotlege uut.",
+      "requestNew": "Küsi uut linki",
+      "errorGeneric": "Parooli ei saanud määrata. Palun proovi uuesti."
+    },
+    "password": {
+      "show": "Näita parooli",
+      "hide": "Peida parool"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Pressi väljalõige — ajaleheartiklid ja veebiportaalid, milles mainitakse kohtunike võrgustikku. Sisu täidetakse osana andmete migratsioonist vanalt saidilt."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Heligaleriid",
+      "placeholder": "Helimainimised — raadiointervjuud ja saated Judge Networki kohta. Sisu täidetakse osana andmete migratsioonist vanalt saidilt."
+    },
+    "video": {
+      "title": "Videogaleriid",
+      "placeholder": "Videomainimised – televisiooni eripakkumised ja intervjuud. Sisu täidetakse osana andmete migratsioonist vanalt saidilt."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Select document type",
     "type": {
       "tuzba": {
+        "_value": "Kohtuasi",
         "desc": "Civilmenetluse alustamiseks kohtus"
       },
       "zalba": {
+        "_value": "Kaebus",
         "desc": "Kohtuoendi vaidlustamiseks kõrgemasse kohtu asutusse"
       },
       "prigovor": {
+        "_value": "Kaebus",
         "desc": "Kohtumõiste vaidlustamiseks"
       },
       "ovrsni": {
+        "_value": "Täitev ettepanek",
         "desc": "Võilatäitmise alustamiseks täitmisakti alusel"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Möödas"
     }
   },
-  "cookiePolicy": "Küpsiste poliitika",
-  "termsOfService": "Kasutustingimused",
-  "judges": {
-    "detail": {
-      "role": "[et] Sudac",
-      "court": "[et] Sud",
-      "appointmentDate": "[et] Datum imenovanja",
-      "specialization": "[et] Specijalizacija",
-      "status": "[et] Status",
-      "contact": "[et] Kontakt podaci"
-    }
-  },
   "legalNews": {
     "title": "[et] Pravne vijesti",
     "subtitle": "[et] Pregled aktualnih pravnih vijesti iz domaćih i europskih pravnih izvora.",
@@ -716,6 +819,8 @@
       "p2": "[et] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Küpsiste poliitika",
+  "termsOfService": "Kasutustingimused",
   "privacy": {
     "title": "Privaatsuspoliitika",
     "lastUpdated": "Viimati uuendatud: 28. märts 2026.",
@@ -808,8 +913,61 @@
       "p2": "Küsimuste korral seoses nende Tingimustega võtke meiega ühendust:"
     }
   },
-  "docgen.type.tuzba.desc": "Tsiviilmenetluse alustamiseks kohtus",
-  "docgen.type.zalba.desc": "Kohtumõtte edasikaigutamiseks kõrgemasse kohtu",
-  "docgen.type.prigovor.desc": "Kohtumääruse vaidlustamiseks",
-  "docgen.type.ovrsni.desc": "Võõratuse alustamiseks täidetihtuja alusel"
+  "debtors": {
+    "title": "Pankrotis võlgnikud",
+    "subtitle": "Võlgnike register, kelle suhtes pankrotimenetlus on või on läbi viidud.",
+    "searchPlaceholder": "Otsi nime või linna järgi...",
+    "oibPh": "OIB...",
+    "loadError": "Viga võlgniku laadimisel.",
+    "noResults": "Otsingule vastavaid võlglasi pole.",
+    "linkedListings": "Pankrotimenetlus",
+    "noLinkedListings": "Sellega seotud pankrotimenetlusi ei ole.",
+    "fields": {
+      "name": "Nimi / nimi",
+      "address": "Aadress",
+      "city": "Linn",
+      "county": "Maakond",
+      "phone": "Telefon",
+      "caseNumber": "Kauba number",
+      "status": "Olek",
+      "deadline": "Tähtaeg",
+      "publishedAt": "Avaldatud"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API dokumentatsioon – Judge Network",
+    "metaDescription": "Avalik REST API juurdepääsuks õigusvõrgustiku kohtulahendite, ekspertide, tõlkide ja kohtute andmebaasidele.",
+    "title": "Avalik REST API",
+    "intro": "Avatud API partnerasutustele ja teadlastele, kes soovivad programmilist juurdepääsu Horvaatia Vabariigi kohtupraktika, ekspertide, tõlkide ja kohtute andmebaasidele.",
+    "paginationNote": "Kõik loendi lõpp-punktid tagastavad sama leheküljelise vastuse vormingu:",
+    "endpointsNote": "Klõpsake parameetrite, näidispäringu ja vastuse vaatamiseks lõpp-punkti.",
+    "sections": {
+      "gettingStarted": "Töö algus",
+      "pagination": "Leheküljed",
+      "endpoints": "Lõpp-punktid"
+    },
+    "cards": {
+      "baseUrl": "Baas-URL",
+      "auth": "Autentimine",
+      "rateLimit": "Piirangud (määra piirang)",
+      "baseUrlNote": "Kõik vastused on JSON, UTF-8",
+      "authNote": "API võti on valikuline, kuid suurendab limiiti."
+    },
+    "endpoint": {
+      "params": "Parameetrid",
+      "exampleRequest": "Taotluse näidis",
+      "exampleResponse": "Vastuse näide",
+      "fields": {
+        "name": "Nimi",
+        "description": "Kirjeldus",
+        "type": "Tüüp",
+        "required": "Kohustuslik",
+        "example": "Näide",
+        "in": "sisse"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Tagasi administraatori juurde"
+  }
 }

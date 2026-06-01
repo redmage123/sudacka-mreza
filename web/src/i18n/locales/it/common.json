@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Cerca nella rete degli arbitri...",
+      "submit": "Ricerca",
+      "aria": "Ricerca"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Su questa piattaforma è disponibile solo il riepilogo ufficiale. Leggi il testo completo sul sito web del tribunale emittente."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nome/Azienda/Indirizzo...",
+    "filterCompany": "Azienda",
+    "filterCompanyPh": "Nome dell'azienda..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Giudice",
+      "court": "Tribunale",
+      "appointmentDate": "Data di nomina",
+      "specialization": "Specializzazione",
+      "status": "Stato",
+      "contact": "Dati di contatto"
+    },
+    "searchPlaceholder": "Cerca per nome dell'arbitro...",
+    "totalCount": "Totale: {{count}} giudici",
+    "totalCount_one": "Totale: {{count}} giudice",
+    "totalCount_few": "Totale: {{count}} giudici",
+    "totalCount_other": "Totale: {{count}} giudici"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nome/Azienda/Indirizzo...",
+    "filterCompany": "Azienda",
+    "filterCompanyPh": "Nome dell'azienda..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Corte Suprema",
       "upravni": "Tribunale Amministrativo",
       "ustavni": "Corte Costituzionale",
-      "echr": "Corte europea dei diritti dell'uomo"
+      "echr": "Corte europea dei diritti dell'uomo",
+      "ecj": "Corte dell'Unione Europea"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Telefono",
       "president": "Presidente"
     },
-    "officialNameNote": "Nome ufficiale del tribunale croato"
+    "officialNameNote": "Nome ufficiale del tribunale croato",
+    "timeAvailability": {
+      "heading": "Orario di lavoro",
+      "monday": "Lunedi",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica",
+      "notes": "Osservazione",
+      "closed": "Chiuso"
+    },
+    "jurisdictionScope": "Area di competenza",
+    "departmentsCount_one": "{{count}} dipartimento",
+    "departmentsCount_few": "{{count}} dipartimento",
+    "departmentsCount_other": "{{count}} dipartimento",
+    "searchPlaceholderNameAddr": "Nome o indirizzo del tribunale..."
   },
   "nav": {
     "home": "Home",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Mappa dei tribunali",
-    "courtType": {
-      "municipal": "Comunale",
-      "county": "Provinciale",
-      "commercial": "Commerciale",
-      "misdemeanour": "Contravvenzionale",
-      "administrative": "Amministrativo"
-    },
-    "legend": "Legenda",
-    "loading": "Caricamento tribunali...",
-    "filterAll": "Tutti i tribunali",
-    "filterMunicipal": "Tribunale ordinario",
-    "filterCounty": "Corte d'appello",
-    "filterCommercial": "Tribunale commerciale",
-    "filterMisdemeanour": "Tribunale penale",
-    "filterAdministrative": "Tribunale amministrativo",
-    "viewDetails": "Vedi dettagli",
-    "courts": "tribunali",
-    "error": "Impossibile caricare i dati dei tribunali. Riprova."
-  },
-  "jurisdiction": {
-    "title": "Ricerca giurisdizione",
-    "subtitle": "Trova il tribunale competente per il tuo caso in base alla località e al tipo di causa.",
-    "cityLabel": "Città o comune",
-    "cityPlaceholder": "es. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Tipo di causa",
-    "caseType": {
-      "civilMinor": "Civile (minore) — Tribunale comunale",
-      "criminalMinor": "Penale (fino a 5 anni) — Tribunale comunale",
-      "criminalSerious": "Penale (5+ anni) — Tribunale provinciale",
-      "commercial": "Commerciale — Tribunale commerciale",
-      "misdemeanour": "Contravvenzione — Tribunale contravvenzionale",
-      "administrative": "Amministrativo — Tribunale amministrativo"
-    },
-    "results": "Risultati",
-    "noResults": "Nessun tribunale competente trovato per questa località e tipo di causa.",
-    "noResultsHint": "Prova con un altro nome di città o consulta l'elenco completo dei tribunali.",
-    "viewCourtsDirectory": "Consulta l'elenco dei tribunali"
-  },
-  "calculator": {
-    "title": "Calcolatore spese processuali",
-    "selectCaseType": "Seleziona tipo di causa",
-    "caseType": {
-      "civil": "Controversia civile",
-      "criminal": "Procedimento penale",
-      "commercial": "Controversia commerciale",
-      "administrative": "Controversia amministrativa",
-      "nonContentious": "Giurisdizione volontaria"
-    },
-    "claimValue": "Valore della pretesa (EUR)",
-    "calculate": "Calcola spese",
-    "filingFee": "Spese di deposito",
-    "appealFee": "Spese di appello",
-    "enforcementFee": "Spese di esecuzione",
-    "fixedFee": "Spese fisse",
-    "exemptionsTitle": "Esenzioni dalle spese",
-    "exemption1": "Beneficiari di assistenza sociale",
-    "exemption2": "Minorenni in procedimenti di tutela",
-    "exemption3": "Lavoratori in controversie di lavoro (fino a 2.650 €)",
-    "paymentTitle": "Metodi di pagamento",
-    "payment1": "Bonifico bancario al conto del tribunale",
-    "payment2": "Portale di pagamento online E-Pristojbe",
-    "payment3": "Cassa del tribunale",
-    "legalBasis": "Base giuridica",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, con modifiche). Tutti gli importi convertiti in EUR dal 01.01.2023.",
-    "minorOffenses": "Reati minori",
-    "seriousOffenses": "Reati gravi"
-  },
-  "jurisdictionFinder": {
-    "title": "Trova il tuo tribunale",
-    "description": "Inserisci la tua città e il tipo di causa per trovare il tribunale competente.",
-    "cityLabel": "La tua città o comune",
-    "cityPlaceholder": "es. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Tipo di causa",
-    "caseType": {
-      "civilMinor": "Controversia civile (fino a 2.654 €)",
-      "civilMajor": "Controversia civile (oltre 2.654 €)",
-      "criminalMinor": "Penale (reato minore)",
-      "criminalSerious": "Penale (reato grave)",
-      "commercial": "Controversia commerciale",
-      "misdemeanour": "Contravvenzione / infrazione stradale",
-      "administrative": "Controversia con ente pubblico"
-    },
-    "find": "Trova tribunale",
-    "result": "Tribunale competente",
-    "noResult": "Nessun tribunale trovato per questa città. Sfoglia la directory.",
-    "browseAll": "Sfoglia tutti i tribunali",
-    "viewProfile": "Vedi profilo del tribunale"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Calcolatore spese processuali",
+    "selectCaseType": "Seleziona tipo di causa",
+    "caseType": {
+      "civil": "Controversia civile",
+      "criminal": "Procedimento penale",
+      "commercial": "Controversia commerciale",
+      "administrative": "Controversia amministrativa",
+      "nonContentious": "Giurisdizione volontaria"
+    },
+    "claimValue": "Valore della pretesa (EUR)",
+    "fixedFee": "Spese fisse",
+    "minorOffenses": "Reati minori",
+    "seriousOffenses": "Reati gravi",
+    "filingFee": "Spese di deposito",
+    "appealFee": "Spese di appello",
+    "enforcementFee": "Spese di esecuzione",
+    "exemptionsTitle": "Esenzioni dalle spese",
+    "exemption1": "Beneficiari di assistenza sociale",
+    "exemption2": "Minorenni in procedimenti di tutela",
+    "exemption3": "Lavoratori in controversie di lavoro (fino a 2.650 €)",
+    "paymentTitle": "Metodi di pagamento",
+    "payment1": "Bonifico bancario al conto del tribunale",
+    "payment2": "Portale di pagamento online E-Pristojbe",
+    "payment3": "Cassa del tribunale",
+    "legalBasis": "Base giuridica",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, con modifiche). Tutti gli importi convertiti in EUR dal 01.01.2023.",
+    "calculate": "Calcola spese"
+  },
+  "map": {
+    "title": "Mappa dei tribunali",
+    "filterAll": "Tutti i tribunali",
+    "filterMunicipal": "Tribunale ordinario",
+    "filterCounty": "Corte d'appello",
+    "filterCommercial": "Tribunale commerciale",
+    "filterMisdemeanour": "Tribunale penale",
+    "filterAdministrative": "Tribunale amministrativo",
+    "courtType": {
+      "municipal": "Comunale",
+      "county": "Provinciale",
+      "commercial": "Commerciale",
+      "misdemeanour": "Contravvenzionale",
+      "administrative": "Amministrativo"
+    },
+    "legend": "Legenda",
+    "error": "Impossibile caricare i dati dei tribunali. Riprova.",
+    "viewDetails": "Vedi dettagli",
+    "loading": "Caricamento tribunali...",
+    "courts": "tribunali"
+  },
+  "jurisdiction": {
+    "title": "Ricerca giurisdizione",
+    "subtitle": "Trova il tribunale competente per il tuo caso in base alla località e al tipo di causa.",
+    "cityLabel": "Città o comune",
+    "cityPlaceholder": "es. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Tipo di causa",
+    "caseType": {
+      "civilMinor": "Civile (minore) — Tribunale comunale",
+      "criminalMinor": "Penale (fino a 5 anni) — Tribunale comunale",
+      "criminalSerious": "Penale (5+ anni) — Tribunale provinciale",
+      "commercial": "Commerciale — Tribunale commerciale",
+      "misdemeanour": "Contravvenzione — Tribunale contravvenzionale",
+      "administrative": "Amministrativo — Tribunale amministrativo"
+    },
+    "results": "Risultati",
+    "noResults": "Nessun tribunale competente trovato per questa località e tipo di causa.",
+    "noResultsHint": "Prova con un altro nome di città o consulta l'elenco completo dei tribunali.",
+    "viewCourtsDirectory": "Consulta l'elenco dei tribunali"
+  },
+  "jurisdictionFinder": {
+    "title": "Trova il tuo tribunale",
+    "description": "Inserisci la tua città e il tipo di causa per trovare il tribunale competente.",
+    "cityLabel": "La tua città o comune",
+    "cityPlaceholder": "es. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Tipo di causa",
+    "caseType": {
+      "civilMinor": "Controversia civile (fino a 2.654 €)",
+      "civilMajor": "Controversia civile (oltre 2.654 €)",
+      "criminalMinor": "Penale (reato minore)",
+      "criminalSerious": "Penale (reato grave)",
+      "commercial": "Controversia commerciale",
+      "misdemeanour": "Contravvenzione / infrazione stradale",
+      "administrative": "Controversia con ente pubblico"
+    },
+    "find": "Trova tribunale",
+    "result": "Tribunale competente",
+    "noResult": "Nessun tribunale trovato per questa città. Sfoglia la directory.",
+    "browseAll": "Sfoglia tutti i tribunali",
+    "viewProfile": "Vedi profilo del tribunale"
+  },
   "bankruptcy": {
     "title": "Portale fallimentare",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Debitori falliti",
+      "debtorsDesc": "Elenco dei debitori con profilo e cronologia di tutte le procedure correlate",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Invia una presentazione",
+      "filingDesc": "Presentare una dichiarazione di fallimento: presentazione di un reclamo, proposta di avvio, relazione, piano di ristrutturazione"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Annunci di fallimento",
+      "description": "Procedimenti fallimentari attivi pubblicati nella Gazzetta Ufficiale e nella Gazzetta Ufficiale.",
+      "searchPlaceholder": "Cerca per nome del debitore...",
+      "count": "{{n}} annunci",
+      "count_one": "{{n}} annuncio",
+      "count_few": "{{n}} annunci",
+      "count_other": "{{n}} annunci",
+      "loadError": "Impossibile caricare gli annunci di fallimento.",
+      "empty": "Non ci sono annunci di fallimento attivi.",
+      "unknownDebtor": "Debitore sconosciuto",
+      "deadline": "Scadenza"
+    },
+    "decisions": {
+      "title": "Decisioni fallimentari",
+      "description": "Decisioni dei tribunali derivanti da procedure fallimentari in Croazia.",
+      "loadError": "Non è possibile caricare le decisioni di fallimento.",
+      "noResults": "Nessun risultato.",
+      "viewDecision": "Apri la decisione"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Tipo di utente",
+      "userTypeOptions": {
+        "person": "Persona",
+        "legal_entity": "Persona giuridica"
+      },
+      "organisationName": "Nome della persona giuridica",
+      "organisationOib": "OIB delle persone giuridiche",
+      "legalEntityNote": "Le persone giuridiche (studi legali, curatori fallimentari che agiscono per conto proprio, organizzazioni registrate) possono presentare istanze di fallimento attraverso la modalità editoriale. La tua autorizzazione verrà attivata automaticamente dopo la registrazione.",
+      "errorOib": "OIB deve avere esattamente 11 cifre.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Crea account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Ha dimenticato la password",
+      "subtitle": "Inserisci il tuo indirizzo email e ti invieremo un collegamento per impostare una nuova password.",
+      "submit": "Invia un collegamento",
+      "submitting": "Inviamo…",
+      "backToLogin": "Torna al login",
+      "errorGeneric": "Qualcosa è andato storto. Per favore riprova."
+    },
+    "resetPassword": {
+      "title": "Imposta una nuova password",
+      "subtitle": "Scegli una nuova password per il tuo account.",
+      "newPassword": "Nuova password",
+      "confirmPassword": "Conferma la nuova password",
+      "submit": "Imposta una nuova password",
+      "submitting": "Stiamo preparando...",
+      "done": "La tua password è stata impostata con successo. Puoi iscriverti adesso.",
+      "goToLogin": "Vai all'applicazione",
+      "missingToken": "Questo collegamento per la modifica della password non ha token. Richiedine uno nuovo.",
+      "requestNew": "Richiedi un nuovo collegamento",
+      "errorGeneric": "Impossibile impostare la password. Per favore riprova."
+    },
+    "password": {
+      "show": "Mostra password",
+      "hide": "Nascondi la password"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Comunicati stampa",
-      "desc": "Dichiarazioni ufficiali e annunci pubblicati da Sudačka Mreža."
+      "placeholder": "Rassegna stampa: articoli di giornale e portali web in cui viene citata la Rete dei giudici. Il contenuto verrà compilato come parte della migrazione dei dati dal vecchio sito."
     },
     "contact": {
       "title": "Contatto stampa",
       "desc": "Per richieste di interviste, permessi fotografici o informazioni di background, contatta il nostro team stampa."
+    },
+    "audio": {
+      "title": "Gallerie audio",
+      "placeholder": "Menzioni audio: interviste radiofoniche e programmi sul Judge Network. Il contenuto verrà compilato come parte della migrazione dei dati dal vecchio sito."
+    },
+    "video": {
+      "title": "Gallerie video",
+      "placeholder": "Menzioni video: speciali televisivi e interviste. Il contenuto verrà compilato come parte della migrazione dei dati dal vecchio sito."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Seleziona il tipo di documento",
     "type": {
       "tuzba": {
+        "_value": "Causa",
         "desc": "Per l'avvio di un procedimento civile dinanzi al tribunale"
       },
       "zalba": {
+        "_value": "Rimostranza",
         "desc": "Per l'impugnazione di una decisione giudiziaria dinanzi a un tribunale superiore"
       },
       "prigovor": {
+        "_value": "Rimostranza",
         "desc": "Per la presentazione di un'opposizione a un provvedimento giudiziario"
       },
       "ovrsni": {
+        "_value": "Proposta esecutiva",
         "desc": "Per l'avvio di un'esecuzione forzata sulla base di un titolo esecutivo"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Scaduto"
     }
   },
-  "cookiePolicy": "Informativa sui cookie",
-  "termsOfService": "Termini di servizio",
-  "judges": {
-    "detail": {
-      "role": "Giudice",
-      "court": "Tribunale",
-      "appointmentDate": "Data di nomina",
-      "specialization": "Specializzazione",
-      "status": "Stato",
-      "contact": "Dati di contatto"
-    }
-  },
   "legalNews": {
     "title": "Notizie legali",
     "subtitle": "Panoramica delle attuali notizie legali da fonti giuridiche nazionali ed europee.",
@@ -716,6 +819,8 @@
       "p2": "Per ulteriori informazioni su come trattiamo i Suoi dati personali, consulti la nostra"
     }
   },
+  "cookiePolicy": "Informativa sui cookie",
+  "termsOfService": "Termini di servizio",
   "privacy": {
     "title": "Informativa sulla privacy",
     "lastUpdated": "Ultimo aggiornamento: 28 marzo 2026.",
@@ -808,8 +913,61 @@
       "p2": "Per domande relative ai presenti Termini, contattarci all'indirizzo:"
     }
   },
-  "docgen.type.tuzba.desc": "Per l'avvio di un procedimento civile dinanzi al tribunale",
-  "docgen.type.zalba.desc": "Per l'impugnazione di una decisione giudiziaria dinanzi a un tribunale superiore",
-  "docgen.type.prigovor.desc": "Per l'opposizione a un provvedimento giudiziario",
-  "docgen.type.ovrsni.desc": "Per l'avvio dell'esecuzione forzata sulla base di un titolo esecutivo"
+  "debtors": {
+    "title": "Debitori falliti",
+    "subtitle": "Elenco dei debitori per i quali sono o sono state avviate procedure concorsuali.",
+    "searchPlaceholder": "Cerca per nome o città...",
+    "oibPh": "OIB...",
+    "loadError": "Errore durante il caricamento del debitore.",
+    "noResults": "Non ci sono debitori corrispondenti alla ricerca.",
+    "linkedListings": "Procedure fallimentari",
+    "noLinkedListings": "Non sono presenti procedure concorsuali correlate.",
+    "fields": {
+      "name": "Nome/Nome",
+      "address": "Indirizzo",
+      "city": "Città",
+      "county": "Contea",
+      "phone": "Telefono",
+      "caseNumber": "Numero dell'articolo",
+      "status": "Stato",
+      "deadline": "Scadenza",
+      "publishedAt": "Pubblicato"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Documentazione API — Judge Network",
+    "metaDescription": "API REST pubbliche per l'accesso alle banche dati delle decisioni dei tribunali, degli esperti, degli interpreti e dei tribunali della Rete Giudiziaria.",
+    "title": "API REST pubblica",
+    "intro": "API aperta per istituzioni partner e ricercatori che desiderano un accesso programmatico ai database di pratiche giudiziarie, esperti, interpreti e tribunali della Repubblica di Croazia.",
+    "paginationNote": "Tutti gli endpoint dell'elenco restituiscono lo stesso formato di risposta impaginato:",
+    "endpointsNote": "Fare clic sull'endpoint per parametri, richiesta di esempio e risposta.",
+    "sections": {
+      "gettingStarted": "Inizio dei lavori",
+      "pagination": "Impaginazione",
+      "endpoints": "Endpoint"
+    },
+    "cards": {
+      "baseUrl": "URL di base",
+      "auth": "Autenticazione",
+      "rateLimit": "Limiti (limite di velocità)",
+      "baseUrlNote": "Tutte le risposte sono JSON, UTF-8",
+      "authNote": "La chiave API è facoltativa, ma aumenta il limite."
+    },
+    "endpoint": {
+      "params": "Parametri",
+      "exampleRequest": "Richiesta di campione",
+      "exampleResponse": "Risposta di esempio",
+      "fields": {
+        "name": "Nome",
+        "description": "Descrizione",
+        "type": "Tipo",
+        "required": "Obbligatorio",
+        "example": "Esempio",
+        "in": "In"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Torna all'amministrazione"
+  }
 }

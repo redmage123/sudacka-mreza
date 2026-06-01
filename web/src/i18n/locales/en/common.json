@@ -268,9 +268,7 @@
     "payment3": "Court cashier (in person at the court)",
     "legalBasis": "Legal Basis",
     "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, with amendments). All amounts converted to EUR since 01.01.2023.",
-    "calculate": "Calculate fee",
-    "tariffRef": "Tariff item",
-    "tariffSource": "OG 118/18"
+    "calculate": "Calculate fee"
   },
   "map": {
     "title": "Court Map",
@@ -367,17 +365,7 @@
       "loadError": "Could not load bankruptcy listings.",
       "empty": "No active bankruptcy listings.",
       "unknownDebtor": "Unknown debtor",
-      "deadline": "Deadline",
-      "filterDebtor": "Bankruptcy debtor",
-      "filterCourt": "Court",
-      "filterAdmin": "Bankruptcy trustee",
-      "filterStatus": "Status",
-      "allCourts": "All courts",
-      "allAdmins": "All trustees",
-      "allStatuses": "All statuses",
-      "statusActive": "Active",
-      "statusClosed": "Closed",
-      "statusPending": "Pending review"
+      "deadline": "Deadline"
     },
     "decisions": {
       "title": "Bankruptcy Decisions",
@@ -975,33 +963,6 @@
     }
   },
   "admin": {
-    "backToAdmin": "Back to Admin",
-    "collections": {
-      "expertWitnesses": {
-        "name": "Full name",
-        "specialityAreas": "Specialty areas (one per line)",
-        "languages": "Languages (codes: hr, en, de, fr...)",
-        "address": "Address",
-        "county": "County",
-        "city": "City",
-        "company": "Company",
-        "phone": "Phone",
-        "email": "Email",
-        "verified": "Verified",
-        "lang": "Entry language"
-      },
-      "interpreters": {
-        "name": "Full name",
-        "languagePairs": "Language pairs (one per line, e.g. hr-en)",
-        "address": "Address",
-        "county": "County",
-        "city": "City",
-        "company": "Company",
-        "phone": "Phone",
-        "email": "Email",
-        "verified": "Verified",
-        "lang": "Entry language"
-      }
-    }
+    "backToAdmin": "Back to Admin"
   }
 }

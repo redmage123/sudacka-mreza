@@ -105,6 +105,41 @@ export const SUPPORTED_LANGUAGES = [
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
 export const DEFAULT_LANGUAGE: SupportedLanguage = 'hr'
 
+export const LANGUAGE_LABELS: Readonly<Record<string, string>> = {
+  "hr": "Hrvatski",
+  "en": "English",
+  "de": "Deutsch",
+  "fr": "Français",
+  "bg": "Български",
+  "cs": "Čeština",
+  "da": "Dansk",
+  "el": "Ελληνικά",
+  "es": "Español",
+  "et": "Eesti",
+  "eu": "Euskara",
+  "fi": "Suomi",
+  "ga": "Gaeilge",
+  "hu": "Magyar",
+  "is": "Íslenska",
+  "it": "Italiano",
+  "ja": "日本語",
+  "lt": "Lietuvių",
+  "lv": "Latviešu",
+  "mt": "Malti",
+  "nb": "Norsk bokmål",
+  "nl": "Nederlands",
+  "pl": "Polski",
+  "pt": "Português",
+  "ro": "Română",
+  "sk": "Slovenčina",
+  "sl": "Slovenščina",
+  "sv": "Svenska",
+  "uk": "Українська",
+  "ar": "العربية",
+  "zh": "中文"
+}
+
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

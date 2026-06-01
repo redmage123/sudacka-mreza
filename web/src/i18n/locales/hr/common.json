@@ -284,9 +284,7 @@
     "payment3": "Blagajna suda (osobno u sudu)",
     "legalBasis": "Pravna osnova",
     "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, s izmjenama). Svi iznosi preračunati u EUR od 01.01.2023.",
-    "calculate": "Izračunaj pristojbu",
-    "tariffRef": "Tar. br.",
-    "tariffSource": "NN 118/18"
+    "calculate": "Izračunaj pristojbu"
   },
   "map": {
     "title": "Karta sudova",
@@ -386,17 +384,7 @@
       "loadError": "Nije moguće učitati stečajne oglase.",
       "empty": "Nema aktivnih stečajnih oglasa.",
       "unknownDebtor": "Nepoznati dužnik",
-      "deadline": "Rok",
-      "filterDebtor": "Stečajni dužnik",
-      "filterCourt": "Sud",
-      "filterAdmin": "Stečajni upravitelj",
-      "filterStatus": "Status",
-      "allCourts": "Svi sudovi",
-      "allAdmins": "Svi upravitelji",
-      "allStatuses": "Svi statusi",
-      "statusActive": "Aktivni",
-      "statusClosed": "Zatvoreni",
-      "statusPending": "U obradi"
+      "deadline": "Rok"
     },
     "decisions": {
       "title": "Stečajne odluke",
@@ -980,33 +968,6 @@
     }
   },
   "admin": {
-    "backToAdmin": "Natrag na Admin",
-    "collections": {
-      "expertWitnesses": {
-        "name": "Ime i prezime",
-        "specialityAreas": "Područja vještačenja (jedno po retku)",
-        "languages": "Jezici (kodovi: hr, en, de, fr...)",
-        "address": "Adresa",
-        "county": "Županija",
-        "city": "Grad",
-        "company": "Tvrtka",
-        "phone": "Telefon",
-        "email": "Email",
-        "verified": "Verificiran",
-        "lang": "Jezik unosa"
-      },
-      "interpreters": {
-        "name": "Ime i prezime",
-        "languagePairs": "Jezični parovi (jedan po retku, npr. hr-en)",
-        "address": "Adresa",
-        "county": "Županija",
-        "city": "Grad",
-        "company": "Tvrtka",
-        "phone": "Telefon",
-        "email": "Email",
-        "verified": "Verificiran",
-        "lang": "Jezik unosa"
-      }
-    }
+    "backToAdmin": "Natrag na Admin"
   }
 }

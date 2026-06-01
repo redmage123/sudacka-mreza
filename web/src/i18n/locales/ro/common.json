@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Căutați în rețeaua judecătorilor...",
+      "submit": "Căutare",
+      "aria": "Căutare"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Doar rezumatul oficial este disponibil pe această platformă. Citiți textul integral pe site-ul instanței emitente."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nume / Companie / Adresa...",
+    "filterCompany": "Companie",
+    "filterCompanyPh": "Numele companiei..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Judecător",
+      "court": "Instanță",
+      "appointmentDate": "Data numirii",
+      "specialization": "Specializare",
+      "status": "Status",
+      "contact": "Date de contact"
+    },
+    "searchPlaceholder": "Căutați după numele arbitrului...",
+    "totalCount": "Total: {{count}} judecători",
+    "totalCount_one": "Total: {{count}} judecător",
+    "totalCount_few": "Total: {{count}} judecători",
+    "totalCount_other": "Total: {{count}} judecători"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nume / Companie / Adresa...",
+    "filterCompany": "Companie",
+    "filterCompanyPh": "Numele companiei..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Curtea Europeană a Drepturilor Omului"
+      "echr": "Curtea Europeană a Drepturilor Omului",
+      "ecj": "Curtea Uniunii Europene"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Program de lucru",
+      "monday": "luni",
+      "tuesday": "marţi",
+      "wednesday": "miercuri",
+      "thursday": "joi",
+      "friday": "vineri",
+      "saturday": "sâmbătă",
+      "sunday": "duminică",
+      "notes": "Remarcă",
+      "closed": "Închis"
+    },
+    "jurisdictionScope": "Domeniul de jurisdicție",
+    "departmentsCount_one": "{{count}} departament",
+    "departmentsCount_few": "{{count}} departament",
+    "departmentsCount_other": "{{count}} departament",
+    "searchPlaceholderNameAddr": "Numele sau adresa instanței..."
   },
   "nav": {
     "home": "Acasă",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Harta instanțelor",
-    "courtType": {
-      "municipal": "Municipală",
-      "county": "Județeană",
-      "commercial": "Comercială",
-      "misdemeanour": "Contravențională",
-      "administrative": "Administrativă"
-    },
-    "legend": "Legendă",
-    "loading": "Se încarcă instanțele...",
-    "filterAll": "Toate instanțele",
-    "filterMunicipal": "Municipală",
-    "filterCounty": "Județeană",
-    "filterCommercial": "Comercială",
-    "filterMisdemeanour": "Contravențională",
-    "filterAdministrative": "Administrativă",
-    "viewDetails": "Vezi detalii",
-    "courts": "instanțe",
-    "error": "Nu s-au putut încărca datele instanțelor. Vă rugăm să încercați din nou."
-  },
-  "jurisdiction": {
-    "title": "Căutare competență",
-    "subtitle": "Găsiți instanța competentă pentru cauza dumneavoastră pe baza locației și tipului de cauză.",
-    "cityLabel": "Oraș sau municipiu",
-    "cityPlaceholder": "ex. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Tipul cauzei",
-    "caseType": {
-      "civilMinor": "Civilă (minoră) — Judecătorie",
-      "criminalMinor": "Penală (sub 5 ani) — Judecătorie",
-      "criminalSerious": "Penală (5+ ani) — Tribunal județean",
-      "commercial": "Comercială — Tribunal comercial",
-      "misdemeanour": "Contravenție — Judecătorie contravențională",
-      "administrative": "Administrativă — Tribunal administrativ"
-    },
-    "results": "Rezultate",
-    "noResults": "Nu a fost găsită nicio instanță potrivită pentru această locație și tip de cauză.",
-    "noResultsHint": "Încercați un alt nume de oraș sau consultați directorul complet al instanțelor.",
-    "viewCourtsDirectory": "Vizualizați directorul instanțelor"
-  },
-  "calculator": {
-    "title": "Taxe judiciare",
-    "selectCaseType": "Tipul cauzei",
-    "caseType": {
-      "civil": "Litigiu civil",
-      "criminal": "Procedură penală",
-      "commercial": "Litigiu comercial",
-      "administrative": "Litigiu administrativ",
-      "nonContentious": "Procedură necontencioasă"
-    },
-    "claimValue": "Valoarea cererii (EUR)",
-    "calculate": "Calculează taxa",
-    "filingFee": "Taxă de înregistrare",
-    "appealFee": "Taxă de apel",
-    "enforcementFee": "Taxă de executare",
-    "fixedFee": "Taxe fixe",
-    "exemptionsTitle": "Scutiri de taxe",
-    "exemption1": "Beneficiarii de asistență socială sunt scutiți de toate taxele judiciare.",
-    "exemption2": "Minorii sunt scutiți de taxele judiciare în procedurile privind drepturile lor.",
-    "exemption3": "Lucrătorii în litigii de muncă cu o valoare a cererii de până la 2.650 € sunt scutiți.",
-    "paymentTitle": "Metode de plată",
-    "payment1": "Transfer bancar în contul oficial al instanței",
-    "payment2": "Portalul e-Pristojbe (plată electronică)",
-    "payment3": "Caseria instanței (personal la instanță)",
-    "legalBasis": "Baza legală",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, cu modificări). Toate sumele convertite în EUR din 01.01.2023.",
-    "minorOffenses": "Infracțiuni minore",
-    "seriousOffenses": "Infracțiuni grave"
-  },
-  "jurisdictionFinder": {
-    "title": "Găsiți instanța dumneavoastră",
-    "description": "Introduceți orașul și tipul de cauză pentru a afla instanța competentă.",
-    "cityLabel": "Orașul sau municipiul dumneavoastră",
-    "cityPlaceholder": "ex. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Tipul cauzei",
-    "caseType": {
-      "civilMinor": "Litigiu civil (până la 2.654 €)",
-      "civilMajor": "Litigiu civil (peste 2.654 €)",
-      "criminalMinor": "Penală (infracțiune minoră)",
-      "criminalSerious": "Penală (infracțiune gravă)",
-      "commercial": "Litigiu comercial",
-      "misdemeanour": "Contravenție / infracțiune rutieră",
-      "administrative": "Litigiu cu instituție publică"
-    },
-    "find": "Găsește instanța",
-    "result": "Instanța competentă",
-    "noResult": "Nu s-a găsit nicio instanță pentru acest oraș. Încercați directorul instanțelor.",
-    "browseAll": "Răsfoiește toate instanțele",
-    "viewProfile": "Vezi profilul instanței"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Taxe judiciare",
+    "selectCaseType": "Tipul cauzei",
+    "caseType": {
+      "civil": "Litigiu civil",
+      "criminal": "Procedură penală",
+      "commercial": "Litigiu comercial",
+      "administrative": "Litigiu administrativ",
+      "nonContentious": "Procedură necontencioasă"
+    },
+    "claimValue": "Valoarea cererii (EUR)",
+    "fixedFee": "Taxe fixe",
+    "minorOffenses": "Infracțiuni minore",
+    "seriousOffenses": "Infracțiuni grave",
+    "filingFee": "Taxă de înregistrare",
+    "appealFee": "Taxă de apel",
+    "enforcementFee": "Taxă de executare",
+    "exemptionsTitle": "Scutiri de taxe",
+    "exemption1": "Beneficiarii de asistență socială sunt scutiți de toate taxele judiciare.",
+    "exemption2": "Minorii sunt scutiți de taxele judiciare în procedurile privind drepturile lor.",
+    "exemption3": "Lucrătorii în litigii de muncă cu o valoare a cererii de până la 2.650 € sunt scutiți.",
+    "paymentTitle": "Metode de plată",
+    "payment1": "Transfer bancar în contul oficial al instanței",
+    "payment2": "Portalul e-Pristojbe (plată electronică)",
+    "payment3": "Caseria instanței (personal la instanță)",
+    "legalBasis": "Baza legală",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, cu modificări). Toate sumele convertite în EUR din 01.01.2023.",
+    "calculate": "Calculează taxa"
+  },
+  "map": {
+    "title": "Harta instanțelor",
+    "filterAll": "Toate instanțele",
+    "filterMunicipal": "Municipală",
+    "filterCounty": "Județeană",
+    "filterCommercial": "Comercială",
+    "filterMisdemeanour": "Contravențională",
+    "filterAdministrative": "Administrativă",
+    "courtType": {
+      "municipal": "Municipală",
+      "county": "Județeană",
+      "commercial": "Comercială",
+      "misdemeanour": "Contravențională",
+      "administrative": "Administrativă"
+    },
+    "legend": "Legendă",
+    "error": "Nu s-au putut încărca datele instanțelor. Vă rugăm să încercați din nou.",
+    "viewDetails": "Vezi detalii",
+    "loading": "Se încarcă instanțele...",
+    "courts": "instanțe"
+  },
+  "jurisdiction": {
+    "title": "Căutare competență",
+    "subtitle": "Găsiți instanța competentă pentru cauza dumneavoastră pe baza locației și tipului de cauză.",
+    "cityLabel": "Oraș sau municipiu",
+    "cityPlaceholder": "ex. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Tipul cauzei",
+    "caseType": {
+      "civilMinor": "Civilă (minoră) — Judecătorie",
+      "criminalMinor": "Penală (sub 5 ani) — Judecătorie",
+      "criminalSerious": "Penală (5+ ani) — Tribunal județean",
+      "commercial": "Comercială — Tribunal comercial",
+      "misdemeanour": "Contravenție — Judecătorie contravențională",
+      "administrative": "Administrativă — Tribunal administrativ"
+    },
+    "results": "Rezultate",
+    "noResults": "Nu a fost găsită nicio instanță potrivită pentru această locație și tip de cauză.",
+    "noResultsHint": "Încercați un alt nume de oraș sau consultați directorul complet al instanțelor.",
+    "viewCourtsDirectory": "Vizualizați directorul instanțelor"
+  },
+  "jurisdictionFinder": {
+    "title": "Găsiți instanța dumneavoastră",
+    "description": "Introduceți orașul și tipul de cauză pentru a afla instanța competentă.",
+    "cityLabel": "Orașul sau municipiul dumneavoastră",
+    "cityPlaceholder": "ex. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Tipul cauzei",
+    "caseType": {
+      "civilMinor": "Litigiu civil (până la 2.654 €)",
+      "civilMajor": "Litigiu civil (peste 2.654 €)",
+      "criminalMinor": "Penală (infracțiune minoră)",
+      "criminalSerious": "Penală (infracțiune gravă)",
+      "commercial": "Litigiu comercial",
+      "misdemeanour": "Contravenție / infracțiune rutieră",
+      "administrative": "Litigiu cu instituție publică"
+    },
+    "find": "Găsește instanța",
+    "result": "Instanța competentă",
+    "noResult": "Nu s-a găsit nicio instanță pentru acest oraș. Încercați directorul instanțelor.",
+    "browseAll": "Răsfoiește toate instanțele",
+    "viewProfile": "Vezi profilul instanței"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Debitori falimentati",
+      "debtorsDesc": "Directorul debitorilor cu profilul și istoricul tuturor procedurilor aferente",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Trimiteți o trimitere",
+      "filingDesc": "Depuneți o declarație de faliment - depunerea unei cereri, propunere de inițiere, raport, plan de restructurare"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Anunturi de faliment",
+      "description": "Procedura de faliment activă publicată în Monitorul Oficial și Monitorul Oficial.",
+      "searchPlaceholder": "Căutați după numele debitorului...",
+      "count": "{{n}} reclame",
+      "count_one": "{{n}} ad",
+      "count_few": "{{n}} reclame",
+      "count_other": "{{n}} reclame",
+      "loadError": "Nu se pot încărca anunțuri de faliment.",
+      "empty": "Nu există anunțuri active de faliment.",
+      "unknownDebtor": "Debitor necunoscut",
+      "deadline": "Termen limită"
+    },
+    "decisions": {
+      "title": "Deciziile de faliment",
+      "description": "Hotărâri judecătorești din procedurile de faliment din Croația.",
+      "loadError": "Nu este posibilă încărcarea deciziilor de faliment.",
+      "noResults": "Niciun rezultat.",
+      "viewDecision": "Deschide decizia"
     }
   },
   "administrators": {
@@ -444,6 +513,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Tip de utilizator",
+      "userTypeOptions": {
+        "person": "Persoană",
+        "legal_entity": "Persoana juridica"
+      },
+      "organisationName": "Denumirea persoanei juridice",
+      "organisationOib": "OIB al persoanelor juridice",
+      "legalEntityNote": "Persoanele juridice (firme de avocatură, administratori de faliment care acționează în nume propriu, organizații înregistrate) pot depune petiții de faliment prin abordarea editorială. Autorizarea dumneavoastră va fi activată automat după înregistrare.",
+      "errorOib": "OIB trebuie să aibă exact 11 cifre.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +534,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Aţi uitat parola",
+      "subtitle": "Introdu adresa ta de e-mail și îți vom trimite un link pentru a configura o nouă parolă.",
+      "submit": "Trimiteți un link",
+      "submitting": "Trimitem…",
+      "backToLogin": "Înapoi la autentificare",
+      "errorGeneric": "Ceva a mers prost. Vă rugăm să încercați din nou."
+    },
+    "resetPassword": {
+      "title": "Setați o nouă parolă",
+      "subtitle": "Alegeți o nouă parolă pentru contul dvs.",
+      "newPassword": "Parolă Nouă",
+      "confirmPassword": "Confirmați noua parolă",
+      "submit": "Setați o nouă parolă",
+      "submitting": "Ne pregatim...",
+      "done": "Parola dvs. a fost setată cu succes. Vă puteți înscrie acum.",
+      "goToLogin": "Accesați aplicația",
+      "missingToken": "Acest link de schimbare a parolei nu are un simbol. Solicitați unul nou.",
+      "requestNew": "Solicitați un nou link",
+      "errorGeneric": "Parola nu a putut fi setată. Vă rugăm să încercați din nou."
+    },
+    "password": {
+      "show": "Afișați parola",
+      "hide": "Ascunde parola"
     }
   },
   "about": {
@@ -488,11 +591,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Decupaje de presă — articole din ziare și portaluri web în care este menționată Rețeaua Judecătorilor. Conținutul va fi completat ca parte a migrării datelor de pe vechiul site."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Galerii audio",
+      "placeholder": "Mențiuni audio — interviuri radio și emisiuni despre Judge Network. Conținutul va fi completat ca parte a migrării datelor de pe vechiul site."
+    },
+    "video": {
+      "title": "Galerii video",
+      "placeholder": "Mențiuni video — speciale de televiziune și interviuri. Conținutul va fi completat ca parte a migrării datelor de pe vechiul site."
     }
   },
   "courtPerformance": {
@@ -539,15 +650,19 @@
     "selectType": "Selectați tipul documentului",
     "type": {
       "tuzba": {
+        "_value": "Proces",
         "desc": "Pentru inițierea procedurii civile în instanță"
       },
       "zalba": {
+        "_value": "Plângere",
         "desc": "Pentru contestarea unei decizii judiciare la o instanță superioară"
       },
       "prigovor": {
+        "_value": "Plângere",
         "desc": "Pentru formularea unei contestații la o încheiere judiciară"
       },
       "ovrsni": {
+        "_value": "Propunere executivă",
         "desc": "Pentru inițierea executării silite în temeiul unui titlu executoriu"
       }
     },
@@ -644,18 +759,6 @@
       "overdue": "Expirat"
     }
   },
-  "cookiePolicy": "Politica de cookie-uri",
-  "termsOfService": "Termeni de utilizare",
-  "judges": {
-    "detail": {
-      "role": "Judecător",
-      "court": "Instanță",
-      "appointmentDate": "Data numirii",
-      "specialization": "Specializare",
-      "status": "Status",
-      "contact": "Date de contact"
-    }
-  },
   "legalNews": {
     "title": "Știri juridice",
     "subtitle": "Revizuirea știrilor juridice actuale din surse juridice naționale și europene.",
@@ -716,6 +819,8 @@
       "p2": "[ro] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Politica de cookie-uri",
+  "termsOfService": "Termeni de utilizare",
   "privacy": {
     "title": "Politica de confidențialitate",
     "lastUpdated": "Ultima actualizare: 28 martie 2026.",
@@ -808,8 +913,61 @@
       "p2": "Pentru întrebări privind acești Termeni, contactați-ne la:"
     }
   },
-  "docgen.type.tuzba.desc": "Pentru inițierea procedurii civile în instanță",
-  "docgen.type.zalba.desc": "Pentru atacarea unei decizii judecătorești la o instanță superioară",
-  "docgen.type.prigovor.desc": "Pentru formularea unei contestații la o decizie judecătorească",
-  "docgen.type.ovrsni.desc": "Pentru inițierea executării silite în temeiul unui titlu executoriu"
+  "debtors": {
+    "title": "Debitori falimentati",
+    "subtitle": "Anuarul debitorilor pentru care se desfășoară sau s-au desfășurat procedurile de faliment.",
+    "searchPlaceholder": "Caută după nume sau oraș...",
+    "oibPh": "OIB...",
+    "loadError": "Eroare la încărcarea debitorului.",
+    "noResults": "Nu există debitori care să corespundă căutării.",
+    "linkedListings": "Procedura de faliment",
+    "noLinkedListings": "Nu există proceduri de faliment aferente.",
+    "fields": {
+      "name": "Nume / Nume",
+      "address": "Adresa",
+      "city": "Oraş",
+      "county": "judetul",
+      "phone": "Telefon",
+      "caseNumber": "Numărul articolului",
+      "status": "Stare",
+      "deadline": "Termen limită",
+      "publishedAt": "Publicat"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Documentație API — Judge Network",
+    "metaDescription": "API-ul REST public pentru acces la bazele de date cu hotărâri judecătorești, experți, interpreți și instanțe ale Rețelei Judiciare.",
+    "title": "API-ul REST public",
+    "intro": "API deschisă pentru instituțiile partenere și cercetătorii care doresc acces programatic la bazele de date de practici judiciare, experți, interpreți și tribunale din Republica Croația.",
+    "paginationNote": "Toate punctele finale ale listei returnează același format de răspuns paginat:",
+    "endpointsNote": "Faceți clic pe punctul final pentru parametri, exemplu de solicitare și răspuns.",
+    "sections": {
+      "gettingStarted": "Începutul lucrării",
+      "pagination": "Paginare",
+      "endpoints": "Puncte finale"
+    },
+    "cards": {
+      "baseUrl": "Adresa URL de bază",
+      "auth": "Autentificare",
+      "rateLimit": "Limite (limită de rată)",
+      "baseUrlNote": "Toate răspunsurile sunt JSON, UTF-8",
+      "authNote": "Cheia API este opțională, dar crește limita."
+    },
+    "endpoint": {
+      "params": "Parametrii",
+      "exampleRequest": "Cerere de eșantion",
+      "exampleResponse": "Exemplu de răspuns",
+      "fields": {
+        "name": "Nume",
+        "description": "Descriere",
+        "type": "Tip",
+        "required": "Obligatoriu",
+        "example": "Exemplu",
+        "in": "în"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Înapoi la Admin"
+  }
 }
