@@ -142,7 +142,11 @@ i18n
       ar: { nav: arNav, common: arCommon, chat: arChat },
       zh: { nav: zhNav, common: zhCommon, chat: zhChat },
     },
-    fallbackLng: DEFAULT_LANGUAGE,
+    // Two-step fallback: try English first (which is at 98.9% key
+    // coverage), then Croatian (the authoring locale). Means a visitor
+    // who selected Deutsch and hits a key that has not been translated
+    // yet sees English rather than Croatian.
+    fallbackLng: ["en", "hr"],
     supportedLngs: SUPPORTED_LANGUAGES,
     defaultNS: 'common',
     ns: ['common', 'nav', 'chat'],
