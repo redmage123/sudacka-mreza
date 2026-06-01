@@ -87,7 +87,7 @@
   },
   "experts": {
     "searchTitle": "Sudski vještaci",
-    "searchPlaceholder": "Pretraži po imenu...",
+    "searchPlaceholder": "Ime / Tvrtka / Adresa…",
     "filterSpeciality": "Specijalnost",
     "filterSpecialityAll": "Sve specijalnosti",
     "filterCounty": "Županija",
@@ -100,7 +100,10 @@
       "county": "Županija",
       "assignedCourts": "Dodijeljeni sudovi",
       "contactDetails": "Kontakt podaci"
-    }
+    },
+    "searchPlaceholderCombined": "Ime / Tvrtka / Adresa…",
+    "filterCompany": "Tvrtka",
+    "filterCompanyPh": "Naziv tvrtke…"
   },
   "judges": {
     "detail": {
@@ -110,11 +113,16 @@
       "specialization": "Specijalizacija",
       "status": "Status",
       "contact": "Kontakt podaci"
-    }
+    },
+    "searchPlaceholder": "Pretraži po imenu suca…",
+    "totalCount": "Ukupno: {{count}} sudaca",
+    "totalCount_one": "Ukupno: {{count}} sudac",
+    "totalCount_few": "Ukupno: {{count}} sudaca",
+    "totalCount_other": "Ukupno: {{count}} sudaca"
   },
   "interpreters": {
     "searchTitle": "Sudski tumači",
-    "searchPlaceholder": "Pretraži po imenu...",
+    "searchPlaceholder": "Ime / Tvrtka / Adresa…",
     "filterLanguage": "Jezični par",
     "filterLanguageAll": "Svi jezični parovi",
     "noResults": "Nema tumača koji odgovaraju pretrazi.",
@@ -123,7 +131,10 @@
       "languagePairs": "Jezični parovi",
       "county": "Županija",
       "contactDetails": "Kontakt podaci"
-    }
+    },
+    "searchPlaceholderCombined": "Ime / Tvrtka / Adresa…",
+    "filterCompany": "Tvrtka",
+    "filterCompanyPh": "Naziv tvrtke…"
   },
   "courts": {
     "searchTitle": "Sudovi",
@@ -161,7 +172,8 @@
     "jurisdictionScope": "Područje nadležnosti",
     "departmentsCount_one": "{{count}} odjel",
     "departmentsCount_few": "{{count}} odjela",
-    "departmentsCount_other": "{{count}} odjela"
+    "departmentsCount_other": "{{count}} odjela",
+    "searchPlaceholderNameAddr": "Naziv ili adresa suda…"
   },
   "nav": {
     "home": "Početna",
@@ -573,12 +585,20 @@
       "desc": "Službeni logotipi Sudačke Mreže u SVG i PNG formatu za uredničku i partnersku upotrebu."
     },
     "press": {
-      "title": "Priopćenja za javnost",
-      "desc": "Službeni iskazi i objave koje je objavila Sudačka Mreža."
+      "title": "Novinski članci",
+      "placeholder": "Press clipping — novinski članci i web portali u kojima se spominje Sudačka Mreža. Sadržaj će biti popunjen u sklopu migracije podataka sa stare stranice."
     },
     "contact": {
       "title": "Kontakt za medije",
       "desc": "Za zahtjeve za intervju, dozvole za fotografije ili pozadinske informacije, kontaktirajte naš ured za tisak."
+    },
+    "audio": {
+      "title": "Audiogalerije",
+      "placeholder": "Audio spomeni — radijski razgovori i emisije o Sudačkoj Mreži. Sadržaj će biti popunjen u sklopu migracije podataka sa stare stranice."
+    },
+    "video": {
+      "title": "Videogalerije",
+      "placeholder": "Video spomeni — televizijski prilozi i intervjui. Sadržaj će biti popunjen u sklopu migracije podataka sa stare stranice."
     }
   },
   "courtPerformance": {

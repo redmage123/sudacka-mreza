@@ -206,7 +206,7 @@ export default function CourtsPage() {
           type="search"
           value={queryDraft}
           onChange={(e) => handleKeywordChange(e.target.value)}
-          placeholder={t('courts.searchPlaceholder', 'Naziv ili adresa suda…')}
+          placeholder={t('courts.searchPlaceholderNameAddr', 'Naziv ili adresa suda…')}
           aria-label={t('courts.searchPlaceholder', 'Naziv ili adresa suda…')}
           className="w-full max-w-md rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
         />

@@ -98,23 +98,29 @@ export function Header() {
         { to: `/${lang}/sudovi/nadleznost`, label: t('jurisdictionFinder') },
         { to: `/${lang}/sudovi/performanse`, label: t('courtPerformance') },
         { to: `/${lang}/pristojbe`, label: t('calculator') },
-      ],
-    },
-    {
-      label: t('decisions'),
-      items: [
-        { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/eur-lex`, label: t('eurlexSearch', 'EUR-Lex search') },
-        { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
         { to: `/${lang}/rokovi`, label: t('deadlines') },
       ],
     },
+    // REDESIGN §3.1: 'Sudska praksa' main section is cut. EUR-Lex and
+    // Legal news survive — relocated under Services so the items aren't
+    // lost while the main nav stays slim.
     {
       label: t('services'),
       items: [
+        { to: `/${lang}/eur-lex`, label: t('eurlexSearch', 'EUR-Lex search') },
+        { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
         { to: `/${lang}/dokumenti/generator`, label: t('documentGenerator') },
         { to: `/${lang}/pravna-pomoc`, label: t('legalAid') },
         { to: `/${lang}/pracenje`, label: t('watchlist') },
+      ],
+    },
+    // REDESIGN §2.4: Mediji o nama (Media about us)
+    {
+      label: t('media', 'Mediji o nama'),
+      items: [
+        { to: `/${lang}/mediji/audio`,  label: t('audio',  'Audiogalerije') },
+        { to: `/${lang}/mediji/video`,  label: t('video',  'Videogalerije') },
+        { to: `/${lang}/mediji/press`,  label: t('press',  'Novinski članci') },
       ],
     },
     {

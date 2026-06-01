@@ -2,6 +2,7 @@ import { apiFetch } from './client'
 import { InterpreterSchema, PayloadListSchema, type Interpreter, type PayloadList } from './types'
 
 export interface GetInterpretersParams {
+  company?: string
   q?: string
   languagePair?: string
   language2?: string

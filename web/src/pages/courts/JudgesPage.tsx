@@ -90,7 +90,7 @@ export default function JudgesPage() {
       <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 mb-6">
         <SearchBar
           value={q}
-          placeholder="Pretraži po imenu suca..."
+          placeholder={t('judges.searchPlaceholder', 'Pretraži po imenu suca…')}
           onChange={handleKeywordChange}
           aria-label={tn('judges')}
         />
@@ -118,7 +118,7 @@ export default function JudgesPage() {
           ) : (
             <>
               <p className="text-sm text-[color:var(--color-text-muted)] mb-4">
-                Ukupno: {results.totalDocs.toLocaleString('hr-HR')} sudaca
+                {t('judges.totalCount', 'Ukupno: {{count}}', { count: results.totalDocs })}
               </p>
               <div className="space-y-3">
                 {results.docs.map((judge) => (

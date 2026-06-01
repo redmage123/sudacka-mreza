@@ -87,7 +87,7 @@
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
-    "searchPlaceholder": "Search by name...",
+    "searchPlaceholder": "Name / Company / Address…",
     "filterSpeciality": "Speciality",
     "filterSpecialityAll": "All specialities",
     "filterCounty": "County",
@@ -100,11 +100,14 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Name / Company / Address…",
+    "filterCompany": "Company",
+    "filterCompanyPh": "Company name…"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
-    "searchPlaceholder": "Search by name...",
+    "searchPlaceholder": "Name / Company / Address…",
     "filterLanguage": "Language pair",
     "filterLanguageAll": "All language pairs",
     "noResults": "No interpreters match your search.",
@@ -113,7 +116,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Name / Company / Address…",
+    "filterCompany": "Company",
+    "filterCompanyPh": "Company name…"
   },
   "courts": {
     "searchTitle": "Courts",
@@ -150,7 +156,8 @@
     },
     "jurisdictionScope": "Jurisdiction area",
     "departmentsCount_one": "{{count}} department",
-    "departmentsCount_other": "{{count}} departments"
+    "departmentsCount_other": "{{count}} departments",
+    "searchPlaceholderNameAddr": "Court name or address…"
   },
   "nav": {
     "home": "Home",
@@ -559,12 +566,20 @@
       "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
     },
     "press": {
-      "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "title": "Press clipping",
+      "placeholder": "Press clipping — newspaper articles and web portal mentions of Sudačka Mreža. Content will be populated as part of data migration from the legacy site."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audio galleries",
+      "placeholder": "Audio mentions — radio interviews and broadcasts about Sudačka Mreža. Content will be populated as part of data migration from the legacy site."
+    },
+    "video": {
+      "title": "Video galleries",
+      "placeholder": "Video mentions — TV pieces and interviews. Content will be populated as part of data migration from the legacy site."
     }
   },
   "courtPerformance": {
@@ -878,7 +893,11 @@
       "specialization": "Specialization",
       "status": "Status",
       "contact": "Contact details"
-    }
+    },
+    "searchPlaceholder": "Search by judge name…",
+    "totalCount": "Total: {{count}} judges",
+    "totalCount_one": "Total: {{count}} judge",
+    "totalCount_other": "Total: {{count}} judges"
   },
   "docgen.type.tuzba.desc": "To initiate civil proceedings before a court",
   "docgen.type.zalba.desc": "To appeal a court decision to a higher court",

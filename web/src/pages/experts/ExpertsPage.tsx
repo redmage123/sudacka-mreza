@@ -22,6 +22,7 @@ export default function ExpertsPage() {
   const subSpeciality = searchParams.get('subSpeciality') ?? ''
   const county = searchParams.get('county') ?? ''
   const city = searchParams.get('city') ?? ''
+  const company = searchParams.get('company') ?? ''
   const hasCv = searchParams.get('hasCv') === '1'
   const hasWorks = searchParams.get('hasWorks') === '1'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
@@ -64,6 +65,7 @@ export default function ExpertsPage() {
       subSpeciality: subSpeciality || undefined,
       county: county || undefined,
       city: city || undefined,
+      company: company || undefined,
       hasCv: hasCv || undefined,
       hasWorks: hasWorks || undefined,
       page,
@@ -81,7 +83,7 @@ export default function ExpertsPage() {
           setLoading(false)
         }
       })
-  }, [q, speciality, subSpeciality, county, city, hasCv, hasWorks, page, locale])
+  }, [q, speciality, subSpeciality, county, city, company, hasCv, hasWorks, page, locale])
 
   function handleKeywordChange(value: string) {
     clearTimeout(debounceRef.current)
@@ -189,6 +191,20 @@ export default function ExpertsPage() {
               value={city}
               onChange={(e) => handleFilterChange('city', e.target.value)}
               placeholder={t('experts.filterCityPh', 'Grad…')}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            />
+          </div>
+
+          {/* Tvrtka (Company) — REDESIGN §3.2.2 additional search */}
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('experts.filterCompany', 'Tvrtka')}
+            </label>
+            <input
+              type="text"
+              value={company}
+              onChange={(e) => handleFilterChange('company', e.target.value)}
+              placeholder={t('experts.filterCompanyPh', 'Naziv tvrtke…')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             />
           </div>

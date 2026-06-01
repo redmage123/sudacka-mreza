@@ -79,6 +79,10 @@ const MembersPage = lazy(() => import('@/pages/MembersPage'))
 const LoginPage = lazy(() => import('@/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'))
 const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPasswordPage'))
+const AudioGalleriesPage = lazy(() => import('@/pages/media/AudioGalleriesPage'))
+const VideoGalleriesPage = lazy(() => import('@/pages/media/VideoGalleriesPage'))
+const PressClippingPage  = lazy(() => import('@/pages/media/PressClippingPage'))
+
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'))
 const MyLibraryPage = lazy(() => import('@/pages/MyLibraryPage'))
 
@@ -205,6 +209,9 @@ export const router = createBrowserRouter([
       { path: 'slobodna-pravna-pomoc', element: S(LegalAidPage) },
       { path: 'o-nama', element: S(AboutPage) },
       { path: 'kontakt', element: S(ContactPage) },
+      { path: 'mediji/audio',  element: S(AudioGalleriesPage) },
+      { path: 'mediji/video',  element: S(VideoGalleriesPage) },
+      { path: 'mediji/press',  element: S(PressClippingPage)  },
 
       // GDPR / legal pages
       { path: 'privatnost', element: S(PrivacyPolicyPage) },

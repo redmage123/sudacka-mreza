@@ -2,6 +2,7 @@ import { apiFetch } from './client'
 import { ExpertWitnessSchema, PayloadListSchema, type ExpertWitness, type PayloadList } from './types'
 
 export interface GetExpertWitnessesParams {
+  company?: string
   q?: string
   speciality?: string
   subSpeciality?: string
