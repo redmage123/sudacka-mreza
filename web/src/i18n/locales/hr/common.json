@@ -941,5 +941,8 @@
         "in": "u"
       }
     }
+  },
+  "admin": {
+    "backToAdmin": "Natrag na Admin"
   }
 }

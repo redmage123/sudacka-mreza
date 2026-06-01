@@ -937,5 +937,8 @@
         "in": "in"
       }
     }
+  },
+  "admin": {
+    "backToAdmin": "Back to Admin"
   }
 }

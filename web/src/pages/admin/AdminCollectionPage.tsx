@@ -378,10 +378,10 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
   'legal-categories': {
     slug: 'legal-categories',
     title: 'Legal categories',
-    columns: ['name', 'slug'],
+    columns: ['name_hr', 'name_en', 'slug'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'slug', type: 'text' },
+      { name: 'name_hr', type: 'text', required: true },
+      { name: 'name_en', type: 'text' },
       { name: 'description', type: 'textarea' },
     ],
   },

@@ -1,13 +1,18 @@
-import { NavLink, Outlet, useParams } from 'react-router'
+import { NavLink, Outlet, useParams, useLocation } from 'react-router'
 import { useAuth } from '@/hooks/useAuth'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { ArrowLeft } from 'lucide-react'
 
 export default function AdminLayout() {
   const { user, loading } = useAuth()
   const { t } = useTranslation('common')
   const { lang } = useParams<{ lang: string }>()
+  const location = useLocation()
   const locale = lang ?? 'hr'
+  // /<locale>/admin           -> root (false)
+  // /<locale>/admin/anything  -> sub (true)
+  const isSubRoute = location.pathname.replace(/\/$/, '') !== `/${locale}/admin`
 
   if (loading) {
     return (
@@ -55,6 +60,32 @@ export default function AdminLayout() {
         ? 'bg-[color:var(--color-brand)] text-white font-semibold'
         : 'text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-alt)]'
     }`
+
+  // Sub-route layout: hide the sidebar, show a Back button + the outlet
+  // taking the full width. Visitors no longer have to scroll past the
+  // entire admin nav to read the page they clicked into.
+  if (isSubRoute) {
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            to={`/${locale}/admin`}
+            className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-text)] hover:text-[color:var(--color-brand)]"
+          >
+            <ArrowLeft size={16} aria-hidden="true" />
+            {t('admin.backToAdmin', 'Back to Admin')}
+          </Link>
+          <span className="text-sm text-[color:var(--color-text-muted)]">
+            {user.firstName} {user.lastName} · {user.email}
+          </span>
+        </div>
+
+        <div className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6">
+          <Outlet />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
