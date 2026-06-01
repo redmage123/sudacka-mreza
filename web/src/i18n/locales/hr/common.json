@@ -384,7 +384,17 @@
       "loadError": "Nije moguće učitati stečajne oglase.",
       "empty": "Nema aktivnih stečajnih oglasa.",
       "unknownDebtor": "Nepoznati dužnik",
-      "deadline": "Rok"
+      "deadline": "Rok",
+      "filterDebtor": "Stečajni dužnik",
+      "filterCourt": "Sud",
+      "filterAdmin": "Stečajni upravitelj",
+      "filterStatus": "Status",
+      "allCourts": "Svi sudovi",
+      "allAdmins": "Svi upravitelji",
+      "allStatuses": "Svi statusi",
+      "statusActive": "Aktivni",
+      "statusClosed": "Zatvoreni",
+      "statusPending": "U obradi"
     },
     "decisions": {
       "title": "Stečajne odluke",

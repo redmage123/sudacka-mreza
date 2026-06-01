@@ -365,7 +365,17 @@
       "loadError": "Could not load bankruptcy listings.",
       "empty": "No active bankruptcy listings.",
       "unknownDebtor": "Unknown debtor",
-      "deadline": "Deadline"
+      "deadline": "Deadline",
+      "filterDebtor": "Bankruptcy debtor",
+      "filterCourt": "Court",
+      "filterAdmin": "Bankruptcy trustee",
+      "filterStatus": "Status",
+      "allCourts": "All courts",
+      "allAdmins": "All trustees",
+      "allStatuses": "All statuses",
+      "statusActive": "Active",
+      "statusClosed": "Closed",
+      "statusPending": "Pending review"
     },
     "decisions": {
       "title": "Bankruptcy Decisions",
