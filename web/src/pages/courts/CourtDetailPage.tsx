@@ -5,7 +5,7 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 interface Department {
-  id?: string; name?: string; type?: string; head?: string; phone?: string; email?: string;
+  id?: string; name?: string; type?: string; head?: string; phone?: string; email?: string; notes?: string;
 }
 interface JurisdictionRich { root?: { children?: Array<{ children?: Array<{ text?: string }> }> } }
 interface TimeAvailability {
@@ -120,6 +120,11 @@ export default function CourtDetailPage() {
                   {d.phone && <span>{t('courts.phone', 'Telefon')}: {d.phone}</span>}
                   {d.email && <span>{d.email}</span>}
                 </div>
+                {d.notes && (
+                  <p className="mt-1 text-xs italic text-[color:var(--color-text-muted)] leading-snug">
+                    {d.notes}
+                  </p>
+                )}
               </div>
             ))}
           </div>
