@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 import { ChevronDown, ChevronRight, Copy, Check, Key, Zap, Globe, Lock } from 'lucide-react'
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
@@ -281,6 +282,7 @@ function CodeBlock({ code, lang = 'bash' }: { code: string; lang?: string }) {
 }
 
 function EndpointCard({ endpoint }: { endpoint: EndpointDef }) {
+  const { t } = useTranslation("common")
   const [open, setOpen] = useState(false)
 
   return (
@@ -321,11 +323,11 @@ function EndpointCard({ endpoint }: { endpoint: EndpointDef }) {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[color:var(--color-surface-subtle)] border-b border-[color:var(--color-border)]">
-                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">Naziv</th>
+                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">{t('apiDocs.endpoint.fields.name', 'Naziv')}</th>
                       <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">U</th>
-                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">Tip</th>
-                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)]">Opis</th>
-                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">Obavezno</th>
+                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">{t('apiDocs.endpoint.fields.type', 'Tip')}</th>
+                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)]">{t('apiDocs.endpoint.fields.description', 'Opis')}</th>
+                      <th className="text-left px-4 py-2.5 font-semibold text-[color:var(--color-text-muted)] whitespace-nowrap">{t('apiDocs.endpoint.fields.required', 'Obavezno')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -351,7 +353,7 @@ function EndpointCard({ endpoint }: { endpoint: EndpointDef }) {
           {/* Example request */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)] mb-3">
-              Primjer zahtjeva
+              {t('apiDocs.endpoint.exampleRequest', 'Primjer zahtjeva')}
             </h4>
             <CodeBlock code={endpoint.exampleRequest} lang="bash" />
           </div>
@@ -359,7 +361,7 @@ function EndpointCard({ endpoint }: { endpoint: EndpointDef }) {
           {/* Example response */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)] mb-3">
-              Primjer odgovora
+              {t('apiDocs.endpoint.exampleResponse', 'Primjer odgovora')}
             </h4>
             <CodeBlock code={endpoint.exampleResponse} lang="json" />
           </div>
@@ -499,13 +501,14 @@ function InfoCard({ icon, title, children }: { icon: React.ReactNode; title: str
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function ApiDocsPage() {
+  const { t } = useTranslation('common')
   return (
     <>
       <Helmet>
-        <title>API Dokumentacija — Sudačka Mreža</title>
+        <title>{t('apiDocs.metaTitle', 'API Dokumentacija — Sudačka Mreža')}</title>
         <meta
           name="description"
-          content="Javni REST API za pristup bazama sudskih odluka, vještaka, tumača i sudova Sudačke Mreže."
+          content={t('apiDocs.metaDescription', 'Javni REST API za pristup bazama sudskih odluka, vještaka, tumača i sudova Sudačke Mreže.')}
         />
       </Helmet>
 
@@ -514,32 +517,31 @@ export default function ApiDocsPage() {
         {/* ── Page header ─────────────────────────────────────────── */}
         <div className="border-b border-[color:var(--color-border)] pb-6">
           <h1 className="text-3xl font-bold text-[color:var(--color-heading)] mb-2">
-            Javni REST API
+            {t('apiDocs.title', 'Javni REST API')}
           </h1>
           <p className="text-[color:var(--color-text-muted)] max-w-2xl">
-            Otvoreni API za partnerske institucije i istraživače koji žele programatski pristup
-            bazama podataka sudske prakse, vještaka, tumača i sudova Republike Hrvatske.
+            {t('apiDocs.intro', 'Otvoreni API za partnerske institucije i istraživače koji žele programatski pristup bazama podataka sudske prakse, vještaka, tumača i sudova Republike Hrvatske.')}
           </p>
         </div>
 
         {/* ── Getting started cards ────────────────────────────────── */}
         <section aria-labelledby="getting-started-heading">
           <h2 id="getting-started-heading" className="text-lg font-semibold text-[color:var(--color-heading)] mb-4">
-            Početak rada
+            {t('apiDocs.sections.gettingStarted', 'Početak rada')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <InfoCard icon={<Globe size={16} />} title="Osnovna URL adresa">
+            <InfoCard icon={<Globe size={16} />} title={t('apiDocs.cards.baseUrl', 'Osnovna URL adresa')}>
               <code className="text-xs font-mono break-all">{BASE_URL}/api/v1</code>
-              <p className="text-xs text-[color:var(--color-text-muted)]">Svi odgovori su JSON, UTF-8</p>
+              <p className="text-xs text-[color:var(--color-text-muted)]">{t('apiDocs.cards.baseUrlNote', 'Svi odgovori su JSON, UTF-8')}</p>
             </InfoCard>
 
-            <InfoCard icon={<Lock size={16} />} title="Autentikacija">
-              <p>API ključ je opcionalan, ali povećava ograničenje.</p>
+            <InfoCard icon={<Lock size={16} />} title={t('apiDocs.cards.auth', 'Autentikacija')}>
+              <p>{t('apiDocs.cards.authNote', 'API ključ je opcionalan, ali povećava ograničenje.')}</p>
               <code className="text-xs font-mono block mt-1">X-API-Key: sm_…</code>
               <p className="text-xs text-[color:var(--color-text-muted)] mt-1">ili query param <code className="font-mono">?apiKey=</code></p>
             </InfoCard>
 
-            <InfoCard icon={<Zap size={16} />} title="Ograničenja (rate limit)">
+            <InfoCard icon={<Zap size={16} />} title={t('apiDocs.cards.rateLimit', 'Ograničenja (rate limit)')}>
               <p><strong>Bez ključa:</strong> 100 zahtjeva / min per IP</p>
               <p><strong>S ključem:</strong> do 1 000 zahtjeva / min</p>
               <p className="text-xs text-[color:var(--color-text-muted)] mt-1">HTTP 429 pri prekoračenju</p>
@@ -550,10 +552,10 @@ export default function ApiDocsPage() {
         {/* ── Pagination note ──────────────────────────────────────── */}
         <section aria-labelledby="pagination-heading">
           <h2 id="pagination-heading" className="text-lg font-semibold text-[color:var(--color-heading)] mb-3">
-            Paginacija
+            {t('apiDocs.sections.pagination', 'Paginacija')}
           </h2>
           <p className="text-sm text-[color:var(--color-text)] mb-3">
-            Svi endpoint-i liste vraćaju isti format paginiranog odgovora:
+            {t('apiDocs.paginationNote', 'Svi endpoint-i liste vraćaju isti format paginiranog odgovora:')}
           </p>
           <CodeBlock
             lang="json"
@@ -572,10 +574,10 @@ export default function ApiDocsPage() {
         {/* ── Endpoints ────────────────────────────────────────────── */}
         <section aria-labelledby="endpoints-heading">
           <h2 id="endpoints-heading" className="text-lg font-semibold text-[color:var(--color-heading)] mb-4">
-            Endpoint-i
+            {t('apiDocs.sections.endpoints', 'Endpoint-i')}
           </h2>
           <p className="text-sm text-[color:var(--color-text-muted)] mb-4">
-            Kliknite na endpoint za parametre, primjer zahtjeva i odgovora.
+            {t('apiDocs.endpointsNote', 'Kliknite na endpoint za parametre, primjer zahtjeva i odgovora.')}
           </p>
           <div className="space-y-3">
             {ENDPOINTS.map((ep) => (

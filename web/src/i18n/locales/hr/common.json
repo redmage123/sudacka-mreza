@@ -883,5 +883,38 @@
       "deadline": "Rok",
       "publishedAt": "Objavljeno"
     }
+  },
+  "apiDocs": {
+    "metaTitle": "API Dokumentacija — Sudačka Mreža",
+    "metaDescription": "Javni REST API za pristup bazama sudskih odluka, vještaka, tumača i sudova Sudačke Mreže.",
+    "title": "Javni REST API",
+    "intro": "Otvoreni API za partnerske institucije i istraživače koji žele programatski pristup bazama podataka sudske prakse, vještaka, tumača i sudova Republike Hrvatske.",
+    "paginationNote": "Svi endpoint-i liste vraćaju isti format paginiranog odgovora:",
+    "endpointsNote": "Kliknite na endpoint za parametre, primjer zahtjeva i odgovora.",
+    "sections": {
+      "gettingStarted": "Početak rada",
+      "pagination": "Paginacija",
+      "endpoints": "Endpoint-i"
+    },
+    "cards": {
+      "baseUrl": "Osnovna URL adresa",
+      "auth": "Autentikacija",
+      "rateLimit": "Ograničenja (rate limit)",
+      "baseUrlNote": "Svi odgovori su JSON, UTF-8",
+      "authNote": "API ključ je opcionalan, ali povećava ograničenje."
+    },
+    "endpoint": {
+      "params": "Parametri",
+      "exampleRequest": "Primjer zahtjeva",
+      "exampleResponse": "Primjer odgovora",
+      "fields": {
+        "name": "Naziv",
+        "description": "Opis",
+        "type": "Tip",
+        "required": "Obavezno",
+        "example": "Primjer",
+        "in": "u"
+      }
+    }
   }
 }

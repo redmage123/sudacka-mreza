@@ -879,5 +879,38 @@
       "deadline": "Deadline",
       "publishedAt": "Published"
     }
+  },
+  "apiDocs": {
+    "metaTitle": "API Documentation — Sudačka Mreža",
+    "metaDescription": "Public REST API for programmatic access to court decisions, expert witnesses, interpreters and courts of Sudačka Mreža.",
+    "title": "Public REST API",
+    "intro": "Open API for partner institutions and researchers who need programmatic access to the case-law, expert witness, interpreter and court databases of the Republic of Croatia.",
+    "paginationNote": "Every list endpoint returns the same paginated response shape:",
+    "endpointsNote": "Click an endpoint to expand parameters, an example request, and an example response.",
+    "sections": {
+      "gettingStarted": "Getting started",
+      "pagination": "Pagination",
+      "endpoints": "Endpoints"
+    },
+    "cards": {
+      "baseUrl": "Base URL",
+      "auth": "Authentication",
+      "rateLimit": "Rate limits",
+      "baseUrlNote": "All responses are JSON, UTF-8",
+      "authNote": "An API key is optional but raises the rate limit."
+    },
+    "endpoint": {
+      "params": "Parameters",
+      "exampleRequest": "Example request",
+      "exampleResponse": "Example response",
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "type": "Type",
+        "required": "Required",
+        "example": "Example",
+        "in": "in"
+      }
+    }
   }
 }

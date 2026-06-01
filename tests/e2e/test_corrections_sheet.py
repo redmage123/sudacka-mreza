@@ -101,9 +101,20 @@ def bundle_text():
 @pytest.mark.parametrize("case", _all_assertions(), ids=_id_for)
 def test_corrections_assertion(case, page: Page, bundle_text: str):
     item_id, idx, title, verify, xfail_reason = case
-    if xfail_reason:
-        pytest.xfail(xfail_reason)
+    # Defer the xfail decision: run the assertion, only convert
+    # AssertionError into pytest.xfail at the end. That way, when the
+    # data lands or the feature ships, the assertion passes and pytest
+    # reports XPASS (highlighted) instead of staying frozen on XFAIL.
+    try:
+        _run_dispatch(verify, page, bundle_text, item_id)
+    except AssertionError:
+        if xfail_reason:
+            pytest.xfail(xfail_reason)
+        raise
+    return
 
+
+def _run_dispatch(verify, page, bundle_text, item_id):
     kind = verify["kind"]
 
     if kind == "dom-marker":

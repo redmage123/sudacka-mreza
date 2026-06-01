@@ -345,22 +345,30 @@ corrections:
 
   - id: api-docs-page-i18n
     area: i18n
-    status: not-started
+    status: implemented
     title: |
-      OPEN — /hr/api and /en/api both render hardcoded Croatian content.
-      ApiDocsPage.tsx (618 LOC) has zero useTranslation calls. Endpoint
-      descriptions, parameter descriptions, and table headers are all
-      string literals. Audience is Croatian legal-tech devs so this is
-      deferrable, but EN locale visitors see Croatian and that needs to
-      be fixed before any English-speaking audience push.
+      ApiDocsPage UI shell is localized: page title, intro paragraph,
+      section headings (Getting started / Pagination / Endpoints),
+      info-card titles + body, parameter table column headers, and the
+      Parametri/Primjer zahtjeva/Primjer odgovora labels inside each
+      endpoint card. Endpoint summary/description and parameter
+      description content remains Croatian on purpose: it documents
+      Croatian-specific enum values like gradjansko/kazneno that
+      are themselves Croatian strings in the API itself.
     verify:
       - kind: dom-marker
         route: /en/api
         must_contain:
           - Public REST API
+          - Getting started
+          - Pagination
+          - Endpoints
+          - Base URL
+          - Authentication
         must_not_contain:
           - Javni REST API
-          - Vraća paginiran popis
+          - Početak rada
+          - Endpoint-i
 
   # ─── Open gaps — features explicitly NOT shipped yet ────────────────
   - id: courts-jurisdiction-text-populated
