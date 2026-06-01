@@ -82,5 +82,8 @@
   "watchlist": "Watchlist",
   "audio": "Audio galleries",
   "video": "Video galleries",
-  "press": "Press clipping"
+  "press": "Press clipping",
+  "adminConsole": "Administration",
+  "myLibrary": "My Library",
+  "signOut": "Sign out"
 }

@@ -82,5 +82,8 @@
   "watchlist": "Praćenje",
   "audio": "Audiogalerije",
   "video": "Videogalerije",
-  "press": "Novinski članci"
+  "press": "Novinski članci",
+  "adminConsole": "Administracija",
+  "myLibrary": "Moja knjižnica",
+  "signOut": "Odjava"
 }
