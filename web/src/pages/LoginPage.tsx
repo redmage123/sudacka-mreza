@@ -62,7 +62,7 @@ export default function LoginPage() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setSubmitting(true)
     try {
-      const result = await login(identifier, password)
+      const result = await login(identifier.trim(), password.trim())
       if (result.kind === 'mfa') {
         setMfaChallenge(result.challenge)
         setMfaEmailHint(result.emailHint)
@@ -110,7 +110,7 @@ export default function LoginPage() {
     setErrors((p) => ({ ...p, mfa: undefined }))
     setSubmitting(true)
     try {
-      const result = await login(identifier, password)
+      const result = await login(identifier.trim(), password.trim())
       if (result.kind === 'mfa') {
         setMfaChallenge(result.challenge)
         setMfaEmailHint(result.emailHint)
