@@ -169,11 +169,15 @@ export function createMfaRouter(payload: Payload): Router {
     // keep lockout, verify-email, and session tracking semantics.
     let loginResp: Record<string, unknown>
     try {
+      const acceptLang = (req.headers['accept-language'] ?? 'hr') as string
       const resp = await fetch(
         `http://localhost:${process.env.PORT ?? '4094'}/api/users/login`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept-Language': acceptLang,
+          },
           body: JSON.stringify({ email, username, password }),
         },
       )

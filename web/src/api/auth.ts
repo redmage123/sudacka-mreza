@@ -42,6 +42,13 @@ async function postJson(path: string, body: unknown): Promise<unknown> {
   const token = getAuthToken()
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
   if (token) headers.Authorization = `JWT ${token}`
+  // Pass the visitor's UI locale so the Payload server returns error
+  // messages in the right language. Falls back to 'hr' when called
+  // outside the router (e.g. session refresh on initial mount).
+  try {
+    const m = (typeof window !== 'undefined' ? window.location.pathname : '').match(/^\/(hr|en|ar)(\/|$)/)
+    headers['Accept-Language'] = m ? m[1] : 'hr'
+  } catch {}
 
   const resp = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
