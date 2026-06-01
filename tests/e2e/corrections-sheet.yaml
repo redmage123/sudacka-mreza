@@ -307,6 +307,61 @@ corrections:
         header_must_not_contain:
           Cache-Control: immutable
 
+
+  # ─── Round-2 i18n catches from the full audit (2026-06-01) ──────────
+  - id: bankruptcy-decisions-croatian
+    area: i18n
+    status: implemented
+    title: |
+      /stecaj/odluke must render in Croatian. Was leaking the t() default
+      'Bankruptcy Decisions' because bankruptcy.decisions.* keys were
+      missing from hr/common.json.
+    verify:
+      - kind: dom-marker
+        route: /hr/stecaj/odluke
+        must_contain:
+          - Stečajne odluke
+        must_not_contain:
+          - Bankruptcy Decisions
+          - Court decisions related to bankruptcy
+
+  - id: debtors-english-on-en-locale
+    area: i18n
+    status: implemented
+    title: |
+      /stecaj/duznici must render in English on /en. Was leaking the
+      Croatian defaults because debtors.* keys were missing from
+      en/common.json. The DebtorDetailPage shares the same namespace
+      so it gets fixed at the same time.
+    verify:
+      - kind: dom-marker
+        route: /en/stecaj/duznici
+        must_contain:
+          - Bankruptcy Debtors
+          - Directory of debtors
+        must_not_contain:
+          - Stečajni dužnici
+          - Direktorij dužnika
+
+  - id: api-docs-page-i18n
+    area: i18n
+    status: not-started
+    title: |
+      OPEN — /hr/api and /en/api both render hardcoded Croatian content.
+      ApiDocsPage.tsx (618 LOC) has zero useTranslation calls. Endpoint
+      descriptions, parameter descriptions, and table headers are all
+      string literals. Audience is Croatian legal-tech devs so this is
+      deferrable, but EN locale visitors see Croatian and that needs to
+      be fixed before any English-speaking audience push.
+    verify:
+      - kind: dom-marker
+        route: /en/api
+        must_contain:
+          - Public REST API
+        must_not_contain:
+          - Javni REST API
+          - Vraća paginiran popis
+
   # ─── Open gaps — features explicitly NOT shipped yet ────────────────
   - id: courts-jurisdiction-text-populated
     area: courts

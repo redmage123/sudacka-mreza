@@ -368,6 +368,13 @@
       "empty": "Nema aktivnih stečajnih oglasa.",
       "unknownDebtor": "Nepoznati dužnik",
       "deadline": "Rok"
+    },
+    "decisions": {
+      "title": "Stečajne odluke",
+      "description": "Sudske odluke iz stečajnih postupaka u Hrvatskoj.",
+      "loadError": "Nije moguće učitati stečajne odluke.",
+      "noResults": "Nema rezultata.",
+      "viewDecision": "Otvori odluku"
     }
   },
   "administrators": {
@@ -854,6 +861,27 @@
       "title": "7. Izmjene Uvjeta",
       "p1": "Zadržavamo pravo izmjene ovih Uvjeta korištenja. O značajnim izmjenama obavijestit ćemo registrirane korisnike e-poštom. Nastavak korištenja platforme nakon objave izmjena smatra se prihvaćanjem novih Uvjeta.",
       "p2": "Za pitanja o ovim Uvjetima kontaktirajte nas na:"
+    }
+  },
+  "debtors": {
+    "title": "Stečajni dužnici",
+    "subtitle": "Direktorij dužnika nad kojima se vodi ili se vodio stečajni postupak.",
+    "searchPlaceholder": "Pretraga po nazivu ili gradu…",
+    "oibPh": "OIB…",
+    "loadError": "Greška pri učitavanju dužnika.",
+    "noResults": "Nema dužnika koji odgovaraju pretrazi.",
+    "linkedListings": "Stečajni postupci",
+    "noLinkedListings": "Nema povezanih stečajnih postupaka.",
+    "fields": {
+      "name": "Naziv / Ime",
+      "address": "Adresa",
+      "city": "Grad",
+      "county": "Županija",
+      "phone": "Telefon",
+      "caseNumber": "Broj predmeta",
+      "status": "Status",
+      "deadline": "Rok",
+      "publishedAt": "Objavljeno"
     }
   }
 }

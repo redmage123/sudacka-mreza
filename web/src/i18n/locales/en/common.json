@@ -354,6 +354,13 @@
       "empty": "No active bankruptcy listings.",
       "unknownDebtor": "Unknown debtor",
       "deadline": "Deadline"
+    },
+    "decisions": {
+      "title": "Bankruptcy Decisions",
+      "description": "Court decisions related to bankruptcy proceedings in Croatia.",
+      "loadError": "Could not load bankruptcy decisions.",
+      "noResults": "No results.",
+      "viewDecision": "Open decision"
     }
   },
   "administrators": {
@@ -851,5 +858,26 @@
   "docgen.type.tuzba.desc": "To initiate civil proceedings before a court",
   "docgen.type.zalba.desc": "To appeal a court decision to a higher court",
   "docgen.type.prigovor.desc": "To file an objection against a court ruling",
-  "docgen.type.ovrsni.desc": "To initiate enforcement based on an enforceable instrument"
+  "docgen.type.ovrsni.desc": "To initiate enforcement based on an enforceable instrument",
+  "debtors": {
+    "title": "Bankruptcy Debtors",
+    "subtitle": "Directory of debtors against whom bankruptcy proceedings have been or are being conducted.",
+    "searchPlaceholder": "Search by name or city…",
+    "oibPh": "OIB…",
+    "loadError": "Could not load debtors.",
+    "noResults": "No debtors match the search.",
+    "linkedListings": "Bankruptcy proceedings",
+    "noLinkedListings": "No linked bankruptcy proceedings.",
+    "fields": {
+      "name": "Name",
+      "address": "Address",
+      "city": "City",
+      "county": "County",
+      "phone": "Phone",
+      "caseNumber": "Case number",
+      "status": "Status",
+      "deadline": "Deadline",
+      "publishedAt": "Published"
+    }
+  }
 }
