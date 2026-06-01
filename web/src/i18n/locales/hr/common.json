@@ -284,7 +284,9 @@
     "payment3": "Blagajna suda (osobno u sudu)",
     "legalBasis": "Pravna osnova",
     "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, s izmjenama). Svi iznosi preračunati u EUR od 01.01.2023.",
-    "calculate": "Izračunaj pristojbu"
+    "calculate": "Izračunaj pristojbu",
+    "tariffRef": "Tar. br.",
+    "tariffSource": "NN 118/18"
   },
   "map": {
     "title": "Karta sudova",

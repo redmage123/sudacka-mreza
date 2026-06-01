@@ -174,9 +174,20 @@ export default function CalculatorPage() {
           {/* Result for civil/commercial */}
           {displayResult && needsClaimValue && (
             <div className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg-card)] p-6 space-y-3">
-              <h2 className="text-lg font-semibold text-[color:var(--color-heading)]">
-                {t('calculator.filingFee')}
-              </h2>
+              <div className="flex items-baseline justify-between">
+                <h2 className="text-lg font-semibold text-[color:var(--color-heading)]">
+                  {t('calculator.filingFee')}
+                </h2>
+                <span className="text-xs text-[color:var(--color-text-muted)]">
+                  {t('calculator.tariffRef', 'Tar. br.')} {caseType === 'civil' ? 1 : 2}
+                  &nbsp;·&nbsp;
+                  <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2018_12_118_2310.html"
+                     target="_blank" rel="noopener noreferrer"
+                     className="underline hover:text-[color:var(--color-text)]">
+                    {t('calculator.tariffSource', 'NN 118/18')}
+                  </a>
+                </span>
+              </div>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-[color:var(--color-text-muted)]">{t('calculator.filingFee')}</span>

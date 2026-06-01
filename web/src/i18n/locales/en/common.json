@@ -268,7 +268,9 @@
     "payment3": "Court cashier (in person at the court)",
     "legalBasis": "Legal Basis",
     "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, with amendments). All amounts converted to EUR since 01.01.2023.",
-    "calculate": "Calculate fee"
+    "calculate": "Calculate fee",
+    "tariffRef": "Tariff item",
+    "tariffSource": "OG 118/18"
   },
   "map": {
     "title": "Court Map",
