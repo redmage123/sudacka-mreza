@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router'
+import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Alert } from '@/components/ui/Alert'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -122,19 +122,23 @@ export default function StateAttorneysPage() {
               </p>
               <div className="space-y-3">
                 {results.docs.map((sa) => (
-                  <div
+                  <Link
                     key={sa.id}
-                    className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-4"
+                    to={`/${locale}/sudovi/dorh/${sa.id}`}
+                    className="block bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-4 hover:border-[color:var(--color-brand-gold)] transition-colors group"
                   >
-                    <p className="font-medium text-[color:var(--color-text)]">
-                      {sa.name}
-                    </p>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="font-medium text-[color:var(--color-text)]">{sa.name}</p>
+                      <span className="text-sm text-[color:var(--color-text-link)] opacity-70 group-hover:opacity-100 whitespace-nowrap">
+                        {t('viewDetails', 'Pogledaj detalje')} →
+                      </span>
+                    </div>
                     <div className="text-sm text-[color:var(--color-text-muted)] mt-1 space-x-3">
                       {sa.address && <span>{sa.address}</span>}
                       {sa.city && <span>{sa.city}</span>}
                       {sa.phone && <span>{sa.phone}</span>}
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
               <div className="mt-6 flex justify-center">

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Alert } from '@/components/ui/Alert'
@@ -149,6 +149,7 @@ export default function AdministratorsPage() {
                     {t(`administrators.fields.${f}`)}
                   </th>
                 ))}
+                <th className="px-4 py-3 font-semibold text-[color:var(--color-heading)]" aria-label="actions" />
               </tr>
             </thead>
             <tbody className="divide-y divide-[color:var(--color-border)]">
@@ -170,6 +171,14 @@ export default function AdministratorsPage() {
                   </td>
                   <td className="px-4 py-3 text-[color:var(--color-text-muted)]">
                     {a.city ?? '—'}
+                  </td>
+                  <td className="px-4 py-3 text-right whitespace-nowrap">
+                    <Link
+                      to={`/${locale}/stecaj/upravitelji/${a.id}`}
+                      className="text-sm text-[color:var(--color-text-link)] hover:underline"
+                    >
+                      {t('viewDetails', 'Pogledaj detalje')} →
+                    </Link>
                   </td>
                 </tr>
                 )

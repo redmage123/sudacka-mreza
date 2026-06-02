@@ -20,9 +20,6 @@ export default function JudgeDetailPage() {
 
   useEffect(() => {
     if (!id) return
-    // /sudovi/suci/:id catches non-numeric paths too; short-circuit so a
-    // path like /sudovi/suci/anything doesn't trigger an API call with NaN.
-    if (!/^\d+$/.test(id)) { setNotFound(true); setLoading(false); return }
     setLoading(true)
     setError(false)
     setNotFound(false)
@@ -94,55 +91,44 @@ export default function JudgeDetailPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {judge.court && (
-          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5">
-            <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
-              {t('judges.detail.court')}
-            </h2>
-            <p className="text-[color:var(--color-text)]">{judge.court.name}</p>
-          </div>
-        )}
+        <DetailCard label={t('judges.detail.court', 'Sud')}>
+          {judge.court ? (
+            <Link to={`/${locale}/sudovi/${judge.court.id}`} className="text-[color:var(--color-text-link)] hover:underline">
+              {judge.court.name}
+            </Link>
+          ) : '—'}
+        </DetailCard>
 
-        {judge.appointmentDate && (
-          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5">
-            <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
-              {t('judges.detail.appointmentDate')}
-            </h2>
-            <p className="text-[color:var(--color-text)]">
-              {new Date(judge.appointmentDate).toLocaleDateString(locale === 'hr' ? 'hr-HR' : locale)}
-            </p>
-          </div>
-        )}
+        <DetailCard label={t('judges.detail.status', 'Status')}>
+          {judge.status === 'active' ? (
+            <span className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-green-500"/>
+              {t('judges.statusActive', 'Aktivan')}
+            </span>
+          ) : judge.status === 'inactive' ? (
+            <span className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-gray-400"/>
+              {t('judges.statusInactive', 'Neaktivan')}
+            </span>
+          ) : (judge.status || '—')}
+        </DetailCard>
 
-        {judge.specialization && (
-          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5">
-            <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
-              {t('judges.detail.specialization')}
-            </h2>
-            <p className="text-[color:var(--color-text)]">{judge.specialization}</p>
-          </div>
-        )}
+        <DetailCard label={t('judges.detail.specialization', 'Specijalizacija')}>
+          {judge.specialization || '—'}
+        </DetailCard>
 
-        {judge.status && (
-          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5">
-            <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
-              {t('judges.detail.status')}
-            </h2>
-            <p className="text-[color:var(--color-text)]">{judge.status}</p>
-          </div>
-        )}
+        <DetailCard label={t('judges.detail.appointmentDate', 'Datum imenovanja')}>
+          {judge.appointmentDate
+            ? new Date(judge.appointmentDate).toLocaleDateString(locale === 'hr' ? 'hr-HR' : locale)
+            : '—'}
+        </DetailCard>
 
         {judge.email && (
-          <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 sm:col-span-2">
-            <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
-              {t('judges.detail.contact')}
-            </h2>
-            <p className="text-sm text-[color:var(--color-text)]">
-              <a href={`mailto:${judge.email}`} className="text-[color:var(--color-text-link)] hover:underline">
-                {judge.email}
-              </a>
-            </p>
-          </div>
+          <DetailCard label={t('judges.detail.contact', 'Kontakt')} colSpan>
+            <a href={`mailto:${judge.email}`} className="text-[color:var(--color-text-link)] hover:underline">
+              {judge.email}
+            </a>
+          </DetailCard>
         )}
       </div>
 
@@ -154,6 +140,16 @@ export default function JudgeDetailPage() {
           ← {t('back')}
         </Link>
       </div>
+    </div>
+  )
+}
+
+
+function DetailCard({ label, children, colSpan }: { label: string; children: React.ReactNode; colSpan?: boolean }) {
+  return (
+    <div className={`bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 ${colSpan ? 'sm:col-span-2' : ''}`}>
+      <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">{label}</h2>
+      <p className="text-[color:var(--color-text)]">{children}</p>
     </div>
   )
 }

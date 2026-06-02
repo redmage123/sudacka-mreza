@@ -90,7 +90,7 @@ export default function JudgesPage() {
       <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 mb-6">
         <SearchBar
           value={q}
-          placeholder="Pretraži po imenu suca..."
+          placeholder={t('judges.searchPlaceholder', 'Pretraži po imenu suca…')}
           onChange={handleKeywordChange}
           aria-label={tn('judges')}
         />
@@ -118,7 +118,7 @@ export default function JudgesPage() {
           ) : (
             <>
               <p className="text-sm text-[color:var(--color-text-muted)] mb-4">
-                Ukupno: {results.totalDocs.toLocaleString('hr-HR')} sudaca
+                {t('judges.totalCount', 'Ukupno: {{count}}', { count: results.totalDocs })}
               </p>
               <div className="space-y-3">
                 {results.docs.map((judge) => (
@@ -127,9 +127,10 @@ export default function JudgesPage() {
                     to={`/${locale}/sudovi/suci/${judge.id}`}
                     className="block bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-4 hover:border-[color:var(--color-brand-gold)] transition-colors"
                   >
-                    <p className="font-medium text-[color:var(--color-text)]">
-                      {judge.name}
-                    </p>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="font-medium text-[color:var(--color-text)]">{judge.name}</p>
+                      <span className="text-sm text-[color:var(--color-text-link)] opacity-70 whitespace-nowrap">{t('viewDetails', 'Pogledaj detalje')} →</span>
+                    </div>
                     <div className="text-sm text-[color:var(--color-text-muted)] mt-1 space-x-3">
                       {judge.court && (
                         <span>{judge.court.name}</span>
