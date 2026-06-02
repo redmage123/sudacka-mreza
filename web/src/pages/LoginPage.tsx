@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, useNavigate, useParams } from 'react-router'
+import { Link, useLocation, useNavigate, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Alert } from '@/components/ui/Alert'
 import { PasswordInput } from '@/components/ui/PasswordInput'
@@ -18,7 +18,24 @@ export default function LoginPage() {
   const { lang } = useParams<{ lang: string }>()
   const locale = lang ?? 'hr'
   const navigate = useNavigate()
+  const location = useLocation()
   usePageTitle('login')
+
+  // If the user navigates back to /login while an MFA challenge is open
+  // (e.g. they got the code wrong and click the header 'Login' link to
+  // start over), reset the OTP form to the email+password step. Watching
+  // location.key catches even same-path navigation — what header re-clicks
+  // trigger — which a pathname effect would miss.
+  useEffect(() => {
+    setMfaChallenge(null)
+    setMfaEmailHint('')
+    setMfaCode('')
+    setServerError(null)
+    setErrors({})
+    setResendIn(0)
+    setResent(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key])
 
   const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
@@ -62,7 +79,7 @@ export default function LoginPage() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setSubmitting(true)
     try {
-      const result = await login(identifier, password)
+      const result = await login(identifier.trim(), password.trim())
       if (result.kind === 'mfa') {
         setMfaChallenge(result.challenge)
         setMfaEmailHint(result.emailHint)
@@ -110,7 +127,7 @@ export default function LoginPage() {
     setErrors((p) => ({ ...p, mfa: undefined }))
     setSubmitting(true)
     try {
-      const result = await login(identifier, password)
+      const result = await login(identifier.trim(), password.trim())
       if (result.kind === 'mfa') {
         setMfaChallenge(result.challenge)
         setMfaEmailHint(result.emailHint)
