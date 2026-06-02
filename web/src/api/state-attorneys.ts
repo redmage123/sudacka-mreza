@@ -26,6 +26,14 @@ export interface GetStateAttorneysParams {
 export async function getStateAttorneys(
   params: GetStateAttorneysParams = {},
 ): Promise<PayloadList<StateAttorney>> {
+    if (params.q !== undefined && params.q !== '') {
+    const SearchListSchema = z.object({ docs: z.array(StateAttorneySchema.passthrough()), totalDocs: z.number() })
+    const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
+      params: { type: 'state-attorneys', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
+    })
+    return { docs: r.docs as StateAttorney[], totalDocs: r.totalDocs, limit: 50, totalPages: 1, page: 1, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null }
+  }
+
   const queryParams: Record<string, string | number | undefined> = {
     sort: 'name',
     limit: 20,

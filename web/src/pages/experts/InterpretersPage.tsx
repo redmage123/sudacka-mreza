@@ -21,6 +21,7 @@ export default function InterpretersPage() {
   const language2 = searchParams.get('lang2') ?? ''
   const county = searchParams.get('county') ?? ''
   const city = searchParams.get('city') ?? ''
+  const company = searchParams.get('company') ?? ''
   const hasCv = searchParams.get('hasCv') === '1'
   const hasWorks = searchParams.get('hasWorks') === '1'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
@@ -74,6 +75,7 @@ export default function InterpretersPage() {
       language2: language2 || undefined,
       county: county || undefined,
       city: city || undefined,
+      company: company || undefined,
       hasCv: hasCv || undefined,
       hasWorks: hasWorks || undefined,
       page,
@@ -133,11 +135,10 @@ export default function InterpretersPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="interp-language-pair" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterLanguage')}
             </label>
             <select
-              id="interp-language-pair"
               value={languagePair}
               onChange={(e) => handleFilterChange('lang', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
@@ -150,11 +151,10 @@ export default function InterpretersPage() {
           </div>
 
           <div>
-            <label htmlFor="interp-language-2" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterLanguage2', 'Drugi jezik / Second language')}
             </label>
             <select
-              id="interp-language-2"
               value={language2}
               onChange={(e) => handleFilterChange('lang2', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
@@ -167,11 +167,10 @@ export default function InterpretersPage() {
           </div>
 
           <div>
-            <label htmlFor="interp-county" className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
               {t('interpreters.filterCounty', 'Županija')}
             </label>
             <select
-              id="interp-county"
               value={county}
               onChange={(e) => handleFilterChange('county', e.target.value)}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
@@ -192,6 +191,20 @@ export default function InterpretersPage() {
               value={city}
               onChange={(e) => handleFilterChange('city', e.target.value)}
               placeholder={t('interpreters.filterCityPh', 'Grad…')}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            />
+          </div>
+
+          {/* Tvrtka (Company) — REDESIGN §3.3.2 additional search */}
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('interpreters.filterCompany', 'Tvrtka')}
+            </label>
+            <input
+              type="text"
+              value={company}
+              onChange={(e) => handleFilterChange('company', e.target.value)}
+              placeholder={t('interpreters.filterCompanyPh', 'Naziv tvrtke…')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             />
           </div>

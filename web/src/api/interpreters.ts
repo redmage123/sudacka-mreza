@@ -2,6 +2,7 @@ import { apiFetch } from './client'
 import { InterpreterSchema, PayloadListSchema, type Interpreter, type PayloadList } from './types'
 
 export interface GetInterpretersParams {
+  company?: string
   q?: string
   languagePair?: string
   language2?: string
@@ -17,6 +18,14 @@ export interface GetInterpretersParams {
 export async function getInterpreters(
   params: GetInterpretersParams = {},
 ): Promise<PayloadList<Interpreter>> {
+    if (params.q !== undefined && params.q !== '') {
+    const SearchListSchema = z.object({ docs: z.array(InterpreterSchema.passthrough()), totalDocs: z.number() })
+    const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
+      params: { type: 'interpreters', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
+    })
+    return { docs: r.docs as Interpreter[], totalDocs: r.totalDocs, limit: 50, totalPages: 1, page: 1, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null }
+  }
+
   const queryParams: Record<string, string | number | undefined> = {
     sort: 'name',
     limit: params.limit ?? 20,

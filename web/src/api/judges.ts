@@ -42,6 +42,15 @@ export async function getJudgeById(id: string, locale = 'hr'): Promise<Judge> {
 export async function getJudges(
   params: GetJudgesParams = {},
 ): Promise<PayloadList<Judge>> {
+  // Hybrid (semantic + keyword) when a query is set.
+  if (params.q !== undefined && params.q !== '') {
+    const SearchListSchema = z.object({ docs: z.array(JudgeSchema.passthrough()), totalDocs: z.number() })
+    const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
+      params: { type: 'judges', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
+    })
+    return { docs: r.docs as Judge[], totalDocs: r.totalDocs, limit: 50, totalPages: 1, page: 1, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null }
+  }
+
   const queryParams: Record<string, string | number | undefined> = {
     sort: 'name',
     limit: 20,
