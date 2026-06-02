@@ -1,27 +1,20 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
+import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
 import { getAuthToken } from '@/api/client'
 
 // Field type descriptors for the generic editor.
-// Scalars: text, textarea, number, checkbox, select.
-// Composites: array (subfields per item), relationship (single FK -> picker),
-// relationshipMany (hasMany FK -> add/remove list of pickers).
+// Keep tiny: text, textarea, number, checkbox, select.
+// Anything richer (relationships, arrays, rich text) should get a dedicated page.
 export interface FieldDef {
   name: string
   label?: string
-  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select'
-      | 'array' | 'relationship' | 'relationshipMany'
+  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines'
   required?: boolean
   options?: Array<{ label: string; value: string }>
-  /** For type='array' — the subfields rendered per array item. */
-  fields?: FieldDef[]
-  /** For type='relationship' / 'relationshipMany' — target collection slug
-   *  (e.g. 'media'). The picker fetches /api/<relationTo>?limit=200&sort=...
-   *  and renders a <select> populated with the resulting docs. */
-  relationTo?: string
-  /** Which field to display in the picker option label (default: 'name',
-   *  falls back to 'filename' for media, 'title' for legal-categories etc). */
-  relationLabel?: string
+  itemKey?: string
+  placeholder?: string
 }
 
 export interface CollectionAdminConfig {
@@ -57,155 +50,12 @@ function blankRecord(fields: FieldDef[], defaults?: Record<string, unknown>): Re
   for (const f of fields) {
     if (!(f.name in out)) {
       out[f.name] =
-        f.type === 'checkbox'          ? false :
-        f.type === 'number'            ? '' :
-        f.type === 'array'             ? [] :
-        f.type === 'relationshipMany'  ? [] :
-        f.type === 'relationship'      ? null :
+        f.type === 'checkbox' ? false :
+        f.type === 'number'   ? '' :
         ''
     }
   }
   return out
-}
-
-function blankArrayItem(subFields: FieldDef[]): Record<string, unknown> {
-  const item: Record<string, unknown> = {}
-  for (const sf of subFields) {
-    item[sf.name] =
-      sf.type === 'checkbox'         ? false :
-      sf.type === 'number'           ? '' :
-      sf.type === 'array'            ? [] :
-      sf.type === 'relationshipMany' ? [] :
-      sf.type === 'relationship'     ? null :
-      ''
-  }
-  return item
-}
-
-/** Extract just the id from a Payload relationship value, which may be:
- *   - a number/string (depth=0)
- *   - an object { id, ... } (depth>=1)
- *   - null / undefined */
-function relId(v: unknown): string {
-  if (v == null) return ''
-  if (typeof v === 'object') return String((v as { id?: string | number }).id ?? '')
-  return String(v)
-}
-
-/** Pick a human label from a Payload doc for the picker dropdown. */
-function relLabel(doc: Record<string, unknown>, prefer?: string): string {
-  if (prefer && doc[prefer] != null) return String(doc[prefer])
-  for (const k of ['name', 'title', 'filename', 'email', 'slug']) {
-    if (doc[k] != null) return String(doc[k])
-  }
-  return `#${doc.id ?? '?'}`
-}
-
-// ─── Composite-field editors ────────────────────────────────────────────────
-
-function RelationshipManyEditor({
-  selected,
-  options,
-  onChange,
-}: {
-  selected: string[]
-  options: Array<{ id: string; label: string }>
-  onChange: (next: string[]) => void
-}) {
-  const common = 'rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm flex-1'
-  const setAt = (i: number, v: string) => {
-    const next = [...selected]
-    next[i] = v
-    onChange(next.filter(Boolean))
-  }
-  const remove = (i: number) => onChange(selected.filter((_, idx) => idx !== i))
-  const add = () => onChange([...selected, ''])
-  return (
-    <div className="space-y-1.5">
-      {selected.map((sel, i) => (
-        <div key={i} className="flex gap-2 items-center">
-          <select value={sel} onChange={(e) => setAt(i, e.target.value)} className={common}>
-            <option value="">— pick —</option>
-            {options.map((o) => (
-              <option key={o.id} value={o.id}>{o.label}</option>
-            ))}
-          </select>
-          <button type="button" onClick={() => remove(i)} className="text-xs text-red-600 hover:underline">remove</button>
-        </div>
-      ))}
-      <button type="button" onClick={add} className="text-xs text-[color:var(--color-brand)] hover:underline">
-        + add
-      </button>
-    </div>
-  )
-}
-
-function ArrayEditor({
-  items,
-  subFields,
-  relOptions,
-  onChange,
-}: {
-  items: Array<Record<string, unknown>>
-  subFields: FieldDef[]
-  relOptions: Record<string, Array<{ id: string; label: string }>>
-  onChange: (next: Array<Record<string, unknown>>) => void
-}) {
-  const common = 'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1.5 text-sm'
-  const setAt = (i: number, name: string, v: unknown) => {
-    const next = items.map((it, idx) => (idx === i ? { ...it, [name]: v } : it))
-    onChange(next)
-  }
-  const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i))
-  const add = () => onChange([...items, blankArrayItem(subFields)])
-  return (
-    <div className="space-y-2">
-      {items.map((item, i) => (
-        <div key={i} className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-2 space-y-1.5">
-          <div className="flex items-start gap-2">
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {subFields.map((sf) => {
-                const sv = item[sf.name]
-                const setV = (v: unknown) => setAt(i, sf.name, v)
-                return (
-                  <div key={sf.name}>
-                    <label className="block text-xs text-[color:var(--color-text-muted)] mb-0.5">
-                      {sf.label ?? sf.name}{sf.required && <span className="text-red-600"> *</span>}
-                    </label>
-                    {sf.type === 'select' ? (
-                      <select value={String(sv ?? '')} onChange={(e) => setV(e.target.value)} className={common}>
-                        <option value="">—</option>
-                        {sf.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                      </select>
-                    ) : sf.type === 'textarea' ? (
-                      <textarea rows={2} value={String(sv ?? '')} onChange={(e) => setV(e.target.value)} className={common} />
-                    ) : sf.type === 'relationship' ? (
-                      <select value={relId(sv)} onChange={(e) => setV(e.target.value || null)} className={common}>
-                        <option value="">—</option>
-                        {(relOptions[sf.relationTo ?? ''] ?? []).map((o) => (
-                          <option key={o.id} value={o.id}>{o.label}</option>
-                        ))}
-                      </select>
-                    ) : sf.type === 'number' ? (
-                      <input type="number" value={String(sv ?? '')} onChange={(e) => setV(e.target.value === '' ? '' : Number(e.target.value))} className={common} />
-                    ) : sf.type === 'checkbox' ? (
-                      <input type="checkbox" checked={!!sv} onChange={(e) => setV(e.target.checked)} />
-                    ) : (
-                      <input type="text" value={String(sv ?? '')} onChange={(e) => setV(e.target.value)} className={common} />
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-            <button type="button" onClick={() => remove(i)} className="mt-5 text-xs text-red-600 hover:underline whitespace-nowrap">remove</button>
-          </div>
-        </div>
-      ))}
-      <button type="button" onClick={add} className="text-xs text-[color:var(--color-brand)] hover:underline">
-        + add row
-      </button>
-    </div>
-  )
 }
 
 function renderCell(value: unknown): string {
@@ -218,7 +68,17 @@ function renderCell(value: unknown): string {
   return String(value)
 }
 
+
+// REDESIGN: labels in collectionConfigs are i18n keys when they contain a
+// dot; otherwise they are rendered as-is. Falls back to the field name.
+function labelOf(f: FieldDef, t: ReturnType<typeof useTranslation>['t']): string {
+  if (!f.label) return f.name
+  if (f.label.includes('.')) return t(f.label, f.name)
+  return f.label
+}
+
 export function AdminCollectionPage({ config }: { config: CollectionAdminConfig }) {
+  const { t } = useTranslation('common')
   const { lang } = useParams<{ lang: string }>()
   const locale = lang ?? 'hr'
   const [rows, setRows] = useState<Array<Record<string, unknown>>>([])
@@ -229,53 +89,18 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
   const [error, setError] = useState<string | null>(null)
   const [flash, setFlash] = useState<string | null>(null)
   const [editing, setEditing] = useState<Record<string, unknown> | null>(null)
+  const editingRef = useRef<HTMLDivElement | null>(null)
+
+  // Scroll the edit form into view when a row is selected so the user
+  // doesn't miss it appearing above a long table.
+  useEffect(() => {
+    if (editing && editingRef.current) {
+      editingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [editing])
   const [submitting, setSubmitting] = useState(false)
 
   const blank = useMemo(() => blankRecord(config.fields, config.defaults), [config])
-
-  // Relationship options keyed by target collection slug.
-  // Fetched lazily the first time a form with relationship fields opens, then
-  // memoised for the session so opening/closing the editor doesn't re-fetch.
-  const [relOptions, setRelOptions] = useState<Record<string, Array<{ id: string; label: string }>>>({})
-  const relTargetsNeeded = useMemo(() => {
-    const out = new Set<string>()
-    const walk = (fields: FieldDef[]) => {
-      for (const f of fields) {
-        if ((f.type === 'relationship' || f.type === 'relationshipMany') && f.relationTo) {
-          out.add(f.relationTo)
-        }
-        if (f.type === 'array' && f.fields) walk(f.fields)
-      }
-    }
-    walk(config.fields)
-    return [...out]
-  }, [config])
-
-  useEffect(() => {
-    if (!editing) return
-    const missing = relTargetsNeeded.filter((slug) => !(slug in relOptions))
-    if (!missing.length) return
-    let cancelled = false
-    ;(async () => {
-      const updates: Record<string, Array<{ id: string; label: string }>> = {}
-      for (const slug of missing) {
-        try {
-          const sort = slug === 'media' ? 'filename' : 'name'
-          const resp = await authFetch(`/api/${slug}?limit=300&depth=0&sort=${sort}`)
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
-          const data = await resp.json()
-          updates[slug] = (data.docs ?? []).map((d: Record<string, unknown>) => ({
-            id: String(d.id),
-            label: relLabel(d),
-          }))
-        } catch {
-          updates[slug] = []  // fall back to empty list; the picker still renders
-        }
-      }
-      if (!cancelled) setRelOptions((prev) => ({ ...prev, ...updates }))
-    })()
-    return () => { cancelled = true }
-  }, [editing, relTargetsNeeded, relOptions])
 
   async function load() {
     setLoading(true)
@@ -318,37 +143,17 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
       const isCreate = !('id' in editing) || editing.id == null || editing.id === ''
       const url = isCreate ? `/api/${config.slug}` : `/api/${config.slug}/${editing.id}`
       const method = isCreate ? 'POST' : 'PATCH'
-      // Strip id from body for create, and normalize empties + relationships
+      // Strip id from body for create, and drop empty-string relationships
       const body: Record<string, unknown> = {}
       for (const f of config.fields) {
         const v = editing[f.name]
         if (f.type === 'number' && v === '') continue
-        if (f.type === 'relationship') {
-          // Payload accepts the id directly; omit when empty so the field
-          // stays null rather than being assigned an empty string.
-          const id = relId(v)
-          if (id) body[f.name] = id
-          continue
+        if (f.type === 'lines' && Array.isArray(v)) {
+          const key = f.itemKey ?? 'value'
+          body[f.name] = v.filter((x) => x != null && x !== '').map((x) => ({ [key]: x }))
+        } else {
+          body[f.name] = v
         }
-        if (f.type === 'relationshipMany') {
-          body[f.name] = Array.isArray(v) ? v.map(relId).filter(Boolean) : []
-          continue
-        }
-        if (f.type === 'array') {
-          // Drop the synthetic `id` Payload may have added on existing items
-          // so the API doesn't reject unknown IDs on subsequent saves.
-          body[f.name] = Array.isArray(v)
-            ? v.map((item) => {
-                if (item && typeof item === 'object') {
-                  const { id: _omit, ...rest } = item as Record<string, unknown>
-                  return rest
-                }
-                return item
-              })
-            : []
-          continue
-        }
-        body[f.name] = v
       }
       const resp = await authFetch(url, { method, body: JSON.stringify(body) })
       if (!resp.ok) {
@@ -394,6 +199,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
       {flash && <div className="mb-3 rounded bg-green-50 border border-green-300 px-3 py-2 text-sm text-green-800">{flash}</div>}
       {error && <div className="mb-3 rounded bg-red-50 border border-red-300 px-3 py-2 text-sm text-red-800">{error}</div>}
 
+      <div ref={editingRef} />
       {editing ? (
         <form onSubmit={save} className="space-y-3 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-4 mb-6">
           <h3 className="font-semibold">{editing.id ? `Edit #${String(editing.id)}` : 'Create new'}</h3>
@@ -404,7 +210,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
             return (
               <div key={f.name}>
                 <label className="block text-sm font-medium mb-1">
-                  {f.label ?? f.name}
+                  {labelOf(f, t)}
                   {f.required && <span className="text-red-600"> *</span>}
                 </label>
                 {f.type === 'textarea' ? (
@@ -418,30 +224,18 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                     <option value="">—</option>
                     {f.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
-                ) : f.type === 'relationship' ? (
-                  <select
+                ) : f.type === 'lines' ? (
+                  <textarea
+                    rows={4}
                     required={f.required}
-                    value={relId(value)}
-                    onChange={(e) => onChange(e.target.value || null)}
+                    value={Array.isArray(value)
+                      ? value.map((it) => typeof it === 'string' ? it : (it?.[f.itemKey ?? 'value'] ?? '')).join('\n')
+                      : String(value ?? '')}
+                    onChange={(e) => onChange(
+                      e.target.value.split('\n').map((l) => l.trim()).filter(Boolean)
+                    )}
+                    placeholder={f.placeholder ?? 'One value per line'}
                     className={common}
-                  >
-                    <option value="">—</option>
-                    {(relOptions[f.relationTo ?? ''] ?? []).map((o) => (
-                      <option key={o.id} value={o.id}>{o.label}</option>
-                    ))}
-                  </select>
-                ) : f.type === 'relationshipMany' ? (
-                  <RelationshipManyEditor
-                    selected={Array.isArray(value) ? (value as unknown[]).map(relId).filter(Boolean) : []}
-                    options={relOptions[f.relationTo ?? ''] ?? []}
-                    onChange={(next) => onChange(next)}
-                  />
-                ) : f.type === 'array' ? (
-                  <ArrayEditor
-                    items={Array.isArray(value) ? (value as Array<Record<string, unknown>>) : []}
-                    subFields={f.fields ?? []}
-                    relOptions={relOptions}
-                    onChange={(next) => onChange(next)}
                   />
                 ) : (
                   <input type="text" required={f.required} value={String(value ?? '')} onChange={(e) => onChange(e.target.value)} className={common} />
@@ -465,7 +259,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
           type="search"
           value={q}
           onChange={(e) => { setQ(e.target.value); setPage(1) }}
-          placeholder={`Filter by ${config.columns[0]}…`}
+          placeholder={t('admin.table.searchPlaceholder', 'Filter by {{col}}…', { col: config.columns[0] })}
           className="w-64 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm"
         />
       </div>
@@ -477,29 +271,81 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
           <table className="w-full text-sm">
             <thead className="text-left">
               <tr className="border-b border-[color:var(--color-border)]">
-                {config.columns.map((c) => <th key={c} className="py-2 pr-3">{c}</th>)}
+                {config.columns.map((c) => {
+                  const field = config.fields.find((f) => f.name === c)
+                  const headerLabel = field ? labelOf(field, t) : c.charAt(0).toUpperCase() + c.slice(1)
+                  return <th key={c} className="py-2 pr-3">{headerLabel}</th>
+                })}
                 <th className="py-2 pr-3">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[color:var(--color-border)]">
               {rows.map((r) => (
-                <tr key={String(r.id)}>
+                <tr
+                  key={String(r.id)}
+                  className="cursor-pointer hover:bg-[color:var(--color-surface-alt)] transition-colors"
+                  onClick={() => setEditing(r)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setEditing(r)
+                    }
+                  }}
+                >
                   {config.columns.map((c) => (
                     <td key={c} className="py-2 pr-3">{renderCell(r[c])}</td>
                   ))}
                   <td className="py-2 pr-3 space-x-2">
-                    <button onClick={() => setEditing(r)} className="rounded bg-[color:var(--color-brand)] px-2 py-1 text-xs text-white hover:opacity-90">Edit</button>
-                    <button onClick={() => remove(r.id)} className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700">Delete</button>
+                    <button onClick={(e) => { e.stopPropagation(); setEditing(r) }} className="rounded bg-[color:var(--color-brand)] px-2 py-1 text-xs text-white hover:opacity-90">{t('admin.table.edit', 'Edit')}</button>
+                    <button onClick={(e) => { e.stopPropagation(); remove(r.id) }} className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700">{t('admin.table.delete', 'Delete')}</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* Pagination */}
+          {total > 25 && (
+            <div className="mt-4 flex items-center justify-between text-sm">
+              <p className="text-[color:var(--color-text-muted)]">
+                {t('admin.table.range', 'Showing {{from}}–{{to}} of {{total}}', {
+                  from: (page - 1) * 25 + 1,
+                  to: Math.min(page * 25, total),
+                  total,
+                })}
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  className="rounded border border-[color:var(--color-border)] px-3 py-1 disabled:opacity-40"
+                >
+                  ‹ {t('admin.table.prev', 'Previous')}
+                </button>
+                <span className="px-2">
+                  {t('admin.table.pageOf', 'Page {{page}} of {{total}}', {
+                    page,
+                    total: Math.max(1, Math.ceil(total / 25)),
+                  })}
+                </span>
+                <button
+                  type="button"
+                  disabled={page >= Math.ceil(total / 25)}
+                  onClick={() => setPage((p) => p + 1)}
+                  className="rounded border border-[color:var(--color-border)] px-3 py-1 disabled:opacity-40"
+                >
+                  {t('admin.table.next', 'Next')} ›
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
       {!loading && rows.length === 0 && (
-        <p className="text-[color:var(--color-text-muted)]">No records.</p>
+        <p className="text-[color:var(--color-text-muted)]">{t('admin.table.empty', 'No records.')}</p>
       )}
     </div>
   )
@@ -512,9 +358,9 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Courts',
     columns: ['name', 'type', 'city', 'email'],
     fields: [
-      { name: 'name', type: 'text', required: true },
+      { name: 'name', label: 'admin.collections.courts.name', type: 'text', required: true },
       { name: 'type', type: 'select', required: true, options: [
-        { label: 'Supreme', value: 'supreme' },
+        { label: 'admin.collections.courts.type', value: 'supreme' },
         { label: 'County', value: 'county' },
         { label: 'Municipal', value: 'municipal' },
         { label: 'Commercial', value: 'commercial' },
@@ -523,32 +369,15 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
         { label: 'Misdemeanour', value: 'misdemeanour' },
         { label: 'ECHR', value: 'echr' },
       ]},
-      { name: 'address', type: 'text' },
-      { name: 'city', type: 'text', required: true },
-      { name: 'county', type: 'text' },
-      { name: 'phone', type: 'text' },
-      { name: 'email', type: 'text' },
-      { name: 'website', type: 'text' },
-      { name: 'president', type: 'text' },
-      {
-        name: 'departments',
-        type: 'array',
-        label: 'Odjeli suda / Departments',
-        fields: [
-          { name: 'name', type: 'text', required: true, label: 'Naziv odjela' },
-          { name: 'type', type: 'select', label: 'Vrsta odjela', options: [
-            { label: 'Pisarnica / Registry', value: 'registry' },
-            { label: 'Ured predsjednika / President’s office', value: 'president' },
-            { label: 'Tajnik / Secretary', value: 'secretary' },
-            { label: 'Glasnogovornik / Spokesperson', value: 'spokesperson' },
-            { label: 'Ostalo / Other', value: 'other' },
-          ]},
-          { name: 'head', type: 'text', label: 'Voditelj / Head' },
-          { name: 'phone', type: 'text', label: 'Telefon' },
-          { name: 'email', type: 'text' },
-          { name: 'notes', type: 'textarea', label: 'Napomene' },
-        ],
-      },
+      { name: 'address', label: 'admin.collections.courts.address', type: 'text' },
+      { name: 'city', label: 'admin.collections.courts.city', type: 'text', required: true },
+      { name: 'county', label: 'admin.collections.courts.county', type: 'text' },
+      { name: 'phone', label: 'admin.collections.courts.phone', type: 'text' },
+      { name: 'email', label: 'admin.collections.courts.email', type: 'text' },
+      { name: 'website', label: 'admin.collections.courts.website', type: 'text' },
+      { name: 'president', label: 'admin.collections.courts.president', type: 'text' },
+      { name: 'fax',   type: 'text', label: 'admin.collections.courts.fax' },
+      { name: 'notes', type: 'textarea', label: 'admin.collections.courts.notes' },
     ],
   },
   judges: {
@@ -556,76 +385,77 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Judges',
     columns: ['name', 'specialization', 'status'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'specialization', type: 'text' },
-      { name: 'appointmentDate', type: 'text', label: 'Appointment date (YYYY-MM-DD)' },
-      { name: 'email', type: 'text' },
+      { name: 'name', label: 'admin.collections.judges.name', type: 'text', required: true },
+      { name: 'specialization', label: 'admin.collections.judges.specialization', type: 'text' },
+      { name: 'appointmentDate', type: 'text', label: 'admin.collections.judges.appointmentDate' },
+      { name: 'email', label: 'admin.collections.judges.email', type: 'text' },
       { name: 'status', type: 'select', options: [
-        { label: 'Active', value: 'active' },
+        { label: 'admin.collections.judges.status', value: 'active' },
         { label: 'Retired', value: 'retired' },
         { label: 'Other', value: 'other' },
       ]},
+      { name: 'firstName',          type: 'text',     label: 'admin.collections.judges.firstName' },
+      { name: 'lastName',           type: 'text',     label: 'admin.collections.judges.lastName' },
+      { name: 'court',              type: 'number',   label: 'admin.collections.judges.court' },
+      { name: 'department',         type: 'text',     label: 'admin.collections.judges.department' },
+      { name: 'yearsOfExperience',  type: 'number',   label: 'admin.collections.judges.yearsOfExperience' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.judges.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'expert-witnesses': {
     slug: 'expert-witnesses',
     title: 'Expert witnesses',
-    columns: ['name', 'company', 'city', 'county', 'email'],
+    columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'company', type: 'text', label: 'Tvrtka / Company' },
-      { name: 'address', type: 'text' },
-      { name: 'city', type: 'text', label: 'Grad / City' },
-      { name: 'county', type: 'text', label: 'Županija / County' },
-      { name: 'phone', type: 'text' },
-      { name: 'email', type: 'text' },
-      {
-        name: 'specialityAreas',
-        type: 'array',
-        label: 'Speciality areas / Područja vještačenja',
-        fields: [
-          { name: 'area', type: 'text', required: true, label: 'Grana / Branch' },
-          { name: 'subArea', type: 'text', label: 'Podgrana / Sub-branch' },
-        ],
-      },
-      { name: 'cv', type: 'relationship', relationTo: 'media', label: 'Životopis / CV' },
-      { name: 'works', type: 'relationshipMany', relationTo: 'media', label: 'Priloženi radovi / Works' },
+      { name: 'name',            type: 'text',     required: true, label: 'admin.collections.expertWitnesses.name' },
+      { name: 'specialityAreas', type: 'lines',    label: 'admin.collections.expertWitnesses.specialityAreas', itemKey: 'area' },
+      { name: 'languages',       type: 'lines',    label: 'admin.collections.expertWitnesses.languages', itemKey: 'language' },
+      { name: 'address',         type: 'text',     label: 'admin.collections.expertWitnesses.address' },
+      { name: 'county',          type: 'text',     label: 'admin.collections.expertWitnesses.county' },
+      { name: 'city',            type: 'text',     label: 'admin.collections.expertWitnesses.city' },
+      { name: 'company',         type: 'text',     label: 'admin.collections.expertWitnesses.company' },
+      { name: 'phone',           type: 'text',     label: 'admin.collections.expertWitnesses.phone' },
+      { name: 'email',           type: 'text',     label: 'admin.collections.expertWitnesses.email' },
+      { name: 'verified',        type: 'checkbox', label: 'admin.collections.expertWitnesses.verified' },
+      { name: 'lang',            type: 'select',   label: 'admin.collections.expertWitnesses.lang',
+                                  options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
+      { name: 'notes', type: 'textarea', label: 'admin.collections.expertWitnesses.notes' },
     ],
+    defaults: { lang: 'hr' },
   },
   interpreters: {
     slug: 'interpreters',
     title: 'Interpreters',
-    columns: ['name', 'company', 'city', 'county', 'email'],
+    columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'company', type: 'text', label: 'Tvrtka / Company' },
-      { name: 'address', type: 'text' },
-      { name: 'city', type: 'text', label: 'Grad / City' },
-      { name: 'county', type: 'text', label: 'Županija / County' },
-      { name: 'phone', type: 'text' },
-      { name: 'email', type: 'text' },
-      {
-        name: 'languagePairs',
-        type: 'array',
-        label: 'Language pairs / Jezični parovi',
-        fields: [
-          { name: 'pair', type: 'text', required: true, label: 'Par (BCP-47, npr. hr-en)' },
-        ],
-      },
-      { name: 'cv', type: 'relationship', relationTo: 'media', label: 'Životopis / CV' },
-      { name: 'works', type: 'relationshipMany', relationTo: 'media', label: 'Priloženi radovi / Works' },
+      { name: 'name',          type: 'text',     required: true, label: 'admin.collections.interpreters.name' },
+      { name: 'languagePairs', type: 'lines',    label: 'admin.collections.interpreters.languagePairs', itemKey: 'pair' },
+      { name: 'address',       type: 'text',     label: 'admin.collections.interpreters.address' },
+      { name: 'county',        type: 'text',     label: 'admin.collections.interpreters.county' },
+      { name: 'city',          type: 'text',     label: 'admin.collections.interpreters.city' },
+      { name: 'company',       type: 'text',     label: 'admin.collections.interpreters.company' },
+      { name: 'phone',         type: 'text',     label: 'admin.collections.interpreters.phone' },
+      { name: 'email',         type: 'text',     label: 'admin.collections.interpreters.email' },
+      { name: 'verified',      type: 'checkbox', label: 'admin.collections.interpreters.verified' },
+      { name: 'lang',          type: 'select',   label: 'admin.collections.interpreters.lang',
+                                options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
+    defaults: { lang: 'hr' },
   },
   'state-attorneys': {
     slug: 'state-attorneys',
     title: 'State attorneys (DORH)',
     columns: ['name', 'city'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'city', type: 'text' },
-      { name: 'address', type: 'text' },
-      { name: 'phone', type: 'text' },
-      { name: 'email', type: 'text' },
+      { name: 'name', label: 'admin.collections.stateAttorneys.name', type: 'text', required: true },
+      { name: 'city', label: 'admin.collections.stateAttorneys.city', type: 'text' },
+      { name: 'address', label: 'admin.collections.stateAttorneys.address', type: 'text' },
+      { name: 'phone', label: 'admin.collections.stateAttorneys.phone', type: 'text' },
+      { name: 'email', label: 'admin.collections.stateAttorneys.email', type: 'text' },
+      { name: 'county', type: 'text', label: 'admin.collections.stateAttorneys.county' },
+      { name: 'fax',    type: 'text', label: 'admin.collections.stateAttorneys.fax' },
     ],
   },
   'bankruptcy-administrators': {
@@ -633,78 +463,58 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Bankruptcy administrators',
     columns: ['name', 'licenceNumber', 'city'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'licenceNumber', type: 'text' },
-      { name: 'phone', type: 'text' },
-      { name: 'email', type: 'text' },
-      { name: 'address', type: 'text' },
-      { name: 'city', type: 'text' },
-      { name: 'county', type: 'text' },
+      { name: 'name', label: 'admin.collections.bankruptcyAdministrators.name', type: 'text', required: true },
+      { name: 'licenceNumber', label: 'admin.collections.bankruptcyAdministrators.licenceNumber', type: 'text' },
+      { name: 'phone', label: 'admin.collections.bankruptcyAdministrators.phone', type: 'text' },
+      { name: 'email', label: 'admin.collections.bankruptcyAdministrators.email', type: 'text' },
+      { name: 'address', label: 'admin.collections.bankruptcyAdministrators.address', type: 'text' },
+      { name: 'city', label: 'admin.collections.bankruptcyAdministrators.city', type: 'text' },
+      { name: 'county', label: 'admin.collections.bankruptcyAdministrators.county', type: 'text' },
+      { name: 'courts', type: 'lines', itemKey: 'value', label: 'admin.collections.bankruptcyAdministrators.courts' },
     ],
   },
   'bankruptcy-debtors': {
     slug: 'bankruptcy-debtors',
-    title: 'Bankruptcy debtors / Stečajni dužnici',
+    title: 'Bankruptcy debtors',
     columns: ['name', 'oib', 'city', 'county'],
     fields: [
-      { name: 'name', type: 'text', required: true, label: 'Naziv / Ime dužnika' },
-      { name: 'oib', type: 'text', label: 'OIB' },
-      { name: 'address', type: 'text', label: 'Adresa' },
-      { name: 'city', type: 'text', label: 'Grad' },
-      { name: 'county', type: 'text', label: 'Županija' },
-      { name: 'phone', type: 'text', label: 'Telefon' },
-      { name: 'email', type: 'text' },
-      { name: 'notes', type: 'textarea', label: 'Bilješke' },
+      { name: 'name', type: 'text', required: true, label: 'admin.collections.bankruptcyDebtors.name' },
+      { name: 'oib', type: 'text', label: 'admin.collections.bankruptcyDebtors.oib' },
+      { name: 'address', type: 'text', label: 'admin.collections.bankruptcyDebtors.address' },
+      { name: 'city', type: 'text', label: 'admin.collections.bankruptcyDebtors.city' },
+      { name: 'county', type: 'text', label: 'admin.collections.bankruptcyDebtors.county' },
+      { name: 'phone', type: 'text', label: 'admin.collections.bankruptcyDebtors.phone' },
+      { name: 'email', type: 'text', label: 'admin.collections.bankruptcyDebtors.email' },
+      { name: 'notes', type: 'textarea', label: 'admin.collections.bankruptcyDebtors.notes' },
     ],
-  },
-  'bankruptcy-filings': {
-    slug: 'bankruptcy-filings',
-    title: 'Bankruptcy filings / Stečajni podnesci',
-    columns: ['filingType', 'caseNumber', 'status', 'submittedBy'],
-    fields: [
-      { name: 'filingType', type: 'select', required: true, label: 'Vrsta podneska / Filing type', options: [
-        { label: 'Motion to open / Prijedlog za pokretanje', value: 'motion-to-open' },
-        { label: 'Prijava tražbine / Creditor claim', value: 'prijava-trazbine' },
-        { label: 'Asset inventory / Popis imovine', value: 'asset-inventory' },
-        { label: 'Asset sale / Prodaja imovine', value: 'asset-sale' },
-        { label: 'Trustee report / Izvještaj stečajnog upravitelja', value: 'trustee-report' },
-        { label: 'Distribution proposal / Prijedlog raspodjele', value: 'distribution-proposal' },
-        { label: 'Final accounting / Završni račun', value: 'final-accounting' },
-        { label: 'Restructuring plan / Plan restrukturiranja', value: 'restructuring-plan' },
-        { label: 'Pre-bankruptcy settlement / Predstečajna nagodba', value: 'pre-bankruptcy-settlement' },
-      ]},
-      { name: 'caseNumber', type: 'text', label: 'Broj predmeta / Case number' },
-      { name: 'status', type: 'select', required: true, options: [
-        { label: 'Pending review', value: 'pending_review' },
-        { label: 'Approved', value: 'approved' },
-        { label: 'Rejected', value: 'rejected' },
-      ]},
-      { name: 'submittedBy', type: 'text', label: 'Submitted by (email)' },
-      { name: 'attachmentFilename', type: 'text', label: 'Attachment filename' },
-      { name: 'reviewNotes', type: 'textarea', label: 'Review notes' },
-    ],
-    defaults: { status: 'pending_review' },
   },
   laws: {
     slug: 'laws',
     title: 'Laws',
     columns: ['title', 'category', 'effectiveDate'],
     fields: [
-      { name: 'title', type: 'text', required: true },
-      { name: 'category', type: 'text' },
-      { name: 'effectiveDate', type: 'text', label: 'Effective date (YYYY-MM-DD)' },
-      { name: 'officialGazette', type: 'text' },
-      { name: 'summary', type: 'textarea' },
+      { name: 'title', label: 'admin.collections.laws.title', type: 'text', required: true },
+      { name: 'category', label: 'admin.collections.laws.category', type: 'text' },
+      { name: 'effectiveDate', type: 'text', label: 'admin.collections.laws.effectiveDate' },
+      { name: 'officialGazette', label: 'admin.collections.laws.officialGazette', type: 'text' },
+      { name: 'summary', label: 'admin.collections.laws.summary', type: 'textarea' },
+      { name: 'type',        type: 'text',     label: 'admin.collections.laws.type' },
+      { name: 'year',        type: 'number',   label: 'admin.collections.laws.year' },
+      { name: 'fullText',    type: 'textarea', label: 'admin.collections.laws.fullText' },
+      { name: 'externalUrl', type: 'text',     label: 'admin.collections.laws.externalUrl' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.laws.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'legal-categories': {
     slug: 'legal-categories',
     title: 'Legal categories',
-    columns: ['name', 'slug'],
+    columns: ['name_hr', 'name_en', 'slug'],
     fields: [
-      { name: 'name', type: 'text', required: true },
-      { name: 'slug', type: 'text' },
-      { name: 'description', type: 'textarea' },
+      { name: 'name_hr', label: 'admin.collections.legalCategories.name_hr', type: 'text', required: true },
+      { name: 'name_en', label: 'admin.collections.legalCategories.name_en', type: 'text' },
+      { name: 'description', label: 'admin.collections.legalCategories.description', type: 'textarea' },
     ],
   },
   documents: {
@@ -712,9 +522,13 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Documents',
     columns: ['title', 'category'],
     fields: [
-      { name: 'title', type: 'text', required: true },
-      { name: 'description', type: 'textarea' },
-      { name: 'category', type: 'text' },
+      { name: 'title', label: 'admin.collections.documents.title', type: 'text', required: true },
+      { name: 'description', label: 'admin.collections.documents.description', type: 'textarea' },
+      { name: 'category', label: 'admin.collections.documents.category', type: 'text' },
+      { name: 'publishedAt', type: 'text', label: 'admin.collections.documents.publishedAt' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.documents.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   pages: {
@@ -722,9 +536,14 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'Pages',
     columns: ['title', 'slug'],
     fields: [
-      { name: 'title', type: 'text', required: true },
-      { name: 'slug', type: 'text', required: true },
-      { name: 'content', type: 'textarea' },
+      { name: 'title', label: 'admin.collections.pages.title', type: 'text', required: true },
+      { name: 'slug', label: 'admin.collections.pages.slug', type: 'text', required: true },
+      { name: 'content', label: 'admin.collections.pages.content', type: 'textarea' },
+      { name: 'metaTitle',       type: 'text',     label: 'admin.collections.pages.metaTitle' },
+      { name: 'metaDescription', type: 'textarea', label: 'admin.collections.pages.metaDescription' },
+      { name: 'lang', type: 'select',
+        label: 'admin.collections.pages.lang',
+        options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
   },
   'api-keys': {
@@ -732,8 +551,11 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     title: 'API keys',
     columns: ['label', 'key', 'active'],
     fields: [
-      { name: 'label', type: 'text', required: true },
-      { name: 'active', type: 'checkbox' },
+      { name: 'label', label: 'admin.collections.apiKeys.label', type: 'text', required: true },
+      { name: 'active', label: 'admin.collections.apiKeys.active', type: 'checkbox' },
+      { name: 'organization', type: 'text',     label: 'admin.collections.apiKeys.organization' },
+      { name: 'email',        type: 'text',     label: 'admin.collections.apiKeys.email' },
+      { name: 'rateLimit',    type: 'number',   label: 'admin.collections.apiKeys.rateLimit' },
     ],
   },
 }

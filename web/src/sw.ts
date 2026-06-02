@@ -7,44 +7,55 @@ interface SyncEvent extends ExtendableEvent {
   readonly lastChance: boolean
 }
 
-// ─── Cache names (bump CACHE_VERSION to invalidate all) ─────────────────────
-// v1 → v2 (2026-05-22): the v1 cache was still serving pre-corrections-doc
-// bundles to clients who had visited before the redesign; the activate hook
-// below deletes every cache whose name isn't in KNOWN_CACHES, so changing
-// the version triggers a one-time purge across every browser.
-const CACHE_VERSION = 'v2'
+// v4 — rebuilt to make a deploy actually visible after the v3 cache pin.
+// Trap in v3: install pre-cached '/' and '/index.html', so the cached shell
+// kept pointing at the old hashed bundle even after a fresh deploy and the
+// SPA could never recover without manual cache wipe (QA hit this).
+//
+// Rules in v4:
+//   1. No install-time precache of the SPA shell. Navigations and HTML are
+//      always network-first; only the network can introduce a new bundle hash
+//      reference, so deploys are immediately visible on next navigation.
+//   2. Cache-first ONLY for hashed /assets/*.<hash>.<ext> files. Those are
+//      immutable per build, so the filename change naturally evicts stale.
+//   3. skipWaiting + clients.claim + SKIP_WAITING message channel so a new SW
+//      takes over without the user having to close every tab.
+//   4. CACHE_VERSION bump to v4 — activate handler deletes every v3-named
+//      cache, completing the kill-switch flush for any client still on v3.
+const CACHE_VERSION = 'v8'
 const STATIC_CACHE = `sm-static-${CACHE_VERSION}`
 const API_CACHE = `sm-api-${CACHE_VERSION}`
 const DECISIONS_CACHE = `sm-decisions-${CACHE_VERSION}`
 
 const KNOWN_CACHES = [STATIC_CACHE, API_CACHE, DECISIONS_CACHE]
 
-// Static asset extensions eligible for cache-first
-const STATIC_EXT = /\.(js|css|woff2?|ttf|otf|eot|png|svg|ico|gif|jpe?g|webp|avif)$/i
+// Hashed Vite outputs only — e.g. /assets/main-DdEgwN-g.js. Unhashed top-level
+// paths (favicon, logo, manifest, /index.html, /sw.js) are deliberately never
+// SW-cached so they always re-validate against the network/HTTP cache.
+const HASHED_ASSET = /^\/assets\/.+-[A-Za-z0-9_-]{6,}\.[a-z0-9]+$/
 
-// ─── Install: pre-cache app shell ────────────────────────────────────────────
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(['/', '/index.html']))
-      .then(() => self.skipWaiting()),
-  )
+  event.waitUntil(self.skipWaiting())
 })
 
-// ─── Activate: evict stale caches ───────────────────────────────────────────
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(keys.filter((k) => !KNOWN_CACHES.includes(k)).map((k) => caches.delete(k))),
+    (async () => {
+      const keys = await caches.keys()
+      await Promise.all(
+        keys.filter((k) => !KNOWN_CACHES.includes(k)).map((k) => caches.delete(k)),
       )
-      .then(() => self.clients.claim()),
+      await self.clients.claim()
+    })(),
   )
 })
 
-// ─── Fetch routing ───────────────────────────────────────────────────────────
+self.addEventListener('message', (event) => {
+  if (event.data && (event.data as { type?: string }).type === 'SKIP_WAITING') {
+    void self.skipWaiting()
+  }
+})
+
 self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET') return
@@ -52,7 +63,6 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url)
   if (url.origin !== self.location.origin) return
 
-  // Court-decision API responses → dedicate cache for offline reading
   if (
     url.pathname.startsWith('/api/') &&
     (url.pathname.includes('/court-decisions') || url.pathname.includes('/bankruptcy-decisions'))
@@ -61,31 +71,21 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  // Other API calls → network-first, short-lived cache for resilience
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(networkFirst(request, API_CACHE))
     return
   }
 
-  // Static assets (JS, CSS, fonts, images) → cache-first
-  if (STATIC_EXT.test(url.pathname)) {
+  if (HASHED_ASSET.test(url.pathname)) {
     event.respondWith(cacheFirst(request, STATIC_CACHE))
     return
   }
 
-  // Navigation / HTML → network-first, fall back to cached index.html (SPA shell)
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      networkFirst(request, STATIC_CACHE).catch(() =>
-        caches.match('/index.html').then((r) => r ?? offlineResponse()),
-      ),
-    )
-    return
-  }
+  // Everything else (HTML, /index.html, /sw.js, /manifest.json, top-level
+  // favicons and unhashed media): straight through. Browser HTTP cache still
+  // applies — that's nginx's job, not ours.
 })
 
-// ─── Background sync ─────────────────────────────────────────────────────────
-// Cast to string overload since SyncEvent is not in all TS WebWorker lib versions
 self.addEventListener('sync', ((event: SyncEvent) => {
   if (event.tag === 'sync-bookmarks') {
     event.waitUntil(syncPending('bookmarks', '/api/v1/bookmarks'))
@@ -95,12 +95,9 @@ self.addEventListener('sync', ((event: SyncEvent) => {
   }
 }) as EventListener)
 
-// ─── Strategies ──────────────────────────────────────────────────────────────
-
 async function cacheFirst(request: Request, cacheName: string): Promise<Response> {
   const cached = await caches.match(request)
   if (cached) return cached
-
   const response = await fetch(request)
   if (response.ok) {
     const cache = await caches.open(cacheName)
@@ -130,8 +127,6 @@ function offlineResponse(): Response {
     headers: { 'Content-Type': 'application/json' },
   })
 }
-
-// ─── IndexedDB helpers for background sync ───────────────────────────────────
 
 interface PendingRecord {
   id: string
@@ -177,7 +172,6 @@ function idbDelete(db: IDBDatabase, store: string, id: string): Promise<void> {
 async function syncPending(store: string, endpoint: string): Promise<void> {
   const db = await openSyncDB()
   const pending = await idbGetAll(db, store)
-
   for (const record of pending) {
     try {
       const res = await fetch(endpoint, {
@@ -186,11 +180,8 @@ async function syncPending(store: string, endpoint: string): Promise<void> {
         credentials: 'include',
         body: JSON.stringify(record.payload),
       })
-      if (res.ok) {
-        await idbDelete(db, store, record.id)
-      }
+      if (res.ok) await idbDelete(db, store, record.id)
     } catch {
-      // Network still down — leave record, retry on next sync
       break
     }
   }
