@@ -1,0 +1,186 @@
+{
+  "base": "http://23.164.48.64",
+  "generated": "2026-06-02T17:26:54.914Z",
+  "shots": [
+    {
+      "file": "01-homepage-hr.png",
+      "url": "/hr",
+      "label": "Homepage (HR) — inline search form + Mediji nav group",
+      "status": 200
+    },
+    {
+      "file": "02-homepage-en.png",
+      "url": "/en",
+      "label": "Homepage (EN)",
+      "status": 200
+    },
+    {
+      "file": "03-judges-list.png",
+      "url": "/hr/sudovi/suci",
+      "label": "Judges list — clickable cards + Pogledaj detalje CTA",
+      "status": 200
+    },
+    {
+      "file": "04-judge-detail.png",
+      "url": "/hr/sudovi/suci/7277",
+      "label": "Judge detail — Court (linked) + Status badge + Specialization + Appointment Date cards (—) for nulls",
+      "status": 200
+    },
+    {
+      "file": "05-judges-search.png",
+      "url": "/hr/sudovi/suci?q=Ante",
+      "label": "Judges hybrid search results",
+      "status": 200
+    },
+    {
+      "file": "06-experts-list.png",
+      "url": "/hr/strucnjaci/vjestaci",
+      "label": "Expert witnesses — 2,653 entries with specialty areas",
+      "status": 200
+    },
+    {
+      "file": "07-expert-detail.png",
+      "url": "/hr/strucnjaci/vjestaci/1",
+      "label": "Expert detail page",
+      "status": 200
+    },
+    {
+      "file": "08-experts-search.png",
+      "url": "/hr/strucnjaci/vjestaci?q=forenzika",
+      "label": "Experts semantic search (specialty area)",
+      "status": 200
+    },
+    {
+      "file": "09-interpreters-list.png",
+      "url": "/hr/strucnjaci/tumaci",
+      "label": "Interpreters — 2,253 entries with language pairs",
+      "status": 200
+    },
+    {
+      "file": "10-interpreter-detail.png",
+      "url": "/hr/strucnjaci/tumaci/1",
+      "label": "Interpreter detail page",
+      "status": 200
+    },
+    {
+      "file": "11-interpreters-search.png",
+      "url": "/hr/strucnjaci/tumaci?q=engleski",
+      "label": "Interpreters search (language)",
+      "status": 200
+    },
+    {
+      "file": "12-state-attorneys-list.png",
+      "url": "/hr/sudovi/dorh",
+      "label": "State attorneys — clickable cards + Pogledaj detalje (NEW)",
+      "status": 200
+    },
+    {
+      "file": "13-state-attorney-detail.png",
+      "url": "/hr/sudovi/dorh/1",
+      "label": "State attorney detail page (NEW)",
+      "status": 200
+    },
+    {
+      "file": "14-bankruptcy-admins-list.png",
+      "url": "/hr/stecaj/upravitelji",
+      "label": "Bankruptcy admins — License Number + City + details column (NEW)",
+      "status": 200
+    },
+    {
+      "file": "15-admin-detail.png",
+      "url": "/hr/stecaj/upravitelji/1",
+      "label": "Bankruptcy admin detail page — License Number, OIB, Address, City, Courts (NEW)",
+      "status": 200
+    },
+    {
+      "file": "16-bankruptcy-listings.png",
+      "url": "/hr/stecaj/oglasi",
+      "label": "Bankruptcy listings — debtor/court/admin/status filter row",
+      "status": 200
+    },
+    {
+      "file": "17-bankruptcy-debtors.png",
+      "url": "/hr/stecaj/duznici",
+      "label": "Debtors list — own page per debtor",
+      "status": 200
+    },
+    {
+      "file": "18-bankruptcy-laws.png",
+      "url": "/hr/stecaj/zakoni",
+      "label": "Bankruptcy laws — 18 acts seeded",
+      "status": 200
+    },
+    {
+      "file": "19-bankruptcy-portal-cta.png",
+      "url": "/hr/stecaj",
+      "label": "Bankruptcy portal — Submit a filing CTA",
+      "status": 200
+    },
+    {
+      "file": "20-courts-list.png",
+      "url": "/hr/sudovi",
+      "label": "Courts list — renders departments + jurisdictionArea",
+      "status": 200
+    },
+    {
+      "file": "21-court-detail.png",
+      "url": "/hr/sudovi/1",
+      "label": "Court detail — timeAvailability, jurisdiction GeoJSON",
+      "status": 200
+    },
+    {
+      "file": "22-calculator-nn.png",
+      "url": "/hr/kalkulator",
+      "label": "Sudske pristojbe calculator — NN 118/18 Tarifni broj reference link",
+      "status": 200
+    },
+    {
+      "file": "23-media-audio.png",
+      "url": "/hr/mediji/audio",
+      "label": "Mediji — Audio Galleries (NEW)",
+      "status": 200
+    },
+    {
+      "file": "24-media-video.png",
+      "url": "/hr/mediji/video",
+      "label": "Mediji — Video Galleries (NEW)",
+      "status": 200
+    },
+    {
+      "file": "25-media-press.png",
+      "url": "/hr/mediji/press",
+      "label": "Mediji — Press Clipping (NEW)",
+      "status": 200
+    },
+    {
+      "file": "26-login-clean.png",
+      "url": "/hr/login",
+      "label": "Login — email/password form (clean state)",
+      "status": 200
+    },
+    {
+      "file": "27-admin-dashboard.png",
+      "url": "/hr/admin",
+      "label": "Admin dashboard hub",
+      "status": 200
+    },
+    {
+      "file": "28-admin-judges-table.png",
+      "url": "/hr/admin/judges",
+      "label": "Admin: judges table — column headers via field labels (Title Case)",
+      "status": 200
+    },
+    {
+      "file": "29-admin-bankruptcy-admins.png",
+      "url": "/hr/admin/bankruptcy-administrators",
+      "label": "Admin: bankruptcy admins — License Number column + OIB field",
+      "status": 200
+    },
+    {
+      "file": "30-pretraga.png",
+      "url": "/hr/pretraga",
+      "label": "Global search page",
+      "status": 200
+    }
+  ]
+}
