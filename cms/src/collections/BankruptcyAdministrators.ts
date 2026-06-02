@@ -35,6 +35,14 @@ export const BankruptcyAdministrators: CollectionConfig = {
       },
     },
     {
+      name: 'oib',
+      type: 'text',
+      label: 'OIB',
+      admin: {
+        description: 'OIB stečajnog upravitelja (11 znamenki)',
+      },
+    },
+    {
       name: 'phone',
       type: 'text',
       label: 'Telefon',

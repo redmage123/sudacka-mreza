@@ -10,6 +10,14 @@ import * as migration_20260520_200000_admin_courts_and_departments from './20260
 import * as migration_20260520_210000_bankruptcy_debtors from './20260520_210000_bankruptcy_debtors';
 import * as migration_20260520_220000_experts_interpreters_fields from './20260520_220000_experts_interpreters_fields';
 import * as migration_20260520_240000_user_legal_entity from './20260520_240000_user_legal_entity';
+import * as migration_20260522_100000_judges_dashboard_fields from './20260522_100000_judges_dashboard_fields';
+import * as migration_20260522_110000_attorneys from './20260522_110000_attorneys';
+import * as migration_20260522_120000_decisions_analytics_fields from './20260522_120000_decisions_analytics_fields';
+import * as migration_20260531_120000_courts_jurisdiction_time from './20260531_120000_courts_jurisdiction_time';
+import * as migration_20260601_201500_lang_enum_extend from './20260601_201500_lang_enum_extend';
+import * as migration_20260601_220000_entity_embeddings from './20260601_220000_entity_embeddings';
+import * as migration_20260601_223000_state_attorneys_embedding from './20260601_223000_state_attorneys_embedding';
+import * as migration_20260601_230000_admin_oib from './20260601_230000_admin_oib';
 
 export const migrations = [
   {
@@ -71,5 +79,45 @@ export const migrations = [
     up: migration_20260520_240000_user_legal_entity.up,
     down: migration_20260520_240000_user_legal_entity.down,
     name: '20260520_240000_user_legal_entity',
+  },
+  {
+    up: migration_20260522_100000_judges_dashboard_fields.up,
+    down: migration_20260522_100000_judges_dashboard_fields.down,
+    name: '20260522_100000_judges_dashboard_fields',
+  },
+  {
+    up: migration_20260522_110000_attorneys.up,
+    down: migration_20260522_110000_attorneys.down,
+    name: '20260522_110000_attorneys',
+  },
+  {
+    up: migration_20260522_120000_decisions_analytics_fields.up,
+    down: migration_20260522_120000_decisions_analytics_fields.down,
+    name: '20260522_120000_decisions_analytics_fields',
+  },
+  {
+    up: migration_20260531_120000_courts_jurisdiction_time.up,
+    down: migration_20260531_120000_courts_jurisdiction_time.down,
+    name: '20260531_120000_courts_jurisdiction_time',
+  },
+  {
+    up: migration_20260601_201500_lang_enum_extend.up,
+    down: migration_20260601_201500_lang_enum_extend.down,
+    name: '20260601_201500_lang_enum_extend',
+  },
+  {
+    up: migration_20260601_220000_entity_embeddings.up,
+    down: migration_20260601_220000_entity_embeddings.down,
+    name: '20260601_220000_entity_embeddings',
+  },
+  {
+    up: migration_20260601_223000_state_attorneys_embedding.up,
+    down: migration_20260601_223000_state_attorneys_embedding.down,
+    name: '20260601_223000_state_attorneys_embedding',
+  },
+  {
+    up: migration_20260601_230000_admin_oib.up,
+    down: migration_20260601_230000_admin_oib.down,
+    name: '20260601_230000_admin_oib',
   },
 ];
