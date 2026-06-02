@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Αναζήτηση στο Δίκτυο Δικαστών...",
+      "submit": "Ερευνα",
+      "aria": "Ερευνα"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Μόνο η επίσημη περίληψη είναι διαθέσιμη σε αυτήν την πλατφόρμα. Διαβάστε ολόκληρο το κείμενο στην ιστοσελίδα του δικαστηρίου έκδοσης."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Όνομα / Εταιρεία / Διεύθυνση...",
+    "filterCompany": "Εταιρεία",
+    "filterCompanyPh": "Επωνυμία εταιρείας..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Δικαστής",
+      "court": "Δικαστήριο",
+      "appointmentDate": "Ημερομηνία διορισμού",
+      "specialization": "Εξειδίκευση",
+      "status": "Κατάσταση",
+      "contact": "Στοιχεία επικοινωνίας"
+    },
+    "searchPlaceholder": "Αναζήτηση με όνομα διαιτητή...",
+    "totalCount": "Σύνολο: {{count}} κριτές",
+    "totalCount_one": "Σύνολο: {{count}} κριτής",
+    "totalCount_few": "Σύνολο: {{count}} κριτές",
+    "totalCount_other": "Σύνολο: {{count}} κριτές"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Όνομα / Εταιρεία / Διεύθυνση...",
+    "filterCompany": "Εταιρεία",
+    "filterCompanyPh": "Επωνυμία εταιρείας..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Ευρωπαϊκό Δικαστήριο Ανθρωπίνων Δικαιωμάτων"
+      "echr": "Ευρωπαϊκό Δικαστήριο Ανθρωπίνων Δικαιωμάτων",
+      "ecj": "Δικαστήριο της Ευρωπαϊκής Ένωσης"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Ωρες εργασίας",
+      "monday": "Δευτέρα",
+      "tuesday": "Τρίτη",
+      "wednesday": "Τετάρτη",
+      "thursday": "Πέμπτη",
+      "friday": "Παρασκευή",
+      "saturday": "Σάββατο",
+      "sunday": "Κυριακή",
+      "notes": "Παρατήρηση",
+      "closed": "Κλειστό"
+    },
+    "jurisdictionScope": "Περιοχή δικαιοδοσίας",
+    "departmentsCount_one": "τμήμα {{count}}",
+    "departmentsCount_few": "τμήμα {{count}}",
+    "departmentsCount_other": "τμήμα {{count}}",
+    "searchPlaceholderNameAddr": "Όνομα ή διεύθυνση του δικαστηρίου..."
   },
   "nav": {
     "home": "Αρχική",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Χάρτης δικαστηρίων",
-    "courtType": {
-      "municipal": "Δημοτικό",
-      "county": "Περιφερειακό",
-      "commercial": "Εμπορικό",
-      "misdemeanour": "Πλημμελημάτων",
-      "administrative": "Διοικητικό"
-    },
-    "legend": "Υπόμνημα",
-    "loading": "Φόρτωση δικαστηρίων...",
-    "filterAll": "Όλα τα δικαστήρια",
-    "filterMunicipal": "Δημοτικό",
-    "filterCounty": "Περιφερειακό",
-    "filterCommercial": "Εμπορικό",
-    "filterMisdemeanour": "Πλημμελημάτων",
-    "filterAdministrative": "Διοικητικό",
-    "viewDetails": "Προβολή λεπτομερειών",
-    "courts": "δικαστήρια",
-    "error": "Αδυναμία φόρτωσης δεδομένων δικαστηρίων. Παρακαλώ δοκιμάστε ξανά."
-  },
-  "jurisdiction": {
-    "title": "Εύρεση δικαιοδοσίας",
-    "subtitle": "Βρείτε το αρμόδιο δικαστήριο για την υπόθεσή σας βάσει τοποθεσίας και τύπου υπόθεσης.",
-    "cityLabel": "Πόλη ή δήμος",
-    "cityPlaceholder": "π.χ. Ζάγκρεμπ, Σπλιτ, Ριέκα...",
-    "caseTypeLabel": "Τύπος υπόθεσης",
-    "caseType": {
-      "civilMinor": "Αστική (μικρή) — Δημοτικό δικαστήριο",
-      "criminalMinor": "Ποινική (κάτω των 5 ετών) — Δημοτικό δικαστήριο",
-      "criminalSerious": "Ποινική (5+ έτη) — Περιφερειακό δικαστήριο",
-      "commercial": "Εμπορική — Εμπορικό δικαστήριο",
-      "misdemeanour": "Πλημμέλημα — Δικαστήριο πλημμελημάτων",
-      "administrative": "Διοικητική — Διοικητικό δικαστήριο"
-    },
-    "results": "Αποτελέσματα",
-    "noResults": "Δεν βρέθηκε αντίστοιχο δικαστήριο για αυτή την τοποθεσία και τον τύπο υπόθεσης.",
-    "noResultsHint": "Δοκιμάστε διαφορετικό όνομα πόλης ή ελέγξτε τον πλήρη κατάλογο δικαστηρίων.",
-    "viewCourtsDirectory": "Προβολή καταλόγου δικαστηρίων"
-  },
-  "calculator": {
-    "title": "Δικαστικά τέλη",
-    "selectCaseType": "Τύπος υπόθεσης",
-    "caseType": {
-      "civil": "Αστική διαφορά",
-      "criminal": "Ποινική διαδικασία",
-      "commercial": "Εμπορική διαφορά",
-      "administrative": "Διοικητική διαφορά",
-      "nonContentious": "Εκούσια δικαιοδοσία"
-    },
-    "claimValue": "Αξία αγωγής (EUR)",
-    "calculate": "Υπολογισμός τέλους",
-    "filingFee": "Τέλος κατάθεσης",
-    "appealFee": "Τέλος έφεσης",
-    "enforcementFee": "Τέλος εκτέλεσης",
-    "fixedFee": "Πάγια τέλη",
-    "exemptionsTitle": "Απαλλαγές τελών",
-    "exemption1": "Οι δικαιούχοι κοινωνικής πρόνοιας απαλλάσσονται από όλα τα δικαστικά τέλη.",
-    "exemption2": "Οι ανήλικοι απαλλάσσονται από δικαστικά τέλη σε διαδικασίες που αφορούν τα δικαιώματά τους.",
-    "exemption3": "Οι εργαζόμενοι σε εργατικές διαφορές με αξία αγωγής έως 2.650€ απαλλάσσονται.",
-    "paymentTitle": "Τρόποι πληρωμής",
-    "payment1": "Τραπεζικό έμβασμα στον επίσημο λογαριασμό του δικαστηρίου",
-    "payment2": "Πύλη e-Pristojbe (ηλεκτρονική πληρωμή)",
-    "payment3": "Ταμείο δικαστηρίου (αυτοπροσώπως στο δικαστήριο)",
-    "legalBasis": "Νομική βάση",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, με τροποποιήσεις). Όλα τα ποσά μετατρέπονται σε EUR από 01.01.2023.",
-    "minorOffenses": "Ελαφρά αδικήματα",
-    "seriousOffenses": "Σοβαρά εγκλήματα"
-  },
-  "jurisdictionFinder": {
-    "title": "Βρείτε το δικαστήριό σας",
-    "description": "Εισάγετε την πόλη σας και τον τύπο υπόθεσης για να βρείτε ποιο δικαστήριο είναι αρμόδιο.",
-    "cityLabel": "Η πόλη ή ο δήμος σας",
-    "cityPlaceholder": "π.χ. Ζάγκρεμπ, Σπλιτ, Όσιγιεκ...",
-    "caseTypeLabel": "Τύπος υπόθεσης",
-    "caseType": {
-      "civilMinor": "Αστική διαφορά (έως 2.654 €)",
-      "civilMajor": "Αστική διαφορά (άνω των 2.654 €)",
-      "criminalMinor": "Ποινική (ελαφρό αδίκημα)",
-      "criminalSerious": "Ποινική (σοβαρό αδίκημα)",
-      "commercial": "Εμπορική διαφορά",
-      "misdemeanour": "Πταίσμα / τροχαία παράβαση",
-      "administrative": "Διαφορά με δημόσια αρχή"
-    },
-    "find": "Βρες δικαστήριο",
-    "result": "Αρμόδιο δικαστήριο",
-    "noResult": "Δεν βρέθηκε δικαστήριο για αυτή την πόλη. Δοκιμάστε τον κατάλογο δικαστηρίων.",
-    "browseAll": "Περιήγηση σε όλα τα δικαστήρια",
-    "viewProfile": "Προβολή προφίλ δικαστηρίου"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Δικαστικά τέλη",
+    "selectCaseType": "Τύπος υπόθεσης",
+    "caseType": {
+      "civil": "Αστική διαφορά",
+      "criminal": "Ποινική διαδικασία",
+      "commercial": "Εμπορική διαφορά",
+      "administrative": "Διοικητική διαφορά",
+      "nonContentious": "Εκούσια δικαιοδοσία"
+    },
+    "claimValue": "Αξία αγωγής (EUR)",
+    "fixedFee": "Πάγια τέλη",
+    "minorOffenses": "Ελαφρά αδικήματα",
+    "seriousOffenses": "Σοβαρά εγκλήματα",
+    "filingFee": "Τέλος κατάθεσης",
+    "appealFee": "Τέλος έφεσης",
+    "enforcementFee": "Τέλος εκτέλεσης",
+    "exemptionsTitle": "Απαλλαγές τελών",
+    "exemption1": "Οι δικαιούχοι κοινωνικής πρόνοιας απαλλάσσονται από όλα τα δικαστικά τέλη.",
+    "exemption2": "Οι ανήλικοι απαλλάσσονται από δικαστικά τέλη σε διαδικασίες που αφορούν τα δικαιώματά τους.",
+    "exemption3": "Οι εργαζόμενοι σε εργατικές διαφορές με αξία αγωγής έως 2.650€ απαλλάσσονται.",
+    "paymentTitle": "Τρόποι πληρωμής",
+    "payment1": "Τραπεζικό έμβασμα στον επίσημο λογαριασμό του δικαστηρίου",
+    "payment2": "Πύλη e-Pristojbe (ηλεκτρονική πληρωμή)",
+    "payment3": "Ταμείο δικαστηρίου (αυτοπροσώπως στο δικαστήριο)",
+    "legalBasis": "Νομική βάση",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, με τροποποιήσεις). Όλα τα ποσά μετατρέπονται σε EUR από 01.01.2023.",
+    "calculate": "Υπολογισμός τέλους"
+  },
+  "map": {
+    "title": "Χάρτης δικαστηρίων",
+    "filterAll": "Όλα τα δικαστήρια",
+    "filterMunicipal": "Δημοτικό",
+    "filterCounty": "Περιφερειακό",
+    "filterCommercial": "Εμπορικό",
+    "filterMisdemeanour": "Πλημμελημάτων",
+    "filterAdministrative": "Διοικητικό",
+    "courtType": {
+      "municipal": "Δημοτικό",
+      "county": "Περιφερειακό",
+      "commercial": "Εμπορικό",
+      "misdemeanour": "Πλημμελημάτων",
+      "administrative": "Διοικητικό"
+    },
+    "legend": "Υπόμνημα",
+    "error": "Αδυναμία φόρτωσης δεδομένων δικαστηρίων. Παρακαλώ δοκιμάστε ξανά.",
+    "viewDetails": "Προβολή λεπτομερειών",
+    "loading": "Φόρτωση δικαστηρίων...",
+    "courts": "δικαστήρια"
+  },
+  "jurisdiction": {
+    "title": "Εύρεση δικαιοδοσίας",
+    "subtitle": "Βρείτε το αρμόδιο δικαστήριο για την υπόθεσή σας βάσει τοποθεσίας και τύπου υπόθεσης.",
+    "cityLabel": "Πόλη ή δήμος",
+    "cityPlaceholder": "π.χ. Ζάγκρεμπ, Σπλιτ, Ριέκα...",
+    "caseTypeLabel": "Τύπος υπόθεσης",
+    "caseType": {
+      "civilMinor": "Αστική (μικρή) — Δημοτικό δικαστήριο",
+      "criminalMinor": "Ποινική (κάτω των 5 ετών) — Δημοτικό δικαστήριο",
+      "criminalSerious": "Ποινική (5+ έτη) — Περιφερειακό δικαστήριο",
+      "commercial": "Εμπορική — Εμπορικό δικαστήριο",
+      "misdemeanour": "Πλημμέλημα — Δικαστήριο πλημμελημάτων",
+      "administrative": "Διοικητική — Διοικητικό δικαστήριο"
+    },
+    "results": "Αποτελέσματα",
+    "noResults": "Δεν βρέθηκε αντίστοιχο δικαστήριο για αυτή την τοποθεσία και τον τύπο υπόθεσης.",
+    "noResultsHint": "Δοκιμάστε διαφορετικό όνομα πόλης ή ελέγξτε τον πλήρη κατάλογο δικαστηρίων.",
+    "viewCourtsDirectory": "Προβολή καταλόγου δικαστηρίων"
+  },
+  "jurisdictionFinder": {
+    "title": "Βρείτε το δικαστήριό σας",
+    "description": "Εισάγετε την πόλη σας και τον τύπο υπόθεσης για να βρείτε ποιο δικαστήριο είναι αρμόδιο.",
+    "cityLabel": "Η πόλη ή ο δήμος σας",
+    "cityPlaceholder": "π.χ. Ζάγκρεμπ, Σπλιτ, Όσιγιεκ...",
+    "caseTypeLabel": "Τύπος υπόθεσης",
+    "caseType": {
+      "civilMinor": "Αστική διαφορά (έως 2.654 €)",
+      "civilMajor": "Αστική διαφορά (άνω των 2.654 €)",
+      "criminalMinor": "Ποινική (ελαφρό αδίκημα)",
+      "criminalSerious": "Ποινική (σοβαρό αδίκημα)",
+      "commercial": "Εμπορική διαφορά",
+      "misdemeanour": "Πταίσμα / τροχαία παράβαση",
+      "administrative": "Διαφορά με δημόσια αρχή"
+    },
+    "find": "Βρες δικαστήριο",
+    "result": "Αρμόδιο δικαστήριο",
+    "noResult": "Δεν βρέθηκε δικαστήριο για αυτή την πόλη. Δοκιμάστε τον κατάλογο δικαστηρίων.",
+    "browseAll": "Περιήγηση σε όλα τα δικαστήρια",
+    "viewProfile": "Προβολή προφίλ δικαστηρίου"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Πτωχευμένοι οφειλέτες",
+      "debtorsDesc": "Κατάλογος οφειλετών με προφίλ και ιστορικό όλων των σχετικών διαδικασιών",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Υποβολή υποβολής",
+      "filingDesc": "Υποβολή πτώχευσης — υποβολή αξίωσης, πρόταση έναρξης, έκθεση, σχέδιο αναδιάρθρωσης"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Διαφημίσεις χρεοκοπίας",
+      "description": "Ενεργός πτωχευτική διαδικασία που δημοσιεύεται σε ΦΕΚ και ΦΕΚ.",
+      "searchPlaceholder": "Αναζήτηση με όνομα οφειλέτη...",
+      "count": "{{n}} διαφημίσεις",
+      "count_one": "{{n}} διαφήμιση",
+      "count_few": "{{n}} διαφημίσεις",
+      "count_other": "{{n}} διαφημίσεις",
+      "loadError": "Δεν είναι δυνατή η φόρτωση διαφημίσεων πτώχευσης.",
+      "empty": "Δεν υπάρχουν ενεργές διαφημίσεις πτώχευσης.",
+      "unknownDebtor": "Άγνωστος οφειλέτης",
+      "deadline": "Διορία"
+    },
+    "decisions": {
+      "title": "Αποφάσεις πτώχευσης",
+      "description": "Δικαστικές αποφάσεις από πτωχευτικές διαδικασίες στην Κροατία.",
+      "loadError": "Δεν είναι δυνατή η φόρτωση των πτωχευτικών αποφάσεων.",
+      "noResults": "Κανένα αποτέλεσμα.",
+      "viewDecision": "Ανοίξτε την απόφαση"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Ονομα",
+      "licenseNo": "Αριθμός άδειας",
+      "contact": "Επαφή",
+      "assignedCourts": "Εντεταλμένα Δικαστήρια",
+      "court": "Δικαστήριο",
+      "city": "Πόλη"
+    },
+    "filterCourtAll": "Όλα τα Δικαστήρια"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Τύπος χρήστη",
+      "userTypeOptions": {
+        "person": "Πρόσωπο",
+        "legal_entity": "Νομικό πρόσωπο"
+      },
+      "organisationName": "Όνομα νομικού προσώπου",
+      "organisationOib": "OIB νομικών προσώπων",
+      "legalEntityNote": "Νομικά πρόσωπα (δικηγορικά γραφεία, σύνδικοι πτώχευσης που ενεργούν για δικό τους λογαριασμό, εγγεγραμμένοι οργανισμοί) μπορούν να υποβάλλουν αιτήσεις πτώχευσης μέσω της συντακτικής προσέγγισης. Η εξουσιοδότηση σας θα ενεργοποιηθεί αυτόματα μετά την εγγραφή.",
+      "errorOib": "Το OIB πρέπει να έχει ακριβώς 11 ψηφία.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Ξέχασα τον κωδικό πρόσβασης",
+      "subtitle": "Εισαγάγετε τη διεύθυνση email σας και θα σας στείλουμε έναν σύνδεσμο για να ορίσετε έναν νέο κωδικό πρόσβασης.",
+      "submit": "Στείλτε έναν σύνδεσμο",
+      "submitting": "Στέλνουμε…",
+      "backToLogin": "Επιστροφή στην είσοδο",
+      "errorGeneric": "Κάτι πήγε στραβά. Δοκιμάστε ξανά."
+    },
+    "resetPassword": {
+      "title": "Ορίστε νέο κωδικό πρόσβασης",
+      "subtitle": "Επιλέξτε έναν νέο κωδικό πρόσβασης για τον λογαριασμό σας.",
+      "newPassword": "Νέος κωδικός πρόσβασης",
+      "confirmPassword": "Επιβεβαιώστε τον νέο κωδικό πρόσβασης",
+      "submit": "Ορίστε νέο κωδικό πρόσβασης",
+      "submitting": "Ετοιμάζουμε...",
+      "done": "Ο κωδικός πρόσβασής σας ορίστηκε με επιτυχία. Μπορείτε να εγγραφείτε τώρα.",
+      "goToLogin": "Μεταβείτε στην εφαρμογή",
+      "missingToken": "Αυτός ο σύνδεσμος αλλαγής κωδικού πρόσβασης δεν έχει διακριτικό. Ζητήστε ένα νέο.",
+      "requestNew": "Ζητήστε νέο σύνδεσμο",
+      "errorGeneric": "Δεν ήταν δυνατός ο ορισμός του κωδικού πρόσβασης. Δοκιμάστε ξανά."
+    },
+    "password": {
+      "show": "Εμφάνιση κωδικού πρόσβασης",
+      "hide": "Απόκρυψη κωδικού πρόσβασης"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Απόκομμα τύπου — άρθρα εφημερίδων και διαδικτυακές πύλες στις οποίες αναφέρεται το Δίκτυο των Δικαστών. Το περιεχόμενο θα συμπληρωθεί ως μέρος της μετεγκατάστασης δεδομένων από τον παλιό ιστότοπο."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Γκαλερί ήχου",
+      "placeholder": "Ηχητικές αναφορές — ραδιοφωνικές συνεντεύξεις και εκπομπές για το Δίκτυο των δικαστών. Το περιεχόμενο θα συμπληρωθεί ως μέρος της μετεγκατάστασης δεδομένων από τον παλιό ιστότοπο."
+    },
+    "video": {
+      "title": "Γκαλερί βίντεο",
+      "placeholder": "Αναφορές βίντεο — αφιερώματα στην τηλεόραση και συνεντεύξεις. Το περιεχόμενο θα συμπληρωθεί ως μέρος της μετεγκατάστασης δεδομένων από τον παλιό ιστότοπο."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Επιλέξτε τύπο εγγράφου",
     "type": {
       "tuzba": {
+        "_value": "Αγωγή",
         "desc": "Για την έναρξη αστικής διαδικασίας ενώ το δικαστήριο"
       },
       "zalba": {
+        "_value": "Καταγγελία",
         "desc": "Για την προσβολή δικαστικής απόφασης σε ανώτερο δικαστήριο"
       },
       "prigovor": {
+        "_value": "Καταγγελία",
         "desc": "Για την υποβολή ένστασης κατά δικαστικής απόφασης"
       },
       "ovrsni": {
+        "_value": "Εκτελεστική πρόταση",
         "desc": "Για την έναρξη εκτέλεσης με βάση εκτελεστικό τίτλο"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Εκπρόθεσμος"
     }
   },
-  "cookiePolicy": "Πολιτική cookies",
-  "termsOfService": "Όροι χρήσης",
-  "judges": {
-    "detail": {
-      "role": "Δικαστής",
-      "court": "Δικαστήριο",
-      "appointmentDate": "Ημερομηνία διορισμού",
-      "specialization": "Εξειδίκευση",
-      "status": "Κατάσταση",
-      "contact": "Στοιχεία επικοινωνίας"
-    }
-  },
   "legalNews": {
     "title": "Νομικά νέα",
     "subtitle": "Επισκόπηση τρέχουσων νομικών ειδήσεων από εγχώριες και ευρωπαϊκές νομικές πηγές.",
@@ -716,6 +822,8 @@
       "p2": "[el] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Πολιτική cookies",
+  "termsOfService": "Όροι χρήσης",
   "privacy": {
     "title": "Πολιτική απορρήτου",
     "lastUpdated": "Τελευταία ενημέρωση: 28 Μαρτίου 2026.",
@@ -808,8 +916,201 @@
       "p2": "Για ερωτήσεις σχετικά με αυτούς τους Όρους, επικοινωνήστε μαζί μας στο:"
     }
   },
-  "docgen.type.tuzba.desc": "Για την έναρξη αστικής διαδικασίας ενώπιον του δικαστηρίου",
-  "docgen.type.zalba.desc": "Για την προσβολή δικαστικής απόφασης σε ανώτερο δικαστήριο",
-  "docgen.type.prigovor.desc": "Για την κατάθεση ένστασης κατά δικαστικής απόφασης",
-  "docgen.type.ovrsni.desc": "Για την έναρξη εκτέλεσης βάσει εκτελεστικού τίτλου"
+  "debtors": {
+    "title": "Πτωχευμένοι οφειλέτες",
+    "subtitle": "Κατάλογος οφειλετών για τους οποίους έχει κινηθεί ή έχει κινηθεί πτωχευτική διαδικασία.",
+    "searchPlaceholder": "Αναζήτηση κατά όνομα ή πόλη...",
+    "oibPh": "OIB...",
+    "loadError": "Σφάλμα κατά τη φόρτωση του οφειλέτη.",
+    "noResults": "Δεν υπάρχουν οφειλέτες που να ταιριάζουν με την αναζήτηση.",
+    "linkedListings": "Διαδικασία πτώχευσης",
+    "noLinkedListings": "Δεν υπάρχουν σχετικές διαδικασίες πτώχευσης.",
+    "fields": {
+      "name": "Όνομα / Όνομα",
+      "address": "Διεύθυνση",
+      "city": "Πόλη",
+      "county": "Κομητεία",
+      "phone": "Τηλέφωνο",
+      "caseNumber": "Αριθμός αντικειμένου",
+      "status": "Κατάσταση",
+      "deadline": "Διορία",
+      "publishedAt": "Δημοσιεύθηκε"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API Documentation — Judge Network",
+    "metaDescription": "Public REST API για πρόσβαση σε βάσεις δεδομένων δικαστικών αποφάσεων, εμπειρογνωμόνων, διερμηνέων και δικαστηρίων του Δικαστικού Δικτύου.",
+    "title": "Public REST API",
+    "intro": "Ανοιχτό API για συνεργαζόμενα ιδρύματα και ερευνητές που επιθυμούν πρόσβαση μέσω προγραμματισμού σε βάσεις δεδομένων δικαστικής πρακτικής, εμπειρογνώμονες, διερμηνείς και δικαστήρια της Δημοκρατίας της Κροατίας.",
+    "paginationNote": "Όλα τα τελικά σημεία της λίστας επιστρέφουν την ίδια σελιδοποιημένη μορφή απάντησης:",
+    "endpointsNote": "Κάντε κλικ στο τελικό σημείο για παραμέτρους, παράδειγμα αίτησης και απάντησης.",
+    "sections": {
+      "gettingStarted": "Έναρξη εργασιών",
+      "pagination": "Σελιδοποίηση",
+      "endpoints": "Καταληκτικά σημεία"
+    },
+    "cards": {
+      "baseUrl": "Βασική διεύθυνση URL",
+      "auth": "Πιστοποίηση",
+      "rateLimit": "Όρια (όριο τιμής)",
+      "baseUrlNote": "Όλες οι απαντήσεις είναι JSON, UTF-8",
+      "authNote": "Το κλειδί API είναι προαιρετικό, αλλά αυξάνει το όριο."
+    },
+    "endpoint": {
+      "params": "Παράμετροι",
+      "exampleRequest": "Δείγμα αίτησης",
+      "exampleResponse": "Παράδειγμα απάντησης",
+      "fields": {
+        "name": "Ονομα",
+        "description": "Περιγραφή",
+        "type": "Τύπος",
+        "required": "Επιτακτικός",
+        "example": "Παράδειγμα",
+        "in": "σε"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Επιστροφή στον Διαχειριστή",
+    "table": {
+      "range": "Εμφάνιση {{from}}–{{to}} από {{total}}",
+      "prev": "Το προηγούμενο",
+      "next": "Επόμενος",
+      "pageOf": "Σελίδα {{page}} από {{total}}",
+      "empty": "Κανένα αρχείο."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Κλειδιά API",
+        "label": "Επιγραφή",
+        "email": "Email",
+        "organization": "Οργάνωση",
+        "rateLimit": "Όριο τιμής (απαιτ./λεπτό)",
+        "active": "Ενεργός"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Διαχειριστές πτώχευσης",
+        "name": "Ονομα",
+        "licenceNumber": "Αριθμός άδειας",
+        "phone": "Τηλέφωνο",
+        "email": "Email",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "courts": "Εντεταλμένα Δικαστήρια"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Οφειλέτες (Πτώχευση)",
+        "name": "Ονομα",
+        "oib": "OIB",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "phone": "Τηλέφωνο",
+        "email": "Email",
+        "notes": "Σημειώσεις"
+      },
+      "courts": {
+        "__title": "Δικαστήρια",
+        "name": "Όνομα Δικαστηρίου",
+        "type": "Τύπος δικαστηρίου",
+        "president": "Πρόεδρος Δικαστηρίου",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "phone": "Τηλέφωνο",
+        "fax": "Φαξ",
+        "email": "Email",
+        "website": "Δικτυακός τόπος",
+        "notes": "Σημειώσεις"
+      },
+      "documents": {
+        "__title": "Εγγραφα",
+        "title": "Τίτλος",
+        "description": "Περιγραφή",
+        "category": "Κατηγορία",
+        "publishedAt": "Δημοσιεύθηκε στο",
+        "lang": "Γλώσσα"
+      },
+      "expertWitnesses": {
+        "__title": "Εμπειρογνώμονες Μάρτυρες",
+        "name": "Ονομα",
+        "company": "Εταιρεία / Εταιρεία",
+        "specialityAreas": "Ειδικές Περιοχές",
+        "languages": "Γλώσσες",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "phone": "Τηλέφωνο",
+        "email": "Email",
+        "verified": "Επαληθεύτηκε",
+        "lang": "Γλώσσα εισόδου",
+        "notes": "Σημειώσεις"
+      },
+      "interpreters": {
+        "__title": "Διερμηνείς Δικαστηρίου",
+        "name": "Ονομα",
+        "company": "Εταιρεία / Εταιρεία",
+        "languagePairs": "Ζεύγη γλωσσών",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "phone": "Τηλέφωνο",
+        "email": "Email",
+        "verified": "Επαληθεύτηκε",
+        "lang": "Γλώσσα εισόδου"
+      },
+      "judges": {
+        "__title": "δικαστές",
+        "name": "Ονοματεπώνυμο",
+        "firstName": "Ονομα",
+        "lastName": "Επώνυμο",
+        "court": "Δικαστήριο",
+        "specialization": "Ειδίκευση",
+        "department": "Τμήμα",
+        "appointmentDate": "Ημερομηνία Ραντεβού (ΕΕΕΕ-ΜΜ-ΗΗ)",
+        "yearsOfExperience": "Χρόνια Εμπειρίας",
+        "status": "Κατάσταση",
+        "email": "Email",
+        "lang": "Γλώσσα εισόδου"
+      },
+      "laws": {
+        "__title": "Νόμοι",
+        "title": "Τίτλος",
+        "type": "Τύπος",
+        "category": "Νομικός Χώρος",
+        "year": "Ετος",
+        "officialGazette": "Επίσημη Εφημερίδα (ΝΝ)",
+        "externalUrl": "Εξωτερική διεύθυνση URL",
+        "effectiveDate": "Ημερομηνία έναρξης ισχύος",
+        "fullText": "Πλήρες κείμενο",
+        "summary": "Περίληψη",
+        "lang": "Γλώσσα"
+      },
+      "legalCategories": {
+        "__title": "Νομικές Κατηγορίες",
+        "name": "Ονομα",
+        "description": "Περιγραφή"
+      },
+      "pages": {
+        "__title": "Σελίδες",
+        "title": "Τίτλος",
+        "slug": "Slug (URL)",
+        "content": "Περιεχόμενο",
+        "metaTitle": "Meta Τίτλος",
+        "metaDescription": "Meta Περιγραφή",
+        "lang": "Γλώσσα"
+      },
+      "stateAttorneys": {
+        "__title": "Εισαγγελίες του Κράτους",
+        "name": "Όνομα γραφείου",
+        "address": "Διεύθυνση",
+        "city": "Πόλη",
+        "county": "Κομητεία",
+        "phone": "Τηλέφωνο",
+        "fax": "Φαξ",
+        "email": "Email"
+      }
+    }
+  }
 }

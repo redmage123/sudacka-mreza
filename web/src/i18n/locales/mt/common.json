@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Fittex fin-Netwerk tal-Imħallfin...",
+      "submit": "Fittex",
+      "aria": "Fittex"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Is-sommarju uffiċjali biss huwa disponibbli fuq din il-pjattaforma. Aqra t-test sħiħ fuq il-websajt tal-qorti emittenti."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Isem/Kumpanija/Indirizz...",
+    "filterCompany": "Kumpanija",
+    "filterCompanyPh": "Isem tal-kumpanija..."
+  },
+  "judges": {
+    "detail": {
+      "role": "[mt] Sudac",
+      "court": "[mt] Sud",
+      "appointmentDate": "[mt] Datum imenovanja",
+      "specialization": "[mt] Specijalizacija",
+      "status": "[mt] Status",
+      "contact": "[mt] Kontakt podaci"
+    },
+    "searchPlaceholder": "Fittex bl-isem tar-referi...",
+    "totalCount": "Total: {{count}} imħallfin",
+    "totalCount_one": "Total: {{count}} imħallef",
+    "totalCount_few": "Total: {{count}} imħallfin",
+    "totalCount_other": "Total: {{count}} imħallfin"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Isem/Kumpanija/Indirizz...",
+    "filterCompany": "Kumpanija",
+    "filterCompanyPh": "Isem tal-kumpanija..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Qorti Ewropea tad-Drittijiet tal-Bniedem"
+      "echr": "Qorti Ewropea tad-Drittijiet tal-Bniedem",
+      "ecj": "Qorti tal-Unjoni Ewropea"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Ħinijiet tax-xogħol",
+      "monday": "it-Tnejn",
+      "tuesday": "it-Tlieta",
+      "wednesday": "l-Erbgħa",
+      "thursday": "il-Ħamis",
+      "friday": "il-Ġimgħa",
+      "saturday": "is-Sibt",
+      "sunday": "il-Ħadd",
+      "notes": "Rimarka",
+      "closed": "Magħluq"
+    },
+    "jurisdictionScope": "Żona ta’ ġurisdizzjoni",
+    "departmentsCount_one": "{{count}} dipartiment",
+    "departmentsCount_few": "{{count}} dipartiment",
+    "departmentsCount_other": "{{count}} dipartiment",
+    "searchPlaceholderNameAddr": "Isem jew indirizz tal-qorti..."
   },
   "nav": {
     "home": "Paġna prinċipali",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Mappa tal-Qrati",
-    "courtType": {
-      "municipal": "Muniċipali",
-      "county": "Distrettwali",
-      "commercial": "Kummerċjali",
-      "misdemeanour": "Kontravenzjonali",
-      "administrative": "Amministrattiv"
-    },
-    "legend": "Leġenda",
-    "loading": "Qed jitgħabbew il-qrati...",
-    "filterAll": "Il-qrati kollha",
-    "filterMunicipal": "Muniċipali",
-    "filterCounty": "Distrettwali",
-    "filterCommercial": "Kummerċjali",
-    "filterMisdemeanour": "Kontravenzjonali",
-    "filterAdministrative": "Amministrattiv",
-    "viewDetails": "Ara d-dettalji",
-    "courts": "qrati",
-    "error": "Ma setax jitgħabbu d-data tal-qrati. Jekk jogħġbok erġa' pprova."
-  },
-  "jurisdiction": {
-    "title": "Sejbien tal-Ġurisdizzjoni",
-    "subtitle": "Sib il-qorti kompetenti għall-każ tiegħek ibbażat fuq il-post u t-tip ta' każ.",
-    "cityLabel": "Belt jew muniċipalità",
-    "cityPlaceholder": "eż. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Tip ta' każ",
-    "caseType": {
-      "civilMinor": "Ċivili (żgħir) — Qorti muniċipali",
-      "criminalMinor": "Kriminali (taħt 5 snin) — Qorti muniċipali",
-      "criminalSerious": "Kriminali (5+ snin) — Qorti distrettwali",
-      "commercial": "Kummerċjali — Qorti kummerċjali",
-      "misdemeanour": "Kontravenzjoni — Qorti kontravenzjonali",
-      "administrative": "Amministrattiv — Qorti amministrattiva"
-    },
-    "results": "Riżultati",
-    "noResults": "Ma nstabet l-ebda qorti kompetenti għal dan il-post u t-tip ta' każ.",
-    "noResultsHint": "Ipprova isem ta' belt ieħor jew ara d-direttorju sħiħ tal-qrati.",
-    "viewCourtsDirectory": "Ara d-direttorju tal-qrati"
-  },
-  "calculator": {
-    "title": "Tariffi tal-Qorti",
-    "selectCaseType": "Tip ta' każ",
-    "caseType": {
-      "civil": "Tilwima ċivili",
-      "criminal": "Proċedimenti kriminali",
-      "commercial": "Tilwima kummerċjali",
-      "administrative": "Tilwima amministrattiva",
-      "nonContentious": "Proċedimenti mhux kontenzjużi"
-    },
-    "claimValue": "Valur tat-talba (EUR)",
-    "calculate": "Ikkalkula t-tariffa",
-    "filingFee": "Tariffa tal-preżentata",
-    "appealFee": "Tariffa tal-appell",
-    "enforcementFee": "Tariffa tal-infurzar",
-    "fixedFee": "Tariffi fissi",
-    "exemptionsTitle": "Eżenzjonijiet mit-Tariffi",
-    "exemption1": "Ir-riċevituri tal-welfare soċjali huma eżenti mit-tariffi kollha tal-qorti.",
-    "exemption2": "Il-minuri huma eżenti mit-tariffi tal-qorti fi proċedimenti dwar id-drittijiet tagħhom.",
-    "exemption3": "Il-ħaddiema fi tilwim tax-xogħol b'valur tat-talba sa €2,650 huma eżenti.",
-    "paymentTitle": "Metodi ta' Ħlas",
-    "payment1": "Trasferiment bankarju għall-kont uffiċjali tal-qorti",
-    "payment2": "Portal e-Pristojbe (ħlas elettroniku)",
-    "payment3": "Każżier tal-qorti (personalment fil-qorti)",
-    "legalBasis": "Bażi Legali",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, b'emendi). L-ammonti kollha kkonvertiti għall-EUR mill-01.01.2023.",
-    "minorOffenses": "Reati żgħar",
-    "seriousOffenses": "Reati gravi"
-  },
-  "jurisdictionFinder": {
-    "title": "Sib il-qorti tiegħek",
-    "description": "Daħħal il-belt tiegħek u t-tip ta' kawża biex issib liema qorti għandha ġuriżdizzjoni.",
-    "cityLabel": "Il-belt jew il-kunsill lokali tiegħek",
-    "cityPlaceholder": "eż. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Tip ta' kawża",
-    "caseType": {
-      "civilMinor": "Tilwima ċivili (sa €2,654)",
-      "civilMajor": "Tilwima ċivili (aktar minn €2,654)",
-      "criminalMinor": "Kriminali (reat żgħir)",
-      "criminalSerious": "Kriminali (reat gravi)",
-      "commercial": "Tilwima kummerċjali",
-      "misdemeanour": "Kontravenzjoni / reat tat-traffiku",
-      "administrative": "Tilwima ma' aġenzija tal-gvern"
-    },
-    "find": "Sib qorti",
-    "result": "Qorti kompetenti",
-    "noResult": "Ma nstabet l-ebda qorti għal din il-belt. Ipprova d-direttorju tal-qrati.",
-    "browseAll": "Ara l-qrati kollha",
-    "viewProfile": "Ara l-profil tal-qorti"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Tariffi tal-Qorti",
+    "selectCaseType": "Tip ta' każ",
+    "caseType": {
+      "civil": "Tilwima ċivili",
+      "criminal": "Proċedimenti kriminali",
+      "commercial": "Tilwima kummerċjali",
+      "administrative": "Tilwima amministrattiva",
+      "nonContentious": "Proċedimenti mhux kontenzjużi"
+    },
+    "claimValue": "Valur tat-talba (EUR)",
+    "fixedFee": "Tariffi fissi",
+    "minorOffenses": "Reati żgħar",
+    "seriousOffenses": "Reati gravi",
+    "filingFee": "Tariffa tal-preżentata",
+    "appealFee": "Tariffa tal-appell",
+    "enforcementFee": "Tariffa tal-infurzar",
+    "exemptionsTitle": "Eżenzjonijiet mit-Tariffi",
+    "exemption1": "Ir-riċevituri tal-welfare soċjali huma eżenti mit-tariffi kollha tal-qorti.",
+    "exemption2": "Il-minuri huma eżenti mit-tariffi tal-qorti fi proċedimenti dwar id-drittijiet tagħhom.",
+    "exemption3": "Il-ħaddiema fi tilwim tax-xogħol b'valur tat-talba sa €2,650 huma eżenti.",
+    "paymentTitle": "Metodi ta' Ħlas",
+    "payment1": "Trasferiment bankarju għall-kont uffiċjali tal-qorti",
+    "payment2": "Portal e-Pristojbe (ħlas elettroniku)",
+    "payment3": "Każżier tal-qorti (personalment fil-qorti)",
+    "legalBasis": "Bażi Legali",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, b'emendi). L-ammonti kollha kkonvertiti għall-EUR mill-01.01.2023.",
+    "calculate": "Ikkalkula t-tariffa"
+  },
+  "map": {
+    "title": "Mappa tal-Qrati",
+    "filterAll": "Il-qrati kollha",
+    "filterMunicipal": "Muniċipali",
+    "filterCounty": "Distrettwali",
+    "filterCommercial": "Kummerċjali",
+    "filterMisdemeanour": "Kontravenzjonali",
+    "filterAdministrative": "Amministrattiv",
+    "courtType": {
+      "municipal": "Muniċipali",
+      "county": "Distrettwali",
+      "commercial": "Kummerċjali",
+      "misdemeanour": "Kontravenzjonali",
+      "administrative": "Amministrattiv"
+    },
+    "legend": "Leġenda",
+    "error": "Ma setax jitgħabbu d-data tal-qrati. Jekk jogħġbok erġa' pprova.",
+    "viewDetails": "Ara d-dettalji",
+    "loading": "Qed jitgħabbew il-qrati...",
+    "courts": "qrati"
+  },
+  "jurisdiction": {
+    "title": "Sejbien tal-Ġurisdizzjoni",
+    "subtitle": "Sib il-qorti kompetenti għall-każ tiegħek ibbażat fuq il-post u t-tip ta' każ.",
+    "cityLabel": "Belt jew muniċipalità",
+    "cityPlaceholder": "eż. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Tip ta' każ",
+    "caseType": {
+      "civilMinor": "Ċivili (żgħir) — Qorti muniċipali",
+      "criminalMinor": "Kriminali (taħt 5 snin) — Qorti muniċipali",
+      "criminalSerious": "Kriminali (5+ snin) — Qorti distrettwali",
+      "commercial": "Kummerċjali — Qorti kummerċjali",
+      "misdemeanour": "Kontravenzjoni — Qorti kontravenzjonali",
+      "administrative": "Amministrattiv — Qorti amministrattiva"
+    },
+    "results": "Riżultati",
+    "noResults": "Ma nstabet l-ebda qorti kompetenti għal dan il-post u t-tip ta' każ.",
+    "noResultsHint": "Ipprova isem ta' belt ieħor jew ara d-direttorju sħiħ tal-qrati.",
+    "viewCourtsDirectory": "Ara d-direttorju tal-qrati"
+  },
+  "jurisdictionFinder": {
+    "title": "Sib il-qorti tiegħek",
+    "description": "Daħħal il-belt tiegħek u t-tip ta' kawża biex issib liema qorti għandha ġuriżdizzjoni.",
+    "cityLabel": "Il-belt jew il-kunsill lokali tiegħek",
+    "cityPlaceholder": "eż. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Tip ta' kawża",
+    "caseType": {
+      "civilMinor": "Tilwima ċivili (sa €2,654)",
+      "civilMajor": "Tilwima ċivili (aktar minn €2,654)",
+      "criminalMinor": "Kriminali (reat żgħir)",
+      "criminalSerious": "Kriminali (reat gravi)",
+      "commercial": "Tilwima kummerċjali",
+      "misdemeanour": "Kontravenzjoni / reat tat-traffiku",
+      "administrative": "Tilwima ma' aġenzija tal-gvern"
+    },
+    "find": "Sib qorti",
+    "result": "Qorti kompetenti",
+    "noResult": "Ma nstabet l-ebda qorti għal din il-belt. Ipprova d-direttorju tal-qrati.",
+    "browseAll": "Ara l-qrati kollha",
+    "viewProfile": "Ara l-profil tal-qorti"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Debituri falluti",
+      "debtorsDesc": "Direttorju tad-debitur bi profil u storja tal-proċeduri kollha relatati",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Ibgħat sottomissjoni",
+      "filingDesc": "Iffajlja preżentazzjoni ta' falliment — preżentazzjoni ta' talba, proposta ta' bidu, rapport, pjan ta' ristrutturar"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Riklami ta' falliment",
+      "description": "Proċedimenti ta' falliment attivi ppubblikati fil-Gazzetta Uffiċjali u fil-gazzetta uffiċjali.",
+      "searchPlaceholder": "Fittex bl-isem tad-debitur...",
+      "count": "{{n}} reklami",
+      "count_one": "{{n}} ad",
+      "count_few": "{{n}} reklami",
+      "count_other": "{{n}} reklami",
+      "loadError": "Ma tistax tgħabbi reklami ta' falliment.",
+      "empty": "M'hemm l-ebda reklami ta' fallimenti attivi.",
+      "unknownDebtor": "Debitur mhux magħruf",
+      "deadline": "Skadenza"
+    },
+    "decisions": {
+      "title": "Deċiżjonijiet ta' falliment",
+      "description": "Deċiżjonijiet tal-qorti minn proċeduri ta' falliment fil-Kroazja.",
+      "loadError": "Mhuwiex possibbli li jitgħabbew deċiżjonijiet ta' falliment.",
+      "noResults": "Ebda riżultati.",
+      "viewDecision": "Iftaħ id-deċiżjoni"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Isem",
+      "licenseNo": "Numru tal-Liċenzja",
+      "contact": "Kuntatt",
+      "assignedCourts": "Qrati Assenjati",
+      "court": "Qorti",
+      "city": "Belt"
+    },
+    "filterCourtAll": "Il-Qrati kollha"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Tip ta' utent",
+      "userTypeOptions": {
+        "person": "Persuna",
+        "legal_entity": "Entità legali"
+      },
+      "organisationName": "Isem tal-entità legali",
+      "organisationOib": "OIB ta' persuni legali",
+      "legalEntityNote": "Entitajiet legali (ditti legali, trustees tal-fallimenti li jaġixxu f'isimhom stess, organizzazzjonijiet reġistrati) jistgħu jissottomettu petizzjonijiet ta' falliment permezz tal-approċċ editorjali. L-awtorizzazzjoni tiegħek tiġi attivata awtomatikament wara r-reġistrazzjoni.",
+      "errorOib": "OIB għandu jkollu eżattament 11-il ċifra.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Insejt il-password",
+      "subtitle": "Daħħal l-indirizz elettroniku tiegħek u aħna nibagħtulek link biex twaqqaf password ġdida.",
+      "submit": "Ibgħat link",
+      "submitting": "Nibagħtu…",
+      "backToLogin": "Lura għall-login",
+      "errorGeneric": "Xi ħaġa marret ħażin. Jekk jogħġbok erġa' pprova."
+    },
+    "resetPassword": {
+      "title": "Issettja password ġdida",
+      "subtitle": "Agħżel password ġdida għall-kont tiegħek.",
+      "newPassword": "Password ġdida",
+      "confirmPassword": "Ikkonferma password ġdida",
+      "submit": "Issettja password ġdida",
+      "submitting": "Qed nippreparaw...",
+      "done": "Il-password tiegħek ġiet issettjata b'suċċess. Tista' tiffirma issa.",
+      "goToLogin": "Mur għall-applikazzjoni",
+      "missingToken": "Din il-link għall-bidla tal-password m'għandha l-ebda token. Itlob waħda ġdida.",
+      "requestNew": "Itlob rabta ġdida",
+      "errorGeneric": "Il-password ma setgħetx tiġi stabbilita. Jekk jogħġbok erġa' pprova."
+    },
+    "password": {
+      "show": "Uri password",
+      "hide": "Aħbi l-password"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Qtugħ għall-istampa — artikoli tal-gazzetti u portali tal-web li fihom jissemma n-Netwerk tal-Imħallfin. Il-kontenut se jimtela bħala parti mill-migrazzjoni tad-dejta mis-sit l-antik."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Galleriji awdjo",
+      "placeholder": "Awdjo jsemmi — intervisti bir-radju u wirjiet dwar in-Netwerk tal-Imħallfin. Il-kontenut se jimtela bħala parti mill-migrazzjoni tad-dejta mis-sit l-antik."
+    },
+    "video": {
+      "title": "Galleriji tal-vidjo",
+      "placeholder": "Vidjo jsemmi - speċjalisti televiżivi u intervisti. Il-kontenut se jimtela bħala parti mill-migrazzjoni tad-dejta mis-sit l-antik."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Select document type",
     "type": {
       "tuzba": {
+        "_value": "Kawża",
         "desc": "Għall-bdie ta' proċedura sivil quddiem il-qorti"
       },
       "zalba": {
+        "_value": "Ilment",
         "desc": "Għall-appell ta' decisione tal-qorti għal qorti ogħla"
       },
       "prigovor": {
+        "_value": "Ilment",
         "desc": "Għall-ippreżentazzjoni ta' oppostizzjoni għal deċiżjoni tal-qorti"
       },
       "ovrsni": {
+        "_value": "Proposta eżekuttiva",
         "desc": "Għall-bdie ta' eżekuzzjoni bbażata fuq dokument ta' eżekuzzjoni"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Skadut"
     }
   },
-  "cookiePolicy": "Politika tal-cookies",
-  "termsOfService": "Termini tas-Servizz",
-  "judges": {
-    "detail": {
-      "role": "[mt] Sudac",
-      "court": "[mt] Sud",
-      "appointmentDate": "[mt] Datum imenovanja",
-      "specialization": "[mt] Specijalizacija",
-      "status": "[mt] Status",
-      "contact": "[mt] Kontakt podaci"
-    }
-  },
   "legalNews": {
     "title": "[mt] Pravne vijesti",
     "subtitle": "[mt] Pregled aktualnih pravnih vijesti iz domaćih i europskih pravnih izvora.",
@@ -716,6 +822,8 @@
       "p2": "[mt] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Politika tal-cookies",
+  "termsOfService": "Termini tas-Servizz",
   "privacy": {
     "title": "[mt] Pravila privatnosti",
     "lastUpdated": "[mt] Zadnje ažuriranje: 28. ožujka 2026.",
@@ -808,8 +916,201 @@
       "p2": "Għal mistejhiet dwar dawn it-Termini, ikkontattana fuq:"
     }
   },
-  "docgen.type.tuzba.desc": "Għall-bidu ta' proċedura ċivili quddam il-Qorti",
-  "docgen.type.zalba.desc": "Għall-appell ta' deċiżjoni tal-Qorti għal qorti ogħla",
-  "docgen.type.prigovor.desc": "Għall-ippreżentazzjoni ta' oġġezzjoni kontra deċiżjoni tal-Qorti",
-  "docgen.type.ovrsni.desc": "Għall-bidu tal-eżekuzzjoni ibbażata fuq titlu eżekuttiv"
+  "debtors": {
+    "title": "Debituri falluti",
+    "subtitle": "Direttorju ta' debituri li għalihom saru jew saru proċedimenti ta' falliment.",
+    "searchPlaceholder": "Fittex bl-isem jew il-belt...",
+    "oibPh": "OIB...",
+    "loadError": "Żball fit-tagħbija tad-debitur.",
+    "noResults": "M'hemm l-ebda debituri li jaqblu mat-tfittxija.",
+    "linkedListings": "Proċedimenti ta' falliment",
+    "noLinkedListings": "M'hemm l-ebda proċedimenti ta' falliment relatati.",
+    "fields": {
+      "name": "Isem / Isem",
+      "address": "Indirizz",
+      "city": "Belt",
+      "county": "Kontea",
+      "phone": "Telefon",
+      "caseNumber": "Numru tal-oġġett",
+      "status": "Status",
+      "deadline": "Skadenza",
+      "publishedAt": "Ippubblikat"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Dokumentazzjoni tal-API — Netwerk tal-Imħallfin",
+    "metaDescription": "Public REST API għall-aċċess għal databases ta' deċiżjonijiet tal-qorti, esperti, interpreti u qrati tan-Netwerk Ġudizzjarju.",
+    "title": "Pubbliku REST API",
+    "intro": "API miftuħa għal istituzzjonijiet sħab u riċerkaturi li jridu aċċess programmatiku għal databases ta' prattika tal-qorti, esperti, interpreti u qrati tar-Repubblika tal-Kroazja.",
+    "paginationNote": "L-endpoints kollha tal-lista jirritornaw l-istess format ta’ rispons paġinat:",
+    "endpointsNote": "Ikklikkja fuq l-endpoint għal parametri, eżempju ta' talba u rispons.",
+    "sections": {
+      "gettingStarted": "Bidu tax-xogħol",
+      "pagination": "Paġnar",
+      "endpoints": "Endpoints"
+    },
+    "cards": {
+      "baseUrl": "URL bażi",
+      "auth": "Awtentikazzjoni",
+      "rateLimit": "Limiti (limitu tar-rata)",
+      "baseUrlNote": "It-tweġibiet kollha huma JSON, UTF-8",
+      "authNote": "Iċ-ċavetta API hija fakultattiva, iżda żżid il-limitu."
+    },
+    "endpoint": {
+      "params": "Parametri",
+      "exampleRequest": "Talba tal-kampjun",
+      "exampleResponse": "Eżempju ta' tweġiba",
+      "fields": {
+        "name": "Isem",
+        "description": "Deskrizzjoni",
+        "type": "Tip",
+        "required": "Obbligatorju",
+        "example": "Eżempju",
+        "in": "fi"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Lura għall-Amministratur",
+    "table": {
+      "range": "Juri {{from}}–{{to}} minn {{total}}",
+      "prev": "Il-preċedenti",
+      "next": "Li jmiss",
+      "pageOf": "Paġna {{page}} minn {{total}}",
+      "empty": "Ebda rekords."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Ċwievet API",
+        "label": "Tikketta",
+        "email": "Email",
+        "organization": "Organizzazzjoni",
+        "rateLimit": "Limitu tar-Rata (req/min)",
+        "active": "Attiva"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Amministraturi ta' Falliment",
+        "name": "Isem",
+        "licenceNumber": "Numru tal-Liċenzja",
+        "phone": "Telefon",
+        "email": "Email",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "courts": "Qrati Assenjati"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Debituri (Falliment)",
+        "name": "Isem",
+        "oib": "OIB",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "phone": "Telefon",
+        "email": "Email",
+        "notes": "Noti"
+      },
+      "courts": {
+        "__title": "Qrati",
+        "name": "Isem il-Qorti",
+        "type": "Tip ta' Qorti",
+        "president": "President tal-Qorti",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "phone": "Telefon",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "Websajt",
+        "notes": "Noti"
+      },
+      "documents": {
+        "__title": "Dokumenti",
+        "title": "Titolu",
+        "description": "Deskrizzjoni",
+        "category": "Kategorija",
+        "publishedAt": "Ippubblikat Fl",
+        "lang": "Lingwa"
+      },
+      "expertWitnesses": {
+        "__title": "Xhieda esperti",
+        "name": "Isem",
+        "company": "Kumpanija / Ditta",
+        "specialityAreas": "Oqsma ta' Speċjalità",
+        "languages": "Lingwi",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verifikat",
+        "lang": "Lingwa tad-Dħul",
+        "notes": "Noti"
+      },
+      "interpreters": {
+        "__title": "Interpreti tal-Qorti",
+        "name": "Isem",
+        "company": "Kumpanija / Ditta",
+        "languagePairs": "Pari Lingwi",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verifikat",
+        "lang": "Lingwa tad-Dħul"
+      },
+      "judges": {
+        "__title": "Imħallfin",
+        "name": "Isem Sħiħ",
+        "firstName": "L-Isem",
+        "lastName": "Kunjom",
+        "court": "Qorti",
+        "specialization": "Speċjalizzazzjoni",
+        "department": "Dipartiment",
+        "appointmentDate": "Data tal-Ħatra (SSSS-XX-JJ)",
+        "yearsOfExperience": "Snin ta' Esperjenza",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Lingwa tad-Dħul"
+      },
+      "laws": {
+        "__title": "Liġijiet",
+        "title": "Titolu",
+        "type": "Tip",
+        "category": "Qasam Legali",
+        "year": "Sena",
+        "officialGazette": "Gazzetta Uffiċjali (NN)",
+        "externalUrl": "URL estern",
+        "effectiveDate": "Data Effettiva",
+        "fullText": "Test sħiħ",
+        "summary": "Sommarju",
+        "lang": "Lingwa"
+      },
+      "legalCategories": {
+        "__title": "Kategoriji Legali",
+        "name": "Isem",
+        "description": "Deskrizzjoni"
+      },
+      "pages": {
+        "__title": "Paġni",
+        "title": "Titolu",
+        "slug": "Slug (URL)",
+        "content": "Kontenut",
+        "metaTitle": "Meta Titolu",
+        "metaDescription": "Meta Deskrizzjoni",
+        "lang": "Lingwa"
+      },
+      "stateAttorneys": {
+        "__title": "Uffiċċji ta' l-Avukati ta' l-Istat",
+        "name": "Isem l-Uffiċċju",
+        "address": "Indirizz",
+        "city": "Belt",
+        "county": "Kontea",
+        "phone": "Telefon",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    }
+  }
 }

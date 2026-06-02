@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Zoek in het rechternetwerk...",
+      "submit": "Zoekopdracht",
+      "aria": "Zoekopdracht"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Alleen de officiële samenvatting is beschikbaar op dit platform. Lees de volledige tekst op de website van de uitvaardigende rechtbank."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Naam / Bedrijf / Adres...",
+    "filterCompany": "Bedrijf",
+    "filterCompanyPh": "Bedrijfsnaam..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Rechter",
+      "court": "Rechtbank",
+      "appointmentDate": "Datum van benoeming",
+      "specialization": "Specialisatie",
+      "status": "Status",
+      "contact": "Contactgegevens"
+    },
+    "searchPlaceholder": "Zoek op naam van de scheidsrechter...",
+    "totalCount": "Totaal: {{count}} juryleden",
+    "totalCount_one": "Totaal: {{count}} rechter",
+    "totalCount_few": "Totaal: {{count}} juryleden",
+    "totalCount_other": "Totaal: {{count}} juryleden"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Naam / Bedrijf / Adres...",
+    "filterCompany": "Bedrijf",
+    "filterCompanyPh": "Bedrijfsnaam..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Europees Hof voor de Rechten van de Mens"
+      "echr": "Europees Hof voor de Rechten van de Mens",
+      "ecj": "Hof van de Europese Unie"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Werktijden",
+      "monday": "Maandag",
+      "tuesday": "Dinsdag",
+      "wednesday": "Woensdag",
+      "thursday": "Donderdag",
+      "friday": "Vrijdag",
+      "saturday": "Zaterdag",
+      "sunday": "Zondag",
+      "notes": "Opmerking",
+      "closed": "Gesloten"
+    },
+    "jurisdictionScope": "Jurisdictiegebied",
+    "departmentsCount_one": "{{count}} afdeling",
+    "departmentsCount_few": "{{count}} afdeling",
+    "departmentsCount_other": "{{count}} afdeling",
+    "searchPlaceholderNameAddr": "Naam of adres van de rechtbank..."
   },
   "nav": {
     "home": "Home",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Rechtbankkaart",
-    "courtType": {
-      "municipal": "Gemeentelijk",
-      "county": "Provinciaal",
-      "commercial": "Handels",
-      "misdemeanour": "Overtredingen",
-      "administrative": "Bestuurs"
-    },
-    "legend": "Legenda",
-    "loading": "Rechtbanken laden...",
-    "filterAll": "Alle rechtbanken",
-    "filterMunicipal": "Kantongerecht",
-    "filterCounty": "Gerechtshof",
-    "filterCommercial": "Handelsrechtbank",
-    "filterMisdemeanour": "Politierechtbank",
-    "filterAdministrative": "Bestuursrechtbank",
-    "viewDetails": "Details bekijken",
-    "courts": "rechtbanken",
-    "error": "Kan rechtbankgegevens niet laden. Probeer het opnieuw."
-  },
-  "jurisdiction": {
-    "title": "Bevoegde rechtbank zoeken",
-    "subtitle": "Vind de bevoegde rechtbank voor uw zaak op basis van locatie en zaaktype.",
-    "cityLabel": "Stad of gemeente",
-    "cityPlaceholder": "bijv. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Zaaktype",
-    "caseType": {
-      "civilMinor": "Civiel (klein) — Gemeentelijke rechtbank",
-      "criminalMinor": "Strafrecht (minder dan 5 jaar) — Gemeentelijke rechtbank",
-      "criminalSerious": "Strafrecht (5+ jaar) — Provinciale rechtbank",
-      "commercial": "Handels — Handelsrechtbank",
-      "misdemeanour": "Overtreding — Overtredingenrechtbank",
-      "administrative": "Bestuurs — Bestuursrechtbank"
-    },
-    "results": "Resultaten",
-    "noResults": "Geen passende rechtbank gevonden voor deze locatie en dit zaaktype.",
-    "noResultsHint": "Probeer een andere plaatsnaam of raadpleeg het volledige rechtbankregister.",
-    "viewCourtsDirectory": "Rechtbankregister bekijken"
-  },
-  "calculator": {
-    "title": "Griffierechten calculator",
-    "selectCaseType": "Selecteer zaaktype",
-    "caseType": {
-      "civil": "Civiele zaak",
-      "criminal": "Strafzaak",
-      "commercial": "Handelsgeschil",
-      "administrative": "Bestuursrechtelijk geschil",
-      "nonContentious": "Niet-contentieuze procedure"
-    },
-    "claimValue": "Waarde van de vordering (EUR)",
-    "calculate": "Bereken griffierecht",
-    "filingFee": "Indieningsrecht",
-    "appealFee": "Hoger beroepsrecht",
-    "enforcementFee": "Executierecht",
-    "fixedFee": "Vast griffierecht",
-    "exemptionsTitle": "Vrijstellingen van griffierechten",
-    "exemption1": "Ontvangers van sociale bijstand",
-    "exemption2": "Minderjarigen in voogdijprocedures",
-    "exemption3": "Werknemers in arbeidsgeschillen (tot 2.650 €)",
-    "paymentTitle": "Betalingsmethoden",
-    "payment1": "Bankoverschrijving naar gerechtsrekening",
-    "payment2": "E-Pristojbe online betalingsportaal",
-    "payment3": "Gerechtsloket",
-    "legalBasis": "Juridische grondslag",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, met wijzigingen). Alle bedragen omgerekend naar EUR sinds 01.01.2023.",
-    "minorOffenses": "Kleine overtredingen",
-    "seriousOffenses": "Ernstige misdrijven"
-  },
-  "jurisdictionFinder": {
-    "title": "Vind uw rechtbank",
-    "description": "Voer uw stad en zaaktype in om de bevoegde rechtbank te vinden.",
-    "cityLabel": "Uw stad of gemeente",
-    "cityPlaceholder": "bijv. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Type zaak",
-    "caseType": {
-      "civilMinor": "Civiele zaak (tot 2.654 €)",
-      "civilMajor": "Civiele zaak (boven 2.654 €)",
-      "criminalMinor": "Strafrecht (kleine overtreding)",
-      "criminalSerious": "Strafrecht (ernstig misdrijf)",
-      "commercial": "Handelsgeschil",
-      "misdemeanour": "Overtreding / verkeersovertreding",
-      "administrative": "Geschil met overheidsinstantie"
-    },
-    "find": "Rechtbank zoeken",
-    "result": "Bevoegde rechtbank",
-    "noResult": "Geen rechtbank gevonden voor deze stad. Blader door de directory.",
-    "browseAll": "Alle rechtbanken bekijken",
-    "viewProfile": "Rechtbankprofiel bekijken"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Griffierechten calculator",
+    "selectCaseType": "Selecteer zaaktype",
+    "caseType": {
+      "civil": "Civiele zaak",
+      "criminal": "Strafzaak",
+      "commercial": "Handelsgeschil",
+      "administrative": "Bestuursrechtelijk geschil",
+      "nonContentious": "Niet-contentieuze procedure"
+    },
+    "claimValue": "Waarde van de vordering (EUR)",
+    "fixedFee": "Vast griffierecht",
+    "minorOffenses": "Kleine overtredingen",
+    "seriousOffenses": "Ernstige misdrijven",
+    "filingFee": "Indieningsrecht",
+    "appealFee": "Hoger beroepsrecht",
+    "enforcementFee": "Executierecht",
+    "exemptionsTitle": "Vrijstellingen van griffierechten",
+    "exemption1": "Ontvangers van sociale bijstand",
+    "exemption2": "Minderjarigen in voogdijprocedures",
+    "exemption3": "Werknemers in arbeidsgeschillen (tot 2.650 €)",
+    "paymentTitle": "Betalingsmethoden",
+    "payment1": "Bankoverschrijving naar gerechtsrekening",
+    "payment2": "E-Pristojbe online betalingsportaal",
+    "payment3": "Gerechtsloket",
+    "legalBasis": "Juridische grondslag",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, met wijzigingen). Alle bedragen omgerekend naar EUR sinds 01.01.2023.",
+    "calculate": "Bereken griffierecht"
+  },
+  "map": {
+    "title": "Rechtbankkaart",
+    "filterAll": "Alle rechtbanken",
+    "filterMunicipal": "Kantongerecht",
+    "filterCounty": "Gerechtshof",
+    "filterCommercial": "Handelsrechtbank",
+    "filterMisdemeanour": "Politierechtbank",
+    "filterAdministrative": "Bestuursrechtbank",
+    "courtType": {
+      "municipal": "Gemeentelijk",
+      "county": "Provinciaal",
+      "commercial": "Handels",
+      "misdemeanour": "Overtredingen",
+      "administrative": "Bestuurs"
+    },
+    "legend": "Legenda",
+    "error": "Kan rechtbankgegevens niet laden. Probeer het opnieuw.",
+    "viewDetails": "Details bekijken",
+    "loading": "Rechtbanken laden...",
+    "courts": "rechtbanken"
+  },
+  "jurisdiction": {
+    "title": "Bevoegde rechtbank zoeken",
+    "subtitle": "Vind de bevoegde rechtbank voor uw zaak op basis van locatie en zaaktype.",
+    "cityLabel": "Stad of gemeente",
+    "cityPlaceholder": "bijv. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Zaaktype",
+    "caseType": {
+      "civilMinor": "Civiel (klein) — Gemeentelijke rechtbank",
+      "criminalMinor": "Strafrecht (minder dan 5 jaar) — Gemeentelijke rechtbank",
+      "criminalSerious": "Strafrecht (5+ jaar) — Provinciale rechtbank",
+      "commercial": "Handels — Handelsrechtbank",
+      "misdemeanour": "Overtreding — Overtredingenrechtbank",
+      "administrative": "Bestuurs — Bestuursrechtbank"
+    },
+    "results": "Resultaten",
+    "noResults": "Geen passende rechtbank gevonden voor deze locatie en dit zaaktype.",
+    "noResultsHint": "Probeer een andere plaatsnaam of raadpleeg het volledige rechtbankregister.",
+    "viewCourtsDirectory": "Rechtbankregister bekijken"
+  },
+  "jurisdictionFinder": {
+    "title": "Vind uw rechtbank",
+    "description": "Voer uw stad en zaaktype in om de bevoegde rechtbank te vinden.",
+    "cityLabel": "Uw stad of gemeente",
+    "cityPlaceholder": "bijv. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Type zaak",
+    "caseType": {
+      "civilMinor": "Civiele zaak (tot 2.654 €)",
+      "civilMajor": "Civiele zaak (boven 2.654 €)",
+      "criminalMinor": "Strafrecht (kleine overtreding)",
+      "criminalSerious": "Strafrecht (ernstig misdrijf)",
+      "commercial": "Handelsgeschil",
+      "misdemeanour": "Overtreding / verkeersovertreding",
+      "administrative": "Geschil met overheidsinstantie"
+    },
+    "find": "Rechtbank zoeken",
+    "result": "Bevoegde rechtbank",
+    "noResult": "Geen rechtbank gevonden voor deze stad. Blader door de directory.",
+    "browseAll": "Alle rechtbanken bekijken",
+    "viewProfile": "Rechtbankprofiel bekijken"
+  },
   "bankruptcy": {
     "title": "Faillissementsportaal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Failliete debiteuren",
+      "debtorsDesc": "Debiteurenoverzicht met profiel en historie van alle bijbehorende procedures",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Dien een inzending in",
+      "filingDesc": "Een faillissementsaanvraag indienen - een claim indienen, initiatiefvoorstel, rapport, herstructureringsplan"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Faillissement advertenties",
+      "description": "Actieve faillissementsprocedure gepubliceerd in de Staatscourant en de Staatscourant.",
+      "searchPlaceholder": "Zoeken op debiteurnaam...",
+      "count": "{{n}} advertenties",
+      "count_one": "{{n}} advertentie",
+      "count_few": "{{n}} advertenties",
+      "count_other": "{{n}} advertenties",
+      "loadError": "Kan faillissementsadvertenties niet laden.",
+      "empty": "Er zijn geen actieve faillissementsadvertenties.",
+      "unknownDebtor": "Onbekende debiteur",
+      "deadline": "Termijn"
+    },
+    "decisions": {
+      "title": "Beslissingen over faillissementen",
+      "description": "Rechterlijke uitspraken uit faillissementsprocedures in Kroatië.",
+      "loadError": "Het is niet mogelijk om faillissementsbesluiten te laden.",
+      "noResults": "Geen resultaten.",
+      "viewDecision": "Open het besluit"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "Geen curatoren geregistreerd.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
+      "name": "Naam",
+      "licenseNo": "Licentienummer",
       "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "assignedCourts": "Toegewezen rechtbanken",
+      "court": "Rechtbank",
+      "city": "Stad"
+    },
+    "filterCourtAll": "Alle rechtbanken"
   },
   "laws": {
     "title": "Faillissementswetgeving",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Gebruikerstype",
+      "userTypeOptions": {
+        "person": "Persoon",
+        "legal_entity": "Juridische entiteit"
+      },
+      "organisationName": "Naam rechtspersoon",
+      "organisationOib": "OIB van rechtspersonen",
+      "legalEntityNote": "Rechtspersonen (advocatenkantoren, curatoren die in eigen naam handelen, geregistreerde organisaties) kunnen via de redactionele aanpak faillissementsaanvragen indienen. Na registratie wordt uw autorisatie automatisch geactiveerd.",
+      "errorOib": "OIB moet exact 11 cijfers bevatten.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Account aanmaken",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Wachtwoord vergeten",
+      "subtitle": "Vul uw e-mailadres in en wij sturen u een link waarmee u een nieuw wachtwoord kunt instellen.",
+      "submit": "Stuur een link",
+      "submitting": "Wij sturen…",
+      "backToLogin": "Terug naar inloggen",
+      "errorGeneric": "Er is iets misgegaan. Probeer het opnieuw."
+    },
+    "resetPassword": {
+      "title": "Stel een nieuw wachtwoord in",
+      "subtitle": "Kies een nieuw wachtwoord voor uw account.",
+      "newPassword": "Nieuw wachtwoord",
+      "confirmPassword": "Bevestig nieuw wachtwoord",
+      "submit": "Stel een nieuw wachtwoord in",
+      "submitting": "Wij bereiden ons voor...",
+      "done": "Uw wachtwoord is succesvol ingesteld. U kunt zich nu aanmelden.",
+      "goToLogin": "Ga naar applicatie",
+      "missingToken": "Deze link voor het wijzigen van het wachtwoord heeft geen token. Vraag een nieuwe aan.",
+      "requestNew": "Vraag een nieuwe koppeling aan",
+      "errorGeneric": "Het wachtwoord kon niet worden ingesteld. Probeer het opnieuw."
+    },
+    "password": {
+      "show": "Wachtwoord tonen",
+      "hide": "Wachtwoord verbergen"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Persknipsels — krantenartikelen en webportals waarin het rechtersnetwerk wordt genoemd. De inhoud wordt ingevuld als onderdeel van de datamigratie van de oude site."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audiogalerijen",
+      "placeholder": "Audiovermeldingen - radio-interviews en shows over het Judge Network. De inhoud wordt ingevuld als onderdeel van de datamigratie van de oude site."
+    },
+    "video": {
+      "title": "Videogalerijen",
+      "placeholder": "Videovermeldingen - televisiespecials en interviews. De inhoud wordt ingevuld als onderdeel van de datamigratie van de oude site."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Selecteer documenttype",
     "type": {
       "tuzba": {
+        "_value": "Rechtszaak",
         "desc": "Voor het instellen van een civiele procedure bij de rechtbank"
       },
       "zalba": {
+        "_value": "Klacht",
         "desc": "Voor het aanvechten van een rechterlijke beslissing bij een hogere rechtbank"
       },
       "prigovor": {
+        "_value": "Klacht",
         "desc": "Voor het indienen van een bezwaar tegen een rechterlijke beschikking"
       },
       "ovrsni": {
+        "_value": "Uitvoerend voorstel",
         "desc": "Voor het starten van executie op basis van een executoriale titel"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Verlopen"
     }
   },
-  "cookiePolicy": "Cookiebeleid",
-  "termsOfService": "Gebruiksvoorwaarden",
-  "judges": {
-    "detail": {
-      "role": "Rechter",
-      "court": "Rechtbank",
-      "appointmentDate": "Datum van benoeming",
-      "specialization": "Specialisatie",
-      "status": "Status",
-      "contact": "Contactgegevens"
-    }
-  },
   "legalNews": {
     "title": "Juridisch nieuws",
     "subtitle": "Overzicht van actueel juridisch nieuws uit binnenlandse en Europese juridische bronnen.",
@@ -716,6 +822,8 @@
       "p2": "Voor meer informatie over hoe wij uw persoonlijke gegevens verwerken, raadpleeg onze"
     }
   },
+  "cookiePolicy": "Cookiebeleid",
+  "termsOfService": "Gebruiksvoorwaarden",
   "privacy": {
     "title": "Privacybeleid",
     "lastUpdated": "Laatst bijgewerkt: 28 maart 2026.",
@@ -808,8 +916,201 @@
       "p2": "Voor vragen over deze Voorwaarden kunt u contact met ons opnemen via:"
     }
   },
-  "docgen.type.tuzba.desc": "Voor het instellen van een civiele procedure bij de rechtbank",
-  "docgen.type.zalba.desc": "Voor het aanvechten van een rechterlijke uitspraak bij een hogere rechtbank",
-  "docgen.type.prigovor.desc": "Voor het indienen van een bezwaar tegen een rechterlijke beschikking",
-  "docgen.type.ovrsni.desc": "Voor het starten van executie op basis van een executoriale titel"
+  "debtors": {
+    "title": "Failliete debiteuren",
+    "subtitle": "Overzicht van debiteuren waarvoor een faillissementsprocedure wordt of is gevoerd.",
+    "searchPlaceholder": "Zoek op naam of stad...",
+    "oibPh": "OIB...",
+    "loadError": "Greška pri učitavanju dužnika.",
+    "noResults": "Er zijn geen debiteuren die voldoen aan de zoekopdracht.",
+    "linkedListings": "Stečajni postupci",
+    "noLinkedListings": "Er zijn geen daarmee verband houdende faillissementsprocedures.",
+    "fields": {
+      "name": "Naam / Naam",
+      "address": "Adres",
+      "city": "Stad",
+      "county": "District",
+      "phone": "Telefoon",
+      "caseNumber": "Artikelnummer",
+      "status": "Status",
+      "deadline": "Termijn",
+      "publishedAt": "Gepubliceerd"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API-documentatie — Judge Network",
+    "metaDescription": "Openbare REST API voor toegang tot databases met rechterlijke uitspraken, deskundigen, tolken en rechtbanken van het Gerechtelijk Netwerk.",
+    "title": "Openbare REST-API",
+    "intro": "Open API voor partnerinstellingen en onderzoekers die programmatische toegang willen tot databases met rechtspraktijken, experts, tolken en rechtbanken van de Republiek Kroatië.",
+    "paginationNote": "Alle lijsteindpunten retourneren hetzelfde gepagineerde antwoordformaat:",
+    "endpointsNote": "Klik op eindpunt voor parameters, voorbeeldverzoek en antwoord.",
+    "sections": {
+      "gettingStarted": "Begin van het werk",
+      "pagination": "Paginering",
+      "endpoints": "Eindpunten"
+    },
+    "cards": {
+      "baseUrl": "Basis-URL",
+      "auth": "Authenticatie",
+      "rateLimit": "Limieten (tarieflimiet)",
+      "baseUrlNote": "Alle antwoorden zijn JSON, UTF-8",
+      "authNote": "De API-sleutel is optioneel, maar verhoogt de limiet."
+    },
+    "endpoint": {
+      "params": "Parameters",
+      "exampleRequest": "Monsteraanvraag",
+      "exampleResponse": "Voorbeeld antwoord",
+      "fields": {
+        "name": "Naam",
+        "description": "Beschrijving",
+        "type": "Type",
+        "required": "Verplicht",
+        "example": "Voorbeeld",
+        "in": "in"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Terug naar beheerder",
+    "table": {
+      "range": "Toont {{from}}–{{to}} van {{total}}",
+      "prev": "De vorige",
+      "next": "Volgende",
+      "pageOf": "Pagina {{page}} van {{total}}",
+      "empty": "Geen gegevens."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API-sleutels",
+        "label": "Label",
+        "email": "Email",
+        "organization": "Organisatie",
+        "rateLimit": "Snelheidslimiet (vereist/min)",
+        "active": "Actief"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Faillissementsbeheerders",
+        "name": "Naam",
+        "licenceNumber": "Licentienummer",
+        "phone": "Telefoon",
+        "email": "Email",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "courts": "Toegewezen rechtbanken"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Debiteuren (Faillissement)",
+        "name": "Naam",
+        "oib": "OIB",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "phone": "Telefoon",
+        "email": "Email",
+        "notes": "Opmerkingen"
+      },
+      "courts": {
+        "__title": "Rechtbanken",
+        "name": "Naam van de rechtbank",
+        "type": "Rechtbanktype",
+        "president": "Voorzitter van het Hof",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "phone": "Telefoon",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "Website",
+        "notes": "Opmerkingen"
+      },
+      "documents": {
+        "__title": "Documenten",
+        "title": "Titel",
+        "description": "Beschrijving",
+        "category": "Categorie",
+        "publishedAt": "Gepubliceerd op",
+        "lang": "Taal"
+      },
+      "expertWitnesses": {
+        "__title": "Deskundige getuigen",
+        "name": "Naam",
+        "company": "Bedrijf / Firma",
+        "specialityAreas": "Specialistische gebieden",
+        "languages": "Talen",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "phone": "Telefoon",
+        "email": "Email",
+        "verified": "Geverifieerd",
+        "lang": "Invoertaal",
+        "notes": "Opmerkingen"
+      },
+      "interpreters": {
+        "__title": "Gerechtstolken",
+        "name": "Naam",
+        "company": "Bedrijf / Firma",
+        "languagePairs": "Taalparen",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "phone": "Telefoon",
+        "email": "Email",
+        "verified": "Geverifieerd",
+        "lang": "Invoertaal"
+      },
+      "judges": {
+        "__title": "Rechters",
+        "name": "Volledige naam",
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "court": "Rechtbank",
+        "specialization": "Specialisatie",
+        "department": "Afdeling",
+        "appointmentDate": "Datum van afspraak (JJJJ-MM-DD)",
+        "yearsOfExperience": "Jarenlange ervaring",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Invoertaal"
+      },
+      "laws": {
+        "__title": "Wetten",
+        "title": "Titel",
+        "type": "Type",
+        "category": "Juridisch gebied",
+        "year": "Jaar",
+        "officialGazette": "Staatscourant (NN)",
+        "externalUrl": "Externe URL",
+        "effectiveDate": "Ingangsdatum",
+        "fullText": "Volledige tekst",
+        "summary": "Samenvatting",
+        "lang": "Taal"
+      },
+      "legalCategories": {
+        "__title": "Juridische categorieën",
+        "name": "Naam",
+        "description": "Beschrijving"
+      },
+      "pages": {
+        "__title": "Pagina's",
+        "title": "Titel",
+        "slug": "Naaktslak (URL)",
+        "content": "Inhoud",
+        "metaTitle": "Metatitel",
+        "metaDescription": "Metabeschrijving",
+        "lang": "Taal"
+      },
+      "stateAttorneys": {
+        "__title": "Kantoren van staatsadvocaten",
+        "name": "Kantoornaam",
+        "address": "Adres",
+        "city": "Stad",
+        "county": "District",
+        "phone": "Telefoon",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    }
+  }
 }

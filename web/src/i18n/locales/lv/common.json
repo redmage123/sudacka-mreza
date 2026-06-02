@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Meklēt tiesnešu tīklā...",
+      "submit": "Meklēt",
+      "aria": "Meklēt"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Šajā platformā ir pieejams tikai oficiālais kopsavilkums. Pilnu tekstu lasiet izdevējas tiesas tīmekļa vietnē."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nosaukums/uzņēmums/adrese...",
+    "filterCompany": "Uzņēmums",
+    "filterCompanyPh": "Uzņēmuma nosaukums..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Tiesis",
+      "court": "Tiesa",
+      "appointmentDate": "Ieciršanas datums",
+      "specialization": "Specializācija",
+      "status": "Statuss",
+      "contact": "Kontakta informācija"
+    },
+    "searchPlaceholder": "Meklēt pēc tiesneša vārda...",
+    "totalCount": "Kopā: {{count}} tiesneši",
+    "totalCount_one": "Kopā: {{count}} tiesnesis",
+    "totalCount_few": "Kopā: {{count}} tiesneši",
+    "totalCount_other": "Kopā: {{count}} tiesneši"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nosaukums/uzņēmums/adrese...",
+    "filterCompany": "Uzņēmums",
+    "filterCompanyPh": "Uzņēmuma nosaukums..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Eiropas Cilvēktiesību tiesa"
+      "echr": "Eiropas Cilvēktiesību tiesa",
+      "ecj": "Eiropas Savienības tiesa"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Darba laiks",
+      "monday": "pirmdiena",
+      "tuesday": "otrdiena",
+      "wednesday": "trešdiena",
+      "thursday": "ceturtdiena",
+      "friday": "piektdiena",
+      "saturday": "sestdiena",
+      "sunday": "svētdiena",
+      "notes": "Piezīme",
+      "closed": "Slēgts"
+    },
+    "jurisdictionScope": "Jurisdikcijas apgabals",
+    "departmentsCount_one": "{{count}} nodaļa",
+    "departmentsCount_few": "{{count}} nodaļa",
+    "departmentsCount_other": "{{count}} nodaļa",
+    "searchPlaceholderNameAddr": "Tiesas nosaukums vai adrese..."
   },
   "nav": {
     "home": "Sākumlapa",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Tiesu karte",
-    "courtType": {
-      "municipal": "Rajona",
-      "county": "Apgabala",
-      "commercial": "Komerctiesa",
-      "misdemeanour": "Administratīvo pārkāpumu",
-      "administrative": "Administratīvā"
-    },
-    "legend": "Leģenda",
-    "loading": "Ielādē tiesas...",
-    "filterAll": "Visas tiesas",
-    "filterMunicipal": "Rajona",
-    "filterCounty": "Apgabala",
-    "filterCommercial": "Komerctiesa",
-    "filterMisdemeanour": "Administratīvo pārkāpumu",
-    "filterAdministrative": "Administratīvā",
-    "viewDetails": "Skatīt informāciju",
-    "courts": "tiesas",
-    "error": "Nevar ielādēt tiesu datus. Lūdzu, mēģiniet vēlreiz."
-  },
-  "jurisdiction": {
-    "title": "Jurisdikcijas meklētājs",
-    "subtitle": "Atrodiet kompetento tiesu jūsu lietai pēc atrašanās vietas un lietas veida.",
-    "cityLabel": "Pilsēta vai pašvaldība",
-    "cityPlaceholder": "piem. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Lietas veids",
-    "caseType": {
-      "civilMinor": "Civiltiesiska (mazāka) — Rajona tiesa",
-      "criminalMinor": "Krimināltiesiska (līdz 5 gadiem) — Rajona tiesa",
-      "criminalSerious": "Krimināltiesiska (5+ gadi) — Apgabaltiesa",
-      "commercial": "Komerclieta — Komerctiesa",
-      "misdemeanour": "Administratīvais pārkāpums — Administratīvo pārkāpumu tiesa",
-      "administrative": "Administratīvā — Administratīvā tiesa"
-    },
-    "results": "Rezultāti",
-    "noResults": "Šai atrašanās vietai un lietas veidam nav atrasta kompetenta tiesa.",
-    "noResultsHint": "Mēģiniet citu pilsētas nosaukumu vai skatiet pilnu tiesu katalogs.",
-    "viewCourtsDirectory": "Skatīt tiesu katalogu"
-  },
-  "calculator": {
-    "title": "Tiesas nodevas",
-    "selectCaseType": "Lietas veids",
-    "caseType": {
-      "civil": "Civilstrīds",
-      "criminal": "Kriminālprocess",
-      "commercial": "Komercstrīds",
-      "administrative": "Administratīvais strīds",
-      "nonContentious": "Bezstrīdus tiesvedība"
-    },
-    "claimValue": "Prasības vērtība (EUR)",
-    "calculate": "Aprēķināt nodevu",
-    "filingFee": "Iesnieguma nodeva",
-    "appealFee": "Apelācijas nodeva",
-    "enforcementFee": "Izpildes nodeva",
-    "fixedFee": "Fiksētas nodevas",
-    "exemptionsTitle": "Atbrīvojumi no nodevām",
-    "exemption1": "Sociālās palīdzības saņēmēji ir atbrīvoti no visām tiesas nodevām.",
-    "exemption2": "Nepilngadīgie ir atbrīvoti no tiesas nodevām lietās par viņu tiesībām.",
-    "exemption3": "Darba ņēmēji darba strīdos ar prasības vērtību līdz 2 650 € ir atbrīvoti.",
-    "paymentTitle": "Maksājumu veidi",
-    "payment1": "Bankas pārskaitījums uz tiesas oficiālo kontu",
-    "payment2": "e-Pristojbe portāls (elektroniskais maksājums)",
-    "payment3": "Tiesas kase (klātienē tiesā)",
-    "legalBasis": "Tiesiskais pamats",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ar grozījumiem). Visas summas konvertētas uz EUR kopš 01.01.2023.",
-    "minorOffenses": "Viegli pārkāpumi",
-    "seriousOffenses": "Smagi noziegumi"
-  },
-  "jurisdictionFinder": {
-    "title": "Atrodiet savu tiesu",
-    "description": "Ievadiet savu pilsētu un lietas veidu, lai noskaidrotu kompetento tiesu.",
-    "cityLabel": "Jūsu pilsēta vai pašvaldība",
-    "cityPlaceholder": "piem. Zagreba, Splita, Osijeka...",
-    "caseTypeLabel": "Lietas veids",
-    "caseType": {
-      "civilMinor": "Civilstrīds (līdz 2 654 €)",
-      "civilMajor": "Civilstrīds (virs 2 654 €)",
-      "criminalMinor": "Krimināllieta (viegls pārkāpums)",
-      "criminalSerious": "Krimināllieta (smags noziegums)",
-      "commercial": "Komercstrīds",
-      "misdemeanour": "Administratīvs pārkāpums / ceļu satiksmes pārkāpums",
-      "administrative": "Strīds ar valsts iestādi"
-    },
-    "find": "Atrast tiesu",
-    "result": "Kompetentā tiesa",
-    "noResult": "Šai pilsētai tiesa nav atrasta. Mēģiniet tiesu katalogu.",
-    "browseAll": "Pārlūkot visas tiesas",
-    "viewProfile": "Skatīt tiesas profilu"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Tiesas nodevas",
+    "selectCaseType": "Lietas veids",
+    "caseType": {
+      "civil": "Civilstrīds",
+      "criminal": "Kriminālprocess",
+      "commercial": "Komercstrīds",
+      "administrative": "Administratīvais strīds",
+      "nonContentious": "Bezstrīdus tiesvedība"
+    },
+    "claimValue": "Prasības vērtība (EUR)",
+    "fixedFee": "Fiksētas nodevas",
+    "minorOffenses": "Viegli pārkāpumi",
+    "seriousOffenses": "Smagi noziegumi",
+    "filingFee": "Iesnieguma nodeva",
+    "appealFee": "Apelācijas nodeva",
+    "enforcementFee": "Izpildes nodeva",
+    "exemptionsTitle": "Atbrīvojumi no nodevām",
+    "exemption1": "Sociālās palīdzības saņēmēji ir atbrīvoti no visām tiesas nodevām.",
+    "exemption2": "Nepilngadīgie ir atbrīvoti no tiesas nodevām lietās par viņu tiesībām.",
+    "exemption3": "Darba ņēmēji darba strīdos ar prasības vērtību līdz 2 650 € ir atbrīvoti.",
+    "paymentTitle": "Maksājumu veidi",
+    "payment1": "Bankas pārskaitījums uz tiesas oficiālo kontu",
+    "payment2": "e-Pristojbe portāls (elektroniskais maksājums)",
+    "payment3": "Tiesas kase (klātienē tiesā)",
+    "legalBasis": "Tiesiskais pamats",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ar grozījumiem). Visas summas konvertētas uz EUR kopš 01.01.2023.",
+    "calculate": "Aprēķināt nodevu"
+  },
+  "map": {
+    "title": "Tiesu karte",
+    "filterAll": "Visas tiesas",
+    "filterMunicipal": "Rajona",
+    "filterCounty": "Apgabala",
+    "filterCommercial": "Komerctiesa",
+    "filterMisdemeanour": "Administratīvo pārkāpumu",
+    "filterAdministrative": "Administratīvā",
+    "courtType": {
+      "municipal": "Rajona",
+      "county": "Apgabala",
+      "commercial": "Komerctiesa",
+      "misdemeanour": "Administratīvo pārkāpumu",
+      "administrative": "Administratīvā"
+    },
+    "legend": "Leģenda",
+    "error": "Nevar ielādēt tiesu datus. Lūdzu, mēģiniet vēlreiz.",
+    "viewDetails": "Skatīt informāciju",
+    "loading": "Ielādē tiesas...",
+    "courts": "tiesas"
+  },
+  "jurisdiction": {
+    "title": "Jurisdikcijas meklētājs",
+    "subtitle": "Atrodiet kompetento tiesu jūsu lietai pēc atrašanās vietas un lietas veida.",
+    "cityLabel": "Pilsēta vai pašvaldība",
+    "cityPlaceholder": "piem. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Lietas veids",
+    "caseType": {
+      "civilMinor": "Civiltiesiska (mazāka) — Rajona tiesa",
+      "criminalMinor": "Krimināltiesiska (līdz 5 gadiem) — Rajona tiesa",
+      "criminalSerious": "Krimināltiesiska (5+ gadi) — Apgabaltiesa",
+      "commercial": "Komerclieta — Komerctiesa",
+      "misdemeanour": "Administratīvais pārkāpums — Administratīvo pārkāpumu tiesa",
+      "administrative": "Administratīvā — Administratīvā tiesa"
+    },
+    "results": "Rezultāti",
+    "noResults": "Šai atrašanās vietai un lietas veidam nav atrasta kompetenta tiesa.",
+    "noResultsHint": "Mēģiniet citu pilsētas nosaukumu vai skatiet pilnu tiesu katalogs.",
+    "viewCourtsDirectory": "Skatīt tiesu katalogu"
+  },
+  "jurisdictionFinder": {
+    "title": "Atrodiet savu tiesu",
+    "description": "Ievadiet savu pilsētu un lietas veidu, lai noskaidrotu kompetento tiesu.",
+    "cityLabel": "Jūsu pilsēta vai pašvaldība",
+    "cityPlaceholder": "piem. Zagreba, Splita, Osijeka...",
+    "caseTypeLabel": "Lietas veids",
+    "caseType": {
+      "civilMinor": "Civilstrīds (līdz 2 654 €)",
+      "civilMajor": "Civilstrīds (virs 2 654 €)",
+      "criminalMinor": "Krimināllieta (viegls pārkāpums)",
+      "criminalSerious": "Krimināllieta (smags noziegums)",
+      "commercial": "Komercstrīds",
+      "misdemeanour": "Administratīvs pārkāpums / ceļu satiksmes pārkāpums",
+      "administrative": "Strīds ar valsts iestādi"
+    },
+    "find": "Atrast tiesu",
+    "result": "Kompetentā tiesa",
+    "noResult": "Šai pilsētai tiesa nav atrasta. Mēģiniet tiesu katalogu.",
+    "browseAll": "Pārlūkot visas tiesas",
+    "viewProfile": "Skatīt tiesas profilu"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Bankrotējuši parādnieki",
+      "debtorsDesc": "Parādnieku katalogs ar visu saistīto procedūru profilu un vēsturi",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Iesniedziet iesniegumu",
+      "filingDesc": "Bankrota pieteikuma iesniegšana — prasības, ierosinājuma, ziņojuma, restrukturizācijas plāna iesniegšana"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Bankrota sludinājumi",
+      "description": "Aktīva bankrota procedūra publicēta Oficiālajā Vēstnesī un Oficiālajā Vēstnesī.",
+      "searchPlaceholder": "Meklēt pēc parādnieka vārda...",
+      "count": "{{n}} reklāmas",
+      "count_one": "{{n}} reklāma",
+      "count_few": "{{n}} reklāmas",
+      "count_other": "{{n}} reklāmas",
+      "loadError": "Nevar ielādēt bankrota sludinājumus.",
+      "empty": "Aktīvu bankrota sludinājumu nav.",
+      "unknownDebtor": "Nezināms parādnieks",
+      "deadline": "Termiņš"
+    },
+    "decisions": {
+      "title": "Lēmumi par bankrotu",
+      "description": "Tiesu lēmumi no bankrota procedūras Horvātijā.",
+      "loadError": "Nav iespējams ielādēt bankrota lēmumus.",
+      "noResults": "Nav rezultātu.",
+      "viewDecision": "Atveriet lēmumu"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Vārds",
+      "licenseNo": "Licences numurs",
+      "contact": "Sazināties",
+      "assignedCourts": "Piešķirtās tiesas",
+      "court": "Tiesa",
+      "city": "Pilsēta"
+    },
+    "filterCourtAll": "Visas tiesas"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Lietotāja veids",
+      "userTypeOptions": {
+        "person": "Persona",
+        "legal_entity": "Juridiska persona"
+      },
+      "organisationName": "Juridiskās personas nosaukums",
+      "organisationOib": "juridisko personu OIB",
+      "legalEntityNote": "Juridiskas personas (advokātu biroji, bankrota pilnvarnieki, kas darbojas savā vārdā, reģistrētas organizācijas) var iesniegt bankrota pieteikumus, izmantojot redakcionālo pieeju. Jūsu autorizācija tiks aktivizēta automātiski pēc reģistrācijas.",
+      "errorOib": "OIB ir jābūt precīzi 11 cipariem.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Aizmirsu paroli",
+      "subtitle": "Ievadiet savu e-pasta adresi, un mēs nosūtīsim jums saiti, lai iestatītu jaunu paroli.",
+      "submit": "Nosūtiet saiti",
+      "submitting": "Nosūtām…",
+      "backToLogin": "Atpakaļ uz pieteikšanos",
+      "errorGeneric": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+    },
+    "resetPassword": {
+      "title": "Iestatiet jaunu paroli",
+      "subtitle": "Izvēlieties savam kontam jaunu paroli.",
+      "newPassword": "Jauna parole",
+      "confirmPassword": "Apstipriniet jauno paroli",
+      "submit": "Iestatiet jaunu paroli",
+      "submitting": "Mēs gatavojam...",
+      "done": "Jūsu parole ir veiksmīgi iestatīta. Jūs varat reģistrēties tagad.",
+      "goToLogin": "Dodieties uz pieteikumu",
+      "missingToken": "Šai paroles maiņas saitei nav marķiera. Pieprasiet jaunu.",
+      "requestNew": "Pieprasiet jaunu saiti",
+      "errorGeneric": "Paroli nevarēja iestatīt. Lūdzu, mēģiniet vēlreiz."
+    },
+    "password": {
+      "show": "Rādīt paroli",
+      "hide": "Slēpt paroli"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Preses izgriezums — laikrakstu raksti un interneta portāli, kuros tiek pieminēts Tiesnešu tīkls. Saturs tiks aizpildīts kā daļa no datu migrācijas no vecās vietnes."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audio galerijas",
+      "placeholder": "Audio pieminējumi — radio intervijas un šovi par tiesnešu tīklu. Saturs tiks aizpildīts kā daļa no datu migrācijas no vecās vietnes."
+    },
+    "video": {
+      "title": "Video galerijas",
+      "placeholder": "Video minējumi — televīzijas īpašie piedāvājumi un intervijas. Saturs tiks aizpildīts kā daļa no datu migrācijas no vecās vietnes."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Select document type",
     "type": {
       "tuzba": {
+        "_value": "Tiesvedība",
         "desc": "Civilprocessa uzsākšanai tiesā"
       },
       "zalba": {
+        "_value": "Sūdzība",
         "desc": "Tiesas lēmuma apstrīdei augstākajā tiesā"
       },
       "prigovor": {
+        "_value": "Sūdzība",
         "desc": "Iesnieguma iesniegšanai pretēti tiesas lēmumam"
       },
       "ovrsni": {
+        "_value": "Izpildvaras priekšlikums",
         "desc": "Vērtēšanas procesa uzsākšanai uz izpildes dokumenta pamata"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Nokavēts"
     }
   },
-  "cookiePolicy": "Sīkfailu politika",
-  "termsOfService": "Lietošanas noteikumi",
-  "judges": {
-    "detail": {
-      "role": "Tiesis",
-      "court": "Tiesa",
-      "appointmentDate": "Ieciršanas datums",
-      "specialization": "Specializācija",
-      "status": "Statuss",
-      "contact": "Kontakta informācija"
-    }
-  },
   "legalNews": {
     "title": "Juridiskās ziņas",
     "subtitle": "Aktuālo juridisko ziņu pārskats no vietējiem un Eiropas juridiskajiem avotiem.",
@@ -716,6 +822,8 @@
       "p2": "[lv] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Sīkfailu politika",
+  "termsOfService": "Lietošanas noteikumi",
   "privacy": {
     "title": "[lv] Pravila privatnosti",
     "lastUpdated": "[lv] Zadnje ažuriranje: 28. ožujka 2026.",
@@ -808,8 +916,201 @@
       "p2": "Jautājumu par šiem Noteikumiem varat uzdot, sazinoties ar mums pa:"
     }
   },
-  "docgen.type.tuzba.desc": "Civilprocessa sākšanai tiesā",
-  "docgen.type.zalba.desc": "Tiesas lēmuma apstrīdei augstākajā tiesā",
-  "docgen.type.prigovor.desc": "Iesniegums pret tiesas lēmumu",
-  "docgen.type.ovrsni.desc": "Piespiedu izpētes sākšanai uz izpildes dokumenta pamata"
+  "debtors": {
+    "title": "Bankrotējuši parādnieki",
+    "subtitle": "Parādnieku saraksts, kuriem ir vai ir veikta bankrota procedūra.",
+    "searchPlaceholder": "Meklēt pēc vārda vai pilsētas...",
+    "oibPh": "OIB...",
+    "loadError": "Ielādējot parādnieku, radās kļūda.",
+    "noResults": "Meklēšanai nav atbilstošu parādnieku.",
+    "linkedListings": "Bankrota procedūra",
+    "noLinkedListings": "Nav saistītas bankrota procedūras.",
+    "fields": {
+      "name": "Vārds / Vārds",
+      "address": "Adrese",
+      "city": "Pilsēta",
+      "county": "Apgabals",
+      "phone": "Tālrunis",
+      "caseNumber": "Preces numurs",
+      "status": "Statuss",
+      "deadline": "Termiņš",
+      "publishedAt": "Publicēts"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API dokumentācija — tiesnešu tīkls",
+    "metaDescription": "Publiskā REST API piekļuvei Tiesu tīkla tiesu lēmumu, ekspertu, tulku un tiesu datubāzēm.",
+    "title": "Publisks REST API",
+    "intro": "Atvērts API partneru iestādēm un pētniekiem, kuri vēlas programmatisku piekļuvi Horvātijas Republikas tiesu prakses, ekspertu, tulku un tiesu datubāzēm.",
+    "paginationNote": "Visi saraksta galapunkti atgriež to pašu lappušu atbildes formātu:",
+    "endpointsNote": "Noklikšķiniet uz galapunkta, lai skatītu parametrus, pieprasījuma un atbildes piemēru.",
+    "sections": {
+      "gettingStarted": "Darba sākums",
+      "pagination": "Lapu šķirošana",
+      "endpoints": "Gala punkti"
+    },
+    "cards": {
+      "baseUrl": "Pamata URL",
+      "auth": "Autentifikācija",
+      "rateLimit": "Ierobežojumi (likmes ierobežojums)",
+      "baseUrlNote": "Visas atbildes ir JSON, UTF-8",
+      "authNote": "API atslēga nav obligāta, taču tā palielina ierobežojumu."
+    },
+    "endpoint": {
+      "params": "Parametri",
+      "exampleRequest": "Pieprasījuma paraugs",
+      "exampleResponse": "Atbildes piemērs",
+      "fields": {
+        "name": "Vārds",
+        "description": "Apraksts",
+        "type": "Tips",
+        "required": "Obligāti",
+        "example": "Piemērs",
+        "in": "iekšā"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Atpakaļ uz administratoru",
+    "table": {
+      "range": "Rāda {{from}}–{{to}} no {{total}}",
+      "prev": "Iepriekšējais",
+      "next": "Tālāk",
+      "pageOf": "{{page}} lapa no {{total}}",
+      "empty": "Nav ierakstu."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API atslēgas",
+        "label": "Etiķete",
+        "email": "Email",
+        "organization": "Organizācija",
+        "rateLimit": "Likmes ierobežojums (piepras./min)",
+        "active": "Aktīvs"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Bankrota administratori",
+        "name": "Vārds",
+        "licenceNumber": "Licences numurs",
+        "phone": "Tālrunis",
+        "email": "Email",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "courts": "Piešķirtās tiesas"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Parādnieki (bankrots)",
+        "name": "Vārds",
+        "oib": "OIB",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "phone": "Tālrunis",
+        "email": "Email",
+        "notes": "Piezīmes"
+      },
+      "courts": {
+        "__title": "Tiesas",
+        "name": "Tiesas nosaukums",
+        "type": "Tiesas veids",
+        "president": "Tiesas priekšsēdētājs",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "phone": "Tālrunis",
+        "fax": "Fakss",
+        "email": "Email",
+        "website": "Tīmekļa vietne",
+        "notes": "Piezīmes"
+      },
+      "documents": {
+        "__title": "Dokumenti",
+        "title": "Nosaukums",
+        "description": "Apraksts",
+        "category": "Kategorija",
+        "publishedAt": "Publicēts plkst",
+        "lang": "Valoda"
+      },
+      "expertWitnesses": {
+        "__title": "Eksperti liecinieki",
+        "name": "Vārds",
+        "company": "Uzņēmums / Firma",
+        "specialityAreas": "Specializētās jomas",
+        "languages": "Valodas",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "phone": "Tālrunis",
+        "email": "Email",
+        "verified": "Pārbaudīts",
+        "lang": "Ieejas valoda",
+        "notes": "Piezīmes"
+      },
+      "interpreters": {
+        "__title": "Tiesas tulki",
+        "name": "Vārds",
+        "company": "Uzņēmums / Firma",
+        "languagePairs": "Valodu pāri",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "phone": "Tālrunis",
+        "email": "Email",
+        "verified": "Pārbaudīts",
+        "lang": "Ieejas valoda"
+      },
+      "judges": {
+        "__title": "Tiesneši",
+        "name": "Pilns vārds",
+        "firstName": "Vārds",
+        "lastName": "Uzvārds",
+        "court": "Tiesa",
+        "specialization": "Specializācija",
+        "department": "nodaļa",
+        "appointmentDate": "Tikšanās datums (GGGG-MM-DD)",
+        "yearsOfExperience": "Gadu pieredze",
+        "status": "Statuss",
+        "email": "Email",
+        "lang": "Ieejas valoda"
+      },
+      "laws": {
+        "__title": "Likumi",
+        "title": "Nosaukums",
+        "type": "Tips",
+        "category": "Juridiskā joma",
+        "year": "gads",
+        "officialGazette": "Oficiālais Vēstnesis (NN)",
+        "externalUrl": "Ārējais URL",
+        "effectiveDate": "Spēkā stāšanās datums",
+        "fullText": "Pilns teksts",
+        "summary": "Kopsavilkums",
+        "lang": "Valoda"
+      },
+      "legalCategories": {
+        "__title": "Juridiskās kategorijas",
+        "name": "Vārds",
+        "description": "Apraksts"
+      },
+      "pages": {
+        "__title": "Lapas",
+        "title": "Nosaukums",
+        "slug": "Gliemeža (URL)",
+        "content": "Saturs",
+        "metaTitle": "Meta virsraksts",
+        "metaDescription": "Meta apraksts",
+        "lang": "Valoda"
+      },
+      "stateAttorneys": {
+        "__title": "Valsts prokuratūras",
+        "name": "Biroja nosaukums",
+        "address": "Adrese",
+        "city": "Pilsēta",
+        "county": "Apgabals",
+        "phone": "Tālrunis",
+        "fax": "Fakss",
+        "email": "Email"
+      }
+    }
+  }
 }

@@ -105,6 +105,41 @@ export const SUPPORTED_LANGUAGES = [
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
 export const DEFAULT_LANGUAGE: SupportedLanguage = 'hr'
 
+export const LANGUAGE_LABELS: Readonly<Record<string, string>> = {
+  "hr": "Hrvatski",
+  "en": "English",
+  "de": "Deutsch",
+  "fr": "Français",
+  "bg": "Български",
+  "cs": "Čeština",
+  "da": "Dansk",
+  "el": "Ελληνικά",
+  "es": "Español",
+  "et": "Eesti",
+  "eu": "Euskara",
+  "fi": "Suomi",
+  "ga": "Gaeilge",
+  "hu": "Magyar",
+  "is": "Íslenska",
+  "it": "Italiano",
+  "ja": "日本語",
+  "lt": "Lietuvių",
+  "lv": "Latviešu",
+  "mt": "Malti",
+  "nb": "Norsk bokmål",
+  "nl": "Nederlands",
+  "pl": "Polski",
+  "pt": "Português",
+  "ro": "Română",
+  "sk": "Slovenčina",
+  "sl": "Slovenščina",
+  "sv": "Svenska",
+  "uk": "Українська",
+  "ar": "العربية",
+  "zh": "中文"
+}
+
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -142,7 +177,11 @@ i18n
       ar: { nav: arNav, common: arCommon, chat: arChat },
       zh: { nav: zhNav, common: zhCommon, chat: zhChat },
     },
-    fallbackLng: DEFAULT_LANGUAGE,
+    // Two-step fallback: try English first (which is at 98.9% key
+    // coverage), then Croatian (the authoring locale). Means a visitor
+    // who selected Deutsch and hits a key that has not been translated
+    // yet sees English rather than Croatian.
+    fallbackLng: ["en", "hr"],
     supportedLngs: SUPPORTED_LANGUAGES,
     defaultNS: 'common',
     ns: ['common', 'nav', 'chat'],
@@ -164,14 +203,8 @@ const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur'])
 
 function applyLangAndDir(lng: string): void {
   const base = lng.split('-')[0]
-  // Reject non-language URL segments such as "admin" (the path-detector
-  // happily extracts the first segment regardless of supportedLngs); fall
-  // back to the default so screen readers and :lang() CSS stay correct.
-  const safe = (SUPPORTED_LANGUAGES as readonly string[]).includes(base)
-    ? base
-    : DEFAULT_LANGUAGE
-  document.documentElement.lang = safe
-  document.documentElement.dir = RTL_LANGS.has(safe) ? 'rtl' : 'ltr'
+  document.documentElement.lang = base
+  document.documentElement.dir = RTL_LANGS.has(base) ? 'rtl' : 'ltr'
 }
 
 // AC-6: keep <html lang> + dir in sync with i18next language changes

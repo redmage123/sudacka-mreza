@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Cuardaigh Líonra na mBreithiúna...",
+      "submit": "Cuardach",
+      "aria": "Cuardach"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Níl ach an achoimre oifigiúil ar fáil ar an ardán seo. Léigh an téacs iomlán ar shuíomh Gréasáin na cúirte eisiúna."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Ainm / Cuideachta / Seoladh...",
+    "filterCompany": "Cuideachta",
+    "filterCompanyPh": "Ainm cuideachta..."
+  },
+  "judges": {
+    "detail": {
+      "role": "[ga] Sudac",
+      "court": "[ga] Sud",
+      "appointmentDate": "[ga] Datum imenovanja",
+      "specialization": "[ga] Specijalizacija",
+      "status": "[ga] Status",
+      "contact": "[ga] Kontakt podaci"
+    },
+    "searchPlaceholder": "Cuardaigh de réir ainm réiteora...",
+    "totalCount": "Iomlán: {{count}} breithiúna",
+    "totalCount_one": "Iomlán: {{count}} breitheamh",
+    "totalCount_few": "Iomlán: {{count}} breithiúna",
+    "totalCount_other": "Iomlán: {{count}} breithiúna"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Ainm / Cuideachta / Seoladh...",
+    "filterCompany": "Cuideachta",
+    "filterCompanyPh": "Ainm cuideachta..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Cúirt Eorpach um Chearta an Duine"
+      "echr": "Cúirt Eorpach um Chearta an Duine",
+      "ecj": "Cúirt an Aontais Eorpaigh"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Uaireanta oibre",
+      "monday": "Dé Luain",
+      "tuesday": "Dé Máirt",
+      "wednesday": "Dé Céadaoin",
+      "thursday": "Déardaoin",
+      "friday": "Dé hAoine",
+      "saturday": "Dé Sathairn",
+      "sunday": "Domhnach",
+      "notes": "Athmharc",
+      "closed": "Dúnta"
+    },
+    "jurisdictionScope": "Réimse dlínse",
+    "departmentsCount_one": "{{count}} roinn",
+    "departmentsCount_few": "{{count}} roinn",
+    "departmentsCount_other": "{{count}} roinn",
+    "searchPlaceholderNameAddr": "Ainm nó seoladh na cúirte..."
   },
   "nav": {
     "home": "Baile",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Léarscáil na gCúirteanna",
-    "courtType": {
-      "municipal": "Bardasach",
-      "county": "Contae",
-      "commercial": "Tráchtála",
-      "misdemeanour": "Mionchion",
-      "administrative": "Riaracháin"
-    },
-    "legend": "Eochair",
-    "loading": "Cúirteanna á lódáil...",
-    "filterAll": "Gach cúirt",
-    "filterMunicipal": "Bardasach",
-    "filterCounty": "Contae",
-    "filterCommercial": "Tráchtála",
-    "filterMisdemeanour": "Mionchion",
-    "filterAdministrative": "Riaracháin",
-    "viewDetails": "Féach ar shonraí",
-    "courts": "cúirteanna",
-    "error": "Ní féidir sonraí na gcúirteanna a luchtú. Bain triail eile as."
-  },
-  "jurisdiction": {
-    "title": "Aimsitheoir Dlínse",
-    "subtitle": "Aimsigh an chúirt inniúil do do chás bunaithe ar shuíomh agus ar chineál cáis.",
-    "cityLabel": "Cathair nó bardas",
-    "cityPlaceholder": "m.sh. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Cineál cáis",
-    "caseType": {
-      "civilMinor": "Sibhialta (mionchás) — Cúirt bhardasach",
-      "criminalMinor": "Coiriúil (faoi 5 bliana) — Cúirt bhardasach",
-      "criminalSerious": "Coiriúil (5+ bliain) — Cúirt chontae",
-      "commercial": "Tráchtála — Cúirt tráchtála",
-      "misdemeanour": "Mionchion — Cúirt mhionchiona",
-      "administrative": "Riaracháin — Cúirt riaracháin"
-    },
-    "results": "Torthaí",
-    "noResults": "Níor aimsíodh aon chúirt inniúil don suíomh agus don chineál cáis seo.",
-    "noResultsHint": "Bain triail as ainm cathrach eile nó féach ar eolaire iomlán na gcúirteanna.",
-    "viewCourtsDirectory": "Féach ar eolaire na gcúirteanna"
-  },
-  "calculator": {
-    "title": "Táillí Cúirte",
-    "selectCaseType": "Cineál cáis",
-    "caseType": {
-      "civil": "Díospóid shibhialta",
-      "criminal": "Imeachtaí coiriúla",
-      "commercial": "Díospóid tráchtála",
-      "administrative": "Díospóid riaracháin",
-      "nonContentious": "Imeachtaí neamhchonspóideacha"
-    },
-    "claimValue": "Luach an éilimh (EUR)",
-    "calculate": "Ríomh an táille",
-    "filingFee": "Táille comhdaithe",
-    "appealFee": "Táille achomhairc",
-    "enforcementFee": "Táille forfheidhmithe",
-    "fixedFee": "Táillí seasta",
-    "exemptionsTitle": "Díolúintí ó Tháillí",
-    "exemption1": "Tá faighteoirí leasa shóisialaigh díolmhaithe ó gach táille cúirte.",
-    "exemption2": "Tá mionaoisigh díolmhaithe ó tháillí cúirte in imeachtaí a bhaineann lena gcearta.",
-    "exemption3": "Tá oibrithe i ndíospóidí saothair le luach éilimh suas go €2,650 díolmhaithe.",
-    "paymentTitle": "Modhanna Íocaíochta",
-    "payment1": "Aistriú bainc chuig cuntas oifigiúil na cúirte",
-    "payment2": "Tairseach e-Pristojbe (íocaíocht leictreonach)",
-    "payment3": "Caisteoir na cúirte (go pearsanta ag an gcúirt)",
-    "legalBasis": "Bunús Dlíthiúil",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, le leasuithe). Gach suim tiontaithe go EUR ón 01.01.2023.",
-    "minorOffenses": "Mionchionta",
-    "seriousOffenses": "Cionta tromchúiseacha"
-  },
-  "jurisdictionFinder": {
-    "title": "Aimsigh do chúirt",
-    "description": "Cuir isteach do chathair agus cineál cáis chun an chúirt inniúil a fháil.",
-    "cityLabel": "Do chathair nó do bhardas",
-    "cityPlaceholder": "m.sh. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Cineál cáis",
-    "caseType": {
-      "civilMinor": "Díospóid shibhialta (suas le €2,654)",
-      "civilMajor": "Díospóid shibhialta (os cionn €2,654)",
-      "criminalMinor": "Coiriúil (mionchion)",
-      "criminalSerious": "Coiriúil (cion tromchúiseach)",
-      "commercial": "Díospóid tráchtála",
-      "misdemeanour": "Mí-iompar / cion tráchta",
-      "administrative": "Díospóid le gníomhaireacht rialtais"
-    },
-    "find": "Aimsigh cúirt",
-    "result": "Cúirt inniúil",
-    "noResult": "Ní bhfuarthas cúirt don chathair seo. Bain triail as an eolaire cúirteanna.",
-    "browseAll": "Brabhsáil gach cúirt",
-    "viewProfile": "Féach ar phróifíl na cúirte"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Táillí Cúirte",
+    "selectCaseType": "Cineál cáis",
+    "caseType": {
+      "civil": "Díospóid shibhialta",
+      "criminal": "Imeachtaí coiriúla",
+      "commercial": "Díospóid tráchtála",
+      "administrative": "Díospóid riaracháin",
+      "nonContentious": "Imeachtaí neamhchonspóideacha"
+    },
+    "claimValue": "Luach an éilimh (EUR)",
+    "fixedFee": "Táillí seasta",
+    "minorOffenses": "Mionchionta",
+    "seriousOffenses": "Cionta tromchúiseacha",
+    "filingFee": "Táille comhdaithe",
+    "appealFee": "Táille achomhairc",
+    "enforcementFee": "Táille forfheidhmithe",
+    "exemptionsTitle": "Díolúintí ó Tháillí",
+    "exemption1": "Tá faighteoirí leasa shóisialaigh díolmhaithe ó gach táille cúirte.",
+    "exemption2": "Tá mionaoisigh díolmhaithe ó tháillí cúirte in imeachtaí a bhaineann lena gcearta.",
+    "exemption3": "Tá oibrithe i ndíospóidí saothair le luach éilimh suas go €2,650 díolmhaithe.",
+    "paymentTitle": "Modhanna Íocaíochta",
+    "payment1": "Aistriú bainc chuig cuntas oifigiúil na cúirte",
+    "payment2": "Tairseach e-Pristojbe (íocaíocht leictreonach)",
+    "payment3": "Caisteoir na cúirte (go pearsanta ag an gcúirt)",
+    "legalBasis": "Bunús Dlíthiúil",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, le leasuithe). Gach suim tiontaithe go EUR ón 01.01.2023.",
+    "calculate": "Ríomh an táille"
+  },
+  "map": {
+    "title": "Léarscáil na gCúirteanna",
+    "filterAll": "Gach cúirt",
+    "filterMunicipal": "Bardasach",
+    "filterCounty": "Contae",
+    "filterCommercial": "Tráchtála",
+    "filterMisdemeanour": "Mionchion",
+    "filterAdministrative": "Riaracháin",
+    "courtType": {
+      "municipal": "Bardasach",
+      "county": "Contae",
+      "commercial": "Tráchtála",
+      "misdemeanour": "Mionchion",
+      "administrative": "Riaracháin"
+    },
+    "legend": "Eochair",
+    "error": "Ní féidir sonraí na gcúirteanna a luchtú. Bain triail eile as.",
+    "viewDetails": "Féach ar shonraí",
+    "loading": "Cúirteanna á lódáil...",
+    "courts": "cúirteanna"
+  },
+  "jurisdiction": {
+    "title": "Aimsitheoir Dlínse",
+    "subtitle": "Aimsigh an chúirt inniúil do do chás bunaithe ar shuíomh agus ar chineál cáis.",
+    "cityLabel": "Cathair nó bardas",
+    "cityPlaceholder": "m.sh. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Cineál cáis",
+    "caseType": {
+      "civilMinor": "Sibhialta (mionchás) — Cúirt bhardasach",
+      "criminalMinor": "Coiriúil (faoi 5 bliana) — Cúirt bhardasach",
+      "criminalSerious": "Coiriúil (5+ bliain) — Cúirt chontae",
+      "commercial": "Tráchtála — Cúirt tráchtála",
+      "misdemeanour": "Mionchion — Cúirt mhionchiona",
+      "administrative": "Riaracháin — Cúirt riaracháin"
+    },
+    "results": "Torthaí",
+    "noResults": "Níor aimsíodh aon chúirt inniúil don suíomh agus don chineál cáis seo.",
+    "noResultsHint": "Bain triail as ainm cathrach eile nó féach ar eolaire iomlán na gcúirteanna.",
+    "viewCourtsDirectory": "Féach ar eolaire na gcúirteanna"
+  },
+  "jurisdictionFinder": {
+    "title": "Aimsigh do chúirt",
+    "description": "Cuir isteach do chathair agus cineál cáis chun an chúirt inniúil a fháil.",
+    "cityLabel": "Do chathair nó do bhardas",
+    "cityPlaceholder": "m.sh. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Cineál cáis",
+    "caseType": {
+      "civilMinor": "Díospóid shibhialta (suas le €2,654)",
+      "civilMajor": "Díospóid shibhialta (os cionn €2,654)",
+      "criminalMinor": "Coiriúil (mionchion)",
+      "criminalSerious": "Coiriúil (cion tromchúiseach)",
+      "commercial": "Díospóid tráchtála",
+      "misdemeanour": "Mí-iompar / cion tráchta",
+      "administrative": "Díospóid le gníomhaireacht rialtais"
+    },
+    "find": "Aimsigh cúirt",
+    "result": "Cúirt inniúil",
+    "noResult": "Ní bhfuarthas cúirt don chathair seo. Bain triail as an eolaire cúirteanna.",
+    "browseAll": "Brabhsáil gach cúirt",
+    "viewProfile": "Féach ar phróifíl na cúirte"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Féichiúnaithe féimheach",
+      "debtorsDesc": "Eolaire féichiúnaithe le próifíl agus stair na nósanna imeachta gaolmhara go léir",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Cuir aighneacht isteach",
+      "filingDesc": "Comhdú féimheachta a chomhdú — éileamh a chomhdú, togra tionscnaimh, tuarascáil, plean athstruchtúraithe"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Fógraí féimheachta",
+      "description": "Imeachtaí gníomhacha féimheachta foilsithe san Iris Oifigiúil agus san Iris Oifigiúil.",
+      "searchPlaceholder": "Cuardaigh de réir ainm féichiúnaí...",
+      "count": "{{n}} fógraí",
+      "count_one": "{{n}} fógra",
+      "count_few": "{{n}} fógraí",
+      "count_other": "{{n}} fógraí",
+      "loadError": "Ní féidir fógraí féimheachta a lódáil.",
+      "empty": "Níl aon fógraí féimheachta gníomhacha ann.",
+      "unknownDebtor": "Féichiúnaí anaithnid",
+      "deadline": "Spriocdháta"
+    },
+    "decisions": {
+      "title": "Cinntí féimheachta",
+      "description": "Cinntí cúirte ó imeachtaí féimheachta sa Chróit.",
+      "loadError": "Ní féidir cinntí féimheachta a luchtú.",
+      "noResults": "Gan torthaí.",
+      "viewDecision": "Oscail an cinneadh"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Ainm",
+      "licenseNo": "Uimhir Cheadúnais",
+      "contact": "Teagmháil",
+      "assignedCourts": "Cúirteanna Sannta",
+      "court": "Cúirt",
+      "city": "Cathair"
+    },
+    "filterCourtAll": "Gach Cúirt"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Cineál úsáideora",
+      "userTypeOptions": {
+        "person": "Duine",
+        "legal_entity": "Aonán dlíthiúil"
+      },
+      "organisationName": "Ainm an eintitis dhlíthiúil",
+      "organisationOib": "OIB daoine dlítheanacha",
+      "legalEntityNote": "Is féidir le haonáin dhlíthiúla (gnólachtaí dlí, iontaobhaithe féimheachta ag gníomhú ar a son féin, eagraíochtaí cláraithe) achainíocha féimheachta a chur isteach tríd an gcur chuige eagarthóireachta. Cuirfear d'údarú i ngníomh go huathoibríoch tar éis clárúcháin.",
+      "errorOib": "Caithfidh 11 dhigit díreach a bheith ag OIB.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Focal faire dearmadta",
+      "subtitle": "Cuir isteach do sheoladh ríomhphoist agus seolfaimid nasc chugat chun pasfhocal nua a shocrú.",
+      "submit": "Seol nasc",
+      "submitting": "Seolaimid…",
+      "backToLogin": "Ar ais chuig logáil isteach",
+      "errorGeneric": "Chuaigh rud éigin mícheart. Bain triail eile as."
+    },
+    "resetPassword": {
+      "title": "Socraigh pasfhocal nua",
+      "subtitle": "Roghnaigh pasfhocal nua do do chuntas.",
+      "newPassword": "Pasfhocal nua",
+      "confirmPassword": "Deimhnigh pasfhocal nua",
+      "submit": "Socraigh pasfhocal nua",
+      "submitting": "Táimid ag ullmhú...",
+      "done": "Socraíodh do phasfhocal go rathúil. Is féidir leat clárú anois.",
+      "goToLogin": "Téigh go dtí an t-iarratas",
+      "missingToken": "Níl aon comhartha ar an nasc athraithe pasfhocail seo. Iarr ceann nua.",
+      "requestNew": "Iarr nasc nua",
+      "errorGeneric": "Níorbh fhéidir an pasfhocal a shocrú. Bain triail eile as."
+    },
+    "password": {
+      "show": "Taispeáin pasfhocal",
+      "hide": "Folaigh pasfhocal"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Gearrthóg preas — ailt nuachtáin agus tairseacha gréasáin ina luaitear Líonra na mBreithiúna. Líonfar an t-ábhar isteach mar chuid den aistriú sonraí ón seansuíomh."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Dánlanna fuaime",
+      "placeholder": "Clos-luaite — agallaimh raidió agus seónna faoin Judge Network. Líonfar an t-ábhar isteach mar chuid den aistriú sonraí ón seansuíomh."
+    },
+    "video": {
+      "title": "Dánlanna físeán",
+      "placeholder": "Léirmheasanna ar fhíseáin — cláir speisialta teilifíse agus agallaimh. Líonfar an t-ábhar isteach mar chuid den aistriú sonraí ón seansuíomh."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Select document type",
     "type": {
       "tuzba": {
+        "_value": "Cleachtadh dlí",
         "desc": "Chun próiseas sibhialta a thosú sa chúirt"
       },
       "zalba": {
+        "_value": "Gearán",
         "desc": "Chun dlíthe de chúirt a athchúraim ag chúirt níos airde"
       },
       "prigovor": {
+        "_value": "Gearán",
         "desc": "Chun cogar a chur in aghaidh réiteach cúirte"
       },
       "ovrsni": {
+        "_value": "Togra feidhmiúcháin",
         "desc": "Chun forfórtuithe a thosú bunaithe ar an doiciméad forfóirtuithe"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Caite"
     }
   },
-  "cookiePolicy": "Beartas fianán",
-  "termsOfService": "Téarmaí Seirbhíse",
-  "judges": {
-    "detail": {
-      "role": "[ga] Sudac",
-      "court": "[ga] Sud",
-      "appointmentDate": "[ga] Datum imenovanja",
-      "specialization": "[ga] Specijalizacija",
-      "status": "[ga] Status",
-      "contact": "[ga] Kontakt podaci"
-    }
-  },
   "legalNews": {
     "title": "[ga] Pravne vijesti",
     "subtitle": "[ga] Pregled aktualnih pravnih vijesti iz domaćih i europskih pravnih izvora.",
@@ -716,6 +822,8 @@
       "p2": "[ga] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Beartas fianán",
+  "termsOfService": "Téarmaí Seirbhíse",
   "privacy": {
     "title": "[ga] Pravila privatnosti",
     "lastUpdated": "[ga] Zadnje ažuriranje: 28. ožujka 2026.",
@@ -808,8 +916,201 @@
       "p2": "[ga] Za pitanja o ovim Uvjetima kontaktirajte nas na:"
     }
   },
-  "docgen.type.tuzba.desc": "Chun próiseas sibhialta a thosú i gCúirt",
-  "docgen.type.zalba.desc": "Chun achomhairle a dhéanamh ar an bhdeontú cúirte i gCúirt níos airde",
-  "docgen.type.prigovor.desc": "Chun seasamh a dhéanamh in aghaidh an bhdeontú cúirte",
-  "docgen.type.ovrsni.desc": "Chun forfoghlaim a thosú bunaithe ar doiciméad forfoghlaim"
+  "debtors": {
+    "title": "Féichiúnaithe féimheach",
+    "subtitle": "Eolaire féichiúnaithe a bhfuil nó a bhfuil imeachtaí féimheachta á seoladh ina leith.",
+    "searchPlaceholder": "Cuardaigh de réir ainm nó cathrach...",
+    "oibPh": "OIB...",
+    "loadError": "Earráid agus féichiúnaí á lódáil.",
+    "noResults": "Níl aon fhéichiúnaithe ann a mheaitseálann an cuardach.",
+    "linkedListings": "Imeachtaí féimheachta",
+    "noLinkedListings": "Níl aon imeachtaí féimheachta gaolmhara ann.",
+    "fields": {
+      "name": "Ainm / Ainm",
+      "address": "Seoladh",
+      "city": "Cathair",
+      "county": "Contae",
+      "phone": "Fón",
+      "caseNumber": "Uimhir mhíre",
+      "status": "Stádas",
+      "deadline": "Spriocdháta",
+      "publishedAt": "Foilsithe"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Doiciméadúchán API — Líonra Breithiúna",
+    "metaDescription": "API REST poiblí chun rochtain a fháil ar bhunachair shonraí de chinntí cúirte, de shaineolaithe, de ateangairí agus de chúirteanna an Líonra Bhreithiúnaigh.",
+    "title": "API REST poiblí",
+    "intro": "API Oscailte d’institiúidí comhpháirtíochta agus do thaighdeoirí ar mian leo rochtain ríomhchláraithe ar bhunachair shonraí de chleachtas cúirte, de shaineolaithe, d’ateangairí agus de chúirteanna Phoblacht na Cróite.",
+    "paginationNote": "Tugann gach críochphointe liosta an fhormáid freagartha uimhrithe céanna ar ais:",
+    "endpointsNote": "Cliceáil ar chríochphointe le haghaidh paraiméadair, mar shampla iarratas agus freagra.",
+    "sections": {
+      "gettingStarted": "Tús na hoibre",
+      "pagination": "Leathanaigh",
+      "endpoints": "Críochphointí"
+    },
+    "cards": {
+      "baseUrl": "Bun-URL",
+      "auth": "Fíordheimhniú",
+      "rateLimit": "Teorainneacha (teorainn ráta)",
+      "baseUrlNote": "Is iad na freagraí go léir JSON, UTF-8",
+      "authNote": "Tá an eochair API roghnach, ach méadaíonn sé an teorainn."
+    },
+    "endpoint": {
+      "params": "Paraiméadair",
+      "exampleRequest": "Iarratas samplach",
+      "exampleResponse": "Freagra samplach",
+      "fields": {
+        "name": "Ainm",
+        "description": "Cur síos",
+        "type": "Cineál",
+        "required": "Éigeantach",
+        "example": "Sampla",
+        "in": "isteach"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Ar ais go Riarachán",
+    "table": {
+      "range": "Ag taispeáint {{from}}–{{to}} de {{total}}",
+      "prev": "An ceann roimhe sin",
+      "next": "Ar aghaidh",
+      "pageOf": "Leathanach {{page}} de {{total}}",
+      "empty": "Uimh taifid."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Eochracha API",
+        "label": "Lipéad",
+        "email": "Email",
+        "organization": "Eagraíocht",
+        "rateLimit": "Teorainn Ráta (req/nóim)",
+        "active": "Gníomhach"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Riarthóirí Féimheachta",
+        "name": "Ainm",
+        "licenceNumber": "Uimhir Cheadúnais",
+        "phone": "Fón",
+        "email": "Email",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "courts": "Cúirteanna Sannta"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Féichiúnaithe (Féimheacht)",
+        "name": "Ainm",
+        "oib": "OIB",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "phone": "Fón",
+        "email": "Email",
+        "notes": "Nótaí"
+      },
+      "courts": {
+        "__title": "Cúirteanna",
+        "name": "Ainm na Cúirte",
+        "type": "Cineál Cúirte",
+        "president": "Uachtarán na Cúirte",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "phone": "Fón",
+        "fax": "Facs",
+        "email": "Email",
+        "website": "Suíomh Gréasáin",
+        "notes": "Nótaí"
+      },
+      "documents": {
+        "__title": "Doiciméid",
+        "title": "Teideal",
+        "description": "Cur síos",
+        "category": "Catagóir",
+        "publishedAt": "Arna fhoilsiú ag",
+        "lang": "Teanga"
+      },
+      "expertWitnesses": {
+        "__title": "Finnéithe Saineolaithe",
+        "name": "Ainm",
+        "company": "Cuideachta/Gnólacht",
+        "specialityAreas": "Limistéir Speisialtachta",
+        "languages": "Teangacha",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "phone": "Fón",
+        "email": "Email",
+        "verified": "Fíoraithe",
+        "lang": "Teanga Iontrála",
+        "notes": "Nótaí"
+      },
+      "interpreters": {
+        "__title": "Ateangairí Cúirte",
+        "name": "Ainm",
+        "company": "Cuideachta/Gnólacht",
+        "languagePairs": "Péirí Teanga",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "phone": "Fón",
+        "email": "Email",
+        "verified": "Fíoraithe",
+        "lang": "Teanga Iontrála"
+      },
+      "judges": {
+        "__title": "Breithiúna",
+        "name": "Ainm Iomlán",
+        "firstName": "Céad Ainm",
+        "lastName": "Sloinne",
+        "court": "Cúirt",
+        "specialization": "Speisialtóireacht",
+        "department": "Roinn",
+        "appointmentDate": "Dáta an Cheapacháin (BBBB-MM-DD)",
+        "yearsOfExperience": "Blianta Taithí",
+        "status": "Stádas",
+        "email": "Email",
+        "lang": "Teanga Iontrála"
+      },
+      "laws": {
+        "__title": "Dlíthe",
+        "title": "Teideal",
+        "type": "Cineál",
+        "category": "Réimse Dlí",
+        "year": "Bliain",
+        "officialGazette": "Iris Oifigiúil (NN)",
+        "externalUrl": "URL seachtrach",
+        "effectiveDate": "Dáta Éifeachtach",
+        "fullText": "Téacs Iomlán",
+        "summary": "Achoimre",
+        "lang": "Teanga"
+      },
+      "legalCategories": {
+        "__title": "Catagóirí Dlí",
+        "name": "Ainm",
+        "description": "Cur síos"
+      },
+      "pages": {
+        "__title": "Leathanaigh",
+        "title": "Teideal",
+        "slug": "Drúchtín (URL)",
+        "content": "Ábhar",
+        "metaTitle": "Teideal Meta",
+        "metaDescription": "Cur Síos Meta",
+        "lang": "Teanga"
+      },
+      "stateAttorneys": {
+        "__title": "Oifigí na nAturnaetha Stáit",
+        "name": "Ainm Oifige",
+        "address": "Seoladh",
+        "city": "Cathair",
+        "county": "Contae",
+        "phone": "Fón",
+        "fax": "Facs",
+        "email": "Email"
+      }
+    }
+  }
 }

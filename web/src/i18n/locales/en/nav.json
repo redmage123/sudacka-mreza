@@ -73,11 +73,17 @@
   "lang.ja": "日本語",
   "skipToContent": "Skip to content",
   "documents": "Document Library",
-  "media": "Press & Media",
+  "media": "Media about us",
   "deadlines": "Court Deadline Calculator",
   "legalNews": "Legal News",
   "courtPerformance": "Court Performance",
   "services": "Services",
   "documentGenerator": "Document Generator",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "audio": "Audio galleries",
+  "video": "Video galleries",
+  "press": "Press clipping",
+  "adminConsole": "Administration",
+  "myLibrary": "My Library",
+  "signOut": "Sign out"
 }

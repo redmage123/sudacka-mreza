@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Търсене в Judge Network...",
+      "submit": "Търсене",
+      "aria": "Търсене"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "На тази платформа е достъпно само официалното резюме. Прочетете пълния текст на сайта на издаващия съд."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Име/Фирма/Адрес...",
+    "filterCompany": "Компания",
+    "filterCompanyPh": "Име на фирмата..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Съдия",
+      "court": "Съд",
+      "appointmentDate": "Дата на назначаване",
+      "specialization": "Специализация",
+      "status": "Статус",
+      "contact": "Контактни данни"
+    },
+    "searchPlaceholder": "Търсене по име на съдия...",
+    "totalCount": "Общо: {{count}} съдии",
+    "totalCount_one": "Общо: {{count}} съдия",
+    "totalCount_few": "Общо: {{count}} съдии",
+    "totalCount_other": "Общо: {{count}} съдии"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Име/Фирма/Адрес...",
+    "filterCompany": "Компания",
+    "filterCompanyPh": "Име на фирмата..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Европейски съд по правата на човека"
+      "echr": "Европейски съд по правата на човека",
+      "ecj": "Съдът на Европейския съюз"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Работно време",
+      "monday": "понеделник",
+      "tuesday": "вторник",
+      "wednesday": "сряда",
+      "thursday": "четвъртък",
+      "friday": "петък",
+      "saturday": "Събота",
+      "sunday": "неделя",
+      "notes": "Забележка",
+      "closed": "Затворено"
+    },
+    "jurisdictionScope": "Район на юрисдикция",
+    "departmentsCount_one": "{{count}} отдел",
+    "departmentsCount_few": "{{count}} отдел",
+    "departmentsCount_other": "{{count}} отдел",
+    "searchPlaceholderNameAddr": "Име или адрес на съда..."
   },
   "nav": {
     "home": "Начало",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Карта на съдилищата",
-    "courtType": {
-      "municipal": "Районен",
-      "county": "Окръжен",
-      "commercial": "Търговски",
-      "misdemeanour": "За нарушения",
-      "administrative": "Административен"
-    },
-    "legend": "Легенда",
-    "loading": "Зареждане на съдилища...",
-    "filterAll": "Всички съдилища",
-    "filterMunicipal": "Районен",
-    "filterCounty": "Окръжен",
-    "filterCommercial": "Търговски",
-    "filterMisdemeanour": "За нарушения",
-    "filterAdministrative": "Административен",
-    "viewDetails": "Преглед на детайли",
-    "courts": "съдилища",
-    "error": "Данните за съдилищата не могат да бъдат заредени. Моля, опитайте отново."
-  },
-  "jurisdiction": {
-    "title": "Търсене на подсъдност",
-    "subtitle": "Намерете компетентния съд за вашето дело въз основа на местоположение и вид на делото.",
-    "cityLabel": "Град или община",
-    "cityPlaceholder": "напр. Загреб, Сплит, Риека...",
-    "caseTypeLabel": "Вид дело",
-    "caseType": {
-      "civilMinor": "Гражданско (дребно) — Районен съд",
-      "criminalMinor": "Наказателно (до 5 години) — Районен съд",
-      "criminalSerious": "Наказателно (5+ години) — Окръжен съд",
-      "commercial": "Търговско — Търговски съд",
-      "misdemeanour": "Нарушение — Съд за нарушения",
-      "administrative": "Административно — Административен съд"
-    },
-    "results": "Резултати",
-    "noResults": "Не е намерен подходящ съд за това местоположение и вид дело.",
-    "noResultsHint": "Опитайте с друго име на град или проверете пълния справочник на съдилищата.",
-    "viewCourtsDirectory": "Преглед на справочника на съдилищата"
-  },
-  "calculator": {
-    "title": "Съдебни такси",
-    "selectCaseType": "Вид дело",
-    "caseType": {
-      "civil": "Граждански спор",
-      "criminal": "Наказателно производство",
-      "commercial": "Търговски спор",
-      "administrative": "Административен спор",
-      "nonContentious": "Безспорно производство"
-    },
-    "claimValue": "Стойност на иска (EUR)",
-    "calculate": "Изчисли таксата",
-    "filingFee": "Такса за подаване",
-    "appealFee": "Такса за обжалване",
-    "enforcementFee": "Такса за изпълнение",
-    "fixedFee": "Фиксирани такси",
-    "exemptionsTitle": "Освобождаване от такси",
-    "exemption1": "Получателите на социални помощи са освободени от всички съдебни такси.",
-    "exemption2": "Непълнолетните са освободени от съдебни такси в производства, свързани с техните права.",
-    "exemption3": "Работниците в трудови спорове със стойност на иска до 2 650€ са освободени.",
-    "paymentTitle": "Начини на плащане",
-    "payment1": "Банков превод по официалната сметка на съда",
-    "payment2": "Портал e-Pristojbe (електронно плащане)",
-    "payment3": "Каса на съда (лично в съда)",
-    "legalBasis": "Правно основание",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, с изменения). Всички суми са конвертирани в EUR от 01.01.2023 г.",
-    "minorOffenses": "Леки нарушения",
-    "seriousOffenses": "Тежки престъпления"
-  },
-  "jurisdictionFinder": {
-    "title": "Намерете вашия съд",
-    "description": "Въведете вашия град и вид дело, за да разберете кой съд е компетентен.",
-    "cityLabel": "Вашият град или община",
-    "cityPlaceholder": "напр. Загреб, Сплит, Осиек...",
-    "caseTypeLabel": "Вид дело",
-    "caseType": {
-      "civilMinor": "Граждански спор (до 2 654€)",
-      "civilMajor": "Граждански спор (над 2 654€)",
-      "criminalMinor": "Наказателно (леко нарушение)",
-      "criminalSerious": "Наказателно (тежко престъпление)",
-      "commercial": "Търговски спор",
-      "misdemeanour": "Нарушение / пътно нарушение",
-      "administrative": "Спор с държавен орган"
-    },
-    "find": "Намери съд",
-    "result": "Компетентен съд",
-    "noResult": "Не е намерен съд за този град. Опитайте да разгледате справочника на съдилищата.",
-    "browseAll": "Разгледай всички съдилища",
-    "viewProfile": "Преглед на профила на съда"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Съдебни такси",
+    "selectCaseType": "Вид дело",
+    "caseType": {
+      "civil": "Граждански спор",
+      "criminal": "Наказателно производство",
+      "commercial": "Търговски спор",
+      "administrative": "Административен спор",
+      "nonContentious": "Безспорно производство"
+    },
+    "claimValue": "Стойност на иска (EUR)",
+    "fixedFee": "Фиксирани такси",
+    "minorOffenses": "Леки нарушения",
+    "seriousOffenses": "Тежки престъпления",
+    "filingFee": "Такса за подаване",
+    "appealFee": "Такса за обжалване",
+    "enforcementFee": "Такса за изпълнение",
+    "exemptionsTitle": "Освобождаване от такси",
+    "exemption1": "Получателите на социални помощи са освободени от всички съдебни такси.",
+    "exemption2": "Непълнолетните са освободени от съдебни такси в производства, свързани с техните права.",
+    "exemption3": "Работниците в трудови спорове със стойност на иска до 2 650€ са освободени.",
+    "paymentTitle": "Начини на плащане",
+    "payment1": "Банков превод по официалната сметка на съда",
+    "payment2": "Портал e-Pristojbe (електронно плащане)",
+    "payment3": "Каса на съда (лично в съда)",
+    "legalBasis": "Правно основание",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, с изменения). Всички суми са конвертирани в EUR от 01.01.2023 г.",
+    "calculate": "Изчисли таксата"
+  },
+  "map": {
+    "title": "Карта на съдилищата",
+    "filterAll": "Всички съдилища",
+    "filterMunicipal": "Районен",
+    "filterCounty": "Окръжен",
+    "filterCommercial": "Търговски",
+    "filterMisdemeanour": "За нарушения",
+    "filterAdministrative": "Административен",
+    "courtType": {
+      "municipal": "Районен",
+      "county": "Окръжен",
+      "commercial": "Търговски",
+      "misdemeanour": "За нарушения",
+      "administrative": "Административен"
+    },
+    "legend": "Легенда",
+    "error": "Данните за съдилищата не могат да бъдат заредени. Моля, опитайте отново.",
+    "viewDetails": "Преглед на детайли",
+    "loading": "Зареждане на съдилища...",
+    "courts": "съдилища"
+  },
+  "jurisdiction": {
+    "title": "Търсене на подсъдност",
+    "subtitle": "Намерете компетентния съд за вашето дело въз основа на местоположение и вид на делото.",
+    "cityLabel": "Град или община",
+    "cityPlaceholder": "напр. Загреб, Сплит, Риека...",
+    "caseTypeLabel": "Вид дело",
+    "caseType": {
+      "civilMinor": "Гражданско (дребно) — Районен съд",
+      "criminalMinor": "Наказателно (до 5 години) — Районен съд",
+      "criminalSerious": "Наказателно (5+ години) — Окръжен съд",
+      "commercial": "Търговско — Търговски съд",
+      "misdemeanour": "Нарушение — Съд за нарушения",
+      "administrative": "Административно — Административен съд"
+    },
+    "results": "Резултати",
+    "noResults": "Не е намерен подходящ съд за това местоположение и вид дело.",
+    "noResultsHint": "Опитайте с друго име на град или проверете пълния справочник на съдилищата.",
+    "viewCourtsDirectory": "Преглед на справочника на съдилищата"
+  },
+  "jurisdictionFinder": {
+    "title": "Намерете вашия съд",
+    "description": "Въведете вашия град и вид дело, за да разберете кой съд е компетентен.",
+    "cityLabel": "Вашият град или община",
+    "cityPlaceholder": "напр. Загреб, Сплит, Осиек...",
+    "caseTypeLabel": "Вид дело",
+    "caseType": {
+      "civilMinor": "Граждански спор (до 2 654€)",
+      "civilMajor": "Граждански спор (над 2 654€)",
+      "criminalMinor": "Наказателно (леко нарушение)",
+      "criminalSerious": "Наказателно (тежко престъпление)",
+      "commercial": "Търговски спор",
+      "misdemeanour": "Нарушение / пътно нарушение",
+      "administrative": "Спор с държавен орган"
+    },
+    "find": "Намери съд",
+    "result": "Компетентен съд",
+    "noResult": "Не е намерен съд за този град. Опитайте да разгледате справочника на съдилищата.",
+    "browseAll": "Разгледай всички съдилища",
+    "viewProfile": "Преглед на профила на съда"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Длъжници в несъстоятелност",
+      "debtorsDesc": "Справочник на длъжниците с профил и история на всички свързани процедури",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Изпратете заявка",
+      "filingDesc": "Подайте заявление за фалит — подаване на иск, предложение за започване, доклад, план за преструктуриране"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Обяви за банкрут",
+      "description": "Активно производство по несъстоятелност, публикувано в Държавен вестник и Държавен вестник.",
+      "searchPlaceholder": "Търсене по име на длъжника...",
+      "count": "{{n}} реклами",
+      "count_one": "{{n}} реклама",
+      "count_few": "{{n}} реклами",
+      "count_other": "{{n}} реклами",
+      "loadError": "Не могат да се заредят реклами за фалит.",
+      "empty": "Няма активни обяви за фалит.",
+      "unknownDebtor": "Неизвестен длъжник",
+      "deadline": "Краен срок"
+    },
+    "decisions": {
+      "title": "Решения за банкрут",
+      "description": "Съдебни решения от процедури по несъстоятелност в Хърватия.",
+      "loadError": "Не е възможно да се зареждат решения за фалит.",
+      "noResults": "Няма резултати.",
+      "viewDecision": "Отворете решението"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Име",
+      "licenseNo": "Номер на лиценза",
+      "contact": "Контакт",
+      "assignedCourts": "Определени съдилища",
+      "court": "съд",
+      "city": "град"
+    },
+    "filterCourtAll": "Всички съдилища"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Тип потребител",
+      "userTypeOptions": {
+        "person": "Лице",
+        "legal_entity": "Юридическо лице"
+      },
+      "organisationName": "Име на юридическото лице",
+      "organisationOib": "OIB на юридически лица",
+      "legalEntityNote": "Юридически лица (адвокатски кантори, синдици, действащи от свое име, регистрирани организации) могат да подават молби за несъстоятелност чрез редакционния подход. Вашата авторизация ще бъде активирана автоматично след регистрация.",
+      "errorOib": "OIB трябва да има точно 11 цифри.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Забравена парола",
+      "subtitle": "Въведете вашия имейл адрес и ние ще ви изпратим връзка за настройка на нова парола.",
+      "submit": "Изпратете линк",
+      "submitting": "Ние изпращаме…",
+      "backToLogin": "Назад към входа",
+      "errorGeneric": "Нещо се обърка. Моля, опитайте отново."
+    },
+    "resetPassword": {
+      "title": "Задайте нова парола",
+      "subtitle": "Изберете нова парола за вашия акаунт.",
+      "newPassword": "Нова парола",
+      "confirmPassword": "Потвърдете новата парола",
+      "submit": "Задайте нова парола",
+      "submitting": "Подготвяме...",
+      "done": "Вашата парола е зададена успешно. Можете да се регистрирате сега.",
+      "goToLogin": "Отидете на приложението",
+      "missingToken": "Тази връзка за промяна на паролата няма токен. Поискайте нов.",
+      "requestNew": "Поискайте нова връзка",
+      "errorGeneric": "Паролата не може да бъде зададена. Моля, опитайте отново."
+    },
+    "password": {
+      "show": "Покажи парола",
+      "hide": "Скриване на паролата"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Изрезки от пресата — статии във вестници и уеб портали, в които се споменава Съдийската мрежа. Съдържанието ще бъде попълнено като част от миграцията на данни от стария сайт."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Аудио галерии",
+      "placeholder": "Аудио споменавания — радио интервюта и предавания за Judge Network. Съдържанието ще бъде попълнено като част от миграцията на данни от стария сайт."
+    },
+    "video": {
+      "title": "Видео галерии",
+      "placeholder": "Споменавания във видеоклипове — специални телевизионни предавания и интервюта. Съдържанието ще бъде попълнено като част от миграцията на данни от стария сайт."
     }
   },
   "courtPerformance": {
@@ -538,10 +652,22 @@
     "subtitle": "Попълнете формуляра и изтеглете готов хърватски правен документ в PDF формат",
     "selectType": "Изберете вид документ",
     "type": {
-      "tuzba": "Искова молба",
-      "zalba": "Жалба",
-      "prigovor": "Възражение",
-      "ovrsni": "Заявление за изпълнение"
+      "tuzba": {
+        "_value": "Съдебно дело",
+        "desc": "Да образува гражданско дело пред съда"
+      },
+      "zalba": {
+        "_value": "Жалба",
+        "desc": "За отмяна на съдебното решение пред по-горна инстанция"
+      },
+      "prigovor": {
+        "_value": "Жалба",
+        "desc": "За подаване на възражение срещу съдебно решение"
+      },
+      "ovrsni": {
+        "_value": "Изпълнително предложение",
+        "desc": "Да пристъпи към изпълнение въз основа на изпълнителен лист"
+      }
     },
     "fields": {
       "plaintiff_name": "Пълно ime на ищеца",
@@ -636,18 +762,6 @@
       "overdue": "Просрочен"
     }
   },
-  "cookiePolicy": "Политика за бисквитки",
-  "termsOfService": "Условия за ползване",
-  "judges": {
-    "detail": {
-      "role": "Съдия",
-      "court": "Съд",
-      "appointmentDate": "Дата на назначаване",
-      "specialization": "Специализация",
-      "status": "Статус",
-      "contact": "Контактни данни"
-    }
-  },
   "legalNews": {
     "title": "Правни новини",
     "subtitle": "Преглед на актуални правни новини от местни и европейски правни източници.",
@@ -708,6 +822,8 @@
       "p2": "За повече информация относно това как обработваме Вашите лични данни, разгледайте нашите"
     }
   },
+  "cookiePolicy": "Политика за бисквитки",
+  "termsOfService": "Условия за ползване",
   "privacy": {
     "title": "Политика за поверителност",
     "lastUpdated": "Последна актуализация: 28 март 2026 г.",
@@ -800,8 +916,201 @@
       "p2": "За въпроси относно тези Условия се свържете с нас на:"
     }
   },
-  "docgen.type.tuzba.desc": "За иницииране на гражданско производство пред съда",
-  "docgen.type.zalba.desc": "За обжалване на съдебно решение пред висш съд",
-  "docgen.type.prigovor.desc": "За подаване на възражение срещу съдебно решение",
-  "docgen.type.ovrsni.desc": "За започване на изпълнение на основание изпълнителен документ"
+  "debtors": {
+    "title": "Длъжници в несъстоятелност",
+    "subtitle": "Указател на длъжниците, за които се води или е водено производство по несъстоятелност.",
+    "searchPlaceholder": "Търсене по име или град...",
+    "oibPh": "OIB...",
+    "loadError": "Грешка при зареждането на длъжника.",
+    "noResults": "Няма длъжници, отговарящи на търсенето.",
+    "linkedListings": "Производство по несъстоятелност",
+    "noLinkedListings": "Няма свързани производства по несъстоятелност.",
+    "fields": {
+      "name": "Име / Име",
+      "address": "Адрес",
+      "city": "град",
+      "county": "окръг",
+      "phone": "Телефон",
+      "caseNumber": "Номер на артикул",
+      "status": "Статус",
+      "deadline": "Краен срок",
+      "publishedAt": "Публикувано"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Документация на API — Judge Network",
+    "metaDescription": "Public REST API за достъп до бази данни със съдебни решения, вещи лица, преводачи и съдилища на Съдебната мрежа.",
+    "title": "Публичен REST API",
+    "intro": "Отворен API за партньорски институции и изследователи, които искат програмен достъп до бази данни със съдебна практика, експерти, устни преводачи и съдилища на Република Хърватия.",
+    "paginationNote": "Всички крайни точки на списъка връщат един и същ формат на отговор с пагиниране:",
+    "endpointsNote": "Кликнете върху крайната точка за параметри, примерна заявка и отговор.",
+    "sections": {
+      "gettingStarted": "Начало на работа",
+      "pagination": "Пагинация",
+      "endpoints": "Крайни точки"
+    },
+    "cards": {
+      "baseUrl": "Основен URL адрес",
+      "auth": "Удостоверяване",
+      "rateLimit": "Ограничения (лимит на скоростта)",
+      "baseUrlNote": "Всички отговори са JSON, UTF-8",
+      "authNote": "API ключът не е задължителен, но увеличава лимита."
+    },
+    "endpoint": {
+      "params": "Параметри",
+      "exampleRequest": "Примерна заявка",
+      "exampleResponse": "Примерен отговор",
+      "fields": {
+        "name": "Име",
+        "description": "Описание",
+        "type": "Тип",
+        "required": "Задължително",
+        "example": "Пример",
+        "in": "в"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Обратно към администратора",
+    "table": {
+      "range": "Показани са {{from}}–{{to}} от {{total}}",
+      "prev": "Предишната",
+      "next": "Следваща",
+      "pageOf": "Страница {{page}} от {{total}}",
+      "empty": "Няма записи."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API ключове",
+        "label": "Етикет",
+        "email": "Email",
+        "organization": "Организация",
+        "rateLimit": "Лимит на скоростта (req/min)",
+        "active": "Активен"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Несъстоятелни синдици",
+        "name": "Име",
+        "licenceNumber": "Номер на лиценза",
+        "phone": "Телефон",
+        "email": "Email",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "courts": "Определени съдилища"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Длъжници (фалит)",
+        "name": "Име",
+        "oib": "OIB",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "phone": "Телефон",
+        "email": "Email",
+        "notes": "Бележки"
+      },
+      "courts": {
+        "__title": "съдилища",
+        "name": "Име на съда",
+        "type": "Тип съд",
+        "president": "Председател на съда",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "phone": "Телефон",
+        "fax": "факс",
+        "email": "Email",
+        "website": "уебсайт",
+        "notes": "Бележки"
+      },
+      "documents": {
+        "__title": "Документи",
+        "title": "Заглавие",
+        "description": "Описание",
+        "category": "Категория",
+        "publishedAt": "Публикувано при",
+        "lang": "език"
+      },
+      "expertWitnesses": {
+        "__title": "Свидетели вещи лица",
+        "name": "Име",
+        "company": "Компания / Фирма",
+        "specialityAreas": "Специализирани области",
+        "languages": "Езици",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "phone": "Телефон",
+        "email": "Email",
+        "verified": "Проверен",
+        "lang": "Език за въвеждане",
+        "notes": "Бележки"
+      },
+      "interpreters": {
+        "__title": "Съдебни преводачи",
+        "name": "Име",
+        "company": "Компания / Фирма",
+        "languagePairs": "Езикови двойки",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "phone": "Телефон",
+        "email": "Email",
+        "verified": "Проверен",
+        "lang": "Език за въвеждане"
+      },
+      "judges": {
+        "__title": "Съдии",
+        "name": "Пълно име",
+        "firstName": "Първо име",
+        "lastName": "Фамилия",
+        "court": "съд",
+        "specialization": "Специализация",
+        "department": "Отдел",
+        "appointmentDate": "Дата на среща (ГГГГ-ММ-ДД)",
+        "yearsOfExperience": "Години опит",
+        "status": "Статус",
+        "email": "Email",
+        "lang": "Език за въвеждане"
+      },
+      "laws": {
+        "__title": "Закони",
+        "title": "Заглавие",
+        "type": "Тип",
+        "category": "Правна област",
+        "year": "година",
+        "officialGazette": "Държавен вестник (NN)",
+        "externalUrl": "Външен URL адрес",
+        "effectiveDate": "Дата на влизане в сила",
+        "fullText": "Пълен текст",
+        "summary": "Резюме",
+        "lang": "език"
+      },
+      "legalCategories": {
+        "__title": "Правни категории",
+        "name": "Име",
+        "description": "Описание"
+      },
+      "pages": {
+        "__title": "Страници",
+        "title": "Заглавие",
+        "slug": "Охлюв (URL)",
+        "content": "Съдържание",
+        "metaTitle": "Мета заглавие",
+        "metaDescription": "Мета описание",
+        "lang": "език"
+      },
+      "stateAttorneys": {
+        "__title": "Държавни прокуратури",
+        "name": "Име на офиса",
+        "address": "Адрес",
+        "city": "град",
+        "county": "окръг",
+        "phone": "Телефон",
+        "fax": "факс",
+        "email": "Email"
+      }
+    }
+  }
 }

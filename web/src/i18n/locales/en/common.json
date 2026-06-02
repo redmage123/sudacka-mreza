@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Search Sudačka Mreža…",
+      "submit": "Search",
+      "aria": "Search"
     }
   },
   "decisions": {
@@ -87,7 +92,7 @@
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
-    "searchPlaceholder": "Search by name...",
+    "searchPlaceholder": "Name / Company / Address…",
     "filterSpeciality": "Speciality",
     "filterSpecialityAll": "All specialities",
     "filterCounty": "County",
@@ -100,11 +105,14 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Name / Company / Address…",
+    "filterCompany": "Company",
+    "filterCompanyPh": "Company name…"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
-    "searchPlaceholder": "Search by name...",
+    "searchPlaceholder": "Name / Company / Address…",
     "filterLanguage": "Language pair",
     "filterLanguageAll": "All language pairs",
     "noResults": "No interpreters match your search.",
@@ -113,7 +121,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Name / Company / Address…",
+    "filterCompany": "Company",
+    "filterCompanyPh": "Company name…"
   },
   "courts": {
     "searchTitle": "Courts",
@@ -135,7 +146,23 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Working hours",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "notes": "Notes",
+      "closed": "Closed"
+    },
+    "jurisdictionScope": "Jurisdiction area",
+    "departmentsCount_one": "{{count}} department",
+    "departmentsCount_other": "{{count}} departments",
+    "searchPlaceholderNameAddr": "Court name or address…"
   },
   "nav": {
     "home": "Home",
@@ -319,7 +346,9 @@
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Submit a filing",
+      "filingDesc": "Submit a bankruptcy filing — creditor claim, motion to open, trustee report, restructuring plan"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -327,6 +356,23 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Bankruptcy Listings",
+      "description": "Active bankruptcy proceedings published in the official gazette.",
+      "searchPlaceholder": "Search by debtor name…",
+      "count": "{{n}} listings",
+      "loadError": "Could not load bankruptcy listings.",
+      "empty": "No active bankruptcy listings.",
+      "unknownDebtor": "Unknown debtor",
+      "deadline": "Deadline"
+    },
+    "decisions": {
+      "title": "Bankruptcy Decisions",
+      "description": "Court decisions related to bankruptcy proceedings in Croatia.",
+      "loadError": "Could not load bankruptcy decisions.",
+      "noResults": "No results.",
+      "viewDecision": "Open decision"
     }
   },
   "administrators": {
@@ -337,10 +383,13 @@
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
       "name": "Name",
-      "licenseNo": "Licence No.",
+      "licenseNo": "License Number",
       "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "assignedCourts": "Assigned Courts",
+      "court": "Court",
+      "city": "City"
+    },
+    "filterCourtAll": "All Courts"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -446,14 +495,17 @@
         "lawyer": "Lawyer",
         "judge": "Judge",
         "researcher": "Researcher / Academic",
-        "legal_entity": "Legal entity",
         "other": "Other"
+      },
+      "userType": "Account type",
+      "userTypeOptions": {
+        "person": "Person",
+        "legal_entity": "Legal entity"
       },
       "organisationName": "Legal entity name",
       "organisationOib": "Legal entity OIB",
-      "legalEntity": {
-        "notice": "The account is created as a Member; an administrator will verify the legal-entity status."
-      },
+      "legalEntityNote": "Legal entities (law firms, bankruptcy administrators acting on their own behalf, registered organizations) can submit bankruptcy filings through the editor interface. Your privileges will be activated automatically after registration.",
+      "errorOib": "OIB must be exactly 11 digits.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -465,8 +517,32 @@
       "errorRequired": "This field is required.",
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
-      "errorMinPassword": "Password must be at least 8 characters.",
-      "errorOib": "OIB must be 11 digits."
+      "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we will send you a link to set a new password.",
+      "submit": "Send reset link",
+      "submitting": "Sending…",
+      "backToLogin": "Back to sign in",
+      "errorGeneric": "Something went wrong. Please try again."
+    },
+    "resetPassword": {
+      "title": "Set a new password",
+      "subtitle": "Choose a new password for your account.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Set new password",
+      "submitting": "Saving…",
+      "done": "Your password has been reset. You can now sign in.",
+      "goToLogin": "Go to sign in",
+      "missingToken": "This reset link is missing its token. Request a new one.",
+      "requestNew": "Request a new reset link",
+      "errorGeneric": "Could not reset your password. Please try again."
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
     }
   },
   "about": {
@@ -498,12 +574,20 @@
       "desc": "Official Sudačka Mreža logos in SVG and PNG formats for editorial and partner use."
     },
     "press": {
-      "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "title": "Press clipping",
+      "placeholder": "Press clipping — newspaper articles and web portal mentions of Sudačka Mreža. Content will be populated as part of data migration from the legacy site."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audio galleries",
+      "placeholder": "Audio mentions — radio interviews and broadcasts about Sudačka Mreža. Content will be populated as part of data migration from the legacy site."
+    },
+    "video": {
+      "title": "Video galleries",
+      "placeholder": "Video mentions — TV pieces and interviews. Content will be populated as part of data migration from the legacy site."
     }
   },
   "courtPerformance": {
@@ -817,10 +901,213 @@
       "specialization": "Specialization",
       "status": "Status",
       "contact": "Contact details"
-    }
+    },
+    "searchPlaceholder": "Search by judge name…",
+    "totalCount": "Total: {{count}} judges",
+    "totalCount_one": "Total: {{count}} judge",
+    "totalCount_other": "Total: {{count}} judges"
   },
   "docgen.type.tuzba.desc": "To initiate civil proceedings before a court",
   "docgen.type.zalba.desc": "To appeal a court decision to a higher court",
   "docgen.type.prigovor.desc": "To file an objection against a court ruling",
-  "docgen.type.ovrsni.desc": "To initiate enforcement based on an enforceable instrument"
+  "docgen.type.ovrsni.desc": "To initiate enforcement based on an enforceable instrument",
+  "debtors": {
+    "title": "Bankruptcy Debtors",
+    "subtitle": "Directory of debtors against whom bankruptcy proceedings have been or are being conducted.",
+    "searchPlaceholder": "Search by name or city…",
+    "oibPh": "OIB…",
+    "loadError": "Could not load debtors.",
+    "noResults": "No debtors match the search.",
+    "linkedListings": "Bankruptcy proceedings",
+    "noLinkedListings": "No linked bankruptcy proceedings.",
+    "fields": {
+      "name": "Name",
+      "address": "Address",
+      "city": "City",
+      "county": "County",
+      "phone": "Phone",
+      "caseNumber": "Case number",
+      "status": "Status",
+      "deadline": "Deadline",
+      "publishedAt": "Published"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "API Documentation — Sudačka Mreža",
+    "metaDescription": "Public REST API for programmatic access to court decisions, expert witnesses, interpreters and courts of Sudačka Mreža.",
+    "title": "Public REST API",
+    "intro": "Open API for partner institutions and researchers who need programmatic access to the case-law, expert witness, interpreter and court databases of the Republic of Croatia.",
+    "paginationNote": "Every list endpoint returns the same paginated response shape:",
+    "endpointsNote": "Click an endpoint to expand parameters, an example request, and an example response.",
+    "sections": {
+      "gettingStarted": "Getting started",
+      "pagination": "Pagination",
+      "endpoints": "Endpoints"
+    },
+    "cards": {
+      "baseUrl": "Base URL",
+      "auth": "Authentication",
+      "rateLimit": "Rate limits",
+      "baseUrlNote": "All responses are JSON, UTF-8",
+      "authNote": "An API key is optional but raises the rate limit."
+    },
+    "endpoint": {
+      "params": "Parameters",
+      "exampleRequest": "Example request",
+      "exampleResponse": "Example response",
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "type": "Type",
+        "required": "Required",
+        "example": "Example",
+        "in": "in"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Back to Admin",
+    "table": {
+      "range": "Showing {{from}}–{{to}} of {{total}}",
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {{page}} of {{total}}",
+      "empty": "No records.",
+      "searchPlaceholder": "Filter by {{col}}…"
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API Keys",
+        "label": "Label",
+        "email": "Email",
+        "organization": "Organization",
+        "rateLimit": "Rate Limit (req/min)",
+        "active": "Active"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Bankruptcy Administrators",
+        "name": "Name",
+        "licenceNumber": "License Number",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "courts": "Assigned Courts"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Debtors (Bankruptcy)",
+        "name": "Name",
+        "oib": "OIB",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "notes": "Notes"
+      },
+      "courts": {
+        "__title": "Courts",
+        "name": "Court Name",
+        "type": "Court Type",
+        "president": "Court President",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "Website",
+        "notes": "Notes"
+      },
+      "documents": {
+        "__title": "Documents",
+        "title": "Title",
+        "description": "Description",
+        "category": "Category",
+        "publishedAt": "Published At",
+        "lang": "Language"
+      },
+      "expertWitnesses": {
+        "__title": "Expert Witnesses",
+        "name": "Name",
+        "company": "Company / Firm",
+        "specialityAreas": "Specialty Areas",
+        "languages": "Languages",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry Language",
+        "notes": "Notes"
+      },
+      "interpreters": {
+        "__title": "Court Interpreters",
+        "name": "Name",
+        "company": "Company / Firm",
+        "languagePairs": "Language Pairs",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry Language"
+      },
+      "judges": {
+        "__title": "Judges",
+        "name": "Full Name",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "court": "Court",
+        "specialization": "Specialization",
+        "department": "Department",
+        "appointmentDate": "Appointment Date (YYYY-MM-DD)",
+        "yearsOfExperience": "Years of Experience",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Entry Language"
+      },
+      "laws": {
+        "__title": "Laws",
+        "title": "Title",
+        "type": "Type",
+        "category": "Legal Area",
+        "year": "Year",
+        "officialGazette": "Official Gazette (NN)",
+        "externalUrl": "External URL",
+        "effectiveDate": "Effective Date",
+        "fullText": "Full Text",
+        "summary": "Summary",
+        "lang": "Language"
+      },
+      "legalCategories": {
+        "__title": "Legal Categories",
+        "name": "Name",
+        "description": "Description"
+      },
+      "pages": {
+        "__title": "Pages",
+        "title": "Title",
+        "slug": "Slug (URL)",
+        "content": "Content",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "lang": "Language"
+      },
+      "stateAttorneys": {
+        "__title": "State Attorneys' Offices",
+        "name": "Office Name",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    }
+  },
+  "viewDetails": "View Details"
 }

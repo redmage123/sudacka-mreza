@@ -14,6 +14,7 @@
   "bankruptcy": "Insolvenz",
   "bankruptcyListings": "Insolvenzbekanntmachungen",
   "bankruptcyListing": "Insolvenzbekanntmachung",
+  "bankruptcyDebtors": "Insolvenzschuldner",
   "administrators": "Insolvenzverwalter",
   "bankruptcyLaws": "Gesetzgebung",
   "bankruptcyDecisions": "Insolvenzentscheidungen",
@@ -78,5 +79,11 @@
   "courtPerformance": "Gerichtsleistung",
   "services": "Dienste",
   "documentGenerator": "Dokumentengenerator",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "audio": "Audiogalerien",
+  "video": "Videogalerien",
+  "press": "Zeitungsartikel",
+  "adminConsole": "Administration",
+  "myLibrary": "Meine Bibliothek",
+  "signOut": "Abmelden"
 }

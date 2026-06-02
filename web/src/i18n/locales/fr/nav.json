@@ -14,6 +14,7 @@
   "bankruptcy": "Faillite",
   "bankruptcyListings": "Annonces de faillite",
   "bankruptcyListing": "Annonce de faillite",
+  "bankruptcyDebtors": "Débiteurs en faillite",
   "administrators": "Administrateurs judiciaires",
   "bankruptcyLaws": "Législation",
   "bankruptcyDecisions": "Décisions de faillite",
@@ -78,5 +79,11 @@
   "courtPerformance": "Performance des tribunaux",
   "services": "Services",
   "documentGenerator": "Générateur de documents",
-  "watchlist": "Surveillance"
+  "watchlist": "Surveillance",
+  "audio": "Galeries audio",
+  "video": "Galeries vidéo",
+  "press": "Articles de journaux",
+  "adminConsole": "Administration",
+  "myLibrary": "Ma bibliothèque",
+  "signOut": "Déconnexion"
 }

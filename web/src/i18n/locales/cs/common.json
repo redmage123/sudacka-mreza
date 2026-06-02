@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Prohledejte síť soudců...",
+      "submit": "Vyhledávání",
+      "aria": "Vyhledávání"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Na této platformě je k dispozici pouze oficiální shrnutí. Celý text si přečtěte na webu vydávajícího soudu."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Jméno / Firma / Adresa...",
+    "filterCompany": "Společnost",
+    "filterCompanyPh": "Název společnosti..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Soudce",
+      "court": "Soud",
+      "appointmentDate": "Datum jmenování",
+      "specialization": "Specializace",
+      "status": "Stav",
+      "contact": "Kontaktní údaje"
+    },
+    "searchPlaceholder": "Hledat podle jména rozhodčího...",
+    "totalCount": "Celkem: {{count}} soudců",
+    "totalCount_one": "Celkem: {{count}} soudce",
+    "totalCount_few": "Celkem: {{count}} soudců",
+    "totalCount_other": "Celkem: {{count}} soudců"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Jméno / Firma / Adresa...",
+    "filterCompany": "Společnost",
+    "filterCompanyPh": "Název společnosti..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Supreme",
       "upravni": "Administrative",
       "ustavni": "Constitutional",
-      "echr": "Evropský soud pro lidská práva"
+      "echr": "Evropský soud pro lidská práva",
+      "ecj": "Soud Evropské unie"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Phone",
       "president": "President"
     },
-    "officialNameNote": "Official Croatian court name"
+    "officialNameNote": "Official Croatian court name",
+    "timeAvailability": {
+      "heading": "Pracovní doba",
+      "monday": "pondělí",
+      "tuesday": "úterý",
+      "wednesday": "středa",
+      "thursday": "čtvrtek",
+      "friday": "pátek",
+      "saturday": "sobota",
+      "sunday": "neděle",
+      "notes": "Poznámka",
+      "closed": "ZAVŘENO"
+    },
+    "jurisdictionScope": "Oblast jurisdikce",
+    "departmentsCount_one": "{{count}} oddělení",
+    "departmentsCount_few": "{{count}} oddělení",
+    "departmentsCount_other": "{{count}} oddělení",
+    "searchPlaceholderNameAddr": "Název nebo adresa soudu..."
   },
   "nav": {
     "home": "Domů",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Mapa soudů",
-    "courtType": {
-      "municipal": "Okresní",
-      "county": "Krajský",
-      "commercial": "Obchodní",
-      "misdemeanour": "Přestupkový",
-      "administrative": "Správní"
-    },
-    "legend": "Legenda",
-    "loading": "Načítání soudů...",
-    "filterAll": "Všechny soudy",
-    "filterMunicipal": "Okresní",
-    "filterCounty": "Krajský",
-    "filterCommercial": "Obchodní",
-    "filterMisdemeanour": "Přestupkový",
-    "filterAdministrative": "Správní",
-    "viewDetails": "Zobrazit podrobnosti",
-    "courts": "soudy",
-    "error": "Nelze načíst data soudů. Zkuste to prosím znovu."
-  },
-  "jurisdiction": {
-    "title": "Vyhledávač příslušnosti",
-    "subtitle": "Najděte příslušný soud pro váš případ na základě místa a typu případu.",
-    "cityLabel": "Město nebo obec",
-    "cityPlaceholder": "např. Záhřeb, Split, Rijeka...",
-    "caseTypeLabel": "Typ případu",
-    "caseType": {
-      "civilMinor": "Občanský (drobný) — Okresní soud",
-      "criminalMinor": "Trestní (do 5 let) — Okresní soud",
-      "criminalSerious": "Trestní (5+ let) — Krajský soud",
-      "commercial": "Obchodní — Obchodní soud",
-      "misdemeanour": "Přestupek — Přestupkový soud",
-      "administrative": "Správní — Správní soud"
-    },
-    "results": "Výsledky",
-    "noResults": "Pro toto místo a typ případu nebyl nalezen odpovídající soud.",
-    "noResultsHint": "Zkuste jiný název města nebo se podívejte do úplného adresáře soudů.",
-    "viewCourtsDirectory": "Zobrazit adresář soudů"
-  },
-  "calculator": {
-    "title": "Soudní poplatky",
-    "selectCaseType": "Typ případu",
-    "caseType": {
-      "civil": "Občanský spor",
-      "criminal": "Trestní řízení",
-      "commercial": "Obchodní spor",
-      "administrative": "Správní spor",
-      "nonContentious": "Nesporné řízení"
-    },
-    "claimValue": "Hodnota nároku (EUR)",
-    "calculate": "Vypočítat poplatek",
-    "filingFee": "Poplatek za podání",
-    "appealFee": "Poplatek za odvolání",
-    "enforcementFee": "Poplatek za výkon rozhodnutí",
-    "fixedFee": "Pevné poplatky",
-    "exemptionsTitle": "Osvobození od poplatků",
-    "exemption1": "Příjemci sociální péče jsou osvobozeni od všech soudních poplatků.",
-    "exemption2": "Nezletilí jsou osvobozeni od soudních poplatků v řízeních týkajících se jejich práv.",
-    "exemption3": "Pracovníci v pracovních sporech s hodnotou nároku do 2 650 € jsou osvobozeni.",
-    "paymentTitle": "Způsoby platby",
-    "payment1": "Bankovní převod na oficiální účet soudu",
-    "payment2": "Portál e-Pristojbe (elektronická platba)",
-    "payment3": "Pokladna soudu (osobně na soudu)",
-    "legalBasis": "Právní základ",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ve znění pozdějších předpisů). Všechny částky přepočteny na EUR od 01.01.2023.",
-    "minorOffenses": "Drobné přestupky",
-    "seriousOffenses": "Závažné trestné činy"
-  },
-  "jurisdictionFinder": {
-    "title": "Najděte svůj soud",
-    "description": "Zadejte své město a typ případu a zjistěte, který soud je příslušný.",
-    "cityLabel": "Vaše město nebo obec",
-    "cityPlaceholder": "např. Záhřeb, Split, Osijek...",
-    "caseTypeLabel": "Typ případu",
-    "caseType": {
-      "civilMinor": "Občanský spor (do 2 654 €)",
-      "civilMajor": "Občanský spor (nad 2 654 €)",
-      "criminalMinor": "Trestní (drobný přestupek)",
-      "criminalSerious": "Trestní (závažný trestný čin)",
-      "commercial": "Obchodní spor",
-      "misdemeanour": "Přestupek / dopravní přestupek",
-      "administrative": "Spor se státním úřadem"
-    },
-    "find": "Najít soud",
-    "result": "Příslušný soud",
-    "noResult": "Pro toto město nebyl nalezen žádný soud. Zkuste procházet adresář soudů.",
-    "browseAll": "Procházet všechny soudy",
-    "viewProfile": "Zobrazit profil soudu"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Soudní poplatky",
+    "selectCaseType": "Typ případu",
+    "caseType": {
+      "civil": "Občanský spor",
+      "criminal": "Trestní řízení",
+      "commercial": "Obchodní spor",
+      "administrative": "Správní spor",
+      "nonContentious": "Nesporné řízení"
+    },
+    "claimValue": "Hodnota nároku (EUR)",
+    "fixedFee": "Pevné poplatky",
+    "minorOffenses": "Drobné přestupky",
+    "seriousOffenses": "Závažné trestné činy",
+    "filingFee": "Poplatek za podání",
+    "appealFee": "Poplatek za odvolání",
+    "enforcementFee": "Poplatek za výkon rozhodnutí",
+    "exemptionsTitle": "Osvobození od poplatků",
+    "exemption1": "Příjemci sociální péče jsou osvobozeni od všech soudních poplatků.",
+    "exemption2": "Nezletilí jsou osvobozeni od soudních poplatků v řízeních týkajících se jejich práv.",
+    "exemption3": "Pracovníci v pracovních sporech s hodnotou nároku do 2 650 € jsou osvobozeni.",
+    "paymentTitle": "Způsoby platby",
+    "payment1": "Bankovní převod na oficiální účet soudu",
+    "payment2": "Portál e-Pristojbe (elektronická platba)",
+    "payment3": "Pokladna soudu (osobně na soudu)",
+    "legalBasis": "Právní základ",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ve znění pozdějších předpisů). Všechny částky přepočteny na EUR od 01.01.2023.",
+    "calculate": "Vypočítat poplatek"
+  },
+  "map": {
+    "title": "Mapa soudů",
+    "filterAll": "Všechny soudy",
+    "filterMunicipal": "Okresní",
+    "filterCounty": "Krajský",
+    "filterCommercial": "Obchodní",
+    "filterMisdemeanour": "Přestupkový",
+    "filterAdministrative": "Správní",
+    "courtType": {
+      "municipal": "Okresní",
+      "county": "Krajský",
+      "commercial": "Obchodní",
+      "misdemeanour": "Přestupkový",
+      "administrative": "Správní"
+    },
+    "legend": "Legenda",
+    "error": "Nelze načíst data soudů. Zkuste to prosím znovu.",
+    "viewDetails": "Zobrazit podrobnosti",
+    "loading": "Načítání soudů...",
+    "courts": "soudy"
+  },
+  "jurisdiction": {
+    "title": "Vyhledávač příslušnosti",
+    "subtitle": "Najděte příslušný soud pro váš případ na základě místa a typu případu.",
+    "cityLabel": "Město nebo obec",
+    "cityPlaceholder": "např. Záhřeb, Split, Rijeka...",
+    "caseTypeLabel": "Typ případu",
+    "caseType": {
+      "civilMinor": "Občanský (drobný) — Okresní soud",
+      "criminalMinor": "Trestní (do 5 let) — Okresní soud",
+      "criminalSerious": "Trestní (5+ let) — Krajský soud",
+      "commercial": "Obchodní — Obchodní soud",
+      "misdemeanour": "Přestupek — Přestupkový soud",
+      "administrative": "Správní — Správní soud"
+    },
+    "results": "Výsledky",
+    "noResults": "Pro toto místo a typ případu nebyl nalezen odpovídající soud.",
+    "noResultsHint": "Zkuste jiný název města nebo se podívejte do úplného adresáře soudů.",
+    "viewCourtsDirectory": "Zobrazit adresář soudů"
+  },
+  "jurisdictionFinder": {
+    "title": "Najděte svůj soud",
+    "description": "Zadejte své město a typ případu a zjistěte, který soud je příslušný.",
+    "cityLabel": "Vaše město nebo obec",
+    "cityPlaceholder": "např. Záhřeb, Split, Osijek...",
+    "caseTypeLabel": "Typ případu",
+    "caseType": {
+      "civilMinor": "Občanský spor (do 2 654 €)",
+      "civilMajor": "Občanský spor (nad 2 654 €)",
+      "criminalMinor": "Trestní (drobný přestupek)",
+      "criminalSerious": "Trestní (závažný trestný čin)",
+      "commercial": "Obchodní spor",
+      "misdemeanour": "Přestupek / dopravní přestupek",
+      "administrative": "Spor se státním úřadem"
+    },
+    "find": "Najít soud",
+    "result": "Příslušný soud",
+    "noResult": "Pro toto město nebyl nalezen žádný soud. Zkuste procházet adresář soudů.",
+    "browseAll": "Procházet všechny soudy",
+    "viewProfile": "Zobrazit profil soudu"
+  },
   "bankruptcy": {
     "title": "Bankruptcy Portal",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Zkrachovalí dlužníci",
+      "debtorsDesc": "Adresář dlužníků s profilem a historií všech souvisejících postupů",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Odeslat příspěvek",
+      "filingDesc": "Podat konkurzní přihlášku — přihlášku pohledávky, iniciační návrh, zprávu, plán restrukturalizace"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Inzeráty na konkurz",
+      "description": "Aktivní konkurzní řízení zveřejněné v Úředním věstníku a Úředním věstníku.",
+      "searchPlaceholder": "Pretraga po nazivu dužnika…",
+      "count": "{{n}} reklam",
+      "count_one": "{{n}} reklama",
+      "count_few": "{{n}} reklam",
+      "count_other": "{{n}} reklam",
+      "loadError": "Nelze načíst konkurzní reklamy.",
+      "empty": "Nejsou zde žádné aktivní reklamy na konkurz.",
+      "unknownDebtor": "Neznámý dlužník",
+      "deadline": "Lhůta"
+    },
+    "decisions": {
+      "title": "Rozhodnutí o úpadku",
+      "description": "Soudní rozhodnutí z konkurzního řízení v Chorvatsku.",
+      "loadError": "Rozhodnutí o úpadku nelze načíst.",
+      "noResults": "Žádné výsledky.",
+      "viewDecision": "Otevřete rozhodnutí"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No bankruptcy administrators are currently registered in the system.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Jméno",
+      "licenseNo": "Licenční číslo",
+      "contact": "Kontakt",
+      "assignedCourts": "Přidělené soudy",
+      "court": "Soud",
+      "city": "Město"
+    },
+    "filterCourtAll": "Všechny soudy"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Typ uživatele",
+      "userTypeOptions": {
+        "person": "Osoba",
+        "legal_entity": "Právnická osoba"
+      },
+      "organisationName": "Název právnické osoby",
+      "organisationOib": "OIB právnických osob",
+      "legalEntityNote": "Právnické osoby (advokátní kanceláře, správci konkurzní podstaty jednající vlastním jménem, ​​registrované organizace) mohou podávat návrhy na konkurz redakčním přístupem. Vaše oprávnění bude aktivováno automaticky po registraci.",
+      "errorOib": "OIB musí mít přesně 11 číslic.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Create account",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Zapomenuté heslo",
+      "subtitle": "Zadejte svou e-mailovou adresu a my vám zašleme odkaz pro nastavení nového hesla.",
+      "submit": "Pošlete odkaz",
+      "submitting": "Posíláme…",
+      "backToLogin": "Zpět k přihlášení",
+      "errorGeneric": "Něco se pokazilo. Zkuste to prosím znovu."
+    },
+    "resetPassword": {
+      "title": "Nastavte nové heslo",
+      "subtitle": "Vyberte si nové heslo pro svůj účet.",
+      "newPassword": "Nové heslo",
+      "confirmPassword": "Potvrďte nové heslo",
+      "submit": "Nastavte nové heslo",
+      "submitting": "Připravujeme...",
+      "done": "Vaše heslo bylo úspěšně nastaveno. Přihlásit se můžete již nyní.",
+      "goToLogin": "Přejděte na aplikaci",
+      "missingToken": "Tento odkaz na změnu hesla nemá žádný token. Vyžádejte si nový.",
+      "requestNew": "Požádejte o nový odkaz",
+      "errorGeneric": "Heslo nelze nastavit. Zkuste to prosím znovu."
+    },
+    "password": {
+      "show": "Zobrazit heslo",
+      "hide": "Skrýt heslo"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Tiskový výstřižek — novinové články a webové portály, ve kterých je zmíněna Síť soudců. Obsah bude vyplněn v rámci migrace dat ze starého webu."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Audio galerie",
+      "placeholder": "Zvukové zmínky — rozhlasové rozhovory a pořady o Judge Network. Obsah bude vyplněn v rámci migrace dat ze starého webu."
+    },
+    "video": {
+      "title": "Videogalerie",
+      "placeholder": "Video zmínky — televizní speciály a rozhovory. Obsah bude vyplněn v rámci migrace dat ze starého webu."
     }
   },
   "courtPerformance": {
@@ -538,10 +652,22 @@
     "subtitle": "Vyplňte formulář a stáhněte hotový chorvatský právní dokument ve formátu PDF",
     "selectType": "Vyberte typ dokumentu",
     "type": {
-      "tuzba": "Žaloba",
-      "zalba": "Odvolání",
-      "prigovor": "Námitka",
-      "ovrsni": "Návrh na exekuci"
+      "tuzba": {
+        "_value": "Soudní spor",
+        "desc": "Zahájit občanskoprávní řízení před soudem"
+      },
+      "zalba": {
+        "_value": "Stížnost",
+        "desc": "Za vyvrácení soudního rozhodnutí vyššímu soudu"
+      },
+      "prigovor": {
+        "_value": "Stížnost",
+        "desc": "Za podání odporu proti rozhodnutí soudu"
+      },
+      "ovrsni": {
+        "_value": "Výkonný návrh",
+        "desc": "Zahájit exekuci na základě exekučního titulu"
+      }
     },
     "fields": {
       "plaintiff_name": "Jméno a příjmení žalobce",
@@ -636,18 +762,6 @@
       "overdue": "Po lhůtě"
     }
   },
-  "cookiePolicy": "Zásady cookies",
-  "termsOfService": "Podmínky použití",
-  "judges": {
-    "detail": {
-      "role": "Soudce",
-      "court": "Soud",
-      "appointmentDate": "Datum jmenování",
-      "specialization": "Specializace",
-      "status": "Stav",
-      "contact": "Kontaktní údaje"
-    }
-  },
   "legalNews": {
     "title": "Právní zprávy",
     "subtitle": "Přehled aktuálních právních zpráv z domácích a evropských právních zdrojů.",
@@ -708,6 +822,8 @@
       "p2": "[cs] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Zásady cookies",
+  "termsOfService": "Podmínky použití",
   "privacy": {
     "title": "Zásady ochrany osobních údajů",
     "lastUpdated": "Poslední aktualizace: 28. března 2026.",
@@ -800,8 +916,201 @@
       "p2": "Pro dotazy týkající se těchto Podmínek nás kontaktujte na:"
     }
   },
-  "docgen.type.tuzba.desc": "Pro zahájení civilního řízení před soudem",
-  "docgen.type.zalba.desc": "Pro odvolání proti soudnímu rozhodnutí u vyššího soudu",
-  "docgen.type.prigovor.desc": "Pro podání námitky proti soudnímu rozhodnutí",
-  "docgen.type.ovrsni.desc": "Pro zahájení exekuce na základě výkonného listu"
+  "debtors": {
+    "title": "Zkrachovalí dlužníci",
+    "subtitle": "Adresář dlužníků, na které je nebo bylo vedeno konkursní řízení.",
+    "searchPlaceholder": "Hledat podle jména nebo města...",
+    "oibPh": "OIB...",
+    "loadError": "Chyba při načítání dlužníka.",
+    "noResults": "Vyhledávání neodpovídají žádní dlužníci.",
+    "linkedListings": "Konkurzní řízení",
+    "noLinkedListings": "Neprobíhají žádné související konkurzní řízení.",
+    "fields": {
+      "name": "Jméno / Jméno",
+      "address": "Adresa",
+      "city": "Město",
+      "county": "Hrabství",
+      "phone": "Telefon",
+      "caseNumber": "Číslo položky",
+      "status": "Postavení",
+      "deadline": "Lhůta",
+      "publishedAt": "Publikováno"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Dokumentace API — Síť soudců",
+    "metaDescription": "Veřejné REST API pro přístup do databází soudních rozhodnutí, znalců, tlumočníků a soudů Justiční sítě.",
+    "title": "Veřejné REST API",
+    "intro": "Otevřené API pro partnerské instituce a výzkumníky, kteří chtějí programový přístup k databázím soudní praxe, znalců, tlumočníků a soudů Chorvatské republiky.",
+    "paginationNote": "Všechny koncové body seznamu vracejí stejný stránkovaný formát odpovědi:",
+    "endpointsNote": "Kliknutím na koncový bod zobrazíte parametry, příklad požadavku a odpovědi.",
+    "sections": {
+      "gettingStarted": "Začátek práce",
+      "pagination": "Stránkování",
+      "endpoints": "Koncové body"
+    },
+    "cards": {
+      "baseUrl": "Základní URL",
+      "auth": "Autentizace",
+      "rateLimit": "Limity (limit sazby)",
+      "baseUrlNote": "Všechny odpovědi jsou JSON, UTF-8",
+      "authNote": "Klíč API je volitelný, ale zvyšuje limit."
+    },
+    "endpoint": {
+      "params": "Parametry",
+      "exampleRequest": "Vzorová žádost",
+      "exampleResponse": "Příklad odpovědi",
+      "fields": {
+        "name": "Jméno",
+        "description": "Popis",
+        "type": "Typ",
+        "required": "Povinné",
+        "example": "Příklad",
+        "in": "v"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Zpět na správce",
+    "table": {
+      "range": "Zobrazeno {{from}}–{{to}} z {{total}}",
+      "prev": "Ten předchozí",
+      "next": "Další",
+      "pageOf": "Strana {{page}} z {{total}}",
+      "empty": "Žádné záznamy."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Klíče API",
+        "label": "Označení",
+        "email": "Email",
+        "organization": "Organizace",
+        "rateLimit": "Limit sazby (požadavek/min)",
+        "active": "Aktivní"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Konkurzní správci",
+        "name": "Jméno",
+        "licenceNumber": "Licenční číslo",
+        "phone": "Telefon",
+        "email": "Email",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "courts": "Přidělené soudy"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Dlužníci (bankrot)",
+        "name": "Jméno",
+        "oib": "OIB",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "phone": "Telefon",
+        "email": "Email",
+        "notes": "Poznámky"
+      },
+      "courts": {
+        "__title": "soudy",
+        "name": "Název soudu",
+        "type": "Typ soudu",
+        "president": "Předseda soudu",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "phone": "Telefon",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "webové stránky",
+        "notes": "Poznámky"
+      },
+      "documents": {
+        "__title": "Dokumenty",
+        "title": "Titul",
+        "description": "Popis",
+        "category": "Kategorie",
+        "publishedAt": "Publikováno v",
+        "lang": "Jazyk"
+      },
+      "expertWitnesses": {
+        "__title": "Svědci znalci",
+        "name": "Jméno",
+        "company": "Společnost / Firma",
+        "specialityAreas": "Speciální oblasti",
+        "languages": "Jazyky",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Ověřeno",
+        "lang": "Vstupní jazyk",
+        "notes": "Poznámky"
+      },
+      "interpreters": {
+        "__title": "Soudní tlumočníci",
+        "name": "Jméno",
+        "company": "Společnost / Firma",
+        "languagePairs": "Jazykové páry",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Ověřeno",
+        "lang": "Vstupní jazyk"
+      },
+      "judges": {
+        "__title": "soudci",
+        "name": "Celé jméno",
+        "firstName": "Křestní jméno",
+        "lastName": "Příjmení",
+        "court": "Soud",
+        "specialization": "Specializace",
+        "department": "Oddělení",
+        "appointmentDate": "Datum schůzky (RRRR-MM-DD)",
+        "yearsOfExperience": "Léta zkušeností",
+        "status": "Postavení",
+        "email": "Email",
+        "lang": "Vstupní jazyk"
+      },
+      "laws": {
+        "__title": "zákony",
+        "title": "Titul",
+        "type": "Typ",
+        "category": "Právní oblast",
+        "year": "Rok",
+        "officialGazette": "Úřední věstník (NN)",
+        "externalUrl": "Externí URL",
+        "effectiveDate": "Datum účinnosti",
+        "fullText": "Plné znění",
+        "summary": "Shrnutí",
+        "lang": "Jazyk"
+      },
+      "legalCategories": {
+        "__title": "Právní kategorie",
+        "name": "Jméno",
+        "description": "Popis"
+      },
+      "pages": {
+        "__title": "Stránky",
+        "title": "Titul",
+        "slug": "Slimák (URL)",
+        "content": "Obsah",
+        "metaTitle": "Název metadat",
+        "metaDescription": "Popis metadat",
+        "lang": "Jazyk"
+      },
+      "stateAttorneys": {
+        "__title": "Státní zastupitelství",
+        "name": "Název kanceláře",
+        "address": "Adresa",
+        "city": "Město",
+        "county": "Hrabství",
+        "phone": "Telefon",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    }
+  }
 }

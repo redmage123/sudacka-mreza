@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Przeszukaj sieć sędziów...",
+      "submit": "Szukaj",
+      "aria": "Szukaj"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "Na tej platformie dostępne jest tylko oficjalne podsumowanie. Przeczytaj pełny tekst na stronie internetowej sądu wydającego."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Imię/Firma/Adres...",
+    "filterCompany": "Firma",
+    "filterCompanyPh": "Nazwa firmy..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Sędzia",
+      "court": "Sąd",
+      "appointmentDate": "Data powołania",
+      "specialization": "Specjalizacja",
+      "status": "Status",
+      "contact": "Dane kontaktowe"
+    },
+    "searchPlaceholder": "Wyszukaj według nazwiska sędziego...",
+    "totalCount": "Razem: {{count}} sędziów",
+    "totalCount_one": "Razem: {{count}} sędzia",
+    "totalCount_few": "Razem: {{count}} sędziów",
+    "totalCount_other": "Razem: {{count}} sędziów"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Imię/Firma/Adres...",
+    "filterCompany": "Firma",
+    "filterCompanyPh": "Nazwa firmy..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Sąd Najwyższy",
       "upravni": "Sąd Administracyjny",
       "ustavni": "Trybunał Konstytucyjny",
-      "echr": "Europejski Trybunał Praw Człowieka"
+      "echr": "Europejski Trybunał Praw Człowieka",
+      "ecj": "Trybunał Unii Europejskiej"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Telefon",
       "president": "Prezes"
     },
-    "officialNameNote": "Oficjalna chorwacka nazwa sądu"
+    "officialNameNote": "Oficjalna chorwacka nazwa sądu",
+    "timeAvailability": {
+      "heading": "Godziny pracy",
+      "monday": "Poniedziałek",
+      "tuesday": "Wtorek",
+      "wednesday": "Środa",
+      "thursday": "Czwartek",
+      "friday": "Piątek",
+      "saturday": "Sobota",
+      "sunday": "Niedziela",
+      "notes": "Uwaga",
+      "closed": "Zamknięte"
+    },
+    "jurisdictionScope": "Obszar jurysdykcji",
+    "departmentsCount_one": "Dział {{count}}",
+    "departmentsCount_few": "Dział {{count}}",
+    "departmentsCount_other": "Dział {{count}}",
+    "searchPlaceholderNameAddr": "Nazwa lub adres sądu..."
   },
   "nav": {
     "home": "Strona główna",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Mapa sądów",
-    "courtType": {
-      "municipal": "Rejonowy",
-      "county": "Okręgowy",
-      "commercial": "Gospodarczy",
-      "misdemeanour": "Wykroczeniowy",
-      "administrative": "Administracyjny"
-    },
-    "legend": "Legenda",
-    "loading": "Ładowanie sądów...",
-    "filterAll": "Wszystkie sądy",
-    "filterMunicipal": "Sąd rejonowy",
-    "filterCounty": "Sąd okręgowy",
-    "filterCommercial": "Sąd handlowy",
-    "filterMisdemeanour": "Sąd wykroczeń",
-    "filterAdministrative": "Sąd administracyjny",
-    "viewDetails": "Zobacz szczegóły",
-    "courts": "sądów",
-    "error": "Nie udało się załadować danych o sądach. Spróbuj ponownie."
-  },
-  "jurisdiction": {
-    "title": "Wyszukiwarka właściwości sądu",
-    "subtitle": "Znajdź właściwy sąd dla swojej sprawy na podstawie lokalizacji i rodzaju sprawy.",
-    "cityLabel": "Miasto lub gmina",
-    "cityPlaceholder": "np. Zagrzeb, Split, Rijeka...",
-    "caseTypeLabel": "Rodzaj sprawy",
-    "caseType": {
-      "civilMinor": "Cywilna (drobna) — Sąd rejonowy",
-      "criminalMinor": "Karna (do 5 lat) — Sąd rejonowy",
-      "criminalSerious": "Karna (5+ lat) — Sąd okręgowy",
-      "commercial": "Gospodarcza — Sąd gospodarczy",
-      "misdemeanour": "Wykroczenie — Sąd wykroczeniowy",
-      "administrative": "Administracyjna — Sąd administracyjny"
-    },
-    "results": "Wyniki",
-    "noResults": "Nie znaleziono pasującego sądu dla tej lokalizacji i rodzaju sprawy.",
-    "noResultsHint": "Spróbuj innej nazwy miasta lub sprawdź pełny katalog sądów.",
-    "viewCourtsDirectory": "Zobacz katalog sądów"
-  },
-  "calculator": {
-    "title": "Kalkulator opłat sądowych",
-    "selectCaseType": "Wybierz rodzaj sprawy",
-    "caseType": {
-      "civil": "Spór cywilny",
-      "criminal": "Postępowanie karne",
-      "commercial": "Spór handlowy",
-      "administrative": "Spór administracyjny",
-      "nonContentious": "Postępowanie nieprocesowe"
-    },
-    "claimValue": "Wartość roszczenia (EUR)",
-    "calculate": "Oblicz opłatę",
-    "filingFee": "Opłata za złożenie",
-    "appealFee": "Opłata za apelację",
-    "enforcementFee": "Opłata za egzekucję",
-    "fixedFee": "Stała opłata",
-    "exemptionsTitle": "Zwolnienia z opłat",
-    "exemption1": "Beneficjenci pomocy społecznej",
-    "exemption2": "Małoletni w postępowaniach opiekuńczych",
-    "exemption3": "Pracownicy w sporach pracowniczych (do 2.650 €)",
-    "paymentTitle": "Metody płatności",
-    "payment1": "Przelew bankowy na konto sądu",
-    "payment2": "Portal płatności online E-Pristojbe",
-    "payment3": "Kasa sądu",
-    "legalBasis": "Podstawa prawna",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ze zmianami). Wszystkie kwoty przeliczone na EUR od 01.01.2023.",
-    "minorOffenses": "Drobne przestępstwa",
-    "seriousOffenses": "Poważne przestępstwa"
-  },
-  "jurisdictionFinder": {
-    "title": "Znajdź swój sąd",
-    "description": "Wpisz swoje miasto i rodzaj sprawy, aby znaleźć właściwy sąd.",
-    "cityLabel": "Twoje miasto lub gmina",
-    "cityPlaceholder": "np. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Rodzaj sprawy",
-    "caseType": {
-      "civilMinor": "Spór cywilny (do 2.654 €)",
-      "civilMajor": "Spór cywilny (powyżej 2.654 €)",
-      "criminalMinor": "Karne (drobne przestępstwo)",
-      "criminalSerious": "Karne (poważne przestępstwo)",
-      "commercial": "Spór handlowy",
-      "misdemeanour": "Wykroczenie / wykroczenie drogowe",
-      "administrative": "Spór z organem publicznym"
-    },
-    "find": "Znajdź sąd",
-    "result": "Właściwy sąd",
-    "noResult": "Nie znaleziono sądu dla tego miasta. Przeglądaj katalog sądów.",
-    "browseAll": "Przeglądaj wszystkie sądy",
-    "viewProfile": "Zobacz profil sądu"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Kalkulator opłat sądowych",
+    "selectCaseType": "Wybierz rodzaj sprawy",
+    "caseType": {
+      "civil": "Spór cywilny",
+      "criminal": "Postępowanie karne",
+      "commercial": "Spór handlowy",
+      "administrative": "Spór administracyjny",
+      "nonContentious": "Postępowanie nieprocesowe"
+    },
+    "claimValue": "Wartość roszczenia (EUR)",
+    "fixedFee": "Stała opłata",
+    "minorOffenses": "Drobne przestępstwa",
+    "seriousOffenses": "Poważne przestępstwa",
+    "filingFee": "Opłata za złożenie",
+    "appealFee": "Opłata za apelację",
+    "enforcementFee": "Opłata za egzekucję",
+    "exemptionsTitle": "Zwolnienia z opłat",
+    "exemption1": "Beneficjenci pomocy społecznej",
+    "exemption2": "Małoletni w postępowaniach opiekuńczych",
+    "exemption3": "Pracownicy w sporach pracowniczych (do 2.650 €)",
+    "paymentTitle": "Metody płatności",
+    "payment1": "Przelew bankowy na konto sądu",
+    "payment2": "Portal płatności online E-Pristojbe",
+    "payment3": "Kasa sądu",
+    "legalBasis": "Podstawa prawna",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, ze zmianami). Wszystkie kwoty przeliczone na EUR od 01.01.2023.",
+    "calculate": "Oblicz opłatę"
+  },
+  "map": {
+    "title": "Mapa sądów",
+    "filterAll": "Wszystkie sądy",
+    "filterMunicipal": "Sąd rejonowy",
+    "filterCounty": "Sąd okręgowy",
+    "filterCommercial": "Sąd handlowy",
+    "filterMisdemeanour": "Sąd wykroczeń",
+    "filterAdministrative": "Sąd administracyjny",
+    "courtType": {
+      "municipal": "Rejonowy",
+      "county": "Okręgowy",
+      "commercial": "Gospodarczy",
+      "misdemeanour": "Wykroczeniowy",
+      "administrative": "Administracyjny"
+    },
+    "legend": "Legenda",
+    "error": "Nie udało się załadować danych o sądach. Spróbuj ponownie.",
+    "viewDetails": "Zobacz szczegóły",
+    "loading": "Ładowanie sądów...",
+    "courts": "sądów"
+  },
+  "jurisdiction": {
+    "title": "Wyszukiwarka właściwości sądu",
+    "subtitle": "Znajdź właściwy sąd dla swojej sprawy na podstawie lokalizacji i rodzaju sprawy.",
+    "cityLabel": "Miasto lub gmina",
+    "cityPlaceholder": "np. Zagrzeb, Split, Rijeka...",
+    "caseTypeLabel": "Rodzaj sprawy",
+    "caseType": {
+      "civilMinor": "Cywilna (drobna) — Sąd rejonowy",
+      "criminalMinor": "Karna (do 5 lat) — Sąd rejonowy",
+      "criminalSerious": "Karna (5+ lat) — Sąd okręgowy",
+      "commercial": "Gospodarcza — Sąd gospodarczy",
+      "misdemeanour": "Wykroczenie — Sąd wykroczeniowy",
+      "administrative": "Administracyjna — Sąd administracyjny"
+    },
+    "results": "Wyniki",
+    "noResults": "Nie znaleziono pasującego sądu dla tej lokalizacji i rodzaju sprawy.",
+    "noResultsHint": "Spróbuj innej nazwy miasta lub sprawdź pełny katalog sądów.",
+    "viewCourtsDirectory": "Zobacz katalog sądów"
+  },
+  "jurisdictionFinder": {
+    "title": "Znajdź swój sąd",
+    "description": "Wpisz swoje miasto i rodzaj sprawy, aby znaleźć właściwy sąd.",
+    "cityLabel": "Twoje miasto lub gmina",
+    "cityPlaceholder": "np. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Rodzaj sprawy",
+    "caseType": {
+      "civilMinor": "Spór cywilny (do 2.654 €)",
+      "civilMajor": "Spór cywilny (powyżej 2.654 €)",
+      "criminalMinor": "Karne (drobne przestępstwo)",
+      "criminalSerious": "Karne (poważne przestępstwo)",
+      "commercial": "Spór handlowy",
+      "misdemeanour": "Wykroczenie / wykroczenie drogowe",
+      "administrative": "Spór z organem publicznym"
+    },
+    "find": "Znajdź sąd",
+    "result": "Właściwy sąd",
+    "noResult": "Nie znaleziono sądu dla tego miasta. Przeglądaj katalog sądów.",
+    "browseAll": "Przeglądaj wszystkie sądy",
+    "viewProfile": "Zobacz profil sądu"
+  },
   "bankruptcy": {
     "title": "Portal upadłościowy",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Zbankrutowani dłużnicy",
+      "debtorsDesc": "Katalog dłużników z profilem i historią wszystkich powiązanych postępowań",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Prześlij zgłoszenie",
+      "filingDesc": "Złożyć wniosek o ogłoszenie upadłości — zgłosić wierzytelność, propozycję wszczęcia postępowania, raport, plan restrukturyzacyjny"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Reklamy upadłości",
+      "description": "Aktywne postępowanie upadłościowe ogłaszane w Dzienniku Urzędowym i Dzienniku Urzędowym.",
+      "searchPlaceholder": "Wyszukaj według nazwiska dłużnika...",
+      "count": "{{n}} reklam",
+      "count_one": "{{n}} reklama",
+      "count_few": "{{n}} reklam",
+      "count_other": "{{n}} reklam",
+      "loadError": "Nie można wczytać ogłoszeń o upadłości.",
+      "empty": "Brak aktywnych ogłoszeń o upadłości.",
+      "unknownDebtor": "Nieznany dłużnik",
+      "deadline": "Termin ostateczny"
+    },
+    "decisions": {
+      "title": "Decyzje o upadłości",
+      "description": "Orzeczenia sądowe z postępowań upadłościowych w Chorwacji.",
+      "loadError": "Nie ma możliwości wczytania decyzji upadłościowych.",
+      "noResults": "Brak wyników.",
+      "viewDecision": "Otwórz decyzję"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "Brak zarejestrowanych syndyków.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Nazwa",
+      "licenseNo": "Numer licencji",
+      "contact": "Kontakt",
+      "assignedCourts": "Przydzielone sądy",
+      "court": "Sąd",
+      "city": "Miasto"
+    },
+    "filterCourtAll": "Wszystkie sądy"
   },
   "laws": {
     "title": "Prawo upadłościowe",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Typ użytkownika",
+      "userTypeOptions": {
+        "person": "Osoba",
+        "legal_entity": "Osoba prawna"
+      },
+      "organisationName": "Nazwa osoby prawnej",
+      "organisationOib": "OIB osób prawnych",
+      "legalEntityNote": "Osoby prawne (kancelarie prawne, syndycy masy upadłościowej działający we własnym imieniu, zarejestrowane organizacje) mogą składać wnioski o ogłoszenie upadłości w trybie redakcyjnym. Twoja autoryzacja zostanie aktywowana automatycznie po rejestracji.",
+      "errorOib": "OIB musi mieć dokładnie 11 cyfr.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Utwórz konto",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Zapomniałem hasła",
+      "subtitle": "Podaj swój adres e-mail, a my wyślemy Ci link umożliwiający ustawienie nowego hasła.",
+      "submit": "Wyślij link",
+      "submitting": "Wysyłamy…",
+      "backToLogin": "Powrót do logowania",
+      "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie."
+    },
+    "resetPassword": {
+      "title": "Ustaw nowe hasło",
+      "subtitle": "Wybierz nowe hasło do swojego konta.",
+      "newPassword": "Nowe hasło",
+      "confirmPassword": "Potwierdź nowe hasło",
+      "submit": "Ustaw nowe hasło",
+      "submitting": "Przygotowujemy...",
+      "done": "Twoje hasło zostało pomyślnie ustawione. Możesz zapisać się już teraz.",
+      "goToLogin": "Przejdź do aplikacji",
+      "missingToken": "Ten link do zmiany hasła nie zawiera tokena. Poproś o nowy.",
+      "requestNew": "Poproś o nowy link",
+      "errorGeneric": "Nie można ustawić hasła. Spróbuj ponownie."
+    },
+    "password": {
+      "show": "Pokaż hasło",
+      "hide": "Ukryj hasło"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Press Releases",
-      "desc": "Official statements and announcements published by Sudačka Mreža."
+      "placeholder": "Wycinki prasowe — artykuły prasowe i portale internetowe, w których wspomina się o Sieci Sędziów. Treść zostanie uzupełniona w ramach migracji danych ze starej witryny."
     },
     "contact": {
       "title": "Press Contact",
       "desc": "For interview requests, photo permissions or background information, contact our press team."
+    },
+    "audio": {
+      "title": "Galerie audio",
+      "placeholder": "Wzmianki audio — wywiady radiowe i programy o Judge Network. Treść zostanie uzupełniona w ramach migracji danych ze starej witryny."
+    },
+    "video": {
+      "title": "Galerie wideo",
+      "placeholder": "Wzmianki wideo — programy telewizyjne i wywiady. Treść zostanie uzupełniona w ramach migracji danych ze starej witryny."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Wybierz typ dokumentu",
     "type": {
       "tuzba": {
+        "_value": "Proces sądowy",
         "desc": "Za wszczęcie postępowania cywilnego przed sądem"
       },
       "zalba": {
+        "_value": "Skarga",
         "desc": "Za zaskarżenie orzeczenia sądu do sądu wyższej instancji"
       },
       "prigovor": {
+        "_value": "Skarga",
         "desc": "Za wniesienie sprzeciwu od postanowienia sądu"
       },
       "ovrsni": {
+        "_value": "Propozycja wykonawcza",
         "desc": "Za wszczęcie egzekucji na podstawie tytułu wykonawczego"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Po terminie"
     }
   },
-  "cookiePolicy": "Polityka cookies",
-  "termsOfService": "Warunki korzystania",
-  "judges": {
-    "detail": {
-      "role": "Sędzia",
-      "court": "Sąd",
-      "appointmentDate": "Data powołania",
-      "specialization": "Specjalizacja",
-      "status": "Status",
-      "contact": "Dane kontaktowe"
-    }
-  },
   "legalNews": {
     "title": "Wiadomości prawne",
     "subtitle": "Przegląd aktualnych wiadomości prawnych z krajowych i europejskich źródeł prawnych.",
@@ -716,6 +822,8 @@
       "p2": "Aby uzyskać więcej informacji na temat sposobu przetwarzania Twoich danych osobowych, zapoznaj się z naszą"
     }
   },
+  "cookiePolicy": "Polityka cookies",
+  "termsOfService": "Warunki korzystania",
   "privacy": {
     "title": "Polityka prywatności",
     "lastUpdated": "Ostatnia aktualizacja: 28 marca 2026 r.",
@@ -808,8 +916,201 @@
       "p2": "W sprawach dotyczących niniejszych Warunków prosimy o kontakt pod adresem:"
     }
   },
-  "docgen.type.tuzba.desc": "Do wszczęcia postępowania cywilnego przed sądem",
-  "docgen.type.zalba.desc": "Do zaskarżenia orzeczenia sądu do sądu wyższej instancji",
-  "docgen.type.prigovor.desc": "Do wniesienia sprzeciwu od postanowienia sądu",
-  "docgen.type.ovrsni.desc": "Do wszczęcia egzekucji na podstawie tytułu wykonawczego"
+  "debtors": {
+    "title": "Zbankrutowani dłużnicy",
+    "subtitle": "Katalog dłużników, dla których toczy się lub było prowadzone postępowanie upadłościowe.",
+    "searchPlaceholder": "Szukaj według nazwy lub miasta...",
+    "oibPh": "OIB...",
+    "loadError": "Błąd podczas ładowania dłużnika.",
+    "noResults": "Brak dłużników spełniających kryteria wyszukiwania.",
+    "linkedListings": "Postępowanie upadłościowe",
+    "noLinkedListings": "Nie toczą się żadne postępowania upadłościowe.",
+    "fields": {
+      "name": "Imię / Imię",
+      "address": "Adres",
+      "city": "Miasto",
+      "county": "Hrabstwo",
+      "phone": "Telefon",
+      "caseNumber": "Numer pozycji",
+      "status": "Status",
+      "deadline": "Termin ostateczny",
+      "publishedAt": "Opublikowany"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Dokumentacja API — sieć sędziowska",
+    "metaDescription": "Publiczne API REST umożliwiające dostęp do baz danych orzeczeń sądowych, biegłych, tłumaczy ustnych i sądów Sieci Sądowniczej.",
+    "title": "Publiczne API REST",
+    "intro": "Otwarte API dla instytucji partnerskich i badaczy, którzy chcą programowego dostępu do baz danych praktyki sądowej, biegłych, tłumaczy ustnych i sądów Republiki Chorwacji.",
+    "paginationNote": "Wszystkie punkty końcowe listy zwracają ten sam format odpowiedzi podzielonych na strony:",
+    "endpointsNote": "Kliknij punkt końcowy, aby wyświetlić parametry, przykładowe żądanie i odpowiedź.",
+    "sections": {
+      "gettingStarted": "Początek pracy",
+      "pagination": "Paginacja",
+      "endpoints": "Punkty końcowe"
+    },
+    "cards": {
+      "baseUrl": "Bazowy adres URL",
+      "auth": "Uwierzytelnianie",
+      "rateLimit": "Limity (limit szybkości)",
+      "baseUrlNote": "Wszystkie odpowiedzi są w formacie JSON, UTF-8",
+      "authNote": "Klucz API jest opcjonalny, ale zwiększa limit."
+    },
+    "endpoint": {
+      "params": "Parametry",
+      "exampleRequest": "Przykładowe żądanie",
+      "exampleResponse": "Przykładowa odpowiedź",
+      "fields": {
+        "name": "Nazwa",
+        "description": "Opis",
+        "type": "Typ",
+        "required": "Obowiązkowy",
+        "example": "Przykład",
+        "in": "W"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Powrót do Admina",
+    "table": {
+      "range": "Wyświetlanie {{from}}–{{to}} z {{total}}",
+      "prev": "Poprzedni",
+      "next": "Następny",
+      "pageOf": "Strona {{page}} z {{total}}",
+      "empty": "Brak zapisów."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Klucze API",
+        "label": "Etykieta",
+        "email": "Email",
+        "organization": "Organizacja",
+        "rateLimit": "Limit szybkości (wymagania/min)",
+        "active": "Aktywny"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Administratorzy upadłości",
+        "name": "Nazwa",
+        "licenceNumber": "Numer licencji",
+        "phone": "Telefon",
+        "email": "Email",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "courts": "Przydzielone sądy"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Dłużnicy (Upadłość)",
+        "name": "Nazwa",
+        "oib": "OIB",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "phone": "Telefon",
+        "email": "Email",
+        "notes": "Notatki"
+      },
+      "courts": {
+        "__title": "Sądy",
+        "name": "Nazwa sądu",
+        "type": "Typ sądu",
+        "president": "Prezes Sądu",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "phone": "Telefon",
+        "fax": "Faks",
+        "email": "Email",
+        "website": "Strona internetowa",
+        "notes": "Notatki"
+      },
+      "documents": {
+        "__title": "Dokumenty",
+        "title": "Tytuł",
+        "description": "Opis",
+        "category": "Kategoria",
+        "publishedAt": "Opublikowano o godz",
+        "lang": "Język"
+      },
+      "expertWitnesses": {
+        "__title": "Biegli Świadkowie",
+        "name": "Nazwa",
+        "company": "Firma / Firma",
+        "specialityAreas": "Obszary specjalistyczne",
+        "languages": "Języki",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Zweryfikowano",
+        "lang": "Język wejścia",
+        "notes": "Notatki"
+      },
+      "interpreters": {
+        "__title": "Tłumacze sądowi",
+        "name": "Nazwa",
+        "company": "Firma / Firma",
+        "languagePairs": "Pary językowe",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Zweryfikowano",
+        "lang": "Język wejścia"
+      },
+      "judges": {
+        "__title": "Sędziowie",
+        "name": "Pełne imię i nazwisko",
+        "firstName": "Imię",
+        "lastName": "Nazwisko",
+        "court": "Sąd",
+        "specialization": "Specjalizacja",
+        "department": "Dział",
+        "appointmentDate": "Data spotkania (RRRR-MM-DD)",
+        "yearsOfExperience": "Lata doświadczenia",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Język wejścia"
+      },
+      "laws": {
+        "__title": "Prawa",
+        "title": "Tytuł",
+        "type": "Typ",
+        "category": "Obszar prawny",
+        "year": "Rok",
+        "officialGazette": "Dziennik Urzędowy (NN)",
+        "externalUrl": "Zewnętrzny adres URL",
+        "effectiveDate": "Data wejścia w życie",
+        "fullText": "Pełny tekst",
+        "summary": "Streszczenie",
+        "lang": "Język"
+      },
+      "legalCategories": {
+        "__title": "Kategorie prawne",
+        "name": "Nazwa",
+        "description": "Opis"
+      },
+      "pages": {
+        "__title": "Strony",
+        "title": "Tytuł",
+        "slug": "Ślimak (URL)",
+        "content": "Treść",
+        "metaTitle": "Tytuł meta",
+        "metaDescription": "Metaopis",
+        "lang": "Język"
+      },
+      "stateAttorneys": {
+        "__title": "Biura Prokuratorów Państwowych",
+        "name": "Nazwa biura",
+        "address": "Adres",
+        "city": "Miasto",
+        "county": "Hrabstwo",
+        "phone": "Telefon",
+        "fax": "Faks",
+        "email": "Email"
+      }
+    }
+  }
 }

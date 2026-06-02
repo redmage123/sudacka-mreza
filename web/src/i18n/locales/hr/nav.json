@@ -73,11 +73,17 @@
   "lang.ja": "日本語",
   "skipToContent": "Skoči na sadržaj",
   "documents": "Dokumenti",
-  "media": "Mediji",
+  "media": "Mediji o nama",
   "deadlines": "Kalkulator procesnih rokova",
   "legalNews": "Pravne vijesti",
   "courtPerformance": "Performanse sudova",
   "services": "Usluge",
   "documentGenerator": "Generator dokumenata",
-  "watchlist": "Praćenje"
+  "watchlist": "Praćenje",
+  "audio": "Audiogalerije",
+  "video": "Videogalerije",
+  "press": "Novinski članci",
+  "adminConsole": "Administracija",
+  "myLibrary": "Moja knjižnica",
+  "signOut": "Odjava"
 }

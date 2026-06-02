@@ -63,6 +63,11 @@
     },
     "donors": {
       "title": "Donors & Partners"
+    },
+    "search": {
+      "placeholder": "Buscar en la Red de Jueces...",
+      "submit": "Buscar",
+      "aria": "Buscar"
     }
   },
   "decisions": {
@@ -82,7 +87,8 @@
     "clearFilters": "Clear filters",
     "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
     "noResults": "No court decisions match your search.",
-    "semanticMatch": "Semantic match"
+    "semanticMatch": "Semantic match",
+    "summaryOnlyNote": "En esta plataforma sólo está disponible el resumen oficial. Lea el texto completo en la página web del tribunal emisor."
   },
   "experts": {
     "searchTitle": "Expert Witnesses",
@@ -99,7 +105,25 @@
       "county": "County",
       "assignedCourts": "Assigned courts",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nombre / Empresa / Dirección...",
+    "filterCompany": "Compañía",
+    "filterCompanyPh": "Nombre de empresa..."
+  },
+  "judges": {
+    "detail": {
+      "role": "Juez",
+      "court": "Tribunal",
+      "appointmentDate": "Fecha de nombramiento",
+      "specialization": "Especialización",
+      "status": "Estado",
+      "contact": "Datos de contacto"
+    },
+    "searchPlaceholder": "Buscar por nombre del árbitro...",
+    "totalCount": "Total: {{count}} jueces",
+    "totalCount_one": "Total: {{count}} juez",
+    "totalCount_few": "Total: {{count}} jueces",
+    "totalCount_other": "Total: {{count}} jueces"
   },
   "interpreters": {
     "searchTitle": "Interpreters",
@@ -112,7 +136,10 @@
       "languagePairs": "Language pairs",
       "county": "County",
       "contactDetails": "Contact details"
-    }
+    },
+    "searchPlaceholderCombined": "Nombre / Empresa / Dirección...",
+    "filterCompany": "Compañía",
+    "filterCompanyPh": "Nombre de empresa..."
   },
   "courts": {
     "searchTitle": "Courts",
@@ -125,7 +152,8 @@
       "vrhovni": "Tribunal Supremo",
       "upravni": "Tribunal Administrativo",
       "ustavni": "Tribunal Constitucional",
-      "echr": "Tribunal Europeo de Derechos Humanos"
+      "echr": "Tribunal Europeo de Derechos Humanos",
+      "ecj": "Tribunal de la Unión Europea"
     },
     "noResults": "No courts in this category.",
     "fields": {
@@ -133,7 +161,24 @@
       "phone": "Teléfono",
       "president": "Presidente"
     },
-    "officialNameNote": "Nombre oficial del tribunal croata"
+    "officialNameNote": "Nombre oficial del tribunal croata",
+    "timeAvailability": {
+      "heading": "Horas de trabajo",
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "notes": "Observación",
+      "closed": "Cerrado"
+    },
+    "jurisdictionScope": "Área de jurisdicción",
+    "departmentsCount_one": "{{count}} departamento",
+    "departmentsCount_few": "{{count}} departamento",
+    "departmentsCount_other": "{{count}} departamento",
+    "searchPlaceholderNameAddr": "Nombre o dirección del tribunal..."
   },
   "nav": {
     "home": "Inicio",
@@ -146,96 +191,6 @@
     "description": "Quick access to case law, even offline.",
     "install": "Install",
     "noThanks": "No thanks"
-  },
-  "map": {
-    "title": "Mapa de tribunales",
-    "courtType": {
-      "municipal": "Municipal",
-      "county": "Provincial",
-      "commercial": "Mercantil",
-      "misdemeanour": "De faltas",
-      "administrative": "Administrativo"
-    },
-    "legend": "Leyenda",
-    "loading": "Cargando tribunales...",
-    "filterAll": "Todos los tribunales",
-    "filterMunicipal": "Municipal",
-    "filterCounty": "Provincial",
-    "filterCommercial": "Mercantil",
-    "filterMisdemeanour": "Contravenciones",
-    "filterAdministrative": "Administrativo",
-    "viewDetails": "Ver detalles",
-    "courts": "tribunales",
-    "error": "No se pudieron cargar los datos de los tribunales. Inténtelo de nuevo."
-  },
-  "jurisdiction": {
-    "title": "Buscador de jurisdicción",
-    "subtitle": "Encuentre el tribunal competente para su caso según la ubicación y el tipo de caso.",
-    "cityLabel": "Ciudad o municipio",
-    "cityPlaceholder": "p. ej. Zagreb, Split, Rijeka...",
-    "caseTypeLabel": "Tipo de caso",
-    "caseType": {
-      "civilMinor": "Civil (menor cuantía) — Juzgado municipal",
-      "criminalMinor": "Penal (menos de 5 años) — Juzgado municipal",
-      "criminalSerious": "Penal (5+ años) — Tribunal provincial",
-      "commercial": "Mercantil — Tribunal mercantil",
-      "misdemeanour": "Falta — Juzgado de faltas",
-      "administrative": "Administrativo — Tribunal administrativo"
-    },
-    "results": "Resultados",
-    "noResults": "No se encontró un tribunal correspondiente para esta ubicación y tipo de caso.",
-    "noResultsHint": "Pruebe con otro nombre de ciudad o consulte el directorio completo de tribunales.",
-    "viewCourtsDirectory": "Ver directorio de tribunales"
-  },
-  "calculator": {
-    "title": "Calculadora de tasas judiciales",
-    "selectCaseType": "Seleccionar tipo de caso",
-    "caseType": {
-      "civil": "Disputa civil",
-      "criminal": "Procedimiento penal",
-      "commercial": "Disputa comercial",
-      "administrative": "Disputa administrativa",
-      "nonContentious": "Jurisdicción voluntaria"
-    },
-    "claimValue": "Valor de la reclamación (EUR)",
-    "calculate": "Calcular tasa",
-    "filingFee": "Tasa de presentación",
-    "appealFee": "Tasa de apelación",
-    "enforcementFee": "Tasa de ejecución",
-    "fixedFee": "Tasa fija",
-    "exemptionsTitle": "Exenciones de tasas",
-    "exemption1": "Beneficiarios de asistencia social",
-    "exemption2": "Menores en procedimientos de tutela",
-    "exemption3": "Trabajadores en disputas laborales (hasta 2.650 €)",
-    "paymentTitle": "Métodos de pago",
-    "payment1": "Transferencia bancaria a cuenta del tribunal",
-    "payment2": "Portal de pago en línea E-Pristojbe",
-    "payment3": "Caja del tribunal",
-    "legalBasis": "Base legal",
-    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, con enmiendas). Todos los importes convertidos a EUR desde el 01.01.2023.",
-    "minorOffenses": "Delitos menores",
-    "seriousOffenses": "Delitos graves"
-  },
-  "jurisdictionFinder": {
-    "title": "Encuentra tu tribunal",
-    "description": "Introduce tu ciudad y el tipo de caso para encontrar el tribunal competente.",
-    "cityLabel": "Tu ciudad o municipio",
-    "cityPlaceholder": "ej. Zagreb, Split, Osijek...",
-    "caseTypeLabel": "Tipo de caso",
-    "caseType": {
-      "civilMinor": "Disputa civil (hasta 2.654 €)",
-      "civilMajor": "Disputa civil (más de 2.654 €)",
-      "criminalMinor": "Penal (delito menor)",
-      "criminalSerious": "Penal (delito grave)",
-      "commercial": "Disputa comercial",
-      "misdemeanour": "Contravención / infracción de tráfico",
-      "administrative": "Disputa con organismo público"
-    },
-    "find": "Buscar tribunal",
-    "result": "Tribunal competente",
-    "noResult": "No se encontró tribunal para esta ciudad. Consulte el directorio.",
-    "browseAll": "Ver todos los tribunales",
-    "viewProfile": "Ver perfil del tribunal"
   },
   "statistics": {
     "title": "Statistics",
@@ -302,6 +257,96 @@
     "annotationsInstructions": "Select text on a decision page and add an annotation.",
     "defaultFolder": "General"
   },
+  "calculator": {
+    "title": "Calculadora de tasas judiciales",
+    "selectCaseType": "Seleccionar tipo de caso",
+    "caseType": {
+      "civil": "Disputa civil",
+      "criminal": "Procedimiento penal",
+      "commercial": "Disputa comercial",
+      "administrative": "Disputa administrativa",
+      "nonContentious": "Jurisdicción voluntaria"
+    },
+    "claimValue": "Valor de la reclamación (EUR)",
+    "fixedFee": "Tasa fija",
+    "minorOffenses": "Delitos menores",
+    "seriousOffenses": "Delitos graves",
+    "filingFee": "Tasa de presentación",
+    "appealFee": "Tasa de apelación",
+    "enforcementFee": "Tasa de ejecución",
+    "exemptionsTitle": "Exenciones de tasas",
+    "exemption1": "Beneficiarios de asistencia social",
+    "exemption2": "Menores en procedimientos de tutela",
+    "exemption3": "Trabajadores en disputas laborales (hasta 2.650 €)",
+    "paymentTitle": "Métodos de pago",
+    "payment1": "Transferencia bancaria a cuenta del tribunal",
+    "payment2": "Portal de pago en línea E-Pristojbe",
+    "payment3": "Caja del tribunal",
+    "legalBasis": "Base legal",
+    "legalBasisText": "Zakon o sudskim pristojbama (NN 74/95, con enmiendas). Todos los importes convertidos a EUR desde el 01.01.2023.",
+    "calculate": "Calcular tasa"
+  },
+  "map": {
+    "title": "Mapa de tribunales",
+    "filterAll": "Todos los tribunales",
+    "filterMunicipal": "Municipal",
+    "filterCounty": "Provincial",
+    "filterCommercial": "Mercantil",
+    "filterMisdemeanour": "Contravenciones",
+    "filterAdministrative": "Administrativo",
+    "courtType": {
+      "municipal": "Municipal",
+      "county": "Provincial",
+      "commercial": "Mercantil",
+      "misdemeanour": "De faltas",
+      "administrative": "Administrativo"
+    },
+    "legend": "Leyenda",
+    "error": "No se pudieron cargar los datos de los tribunales. Inténtelo de nuevo.",
+    "viewDetails": "Ver detalles",
+    "loading": "Cargando tribunales...",
+    "courts": "tribunales"
+  },
+  "jurisdiction": {
+    "title": "Buscador de jurisdicción",
+    "subtitle": "Encuentre el tribunal competente para su caso según la ubicación y el tipo de caso.",
+    "cityLabel": "Ciudad o municipio",
+    "cityPlaceholder": "p. ej. Zagreb, Split, Rijeka...",
+    "caseTypeLabel": "Tipo de caso",
+    "caseType": {
+      "civilMinor": "Civil (menor cuantía) — Juzgado municipal",
+      "criminalMinor": "Penal (menos de 5 años) — Juzgado municipal",
+      "criminalSerious": "Penal (5+ años) — Tribunal provincial",
+      "commercial": "Mercantil — Tribunal mercantil",
+      "misdemeanour": "Falta — Juzgado de faltas",
+      "administrative": "Administrativo — Tribunal administrativo"
+    },
+    "results": "Resultados",
+    "noResults": "No se encontró un tribunal correspondiente para esta ubicación y tipo de caso.",
+    "noResultsHint": "Pruebe con otro nombre de ciudad o consulte el directorio completo de tribunales.",
+    "viewCourtsDirectory": "Ver directorio de tribunales"
+  },
+  "jurisdictionFinder": {
+    "title": "Encuentra tu tribunal",
+    "description": "Introduce tu ciudad y el tipo de caso para encontrar el tribunal competente.",
+    "cityLabel": "Tu ciudad o municipio",
+    "cityPlaceholder": "ej. Zagreb, Split, Osijek...",
+    "caseTypeLabel": "Tipo de caso",
+    "caseType": {
+      "civilMinor": "Disputa civil (hasta 2.654 €)",
+      "civilMajor": "Disputa civil (más de 2.654 €)",
+      "criminalMinor": "Penal (delito menor)",
+      "criminalSerious": "Penal (delito grave)",
+      "commercial": "Disputa comercial",
+      "misdemeanour": "Contravención / infracción de tráfico",
+      "administrative": "Disputa con organismo público"
+    },
+    "find": "Buscar tribunal",
+    "result": "Tribunal competente",
+    "noResult": "No se encontró tribunal para esta ciudad. Consulte el directorio.",
+    "browseAll": "Ver todos los tribunales",
+    "viewProfile": "Ver perfil del tribunal"
+  },
   "bankruptcy": {
     "title": "Portal de concursos",
     "subtitle": "Bankruptcy proceedings, administrators and legislation in Croatia",
@@ -312,10 +357,14 @@
     "sections": {
       "listings": "Bankruptcy Listings",
       "listingsDesc": "Published bankruptcy notices, creditor calls and asset auctions",
+      "debtors": "Deudores en quiebra",
+      "debtorsDesc": "Directorio de deudores con perfil e historial de todos los trámites relacionados",
       "administrators": "Administrators",
       "administratorsDesc": "Licensed bankruptcy administrators and their contact information",
       "legislation": "Legislation",
-      "legislationDesc": "Stečajni zakon and related EU directives"
+      "legislationDesc": "Stečajni zakon and related EU directives",
+      "filing": "Enviar una presentación",
+      "filingDesc": "Presentar una declaración de quiebra: presentación de un reclamo, propuesta de inicio, informe, plan de reestructuración"
     },
     "process": {
       "title": "The Bankruptcy Process",
@@ -323,6 +372,26 @@
       "step2": "2. Opening — Court examines solvency; if accepted, bankruptcy is opened",
       "step3": "3. Administrator — Court appoints a bankruptcy administrator (stečajni upravitelj)",
       "step4": "4. Resolution — Assets liquidated or restructuring plan approved by creditors"
+    },
+    "listings": {
+      "title": "Anuncios de quiebra",
+      "description": "Procedimientos concursales activos publicados en el Diario Oficial y diario oficial.",
+      "searchPlaceholder": "Buscar por nombre del deudor...",
+      "count": "{{n}} anuncios",
+      "count_one": "{{n}} anuncio",
+      "count_few": "{{n}} anuncios",
+      "count_other": "{{n}} anuncios",
+      "loadError": "No se pueden cargar anuncios de quiebras.",
+      "empty": "No hay anuncios de quiebra activos.",
+      "unknownDebtor": "Deudor desconocido",
+      "deadline": "Fecha límite"
+    },
+    "decisions": {
+      "title": "Decisiones de quiebra",
+      "description": "Decisiones judiciales de procedimientos de quiebra en Croacia.",
+      "loadError": "No es posible cargar decisiones de quiebra.",
+      "noResults": "Sin resultados.",
+      "viewDecision": "abrir la decision"
     }
   },
   "administrators": {
@@ -332,11 +401,14 @@
     "noResults": "No hay administradores registrados actualmente.",
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
-      "name": "Name",
-      "licenseNo": "Licence No.",
-      "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "name": "Nombre",
+      "licenseNo": "Número de licencia",
+      "contact": "Contacto",
+      "assignedCourts": "Tribunales asignados",
+      "court": "Corte",
+      "city": "Ciudad"
+    },
+    "filterCourtAll": "Todos los tribunales"
   },
   "laws": {
     "title": "Legislación concursal",
@@ -444,6 +516,15 @@
         "researcher": "Researcher / Academic",
         "other": "Other"
       },
+      "userType": "Tipo de usuario",
+      "userTypeOptions": {
+        "person": "Persona",
+        "legal_entity": "entidad legal"
+      },
+      "organisationName": "Nombre de la entidad legal",
+      "organisationOib": "OIB de personas jurídicas",
+      "legalEntityNote": "Las personas jurídicas (bufetes de abogados, administradores de quiebras que actúan por cuenta propia, organizaciones registradas) pueden presentar peticiones de quiebra a través del enfoque editorial. Su autorización se activará automáticamente después del registro.",
+      "errorOib": "OIB debe tener exactamente 11 dígitos.",
       "terms": "I agree to the",
       "termsLink": "terms of service",
       "submit": "Crear cuenta",
@@ -456,6 +537,31 @@
       "errorEmail": "Please enter a valid email address.",
       "errorPasswordMatch": "Passwords do not match.",
       "errorMinPassword": "Password must be at least 8 characters."
+    },
+    "forgotPassword": {
+      "title": "Has olvidado tu contraseña",
+      "subtitle": "Ingrese su dirección de correo electrónico y le enviaremos un enlace para configurar una nueva contraseña.",
+      "submit": "Enviar un enlace",
+      "submitting": "Enviamos…",
+      "backToLogin": "Volver a iniciar sesión",
+      "errorGeneric": "Algo salió mal. Por favor inténtalo de nuevo."
+    },
+    "resetPassword": {
+      "title": "Establecer una nueva contraseña",
+      "subtitle": "Elija una nueva contraseña para su cuenta.",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar nueva contraseña",
+      "submit": "Establecer una nueva contraseña",
+      "submitting": "Nos estamos preparando...",
+      "done": "Su contraseña se ha establecido correctamente. Puedes registrarte ahora.",
+      "goToLogin": "Ir a la aplicación",
+      "missingToken": "Este enlace de cambio de contraseña no tiene token. Solicite uno nuevo.",
+      "requestNew": "Solicitar un nuevo enlace",
+      "errorGeneric": "No se pudo establecer la contraseña. Por favor inténtalo de nuevo."
+    },
+    "password": {
+      "show": "Mostrar contraseña",
+      "hide": "Ocultar contraseña"
     }
   },
   "about": {
@@ -488,11 +594,19 @@
     },
     "press": {
       "title": "Comunicados de prensa",
-      "desc": "Declaraciones oficiales y anuncios publicados por Sudačka Mreža."
+      "placeholder": "Recortes de prensa: artículos periodísticos y portales web en los que se menciona la Red de Jueces. El contenido se completará como parte de la migración de datos desde el sitio anterior."
     },
     "contact": {
       "title": "Contacto de prensa",
       "desc": "Para solicitudes de entrevistas, permisos de fotos o información de fondo, contacte a nuestro equipo de prensa."
+    },
+    "audio": {
+      "title": "Galerías de audio",
+      "placeholder": "Menciones de audio: entrevistas de radio y programas sobre Judge Network. El contenido se completará como parte de la migración de datos desde el sitio anterior."
+    },
+    "video": {
+      "title": "Galerías de vídeos",
+      "placeholder": "Menciones en vídeos: especiales de televisión y entrevistas. El contenido se completará como parte de la migración de datos desde el sitio anterior."
     }
   },
   "courtPerformance": {
@@ -539,15 +653,19 @@
     "selectType": "Seleccione el tipo de documento",
     "type": {
       "tuzba": {
+        "_value": "Pleito",
         "desc": "Para el inicio de un procedimiento civil ante el tribunal"
       },
       "zalba": {
+        "_value": "Queja",
         "desc": "Para la impugnación de una resolución judicial ante un tribunal superior"
       },
       "prigovor": {
+        "_value": "Queja",
         "desc": "Para la interposición de una oposición contra una resolución judicial"
       },
       "ovrsni": {
+        "_value": "Propuesta ejecutiva",
         "desc": "Para el inicio de la ejecución basada en un título ejecutivo"
       }
     },
@@ -644,18 +762,6 @@
       "overdue": "Vencido"
     }
   },
-  "cookiePolicy": "Política de cookies",
-  "termsOfService": "Términos de uso",
-  "judges": {
-    "detail": {
-      "role": "Juez",
-      "court": "Tribunal",
-      "appointmentDate": "Fecha de nombramiento",
-      "specialization": "Especialización",
-      "status": "Estado",
-      "contact": "Datos de contacto"
-    }
-  },
   "legalNews": {
     "title": "Noticias jurídicas",
     "subtitle": "Resumen de noticias jurídicas actuales de fuentes jurídicas nacionales y europeas.",
@@ -716,6 +822,8 @@
       "p2": "[es] Za više informacija o tome kako obrađujemo Vaše osobne podatke, pogledajte naša"
     }
   },
+  "cookiePolicy": "Política de cookies",
+  "termsOfService": "Términos de uso",
   "privacy": {
     "title": "Política de privacidad",
     "lastUpdated": "Última actualización: 28 de marzo de 2026.",
@@ -808,8 +916,201 @@
       "p2": "Para consultas sobre estos Términos, póngase en contacto con nosotros en:"
     }
   },
-  "docgen.type.tuzba.desc": "Para iniciar un proceso civil ante el tribunal",
-  "docgen.type.zalba.desc": "Para impugnar una decisión judicial ante un tribunal superior",
-  "docgen.type.prigovor.desc": "Para interponer una objeción contra una resolución judicial",
-  "docgen.type.ovrsni.desc": "Para iniciar una ejecución basada en un título ejecutivo"
+  "debtors": {
+    "title": "Deudores en quiebra",
+    "subtitle": "Directorio de deudores a quienes se les está o se han seguido procedimientos concursales.",
+    "searchPlaceholder": "Buscar por nombre o ciudad...",
+    "oibPh": "OIB...",
+    "loadError": "Error al cargar deudor.",
+    "noResults": "No hay deudores que coincidan con la búsqueda.",
+    "linkedListings": "Procedimientos de quiebra",
+    "noLinkedListings": "No existen procedimientos de quiebra relacionados.",
+    "fields": {
+      "name": "Nombre / Nombre",
+      "address": "DIRECCIÓN",
+      "city": "Ciudad",
+      "county": "Condado",
+      "phone": "Teléfono",
+      "caseNumber": "Número de artículo",
+      "status": "Estado",
+      "deadline": "Fecha límite",
+      "publishedAt": "Publicado"
+    }
+  },
+  "apiDocs": {
+    "metaTitle": "Documentación API — Red de jueces",
+    "metaDescription": "API REST pública para acceso a bases de datos de decisiones judiciales, peritos, intérpretes y tribunales de la Red Judicial.",
+    "title": "API REST pública",
+    "intro": "API abierta para instituciones asociadas e investigadores que deseen acceso programático a bases de datos de práctica judicial, peritos, intérpretes y tribunales de la República de Croacia.",
+    "paginationNote": "Todos los puntos finales de la lista devuelven el mismo formato de respuesta paginada:",
+    "endpointsNote": "Haga clic en el punto final para ver los parámetros, ejemplo de solicitud y respuesta.",
+    "sections": {
+      "gettingStarted": "inicio del trabajo",
+      "pagination": "Paginación",
+      "endpoints": "Puntos finales"
+    },
+    "cards": {
+      "baseUrl": "URL base",
+      "auth": "Autenticación",
+      "rateLimit": "Límites (límite de tarifa)",
+      "baseUrlNote": "Todas las respuestas son JSON, UTF-8.",
+      "authNote": "La clave API es opcional, pero aumenta el límite."
+    },
+    "endpoint": {
+      "params": "Parámetros",
+      "exampleRequest": "Solicitud de muestra",
+      "exampleResponse": "Respuesta de ejemplo",
+      "fields": {
+        "name": "Nombre",
+        "description": "Descripción",
+        "type": "Tipo",
+        "required": "Obligatorio",
+        "example": "Ejemplo",
+        "in": "en"
+      }
+    }
+  },
+  "admin": {
+    "backToAdmin": "Volver a administrador",
+    "table": {
+      "range": "Mostrando {{from}}–{{to}} de {{total}}",
+      "prev": "el anterior",
+      "next": "Próximo",
+      "pageOf": "Página {{page}} de {{total}}",
+      "empty": "Sin registros."
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "Claves API",
+        "label": "Etiqueta",
+        "email": "Email",
+        "organization": "Organización",
+        "rateLimit": "Límite de velocidad (req/min)",
+        "active": "Activo"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Administradores Concursales",
+        "name": "Nombre",
+        "licenceNumber": "Número de licencia",
+        "phone": "Teléfono",
+        "email": "Email",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "courts": "Tribunales asignados"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Deudores (quiebra)",
+        "name": "Nombre",
+        "oib": "OIB",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "phone": "Teléfono",
+        "email": "Email",
+        "notes": "Notas"
+      },
+      "courts": {
+        "__title": "Tribunales",
+        "name": "Nombre del tribunal",
+        "type": "Tipo de cancha",
+        "president": "Presidente de la corte",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "phone": "Teléfono",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "Sitio web",
+        "notes": "Notas"
+      },
+      "documents": {
+        "__title": "Documentos",
+        "title": "Título",
+        "description": "Descripción",
+        "category": "Categoría",
+        "publishedAt": "Publicado en",
+        "lang": "Idioma"
+      },
+      "expertWitnesses": {
+        "__title": "Testigos expertos",
+        "name": "Nombre",
+        "company": "Empresa / Firma",
+        "specialityAreas": "Áreas de especialidad",
+        "languages": "Idiomas",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "phone": "Teléfono",
+        "email": "Email",
+        "verified": "Verificado",
+        "lang": "Idioma de entrada",
+        "notes": "Notas"
+      },
+      "interpreters": {
+        "__title": "Intérpretes judiciales",
+        "name": "Nombre",
+        "company": "Empresa / Firma",
+        "languagePairs": "Pares de idiomas",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "phone": "Teléfono",
+        "email": "Email",
+        "verified": "Verificado",
+        "lang": "Idioma de entrada"
+      },
+      "judges": {
+        "__title": "jueces",
+        "name": "Nombre completo",
+        "firstName": "Nombre de pila",
+        "lastName": "Apellido",
+        "court": "Corte",
+        "specialization": "Especialización",
+        "department": "Departamento",
+        "appointmentDate": "Fecha de la cita (AAAA-MM-DD)",
+        "yearsOfExperience": "Años de experiencia",
+        "status": "Estado",
+        "email": "Email",
+        "lang": "Idioma de entrada"
+      },
+      "laws": {
+        "__title": "leyes",
+        "title": "Título",
+        "type": "Tipo",
+        "category": "Área Jurídica",
+        "year": "Año",
+        "officialGazette": "Gaceta Oficial (NN)",
+        "externalUrl": "URL externa",
+        "effectiveDate": "Fecha de vigencia",
+        "fullText": "Texto completo",
+        "summary": "Resumen",
+        "lang": "Idioma"
+      },
+      "legalCategories": {
+        "__title": "Categorías Legales",
+        "name": "Nombre",
+        "description": "Descripción"
+      },
+      "pages": {
+        "__title": "paginas",
+        "title": "Título",
+        "slug": "Babosa (URL)",
+        "content": "Contenido",
+        "metaTitle": "Metatítulo",
+        "metaDescription": "Meta descripción",
+        "lang": "Idioma"
+      },
+      "stateAttorneys": {
+        "__title": "Fiscalías estatales",
+        "name": "Nombre de la oficina",
+        "address": "DIRECCIÓN",
+        "city": "Ciudad",
+        "county": "Condado",
+        "phone": "Teléfono",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    }
+  }
 }
