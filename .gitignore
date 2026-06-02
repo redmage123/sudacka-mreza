@@ -46,3 +46,4 @@ cms/src/payload-types.ts
 
 # Migration scraped data (large, machine-generated)
 cms/src/migration/data/
+tests/e2e/.admin-state.json
