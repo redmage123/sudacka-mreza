@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const Judges: CollectionConfig = {
   slug: 'judges',
   admin: {
+    group: 'Sudovi',
+    description: 'Suci i njihove specijalizacije po sudovima.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'court', 'specialization', 'status', 'lang'],
   },

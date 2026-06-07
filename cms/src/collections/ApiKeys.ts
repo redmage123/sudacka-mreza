@@ -16,6 +16,7 @@ export const ApiKeys: CollectionConfig = {
     plural: 'API Ključevi',
   },
   admin: {
+    group: 'Korisnici',
     useAsTitle: 'name',
     defaultColumns: ['name', 'organization', 'email', 'rateLimit', 'active', 'createdAt'],
     description: 'API ključevi za pristup javnom REST API-ju (/api/v1/*)',

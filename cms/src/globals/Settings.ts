@@ -4,6 +4,7 @@ import { isAdmin, publicRead } from '../access.js'
 export const Settings: GlobalConfig = {
   slug: 'settings',
   label: 'Postavke stranice',
+  admin: { group: 'Postavke' },
   access: {
     read: publicRead,
     update: isAdmin,

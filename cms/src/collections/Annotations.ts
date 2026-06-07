@@ -9,6 +9,8 @@ const ownerOnly: Access = ({ req }) => {
 export const Annotations: CollectionConfig = {
   slug: 'annotations',
   admin: {
+    group: 'Korisničke akcije',
+    description: 'Korisničke bilješke na sudskim odlukama.',
     useAsTitle: 'note',
     defaultColumns: ['user', 'decision', 'highlight_color', 'created_at'],
   },

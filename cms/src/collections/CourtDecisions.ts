@@ -8,6 +8,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const CourtDecisions: CollectionConfig = {
   slug: 'court-decisions',
   admin: {
+    group: 'Sudovi',
+    description: 'Odluke i presude sudova s metapodacima i punim tekstom.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'court', 'decisionType', 'date', 'lang'],
   },

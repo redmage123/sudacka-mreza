@@ -7,7 +7,8 @@ export const LegalCategories: CollectionConfig = {
   admin: {
     useAsTitle: 'name_hr',
     defaultColumns: ['name_hr', 'name_en', 'parent', 'slug'],
-    group: 'Taksonomija',
+    group: 'Sudovi',
+    description: 'Taksonomija pravnih područja (radno pravo, kazneno, građansko itd.).',
   },
   access: {
     read: publicRead,

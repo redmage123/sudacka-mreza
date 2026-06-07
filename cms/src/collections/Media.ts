@@ -21,6 +21,8 @@ export const Media: CollectionConfig = {
     ],
   },
   admin: {
+    group: 'Sadržaj',
+    description: 'Slike, dokumenti i ostale priložene datoteke.',
     useAsTitle: 'filename',
     defaultColumns: ['filename', 'mimeType', 'filesize'],
   },

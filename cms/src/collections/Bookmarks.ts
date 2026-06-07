@@ -9,6 +9,8 @@ const ownerOnly: Access = ({ req }) => {
 export const Bookmarks: CollectionConfig = {
   slug: 'bookmarks',
   admin: {
+    group: 'Korisničke akcije',
+    description: 'Korisničke oznake (favoriti).',
     useAsTitle: 'folder',
     defaultColumns: ['user', 'decision', 'folder', 'created_at'],
   },

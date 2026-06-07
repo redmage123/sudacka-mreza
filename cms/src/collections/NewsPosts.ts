@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor } from '../access.js'
 export const NewsPosts: CollectionConfig = {
   slug: 'news-posts',
   admin: {
+    group: 'Sadržaj',
+    description: 'Pravne vijesti i članci. Datum objave kontrolira vidljivost.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedAt', 'author', 'lang'],
   },

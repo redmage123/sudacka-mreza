@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const Documents: CollectionConfig = {
   slug: 'documents',
   admin: {
+    group: 'Sadržaj',
+    description: 'Javno dostupni dokumenti i obrasci.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'lang'],
   },

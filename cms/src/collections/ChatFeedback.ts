@@ -5,9 +5,10 @@ import type { CollectionConfig } from 'payload'
 export const ChatFeedback: CollectionConfig = {
   slug: 'chat-feedback',
   admin: {
+    group: 'Korisničke akcije',
     useAsTitle: 'question',
     defaultColumns: ['question', 'lang', 'verdict', 'status', 'createdAt'],
-    description: 'Human feedback on chatbot answers — input for fine-tuning runs.',
+    description: 'Povratne informacije korisnika na chatbot odgovore (RLHF signal).',
   },
   access: {
     // Created by the public /api/chat-feedback router (server-side). No

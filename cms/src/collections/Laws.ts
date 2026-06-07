@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const Laws: CollectionConfig = {
   slug: 'laws',
   admin: {
+    group: 'Sadržaj',
+    description: 'Zakoni i propisi koji se referenciraju u sustavu.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'year', 'category', 'lang'],
   },

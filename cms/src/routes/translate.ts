@@ -18,7 +18,11 @@ import crypto from 'node:crypto'
 const OLLAMA_BASE = (process.env.LLM_ENDPOINT || 'http://176.9.99.103:11434/v1/chat/completions')
   .replace(/\/v1\/chat\/completions$/, '')
 const CHAT_ENDPOINT = `${OLLAMA_BASE}/api/chat`
-const LLM_MODEL = process.env.LLM_MODEL || 'gemma-4-e4b-eurlex-v1'
+// Translation uses a stock multilingual instruction-tuned model. The EUR-Lex
+// fine-tune is over-fitted on EN/DE/FR/ES/IT and emits placeholder markers
+// like "--- DANISH TEXT ---" for less-represented targets, so we route this
+// endpoint at gemma2:9b-instruct (or any TRANSLATE_MODEL override).
+const TRANSLATE_MODEL = process.env.TRANSLATE_MODEL || 'gemma2:9b-instruct-q4_K_M'
 const LLM_API_TOKEN = process.env.LLM_API_TOKEN || ''
 
 const MAX_INPUT_CHARS = 6000
@@ -92,9 +96,9 @@ export function createTranslateRouter(payload: Payload): Router {
         method: 'POST',
         headers: llmHeaders(),
         body: JSON.stringify({
-          model: LLM_MODEL,
+          model: TRANSLATE_MODEL,
           messages: [
-            { role: 'system', content: `You are a professional legal translator. Output only the requested ${targetName} translation, with no preface or commentary.` },
+            { role: 'system', content: `You are a professional legal translator. Output only the requested ${targetName} translation. No preface, no commentary, no language labels, no XML/HTML tags. Do not output placeholder markers like "--- LANGUAGE TEXT ---". If the source contains untranslatable proper nouns, dates, or codes, keep them verbatim in the translation.` },
             { role: 'user', content: prompt },
           ],
           stream: false,
@@ -108,7 +112,7 @@ export function createTranslateRouter(payload: Payload): Router {
             repeat_last_n: 256,
           },
         }),
-        signal: AbortSignal.timeout(120_000),
+        signal: AbortSignal.timeout(180_000),
       })
       if (!r.ok) {
         payload.logger?.error?.(`translate: HTTP ${r.status}`)
@@ -117,9 +121,22 @@ export function createTranslateRouter(payload: Payload): Router {
       const j = (await r.json()) as { message?: { content?: string } }
       let translated = (j.message?.content || '').trim().replace(/^[`"']+|[`"']+$/g, '').trim()
       if (!translated) return res.status(502).json({ error: 'empty LLM response' })
-      // Strip a leading "Translation:" / "Here is the translation:" preface if
-      // the model emitted one despite the system instruction.
-      translated = translated.replace(/^(translation|here is the translation|here's the translation)[:\s—-]+/i, '').trim()
+
+      // Strip the various preamble shapes that instruction-tuned LLMs sometimes
+      // emit despite the system instruction.
+      translated = translated
+        // Leading "Translation:" / "Here is the translation:" / "Sure, here…"
+        .replace(/^(?:sure[,\s][^\n.!?]*[.:]?\s*)?(?:here(?:'s|\s+is)?\s+(?:the\s+)?(?:translation|translated\s+text)|translation|translated\s+text)[\s—\-:.,]+/i, '')
+        // EUR-Lex–style "--- LANGUAGE TEXT ---" / "--- LANGUAGE TRANSLATION ---" lines (possibly multiple)
+        .replace(/^(?:[-–—]{2,}\s*[A-ZČĐŠŽЁ-я֐-׿؀-ۿ一-鿿][^\n]*?(?:TEXT|TRANSLATION|PRENOS|PRIJEVOD|BERSETZUNG|TRADUCTION|TRADUZIONE|TRADUCCIÓN|TŁUMACZENIE|перевод|μετάφραση|翻訳|翻译)[^\n]*?[-–—]{2,}\s*\n)+/im, '')
+        // <translation>…</translation> or similar wrappers
+        .replace(/^<\/?(?:translation|output|result)[^>]*>\s*/i, '')
+        .replace(/\s*<\/?(?:translation|output|result)[^>]*>\s*$/i, '')
+        // HTML-encoded leftovers
+        .replace(/&lt;\/?(?:translation|output|result)&gt;/gi, '')
+        .trim()
+
+      if (!translated) return res.status(502).json({ error: 'empty LLM response after stripping' })
       cacheSet(k, translated)
       return res.json({ translated, fromCache: false })
     } catch (e) {

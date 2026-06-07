@@ -5,6 +5,8 @@ import { isAdmin } from '../access.js'
 export const Subscriptions: CollectionConfig = {
   slug: 'subscriptions',
   admin: {
+    group: 'Korisnici',
+    description: 'Pretplate korisnika na obavijesti i newslettere.',
     useAsTitle: 'email',
     defaultColumns: ['email', 'subscription_type', 'frequency', 'confirmed', 'lastNotifiedAt'],
   },

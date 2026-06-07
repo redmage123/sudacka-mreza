@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
+    group: 'Sadržaj',
+    description: 'Statičke stranice (O nama, Kontakt, ToS itd.).',
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'lang'],
   },

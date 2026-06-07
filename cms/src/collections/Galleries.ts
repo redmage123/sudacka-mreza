@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor } from '../access.js'
 export const Galleries: CollectionConfig = {
   slug: 'galleries',
   admin: {
+    group: 'Sadržaj',
+    description: 'Foto-galerije za stranice i članke.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'publishedAt', 'lang'],
   },

@@ -9,6 +9,7 @@ const navItemFields = [
 
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
+  admin: { group: 'Postavke' },
   label: 'Navigacija',
   access: {
     read: publicRead,

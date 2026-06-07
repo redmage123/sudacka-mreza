@@ -103,6 +103,12 @@ function llmHeaders(): Record<string, string> {
   return h
 }
 
+/** Whitespace-collapse and cap so we don't waste LLM tokens on noise. */
+function normalizeForTranslate(text: string, maxChars: number): string {
+  const cleaned = text.replace(/\s+/g, ' ').trim()
+  return cleaned.length > maxChars ? cleaned.slice(0, maxChars) : cleaned
+}
+
 async function callTranslate(text: string, targetName: string): Promise<string> {
   const prompt =
     `Translate the following Croatian legal text into ${targetName}. ` +
@@ -124,7 +130,7 @@ async function callTranslate(text: string, targetName: string): Promise<string> 
     method: 'POST',
     headers: llmHeaders(),
     body: JSON.stringify(body),
-    signal: AbortSignal.timeout(20_000),
+    signal: AbortSignal.timeout(12_000),
   })
   if (!r.ok) throw new Error(`translate HTTP ${r.status}`)
   const j = (await r.json()) as { message?: { content?: string } }
@@ -198,45 +204,61 @@ export async function translateBatch(
     out.set(`${r.entity_type}:${r.entity_id}:${r.field}`, r.translated)
   }
 
-  // Translate the misses sequentially. With 10 results × 2 fields the worst
-  // case is ~20 LLM calls; keep them in-process so we don't blow KV cache.
+  // Translate cache misses in parallel with a bounded worker pool. With 20
+  // results × 2 fields = up to 40 LLM calls; sequential at ~5-10s each was
+  // taking minutes and tripping browser/abort timeouts so users saw the
+  // untranslated source. Concurrency 6 keeps Ollama responsive while finishing
+  // a full page in roughly the time of one round.
   const targetName = LANG_NAMES[lang]
-  for (const f of fields) {
+  const todo = fields.filter((f) => {
     const k = `${f.entityType}:${f.entityId}:${f.field}`
-    if (out.has(k)) continue
-    const hash = hashText(f.text)
-    const cacheKey = `${f.entityType}:${f.entityId}:${f.field}:${hash}`
-    if (cachedKeys.has(cacheKey)) continue
+    if (out.has(k)) return false
+    const cacheKey = `${f.entityType}:${f.entityId}:${f.field}:${hashText(f.text)}`
+    if (cachedKeys.has(cacheKey)) return false
     if (!f.text || f.text.trim().length === 0) {
       out.set(k, f.text)
-      continue
+      return false
     }
-    try {
-      const translated = await callTranslate(f.text, targetName)
-      out.set(k, translated)
-      // Upsert into cache; ignore cache write errors so a misbehaving DB
-      // can't break user-facing search.
+    return true
+  })
+
+  const CONCURRENCY = 6
+  let cursor = 0
+  async function worker(): Promise<void> {
+    while (true) {
+      const idx = cursor++
+      if (idx >= todo.length) return
+      const f = todo[idx]
+      const k = `${f.entityType}:${f.entityId}:${f.field}`
+      const hash = hashText(f.text)
       try {
-        await pool.query(
-          `INSERT INTO legal_translations
-             (entity_type, entity_id, field, lang, source_text_hash, translated)
-           VALUES ($1, $2, $3, $4, $5, $6)
-           ON CONFLICT (entity_type, entity_id, field, lang)
-           DO UPDATE SET translated = EXCLUDED.translated,
-                         source_text_hash = EXCLUDED.source_text_hash,
-                         updated_at = NOW()`,
-          [f.entityType, f.entityId, f.field, lang, hash, translated],
+        const cap = f.field === 'title' ? 250 : 600
+        const cleaned = normalizeForTranslate(f.text, cap)
+        const translated = await callTranslate(cleaned, targetName)
+        out.set(k, translated)
+        try {
+          await pool.query(
+            `INSERT INTO legal_translations
+               (entity_type, entity_id, field, lang, source_text_hash, translated)
+             VALUES ($1, $2, $3, $4, $5, $6)
+             ON CONFLICT (entity_type, entity_id, field, lang)
+             DO UPDATE SET translated = EXCLUDED.translated,
+                           source_text_hash = EXCLUDED.source_text_hash,
+                           updated_at = NOW()`,
+            [f.entityType, f.entityId, f.field, lang, hash, translated],
+          )
+        } catch {
+          /* swallow cache write errors */
+        }
+      } catch (e) {
+        payload.logger.warn(
+          { err: String(e), lang, field: f.field, id: f.entityId },
+          'legal translation failed; falling back to source text',
         )
-      } catch {
-        /* swallow cache write errors */
+        out.set(k, f.text)
       }
-    } catch (e) {
-      payload.logger.warn(
-        { err: String(e), lang, field: f.field, id: f.entityId },
-        'legal translation failed; falling back to source text',
-      )
-      out.set(k, f.text)
     }
   }
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, todo.length) }, () => worker()))
   return out
 }
