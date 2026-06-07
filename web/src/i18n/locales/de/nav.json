@@ -85,5 +85,11 @@
   "press": "Zeitungsartikel",
   "adminConsole": "Administration",
   "myLibrary": "Meine Bibliothek",
-  "signOut": "Abmelden"
+  "signOut": "Abmelden",
+  "links": "Links",
+  "audioGalleries": "Audiogalerien",
+  "videoGalleries": "Videogalerien",
+  "pressClippings": "Presseausschnitte",
+  "strucniRadovi": "Fachartikel",
+  "internationalExchange": "Internationaler Austausch"
 }

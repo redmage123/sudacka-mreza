@@ -131,6 +131,17 @@ export function Header() {
         { to: `/${lang}/stecaj/duznici`, label: t('bankruptcyDebtors') },
         { to: `/${lang}/stecaj/upravitelji`, label: t('administrators') },
         { to: `/${lang}/stecaj/zakoni`, label: t('bankruptcyLaws') },
+        { to: `/${lang}/stecaj/strucni-radovi`, label: t('strucniRadovi') },
+        { to: `/${lang}/stecaj/internacionalno`, label: t('internationalExchange') },
+      ],
+    },
+    {
+      label: t('media'),
+      items: [
+        { to: `/${lang}/mediji/audio`, label: t('audioGalleries') },
+        { to: `/${lang}/mediji/video`, label: t('videoGalleries') },
+        { to: `/${lang}/mediji/press`, label: t('pressClippings') },
+        { to: `/${lang}/galerije`, label: t('galleries') },
       ],
     },
     {
@@ -138,8 +149,9 @@ export function Header() {
       items: [
         { to: `/${lang}/o-nama`, label: t('about') },
         { to: `/${lang}/kontakt`, label: t('contact') },
-        { to: `/${lang}/galerije`, label: t('galleries') },
-        { to: `/${lang}/mediji`, label: t('media') },
+        { to: `/${lang}/linkovi`, label: t('links') },
+        { to: `/${lang}/donirajte`, label: t('donate', 'Donirajte') },
+        { to: `/${lang}/besplatna-pravna-pomoc`, label: t('legalAid') },
         { to: `/${lang}/dokumenti`, label: t('documents') },
       ],
     },

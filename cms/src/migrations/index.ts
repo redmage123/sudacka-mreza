@@ -18,6 +18,8 @@ import * as migration_20260601_201500_lang_enum_extend from './20260601_201500_l
 import * as migration_20260601_220000_entity_embeddings from './20260601_220000_entity_embeddings';
 import * as migration_20260601_223000_state_attorneys_embedding from './20260601_223000_state_attorneys_embedding';
 import * as migration_20260601_230000_admin_oib from './20260601_230000_admin_oib';
+import * as migration_20260607_120000_state_attorneys_type from './20260607_120000_state_attorneys_type';
+import * as migration_20260607_130000_bankruptcy_listings_assets from './20260607_130000_bankruptcy_listings_assets';
 
 export const migrations = [
   {
@@ -119,5 +121,15 @@ export const migrations = [
     up: migration_20260601_230000_admin_oib.up,
     down: migration_20260601_230000_admin_oib.down,
     name: '20260601_230000_admin_oib',
+  },
+  {
+    up: migration_20260607_120000_state_attorneys_type.up,
+    down: migration_20260607_120000_state_attorneys_type.down,
+    name: '20260607_120000_state_attorneys_type',
+  },
+  {
+    up: migration_20260607_130000_bankruptcy_listings_assets.up,
+    down: migration_20260607_130000_bankruptcy_listings_assets.down,
+    name: '20260607_130000_bankruptcy_listings_assets',
   },
 ];

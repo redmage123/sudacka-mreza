@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import { apiFetch } from './client'
 import { ExpertWitnessSchema, PayloadListSchema, type ExpertWitness, type PayloadList } from './types'
 
@@ -19,7 +20,7 @@ export async function getExpertWitnesses(
   params: GetExpertWitnessesParams = {},
 ): Promise<PayloadList<ExpertWitness>> {
     if (params.q !== undefined && params.q !== '') {
-    const SearchListSchema = z.object({ docs: z.array(ExpertWitnessSchema.passthrough()), totalDocs: z.number() })
+    const SearchListSchema = z.object({ docs: z.array(z.any()), totalDocs: z.number() })
     const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
       params: { type: 'expert-witnesses', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
     })

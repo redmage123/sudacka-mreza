@@ -56,6 +56,8 @@ export default function BankruptcyListingsPage() {
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
   const [query, setQuery] = useState('')
+  const [assetCategory, setAssetCategory] = useState('')
+  const [assetType, setAssetType] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const mounted = useRef(true)
@@ -75,7 +77,15 @@ export default function BankruptcyListingsPage() {
       sort: '-publishedAt',
       'where[status][equals]': 'active',
     }
-    if (query) params['where[debtorName][like]'] = query
+    // REDESIGN 3.7.2 — "Pretraži u tekstu" matches case number, debtor name,
+    // and the new structured description column.
+    if (query) {
+      params['where[or][0][debtorName][like]'] = query
+      params['where[or][1][caseNumber][like]'] = query
+      params['where[or][2][description][like]'] = query
+    }
+    if (assetCategory) params['where[assetCategory][equals]'] = assetCategory
+    if (assetType) params['where[assetType][like]'] = assetType
     apiFetch('/bankruptcy-listings', ListSchema, { params })
       .then((d) => {
         if (!mounted.current) return
@@ -89,7 +99,7 @@ export default function BankruptcyListingsPage() {
         setError(true)
         setLoading(false)
       })
-  }, [page, query, locale])
+  }, [page, query, assetCategory, assetType, locale])
 
   function formatDeadline(iso?: string | null): string {
     if (!iso) return '—'
@@ -114,15 +124,34 @@ export default function BankruptcyListingsPage() {
         {t('bankruptcy.listings.description', 'Active bankruptcy proceedings published in the official gazette.')}
       </p>
 
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <input
           type="search"
           value={query}
           onChange={(e) => { setQuery(e.target.value); setPage(1) }}
-          placeholder={t('bankruptcy.listings.searchPlaceholder', 'Search by debtor name…')}
-          className="w-full max-w-md rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+          placeholder={t('bankruptcy.listings.textSearchPlaceholder', 'Pretraži u tekstu (dužnik, broj, opis)…')}
+          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
         />
-        <span className="text-sm text-[color:var(--color-text-muted)]">
+        <select
+          value={assetCategory}
+          onChange={(e) => { setAssetCategory(e.target.value); setPage(1) }}
+          aria-label={t('bankruptcy.listings.assetCategoryLabel', 'Kategorija imovine')}
+          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+        >
+          <option value="">{t('bankruptcy.listings.assetCategoryAll', 'Sve kategorije imovine')}</option>
+          <option value="immovable">{t('bankruptcy.listings.assetCategoryImmovable', 'Nekretnine')}</option>
+          <option value="movable">{t('bankruptcy.listings.assetCategoryMovable', 'Pokretnine')}</option>
+          <option value="rights">{t('bankruptcy.listings.assetCategoryRights', 'Prava')}</option>
+          <option value="mixed">{t('bankruptcy.listings.assetCategoryMixed', 'Mješovito')}</option>
+        </select>
+        <input
+          type="text"
+          value={assetType}
+          onChange={(e) => { setAssetType(e.target.value); setPage(1) }}
+          placeholder={t('bankruptcy.listings.assetTypePlaceholder', 'Vrsta imovine (stan, vozilo…)')}
+          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+        />
+        <span className="self-center text-sm text-[color:var(--color-text-muted)]">
           {t('bankruptcy.listings.count', '{{n}} listings', { n: totalDocs })}
         </span>
       </div>

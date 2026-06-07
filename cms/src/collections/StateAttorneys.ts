@@ -5,6 +5,8 @@ import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
 export const StateAttorneys: CollectionConfig = {
   slug: 'state-attorneys',
   admin: {
+    group: 'Stručnjaci',
+    description: 'Državna odvjetništva.',
     useAsTitle: 'name',
     defaultColumns: ['name', 'city', 'county'],
   },
@@ -23,6 +25,18 @@ export const StateAttorneys: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Naziv',
+    },
+    {
+      name: 'type',
+      type: 'select',
+      label: 'Vrsta odvjetništva',
+      index: true,
+      options: [
+        { label: 'Općinsko državno odvjetništvo', value: 'municipal' },
+        { label: 'Županijsko državno odvjetništvo', value: 'county' },
+        { label: 'Državno odvjetništvo RH', value: 'state' },
+        { label: 'Specijalno', value: 'special' },
+      ],
     },
     {
       name: 'address',

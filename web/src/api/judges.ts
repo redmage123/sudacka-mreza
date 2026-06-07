@@ -44,7 +44,7 @@ export async function getJudges(
 ): Promise<PayloadList<Judge>> {
   // Hybrid (semantic + keyword) when a query is set.
   if (params.q !== undefined && params.q !== '') {
-    const SearchListSchema = z.object({ docs: z.array(JudgeSchema.passthrough()), totalDocs: z.number() })
+    const SearchListSchema = z.object({ docs: z.array(z.any()), totalDocs: z.number() })
     const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
       params: { type: 'judges', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
     })

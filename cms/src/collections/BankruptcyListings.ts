@@ -56,9 +56,42 @@ export const BankruptcyListings: CollectionConfig = {
     {
       name: 'assets',
       type: 'richText',
-      label: 'Imovina',
+      label: 'Imovina (opis)',
       admin: {
-        description: 'Opis imovine u stečajnom postupku',
+        description: 'Detaljan opis imovine u stečajnom postupku.',
+      },
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Opis (za pretragu)',
+      index: true,
+      admin: {
+        description: 'Sažeti opis postupka za fulltext pretragu (npr. lokacija, ključne riječi). Drazenov "Pretraži u tekstu" filter pretražuje ovo polje + caseNumber + debtorName.',
+      },
+    },
+    {
+      name: 'assetCategory',
+      type: 'select',
+      label: 'Kategorija imovine',
+      index: true,
+      options: [
+        { label: 'Nekretnine', value: 'immovable' },
+        { label: 'Pokretnine', value: 'movable' },
+        { label: 'Prava', value: 'rights' },
+        { label: 'Mješovito', value: 'mixed' },
+      ],
+      admin: {
+        description: 'Glavna kategorija imovine u stečajnom postupku.',
+      },
+    },
+    {
+      name: 'assetType',
+      type: 'text',
+      label: 'Vrsta imovine',
+      index: true,
+      admin: {
+        description: 'Konkretna vrsta imovine (npr. stan, kuća, poslovni prostor, vozilo).',
       },
     },
     {

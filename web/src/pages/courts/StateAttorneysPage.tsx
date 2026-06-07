@@ -17,6 +17,7 @@ export default function StateAttorneysPage() {
 
   const [searchParams, setSearchParams] = useSearchParams()
   const q = searchParams.get('q') ?? ''
+  const type = searchParams.get('type') ?? ''
   const page = parseInt(searchParams.get('page') ?? '1', 10)
 
   const [results, setResults] = useState<PayloadList<StateAttorney> | null>(null)
@@ -36,7 +37,7 @@ export default function StateAttorneysPage() {
   useEffect(() => {
     setLoading(true)
     setError(false)
-    getStateAttorneys({ q: q || undefined, page, locale })
+    getStateAttorneys({ q: q || undefined, type: type || undefined, page, locale })
       .then((data) => {
         if (isMounted.current) {
           setResults(data)
@@ -49,7 +50,18 @@ export default function StateAttorneysPage() {
           setLoading(false)
         }
       })
-  }, [q, page, locale])
+  }, [q, type, page, locale])
+
+  function handleTypeChange(value: string) {
+    const params = new URLSearchParams(searchParams)
+    if (value) {
+      params.set('type', value)
+    } else {
+      params.delete('type')
+    }
+    params.set('page', '1')
+    setSearchParams(params, { replace: true })
+  }
 
   function handleKeywordChange(value: string) {
     clearTimeout(debounceRef.current)
@@ -87,13 +99,25 @@ export default function StateAttorneysPage() {
       </h1>
 
       {/* Search bar */}
-      <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 mb-6">
+      <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
         <SearchBar
           value={q}
-          placeholder="Pretraži po imenu..."
+          placeholder="Naziv / adresa državnog odvjetništva"
           onChange={handleKeywordChange}
           aria-label={tn('stateAttorneys')}
         />
+        <select
+          value={type}
+          onChange={(e) => handleTypeChange(e.target.value)}
+          aria-label="Vrsta odvjetništva"
+          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+        >
+          <option value="">Sve vrste odvjetništva</option>
+          <option value="municipal">Općinsko državno odvjetništvo</option>
+          <option value="county">Županijsko državno odvjetništvo</option>
+          <option value="state">Državno odvjetništvo RH</option>
+          <option value="special">Specijalno</option>
+        </select>
       </div>
 
       {/* Results */}

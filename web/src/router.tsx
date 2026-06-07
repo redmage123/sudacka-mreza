@@ -45,6 +45,8 @@ const DebtorsPage = lazy(() => import('@/pages/bankruptcy/DebtorsPage'))
 const DebtorDetailPage = lazy(() => import('@/pages/bankruptcy/DebtorDetailPage'))
 const BankruptcyLawsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyLawsPage'))
 const BankruptcyDecisionsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyDecisionsPage'))
+const BankruptcyProfessionalWorksPage = lazy(() => import('@/pages/bankruptcy/BankruptcyProfessionalWorksPage'))
+const BankruptcyInternationalExchangePage = lazy(() => import('@/pages/bankruptcy/BankruptcyInternationalExchangePage'))
 
 // Static pages
 const CalculatorPage = lazy(() => import('@/pages/CalculatorPage'))
@@ -199,6 +201,8 @@ export const router = createBrowserRouter([
       { path: 'stecaj/zakoni', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/zakonodavstvo', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/odluke', element: S(BankruptcyDecisionsPage) },
+      { path: 'stecaj/strucni-radovi', element: S(BankruptcyProfessionalWorksPage) },
+      { path: 'stecaj/internacionalno', element: S(BankruptcyInternationalExchangePage) },
 
       // Statistics
       { path: 'statistika', element: S(StatisticsPage) },
