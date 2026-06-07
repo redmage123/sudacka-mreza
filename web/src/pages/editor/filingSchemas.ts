@@ -2,7 +2,17 @@
 // Each filing is a domain form submitted during a bankruptcy proceeding.
 // The generic FilingFormPage renders any of these based on the schema.
 
-export type FieldType = 'text' | 'textarea' | 'number' | 'date' | 'select' | 'oib' | 'currency'
+export type FieldType =
+  | 'text'
+  | 'textarea'
+  | 'number'
+  | 'date'
+  | 'select'
+  | 'oib'
+  | 'currency'
+  | 'email'
+  | 'checkboxes' // multi-select rendered as a checkbox group; value is string[]
+  | 'richtext' // markdown rich-text editor (bold / italic / headings / lists / links)
 
 export interface FilingField {
   key: string
@@ -192,33 +202,93 @@ export const FILING_SCHEMAS: Record<string, FilingSchema> = {
     ],
   },
 
+  // WEB STEČAJ (Web Bankruptcy) sale offer. Mirrors every parameter of the
+  // legacy sudacka-mreza.hr "Pretraživanje prodaje" page (search filters in
+  // pic #8 + the offer card fields in pic #7 + the six content components the
+  // intro text lists every offer must carry): subject of sale, price & sale
+  // conditions, ownership/possession (land registry + cadastre), owner data
+  // (debtor + court register), trustee (seller's representative) contact, and
+  // the competent court.
   'asset-sale': {
     type: 'asset-sale',
     icon: '🔨',
-    title: 'Prodaja imovine (aukcija / neposredna) / Asset sale (auction / direct)',
-    description: 'Notice of asset sale from the bankruptcy estate.',
+    title: 'Prodaja imovine — Web stečaj / Asset sale (Web Bankruptcy)',
+    description:
+      'Oglas o prodaji imovine iz stečajne mase (javna dražba ili neposredna prodaja). Ispunite sve dostupne parametre — odgovaraju pretrazi i prikazu ponuda na webu.',
     caseField: 'case_number',
     fields: [
       CASE,
-      { key: 'item_type', label: 'Vrsta imovine / Asset type', type: 'select', required: true, options: [
-        { label: 'Nekretnina (Real estate)', value: 'real_estate' },
-        { label: 'Pokretnina (Movable)', value: 'movable' },
-        { label: 'Pravo (Right)', value: 'rights' },
+
+      // --- Owner data (podaci o vlasniku — tvrtka u stečaju) ---
+      { key: 'debtor_name', label: 'Stečajni dužnik / Bankruptcy debtor (naziv ili ime)', type: 'text', required: true },
+      OIB, // debtor_oib
+      { key: 'court_register_mbs', label: 'MBS / OIB subjekta u sudskom registru / Court register no.', type: 'text', hint: 'Veza sa sudskim registrom trgovačkih društava.' },
+
+      // --- Court (podaci o sudu pred kojim se vodi postupak) ---
+      { key: 'court_name', label: 'Sud / Court (trgovački sud)', type: 'text', required: true, hint: 'npr. Trgovački sud u Zagrebu' },
+
+      // --- Trustee / seller's representative (stečajni upravitelj) ---
+      { key: 'trustee_name', label: 'Stečajni upravitelj / Bankruptcy trustee', type: 'text', required: true },
+      { key: 'trustee_licence', label: 'Broj licence upravitelja / Trustee licence no.', type: 'text' },
+      { key: 'trustee_address', label: 'Adresa upravitelja / Trustee address', type: 'text' },
+
+      // --- Subject of sale (predmet prodaje) ---
+      { key: 'asset_category', label: 'Kategorija imovine / Asset category', type: 'checkboxes', required: true, options: [
+        { label: 'Nekretnine (Immovable)', value: 'immovable' },
+        { label: 'Pokretnine (Movable)', value: 'movable' },
+        { label: 'Prava (Rights)', value: 'rights' },
       ]},
+      { key: 'asset_type', label: 'Vrsta imovine / Asset type', type: 'text', hint: 'npr. stan, poslovni prostor, vozilo, udjeli, potraživanje…' },
       { key: 'item_description', label: 'Opis imovine / Asset description', type: 'textarea', required: true, rows: 4 },
-      { key: 'item_location', label: 'Lokacija / Location', type: 'text' },
+      { key: 'item_location', label: 'Lokacija imovine / Asset location', type: 'text' },
+
+      // --- Ownership & possession (podaci o vlasništvu i posjedu — gruntovnica + katastar) ---
+      { key: 'land_registry', label: 'Zemljišnoknjižni uložak (gruntovnica) / Land registry folio', type: 'text', hint: 'Veza sa zemljišnom knjigom (zk.ul., zk.odjel).' },
+      { key: 'cadastre_parcel', label: 'Katastarska čestica (katastar) / Cadastral parcel', type: 'text', hint: 'Broj k.č. i katastarska općina.' },
+
+      // --- Price & sale conditions (cijena i uvjeti prodaje) ---
+      { key: 'value_eur', label: 'Procijenjena vrijednost (EUR) / Appraised value', type: 'currency' },
+      { key: 'value_hrk', label: 'Vrijednost (HRK, povijesno) / Value in HRK (legacy)', type: 'currency', hint: 'Samo za stare predmete prije uvođenja eura (2023).' },
       { key: 'sale_type', label: 'Način prodaje / Sale type', type: 'select', required: true, options: [
         { label: 'Javna dražba (Public auction)', value: 'auction' },
         { label: 'Neposredna prodaja (Direct sale)', value: 'direct_sale' },
+        { label: 'Prikupljanje ponuda (Call for bids)', value: 'call_for_bids' },
       ]},
-      { key: 'reserve_price_eur', label: 'Početna / početna cijena (EUR) / Reserve price', type: 'currency', required: true },
+      { key: 'reserve_price_eur', label: 'Početna cijena (EUR) / Starting price', type: 'currency', required: true },
       { key: 'deposit_eur', label: 'Jamčevina (EUR) / Deposit', type: 'currency' },
-      { key: 'sale_date', label: 'Datum prodaje / Sale date', type: 'date', required: true },
+      { key: 'bid_deadline', label: 'Rok za ponudu / Bid deadline', type: 'date' },
+      { key: 'sale_date', label: 'Datum dražbe / prodaje (Auction / sale date)', type: 'date', required: true },
       { key: 'sale_location', label: 'Mjesto prodaje / Sale location', type: 'text' },
-      { key: 'terms', label: 'Uvjeti / Terms & conditions', type: 'textarea', rows: 5 },
-      { key: 'contact', label: 'Kontakt za pregled / Viewing contact', type: 'text' },
+      { key: 'terms', label: 'Uvjeti, način i mjesto plaćanja / Conditions & payment terms', type: 'textarea', rows: 5 },
+
+      // --- Offer lifecycle status (Status — pic #8 filter) ---
+      { key: 'offer_status', label: 'Status oglasa / Offer status', type: 'select', options: [
+        { label: 'Aktualni oglas (Active)', value: 'active' },
+        { label: 'Završeni (Completed)', value: 'completed' },
+        { label: 'Povučeni (Withdrawn)', value: 'withdrawn' },
+      ]},
+
+      // --- Contact ---
+      { key: 'contact_email', label: 'Kontakt email / Contact email', type: 'email' },
+      { key: 'contact_phone', label: 'Kontakt telefon / Contact phone', type: 'text' },
+      { key: 'contact', label: 'Kontakt za pregled imovine / Viewing contact', type: 'text' },
     ],
   },
+}
+
+// Rich-text "case text" — the free-form textual part of every filing (the
+// "tekst oglasa" / obrazloženje / opis predmeta). Drazen's redesign brief asks
+// for a rich-text field on every case, so it is appended to all schemas below.
+const CASE_TEXT: FilingField = {
+  key: 'case_text',
+  label: 'Tekst predmeta / Case text (oglas, obrazloženje, opis)',
+  type: 'richtext',
+  rows: 14,
+  hint: 'Slobodan tekst predmeta — npr. puni tekst oglasa o prodaji ili obrazloženje. Podržava **bold**, *italic*, # naslove, - liste i [poveznice](url).',
+}
+
+for (const schema of Object.values(FILING_SCHEMAS)) {
+  schema.fields.push(CASE_TEXT)
 }
 
 export const FILING_TYPE_ORDER = [

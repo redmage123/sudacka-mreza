@@ -35,24 +35,54 @@ import subprocess
 import sys
 from pathlib import Path
 
+# torch._dynamo.config is a ConfigModuleInstance that dill can't pickle, which
+# breaks TRL's dataset.map fingerprinting under torch >= 2.10. Disable dynamo
+# before any torch import.
+os.environ.setdefault("TORCHDYNAMO_DISABLE", "1")
+os.environ.setdefault("HF_DATASETS_DISABLE_CACHING", "1")
+# Unsloth empties logits by default (memory). TRL's compute_loss needs them.
+os.environ.setdefault("UNSLOTH_RETURN_LOGITS", "1")
+
 # Soft import so this file can be linted without GPU deps installed.
 try:
     import torch  # type: ignore
+    import datasets as _datasets  # type: ignore
     from datasets import Dataset  # type: ignore
-    from transformers import AutoTokenizer, TrainingArguments  # type: ignore
-    from trl import SFTTrainer  # type: ignore
+    from transformers import AutoTokenizer  # type: ignore
+    from trl import SFTConfig, SFTTrainer  # type: ignore
     from unsloth import FastLanguageModel  # type: ignore
 except ImportError as e:  # pragma: no cover
     print(f"missing GPU deps: {e!r}\nrun: pip install 'unsloth[colab]' transformers datasets peft trl accelerate", file=sys.stderr)
     sys.exit(2)
 
+_datasets.disable_caching()
+
+# TRL 0.24 unconditionally calls entropy_from_logits(outputs.logits) for
+# logging. Under transformers 5.5.0, `outputs.logits` can be a callable
+# proxy rather than a tensor, which trips `.shape[:-1]`. We don't need
+# entropy logging — replace with a no-op tensor.
+import trl.trainer.utils as _trl_utils  # type: ignore
+import trl.trainer.sft_trainer as _trl_sft  # type: ignore
+def _noop_entropy(logits):  # noqa: ANN001
+    if torch.is_tensor(logits):
+        return torch.zeros(logits.shape[:-1], device=logits.device)
+    return torch.tensor(0.0)
+_trl_utils.entropy_from_logits = _noop_entropy
+# SFTTrainer imports entropy_from_logits by name into its own namespace.
+_trl_sft.entropy_from_logits = _noop_entropy
+
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     p.add_argument("--corpus", default="/workspace/eurlex/corpus.jsonl")
-    p.add_argument("--base", default="unsloth/gemma-3n-E4B-it-bnb-4bit")
+    # Gemma-4 (gemma-3n-E4B) full bf16 — production base for sudacka chat.
+    # The bnb-4bit variant is unusable under unsloth 2026.4.8 because the
+    # `per_layer_model_projection` weight stays packed in its 4-bit blob and
+    # the dequant patch never fires (forward crashes with shape 1×9175040).
+    # bf16 + LoRA + gradient checkpointing fits on a 24 GB A5000 at seq 1024.
+    p.add_argument("--base", default="unsloth/gemma-3n-E4B-it")
     p.add_argument("--out", default="/workspace/finetune/gemma-4-e4b-eurlex-v1")
-    p.add_argument("--max-seq-len", type=int, default=4096)
+    p.add_argument("--max-seq-len", type=int, default=1024)
     p.add_argument("--epochs", type=int, default=1)
     p.add_argument("--lr", type=float, default=2e-4)
     p.add_argument("--batch-size", type=int, default=1)
@@ -90,12 +120,12 @@ def main() -> None:
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
-    print("loading base model + tokenizer (4-bit)…")
+    print("loading base model + tokenizer (bf16)…")
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=args.base,
         max_seq_length=args.max_seq_len,
-        dtype=None,  # auto
-        load_in_4bit=True,
+        dtype=torch.bfloat16,
+        load_in_4bit=False,
     )
     # Gemma 3n loads as a multimodal Processor. SFTTrainer wants a plain
     # PreTrainedTokenizer — unwrap if needed.
@@ -117,29 +147,52 @@ def main() -> None:
 
     ds = load_corpus(args.corpus, args.max_docs)
 
+    # Pre-tokenize ourselves so TRL doesn't try to dataset.map() internally.
+    # TRL's map call dies in dill fingerprinting because torch._dynamo.config
+    # (a ConfigModuleInstance) ends up in the closure and can't be pickled.
+    # By providing a fixed `new_fingerprint`, datasets skips the dill step.
+    print(f"tokenizing {len(ds)} docs…")
+    def _tok(batch):
+        return tokenizer(
+            batch["text"],
+            truncation=True,
+            max_length=args.max_seq_len,
+            add_special_tokens=False,
+        )
+    ds = ds.map(
+        _tok,
+        batched=True,
+        remove_columns=["text"],
+        num_proc=1,
+        load_from_cache_file=False,
+        new_fingerprint="eurlex_tok_v1",
+    )
+
     print("starting SFT trainer…")
+    sft_cfg = SFTConfig(
+        per_device_train_batch_size=args.batch_size,
+        gradient_accumulation_steps=args.grad_accum,
+        num_train_epochs=args.epochs,
+        learning_rate=args.lr,
+        warmup_ratio=0.03,
+        logging_steps=20,
+        save_steps=500,
+        save_total_limit=2,
+        output_dir=str(out / "checkpoints"),
+        optim="adamw_8bit",
+        bf16=torch.cuda.is_bf16_supported(),
+        fp16=not torch.cuda.is_bf16_supported(),
+        report_to="none",
+        # Already tokenized — don't tell TRL to look for a text field.
+        max_length=args.max_seq_len,
+        packing=False,
+        dataset_kwargs={"skip_prepare_dataset": True},
+    )
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         train_dataset=ds,
-        dataset_text_field="text",
-        max_seq_length=args.max_seq_len,
-        packing=True,
-        args=TrainingArguments(
-            per_device_train_batch_size=args.batch_size,
-            gradient_accumulation_steps=args.grad_accum,
-            num_train_epochs=args.epochs,
-            learning_rate=args.lr,
-            warmup_ratio=0.03,
-            logging_steps=20,
-            save_steps=500,
-            save_total_limit=2,
-            output_dir=str(out / "checkpoints"),
-            optim="adamw_8bit",
-            bf16=torch.cuda.is_bf16_supported(),
-            fp16=not torch.cuda.is_bf16_supported(),
-            report_to="none",
-        ),
+        args=sft_cfg,
     )
     trainer.train()
 

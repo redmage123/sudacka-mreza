@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getAuthToken } from '@/api/client'
+import { mdToHtml } from '@/components/admin/MarkdownEditor'
 
 interface Filing {
   id: number | string
@@ -192,9 +193,22 @@ export default function AdminFilingsPage() {
                   </div>
                 </div>
                 {isOpen && (
-                  <pre className="mt-3 whitespace-pre-wrap text-xs text-[color:var(--color-text-muted)] bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded p-2 max-h-96 overflow-y-auto">
+                  <>
+                    {typeof d.data?.case_text === 'string' && d.data.case_text.trim() !== '' && (
+                      <div className="mt-3">
+                        <div className="text-xs font-semibold text-[color:var(--color-heading)] mb-1">
+                          Tekst predmeta / Case text
+                        </div>
+                        <div
+                          className="prose dark:prose-invert max-w-none text-sm bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded p-3 max-h-96 overflow-y-auto"
+                          dangerouslySetInnerHTML={{ __html: mdToHtml(d.data.case_text) }}
+                        />
+                      </div>
+                    )}
+                    <pre className="mt-3 whitespace-pre-wrap text-xs text-[color:var(--color-text-muted)] bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded p-2 max-h-96 overflow-y-auto">
 {JSON.stringify(d.data, null, 2)}
-                  </pre>
+                    </pre>
+                  </>
                 )}
                 {viewing === String(d.id) && d.attachmentBase64 && (
                   <div className="mt-3">
