@@ -9,14 +9,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   const columns = [
-    {
-      heading: t('decisions'),
-      links: [
-        { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/sudska-praksa/vts`, label: t('decisionsVTS') },
-        { to: `/${lang}/sudska-praksa/esljp`, label: t('decisionsESLJP') },
-      ],
-    },
+    // REDESIGN §3.1: Sudska Praksa cut from main menu (mirror Header.tsx).
     {
       heading: t('experts'),
       links: [

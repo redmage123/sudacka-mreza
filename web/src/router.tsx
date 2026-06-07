@@ -86,6 +86,8 @@ const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPasswordPage'))
 const AudioGalleriesPage = lazy(() => import('@/pages/media/AudioGalleriesPage'))
 const VideoGalleriesPage = lazy(() => import('@/pages/media/VideoGalleriesPage'))
 const PressClippingPage  = lazy(() => import('@/pages/media/PressClippingPage'))
+const LinksPage = lazy(() => import('@/pages/LinksPage'))
+const DonationsPage = lazy(() => import('@/pages/DonationsPage'))
 
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'))
 const MyLibraryPage = lazy(() => import('@/pages/MyLibraryPage'))
@@ -215,6 +217,10 @@ export const router = createBrowserRouter([
       { path: 'rokovi', element: S(DeadlineCalculatorPage) },
       { path: 'pravna-pomoc', element: S(LegalAidPage) },
       { path: 'slobodna-pravna-pomoc', element: S(LegalAidPage) },
+      { path: 'besplatna-pravna-pomoc', element: S(LegalAidPage) },
+      { path: 'linkovi', element: S(LinksPage) },
+      { path: 'donirajte', element: S(DonationsPage) },
+      { path: 'donacija', element: S(DonationsPage) },
       { path: 'o-nama', element: S(AboutPage) },
       { path: 'kontakt', element: S(ContactPage) },
       { path: 'mediji/audio',  element: S(AudioGalleriesPage) },

@@ -17,14 +17,7 @@ export function Sidebar() {
   const lang = params.lang ?? 'hr'
 
   const sections: SidebarSection[] = [
-    {
-      heading: t('decisions'),
-      items: [
-        { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/sudska-praksa/vts`, label: t('decisionsVTS') },
-        { to: `/${lang}/sudska-praksa/esljp`, label: t('decisionsESLJP') },
-      ],
-    },
+    // REDESIGN §3.1: Sudska Praksa cut from main menu.
     {
       heading: t('experts'),
       items: [

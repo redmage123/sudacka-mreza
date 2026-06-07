@@ -100,21 +100,19 @@ export function Header() {
         { to: `/${lang}/pristojbe`, label: t('calculator') },
       ],
     },
-    {
-      label: t('decisions'),
-      items: [
-        { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/eur-lex`, label: t('eurlexSearch', 'EUR-Lex search') },
-        { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
-        { to: `/${lang}/rokovi`, label: t('deadlines') },
-      ],
-    },
+    // REDESIGN §3.1: Sudska Praksa (Case Law) section cut from main menu.
+    // The underlying routes still exist for backwards compatibility and
+    // deep-linking, but they no longer have a top-level dropdown. EUR-Lex
+    // + legal-news + deadlines stay reachable via the Services dropdown.
     {
       label: t('services'),
       items: [
         { to: `/${lang}/dokumenti/generator`, label: t('documentGenerator') },
         { to: `/${lang}/pravna-pomoc`, label: t('legalAid') },
         { to: `/${lang}/pracenje`, label: t('watchlist') },
+        { to: `/${lang}/eur-lex`, label: t('eurlexSearch', 'EUR-Lex search') },
+        { to: `/${lang}/novosti/pravne-vijesti`, label: t('legalNews') },
+        { to: `/${lang}/rokovi`, label: t('deadlines') },
       ],
     },
     {

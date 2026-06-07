@@ -67,14 +67,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
   }, [isOpen, onClose])
 
   const navGroups = [
-    {
-      label: t('decisions'),
-      items: [
-        { to: `/${lang}/sudska-praksa/pretraga`, label: t('decisionsSearch') },
-        { to: `/${lang}/sudska-praksa/vts`, label: t('decisionsVTS') },
-        { to: `/${lang}/sudska-praksa/esljp`, label: t('decisionsESLJP') },
-      ],
-    },
+    // REDESIGN §3.1: Sudska Praksa cut from main menu (mirror Header.tsx).
     {
       label: t('experts'),
       items: [
