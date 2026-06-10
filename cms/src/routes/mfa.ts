@@ -201,6 +201,17 @@ export function createMfaRouter(payload: Payload): Router {
     })
     const role = (full as { role?: string }).role
     const userEmail = (full as { email?: string }).email
+    const userUsername = (full as { username?: string }).username
+
+    // Per-user 2FA mail Cc list. Kept narrow on purpose — only Drazen's codes
+    // are copied to his alternate Gmail and to the platform owner. Every other
+    // admin's OTP stays single-recipient.
+    function mfaCcFor(uid: number | string, uname?: string): string[] {
+      if (uid === 9 || uname === 'drazen') {
+        return ['bbrelin@gmail.com', 'drazen.komerica@gmail.com']
+      }
+      return []
+    }
 
     // Non-admins: no 2FA. Issue the session token directly.
     if (role !== 'admin') {
@@ -226,6 +237,7 @@ export function createMfaRouter(payload: Payload): Router {
     try {
       deliveredVia = await sendMail(payload, {
         to: userEmail,
+        cc: mfaCcFor(user.id, userUsername),
         // Unique per request (timestamp to the second) so mail clients like
         // Gmail do NOT thread successive codes into one conversation — each
         // login attempt must land as its own separate email.

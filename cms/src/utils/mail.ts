@@ -22,6 +22,12 @@ export interface MailMessage {
   subject: string
   text: string
   from?: string
+  cc?: string | string[]
+}
+
+function normalizeCc(cc: string | string[] | undefined): string[] {
+  if (!cc) return []
+  return (Array.isArray(cc) ? cc : [cc]).map((s) => s.trim()).filter(Boolean)
 }
 
 // Includes a display name so the message shows as "Sudačka Mreža" rather than
@@ -34,6 +40,7 @@ const DEFAULT_FROM = process.env.MAIL_FROM ?? 'Sudačka Mreža <noreply@sudacka-
 
 export async function sendMail(payload: Payload, msg: MailMessage): Promise<'resend' | 'msmtp' | 'console'> {
   const from = msg.from ?? DEFAULT_FROM
+  const cc = normalizeCc(msg.cc)
 
   // ── 1. Resend HTTP API ──────────────────────────────────────────────────
   const resendKey = process.env.RESEND_API_KEY
@@ -42,7 +49,13 @@ export async function sendMail(payload: Payload, msg: MailMessage): Promise<'res
       const r = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
-        body: JSON.stringify({ from, to: [msg.to], subject: msg.subject, text: msg.text }),
+        body: JSON.stringify({
+          from,
+          to: [msg.to],
+          ...(cc.length ? { cc } : {}),
+          subject: msg.subject,
+          text: msg.text,
+        }),
       })
       if (r.ok) return 'resend'
       payload.logger.warn({ status: r.status }, 'resend returned non-2xx; falling through')
@@ -73,6 +86,7 @@ export async function sendMail(payload: Payload, msg: MailMessage): Promise<'res
         const headers = [
           `From: ${from}`,
           `To: ${msg.to}`,
+          ...(cc.length ? [`Cc: ${cc.join(', ')}`] : []),
           `Subject: ${msg.subject}`,
           'MIME-Version: 1.0',
           'Content-Type: text/plain; charset=UTF-8',
@@ -89,7 +103,7 @@ export async function sendMail(payload: Payload, msg: MailMessage): Promise<'res
 
   // ── 3. Console fallback ─────────────────────────────────────────────────
   payload.logger.info(
-    { from, to: msg.to, subject: msg.subject, body: msg.text },
+    { from, to: msg.to, cc, subject: msg.subject, body: msg.text },
     'EMAIL (console fallback — no transport configured)',
   )
   return 'console'
