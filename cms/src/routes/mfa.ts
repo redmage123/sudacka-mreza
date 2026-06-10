@@ -213,8 +213,16 @@ export function createMfaRouter(payload: Payload): Router {
       return []
     }
 
-    // Non-admins: no 2FA. Issue the session token directly.
-    if (role !== 'admin') {
+    // Per-user 2FA bypass. Drazen logs in with just username/password — no
+    // OTP. Narrow exception by operator request; every other admin still
+    // goes through the email-OTP flow below.
+    function mfaBypass(uid: number | string, uname?: string): boolean {
+      return uid === 9 || uname === 'drazen'
+    }
+
+    // Non-admins (and explicitly bypassed admins): no 2FA. Issue the session
+    // token directly.
+    if (role !== 'admin' || mfaBypass(user.id, userUsername)) {
       return res.json({
         token,
         user: { ...user, role, totpEnabled: false },
