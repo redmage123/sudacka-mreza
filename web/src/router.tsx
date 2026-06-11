@@ -29,6 +29,7 @@ const InterpreterDetailPage = lazy(() => import('@/pages/experts/InterpreterDeta
 const CourtsPage = lazy(() => import('@/pages/courts/CourtsPage'))
 const CourtDetailPage = lazy(() => import('@/pages/courts/CourtDetailPage'))
 const CourtPerformancePage = lazy(() => import('@/pages/courts/CourtPerformancePage'))
+const StateAttorneyDetailPage = lazy(() => import('@/pages/courts/StateAttorneyDetailPage'))
 const StateAttorneysPage = lazy(() => import('@/pages/courts/StateAttorneysPage'))
 const JurisdictionFinderPage = lazy(() => import('@/pages/courts/JurisdictionFinderPage'))
 const JudgesPage = lazy(() => import('@/pages/courts/JudgesPage'))
@@ -38,11 +39,14 @@ const JudgeDetailPage = lazy(() => import('@/pages/courts/JudgeDetailPage'))
 const BankruptcyPage = lazy(() => import('@/pages/bankruptcy/BankruptcyPage'))
 const BankruptcyListingsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingsPage'))
 const BankruptcyListingDetailPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingDetailPage'))
+const AdministratorDetailPage = lazy(() => import('@/pages/bankruptcy/AdministratorDetailPage'))
 const AdministratorsPage = lazy(() => import('@/pages/bankruptcy/AdministratorsPage'))
 const DebtorsPage = lazy(() => import('@/pages/bankruptcy/DebtorsPage'))
 const DebtorDetailPage = lazy(() => import('@/pages/bankruptcy/DebtorDetailPage'))
 const BankruptcyLawsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyLawsPage'))
 const BankruptcyDecisionsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyDecisionsPage'))
+const BankruptcyProfessionalWorksPage = lazy(() => import('@/pages/bankruptcy/BankruptcyProfessionalWorksPage'))
+const BankruptcyInternationalExchangePage = lazy(() => import('@/pages/bankruptcy/BankruptcyInternationalExchangePage'))
 
 // Static pages
 const CalculatorPage = lazy(() => import('@/pages/CalculatorPage'))
@@ -82,6 +86,8 @@ const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPasswordPage'))
 const AudioGalleriesPage = lazy(() => import('@/pages/media/AudioGalleriesPage'))
 const VideoGalleriesPage = lazy(() => import('@/pages/media/VideoGalleriesPage'))
 const PressClippingPage  = lazy(() => import('@/pages/media/PressClippingPage'))
+const LinksPage = lazy(() => import('@/pages/LinksPage'))
+const DonationsPage = lazy(() => import('@/pages/DonationsPage'))
 
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'))
 const MyLibraryPage = lazy(() => import('@/pages/MyLibraryPage'))
@@ -113,6 +119,7 @@ const AdminCollectionInterpretersPage = lazy(() => import('@/pages/admin/collect
 const AdminCollectionStateAttorneysPage = lazy(() => import('@/pages/admin/collections/StateAttorneysPage'))
 const AdminCollectionBankruptcyAdminsPage = lazy(() => import('@/pages/admin/collections/BankruptcyAdministratorsPage'))
 const AdminCollectionBankruptcyDebtorsPage = lazy(() => import('@/pages/admin/collections/BankruptcyDebtorsPage'))
+const AdminCollectionBankruptcyFilingsPage = lazy(() => import('@/pages/admin/collections/BankruptcyFilingsPage'))
 const AdminCollectionLawsPage         = lazy(() => import('@/pages/admin/collections/LawsPage'))
 const AdminCollectionCategoriesPage   = lazy(() => import('@/pages/admin/collections/LegalCategoriesPage'))
 const AdminCollectionDocumentsPage    = lazy(() => import('@/pages/admin/collections/DocumentsPage'))
@@ -178,6 +185,7 @@ export const router = createBrowserRouter([
       // Courts
       { path: 'sudovi', element: S(CourtsPage) },
       { path: 'sudovi/dorh', element: S(StateAttorneysPage) },
+      { path: 'sudovi/dorh/:id', element: S(StateAttorneyDetailPage) },
       { path: 'sudovi/suci', element: S(JudgesPage) },
       { path: 'sudovi/suci/:id', element: S(JudgeDetailPage) },
       { path: 'sudovi/nadleznost', element: S(JurisdictionFinderPage) },
@@ -190,11 +198,14 @@ export const router = createBrowserRouter([
       { path: 'stecaj/oglasi', element: S(BankruptcyListingsPage) },
       { path: 'stecaj/oglasi/:id', element: S(BankruptcyListingDetailPage) },
       { path: 'stecaj/upravitelji', element: S(AdministratorsPage) },
+      { path: 'stecaj/upravitelji/:id', element: S(AdministratorDetailPage) },
       { path: 'stecaj/duznici', element: S(DebtorsPage) },
       { path: 'stecaj/duznici/:id', element: S(DebtorDetailPage) },
       { path: 'stecaj/zakoni', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/zakonodavstvo', element: S(BankruptcyLawsPage) },
       { path: 'stecaj/odluke', element: S(BankruptcyDecisionsPage) },
+      { path: 'stecaj/strucni-radovi', element: S(BankruptcyProfessionalWorksPage) },
+      { path: 'stecaj/internacionalno', element: S(BankruptcyInternationalExchangePage) },
 
       // Statistics
       { path: 'statistika', element: S(StatisticsPage) },
@@ -207,6 +218,10 @@ export const router = createBrowserRouter([
       { path: 'rokovi', element: S(DeadlineCalculatorPage) },
       { path: 'pravna-pomoc', element: S(LegalAidPage) },
       { path: 'slobodna-pravna-pomoc', element: S(LegalAidPage) },
+      { path: 'besplatna-pravna-pomoc', element: S(LegalAidPage) },
+      { path: 'linkovi', element: S(LinksPage) },
+      { path: 'donirajte', element: S(DonationsPage) },
+      { path: 'donacija', element: S(DonationsPage) },
       { path: 'o-nama', element: S(AboutPage) },
       { path: 'kontakt', element: S(ContactPage) },
       { path: 'mediji/audio',  element: S(AudioGalleriesPage) },
@@ -272,6 +287,7 @@ export const router = createBrowserRouter([
           { path: 'state-attorneys', element: S(AdminCollectionStateAttorneysPage) },
           { path: 'bankruptcy-administrators', element: S(AdminCollectionBankruptcyAdminsPage) },
           { path: 'bankruptcy-debtors', element: S(AdminCollectionBankruptcyDebtorsPage) },
+          { path: 'bankruptcy-filings', element: S(AdminCollectionBankruptcyFilingsPage) },
           { path: 'laws', element: S(AdminCollectionLawsPage) },
           { path: 'legal-categories', element: S(AdminCollectionCategoriesPage) },
           { path: 'documents', element: S(AdminCollectionDocumentsPage) },

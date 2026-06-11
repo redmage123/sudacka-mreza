@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
@@ -10,11 +10,15 @@ import { getAuthToken } from '@/api/client'
 export interface FieldDef {
   name: string
   label?: string
-  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines'
+  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines' | 'relationship'
   required?: boolean
   options?: Array<{ label: string; value: string }>
   itemKey?: string
   placeholder?: string
+  /** For type==='relationship': collection slug to fetch options from, e.g. 'courts'. */
+  relationTo?: string
+  /** For type==='relationship': field on the related doc to use as the display label (default 'name'). */
+  relationLabel?: string
 }
 
 export interface CollectionAdminConfig {
@@ -43,6 +47,67 @@ async function authFetch(path: string, init?: RequestInit): Promise<Response> {
       ...(init?.headers ?? {}),
     },
   })
+}
+
+// Per-collection in-memory cache so the picker doesn't re-fetch on every row open.
+const relationshipOptionsCache = new Map<string, Array<{ id: number | string; label: string }>>()
+
+function RelationshipPicker({
+  field,
+  value,
+  onChange,
+  common,
+}: {
+  field: FieldDef
+  value: number | string | { id: number | string } | null | undefined
+  onChange: (v: number | string | null) => void
+  common: string
+}) {
+  const slug = field.relationTo ?? ''
+  const labelField = field.relationLabel ?? 'name'
+  const [opts, setOpts] = useState<Array<{ id: number | string; label: string }>>(
+    () => relationshipOptionsCache.get(slug) ?? [],
+  )
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    if (!slug || relationshipOptionsCache.has(slug)) return
+    setLoading(true)
+    authFetch(`/api/${slug}?limit=1000&depth=0&sort=${encodeURIComponent(labelField)}`)
+      .then((r) => (r.ok ? r.json() : { docs: [] }))
+      .then((d: { docs?: Array<Record<string, unknown>> }) => {
+        const rows = (d.docs ?? []).map((doc) => ({
+          id: (doc.id as number | string),
+          label: String(doc[labelField] ?? doc.id ?? '?'),
+        }))
+        relationshipOptionsCache.set(slug, rows)
+        setOpts(rows)
+      })
+      .catch(() => setOpts([]))
+      .finally(() => setLoading(false))
+  }, [slug, labelField])
+  const current =
+    value && typeof value === 'object' && 'id' in value ? value.id : (value as number | string | null | undefined)
+  return (
+    <select
+      required={field.required}
+      value={current == null ? '' : String(current)}
+      onChange={(e) => {
+        const v = e.target.value
+        if (!v) onChange(null)
+        // Payload relationship IDs are numeric in Postgres but the response may have string ids — preserve type.
+        else if (/^\d+$/.test(v)) onChange(Number(v))
+        else onChange(v)
+      }}
+      className={common}
+    >
+      <option value="">{loading ? '… učitavanje' : '—'}</option>
+      {opts.map((o) => (
+        <option key={String(o.id)} value={String(o.id)}>
+          {o.label}
+        </option>
+      ))}
+    </select>
+  )
 }
 
 function blankRecord(fields: FieldDef[], defaults?: Record<string, unknown>): Record<string, unknown> {
@@ -89,6 +154,15 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
   const [error, setError] = useState<string | null>(null)
   const [flash, setFlash] = useState<string | null>(null)
   const [editing, setEditing] = useState<Record<string, unknown> | null>(null)
+  const editingRef = useRef<HTMLDivElement | null>(null)
+
+  // Scroll the edit form into view when a row is selected so the user
+  // doesn't miss it appearing above a long table.
+  useEffect(() => {
+    if (editing && editingRef.current) {
+      editingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [editing])
   const [submitting, setSubmitting] = useState(false)
 
   const blank = useMemo(() => blankRecord(config.fields, config.defaults), [config])
@@ -190,6 +264,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
       {flash && <div className="mb-3 rounded bg-green-50 border border-green-300 px-3 py-2 text-sm text-green-800">{flash}</div>}
       {error && <div className="mb-3 rounded bg-red-50 border border-red-300 px-3 py-2 text-sm text-red-800">{error}</div>}
 
+      <div ref={editingRef} />
       {editing ? (
         <form onSubmit={save} className="space-y-3 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-4 mb-6">
           <h3 className="font-semibold">{editing.id ? `Edit #${String(editing.id)}` : 'Create new'}</h3>
@@ -214,6 +289,13 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                     <option value="">—</option>
                     {f.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
+                ) : f.type === 'relationship' ? (
+                  <RelationshipPicker
+                    field={f}
+                    value={value as number | string | { id: number | string } | null | undefined}
+                    onChange={onChange}
+                    common={common}
+                  />
                 ) : f.type === 'lines' ? (
                   <textarea
                     rows={4}
@@ -261,7 +343,11 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
           <table className="w-full text-sm">
             <thead className="text-left">
               <tr className="border-b border-[color:var(--color-border)]">
-                {config.columns.map((c) => <th key={c} className="py-2 pr-3">{c}</th>)}
+                {config.columns.map((c) => {
+                  const field = config.fields.find((f) => f.name === c)
+                  const headerLabel = field ? labelOf(field, t) : c.charAt(0).toUpperCase() + c.slice(1)
+                  return <th key={c} className="py-2 pr-3">{headerLabel}</th>
+                })}
                 <th className="py-2 pr-3">Actions</th>
               </tr>
             </thead>
@@ -382,7 +468,7 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       ]},
       { name: 'firstName',          type: 'text',     label: 'admin.collections.judges.firstName' },
       { name: 'lastName',           type: 'text',     label: 'admin.collections.judges.lastName' },
-      { name: 'court',              type: 'number',   label: 'admin.collections.judges.court' },
+      { name: 'court',              type: 'relationship', relationTo: 'courts', relationLabel: 'name', label: 'admin.collections.judges.court' },
       { name: 'department',         type: 'text',     label: 'admin.collections.judges.department' },
       { name: 'yearsOfExperience',  type: 'number',   label: 'admin.collections.judges.yearsOfExperience' },
       { name: 'lang', type: 'select',
@@ -472,6 +558,41 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'phone', type: 'text', label: 'admin.collections.bankruptcyDebtors.phone' },
       { name: 'email', type: 'text', label: 'admin.collections.bankruptcyDebtors.email' },
       { name: 'notes', type: 'textarea', label: 'admin.collections.bankruptcyDebtors.notes' },
+    ],
+  },
+  'bankruptcy-filings': {
+    slug: 'bankruptcy-filings',
+    title: 'admin.collections.bankruptcyFilings.title',
+    columns: ['filingType', 'caseNumber', 'status', 'submittedBy'],
+    fields: [
+      { name: 'filingType', type: 'select', required: true,
+        label: 'admin.collections.bankruptcyFilings.filingType',
+        options: [
+          { label: 'Prijedlog za pokretanje', value: 'motion-to-open' },
+          { label: 'Prijava tražbine', value: 'prijava-trazbine' },
+          { label: 'Popis imovine', value: 'asset-inventory' },
+          { label: 'Prodaja imovine', value: 'asset-sale' },
+          { label: 'Izvještaj stečajnog upravitelja', value: 'trustee-report' },
+          { label: 'Prijedlog raspodjele', value: 'distribution-proposal' },
+          { label: 'Završni račun', value: 'final-accounting' },
+          { label: 'Plan restrukturiranja', value: 'restructuring-plan' },
+          { label: 'Predstečajna nagodba', value: 'pre-bankruptcy-settlement' },
+        ],
+      },
+      { name: 'caseNumber', type: 'text', label: 'admin.collections.bankruptcyFilings.caseNumber' },
+      { name: 'status', type: 'select', required: true,
+        label: 'admin.collections.bankruptcyFilings.status',
+        options: [
+          { label: 'Na pregledu', value: 'pending_review' },
+          { label: 'Odobreno', value: 'approved' },
+          { label: 'Odbijeno', value: 'rejected' },
+        ],
+      },
+      { name: 'submittedBy', type: 'text', label: 'admin.collections.bankruptcyFilings.submittedBy' },
+      { name: 'attachmentFilename', type: 'text',
+        label: 'admin.collections.bankruptcyFilings.attachmentFilename' },
+      { name: 'reviewNotes', type: 'textarea',
+        label: 'admin.collections.bankruptcyFilings.reviewNotes' },
     ],
   },
   laws: {

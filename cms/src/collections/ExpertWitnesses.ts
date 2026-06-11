@@ -1,6 +1,13 @@
 import type { CollectionConfig } from 'payload'
 import { generateSlug } from '../hooks/generateSlug.js'
 import { isAdmin, isAdminOrEditor, publicRead, membersOnlyRead } from '../access.js'
+import {
+  COUNTY_OPTIONS,
+  EXPERT_AREA_OPTIONS,
+  EDUCATION_LEVELS,
+  EXPERT_TYPES,
+} from '../data/croatia-taxonomy.js'
+import { workingHoursField } from '../data/workingHoursField.js'
 
 export const ExpertWitnesses: CollectionConfig = {
   slug: 'expert-witnesses',
@@ -33,19 +40,38 @@ export const ExpertWitnesses: CollectionConfig = {
       fields: [
         {
           name: 'area',
-          type: 'text',
+          type: 'select',
           required: true,
-          label: 'Grana djelatnosti / Branch',
+          label: 'Grana djelatnosti',
+          options: [...EXPERT_AREA_OPTIONS],
+          admin: {
+            description: 'Kategorija iz Imenika stalnih sudskih vještaka.',
+          },
         },
         {
           name: 'subArea',
           type: 'text',
-          label: 'Podgrana djelatnosti / Sub-branch',
+          label: 'Uža specijalizacija',
           admin: {
-            description: 'Uža specijalizacija unutar grane (opcionalno).',
+            description: 'Uža specijalizacija unutar grane (opcionalno, slobodan tekst).',
           },
         },
       ],
+    },
+    {
+      name: 'expertType',
+      type: 'select',
+      label: 'Vrsta vještaka',
+      options: EXPERT_TYPES.map((t) => ({ label: t.label, value: t.value })),
+      admin: {
+        description: 'Vrsta upisa u Imenik.',
+      },
+    },
+    {
+      name: 'educationLevel',
+      type: 'select',
+      label: 'Razina obrazovanja',
+      options: EDUCATION_LEVELS.map((e) => ({ label: e.label, value: e.value })),
     },
     {
       name: 'languages',
@@ -70,14 +96,23 @@ export const ExpertWitnesses: CollectionConfig = {
     },
     {
       name: 'county',
-      type: 'text',
+      type: 'select',
       label: 'Županija',
+      options: [...COUNTY_OPTIONS],
     },
     {
       name: 'city',
       type: 'text',
       label: 'Grad',
+      admin: {
+        description: 'Grad/mjesto unutar odabrane županije.',
+      },
     },
+    workingHoursField(
+      'workingHours',
+      'Radno vrijeme',
+      'Radno vrijeme za prijem stranaka po danima u tjednu.',
+    ),
     {
       name: 'company',
       type: 'text',
@@ -208,35 +243,6 @@ export const ExpertWitnesses: CollectionConfig = {
       options: [
         { label: 'Hrvatski', value: 'hr' },
         { label: 'English', value: 'en' },
-        { label: 'Deutsch', value: 'de' },
-        { label: 'Français', value: 'fr' },
-        { label: 'Български', value: 'bg' },
-        { label: 'Čeština', value: 'cs' },
-        { label: 'Dansk', value: 'da' },
-        { label: 'Ελληνικά', value: 'el' },
-        { label: 'Español', value: 'es' },
-        { label: 'Eesti', value: 'et' },
-        { label: 'Euskara', value: 'eu' },
-        { label: 'Suomi', value: 'fi' },
-        { label: 'Gaeilge', value: 'ga' },
-        { label: 'Magyar', value: 'hu' },
-        { label: 'Íslenska', value: 'is' },
-        { label: 'Italiano', value: 'it' },
-        { label: '日本語', value: 'ja' },
-        { label: 'Lietuvių', value: 'lt' },
-        { label: 'Latviešu', value: 'lv' },
-        { label: 'Malti', value: 'mt' },
-        { label: 'Norsk bokmål', value: 'nb' },
-        { label: 'Nederlands', value: 'nl' },
-        { label: 'Polski', value: 'pl' },
-        { label: 'Português', value: 'pt' },
-        { label: 'Română', value: 'ro' },
-        { label: 'Slovenčina', value: 'sk' },
-        { label: 'Slovenščina', value: 'sl' },
-        { label: 'Svenska', value: 'sv' },
-        { label: 'Українська', value: 'uk' },
-        { label: 'العربية', value: 'ar' },
-        { label: '中文', value: 'zh' },
       ],
     },
     {

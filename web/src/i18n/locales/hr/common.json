@@ -404,8 +404,11 @@
       "name": "Ime i prezime",
       "licenseNo": "Broj licence",
       "contact": "Kontakt",
-      "assignedCourts": "Dodijeljeni sudovi"
-    }
+      "assignedCourts": "Dodijeljeni sudovi",
+      "court": "Sud",
+      "city": "Grad"
+    },
+    "filterCourtAll": "Svi sudovi"
   },
   "laws": {
     "title": "Stečajno zakonodavstvo",
@@ -976,6 +979,177 @@
       "pageOf": "Stranica {{page}} od {{total}}",
       "empty": "Nema zapisa.",
       "searchPlaceholder": "Filtriraj po {{col}}…"
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API ključevi",
+        "label": "Oznaka",
+        "email": "Email",
+        "organization": "Organizacija",
+        "rateLimit": "Ograničenje (req/min)",
+        "active": "Aktivan"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Stečajni upravitelji",
+        "name": "Ime i prezime",
+        "licenceNumber": "Broj licence",
+        "phone": "Telefon",
+        "email": "Email",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "courts": "Dodijeljeni sudovi"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Dužnici (stečaj)",
+        "name": "Naziv / Ime",
+        "oib": "OIB",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "phone": "Telefon",
+        "email": "Email",
+        "notes": "Napomene"
+      },
+      "courts": {
+        "__title": "Sudovi",
+        "name": "Naziv suda",
+        "type": "Vrsta suda",
+        "president": "Predsjednik suda",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "phone": "Telefon",
+        "fax": "Faks",
+        "email": "Email",
+        "website": "Web stranica",
+        "notes": "Napomene"
+      },
+      "documents": {
+        "__title": "Dokumenti",
+        "title": "Naslov",
+        "description": "Opis",
+        "category": "Kategorija",
+        "publishedAt": "Datum objave",
+        "lang": "Jezik"
+      },
+      "expertWitnesses": {
+        "__title": "Vještaci",
+        "name": "Ime i prezime",
+        "company": "Tvrtka / ured",
+        "specialityAreas": "Područja vještačenja",
+        "languages": "Jezici",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verificiran",
+        "lang": "Jezik unosa",
+        "notes": "Napomene"
+      },
+      "interpreters": {
+        "__title": "Sudski tumači",
+        "name": "Ime i prezime",
+        "company": "Tvrtka / ured",
+        "languagePairs": "Jezični parovi",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "phone": "Telefon",
+        "email": "Email",
+        "verified": "Verificiran",
+        "lang": "Jezik unosa"
+      },
+      "judges": {
+        "__title": "Suci",
+        "name": "Puno ime",
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "court": "Sud",
+        "specialization": "Specijalizacija",
+        "department": "Odjel",
+        "appointmentDate": "Datum imenovanja (YYYY-MM-DD)",
+        "yearsOfExperience": "Godina iskustva",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Jezik unosa"
+      },
+      "laws": {
+        "__title": "Zakoni",
+        "title": "Naslov",
+        "type": "Vrsta",
+        "category": "Pravno područje",
+        "year": "Godina",
+        "officialGazette": "Narodne novine (NN)",
+        "externalUrl": "Vanjska poveznica",
+        "effectiveDate": "Datum stupanja na snagu",
+        "fullText": "Puni tekst",
+        "summary": "Sažetak",
+        "lang": "Jezik"
+      },
+      "legalCategories": {
+        "__title": "Pravne kategorije",
+        "name": "Naziv",
+        "description": "Opis"
+      },
+      "pages": {
+        "__title": "Stranice",
+        "title": "Naslov",
+        "slug": "Slug (URL)",
+        "content": "Sadržaj",
+        "metaTitle": "Meta naslov",
+        "metaDescription": "Meta opis",
+        "lang": "Jezik"
+      },
+      "stateAttorneys": {
+        "__title": "Državna odvjetništva",
+        "name": "Naziv odvjetništva",
+        "address": "Adresa",
+        "city": "Grad",
+        "county": "Županija",
+        "phone": "Telefon",
+        "fax": "Faks",
+        "email": "Email"
+      },
+      "bankruptcyFilings": {
+        "__title": "Stečajni podnesci",
+        "title": "Stečajni podnesci",
+        "filingType": "Vrsta podneska",
+        "caseNumber": "Broj predmeta",
+        "status": "Status",
+        "submittedBy": "Podnositelj",
+        "attachmentFilename": "Naziv priloga",
+        "reviewNotes": "Bilješke recenzije"
+      }
+    },
+    "nav": {
+      "dashboard": "Nadzorna ploča",
+      "users": "Korisnici",
+      "gdpr": "GDPR zahtjevi",
+      "bankruptcy": "Stečajni oglasi",
+      "filings": "Podnesci upravitelja",
+      "flags": "Prijave netočnosti",
+      "news": "Vijesti",
+      "media": "Mediji",
+      "audit": "Zapisnik aktivnosti",
+      "content": "Sadržaj",
+      "courts": "Sudovi",
+      "judges": "Suci",
+      "experts": "Vještaci",
+      "interpreters": "Tumači",
+      "stateAttorneys": "Državna odvjetništva",
+      "bankAdmins": "Stečajni upravitelji",
+      "bankDebtors": "Stečajni dužnici",
+      "bankFilings": "Stečajni podnesci",
+      "laws": "Zakoni",
+      "categories": "Kategorije",
+      "documents": "Dokumenti",
+      "pages": "Stranice",
+      "apiKeys": "API ključevi",
+      "config": "Konfiguracija",
+      "globals": "Globalne postavke"
     }
-  }
+  },
+  "viewDetails": "Pogledaj detalje"
 }

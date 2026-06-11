@@ -383,10 +383,13 @@
     "loadError": "Unable to load administrators. Please try again.",
     "fields": {
       "name": "Name",
-      "licenseNo": "Licence No.",
+      "licenseNo": "License Number",
       "contact": "Contact",
-      "assignedCourts": "Assigned courts"
-    }
+      "assignedCourts": "Assigned Courts",
+      "court": "Court",
+      "city": "City"
+    },
+    "filterCourtAll": "All Courts"
   },
   "laws": {
     "title": "Bankruptcy Legislation",
@@ -971,6 +974,177 @@
       "pageOf": "Page {{page}} of {{total}}",
       "empty": "No records.",
       "searchPlaceholder": "Filter by {{col}}…"
+    },
+    "collections": {
+      "apiKeys": {
+        "__title": "API Keys",
+        "label": "Label",
+        "email": "Email",
+        "organization": "Organization",
+        "rateLimit": "Rate Limit (req/min)",
+        "active": "Active"
+      },
+      "bankruptcyAdministrators": {
+        "__title": "Bankruptcy Administrators",
+        "name": "Name",
+        "licenceNumber": "License Number",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "courts": "Assigned Courts"
+      },
+      "bankruptcyDebtors": {
+        "__title": "Debtors (Bankruptcy)",
+        "name": "Name",
+        "oib": "OIB",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "notes": "Notes"
+      },
+      "courts": {
+        "__title": "Courts",
+        "name": "Court Name",
+        "type": "Court Type",
+        "president": "Court President",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "fax": "Fax",
+        "email": "Email",
+        "website": "Website",
+        "notes": "Notes"
+      },
+      "documents": {
+        "__title": "Documents",
+        "title": "Title",
+        "description": "Description",
+        "category": "Category",
+        "publishedAt": "Published At",
+        "lang": "Language"
+      },
+      "expertWitnesses": {
+        "__title": "Expert Witnesses",
+        "name": "Name",
+        "company": "Company / Firm",
+        "specialityAreas": "Specialty Areas",
+        "languages": "Languages",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry Language",
+        "notes": "Notes"
+      },
+      "interpreters": {
+        "__title": "Court Interpreters",
+        "name": "Name",
+        "company": "Company / Firm",
+        "languagePairs": "Language Pairs",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "email": "Email",
+        "verified": "Verified",
+        "lang": "Entry Language"
+      },
+      "judges": {
+        "__title": "Judges",
+        "name": "Full Name",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "court": "Court",
+        "specialization": "Specialization",
+        "department": "Department",
+        "appointmentDate": "Appointment Date (YYYY-MM-DD)",
+        "yearsOfExperience": "Years of Experience",
+        "status": "Status",
+        "email": "Email",
+        "lang": "Entry Language"
+      },
+      "laws": {
+        "__title": "Laws",
+        "title": "Title",
+        "type": "Type",
+        "category": "Legal Area",
+        "year": "Year",
+        "officialGazette": "Official Gazette (NN)",
+        "externalUrl": "External URL",
+        "effectiveDate": "Effective Date",
+        "fullText": "Full Text",
+        "summary": "Summary",
+        "lang": "Language"
+      },
+      "legalCategories": {
+        "__title": "Legal Categories",
+        "name": "Name",
+        "description": "Description"
+      },
+      "pages": {
+        "__title": "Pages",
+        "title": "Title",
+        "slug": "Slug (URL)",
+        "content": "Content",
+        "metaTitle": "Meta Title",
+        "metaDescription": "Meta Description",
+        "lang": "Language"
+      },
+      "stateAttorneys": {
+        "__title": "State Attorneys' Offices",
+        "name": "Office Name",
+        "address": "Address",
+        "city": "City",
+        "county": "County",
+        "phone": "Phone",
+        "fax": "Fax",
+        "email": "Email"
+      },
+      "bankruptcyFilings": {
+        "__title": "Bankruptcy filings",
+        "title": "Bankruptcy filings",
+        "filingType": "Filing type",
+        "caseNumber": "Case number",
+        "status": "Status",
+        "submittedBy": "Submitted by",
+        "attachmentFilename": "Attachment filename",
+        "reviewNotes": "Review notes"
+      }
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "gdpr": "GDPR requests",
+      "bankruptcy": "Bankruptcy listings",
+      "filings": "Trustee filings",
+      "flags": "Flag reports",
+      "news": "News posts",
+      "media": "Media",
+      "audit": "Audit log",
+      "content": "Content",
+      "courts": "Courts",
+      "judges": "Judges",
+      "experts": "Experts",
+      "interpreters": "Interpreters",
+      "stateAttorneys": "State attorneys",
+      "bankAdmins": "Bankruptcy admins",
+      "bankDebtors": "Bankruptcy debtors",
+      "bankFilings": "Bankruptcy filings",
+      "laws": "Laws",
+      "categories": "Categories",
+      "documents": "Documents",
+      "pages": "Pages",
+      "apiKeys": "API keys",
+      "config": "Configuration",
+      "globals": "Globals"
     }
-  }
+  },
+  "viewDetails": "View Details"
 }

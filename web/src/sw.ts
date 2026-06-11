@@ -22,7 +22,7 @@ interface SyncEvent extends ExtendableEvent {
 //      takes over without the user having to close every tab.
 //   4. CACHE_VERSION bump to v4 — activate handler deletes every v3-named
 //      cache, completing the kill-switch flush for any client still on v3.
-const CACHE_VERSION = 'v4'
+const CACHE_VERSION = 'v13'
 const STATIC_CACHE = `sm-static-${CACHE_VERSION}`
 const API_CACHE = `sm-api-${CACHE_VERSION}`
 const DECISIONS_CACHE = `sm-decisions-${CACHE_VERSION}`

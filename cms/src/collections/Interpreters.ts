@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { generateSlug } from '../hooks/generateSlug.js'
 import { isAdmin, isAdminOrEditor, publicRead, membersOnlyRead } from '../access.js'
+import { COUNTY_OPTIONS, LANGUAGES } from '../data/croatia-taxonomy.js'
+import { workingHoursField } from '../data/workingHoursField.js'
 
 export const Interpreters: CollectionConfig = {
   slug: 'interpreters',
@@ -27,19 +29,19 @@ export const Interpreters: CollectionConfig = {
       label: 'Ime i prezime',
     },
     {
-      // BCP-47 language pairs e.g. ['hr-en', 'hr-de']
-      name: 'languagePairs',
+      name: 'languages',
       type: 'array',
-      label: 'Jezični parovi',
+      label: 'Jezici',
+      admin: {
+        description: 'Jezici za koje je tumač ovlašten (uz hrvatski).',
+      },
       fields: [
         {
-          name: 'pair',
-          type: 'text',
+          name: 'language',
+          type: 'select',
           required: true,
-          label: 'Par',
-          admin: {
-            description: 'BCP-47 par rastavljen crticom, npr. hr-en',
-          },
+          label: 'Jezik',
+          options: LANGUAGES.map((l) => ({ label: l.label, value: l.value })),
         },
       ],
     },
@@ -50,14 +52,23 @@ export const Interpreters: CollectionConfig = {
     },
     {
       name: 'county',
-      type: 'text',
+      type: 'select',
       label: 'Županija',
+      options: [...COUNTY_OPTIONS],
     },
     {
       name: 'city',
       type: 'text',
       label: 'Grad',
+      admin: {
+        description: 'Grad/mjesto unutar odabrane županije.',
+      },
     },
+    workingHoursField(
+      'workingHours',
+      'Radno vrijeme',
+      'Radno vrijeme za prijem stranaka po danima u tjednu.',
+    ),
     {
       name: 'company',
       type: 'text',
@@ -176,35 +187,6 @@ export const Interpreters: CollectionConfig = {
       options: [
         { label: 'Hrvatski', value: 'hr' },
         { label: 'English', value: 'en' },
-        { label: 'Deutsch', value: 'de' },
-        { label: 'Français', value: 'fr' },
-        { label: 'Български', value: 'bg' },
-        { label: 'Čeština', value: 'cs' },
-        { label: 'Dansk', value: 'da' },
-        { label: 'Ελληνικά', value: 'el' },
-        { label: 'Español', value: 'es' },
-        { label: 'Eesti', value: 'et' },
-        { label: 'Euskara', value: 'eu' },
-        { label: 'Suomi', value: 'fi' },
-        { label: 'Gaeilge', value: 'ga' },
-        { label: 'Magyar', value: 'hu' },
-        { label: 'Íslenska', value: 'is' },
-        { label: 'Italiano', value: 'it' },
-        { label: '日本語', value: 'ja' },
-        { label: 'Lietuvių', value: 'lt' },
-        { label: 'Latviešu', value: 'lv' },
-        { label: 'Malti', value: 'mt' },
-        { label: 'Norsk bokmål', value: 'nb' },
-        { label: 'Nederlands', value: 'nl' },
-        { label: 'Polski', value: 'pl' },
-        { label: 'Português', value: 'pt' },
-        { label: 'Română', value: 'ro' },
-        { label: 'Slovenčina', value: 'sk' },
-        { label: 'Slovenščina', value: 'sl' },
-        { label: 'Svenska', value: 'sv' },
-        { label: 'Українська', value: 'uk' },
-        { label: 'العربية', value: 'ar' },
-        { label: '中文', value: 'zh' },
       ],
     },
     {

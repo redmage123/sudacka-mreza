@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { generateSlug } from '../hooks/generateSlug.js'
 import { isAdmin, isAdminOrEditor, publicRead } from '../access.js'
+import { COUNTY_OPTIONS } from '../data/croatia-taxonomy.js'
+import { workingHoursField } from '../data/workingHoursField.js'
 
 export const Courts: CollectionConfig = {
   slug: 'courts',
@@ -52,12 +54,24 @@ export const Courts: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Grad',
+      admin: { description: 'Grad/mjesto unutar odabrane županije.' },
     },
     {
       name: 'county',
-      type: 'text',
+      type: 'select',
       label: 'Županija',
+      options: [...COUNTY_OPTIONS],
     },
+    workingHoursField(
+      'operatingHours',
+      'Radno vrijeme suda',
+      'Standardno radno vrijeme rada suda po danima u tjednu.',
+    ),
+    workingHoursField(
+      'publicServiceHours',
+      'Radno vrijeme za stranke',
+      'Posebno radno vrijeme za prijem stranaka.',
+    ),
     {
       name: 'phone',
       type: 'text',
@@ -102,11 +116,11 @@ export const Courts: CollectionConfig = {
           type: 'select',
           label: 'Vrsta odjela',
           options: [
-            { label: 'Pisarnica / Registry', value: 'registry' },
-            { label: 'Ured predsjednika / President’s office', value: 'president' },
-            { label: 'Tajnik / Secretary', value: 'secretary' },
-            { label: 'Glasnogovornik / Spokesperson', value: 'spokesperson' },
-            { label: 'Ostalo / Other', value: 'other' },
+            { label: 'Pisarnica', value: 'registry' },
+            { label: 'Ured predsjednika', value: 'president' },
+            { label: 'Tajnik', value: 'secretary' },
+            { label: 'Glasnogovornik', value: 'spokesperson' },
+            { label: 'Ostalo', value: 'other' },
           ],
         },
         {
@@ -124,6 +138,11 @@ export const Courts: CollectionConfig = {
           type: 'email',
           label: 'Email',
         },
+        workingHoursField(
+          'workingHours',
+          'Radno vrijeme odjela',
+          'Radno vrijeme za prijem stranaka za ovaj odjel.',
+        ),
         {
           name: 'notes',
           type: 'textarea',
@@ -148,32 +167,6 @@ export const Courts: CollectionConfig = {
       admin: {
         description: 'GeoJSON Polygon koji se prikazuje na Leaflet karti nadležnosti',
       },
-    },
-    {
-      name: 'jurisdictionScope',
-      type: 'richText',
-      label: { hr: 'Područje nadležnosti', en: 'Jurisdiction area' },
-      admin: {
-        description: 'Tekstualni opis područja koje sud pokriva (gradovi, općine, vrste predmeta).',
-      },
-    },
-    {
-      name: 'timeAvailability',
-      type: 'group',
-      label: { hr: 'Radno vrijeme', en: 'Working hours' },
-      admin: {
-        description: 'Radno vrijeme suda za stranke (može se ostaviti prazno za zatvoreno).',
-      },
-      fields: [
-        { name: 'monday',    type: 'text', label: { hr: 'Ponedjeljak', en: 'Monday' } },
-        { name: 'tuesday',   type: 'text', label: { hr: 'Utorak',      en: 'Tuesday' } },
-        { name: 'wednesday', type: 'text', label: { hr: 'Srijeda',     en: 'Wednesday' } },
-        { name: 'thursday',  type: 'text', label: { hr: 'Četvrtak',    en: 'Thursday' } },
-        { name: 'friday',    type: 'text', label: { hr: 'Petak',       en: 'Friday' } },
-        { name: 'saturday',  type: 'text', label: { hr: 'Subota',      en: 'Saturday' } },
-        { name: 'sunday',    type: 'text', label: { hr: 'Nedjelja',    en: 'Sunday' } },
-        { name: 'notes',     type: 'textarea', label: { hr: 'Napomena', en: 'Notes' } },
-      ],
     },
     {
       name: 'slug',
