@@ -23,6 +23,7 @@ import * as migration_20260607_130000_bankruptcy_listings_assets from './2026060
 import * as migration_20260611_150000_taxonomy_and_hours from './20260611_150000_taxonomy_and_hours';
 import * as migration_20260611_180000_expert_sub_areas_array from './20260611_180000_expert_sub_areas_array';
 import * as migration_20260611_190000_revert_sub_areas_array from './20260611_190000_revert_sub_areas_array';
+import * as migration_20260611_200000_locked_docs_rels_attorneys from './20260611_200000_locked_docs_rels_attorneys';
 
 export const migrations = [
   {
@@ -149,5 +150,10 @@ export const migrations = [
     up: migration_20260611_190000_revert_sub_areas_array.up,
     down: migration_20260611_190000_revert_sub_areas_array.down,
     name: '20260611_190000_revert_sub_areas_array',
+  },
+  {
+    up: migration_20260611_200000_locked_docs_rels_attorneys.up,
+    down: migration_20260611_200000_locked_docs_rels_attorneys.down,
+    name: '20260611_200000_locked_docs_rels_attorneys',
   },
 ];
