@@ -128,6 +128,60 @@ export default function InterpreterDetailPage() {
           </div>
         )}
 
+        {(() => {
+          interface WkRow {
+            weekday?: string; closed?: boolean
+            openTime?: string; closeTime?: string
+            secondOpenTime?: string; secondCloseTime?: string; note?: string
+          }
+          const wh = Array.isArray(raw.workingHours) ? (raw.workingHours as WkRow[]) : []
+          const ORDER = ['mon','tue','wed','thu','fri','sat','sun']
+          const KEY: Record<string,string> = {mon:'admin.weekday.mon',tue:'admin.weekday.tue',wed:'admin.weekday.wed',thu:'admin.weekday.thu',fri:'admin.weekday.fri',sat:'admin.weekday.sat',sun:'admin.weekday.sun'}
+          const rows = ORDER.map((d) => wh.find((h) => h.weekday === d)).filter((h): h is WkRow => !!h)
+          if (rows.length === 0) return null
+          return (
+            <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 sm:col-span-2">
+              <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
+                {t('interpreters.detail.workingHours', 'Radno vrijeme')}
+              </h2>
+              <table className="w-full text-sm">
+                <tbody>
+                  {rows.map((h) => (
+                    <tr key={h.weekday} className="border-t border-[color:var(--color-border)] first:border-t-0">
+                      <th className="py-1 pr-3 text-left font-medium w-1/3">{t(KEY[h.weekday ?? ''] ?? '', h.weekday ?? '')}</th>
+                      <td className="py-1">
+                        {h.closed
+                          ? <em className="text-[color:var(--color-text-muted)]">{t('courts.closed', 'Zatvoreno')}</em>
+                          : (h.openTime && h.closeTime
+                              ? `${h.openTime}–${h.closeTime}${h.secondOpenTime && h.secondCloseTime ? `, ${h.secondOpenTime}–${h.secondCloseTime}` : ''}`
+                              : '')}
+                        {h.note && <span className="ml-2 text-xs text-[color:var(--color-text-muted)]">({h.note})</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        })()}
+
+        {(() => {
+          const cv = raw.cv as { id?: number | string; filename?: string; url?: string } | null | undefined
+          const cvHref = cv?.url || (cv?.filename ? `/api/media/file/${encodeURIComponent(cv.filename)}` : null)
+          if (!cv || !cvHref) return null
+          return (
+            <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5">
+              <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
+                {t('interpreters.detail.cv', 'Životopis (CV)')}
+              </h2>
+              <a href={cvHref} target="_blank" rel="noreferrer"
+                 className="inline-flex items-center gap-2 rounded-lg bg-[color:var(--color-brand)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
+                📄 {cv.filename ?? t('interpreters.detail.openCv', 'Otvori CV')}
+              </a>
+            </div>
+          )
+        })()}
+
         {(interpreter.email || interpreter.phone) && (
           <div className="bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded-lg p-5 sm:col-span-2">
             <h2 className="text-sm font-semibold text-[color:var(--color-text-muted)] uppercase tracking-wide mb-3">
