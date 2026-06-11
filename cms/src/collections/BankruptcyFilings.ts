@@ -1,15 +1,16 @@
-import type { Access, CollectionConfig } from 'payload'
+import type { Access, CollectionConfig, FieldAccess } from 'payload'
 import { isAdmin, isLegalEntityOrAbove } from '../access.js'
 
 // Public reads see only approved filings; editors and legal entities also see
 // their own (regardless of status). Admins see everything.
 const readPublicApprovedOrOwn: Access = ({ req }) => {
   if (req.user?.role === 'admin') return true
+  const email = req.user?.email ?? ''
   if (req.user?.role === 'editor' || req.user?.role === 'legal_entity') {
     return {
       or: [
         { status: { equals: 'approved' } },
-        { submittedBy: { equals: req.user.email } },
+        { submittedBy: { equals: email } },
       ],
     }
   }
@@ -17,12 +18,15 @@ const readPublicApprovedOrOwn: Access = ({ req }) => {
 }
 
 // attachmentBase64 stays admin/owner-only — public listings never expose the
-// raw PDF, only metadata.
-const readAttachmentOwnerOrAdmin: Access = ({ req }) => {
+// raw PDF, only metadata. FieldAccess returns boolean only.
+const readAttachmentOwnerOrAdmin: FieldAccess = ({ req, doc }) => {
   if (!req.user) return false
   if (req.user.role === 'admin') return true
-  if (req.user.role === 'editor' || req.user.role === 'legal_entity') {
-    return { submittedBy: { equals: req.user.email } }
+  if (
+    (req.user.role === 'editor' || req.user.role === 'legal_entity') &&
+    (doc as { submittedBy?: string } | undefined)?.submittedBy === req.user.email
+  ) {
+    return true
   }
   return false
 }
