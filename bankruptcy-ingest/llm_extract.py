@@ -31,6 +31,10 @@ Return STRICT JSON matching this schema — no prose, no markdown fences:
   "contact_email": string|null,         // administrator's email
   "contact_phone": string|null,         // administrator's phone
   "address": string|null,               // asset location or administrator address
+  "filing_type": string|null,           // one of: motion-to-open, prijava-trazbine,
+                                        //   asset-inventory, asset-sale, trustee-report,
+                                        //   distribution-proposal, final-accounting,
+                                        //   restructuring-plan, pre-bankruptcy-settlement
   "confidence": number                  // 0.0-1.0, your confidence in the extraction
 }
 
@@ -38,6 +42,16 @@ Rules:
 - Croatian dates like "06.05.2026." → "2026-05-06"
 - Monetary values like "84.300,00 EUR" → value_eur: 84300.00, value_raw: "84.300,00 EUR"
 - Set fields to null if not present or unclear
+- filing_type mapping from Croatian phrases:
+    "Prijedlog za pokretanje" / "Prijedlog za otvaranje stečaja"  → "motion-to-open"
+    "Prijava tražbine"                                            → "prijava-trazbine"
+    "Popis imovine"                                               → "asset-inventory"
+    "Prodaja imovine" / "Oglas o prodaji"                          → "asset-sale"
+    "Izvještaj stečajnog upravitelja"                              → "trustee-report"
+    "Prijedlog raspodjele"                                         → "distribution-proposal"
+    "Završni račun"                                                → "final-accounting"
+    "Plan restrukturiranja"                                        → "restructuring-plan"
+    "Predstečajna nagodba"                                         → "pre-bankruptcy-settlement"
 - confidence should reflect how many fields you extracted and how certain you are
 - Output ONLY the JSON object, no other text"""
 
