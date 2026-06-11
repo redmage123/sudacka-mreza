@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { BankruptcyAdvancedSearch } from '@/components/bankruptcy/BankruptcyAdvancedSearch'
 
 type Work = {
   title: string
@@ -85,10 +86,14 @@ export default function BankruptcyProfessionalWorksPage() {
       <h1 className="text-3xl font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)] mb-2 mt-6">
         {tn('strucniRadovi')}
       </h1>
-      <p className="text-[color:var(--color-text-muted)] mb-10">
+      <p className="text-[color:var(--color-text-muted)] mb-6">
         Stručni radovi vezani uz stečajno pravo, namirenje vjerovnika, ovlasti stečajnog upravitelja i
         sudsku praksu u stečajnim postupcima.
       </p>
+
+      <div className="mb-8">
+        <BankruptcyAdvancedSearch mode="navigate" />
+      </div>
 
       <div className="space-y-4">
         {WORKS.map((w) => (

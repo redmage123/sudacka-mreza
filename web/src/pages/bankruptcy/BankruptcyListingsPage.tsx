@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -7,6 +7,10 @@ import { Alert } from '@/components/ui/Alert'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Pagination } from '@/components/ui/Pagination'
 import { apiFetch } from '@/api/client'
+import {
+  BankruptcyAdvancedSearch,
+  type BankruptcyFilters,
+} from '@/components/bankruptcy/BankruptcyAdvancedSearch'
 import { z } from 'zod'
 
 const IdSchema = z.union([z.string(), z.number()]).transform(String)
@@ -55,9 +59,20 @@ export default function BankruptcyListingsPage() {
   const [totalDocs, setTotalDocs] = useState(0)
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
-  const [query, setQuery] = useState('')
-  const [assetCategory, setAssetCategory] = useState('')
-  const [assetType, setAssetType] = useState('')
+  const [searchParams] = useSearchParams()
+  const [filters, setFilters] = useState<BankruptcyFilters>(() => ({
+    q: searchParams.get('q') ?? '',
+    court: searchParams.get('court') ?? '',
+    assetCategory: searchParams.get('assetCategory') ?? '',
+    assetType: searchParams.get('assetType') ?? '',
+    debtor: searchParams.get('debtor') ?? '',
+    administrator: searchParams.get('administrator') ?? '',
+    status: searchParams.get('status') ?? '',
+  }))
+  // Existing variables kept so the rest of the file (effects, render) still typechecks.
+  const query = filters.q ?? ''
+  const assetCategory = filters.assetCategory ?? ''
+  const assetType = filters.assetType ?? ''
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const mounted = useRef(true)
@@ -75,8 +90,9 @@ export default function BankruptcyListingsPage() {
       page,
       locale,
       sort: '-publishedAt',
-      'where[status][equals]': 'active',
     }
+    // status filter — defaults to 'active' when the search bar leaves it blank.
+    params['where[status][equals]'] = filters.status || 'active'
     // REDESIGN 3.7.2 — "Pretraži u tekstu" matches case number, debtor name,
     // and the new structured description column.
     if (query) {
@@ -86,6 +102,9 @@ export default function BankruptcyListingsPage() {
     }
     if (assetCategory) params['where[assetCategory][equals]'] = assetCategory
     if (assetType) params['where[assetType][like]'] = assetType
+    if (filters.court) params['where[court][equals]'] = filters.court
+    if (filters.debtor) params['where[debtor][equals]'] = filters.debtor
+    if (filters.administrator) params['where[administrator][equals]'] = filters.administrator
     apiFetch('/bankruptcy-listings', ListSchema, { params })
       .then((d) => {
         if (!mounted.current) return
@@ -99,7 +118,7 @@ export default function BankruptcyListingsPage() {
         setError(true)
         setLoading(false)
       })
-  }, [page, query, assetCategory, assetType, locale])
+  }, [page, query, assetCategory, assetType, filters.court, filters.debtor, filters.administrator, filters.status, locale])
 
   function formatDeadline(iso?: string | null): string {
     if (!iso) return '—'
@@ -124,37 +143,16 @@ export default function BankruptcyListingsPage() {
         {t('bankruptcy.listings.description', 'Active bankruptcy proceedings published in the official gazette.')}
       </p>
 
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => { setQuery(e.target.value); setPage(1) }}
-          placeholder={t('bankruptcy.listings.textSearchPlaceholder', 'Pretraži u tekstu (dužnik, broj, opis)…')}
-          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+      <div className="mb-3">
+        <BankruptcyAdvancedSearch
+          mode="inline"
+          initial={filters}
+          onChange={(f) => { setFilters(f); setPage(1) }}
         />
-        <select
-          value={assetCategory}
-          onChange={(e) => { setAssetCategory(e.target.value); setPage(1) }}
-          aria-label={t('bankruptcy.listings.assetCategoryLabel', 'Kategorija imovine')}
-          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
-        >
-          <option value="">{t('bankruptcy.listings.assetCategoryAll', 'Sve kategorije imovine')}</option>
-          <option value="immovable">{t('bankruptcy.listings.assetCategoryImmovable', 'Nekretnine')}</option>
-          <option value="movable">{t('bankruptcy.listings.assetCategoryMovable', 'Pokretnine')}</option>
-          <option value="rights">{t('bankruptcy.listings.assetCategoryRights', 'Prava')}</option>
-          <option value="mixed">{t('bankruptcy.listings.assetCategoryMixed', 'Mješovito')}</option>
-        </select>
-        <input
-          type="text"
-          value={assetType}
-          onChange={(e) => { setAssetType(e.target.value); setPage(1) }}
-          placeholder={t('bankruptcy.listings.assetTypePlaceholder', 'Vrsta imovine (stan, vozilo…)')}
-          className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-[color:var(--color-text)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
-        />
-        <span className="self-center text-sm text-[color:var(--color-text-muted)]">
-          {t('bankruptcy.listings.count', '{{n}} listings', { n: totalDocs })}
-        </span>
       </div>
+      <p className="mb-4 text-sm text-[color:var(--color-text-muted)]">
+        {t('bankruptcy.listings.count', '{{n}} listings', { n: totalDocs })}
+      </p>
 
       {error && <Alert variant="error">{t('bankruptcy.listings.loadError', 'Could not load bankruptcy listings.')}</Alert>}
 

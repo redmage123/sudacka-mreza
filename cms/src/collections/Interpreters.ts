@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { generateSlug } from '../hooks/generateSlug.js'
 import { isAdmin, isAdminOrEditor, publicRead, membersOnlyRead } from '../access.js'
+import { COUNTY_OPTIONS, LANGUAGES } from '../data/croatia-taxonomy.js'
+import { workingHoursField } from '../data/workingHoursField.js'
 
 export const Interpreters: CollectionConfig = {
   slug: 'interpreters',
@@ -27,19 +29,19 @@ export const Interpreters: CollectionConfig = {
       label: 'Ime i prezime',
     },
     {
-      // BCP-47 language pairs e.g. ['hr-en', 'hr-de']
-      name: 'languagePairs',
+      name: 'languages',
       type: 'array',
-      label: 'Jezični parovi',
+      label: 'Jezici',
+      admin: {
+        description: 'Jezici za koje je tumač ovlašten (uz hrvatski).',
+      },
       fields: [
         {
-          name: 'pair',
-          type: 'text',
+          name: 'language',
+          type: 'select',
           required: true,
-          label: 'Par',
-          admin: {
-            description: 'BCP-47 par rastavljen crticom, npr. hr-en',
-          },
+          label: 'Jezik',
+          options: LANGUAGES.map((l) => ({ label: l.label, value: l.value })),
         },
       ],
     },
@@ -50,14 +52,23 @@ export const Interpreters: CollectionConfig = {
     },
     {
       name: 'county',
-      type: 'text',
+      type: 'select',
       label: 'Županija',
+      options: [...COUNTY_OPTIONS],
     },
     {
       name: 'city',
       type: 'text',
       label: 'Grad',
+      admin: {
+        description: 'Grad/mjesto unutar odabrane županije.',
+      },
     },
+    workingHoursField(
+      'workingHours',
+      'Radno vrijeme',
+      'Radno vrijeme za prijem stranaka po danima u tjednu.',
+    ),
     {
       name: 'company',
       type: 'text',

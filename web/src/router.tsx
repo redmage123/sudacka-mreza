@@ -119,6 +119,7 @@ const AdminCollectionInterpretersPage = lazy(() => import('@/pages/admin/collect
 const AdminCollectionStateAttorneysPage = lazy(() => import('@/pages/admin/collections/StateAttorneysPage'))
 const AdminCollectionBankruptcyAdminsPage = lazy(() => import('@/pages/admin/collections/BankruptcyAdministratorsPage'))
 const AdminCollectionBankruptcyDebtorsPage = lazy(() => import('@/pages/admin/collections/BankruptcyDebtorsPage'))
+const AdminCollectionBankruptcyFilingsPage = lazy(() => import('@/pages/admin/collections/BankruptcyFilingsPage'))
 const AdminCollectionLawsPage         = lazy(() => import('@/pages/admin/collections/LawsPage'))
 const AdminCollectionCategoriesPage   = lazy(() => import('@/pages/admin/collections/LegalCategoriesPage'))
 const AdminCollectionDocumentsPage    = lazy(() => import('@/pages/admin/collections/DocumentsPage'))
@@ -286,6 +287,7 @@ export const router = createBrowserRouter([
           { path: 'state-attorneys', element: S(AdminCollectionStateAttorneysPage) },
           { path: 'bankruptcy-administrators', element: S(AdminCollectionBankruptcyAdminsPage) },
           { path: 'bankruptcy-debtors', element: S(AdminCollectionBankruptcyDebtorsPage) },
+          { path: 'bankruptcy-filings', element: S(AdminCollectionBankruptcyFilingsPage) },
           { path: 'laws', element: S(AdminCollectionLawsPage) },
           { path: 'legal-categories', element: S(AdminCollectionCategoriesPage) },
           { path: 'documents', element: S(AdminCollectionDocumentsPage) },

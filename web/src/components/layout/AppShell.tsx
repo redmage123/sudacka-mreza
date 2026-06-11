@@ -84,6 +84,29 @@ export function AppShell() {
     }
   }, [location.pathname])
 
+  // Admin / editor surfaces own their own chrome. Skip the public navbar,
+  // breadcrumb, sidebar and footer so the admin layout fills the viewport.
+  const isAdminSurface =
+    /^\/[^/]+\/(admin|editor)(\/|$)/.test(location.pathname)
+
+  if (isAdminSurface) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <a href="#main-content" className="skip-link">
+          {t('skipToContent')}
+        </a>
+        <main
+          id="main-content"
+          ref={mainRef}
+          tabIndex={-1}
+          className="flex-1 min-w-0 outline-none"
+        >
+          <Outlet />
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Skip link — first focusable element, visible only on :focus */}

@@ -18,6 +18,7 @@ import { createChatFeedbackRouter } from './routes/chat-feedback.js'
 import { createEurLexSearchRouter } from './routes/eurlex-search.js'
 import { createDecisionBriefRouter } from './routes/decisionBrief.js'
 import { createTranslateRouter } from './routes/translate.js'
+import { createEditorRouter } from './routes/editor.js'
 import { createMfaRouter } from './routes/mfa.js'
 import { createPublicApiRouter } from './endpoints/publicApi.js'
 import { createSitemapRouter } from './endpoints/sitemap.js'
@@ -40,8 +41,11 @@ app.use((_req, res, next) => {
   next()
 })
 
-// Parse JSON bodies for all routes (including our custom POST /api/contact)
-app.use(express.json())
+// Parse JSON bodies for all routes (including our custom POST /api/contact).
+// Limit raised to 32mb because POST /api/editor/filing carries the uploaded
+// document inline as base64 (attachmentBase64) — a 15MB PDF inflates to ~20MB
+// base64, so the express default 100kb would 413 every real filing.
+app.use(express.json({ limit: '32mb' }))
 
 const start = async () => {
   // ---------------------------------------------------------------------------
@@ -113,6 +117,11 @@ const start = async () => {
   app.use('/api', createEurLexSearchRouter(payload))
   app.use('/api', createDecisionBriefRouter(payload))
   app.use('/api', createTranslateRouter(payload))
+  // Editor router — POST /api/editor/filing (create bankruptcy-filings doc) and
+  // POST /api/editor/extract (PDF/DOCX text extraction + LLM field pre-fill).
+  // Mounted BEFORE Payload's catch-all so /api/editor/* is owned by us, not
+  // routed into Payload's collection REST surface (which has no editor slug).
+  app.use('/api', createEditorRouter(payload))
   // MFA router — must be mounted BEFORE Payload's catch-all so /api/users/auth/login
   // and /api/users/auth/verify-mfa take precedence over Payload's /api/users/* REST surface.
   app.use('/api', createMfaRouter(payload))
