@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import { apiFetch } from './client'
 import { ExpertWitnessSchema, PayloadListSchema, type ExpertWitness, type PayloadList } from './types'
 
@@ -8,6 +9,7 @@ export interface GetExpertWitnessesParams {
   subSpeciality?: string
   county?: string
   city?: string
+  expertType?: string
   hasCv?: boolean
   hasWorks?: boolean
   page?: number
@@ -18,6 +20,14 @@ export interface GetExpertWitnessesParams {
 export async function getExpertWitnesses(
   params: GetExpertWitnessesParams = {},
 ): Promise<PayloadList<ExpertWitness>> {
+    if (params.q !== undefined && params.q !== '') {
+    const SearchListSchema = z.object({ docs: z.array(z.any()), totalDocs: z.number() })
+    const r = await apiFetch('/entity/hybrid-search', SearchListSchema, {
+      params: { type: 'expert-witnesses', q: params.q, limit: 50, locale: params.locale ?? 'hr' },
+    })
+    return { docs: r.docs as ExpertWitness[], totalDocs: r.totalDocs, limit: 50, totalPages: 1, page: 1, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null }
+  }
+
   const queryParams: Record<string, string | number | undefined> = {
     sort: 'name',
     limit: params.limit ?? 20,
@@ -42,6 +52,9 @@ export async function getExpertWitnesses(
   }
   if (params.city !== undefined && params.city !== '') {
     queryParams['where[city][like]'] = params.city
+  }
+  if (params.expertType !== undefined && params.expertType !== '') {
+    queryParams['where[expertType][equals]'] = params.expertType
   }
   if (params.hasCv) {
     queryParams['where[cv][exists]'] = 'true'

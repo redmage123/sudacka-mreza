@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
 import { getAuthToken } from '@/api/client'
-import { EXPERT_AREAS, SUBAREAS_BY_BRANCH } from '@/data/croatia-taxonomy'
+import { EXPERT_AREAS, EXPERT_AREA_SLUG, SUBAREAS_BY_BRANCH } from '@/data/croatia-taxonomy'
 
 // Field type descriptors for the generic editor.
 // Keep tiny: text, textarea, number, checkbox, select.
@@ -24,6 +24,10 @@ export interface FieldDef {
   filenameField?: string
   /** For type==='file': comma-separated accept hint (default 'application/pdf,.pdf'). */
   accept?: string
+  /** For type==='file': POST the file to this endpoint after upload, take returned fields. */
+  extractEndpoint?: string
+  /** For type==='file': map of extracted-field-name → form-field-name to prefill. */
+  extractFieldMap?: Record<string, string>
 }
 
 export interface CollectionAdminConfig {
@@ -59,6 +63,7 @@ function FilePicker({
   value,
   siblingFilename,
   onChange,
+  onExtracted,
   common,
   t,
 }: {
@@ -66,12 +71,54 @@ function FilePicker({
   value: string | undefined
   siblingFilename: string | undefined
   onChange: (base64: string, filename: string) => void
+  onExtracted?: (extracted: Record<string, unknown>) => void
   common: string
   t: ReturnType<typeof useTranslation>['t']
 }) {
   const [busy, setBusy] = useState(false)
+  const [extractBusy, setExtractBusy] = useState(false)
   const [err, setErr] = useState<string | null>(null)
+  const [extractMsg, setExtractMsg] = useState<string | null>(null)
   const accept = field.accept ?? 'application/pdf,.pdf'
+
+  async function runExtract(file: File) {
+    if (!field.extractEndpoint) return
+    setExtractBusy(true)
+    setExtractMsg(null)
+    try {
+      const token = getAuthToken()
+      const fd = new FormData()
+      fd.append('file', file)
+      const resp = await fetch(field.extractEndpoint, {
+        method: 'POST',
+        headers: token ? { Authorization: `JWT ${token}` } : {},
+        body: fd,
+      })
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+      const j = (await resp.json()) as { fields?: Record<string, unknown>; ok?: boolean }
+      const fields = j.fields ?? {}
+      const mapped: Record<string, unknown> = {}
+      for (const [extracted, target] of Object.entries(field.extractFieldMap ?? {})) {
+        const v = fields[extracted]
+        if (v != null && v !== '') mapped[target] = v
+      }
+      onExtracted?.(mapped)
+      const count = Object.keys(mapped).length
+      setExtractMsg(
+        count > 0
+          ? t('admin.file.extracted', '{{n}} polja popunjena automatski', { n: count })
+          : t('admin.file.extractedEmpty', 'Nije moguće automatski pronaći polja.'),
+      )
+    } catch (e: unknown) {
+      setExtractMsg(t('admin.file.extractFailed', 'Automatska ekstrakcija nije uspjela.'))
+      // Don't surface the error as a blocker — upload still succeeded.
+      // eslint-disable-next-line no-console
+      console.warn('extract failed', e)
+    } finally {
+      setExtractBusy(false)
+    }
+  }
+
   async function handleFile(file: File) {
     setBusy(true)
     setErr(null)
@@ -82,6 +129,9 @@ function FilePicker({
       for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i])
       const b64 = btoa(bin)
       onChange(b64, file.name)
+      // Fire extract in parallel — base64 is already set, so this is purely
+      // additional auto-fill convenience.
+      runExtract(file)
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : String(e))
     } finally {
@@ -106,6 +156,8 @@ function FilePicker({
         </div>
       )}
       {busy && <div className="text-xs">{t('admin.file.uploading', 'Učitavanje…')}</div>}
+      {extractBusy && <div className="text-xs">{t('admin.file.extracting', 'Automatska ekstrakcija polja…')}</div>}
+      {extractMsg && !extractBusy && <div className="text-xs text-[color:var(--color-text-muted)]">{extractMsg}</div>}
       {err && <div className="text-xs text-red-700">{err}</div>}
     </div>
   )
@@ -214,6 +266,12 @@ function SpecialtyAreasEditor({
   }))
   const [pendingArea, setPendingArea] = useState('')
   const [pendingSub, setPendingSub] = useState('')
+  // Translate a Croatian branch name through i18n. Missing locales fall back to
+  // the canonical Croatian string so legibility never regresses.
+  const areaLabel = (croatian: string) => {
+    const key = EXPERT_AREA_SLUG[croatian]
+    return key ? t(`expertise.areas.${key}`, croatian) : croatian
+  }
 
   function add() {
     if (!pendingArea) return
@@ -242,7 +300,7 @@ function SpecialtyAreasEditor({
             >
               <option value="">— {t('admin.specialty.choose', 'odaberi granu')} —</option>
               {EXPERT_AREAS.map((a) => (
-                <option key={a} value={a}>{a}</option>
+                <option key={a} value={a}>{areaLabel(a)}</option>
               ))}
             </select>
           </div>
@@ -322,7 +380,7 @@ function SpecialtyAreasEditor({
               key={i}
               className="flex items-center gap-2 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm"
             >
-              <span className="font-medium">{r.area || '—'}</span>
+              <span className="font-medium">{r.area ? areaLabel(r.area) : '—'}</span>
               {r.subArea && (
                 <>
                   <span className="text-[color:var(--color-text-muted)]">›</span>
@@ -599,12 +657,23 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
   const [flash, setFlash] = useState<string | null>(null)
   const [editing, setEditing] = useState<Record<string, unknown> | null>(null)
   const editingRef = useRef<HTMLDivElement | null>(null)
+  // Track when the editor was opened so we only scroll once (when the row
+  // becomes editable). Watching `editing` directly would re-trigger the
+  // scroll on every keystroke because we create a fresh object via spread,
+  // making the form viewport jump to the top of the page mid-typing.
+  const lastEditorKeyRef = useRef<string | null>(null)
 
-  // Scroll the edit form into view when a row is selected so the user
-  // doesn't miss it appearing above a long table.
   useEffect(() => {
-    if (editing && editingRef.current) {
-      editingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const key = editing == null
+      ? null
+      : editing.id != null
+        ? `id:${String(editing.id)}`
+        : 'new'
+    if (key !== lastEditorKeyRef.current) {
+      lastEditorKeyRef.current = key
+      if (editing && editingRef.current) {
+        editingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }, [editing])
   const [submitting, setSubmitting] = useState(false)
@@ -746,6 +815,17 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                       const next = { ...editing, [f.name]: b64 }
                       if (f.filenameField) next[f.filenameField] = fn
                       setEditing(next)
+                    }}
+                    onExtracted={(extracted) => {
+                      // Only fill empty form fields; never overwrite admin's manual entries.
+                      setEditing((prev) => {
+                        if (!prev) return prev
+                        const next = { ...prev }
+                        for (const [k, v] of Object.entries(extracted)) {
+                          if (next[k] == null || next[k] === '') next[k] = v
+                        }
+                        return next
+                      })
                     }}
                     common={common}
                     t={t}
@@ -1081,7 +1161,12 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'attachmentBase64', type: 'file',
         label: 'admin.collections.bankruptcyFilings.attachment',
         filenameField: 'attachmentFilename',
-        accept: 'application/pdf,.pdf' },
+        accept: 'application/pdf,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx',
+        extractEndpoint: '/api/editor/extract',
+        extractFieldMap: {
+          case_number: 'caseNumber',
+          filing_type: 'filingType',
+        } },
       { name: 'attachmentFilename', type: 'text',
         label: 'admin.collections.bankruptcyFilings.attachmentFilename' },
       { name: 'reviewNotes', type: 'textarea',

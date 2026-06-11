@@ -23,6 +23,7 @@ export default function ExpertsPage() {
   const county = searchParams.get('county') ?? ''
   const city = searchParams.get('city') ?? ''
   const company = searchParams.get('company') ?? ''
+  const expertType = searchParams.get('expertType') ?? ''
   const hasCv = searchParams.get('hasCv') === '1'
   const hasWorks = searchParams.get('hasWorks') === '1'
   const page = parseInt(searchParams.get('page') ?? '1', 10)
@@ -66,6 +67,7 @@ export default function ExpertsPage() {
       county: county || undefined,
       city: city || undefined,
       company: company || undefined,
+      expertType: expertType || undefined,
       hasCv: hasCv || undefined,
       hasWorks: hasWorks || undefined,
       page,
@@ -83,7 +85,7 @@ export default function ExpertsPage() {
           setLoading(false)
         }
       })
-  }, [q, speciality, subSpeciality, county, city, company, hasCv, hasWorks, page, locale])
+  }, [q, speciality, subSpeciality, county, city, company, expertType, hasCv, hasWorks, page, locale])
 
   function handleKeywordChange(value: string) {
     clearTimeout(debounceRef.current)
@@ -207,6 +209,22 @@ export default function ExpertsPage() {
               placeholder={t('experts.filterCompanyPh', 'Naziv tvrtke…')}
               className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
             />
+          </div>
+
+          {/* Vrsta vještaka — distinguishes stalni sudski vještak vs. procjenitelj */}
+          <div>
+            <label className="block text-sm font-medium text-[color:var(--color-text)] mb-1">
+              {t('experts.filterExpertType', 'Vrsta vještaka')}
+            </label>
+            <select
+              value={expertType}
+              onChange={(e) => handleFilterChange('expertType', e.target.value)}
+              className="w-full h-11 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] px-3 text-sm focus:outline-none focus:border-[color:var(--color-border-focus)]"
+            >
+              <option value="">{t('experts.filterExpertTypeAll', 'Sve vrste')}</option>
+              <option value="vjestak">{t('experts.filterExpertType.vjestak', 'Stalni sudski vještak')}</option>
+              <option value="procjenitelj">{t('experts.filterExpertType.procjenitelj', 'Stalni sudski procjenitelj')}</option>
+            </select>
           </div>
         </div>
 
