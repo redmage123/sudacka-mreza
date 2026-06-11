@@ -49,12 +49,15 @@ export const ExpertWitnesses: CollectionConfig = {
           },
         },
         {
-          name: 'subArea',
-          type: 'text',
-          label: 'Uža specijalizacija',
+          name: 'subAreas',
+          type: 'array',
+          label: 'Uže specijalizacije',
           admin: {
-            description: 'Uža specijalizacija unutar grane (opcionalno, slobodan tekst).',
+            description: 'Više užih specijalizacija unutar odabrane grane.',
           },
+          fields: [
+            { name: 'value', type: 'text', required: true, label: 'Naziv' },
+          ],
         },
       ],
     },

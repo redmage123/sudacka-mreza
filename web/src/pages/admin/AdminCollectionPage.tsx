@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
 import { getAuthToken } from '@/api/client'
+import { EXPERT_AREAS } from '@/data/croatia-taxonomy'
 
 // Field type descriptors for the generic editor.
 // Keep tiny: text, textarea, number, checkbox, select.
@@ -10,7 +11,7 @@ import { getAuthToken } from '@/api/client'
 export interface FieldDef {
   name: string
   label?: string
-  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines' | 'relationship'
+  type: 'text' | 'textarea' | 'number' | 'checkbox' | 'select' | 'lines' | 'relationship' | 'file' | 'media-upload' | 'weekday-hours' | 'specialty-areas'
   required?: boolean
   options?: Array<{ label: string; value: string }>
   itemKey?: string
@@ -19,6 +20,10 @@ export interface FieldDef {
   relationTo?: string
   /** For type==='relationship': field on the related doc to use as the display label (default 'name'). */
   relationLabel?: string
+  /** For type==='file': sibling field that should also receive the chosen file's name. */
+  filenameField?: string
+  /** For type==='file': comma-separated accept hint (default 'application/pdf,.pdf'). */
+  accept?: string
 }
 
 export interface CollectionAdminConfig {
@@ -47,6 +52,357 @@ async function authFetch(path: string, init?: RequestInit): Promise<Response> {
       ...(init?.headers ?? {}),
     },
   })
+}
+
+function FilePicker({
+  field,
+  value,
+  siblingFilename,
+  onChange,
+  common,
+  t,
+}: {
+  field: FieldDef
+  value: string | undefined
+  siblingFilename: string | undefined
+  onChange: (base64: string, filename: string) => void
+  common: string
+  t: ReturnType<typeof useTranslation>['t']
+}) {
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState<string | null>(null)
+  const accept = field.accept ?? 'application/pdf,.pdf'
+  async function handleFile(file: File) {
+    setBusy(true)
+    setErr(null)
+    try {
+      const buf = await file.arrayBuffer()
+      const bytes = new Uint8Array(buf)
+      let bin = ''
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i])
+      const b64 = btoa(bin)
+      onChange(b64, file.name)
+    } catch (e: unknown) {
+      setErr(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(false)
+    }
+  }
+  const hasFile = !!value
+  return (
+    <div className="space-y-1">
+      <input
+        type="file"
+        accept={accept}
+        onChange={(e) => {
+          const f = e.target.files?.[0]
+          if (f) handleFile(f)
+        }}
+        className={common}
+      />
+      {hasFile && (
+        <div className="text-xs text-[color:var(--color-text-muted)]">
+          {t('admin.file.current', 'Postojeća datoteka')}: {siblingFilename || `${Math.round((value!.length * 3) / 4 / 1024)} KB`}
+        </div>
+      )}
+      {busy && <div className="text-xs">{t('admin.file.uploading', 'Učitavanje…')}</div>}
+      {err && <div className="text-xs text-red-700">{err}</div>}
+    </div>
+  )
+}
+
+const WEEKDAY_VALUES = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const
+
+interface HoursRow {
+  weekday: string
+  closed?: boolean
+  openTime?: string
+  closeTime?: string
+  secondOpenTime?: string
+  secondCloseTime?: string
+  note?: string
+  id?: string
+  _order?: number
+}
+
+function WeekdayHoursEditor({
+  value,
+  onChange,
+  t,
+}: {
+  value: Array<Record<string, unknown>> | undefined
+  onChange: (v: HoursRow[]) => void
+  t: ReturnType<typeof useTranslation>['t']
+}) {
+  // Pre-populate Mon..Sun, merging in any existing data by weekday key.
+  const byDay = new Map<string, HoursRow>()
+  const inputRows = Array.isArray(value) ? (value as unknown as HoursRow[]) : []
+  for (const r of inputRows) if (r?.weekday) byDay.set(r.weekday, r)
+  const rows: HoursRow[] = WEEKDAY_VALUES.map((wd) => byDay.get(wd) ?? { weekday: wd })
+
+  function update(idx: number, patch: Partial<HoursRow>) {
+    const next = rows.map((r, i) => (i === idx ? { ...r, ...patch } : r))
+    // Only persist rows that have anything meaningful set so we don't bloat the API call.
+    const filtered = next.filter(
+      (r) => r.closed || r.openTime || r.closeTime || r.secondOpenTime || r.secondCloseTime || r.note,
+    )
+    onChange(filtered.length ? filtered : [])
+  }
+
+  const inp = 'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1 text-xs'
+  return (
+    <div className="overflow-x-auto rounded border border-[color:var(--color-border)]">
+      <table className="w-full text-xs">
+        <thead className="bg-[color:var(--color-surface-alt)]">
+          <tr>
+            <th className="p-2 text-left">{t('admin.hours.day', 'Dan')}</th>
+            <th className="p-2 text-left">{t('admin.hours.closed', 'Zatvoreno')}</th>
+            <th className="p-2 text-left">{t('admin.hours.open', 'Otvaranje')}</th>
+            <th className="p-2 text-left">{t('admin.hours.close', 'Zatvaranje')}</th>
+            <th className="p-2 text-left">{t('admin.hours.secondOpen', 'Drugi termin — Otv.')}</th>
+            <th className="p-2 text-left">{t('admin.hours.secondClose', 'Drugi termin — Zat.')}</th>
+            <th className="p-2 text-left">{t('admin.hours.note', 'Napomena')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={r.weekday} className="border-t border-[color:var(--color-border)]">
+              <td className="p-2 font-medium whitespace-nowrap">
+                {t(`admin.weekday.${r.weekday}`, r.weekday)}
+              </td>
+              <td className="p-2 text-center">
+                <input
+                  type="checkbox"
+                  checked={!!r.closed}
+                  onChange={(e) => update(i, { closed: e.target.checked })}
+                />
+              </td>
+              <td className="p-2"><input type="text" placeholder="08:00" value={r.openTime ?? ''} onChange={(e) => update(i, { openTime: e.target.value || undefined })} className={inp} disabled={!!r.closed} /></td>
+              <td className="p-2"><input type="text" placeholder="16:00" value={r.closeTime ?? ''} onChange={(e) => update(i, { closeTime: e.target.value || undefined })} className={inp} disabled={!!r.closed} /></td>
+              <td className="p-2"><input type="text" placeholder="17:00" value={r.secondOpenTime ?? ''} onChange={(e) => update(i, { secondOpenTime: e.target.value || undefined })} className={inp} disabled={!!r.closed} /></td>
+              <td className="p-2"><input type="text" placeholder="19:00" value={r.secondCloseTime ?? ''} onChange={(e) => update(i, { secondCloseTime: e.target.value || undefined })} className={inp} disabled={!!r.closed} /></td>
+              <td className="p-2"><input type="text" value={r.note ?? ''} onChange={(e) => update(i, { note: e.target.value || undefined })} className={inp} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+interface SubAreaRow {
+  value: string
+  id?: string
+}
+interface SpecialtyRow {
+  area: string
+  subAreas?: SubAreaRow[]
+  id?: string
+  _order?: number
+}
+
+function SpecialtyAreasEditor({
+  value,
+  onChange,
+  t,
+}: {
+  value: Array<Record<string, unknown>> | undefined
+  onChange: (v: SpecialtyRow[]) => void
+  t: ReturnType<typeof useTranslation>['t']
+}) {
+  const rows: SpecialtyRow[] = (Array.isArray(value) ? (value as unknown as SpecialtyRow[]) : []).map((r) => ({
+    area: r.area ?? '',
+    subAreas: Array.isArray(r.subAreas) ? r.subAreas : [],
+    id: r.id,
+    _order: r._order,
+  }))
+  function update(idx: number, patch: Partial<SpecialtyRow>) {
+    onChange(rows.map((r, i) => (i === idx ? { ...r, ...patch } : r)))
+  }
+  function addBranch() {
+    onChange([...rows, { area: '', subAreas: [] }])
+  }
+  function removeBranch(idx: number) {
+    onChange(rows.filter((_, i) => i !== idx))
+  }
+  function addSubArea(idx: number) {
+    const r = rows[idx]
+    update(idx, { subAreas: [...(r.subAreas ?? []), { value: '' }] })
+  }
+  function updateSubArea(idx: number, sIdx: number, v: string) {
+    const r = rows[idx]
+    const subs = (r.subAreas ?? []).map((s, j) => (j === sIdx ? { ...s, value: v } : s))
+    update(idx, { subAreas: subs })
+  }
+  function removeSubArea(idx: number, sIdx: number) {
+    const r = rows[idx]
+    const subs = (r.subAreas ?? []).filter((_, j) => j !== sIdx)
+    update(idx, { subAreas: subs })
+  }
+  const inp = 'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1 text-xs'
+  return (
+    <div className="space-y-3">
+      {rows.length === 0 && (
+        <div className="rounded border border-dashed border-[color:var(--color-border)] p-4 text-center text-xs text-[color:var(--color-text-muted)]">
+          {t('admin.specialty.empty', 'Nema unesenih grana. Dodajte prvu nižom tipkom.')}
+        </div>
+      )}
+      {rows.map((r, i) => (
+        <div key={i} className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-3 space-y-2">
+          <div className="flex items-start gap-2">
+            <div className="flex-1">
+              <label className="block text-xs font-semibold mb-1">
+                {t('admin.specialty.area', 'Grana djelatnosti')}
+              </label>
+              <select
+                value={r.area}
+                onChange={(e) => update(i, { area: e.target.value })}
+                className={inp}
+              >
+                <option value="">— {t('admin.specialty.choose', 'odaberi granu')} —</option>
+                {EXPERT_AREAS.map((a) => (
+                  <option key={a} value={a}>{a}</option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={() => removeBranch(i)}
+              aria-label={t('admin.specialty.removeBranch', 'Ukloni granu')}
+              className="mt-5 rounded bg-red-50 border border-red-300 px-2 py-1 text-xs text-red-700 hover:bg-red-100"
+            >
+              ✕
+            </button>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold mb-1">
+              {t('admin.specialty.subAreas', 'Uže specijalizacije')}
+            </label>
+            <div className="space-y-1">
+              {(r.subAreas ?? []).length === 0 && (
+                <div className="text-xs text-[color:var(--color-text-muted)] italic">
+                  {t('admin.specialty.subAreaEmpty', 'Još nema užih specijalizacija.')}
+                </div>
+              )}
+              {(r.subAreas ?? []).map((s, sIdx) => (
+                <div key={sIdx} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={s.value ?? ''}
+                    onChange={(e) => updateSubArea(i, sIdx, e.target.value)}
+                    placeholder={t('admin.specialty.subAreaPlaceholder', 'npr. nekretnine, vozila…')}
+                    className={inp}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeSubArea(i, sIdx)}
+                    aria-label={t('admin.specialty.removeSubArea', 'Ukloni užu specijalizaciju')}
+                    className="rounded bg-red-50 border border-red-300 px-2 py-0.5 text-xs text-red-700 hover:bg-red-100"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => addSubArea(i)}
+              className="mt-1 rounded bg-[color:var(--color-surface)] border border-[color:var(--color-border)] px-2 py-1 text-xs hover:bg-[color:var(--color-surface-alt)]"
+            >
+              + {t('admin.specialty.addSubArea', 'Dodaj užu specijalizaciju')}
+            </button>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={addBranch}
+        className="rounded bg-[color:var(--color-brand)] px-3 py-1.5 text-xs text-white hover:opacity-90"
+      >
+        + {t('admin.specialty.add', 'Dodaj granu')}
+      </button>
+    </div>
+  )
+}
+
+function MediaUploadPicker({
+  field,
+  value,
+  onChange,
+  common,
+  t,
+}: {
+  field: FieldDef
+  value: number | string | { id: number | string; filename?: string } | null | undefined
+  onChange: (v: number | string | null) => void
+  common: string
+  t: ReturnType<typeof useTranslation>['t']
+}) {
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState<string | null>(null)
+  const [filename, setFilename] = useState<string | null>(
+    value && typeof value === 'object' && 'filename' in value ? (value.filename ?? null) : null,
+  )
+  const currentId =
+    value && typeof value === 'object' && 'id' in value ? value.id : (value as number | string | null | undefined)
+  async function handleFile(file: File) {
+    setBusy(true)
+    setErr(null)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      // Payload media collection accepts multipart with `file` plus a JSON body
+      // in `_payload`. We send only the file — server fills in alt/etc. defaults.
+      const token = getAuthToken()
+      const resp = await fetch('/api/media', {
+        method: 'POST',
+        headers: token ? { Authorization: `JWT ${token}` } : {},
+        body: fd,
+      })
+      if (!resp.ok) {
+        const txt = await resp.text()
+        throw new Error(`HTTP ${resp.status}: ${txt.slice(0, 200)}`)
+      }
+      const j = (await resp.json()) as { doc?: { id: number | string; filename?: string }; id?: number | string }
+      const mediaId = j.doc?.id ?? j.id
+      if (mediaId == null) throw new Error('Media upload returned no id')
+      onChange(mediaId)
+      setFilename(j.doc?.filename ?? file.name)
+    } catch (e: unknown) {
+      setErr(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(false)
+    }
+  }
+  return (
+    <div className="space-y-1">
+      <input
+        type="file"
+        accept={field.accept ?? 'application/pdf,.pdf,image/*'}
+        onChange={(e) => {
+          const f = e.target.files?.[0]
+          if (f) handleFile(f)
+        }}
+        className={common}
+      />
+      {currentId != null && (
+        <div className="text-xs text-[color:var(--color-text-muted)]">
+          {t('admin.file.current', 'Postojeća datoteka')}:{' '}
+          {filename ?? `media #${String(currentId)}`}{' '}
+          <a
+            href={`/api/media/${String(currentId)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-[color:var(--color-text-link)] hover:underline"
+          >
+            ↗
+          </a>
+        </div>
+      )}
+      {busy && <div className="text-xs">{t('admin.file.uploading', 'Učitavanje…')}</div>}
+      {err && <div className="text-xs text-red-700">{err}</div>}
+    </div>
+  )
 }
 
 // Per-collection in-memory cache so the picker doesn't re-fetch on every row open.
@@ -115,8 +471,14 @@ function blankRecord(fields: FieldDef[], defaults?: Record<string, unknown>): Re
   for (const f of fields) {
     if (!(f.name in out)) {
       out[f.name] =
-        f.type === 'checkbox' ? false :
-        f.type === 'number'   ? '' :
+        f.type === 'checkbox'        ? false :
+        f.type === 'number'          ? '' :
+        f.type === 'lines'           ? [] :
+        f.type === 'weekday-hours'   ? [] :
+        f.type === 'specialty-areas' ? [] :
+        f.type === 'relationship'    ? null :
+        f.type === 'media-upload'    ? null :
+        f.type === 'file'            ? null :
         ''
     }
   }
@@ -136,6 +498,36 @@ function renderCell(value: unknown): string {
 
 // REDESIGN: labels in collectionConfigs are i18n keys when they contain a
 // dot; otherwise they are rendered as-is. Falls back to the field name.
+// Map a collection slug to its i18n title key. Convention: admin.collections.<camelCase>.__title.
+const SLUG_TO_I18N: Record<string, string> = {
+  'courts': 'admin.collections.courts.__title',
+  'judges': 'admin.collections.judges.__title',
+  'expert-witnesses': 'admin.collections.expertWitnesses.__title',
+  'interpreters': 'admin.collections.interpreters.__title',
+  'state-attorneys': 'admin.collections.stateAttorneys.__title',
+  'bankruptcy-administrators': 'admin.collections.bankruptcyAdministrators.__title',
+  'bankruptcy-debtors': 'admin.collections.bankruptcyDebtors.__title',
+  'bankruptcy-filings': 'admin.collections.bankruptcyFilings.__title',
+  'laws': 'admin.collections.laws.__title',
+  'legal-categories': 'admin.collections.legalCategories.__title',
+  'documents': 'admin.collections.documents.__title',
+  'pages': 'admin.collections.pages.__title',
+  'api-keys': 'admin.collections.apiKeys.__title',
+}
+
+function resolveTitle(config: CollectionAdminConfig, t: ReturnType<typeof useTranslation>['t']): string {
+  // 1) If the title itself is a dotted i18n key, use it.
+  if (config.title.includes('.')) return t(config.title, config.title)
+  // 2) Otherwise, look up the slug's canonical i18n key and use that if present.
+  const key = SLUG_TO_I18N[config.slug]
+  if (key) {
+    const out = t(key, '__missing__')
+    if (out !== '__missing__') return out
+  }
+  // 3) Fall back to the literal title in the config.
+  return config.title
+}
+
 function labelOf(f: FieldDef, t: ReturnType<typeof useTranslation>['t']): string {
   if (!f.label) return f.name
   if (f.label.includes('.')) return t(f.label, f.name)
@@ -251,13 +643,13 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-[color:var(--color-heading)]">
-          {config.title} ({total.toLocaleString()})
+          {resolveTitle(config, t)} ({total.toLocaleString()})
         </h2>
         <button
           onClick={() => setEditing(blank)}
           className="rounded bg-[color:var(--color-brand)] px-3 py-1.5 text-sm text-white hover:opacity-90"
         >
-          + New
+          + {t('admin.table.new', 'Novi unos')}
         </button>
       </div>
 
@@ -287,14 +679,51 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                 ) : f.type === 'select' ? (
                   <select required={f.required} value={String(value ?? '')} onChange={(e) => onChange(e.target.value)} className={common}>
                     <option value="">—</option>
-                    {f.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+                    {f.options?.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label.includes('.') ? t(o.label, o.label) : o.label}
+                      </option>
+                    ))}
                   </select>
+                ) : f.type === 'file' ? (
+                  <FilePicker
+                    field={f}
+                    value={value as string | undefined}
+                    siblingFilename={editing[f.filenameField ?? ''] as string | undefined}
+                    onChange={(b64, fn) => {
+                      const next = { ...editing, [f.name]: b64 }
+                      if (f.filenameField) next[f.filenameField] = fn
+                      setEditing(next)
+                    }}
+                    common={common}
+                    t={t}
+                  />
                 ) : f.type === 'relationship' ? (
                   <RelationshipPicker
                     field={f}
                     value={value as number | string | { id: number | string } | null | undefined}
                     onChange={onChange}
                     common={common}
+                  />
+                ) : f.type === 'media-upload' ? (
+                  <MediaUploadPicker
+                    field={f}
+                    value={value as number | string | { id: number | string; filename?: string } | null | undefined}
+                    onChange={onChange}
+                    common={common}
+                    t={t}
+                  />
+                ) : f.type === 'weekday-hours' ? (
+                  <WeekdayHoursEditor
+                    value={value as Array<Record<string, unknown>> | undefined}
+                    onChange={onChange}
+                    t={t}
+                  />
+                ) : f.type === 'specialty-areas' ? (
+                  <SpecialtyAreasEditor
+                    value={value as Array<Record<string, unknown>> | undefined}
+                    onChange={onChange}
+                    t={t}
                   />
                 ) : f.type === 'lines' ? (
                   <textarea
@@ -348,7 +777,7 @@ export function AdminCollectionPage({ config }: { config: CollectionAdminConfig 
                   const headerLabel = field ? labelOf(field, t) : c.charAt(0).toUpperCase() + c.slice(1)
                   return <th key={c} className="py-2 pr-3">{headerLabel}</th>
                 })}
-                <th className="py-2 pr-3">Actions</th>
+                <th className="py-2 pr-3">{t('admin.table.actions', 'Akcije')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[color:var(--color-border)]">
@@ -447,6 +876,8 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'phone', label: 'admin.collections.courts.phone', type: 'text' },
       { name: 'email', label: 'admin.collections.courts.email', type: 'text' },
       { name: 'website', label: 'admin.collections.courts.website', type: 'text' },
+      { name: 'operatingHours', type: 'weekday-hours', label: 'admin.collections.courts.operatingHours' },
+      { name: 'publicServiceHours', type: 'weekday-hours', label: 'admin.collections.courts.publicServiceHours' },
       { name: 'president', label: 'admin.collections.courts.president', type: 'text' },
       { name: 'fax',   type: 'text', label: 'admin.collections.courts.fax' },
       { name: 'notes', type: 'textarea', label: 'admin.collections.courts.notes' },
@@ -482,7 +913,7 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
     columns: ['name', 'city', 'county', 'email', 'verified'],
     fields: [
       { name: 'name',            type: 'text',     required: true, label: 'admin.collections.expertWitnesses.name' },
-      { name: 'specialityAreas', type: 'lines',    label: 'admin.collections.expertWitnesses.specialityAreas', itemKey: 'area' },
+      { name: 'specialityAreas', type: 'specialty-areas', label: 'admin.collections.expertWitnesses.specialityAreas' },
       { name: 'languages',       type: 'lines',    label: 'admin.collections.expertWitnesses.languages', itemKey: 'language' },
       { name: 'address',         type: 'text',     label: 'admin.collections.expertWitnesses.address' },
       { name: 'county',          type: 'text',     label: 'admin.collections.expertWitnesses.county' },
@@ -491,6 +922,9 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'phone',           type: 'text',     label: 'admin.collections.expertWitnesses.phone' },
       { name: 'email',           type: 'text',     label: 'admin.collections.expertWitnesses.email' },
       { name: 'verified',        type: 'checkbox', label: 'admin.collections.expertWitnesses.verified' },
+      { name: 'cv',              type: 'media-upload', label: 'admin.collections.expertWitnesses.cv',
+                                  accept: 'application/pdf,.pdf' },
+      { name: 'workingHours',    type: 'weekday-hours', label: 'admin.collections.expertWitnesses.workingHours' },
       { name: 'lang',            type: 'select',   label: 'admin.collections.expertWitnesses.lang',
                                   options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
       { name: 'notes', type: 'textarea', label: 'admin.collections.expertWitnesses.notes' },
@@ -511,6 +945,9 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
       { name: 'phone',         type: 'text',     label: 'admin.collections.interpreters.phone' },
       { name: 'email',         type: 'text',     label: 'admin.collections.interpreters.email' },
       { name: 'verified',      type: 'checkbox', label: 'admin.collections.interpreters.verified' },
+      { name: 'cv',            type: 'media-upload', label: 'admin.collections.interpreters.cv',
+                                accept: 'application/pdf,.pdf' },
+      { name: 'workingHours',  type: 'weekday-hours', label: 'admin.collections.interpreters.workingHours' },
       { name: 'lang',          type: 'select',   label: 'admin.collections.interpreters.lang',
                                 options: SUPPORTED_LANGUAGES.map((c) => ({ value: c, label: LANGUAGE_LABELS[c] ?? c })) },
     ],
@@ -562,33 +999,37 @@ export const collectionConfigs: Record<string, CollectionAdminConfig> = {
   },
   'bankruptcy-filings': {
     slug: 'bankruptcy-filings',
-    title: 'admin.collections.bankruptcyFilings.title',
+    title: 'Stečajni podnesci',
     columns: ['filingType', 'caseNumber', 'status', 'submittedBy'],
     fields: [
       { name: 'filingType', type: 'select', required: true,
         label: 'admin.collections.bankruptcyFilings.filingType',
         options: [
-          { label: 'Prijedlog za pokretanje', value: 'motion-to-open' },
-          { label: 'Prijava tražbine', value: 'prijava-trazbine' },
-          { label: 'Popis imovine', value: 'asset-inventory' },
-          { label: 'Prodaja imovine', value: 'asset-sale' },
-          { label: 'Izvještaj stečajnog upravitelja', value: 'trustee-report' },
-          { label: 'Prijedlog raspodjele', value: 'distribution-proposal' },
-          { label: 'Završni račun', value: 'final-accounting' },
-          { label: 'Plan restrukturiranja', value: 'restructuring-plan' },
-          { label: 'Predstečajna nagodba', value: 'pre-bankruptcy-settlement' },
+          { label: 'admin.collections.bankruptcyFilings.types.motionToOpen', value: 'motion-to-open' },
+          { label: 'admin.collections.bankruptcyFilings.types.creditorClaim', value: 'prijava-trazbine' },
+          { label: 'admin.collections.bankruptcyFilings.types.assetInventory', value: 'asset-inventory' },
+          { label: 'admin.collections.bankruptcyFilings.types.assetSale', value: 'asset-sale' },
+          { label: 'admin.collections.bankruptcyFilings.types.trusteeReport', value: 'trustee-report' },
+          { label: 'admin.collections.bankruptcyFilings.types.distributionProposal', value: 'distribution-proposal' },
+          { label: 'admin.collections.bankruptcyFilings.types.finalAccounting', value: 'final-accounting' },
+          { label: 'admin.collections.bankruptcyFilings.types.restructuringPlan', value: 'restructuring-plan' },
+          { label: 'admin.collections.bankruptcyFilings.types.preBankruptcySettlement', value: 'pre-bankruptcy-settlement' },
         ],
       },
       { name: 'caseNumber', type: 'text', label: 'admin.collections.bankruptcyFilings.caseNumber' },
       { name: 'status', type: 'select', required: true,
         label: 'admin.collections.bankruptcyFilings.status',
         options: [
-          { label: 'Na pregledu', value: 'pending_review' },
-          { label: 'Odobreno', value: 'approved' },
-          { label: 'Odbijeno', value: 'rejected' },
+          { label: 'admin.collections.bankruptcyFilings.statuses.pending', value: 'pending_review' },
+          { label: 'admin.collections.bankruptcyFilings.statuses.approved', value: 'approved' },
+          { label: 'admin.collections.bankruptcyFilings.statuses.rejected', value: 'rejected' },
         ],
       },
       { name: 'submittedBy', type: 'text', label: 'admin.collections.bankruptcyFilings.submittedBy' },
+      { name: 'attachmentBase64', type: 'file',
+        label: 'admin.collections.bankruptcyFilings.attachment',
+        filenameField: 'attachmentFilename',
+        accept: 'application/pdf,.pdf' },
       { name: 'attachmentFilename', type: 'text',
         label: 'admin.collections.bankruptcyFilings.attachmentFilename' },
       { name: 'reviewNotes', type: 'textarea',

@@ -973,7 +973,9 @@
       "next": "Next",
       "pageOf": "Page {{page}} of {{total}}",
       "empty": "No records.",
-      "searchPlaceholder": "Filter by {{col}}…"
+      "searchPlaceholder": "Filter by {{col}}…",
+      "actions": "Actions",
+      "new": "New entry"
     },
     "collections": {
       "apiKeys": {
@@ -1018,7 +1020,9 @@
         "fax": "Fax",
         "email": "Email",
         "website": "Website",
-        "notes": "Notes"
+        "notes": "Notes",
+        "operatingHours": "Operating hours",
+        "publicServiceHours": "Public service hours"
       },
       "documents": {
         "__title": "Documents",
@@ -1041,7 +1045,9 @@
         "email": "Email",
         "verified": "Verified",
         "lang": "Entry Language",
-        "notes": "Notes"
+        "notes": "Notes",
+        "cv": "CV (PDF)",
+        "workingHours": "Working hours"
       },
       "interpreters": {
         "__title": "Court Interpreters",
@@ -1054,7 +1060,9 @@
         "phone": "Phone",
         "email": "Email",
         "verified": "Verified",
-        "lang": "Entry Language"
+        "lang": "Entry Language",
+        "cv": "CV (PDF)",
+        "workingHours": "Working hours"
       },
       "judges": {
         "__title": "Judges",
@@ -1115,7 +1123,24 @@
         "status": "Status",
         "submittedBy": "Submitted by",
         "attachmentFilename": "Attachment filename",
-        "reviewNotes": "Review notes"
+        "reviewNotes": "Review notes",
+        "types": {
+          "motionToOpen": "Motion to open",
+          "creditorClaim": "Creditor claim",
+          "assetInventory": "Asset inventory",
+          "assetSale": "Asset sale",
+          "trusteeReport": "Trustee report",
+          "distributionProposal": "Distribution proposal",
+          "finalAccounting": "Final accounting",
+          "restructuringPlan": "Restructuring plan",
+          "preBankruptcySettlement": "Pre-bankruptcy settlement"
+        },
+        "statuses": {
+          "pending": "Pending review",
+          "approved": "Approved",
+          "rejected": "Rejected"
+        },
+        "attachment": "Attachment (PDF)"
       }
     },
     "nav": {
@@ -1143,7 +1168,45 @@
       "pages": "Pages",
       "apiKeys": "API keys",
       "config": "Configuration",
-      "globals": "Globals"
+      "globals": "Globals",
+      "collections": "Collections"
+    },
+    "file": {
+      "current": "Current file",
+      "uploading": "Uploading…"
+    },
+    "backToSite": "Back to public site",
+    "hours": {
+      "day": "Day",
+      "closed": "Closed",
+      "open": "Opens",
+      "close": "Closes",
+      "secondOpen": "Second slot — opens",
+      "secondClose": "Second slot — closes",
+      "note": "Note"
+    },
+    "specialty": {
+      "area": "Branch",
+      "subArea": "Sub-branch",
+      "subAreaPlaceholder": "e.g. real estate, vehicles…",
+      "empty": "No specialty areas yet. Add one using the button below.",
+      "choose": "choose branch",
+      "add": "Add branch",
+      "remove": "Remove",
+      "subAreas": "Sub-branches",
+      "subAreaEmpty": "No sub-branches yet.",
+      "addSubArea": "Add sub-branch",
+      "removeBranch": "Remove branch",
+      "removeSubArea": "Remove sub-branch"
+    },
+    "weekday": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
     }
   },
   "viewDetails": "View Details"

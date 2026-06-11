@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { BankruptcyAdvancedSearch } from '@/components/bankruptcy/BankruptcyAdvancedSearch'
 
 export default function BankruptcyPage() {
   const { t } = useTranslation('common')
@@ -15,7 +16,6 @@ export default function BankruptcyPage() {
     { key: 'debtors', href: `/${locale}/stecaj/duznici`, icon: '🏢' },
     { key: 'administrators', href: `/${locale}/stecaj/upravitelji`, icon: '👤' },
     { key: 'legislation', href: `/${locale}/stecaj/zakoni`, icon: '📖' },
-    { key: 'filing', href: `/${locale}/editor/bankruptcy`, icon: '📝' },
   ]
 
   return (
@@ -29,9 +29,14 @@ export default function BankruptcyPage() {
       <h1 className="text-3xl font-bold text-[color:var(--color-heading)] dark:text-[color:var(--color-brand-gold)] mb-2 mt-6">
         {t('bankruptcy.title')}
       </h1>
-      <p className="text-[color:var(--color-text-muted)] mb-10">{t('bankruptcy.subtitle')}</p>
+      <p className="text-[color:var(--color-text-muted)] mb-6">{t('bankruptcy.subtitle')}</p>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 mb-12">
+      <section className="mb-10">
+        <h2 className="sr-only">{t('bankruptcy.search.title', 'Pretraga stečajnih predmeta')}</h2>
+        <BankruptcyAdvancedSearch mode="navigate" />
+      </section>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-12">
         {sections.map((s) => (
           <Link
             key={s.key}

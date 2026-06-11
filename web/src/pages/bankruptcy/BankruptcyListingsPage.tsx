@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -7,6 +7,10 @@ import { Alert } from '@/components/ui/Alert'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Pagination } from '@/components/ui/Pagination'
 import { apiFetch } from '@/api/client'
+import {
+  BankruptcyAdvancedSearch,
+  type BankruptcyFilters,
+} from '@/components/bankruptcy/BankruptcyAdvancedSearch'
 import { z } from 'zod'
 
 const IdSchema = z.union([z.string(), z.number()]).transform(String)
@@ -55,13 +59,20 @@ export default function BankruptcyListingsPage() {
   const [totalDocs, setTotalDocs] = useState(0)
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
-  const [query, setQuery] = useState('')
-  const [courtId, setCourtId] = useState('')
-  const [adminId, setAdminId] = useState('')
-  const [status, setStatus] = useState('active')
-  // Filter dropdown options
-  const [courtOpts, setCourtOpts] = useState<Array<{ id: string; name: string }>>([])
-  const [adminOpts, setAdminOpts] = useState<Array<{ id: string; name: string }>>([])
+  const [searchParams] = useSearchParams()
+  const [filters, setFilters] = useState<BankruptcyFilters>(() => ({
+    q: searchParams.get('q') ?? '',
+    court: searchParams.get('court') ?? '',
+    assetCategory: searchParams.get('assetCategory') ?? '',
+    assetType: searchParams.get('assetType') ?? '',
+    debtor: searchParams.get('debtor') ?? '',
+    administrator: searchParams.get('administrator') ?? '',
+    status: searchParams.get('status') ?? '',
+  }))
+  // Existing variables kept so the rest of the file (effects, render) still typechecks.
+  const query = filters.q ?? ''
+  const assetCategory = filters.assetCategory ?? ''
+  const assetType = filters.assetType ?? ''
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const mounted = useRef(true)
@@ -69,28 +80,6 @@ export default function BankruptcyListingsPage() {
   useEffect(() => {
     mounted.current = true
     return () => { mounted.current = false }
-  }, [])
-
-  // Load filter options once: commercial courts and bankruptcy administrators.
-  useEffect(() => {
-    let alive = true
-    Promise.all([
-      fetch('/api/courts?where[type][equals]=commercial&limit=200&sort=name')
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then((d: { docs: Array<{ id: string | number; name: string }> }) =>
-          (d.docs ?? []).map(c => ({ id: String(c.id), name: c.name }))),
-      fetch('/api/bankruptcy-administrators?limit=400&sort=name')
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then((d: { docs: Array<{ id: string | number; name: string }> }) =>
-          (d.docs ?? []).map(a => ({ id: String(a.id), name: a.name }))),
-    ])
-      .then(([courts, admins]) => {
-        if (!alive) return
-        setCourtOpts(courts)
-        setAdminOpts(admins)
-      })
-      .catch(() => { /* options stay empty; users can still text-search */ })
-    return () => { alive = false }
   }, [])
 
   useEffect(() => {
@@ -102,10 +91,20 @@ export default function BankruptcyListingsPage() {
       locale,
       sort: '-publishedAt',
     }
-    if (status) params['where[status][equals]'] = status
-    if (query) params['where[debtorName][like]'] = query
-    if (courtId) params['where[court][equals]'] = courtId
-    if (adminId) params['where[administrator][equals]'] = adminId
+    // status filter — defaults to 'active' when the search bar leaves it blank.
+    params['where[status][equals]'] = filters.status || 'active'
+    // REDESIGN 3.7.2 — "Pretraži u tekstu" matches case number, debtor name,
+    // and the new structured description column.
+    if (query) {
+      params['where[or][0][debtorName][like]'] = query
+      params['where[or][1][caseNumber][like]'] = query
+      params['where[or][2][description][like]'] = query
+    }
+    if (assetCategory) params['where[assetCategory][equals]'] = assetCategory
+    if (assetType) params['where[assetType][like]'] = assetType
+    if (filters.court) params['where[court][equals]'] = filters.court
+    if (filters.debtor) params['where[debtor][equals]'] = filters.debtor
+    if (filters.administrator) params['where[administrator][equals]'] = filters.administrator
     apiFetch('/bankruptcy-listings', ListSchema, { params })
       .then((d) => {
         if (!mounted.current) return
@@ -119,7 +118,7 @@ export default function BankruptcyListingsPage() {
         setError(true)
         setLoading(false)
       })
-  }, [page, query, courtId, adminId, status, locale])
+  }, [page, query, assetCategory, assetType, filters.court, filters.debtor, filters.administrator, filters.status, locale])
 
   function formatDeadline(iso?: string | null): string {
     if (!iso) return '—'
@@ -144,62 +143,14 @@ export default function BankruptcyListingsPage() {
         {t('bankruptcy.listings.description', 'Active bankruptcy proceedings published in the official gazette.')}
       </p>
 
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end">
-        <div>
-          <label className="block text-xs font-medium text-[color:var(--color-text-muted)] mb-1">
-            {t('bankruptcy.listings.filterDebtor', 'Stečajni dužnik')}
-          </label>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => { setQuery(e.target.value); setPage(1) }}
-            placeholder={t('bankruptcy.listings.searchPlaceholder', 'Pretraga po nazivu dužnika…')}
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm text-[color:var(--color-text)]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-[color:var(--color-text-muted)] mb-1">
-            {t('bankruptcy.listings.filterCourt', 'Sud')}
-          </label>
-          <select
-            value={courtId}
-            onChange={(e) => { setCourtId(e.target.value); setPage(1) }}
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm text-[color:var(--color-text)]"
-          >
-            <option value="">{t('bankruptcy.listings.allCourts', 'Svi sudovi / All courts')}</option>
-            {courtOpts.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-[color:var(--color-text-muted)] mb-1">
-            {t('bankruptcy.listings.filterAdmin', 'Stečajni upravitelj')}
-          </label>
-          <select
-            value={adminId}
-            onChange={(e) => { setAdminId(e.target.value); setPage(1) }}
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm text-[color:var(--color-text)]"
-          >
-            <option value="">{t('bankruptcy.listings.allAdmins', 'Svi upravitelji')}</option>
-            {adminOpts.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-[color:var(--color-text-muted)] mb-1">
-            {t('bankruptcy.listings.filterStatus', 'Status')}
-          </label>
-          <select
-            value={status}
-            onChange={(e) => { setStatus(e.target.value); setPage(1) }}
-            className="w-full rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm text-[color:var(--color-text)]"
-          >
-            <option value="">{t('bankruptcy.listings.allStatuses', 'Svi statusi')}</option>
-            <option value="active">{t('bankruptcy.listings.statusActive', 'Aktivni')}</option>
-            <option value="closed">{t('bankruptcy.listings.statusClosed', 'Zatvoreni')}</option>
-            <option value="pending_review">{t('bankruptcy.listings.statusPending', 'U obradi')}</option>
-          </select>
-        </div>
+      <div className="mb-3">
+        <BankruptcyAdvancedSearch
+          mode="inline"
+          initial={filters}
+          onChange={(f) => { setFilters(f); setPage(1) }}
+        />
       </div>
-      <p className="-mt-3 mb-4 text-sm text-[color:var(--color-text-muted)]">
+      <p className="mb-4 text-sm text-[color:var(--color-text-muted)]">
         {t('bankruptcy.listings.count', '{{n}} listings', { n: totalDocs })}
       </p>
 

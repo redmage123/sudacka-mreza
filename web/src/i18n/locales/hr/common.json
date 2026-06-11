@@ -978,7 +978,9 @@
       "next": "Sljedeća",
       "pageOf": "Stranica {{page}} od {{total}}",
       "empty": "Nema zapisa.",
-      "searchPlaceholder": "Filtriraj po {{col}}…"
+      "searchPlaceholder": "Filtriraj po {{col}}…",
+      "actions": "Akcije",
+      "new": "Novi unos"
     },
     "collections": {
       "apiKeys": {
@@ -1023,7 +1025,9 @@
         "fax": "Faks",
         "email": "Email",
         "website": "Web stranica",
-        "notes": "Napomene"
+        "notes": "Napomene",
+        "operatingHours": "Radno vrijeme suda",
+        "publicServiceHours": "Radno vrijeme za stranke"
       },
       "documents": {
         "__title": "Dokumenti",
@@ -1046,7 +1050,9 @@
         "email": "Email",
         "verified": "Verificiran",
         "lang": "Jezik unosa",
-        "notes": "Napomene"
+        "notes": "Napomene",
+        "cv": "Životopis (PDF)",
+        "workingHours": "Radno vrijeme"
       },
       "interpreters": {
         "__title": "Sudski tumači",
@@ -1059,7 +1065,9 @@
         "phone": "Telefon",
         "email": "Email",
         "verified": "Verificiran",
-        "lang": "Jezik unosa"
+        "lang": "Jezik unosa",
+        "cv": "Životopis (PDF)",
+        "workingHours": "Radno vrijeme"
       },
       "judges": {
         "__title": "Suci",
@@ -1120,7 +1128,24 @@
         "status": "Status",
         "submittedBy": "Podnositelj",
         "attachmentFilename": "Naziv priloga",
-        "reviewNotes": "Bilješke recenzije"
+        "reviewNotes": "Bilješke recenzije",
+        "types": {
+          "motionToOpen": "Prijedlog za pokretanje",
+          "creditorClaim": "Prijava tražbine",
+          "assetInventory": "Popis imovine",
+          "assetSale": "Prodaja imovine",
+          "trusteeReport": "Izvještaj stečajnog upravitelja",
+          "distributionProposal": "Prijedlog raspodjele",
+          "finalAccounting": "Završni račun",
+          "restructuringPlan": "Plan restrukturiranja",
+          "preBankruptcySettlement": "Predstečajna nagodba"
+        },
+        "statuses": {
+          "pending": "Na pregledu",
+          "approved": "Odobreno",
+          "rejected": "Odbijeno"
+        },
+        "attachment": "Privitak (PDF)"
       }
     },
     "nav": {
@@ -1148,7 +1173,45 @@
       "pages": "Stranice",
       "apiKeys": "API ključevi",
       "config": "Konfiguracija",
-      "globals": "Globalne postavke"
+      "globals": "Globalne postavke",
+      "collections": "Zbirke"
+    },
+    "file": {
+      "current": "Postojeća datoteka",
+      "uploading": "Učitavanje…"
+    },
+    "backToSite": "Natrag na javnu stranicu",
+    "hours": {
+      "day": "Dan",
+      "closed": "Zatvoreno",
+      "open": "Otvaranje",
+      "close": "Zatvaranje",
+      "secondOpen": "Drugi termin — Otv.",
+      "secondClose": "Drugi termin — Zat.",
+      "note": "Napomena"
+    },
+    "specialty": {
+      "area": "Grana djelatnosti",
+      "subArea": "Uža specijalizacija",
+      "subAreaPlaceholder": "npr. nekretnine, vozila…",
+      "empty": "Nema unesenih grana. Dodajte prvu nižom tipkom.",
+      "choose": "odaberi granu",
+      "add": "Dodaj granu",
+      "remove": "Ukloni",
+      "subAreas": "Uže specijalizacije",
+      "subAreaEmpty": "Još nema užih specijalizacija.",
+      "addSubArea": "Dodaj užu specijalizaciju",
+      "removeBranch": "Ukloni granu",
+      "removeSubArea": "Ukloni užu specijalizaciju"
+    },
+    "weekday": {
+      "mon": "Ponedjeljak",
+      "tue": "Utorak",
+      "wed": "Srijeda",
+      "thu": "Četvrtak",
+      "fri": "Petak",
+      "sat": "Subota",
+      "sun": "Nedjelja"
     }
   },
   "viewDetails": "Pogledaj detalje"

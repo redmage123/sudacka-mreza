@@ -21,6 +21,7 @@ import * as migration_20260601_230000_admin_oib from './20260601_230000_admin_oi
 import * as migration_20260607_120000_state_attorneys_type from './20260607_120000_state_attorneys_type';
 import * as migration_20260607_130000_bankruptcy_listings_assets from './20260607_130000_bankruptcy_listings_assets';
 import * as migration_20260611_150000_taxonomy_and_hours from './20260611_150000_taxonomy_and_hours';
+import * as migration_20260611_180000_expert_sub_areas_array from './20260611_180000_expert_sub_areas_array';
 
 export const migrations = [
   {
@@ -137,5 +138,10 @@ export const migrations = [
     up: migration_20260611_150000_taxonomy_and_hours.up,
     down: migration_20260611_150000_taxonomy_and_hours.down,
     name: '20260611_150000_taxonomy_and_hours',
+  },
+  {
+    up: migration_20260611_180000_expert_sub_areas_array.up,
+    down: migration_20260611_180000_expert_sub_areas_array.down,
+    name: '20260611_180000_expert_sub_areas_array',
   },
 ];
