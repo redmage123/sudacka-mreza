@@ -39,6 +39,7 @@ const JudgeDetailPage = lazy(() => import('@/pages/courts/JudgeDetailPage'))
 const BankruptcyPage = lazy(() => import('@/pages/bankruptcy/BankruptcyPage'))
 const BankruptcyListingsPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingsPage'))
 const BankruptcyListingDetailPage = lazy(() => import('@/pages/bankruptcy/BankruptcyListingDetailPage'))
+const BankruptcyFilingsListPage = lazy(() => import('@/pages/bankruptcy/BankruptcyFilingsListPage'))
 const AdministratorDetailPage = lazy(() => import('@/pages/bankruptcy/AdministratorDetailPage'))
 const AdministratorsPage = lazy(() => import('@/pages/bankruptcy/AdministratorsPage'))
 const DebtorsPage = lazy(() => import('@/pages/bankruptcy/DebtorsPage'))
@@ -197,6 +198,7 @@ export const router = createBrowserRouter([
       { path: 'stecaj', element: S(BankruptcyPage) },
       { path: 'stecaj/oglasi', element: S(BankruptcyListingsPage) },
       { path: 'stecaj/oglasi/:id', element: S(BankruptcyListingDetailPage) },
+      { path: 'stecaj/podnesci', element: S(BankruptcyFilingsListPage) },
       { path: 'stecaj/upravitelji', element: S(AdministratorsPage) },
       { path: 'stecaj/upravitelji/:id', element: S(AdministratorDetailPage) },
       { path: 'stecaj/duznici', element: S(DebtorsPage) },

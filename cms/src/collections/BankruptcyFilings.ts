@@ -1,9 +1,24 @@
 import type { Access, CollectionConfig } from 'payload'
 import { isAdmin, isLegalEntityOrAbove } from '../access.js'
 
-// Non-admins (editors + legal entities) read only their own submissions;
-// admins read everything.
-const readOwnOrAdmin: Access = ({ req }) => {
+// Public reads see only approved filings; editors and legal entities also see
+// their own (regardless of status). Admins see everything.
+const readPublicApprovedOrOwn: Access = ({ req }) => {
+  if (req.user?.role === 'admin') return true
+  if (req.user?.role === 'editor' || req.user?.role === 'legal_entity') {
+    return {
+      or: [
+        { status: { equals: 'approved' } },
+        { submittedBy: { equals: req.user.email } },
+      ],
+    }
+  }
+  return { status: { equals: 'approved' } }
+}
+
+// attachmentBase64 stays admin/owner-only — public listings never expose the
+// raw PDF, only metadata.
+const readAttachmentOwnerOrAdmin: Access = ({ req }) => {
   if (!req.user) return false
   if (req.user.role === 'admin') return true
   if (req.user.role === 'editor' || req.user.role === 'legal_entity') {
@@ -15,16 +30,13 @@ const readOwnOrAdmin: Access = ({ req }) => {
 export const BankruptcyFilings: CollectionConfig = {
   slug: 'bankruptcy-filings',
   admin: {
-    group: { hr: 'Stečaj', en: 'Bankruptcy' },
-    description: {
-      hr: 'Stečajni podnesci urednika koji čekaju pregled administratora.',
-      en: 'Editor-submitted bankruptcy filings pending admin review.',
-    },
+    group: 'Stečaj',
+    description: 'Editor-submitted bankruptcy filings pending admin review.',
     useAsTitle: 'caseNumber',
     defaultColumns: ['filingType', 'caseNumber', 'submittedBy', 'status', 'createdAt'],
   },
   access: {
-    read: readOwnOrAdmin,
+    read: readPublicApprovedOrOwn,
     create: isLegalEntityOrAbove,
     update: isAdmin,
     delete: isAdmin,
@@ -34,90 +46,81 @@ export const BankruptcyFilings: CollectionConfig = {
       name: 'filingType',
       type: 'select',
       required: true,
-      label: { hr: 'Vrsta podneska', en: 'Filing type' },
+      label: 'Vrsta podneska / Filing type',
       options: [
-        { label: { hr: 'Prijedlog za pokretanje', en: 'Motion to open' }, value: 'motion-to-open' },
-        { label: { hr: 'Prijava tražbine', en: 'Creditor claim' }, value: 'prijava-trazbine' },
-        { label: { hr: 'Popis imovine', en: 'Asset inventory' }, value: 'asset-inventory' },
-        { label: { hr: 'Prodaja imovine', en: 'Asset sale' }, value: 'asset-sale' },
-        { label: { hr: 'Izvještaj stečajnog upravitelja', en: 'Trustee report' }, value: 'trustee-report' },
-        { label: { hr: 'Prijedlog raspodjele', en: 'Distribution proposal' }, value: 'distribution-proposal' },
-        { label: { hr: 'Završni račun', en: 'Final accounting' }, value: 'final-accounting' },
-        { label: { hr: 'Plan restrukturiranja', en: 'Restructuring plan' }, value: 'restructuring-plan' },
-        { label: { hr: 'Predstečajna nagodba', en: 'Pre-bankruptcy settlement' }, value: 'pre-bankruptcy-settlement' },
+        { label: 'Motion to open / Prijedlog za pokretanje', value: 'motion-to-open' },
+        { label: 'Prijava tražbine / Creditor claim', value: 'prijava-trazbine' },
+        { label: 'Asset inventory / Popis imovine', value: 'asset-inventory' },
+        { label: 'Asset sale / Prodaja imovine', value: 'asset-sale' },
+        { label: 'Trustee report / Izvještaj stečajnog upravitelja', value: 'trustee-report' },
+        { label: 'Distribution proposal / Prijedlog raspodjele', value: 'distribution-proposal' },
+        { label: 'Final accounting / Završni račun', value: 'final-accounting' },
+        { label: 'Restructuring plan / Plan restrukturiranja', value: 'restructuring-plan' },
+        { label: 'Pre-bankruptcy settlement / Predstečajna nagodba', value: 'pre-bankruptcy-settlement' },
       ],
     },
     {
       name: 'caseNumber',
       type: 'text',
-      label: { hr: 'Broj predmeta', en: 'Case number' },
+      label: 'Broj predmeta / Case number',
     },
     {
       name: 'status',
       type: 'select',
       required: true,
       defaultValue: 'pending_review',
-      label: { hr: 'Status', en: 'Status' },
+      label: 'Status',
       options: [
-        { label: { hr: 'Čeka pregled', en: 'Pending review' }, value: 'pending_review' },
-        { label: { hr: 'Odobreno', en: 'Approved' }, value: 'approved' },
-        { label: { hr: 'Odbijeno', en: 'Rejected' }, value: 'rejected' },
+        { label: 'Pending review', value: 'pending_review' },
+        { label: 'Approved', value: 'approved' },
+        { label: 'Rejected', value: 'rejected' },
       ],
     },
     {
       name: 'submittedBy',
       type: 'text',
-      label: { hr: 'Podnositelj', en: 'Submitted by' },
+      label: 'Submitted by',
       admin: {
-        description: {
-          hr: 'Email adresa urednika koji je podnio podnesak (postavlja poslužitelj).',
-          en: 'Email of the submitting editor (server-set).',
-        },
+        description: 'Email of the submitting editor (server-set).',
         readOnly: true,
       },
     },
     {
       name: 'data',
       type: 'json',
-      label: { hr: 'Podaci obrasca', en: 'Form data' },
+      label: 'Form data',
     },
     {
       name: 'attachmentBase64',
       type: 'textarea',
-      label: { hr: 'Izvorni dokument (base64 PDF)', en: 'Original document (base64 PDF)' },
+      label: 'Original document (base64 PDF)',
+      access: {
+        read: readAttachmentOwnerOrAdmin,
+      },
       admin: {
-        description: {
-          hr: 'Izvorno učitana datoteka, base64-kodirana.',
-          en: 'Original uploaded source, base64-encoded.',
-        },
+        description: 'Original uploaded source, base64-encoded.',
         hidden: true,
       },
     },
     {
       name: 'attachmentFilename',
       type: 'text',
-      label: { hr: 'Naziv priložene datoteke', en: 'Attachment filename' },
+      label: 'Attachment filename',
     },
     {
       name: 'reviewNotes',
       type: 'textarea',
-      label: { hr: 'Bilješke pregleda', en: 'Review notes' },
+      label: 'Review notes',
       admin: {
-        description: {
-          hr: 'Administratorske bilješke pri odobravanju ili odbijanju podneska.',
-          en: 'Admin notes when approving or rejecting this filing.',
-        },
+        description: 'Admin notes when approving or rejecting this filing.',
       },
     },
     {
       name: 'publishedAt',
       type: 'date',
-      label: { hr: 'Vrijeme podnošenja', en: 'Submitted at' },
+      label: 'Submitted at',
       admin: {
-        description: {
-          hr: 'Izvorno vrijeme podnošenja od strane urednika.',
-          en: 'Original submission timestamp from the editor.',
-        },
+        description: 'Original submission timestamp from the editor.',
         date: { pickerAppearance: 'dayAndTime' },
         readOnly: true,
       },

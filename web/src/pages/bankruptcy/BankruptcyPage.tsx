@@ -13,6 +13,7 @@ export default function BankruptcyPage() {
 
   const sections = [
     { key: 'listings', href: `/${locale}/stecaj/oglasi`, icon: '📋' },
+    { key: 'filings', href: `/${locale}/stecaj/podnesci`, icon: '📄' },
     { key: 'debtors', href: `/${locale}/stecaj/duznici`, icon: '🏢' },
     { key: 'administrators', href: `/${locale}/stecaj/upravitelji`, icon: '👤' },
     { key: 'legislation', href: `/${locale}/stecaj/zakoni`, icon: '📖' },
