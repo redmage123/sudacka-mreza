@@ -1178,7 +1178,8 @@
     },
     "file": {
       "current": "Postojeća datoteka",
-      "uploading": "Učitavanje…"
+      "uploading": "Učitavanje…",
+      "open": "Otvori"
     },
     "backToSite": "Natrag na javnu stranicu",
     "hours": {
@@ -1202,7 +1203,9 @@
       "subAreaEmpty": "Još nema užih specijalizacija.",
       "addSubArea": "Dodaj užu specijalizaciju",
       "removeBranch": "Ukloni granu",
-      "removeSubArea": "Ukloni užu specijalizaciju"
+      "removeSubArea": "Ukloni užu specijalizaciju",
+      "chooseSub": "odaberi užu specijalizaciju",
+      "subAreaCustom": "ili upiši vlastiti"
     },
     "weekday": {
       "mon": "Ponedjeljak",

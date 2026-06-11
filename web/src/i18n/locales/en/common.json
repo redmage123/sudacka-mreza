@@ -1173,7 +1173,8 @@
     },
     "file": {
       "current": "Current file",
-      "uploading": "Uploading…"
+      "uploading": "Uploading…",
+      "open": "Open"
     },
     "backToSite": "Back to public site",
     "hours": {
@@ -1197,7 +1198,9 @@
       "subAreaEmpty": "No sub-branches yet.",
       "addSubArea": "Add sub-branch",
       "removeBranch": "Remove branch",
-      "removeSubArea": "Remove sub-branch"
+      "removeSubArea": "Remove sub-branch",
+      "chooseSub": "choose sub-branch",
+      "subAreaCustom": "or enter custom"
     },
     "weekday": {
       "mon": "Monday",

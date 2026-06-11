@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/i18n/index'
 import { getAuthToken } from '@/api/client'
-import { EXPERT_AREAS } from '@/data/croatia-taxonomy'
+import { EXPERT_AREAS, SUBAREAS_BY_BRANCH } from '@/data/croatia-taxonomy'
 
 // Field type descriptors for the generic editor.
 // Keep tiny: text, textarea, number, checkbox, select.
@@ -190,13 +190,9 @@ function WeekdayHoursEditor({
   )
 }
 
-interface SubAreaRow {
-  value: string
-  id?: string
-}
 interface SpecialtyRow {
   area: string
-  subAreas?: SubAreaRow[]
+  subArea?: string
   id?: string
   _order?: number
 }
@@ -211,116 +207,140 @@ function SpecialtyAreasEditor({
   t: ReturnType<typeof useTranslation>['t']
 }) {
   const rows: SpecialtyRow[] = (Array.isArray(value) ? (value as unknown as SpecialtyRow[]) : []).map((r) => ({
-    area: r.area ?? '',
-    subAreas: Array.isArray(r.subAreas) ? r.subAreas : [],
+    area: typeof r.area === 'string' ? r.area : '',
+    subArea: typeof r.subArea === 'string' ? r.subArea : undefined,
     id: r.id,
     _order: r._order,
   }))
-  function update(idx: number, patch: Partial<SpecialtyRow>) {
-    onChange(rows.map((r, i) => (i === idx ? { ...r, ...patch } : r)))
+  const [pendingArea, setPendingArea] = useState('')
+  const [pendingSub, setPendingSub] = useState('')
+
+  function add() {
+    if (!pendingArea) return
+    onChange([...rows, { area: pendingArea, subArea: pendingSub.trim() || undefined }])
+    setPendingArea('')
+    setPendingSub('')
   }
-  function addBranch() {
-    onChange([...rows, { area: '', subAreas: [] }])
-  }
-  function removeBranch(idx: number) {
+  function remove(idx: number) {
     onChange(rows.filter((_, i) => i !== idx))
   }
-  function addSubArea(idx: number) {
-    const r = rows[idx]
-    update(idx, { subAreas: [...(r.subAreas ?? []), { value: '' }] })
-  }
-  function updateSubArea(idx: number, sIdx: number, v: string) {
-    const r = rows[idx]
-    const subs = (r.subAreas ?? []).map((s, j) => (j === sIdx ? { ...s, value: v } : s))
-    update(idx, { subAreas: subs })
-  }
-  function removeSubArea(idx: number, sIdx: number) {
-    const r = rows[idx]
-    const subs = (r.subAreas ?? []).filter((_, j) => j !== sIdx)
-    update(idx, { subAreas: subs })
-  }
-  const inp = 'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1 text-xs'
+
+  const inp = 'w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1.5 text-sm'
   return (
     <div className="space-y-3">
-      {rows.length === 0 && (
-        <div className="rounded border border-dashed border-[color:var(--color-border)] p-4 text-center text-xs text-[color:var(--color-text-muted)]">
-          {t('admin.specialty.empty', 'Nema unesenih grana. Dodajte prvu nižom tipkom.')}
-        </div>
-      )}
-      {rows.map((r, i) => (
-        <div key={i} className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-3 space-y-2">
-          <div className="flex items-start gap-2">
-            <div className="flex-1">
-              <label className="block text-xs font-semibold mb-1">
-                {t('admin.specialty.area', 'Grana djelatnosti')}
-              </label>
-              <select
-                value={r.area}
-                onChange={(e) => update(i, { area: e.target.value })}
-                className={inp}
-              >
-                <option value="">— {t('admin.specialty.choose', 'odaberi granu')} —</option>
-                {EXPERT_AREAS.map((a) => (
-                  <option key={a} value={a}>{a}</option>
-                ))}
-              </select>
-            </div>
-            <button
-              type="button"
-              onClick={() => removeBranch(i)}
-              aria-label={t('admin.specialty.removeBranch', 'Ukloni granu')}
-              className="mt-5 rounded bg-red-50 border border-red-300 px-2 py-1 text-xs text-red-700 hover:bg-red-100"
+      {/* Single input row */}
+      <div className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface-alt)] p-3">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_2fr_auto] gap-2 items-end">
+          <div>
+            <label className="block text-xs font-semibold mb-1">
+              {t('admin.specialty.area', 'Grana djelatnosti')}
+            </label>
+            <select
+              value={pendingArea}
+              onChange={(e) => setPendingArea(e.target.value)}
+              className={inp}
             >
-              ✕
-            </button>
+              <option value="">— {t('admin.specialty.choose', 'odaberi granu')} —</option>
+              {EXPERT_AREAS.map((a) => (
+                <option key={a} value={a}>{a}</option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block text-xs font-semibold mb-1">
-              {t('admin.specialty.subAreas', 'Uže specijalizacije')}
+              {t('admin.specialty.subArea', 'Uža specijalizacija')}
             </label>
-            <div className="space-y-1">
-              {(r.subAreas ?? []).length === 0 && (
-                <div className="text-xs text-[color:var(--color-text-muted)] italic">
-                  {t('admin.specialty.subAreaEmpty', 'Još nema užih specijalizacija.')}
-                </div>
-              )}
-              {(r.subAreas ?? []).map((s, sIdx) => (
-                <div key={sIdx} className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={s.value ?? ''}
-                    onChange={(e) => updateSubArea(i, sIdx, e.target.value)}
-                    placeholder={t('admin.specialty.subAreaPlaceholder', 'npr. nekretnine, vozila…')}
-                    className={inp}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeSubArea(i, sIdx)}
-                    aria-label={t('admin.specialty.removeSubArea', 'Ukloni užu specijalizaciju')}
-                    className="rounded bg-red-50 border border-red-300 px-2 py-0.5 text-xs text-red-700 hover:bg-red-100"
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => addSubArea(i)}
-              className="mt-1 rounded bg-[color:var(--color-surface)] border border-[color:var(--color-border)] px-2 py-1 text-xs hover:bg-[color:var(--color-surface-alt)]"
-            >
-              + {t('admin.specialty.addSubArea', 'Dodaj užu specijalizaciju')}
-            </button>
+            {(() => {
+              const knownSubs = (pendingArea && SUBAREAS_BY_BRANCH[pendingArea]) || []
+              if (knownSubs.length > 0) {
+                // Two-column: pick from canonical list OR enter custom text.
+                return (
+                  <div className="flex gap-2">
+                    <select
+                      value={knownSubs.includes(pendingSub) ? pendingSub : ''}
+                      onChange={(e) => setPendingSub(e.target.value)}
+                      className={inp}
+                    >
+                      <option value="">— {t('admin.specialty.chooseSub', 'odaberi užu specijalizaciju')} —</option>
+                      {knownSubs.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                    <input
+                      type="text"
+                      value={knownSubs.includes(pendingSub) ? '' : pendingSub}
+                      onChange={(e) => setPendingSub(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault()
+                          add()
+                        }
+                      }}
+                      placeholder={t('admin.specialty.subAreaCustom', 'ili upiši vlastiti')}
+                      className={inp}
+                    />
+                  </div>
+                )
+              }
+              return (
+                <input
+                  type="text"
+                  value={pendingSub}
+                  onChange={(e) => setPendingSub(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      add()
+                    }
+                  }}
+                  placeholder={t('admin.specialty.subAreaPlaceholder', 'npr. nekretnine, vozila…')}
+                  className={inp}
+                />
+              )
+            })()}
           </div>
+          <button
+            type="button"
+            onClick={add}
+            disabled={!pendingArea}
+            className="rounded bg-[color:var(--color-brand)] px-4 py-1.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            + {t('admin.specialty.add', 'Dodaj')}
+          </button>
         </div>
-      ))}
-      <button
-        type="button"
-        onClick={addBranch}
-        className="rounded bg-[color:var(--color-brand)] px-3 py-1.5 text-xs text-white hover:opacity-90"
-      >
-        + {t('admin.specialty.add', 'Dodaj granu')}
-      </button>
+      </div>
+
+      {/* List of added pairs */}
+      {rows.length === 0 ? (
+        <div className="text-xs text-[color:var(--color-text-muted)] italic">
+          {t('admin.specialty.empty', 'Nema unesenih kombinacija.')}
+        </div>
+      ) : (
+        <ul className="space-y-1">
+          {rows.map((r, i) => (
+            <li
+              key={i}
+              className="flex items-center gap-2 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm"
+            >
+              <span className="font-medium">{r.area || '—'}</span>
+              {r.subArea && (
+                <>
+                  <span className="text-[color:var(--color-text-muted)]">›</span>
+                  <span>{r.subArea}</span>
+                </>
+              )}
+              <button
+                type="button"
+                onClick={() => remove(i)}
+                aria-label={t('admin.specialty.remove', 'Ukloni')}
+                className="ml-auto rounded bg-red-50 border border-red-300 px-2 py-0.5 text-xs text-red-700 hover:bg-red-100"
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -333,26 +353,43 @@ function MediaUploadPicker({
   t,
 }: {
   field: FieldDef
-  value: number | string | { id: number | string; filename?: string } | null | undefined
+  value: number | string | { id: number | string; filename?: string; url?: string } | null | undefined
   onChange: (v: number | string | null) => void
   common: string
   t: ReturnType<typeof useTranslation>['t']
 }) {
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState<string | null>(null)
-  const [filename, setFilename] = useState<string | null>(
-    value && typeof value === 'object' && 'filename' in value ? (value.filename ?? null) : null,
-  )
+  const initialFile = value && typeof value === 'object' ? value : null
+  const [filename, setFilename] = useState<string | null>(initialFile?.filename ?? null)
+  const [fileUrl, setFileUrl] = useState<string | null>(initialFile?.url ?? null)
   const currentId =
     value && typeof value === 'object' && 'id' in value ? value.id : (value as number | string | null | undefined)
+
+  // When the parent record only gave us a numeric id (no expanded url/filename),
+  // fetch the media doc so the admin can click ↗ to actually open the PDF.
+  useEffect(() => {
+    if (currentId == null) return
+    if (fileUrl || filename) return
+    const token = getAuthToken()
+    fetch(`/api/media/${String(currentId)}?depth=0`, {
+      headers: token ? { Authorization: `JWT ${token}` } : {},
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j: { url?: string; filename?: string } | null) => {
+        if (!j) return
+        if (j.url) setFileUrl(j.url)
+        if (j.filename) setFilename(j.filename)
+      })
+      .catch(() => undefined)
+  }, [currentId, fileUrl, filename])
+
   async function handleFile(file: File) {
     setBusy(true)
     setErr(null)
     try {
       const fd = new FormData()
       fd.append('file', file)
-      // Payload media collection accepts multipart with `file` plus a JSON body
-      // in `_payload`. We send only the file — server fills in alt/etc. defaults.
       const token = getAuthToken()
       const resp = await fetch('/api/media', {
         method: 'POST',
@@ -363,17 +400,28 @@ function MediaUploadPicker({
         const txt = await resp.text()
         throw new Error(`HTTP ${resp.status}: ${txt.slice(0, 200)}`)
       }
-      const j = (await resp.json()) as { doc?: { id: number | string; filename?: string }; id?: number | string }
+      const j = (await resp.json()) as {
+        doc?: { id: number | string; filename?: string; url?: string }
+        id?: number | string
+      }
       const mediaId = j.doc?.id ?? j.id
       if (mediaId == null) throw new Error('Media upload returned no id')
       onChange(mediaId)
       setFilename(j.doc?.filename ?? file.name)
+      setFileUrl(j.doc?.url ?? null)
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : String(e))
     } finally {
       setBusy(false)
     }
   }
+
+  const openHref =
+    fileUrl ??
+    (currentId != null && filename
+      ? `/api/media/file/${encodeURIComponent(filename)}`
+      : null)
+
   return (
     <div className="space-y-1">
       <input
@@ -386,17 +434,21 @@ function MediaUploadPicker({
         className={common}
       />
       {currentId != null && (
-        <div className="text-xs text-[color:var(--color-text-muted)]">
-          {t('admin.file.current', 'Postojeća datoteka')}:{' '}
-          {filename ?? `media #${String(currentId)}`}{' '}
-          <a
-            href={`/api/media/${String(currentId)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[color:var(--color-text-link)] hover:underline"
-          >
-            ↗
-          </a>
+        <div className="text-xs text-[color:var(--color-text-muted)] flex items-center gap-2">
+          <span>
+            {t('admin.file.current', 'Postojeća datoteka')}:{' '}
+            {filename ?? `media #${String(currentId)}`}
+          </span>
+          {openHref && (
+            <a
+              href={openHref}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded bg-[color:var(--color-surface-alt)] border border-[color:var(--color-border)] px-2 py-0.5 hover:bg-[color:var(--color-surface)]"
+            >
+              {t('admin.file.open', 'Otvori')} ↗
+            </a>
+          )}
         </div>
       )}
       {busy && <div className="text-xs">{t('admin.file.uploading', 'Učitavanje…')}</div>}

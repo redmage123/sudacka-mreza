@@ -37,6 +37,9 @@ export const ExpertWitnesses: CollectionConfig = {
       name: 'specialityAreas',
       type: 'array',
       label: 'Područja vještačenja',
+      admin: {
+        description: 'Svaki unos je jedan par (grana, uža specijalizacija). Dodaj više unosa za više kombinacija.',
+      },
       fields: [
         {
           name: 'area',
@@ -49,15 +52,12 @@ export const ExpertWitnesses: CollectionConfig = {
           },
         },
         {
-          name: 'subAreas',
-          type: 'array',
-          label: 'Uže specijalizacije',
+          name: 'subArea',
+          type: 'text',
+          label: 'Uža specijalizacija',
           admin: {
-            description: 'Više užih specijalizacija unutar odabrane grane.',
+            description: 'Uža specijalizacija unutar grane (opcionalno, slobodan tekst).',
           },
-          fields: [
-            { name: 'value', type: 'text', required: true, label: 'Naziv' },
-          ],
         },
       ],
     },
