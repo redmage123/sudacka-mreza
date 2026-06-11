@@ -7,12 +7,14 @@ const readPublicApprovedOrOwn: Access = ({ req }) => {
   if (req.user?.role === 'admin') return true
   const email = req.user?.email ?? ''
   if (req.user?.role === 'editor' || req.user?.role === 'legal_entity') {
+    // Cast: Payload's Where type allows `or` arrays but the inferred
+    // discriminated union confuses tsc on mixed-field branches.
     return {
       or: [
         { status: { equals: 'approved' } },
         { submittedBy: { equals: email } },
       ],
-    }
+    } as ReturnType<Access>
   }
   return { status: { equals: 'approved' } }
 }
