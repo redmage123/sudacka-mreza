@@ -7,15 +7,10 @@ export const UserSchema = z.object({
   firstName: z.string().nullable().optional(),
   lastName: z.string().nullable().optional(),
   role: z.string().nullable().optional(),
+  username: z.string().nullable().optional(),
+  totpEnabled: z.boolean().optional(),
 })
 export type AuthUser = z.infer<typeof UserSchema>
-
-const LoginResponseSchema = z.object({
-  user: UserSchema,
-  token: z.string(),
-  exp: z.number().optional(),
-  message: z.string().optional(),
-})
 
 const RegisterResponseSchema = z.object({
   doc: UserSchema,
@@ -55,19 +50,50 @@ async function postJson(path: string, body: unknown): Promise<unknown> {
   return resp.json()
 }
 
-export async function login(identifier: string, password: string): Promise<AuthUser> {
-  // Accept either an email address or a short username. Payload's Users
-  // collection has `loginWithUsername` enabled with `allowEmailLogin: true`,
-  // so we route based on whether the input looks like an email.
+export interface LoginOutcome {
+  user: AuthUser
+  mustEnrolMfa?: boolean
+  enrolmentToken?: string
+  mfaRequired?: boolean
+  mfaChallenge?: string
+}
+
+export async function login(identifier: string, password: string): Promise<LoginOutcome> {
   const trimmed = identifier.trim()
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
-  const payload = isEmail
-    ? { email: trimmed, password }
-    : { username: trimmed, password }
-  const json = await postJson('/users/login', payload)
-  const parsed = LoginResponseSchema.parse(json)
-  setAuthToken(parsed.token)
-  return parsed.user
+  const json = (await postJson('/users/login', { email: trimmed, password })) as {
+    token?: string
+    user?: AuthUser
+  }
+  if (json.token && json.user) {
+    setAuthToken(json.token)
+    return { user: json.user }
+  }
+  throw new ApiError(0, ['Unexpected login response'])
+}
+
+export async function verifyMfa(challenge: string, code: string): Promise<AuthUser> {
+  const json = (await postJson('/users/auth/verify-mfa', { challenge, code })) as {
+    token: string; user: AuthUser
+  }
+  setAuthToken(json.token)
+  return json.user
+}
+
+export async function totpSetup(): Promise<{ secret: string; otpauth: string; qrDataUrl: string }> {
+  return (await postJson('/users/me/totp/setup', {})) as { secret: string; otpauth: string; qrDataUrl: string }
+}
+
+export async function totpConfirm(code: string): Promise<{ recoveryCodes: string[] }> {
+  const json = (await postJson('/users/me/totp/confirm', { code })) as { ok: boolean; recoveryCodes: string[] }
+  return { recoveryCodes: json.recoveryCodes }
+}
+
+export async function totpDisable(code: string): Promise<void> {
+  await postJson('/users/me/totp/disable', { code })
+}
+
+export async function totpRegenerateCodes(code: string): Promise<{ recoveryCodes: string[] }> {
+  return (await postJson('/users/me/totp/regenerate-codes', { code })) as { recoveryCodes: string[] }
 }
 
 export interface RegisterInput {
@@ -81,13 +107,13 @@ export interface RegisterInput {
 export async function register(input: RegisterInput): Promise<AuthUser> {
   const json = await postJson('/users', input)
   const parsed = RegisterResponseSchema.parse(json)
-  // Immediately attempt to log in; auto-verify hook means this will work.
-  return login(input.email, input.password).catch((err) => {
-    // Fall back to returning the created doc without a token if auto-login
-    // fails for any reason (e.g. verify still required in prod).
+  try {
+    const outcome = await login(input.email, input.password)
+    return outcome.user
+  } catch (err) {
     if (err instanceof ApiError) throw err
     return parsed.doc
-  })
+  }
 }
 
 export async function logout(): Promise<void> {
