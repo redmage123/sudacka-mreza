@@ -229,11 +229,10 @@ export function createMfaRouter(payload: Payload): Router {
       })
     }
 
-    // Feature flag: set DISABLE_MFA=true in the environment to bypass 2FA for
-    // all users. Intended for testing and emergency access recovery only —
-    // disable once the underlying login issue is resolved.
-    if (process.env.DISABLE_MFA === 'true') {
-      payload.logger.warn({ userId: user.id }, 'MFA bypassed via DISABLE_MFA flag')
+    // Feature flag: MFA is only active when ENABLE_MFA=true is set in the
+    // environment. Defaults to disabled so that admins can log in without
+    // email-OTP when the flag is absent or unset.
+    if (process.env.ENABLE_MFA !== 'true') {
       return res.json({
         token,
         user: { ...user, role, totpEnabled: false },
