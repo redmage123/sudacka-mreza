@@ -4,8 +4,10 @@ import { isAdmin } from '../access.js'
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: {
-    // SECURITY: require email verification before the account is usable
-    verify: {
+    // Email verification is opt-in: set ENABLE_EMAIL_VERIFY=true to require
+    // users to confirm their address before logging in. Disabled by default so
+    // registration works without a configured mail transport.
+    verify: process.env.ENABLE_EMAIL_VERIFY === 'true' ? {
       generateEmailHTML: ({ token, user }) => {
         const url = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify?token=${token}`
         return `
@@ -17,7 +19,7 @@ export const Users: CollectionConfig = {
         `
       },
       generateEmailSubject: () => 'Sudačka Mreža — Potvrdite e-mail adresu',
-    },
+    } : false,
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000, // 15 minute lockout after 5 failed attempts
     // Allow logging in with a short username (e.g. "gordan") alongside email.
